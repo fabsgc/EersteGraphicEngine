@@ -58,9 +58,6 @@
     <Filter Include="Source Files\Core\2D">
       <UniqueIdentifier>{2164a876-ca71-41c6-bf88-b22a5d0734b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\ThirdParty">
-      <UniqueIdentifier>{2b2ba229-a03f-4907-8eed-7aec4943ad94}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\Text">
       <UniqueIdentifier>{241c6cc5-380d-47c7-bbfa-7e1b2b48af62}</UniqueIdentifier>
     </Filter>
@@ -112,9 +109,6 @@
     <Filter Include="Header Files\Core\2D">
       <UniqueIdentifier>{7412d337-81ae-4dca-9225-fce6c6c8e317}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\ThirdParty">
-      <UniqueIdentifier>{607e5707-429d-4a12-968e-fbc92157630a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Component">
       <UniqueIdentifier>{58462e4c-48a0-40d1-b365-35457f43ce02}</UniqueIdentifier>
     </Filter>
@@ -138,6 +132,12 @@
     </Filter>
     <Filter Include="Header Files\Utility\String">
       <UniqueIdentifier>{baa33827-28f2-4056-9e25-059d8844ff69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Service">
+      <UniqueIdentifier>{26b7d067-414b-48e8-a84d-dfb7bf78e1c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Service">
+      <UniqueIdentifier>{b2a70bb2-011e-4ffb-b8dc-aafc6a456c80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
