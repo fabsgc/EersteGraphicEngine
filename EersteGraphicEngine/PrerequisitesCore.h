@@ -10,6 +10,9 @@
 #include <DirectXPackedVector.h>
 #include <Windowsx.h>
 
+#include <Xinput.h>
+#include <xaudio2.h>
+
 #include "lib/assimp/Importer.hpp"
 #include "lib/assimp/Scene.h"
 #include "lib/assimp/Postprocess.h"
