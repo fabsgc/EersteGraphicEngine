@@ -22,18 +22,6 @@
     <Filter Include="Source Files\Utility\Allocator">
       <UniqueIdentifier>{72ebaeb7-9f58-47ed-b886-ac0829baf588}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utility\Error">
-      <UniqueIdentifier>{d31fb5b0-ee41-4ff2-932e-4a6989a922ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utility\String">
-      <UniqueIdentifier>{90c4caa6-c010-4c49-8eef-a188e4d46d09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utility\Prerequisites">
-      <UniqueIdentifier>{09bb611f-43a0-4145-85a3-252f53958aa9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utility\Util">
-      <UniqueIdentifier>{bd18648b-63c8-40e7-acbe-e354fe5dc9da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\Audio">
       <UniqueIdentifier>{c41643b7-02f7-420e-800b-21654de12249}</UniqueIdentifier>
     </Filter>
@@ -121,9 +109,6 @@
     <Filter Include="Header Files\Utility\Util">
       <UniqueIdentifier>{d4c4b208-18b6-4b86-9811-bc06923f0399}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Utility\Prerequisites">
-      <UniqueIdentifier>{df5b2dfa-73fa-4085-bc0a-63ed536db66d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Utility\String">
       <UniqueIdentifier>{baa33827-28f2-4056-9e25-059d8844ff69}</UniqueIdentifier>
     </Filter>
@@ -139,15 +124,54 @@
     <Filter Include="Source Files\App">
       <UniqueIdentifier>{16c23b85-2128-41bc-81b0-e6eb5f6c5944}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\Log">
+      <UniqueIdentifier>{1fd22b89-6f7c-4eb4-8979-ff509c0ec9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\String">
+      <UniqueIdentifier>{18ae20c6-ba4b-4414-bf48-0c3e30f309eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Util">
+      <UniqueIdentifier>{627cb71f-496a-4636-953e-34746c5be6c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Prerequistes">
+      <UniqueIdentifier>{ecfc6c4a-76be-45a6-8fdb-aae4061a3851}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Header Files\Utility\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files\Utility\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardDeclarationUtil.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="StdHeaders.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="PrerequisitesUtil.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="PrerequisitesCore.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

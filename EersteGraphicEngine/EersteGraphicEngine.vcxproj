@@ -98,6 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>lib\rapidjson;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"log/errors.log\" /DEGE_DEBUG_LOG_FILE=\"log/debug.log\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,9 +131,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="ForwardDeclarationUtil.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="PrerequisitesCore.h" />
+    <ClInclude Include="PrerequisitesUtil.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="StdHeaders.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc" />
