@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{c43d331d-892a-4174-b30c-7ab2545a6327}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{16c23b85-2128-41bc-81b0-e6eb5f6c5944}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utility\Allocator">
       <UniqueIdentifier>{72ebaeb7-9f58-47ed-b886-ac0829baf588}</UniqueIdentifier>
     </Filter>
@@ -112,9 +109,6 @@
     <Filter Include="Header Files\Core\Component">
       <UniqueIdentifier>{58462e4c-48a0-40d1-b365-35457f43ce02}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game">
-      <UniqueIdentifier>{08a04a40-70d7-4bce-8f26-498ede0a4d1f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{854cbe68-c95c-4868-98ab-416fb5f5fa12}</UniqueIdentifier>
     </Filter>
@@ -138,6 +132,12 @@
     </Filter>
     <Filter Include="Source Files\Core\Service">
       <UniqueIdentifier>{b2a70bb2-011e-4ffb-b8dc-aafc6a456c80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App">
+      <UniqueIdentifier>{08a04a40-70d7-4bce-8f26-498ede0a4d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{16c23b85-2128-41bc-81b0-e6eb5f6c5944}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
