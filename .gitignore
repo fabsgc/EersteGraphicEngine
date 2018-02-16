@@ -1,0 +1,8 @@
+## Eerste Graphic Engine ignore files
+
+*.ilk
+*.pdb
+*.exe
+Debug/
+x64/
+.vs/

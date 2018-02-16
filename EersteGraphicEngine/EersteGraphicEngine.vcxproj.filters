@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{24fee7aa-d333-408e-997c-4c48538158da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{c43d331d-892a-4174-b30c-7ab2545a6327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{16c23b85-2128-41bc-81b0-e6eb5f6c5944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Allocator">
+      <UniqueIdentifier>{72ebaeb7-9f58-47ed-b886-ac0829baf588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Error">
+      <UniqueIdentifier>{d31fb5b0-ee41-4ff2-932e-4a6989a922ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\String">
+      <UniqueIdentifier>{90c4caa6-c010-4c49-8eef-a188e4d46d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Prerequisites">
+      <UniqueIdentifier>{09bb611f-43a0-4145-85a3-252f53958aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Util">
+      <UniqueIdentifier>{bd18648b-63c8-40e7-acbe-e354fe5dc9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Audio">
+      <UniqueIdentifier>{c41643b7-02f7-420e-800b-21654de12249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Input">
+      <UniqueIdentifier>{2c33046d-a63f-4cbf-9472-258fde4ceb56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Manager">
+      <UniqueIdentifier>{734d5323-24fd-4859-8e5d-e5602b924330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Model">
+      <UniqueIdentifier>{f604778b-ed4b-4641-ad23-df9c917b9481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Component">
+      <UniqueIdentifier>{60356789-59d7-4a1a-866d-4f0c4545338c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Material">
+      <UniqueIdentifier>{0b18df5d-160f-4e10-b165-fa5d50652aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\2D">
+      <UniqueIdentifier>{2164a876-ca71-41c6-bf88-b22a5d0734b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\ThirdParty">
+      <UniqueIdentifier>{2b2ba229-a03f-4907-8eed-7aec4943ad94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Text">
+      <UniqueIdentifier>{241c6cc5-380d-47c7-bbfa-7e1b2b48af62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Shader">
+      <UniqueIdentifier>{a45b846f-b38e-452a-85f4-d728e38341e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Resources">
+      <UniqueIdentifier>{ba7f66d6-ba63-4cc7-a09f-449d55162cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI">
+      <UniqueIdentifier>{58211f9a-c2b3-461a-9141-5a4c62c9eecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer">
+      <UniqueIdentifier>{abac7786-10dc-4074-9f25-c23f9e23695a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{360d4321-89d9-4eb6-afe8-dff01b4506a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Audio">
+      <UniqueIdentifier>{63c61410-6294-4b7f-84a6-7f0f5964dff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Input">
+      <UniqueIdentifier>{ae9f604e-8b00-49a7-82b0-1c50dee4efaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer">
+      <UniqueIdentifier>{5886a685-b54a-4cb3-ba65-bb8466482e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI">
+      <UniqueIdentifier>{7fbc8d22-66d4-4805-82f2-4999ea070503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Resources">
+      <UniqueIdentifier>{1aa42362-5ce4-4660-8029-b2ec3f3033c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Shader">
+      <UniqueIdentifier>{5b929509-7c83-4091-a797-b4464a38d76a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Manager">
+      <UniqueIdentifier>{6c2d6902-77e5-4010-9d7c-1278bdc44d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Text">
+      <UniqueIdentifier>{7ba5a514-b41e-453c-8060-589790ec2419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Model">
+      <UniqueIdentifier>{39d01d1b-5fbd-4898-8dd9-ca8754895f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Material">
+      <UniqueIdentifier>{cac825dc-0d50-45b0-8fa4-9108acb080b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\2D">
+      <UniqueIdentifier>{7412d337-81ae-4dca-9225-fce6c6c8e317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\ThirdParty">
+      <UniqueIdentifier>{607e5707-429d-4a12-968e-fbc92157630a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Component">
+      <UniqueIdentifier>{58462e4c-48a0-40d1-b365-35457f43ce02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{08a04a40-70d7-4bce-8f26-498ede0a4d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{854cbe68-c95c-4868-98ab-416fb5f5fa12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Allocator">
+      <UniqueIdentifier>{18196b40-2887-45ea-aa9a-ec9962b1ebff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Error">
+      <UniqueIdentifier>{366f91f9-7988-4d7e-b5bb-a0c32927a42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Util">
+      <UniqueIdentifier>{d4c4b208-18b6-4b86-9811-bc06923f0399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Prerequisites">
+      <UniqueIdentifier>{df5b2dfa-73fa-4085-bc0a-63ed536db66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\String">
+      <UniqueIdentifier>{baa33827-28f2-4056-9e25-059d8844ff69}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EersteGraphicEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\directx.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
