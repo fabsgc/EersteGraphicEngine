@@ -16,16 +16,16 @@ namespace ee
 
     UINT64 Timer::GetMilliseconds() const
     {
-        auto newTime = _HRClock.now();
-        duration<double> dur = newTime - _startTime;
+        auto nextTime = _HRClock.now();
+        duration<double> dur = nextTime - _startTime;
 
         return duration_cast<milliseconds>(dur).count();
     }
 
     UINT64 Timer::GetMicroseconds() const
     {
-        auto newTime = _HRClock.now();
-        duration<double> dur = newTime - _startTime;
+        auto nextTime = _HRClock.now();
+        duration<double> dur = nextTime - _startTime;
 
         return duration_cast<microseconds>(dur).count();
     }

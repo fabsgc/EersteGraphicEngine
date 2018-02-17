@@ -144,6 +144,15 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Utility\Util</Filter>
     </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Source Files\Utility\String</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -172,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="PrerequisitesCore.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Header Files\Utility\String</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

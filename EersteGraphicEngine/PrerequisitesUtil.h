@@ -3,6 +3,9 @@
 // Short-hand names for various built-in types
 #include "Types.h"
 
+// Memory allocator
+#include "MemoryAllocator.h"
+
 // Commonly used standard headers
 #include "StdHeaders.h"
 
