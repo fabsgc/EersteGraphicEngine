@@ -1,0 +1,90 @@
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:35 inside ege::StackAllocator::Allocate
+Date: Feb 18 2018
+Time: 22:54:49
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:154 inside ege::StdStackAllocator<struct std::_Container_proxy>::allocate
+Date: Feb 19 2018
+Time: 00:12:45
+Error: Stack allocator not initialized
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:23:32
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:23:48
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:24:06
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:24:16
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:157 inside ege::StdStackAllocator<struct std::_Container_proxy>::allocate
+Date: Feb 19 2018
+Time: 00:24:29
+Error: Stack allocator not initialized
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 00:25:04
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 

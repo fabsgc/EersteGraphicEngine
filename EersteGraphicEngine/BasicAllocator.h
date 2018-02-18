@@ -11,20 +11,27 @@ namespace ege
     class BasicAllocator
     {
     public:
-        UINT8 * Allocate(UINT32 amount)
+        BasicAllocator(){}
+        ~BasicAllocator() {}
+
+        void* Allocate(UINT32 amount)
         {
-            return (UINT8*)malloc(amount);
+            return malloc(amount);
         }
 
         void Deallocate(void* data)
         {
             ::free(data);
         }
+
+    private:
+        BasicAllocator(BasicAllocator const&) = delete;
+        BasicAllocator& operator=(BasicAllocator const&) = delete;
     };
 
-    BasicAllocator& gBasicAlloc();
+    BasicAllocator& gBasicAllocator();
 
-    UINT8* ege_basic_allocate(UINT32 numBytes);
+    void* ege_basic_allocate(UINT32 numBytes);
     void ege_basic_deallocate(void* data);
 
     /**
@@ -39,7 +46,7 @@ namespace ege
 #if EGE_DEBUG
             AddNewCount();
 #endif
-            return gBasicAlloc().Allocate((UINT32)bytes);
+            return gBasicAllocator().Allocate((UINT32)bytes);
         }
 
         static void Deallocate(void* ptr)
@@ -47,7 +54,7 @@ namespace ege
 #if EGE_DEBUG
             AddFreeCount();
 #endif
-            gBasicAlloc().Deallocate(ptr);
+            gBasicAllocator().Deallocate(ptr);
         }
     };
 }

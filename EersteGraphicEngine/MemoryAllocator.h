@@ -6,6 +6,18 @@
 
 namespace ege {
 
+    /* ###################################################################
+    *  ############# ALLOCATIOn HEADER ###################################
+    *  ################################################################ */
+    struct AllocationHeader {
+        size_t padding;
+        size_t size;
+    };
+
+    /* ###################################################################
+    *  ############# MEMORY COUNTER ######################################
+    *  ################################################################ */
+
     /**
     * Thread safe class used for storing total number of memory allocations and deallocations, primarily for statistic
     * purposes.
@@ -33,13 +45,20 @@ namespace ege {
         static UINT64 Frees;
     };
 
-    /** Base class all memory allocators need to inherit. Provides allocation and free counting. */
+    /** 
+    * Base class all memory allocators need to inherit. Provides allocation and free counting. 
+    */
     class MemoryAllocatorBase
     {
     protected:
         static void AddNewCount() { MemoryCounter::AddNewCount(); }
         static void AddFreeCount() { MemoryCounter::AddFreeCount(); }
     };
+
+    /* ###################################################################
+    *  ############# MEMORY ALLOCATOR BASE ###############################
+    *  ################################################################ */
+
     /**
     * Memory allocator providing a generic implementation. Specialize for specific categories as needed.
     */
@@ -64,46 +83,16 @@ namespace ege {
         }
     };
 
+    /**
+    * Default allocator when you want to use default os memory management
+    */
     class GeneralAllocator
     {
     };
 
-    /** Allocates the specified number of bytes. */
-    template<class Allocator = GeneralAllocator>
-    inline void* ege_allocate(UINT32 count)
-    {
-        return MemoryAllocator<Allocator>::Allocate(count);
-    }
-
-    /** Allocates enough bytes to hold the specified type, but doesn't construct it. */
-    template<class T, class Allocator = GeneralAllocator>
-    inline T* ege_allocate()
-    {
-        return (T*)MemoryAllocator<Allocator>::Allocate(sizeof(T));
-    }
-
-    /** Create a new object with the specified allocator and the specified parameters. */
-    template<class Type, class Allocator, class... Args>
-    Type* ege_allocate(Args &&...args)
-    {
-        return new (ege_allocate<Allocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
-    }
-
-    /** Frees all the bytes allocated at the specified location. */
-    template<class Allocator = GeneralAllocator>
-    inline void ege_deallocate(void* ptr)
-    {
-        MemoryAllocator<Allocator>::Deallocate(ptr);
-    }
-
-    /** Destructs and frees the specified object. */
-    template<class T, class Allocator = GeneralAllocator>
-    inline void ege_delete(T* ptr)
-    {
-        (ptr)->~T();
-
-        MemoryAllocator<Allocator>::Deallocate(ptr);
-    }
+    /* ###################################################################
+    *  ############# STL ALLOCATOR WRAPPER ###############################
+    *  ################################################################ */
 
     /** Allocator used for the standard library */
     template <class T, class Allocator = GeneralAllocator>
@@ -156,6 +145,57 @@ namespace ege {
         template<class U, class... Args>
         void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
     };
+
+    /* ###################################################################
+    *  ############# ENGINE MEMORY ALLOCATION ############################
+    *  ################################################################ */
+
+    /**
+    * Allocates the specified number of bytes.
+    */
+    template<class Allocator = GeneralAllocator>
+    inline void* ege_allocate(UINT32 count)
+    {
+        return MemoryAllocator<Allocator>::Allocate(count);
+    }
+
+    /**
+    * Allocates enough bytes to hold the specified type, but doesn't construct it.
+    */
+    template<class T, class Allocator = GeneralAllocator>
+    inline T* ege_allocate()
+    {
+        return (T*)MemoryAllocator<Allocator>::Allocate(sizeof(T));
+    }
+
+    /**
+    * Create a new object with the specified allocator and the specified parameters.
+    */
+    template<class Type, class Allocator, class... Args>
+    Type* ege_allocate(Args &&...args)
+    {
+        return new (ege_allocate<Allocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
+    }
+
+    /**
+    * Frees all the bytes allocated at the specified location.
+    */
+    template<class Allocator = GeneralAllocator>
+    inline void ege_deallocate(void* ptr)
+    {
+        MemoryAllocator<Allocator>::Deallocate(ptr);
+    }
+
+    /** Destructs and frees the specified object. */
+    template<class T, class Allocator = GeneralAllocator>
+    inline void ege_delete(T* ptr)
+    {
+        (ptr)->~T();
+
+        MemoryAllocator<Allocator>::Deallocate(ptr);
+    }
 }
 
 #include "BasicAllocator.h"
+#include "StackAllocator.h"
+#include "PoolAllocator.h"

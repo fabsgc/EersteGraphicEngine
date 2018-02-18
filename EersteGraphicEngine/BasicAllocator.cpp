@@ -5,7 +5,7 @@ namespace ege
 {
     BasicAllocator* _GlobalBasicAllocator = nullptr;
 
-    BasicAllocator& gBasicAlloc()
+    BasicAllocator& gBasicAllocator()
     {
         if (_GlobalBasicAllocator == nullptr)
         {
@@ -17,13 +17,13 @@ namespace ege
         return *_GlobalBasicAllocator;
     }
 
-    UINT8* ege_basic_allocate(UINT32 numBytes)
+    void* ege_basic_allocate(UINT32 numBytes)
     {
-        return gBasicAlloc().Allocate(numBytes);
+        return gBasicAllocator().Allocate(numBytes);
     }
 
     void ege_basic_deallocate(void* data)
     {
-        gBasicAlloc().Deallocate((UINT8*)data);
+        gBasicAllocator().Deallocate((UINT8*)data);
     }
 }
