@@ -1556,3 +1556,43 @@ Date: Feb 19 2018
 Time: 12:59:07
 Message: Memory leak
 ############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:22 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: a
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:26 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: 16
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:30 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: 32
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:38 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: b
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:22 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: a
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:26 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: 16
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:30 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: 32
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\main.cpp:38 inside WinMain
+Date: Feb 19 2018
+Time: 14:32:39
+Message: b
+############################################: 

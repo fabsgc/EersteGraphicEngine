@@ -182,6 +182,7 @@ namespace ege
             EGE_ASSERT_ERROR((_stackAllocator != nullptr), "Stack allocator not initialized");
 
             void* const pv = _stackAllocator->Allocate((num * sizeof(T)));
+
             if (!pv)
                 return nullptr; // Error
 

@@ -107,9 +107,15 @@ namespace ege {
         typedef std::size_t size_type;
         typedef std::ptrdiff_t difference_type;
 
-        StdAllocator() noexcept {}
+        StdAllocator() noexcept 
+		{}
+
+		StdAllocator(Allocator* allocator)
+			: _allocator(allocator)
+		{}
+
         template<class U, class Allocator2> StdAllocator(const StdAllocator<U, Allocator2>&) noexcept {}
-        template<class U, class Allocator2> bool operator==(const StdAllocator<U, Allocator2>&) const noexcept { return true; }
+        template<class U, class Allocator2> bool operator==(const StdAllocator<U, Allocator2>&) const noexcept { return false; }
         template<class U, class Allocator2> bool operator!=(const StdAllocator<U, Allocator2>&) const noexcept { return false; }
         template<class U> class rebind { public: typedef StdAllocator<U, Allocator> other; };
 
@@ -122,7 +128,8 @@ namespace ege {
             if (num > static_cast<size_t>(-1) / sizeof(T))
                 return nullptr; // Error
 
-            void* const pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+			void* const pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+
             if (!pv)
                 return nullptr; // Error
 
@@ -132,7 +139,7 @@ namespace ege {
         /** Deallocate storage p of deleted elements. */
         void deallocate(T* p, size_t num) const noexcept
         {
-            ege_deallocate<Allocator>((void*)p);
+			ege_deallocate<Allocator>((void*)p);
         }
 
         size_t max_size() const { return std::numeric_limits<size_type>::max() / sizeof(T); }
@@ -142,8 +149,11 @@ namespace ege {
         /* This version of construct() (with a varying number of parameters)
         * seems necessary in order to use some STL data structures from
         * libstdc++-4.8, but compilation fails on OS X, hence the #if. */
-        template<class U, class... Args>
-        void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
+        //template<class U, class... Args>
+        //void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
+
+	private:
+		Allocator * _allocator;
     };
 
     /* ###################################################################
