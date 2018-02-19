@@ -110,12 +110,15 @@ namespace ege {
         StdAllocator() noexcept
         {}
 
-        StdAllocator(Allocator* allocator)
+        StdAllocator(Allocator* allocator) noexcept
             : _allocator(allocator)
         {}
 
-        template<class U, class Allocator2> StdAllocator(const StdAllocator<U, Allocator2>&) noexcept {}
-        template<class U, class Allocator2> bool operator==(const StdAllocator<U, Allocator2>&) const noexcept { return false; }
+        template<class U, class Allocator2> StdAllocator(const StdAllocator<U, Allocator2>& alloc) noexcept 
+            : _allocator(alloc._allocator)
+        {}
+
+        template<class U, class Allocator2> bool operator==(const StdAllocator<U, Allocator2>&) const noexcept { return true; }
         template<class U, class Allocator2> bool operator!=(const StdAllocator<U, Allocator2>&) const noexcept { return false; }
         template<class U> class rebind { public: typedef StdAllocator<U, Allocator> other; };
 
@@ -152,7 +155,7 @@ namespace ege {
         //template<class U, class... Args>
         //void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
 
-    private:
+    public:
         Allocator * _allocator;
     };
 
