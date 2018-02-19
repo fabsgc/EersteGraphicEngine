@@ -14,7 +14,7 @@ namespace ege
         BasicAllocator() {}
         ~BasicAllocator() {}
 
-        void* Allocate(UINT32 amount)
+        void* Allocate(size_t amount)
         {
             return malloc(amount);
         }

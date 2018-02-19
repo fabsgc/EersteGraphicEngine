@@ -131,7 +131,12 @@ namespace ege {
             if (num > static_cast<size_t>(-1) / sizeof(T))
                 return nullptr; // Error
 
-            void* const pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+            void* pv = nullptr;
+
+            if(_allocator == nullptr)
+                pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+            else
+                pv = _allocator->Allocate((num * sizeof(T)));
 
             if (!pv)
                 return nullptr; // Error
@@ -142,7 +147,10 @@ namespace ege {
         /** Deallocate storage p of deleted elements. */
         void deallocate(T* p, size_t num) const noexcept
         {
-            ege_deallocate<Allocator>((void*)p);
+            if (_allocator == nullptr)
+                ege_deallocate<Allocator>((void*)p);
+            else
+                _allocator->Deallocate(p);
         }
 
         size_t max_size() const { return std::numeric_limits<size_type>::max() / sizeof(T); }
