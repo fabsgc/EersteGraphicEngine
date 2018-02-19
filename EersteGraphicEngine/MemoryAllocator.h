@@ -7,14 +7,6 @@
 namespace ege {
 
     /* ###################################################################
-    *  ############# ALLOCATIOn HEADER ###################################
-    *  ################################################################ */
-    struct AllocationHeader {
-        size_t padding;
-        size_t size;
-    };
-
-    /* ###################################################################
     *  ############# MEMORY COUNTER ######################################
     *  ################################################################ */
 
@@ -126,21 +118,31 @@ namespace ege {
         T* allocate(const size_t num) const
         {
             if (num == 0)
+            {
                 return nullptr;
-
+            }
+                
             if (num > static_cast<size_t>(-1) / sizeof(T))
-                return nullptr; // Error
+            {
+                return nullptr;
+            }
 
             void* pv = nullptr;
 
-            if(_allocator == nullptr)
+            if (_allocator == nullptr)
+            {
                 pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+            }
             else
+            {
                 pv = _allocator->Allocate((num * sizeof(T)));
-
+            }
+                
             if (!pv)
+            {
                 return nullptr; // Error
-
+            }
+                
             return static_cast<T*>(pv);
         }
 
@@ -148,9 +150,13 @@ namespace ege {
         void deallocate(T* p, size_t num) const noexcept
         {
             if (_allocator == nullptr)
+            {
                 ege_deallocate<Allocator>((void*)p);
+            }  
             else
+            {
                 _allocator->Deallocate(p);
+            }    
         }
 
         size_t max_size() const { return std::numeric_limits<size_type>::max() / sizeof(T); }
@@ -212,7 +218,6 @@ namespace ege {
     inline void ege_delete(T* ptr)
     {
         (ptr)->~T();
-
         MemoryAllocator<Allocator>::Deallocate(ptr);
     }
 }

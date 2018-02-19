@@ -60,6 +60,10 @@ extern "C" {
 
 namespace ege
 {
+    /* ###################################################################
+    *  ############# STL CONTAINER SNIPPETS ##############################
+    *  ################################################################ */
+
     template <typename T>
     using SPtr = std::shared_ptr<T>;
 
@@ -75,25 +79,17 @@ namespace ege
     template <typename K, typename V, typename P = std::less<K>, typename A = StdAllocator<std::pair<const K, V>, BasicAllocator>>
     using Map = std::map<K, V, P, A>;
 
-    /** Create a new shared pointer using a custom allocator category. */
-    template<class Type, class Allocator, class... Args>
-    SPtr<Type> ege_shared_ptr_new(Args &&... args)
-    {
-        return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(), std::forward<Args>(args)...);
-    }
+    /* ###################################################################
+    *  ############# SHARED PTR INSTANTIATION ############################
+    *  ################################################################ */
 
-    /** Create a new shared pointer using a custom allocator category. */
+    /** 
+    * Create a new shared pointer using a custom allocator category. 
+    */
     template<class Type, class Allocator, class... Args>
-    SPtr<Type> ege_shared_ptr_allocator_new(Allocator* allocator, Args &&... args)
+    SPtr<Type> ege_shared_ptr_new(Allocator* allocator, Args &&... args)
     {
         return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(allocator), std::forward<Args>(args)...);
-    }
-
-    /** Create a new shared pointer using the default allocator category. */
-    template<class Type, class... Args>
-    SPtr<Type> ege_shared_ptr_new(Args &&... args)
-    {
-        return std::allocate_shared<Type>(StdAllocator<Type, BasicAllocator>(), std::forward<Args>(args)...);
     }
 
     /**
@@ -101,27 +97,33 @@ namespace ege
     * Pointer specific data will be allocated using the provided allocator category.
     */
     template<class Type, class MainAllocator = BasicAllocator, class PtrDataAllocator = BasicAllocator>
-    SPtr<Type> ege_shared_ptr(Type* data)
+    SPtr<Type> ege_shared_ptr(PtrDataAllocator* allocator, Type* data)
     {
-        return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>());
+        return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>(allocator));
     }
 
-    /** Create a new unique pointer using a custom allocator category. */
+    /* ###################################################################
+    *  ############# UNIQUE PTR INSTANTIATION ############################
+    *  ################################################################ */
+
+    /** 
+    * Create a new unique pointer using a custom allocator category. 
+    */
     template<class Type, class Allocator, class... Args>
-    UPtr<Type, Allocator> ege_unique_ptr_new(Args &&... args)
+    UPtr<Type, Allocator> ege_unique_ptr_new(Allocator* allocator, Args &&... args)
     {
-        Type* rawPtr = ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
+        Type* rawPtr = (Type*)nullptr;
+
+        if (allocator != nullptr)
+        {
+            rawPtr = (Type*)allocator->Allocate(std::forward<Args>(args)...);
+        }
+        else
+        {
+            rawPtr = (Type*)ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
+        }
 
         return ege_unique_ptr<Type, Allocator>(rawPtr);
-    }
-
-    /** Create a new unique pointer using the default allocator category. */
-    template<class Type, class... Args>
-    UPtr<Type> ege_unique_ptr_new(Args &&... args)
-    {
-        Type* rawPtr = ege_allocate<Type, BasicAllocator>(std::forward<Args>(args)...);
-
-        return ege_unique_ptr<Type, BasicAllocator>(rawPtr);
     }
 
     /**

@@ -1,11 +1,8 @@
 #pragma once
 
-#include <algorithm>
-
-#include "Types.h"
-#include "Error.h"
 #include "Log.h"
-#include "String.h"
+#include "Error.h"
+#include "Types.h"
 #include "StdHeaders.h"
 
 namespace ege
@@ -17,29 +14,48 @@ namespace ege
     class LinearAllocator
     {
     public:
-        LinearAllocator()
+        LinearAllocator(size_t size = sizeof(UINT32) * 8192)
+            : _totalSize(size)
         {
+            _startPtr = malloc(_totalSize);
+            Reset();
         }
 
         ~LinearAllocator()
         {
+            free(_startPtr);
             Reset();
         }
 
         void * Allocate(size_t amount)
         {
-            return nullptr;
+            const size_t dataAddress = (size_t)_startPtr + _offset;
+            size_t size = amount;
+            _offset += size;
+
+            EGE_ASSERT_ERROR((_offset + size <= _totalSize), "Not enough memory allocated in stack allocator");
+
+            return (void*)dataAddress;
         }
 
         void Deallocate(void* data)
         {
+            return;
         }
 
         void Reset()
         {
+            _offset = 0;
         }
 
     private:
+        LinearAllocator(LinearAllocator const&) = delete;
+        LinearAllocator& operator=(LinearAllocator const&) = delete;
+
+    private:
+        size_t _offset;
+        size_t _totalSize;
+        void * _startPtr;
     };
 
     /* ###################################################################

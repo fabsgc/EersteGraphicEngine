@@ -8,6 +8,10 @@
 
 namespace ege
 {
+    /* ###################################################################
+    *  ############# BASIC ALLOCATOR #####################################
+    *  ################################################################ */
+
     class BasicAllocator
     {
     public:
@@ -29,14 +33,23 @@ namespace ege
         BasicAllocator& operator=(BasicAllocator const&) = delete;
     };
 
+    /* ###################################################################
+    *  ############# ALLOCATOR METHODS ###################################
+    *  ################################################################ */
+
     BasicAllocator& gBasicAllocator();
 
     void* ege_basic_allocate(UINT32 numBytes);
     void ege_basic_deallocate(void* data);
 
+    /* ###################################################################
+    *  ############# MEMORY ALLOCATOR FOR STD ALLOCATOR ##################
+    *  ################################################################ */
+
     /**
     * Memory allocator using BasicAllocator
     */
+
     template<>
     class MemoryAllocator<BasicAllocator> : public MemoryAllocatorBase
     {
