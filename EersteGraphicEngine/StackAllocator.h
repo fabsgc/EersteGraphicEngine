@@ -4,6 +4,8 @@
 
 #include "Types.h"
 #include "Error.h"
+#include "Log.h"
+#include "String.h"
 #include "StdHeaders.h"
 
 namespace ege
@@ -26,8 +28,17 @@ namespace ege
 
         ~StackAllocator()
         {
-            free(_startPtr);
-            _startPtr = nullptr;
+			if (_offset != 0)
+			{
+				EGE_LOG_DEBUG("Memory from stack allocator has not been properly free");
+			}
+			else
+			{
+				free(_startPtr);
+				_startPtr = nullptr;
+			}
+
+			Reset();
         }
 
         void * Allocate(size_t amount)
@@ -39,31 +50,45 @@ namespace ege
 
             EGE_ASSERT_ERROR((_offset + padding + size <= _totalSize), "Not enough memory allocated in stack allocator");
 
-            _offset += padding;
-
-            const size_t nextAddress   = currentAddress + padding;
-            const size_t headerAddress = nextAddress - sizeof(AllocationHeader);
+			const size_t headerAddress = currentAddress + padding;
+			const size_t dataAddress = headerAddress + sizeof(AllocationHeader);
+            
             AllocationHeader allocationHeader{ padding, size };
             AllocationHeader * headerPtr = (AllocationHeader*)headerAddress;
-            headerPtr = &allocationHeader;
+			headerPtr->padding = padding;
+			headerPtr->size    = size;
 
-            _offset += size;
+            _offset += padding + sizeof(AllocationHeader) + size;
 
             _used = _offset;
             _peak = std::max(_peak, _used);
 
-            return (void*)nextAddress;
+            return (void*)dataAddress;
         }
 
         void Deallocate(void* data)
         {
             const size_t currentAddress = (size_t) data;
-            const size_t headerAddress  = currentAddress - sizeof(AllocationHeader);
+			const size_t headerAddress = currentAddress - sizeof(AllocationHeader);            
             const AllocationHeader * allocationHeader{ (AllocationHeader *)headerAddress };
 
-            _offset = currentAddress - allocationHeader->padding - (size_t) _startPtr;
-            _used = _offset;
+			if (currentAddress == _offset + (size_t)_startPtr - allocationHeader->size)
+			{
+				_offset = _offset - allocationHeader->size - sizeof(AllocationHeader) - allocationHeader->padding;
+				_used = _offset;
+			}
+			else
+			{
+				EGE_LOG_DEBUG("Memory leak");
+			}
         }
+
+		void Reset()
+		{
+			_offset = 0;
+			_used   = 0;
+			_peak   = 0;
+		}
 
     private:
         StackAllocator(StackAllocator const&) = delete;

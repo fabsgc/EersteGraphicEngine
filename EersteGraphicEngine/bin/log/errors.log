@@ -88,3 +88,87 @@ Time: 00:25:04
 Error: Not enough memory allocated in stack allocator
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 09:52:36
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 09:53:52
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 09:54:23
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 10:04:41
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 10:04:41
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 10:22:57
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 10:45:10
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 10:45:45
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 11:10:21
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 11:10:21
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:40 inside ege::StackAllocator::Allocate
+Date: Feb 19 2018
+Time: 11:10:21
+Error: Not enough memory allocated in stack allocator
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 11:31:12
+Error: Memory from stack allocator has not been properly free
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 11:31:51
+Error: tor::Allocate
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 11:33:30
+Error: Memory from stack allocator has not been properly free : 
+Condition: 0
+############################################: 
