@@ -160,8 +160,8 @@ namespace ege {
         /* This version of construct() (with a varying number of parameters)
         * seems necessary in order to use some STL data structures from
         * libstdc++-4.8, but compilation fails on OS X, hence the #if. */
-        //template<class U, class... Args>
-        //void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
+        template<class U, class... Args>
+        void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
 
     public:
         Allocator * _allocator;
