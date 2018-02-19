@@ -11,7 +11,7 @@ namespace ege
     class BasicAllocator
     {
     public:
-        BasicAllocator(){}
+        BasicAllocator() {}
         ~BasicAllocator() {}
 
         void* Allocate(UINT32 amount)

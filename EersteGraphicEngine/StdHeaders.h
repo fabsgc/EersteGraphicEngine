@@ -82,12 +82,12 @@ namespace ege
         return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(), std::forward<Args>(args)...);
     }
 
-	/** Create a new shared pointer using a custom allocator category. */
-	template<class Type, class Allocator, class... Args>
-	SPtr<Type> ege_shared_ptr_allocator_new(Allocator* allocator, Args &&... args)
-	{
-		return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(allocator), std::forward<Args>(args)...);
-	}
+    /** Create a new shared pointer using a custom allocator category. */
+    template<class Type, class Allocator, class... Args>
+    SPtr<Type> ege_shared_ptr_allocator_new(Allocator* allocator, Args &&... args)
+    {
+        return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(allocator), std::forward<Args>(args)...);
+    }
 
     /** Create a new shared pointer using the default allocator category. */
     template<class Type, class... Args>

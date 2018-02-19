@@ -10,72 +10,72 @@
 
 namespace ege
 {
-	/* ###################################################################
-	*  ############# LINEAR ALLOCATOR ####################################
-	*  ################################################################ */
+    /* ###################################################################
+    *  ############# LINEAR ALLOCATOR ####################################
+    *  ################################################################ */
 
-	class LinearAllocator
-	{
-	public:
-		LinearAllocator()
-		{
-		}
+    class LinearAllocator
+    {
+    public:
+        LinearAllocator()
+        {
+        }
 
-		~LinearAllocator()
-		{
-			Reset();
-		}
+        ~LinearAllocator()
+        {
+            Reset();
+        }
 
-		void * Allocate(size_t amount)
-		{
-			return nullptr;
-		}
+        void * Allocate(size_t amount)
+        {
+            return nullptr;
+        }
 
-		void Deallocate(void* data)
-		{
-		}
+        void Deallocate(void* data)
+        {
+        }
 
-		void Reset()
-		{
-		}
+        void Reset()
+        {
+        }
 
-	private:
-	};
+    private:
+    };
 
-	/* ###################################################################
-	*  ############# ALLOCATOR METHOD ####################################
-	*  ################################################################ */
+    /* ###################################################################
+    *  ############# ALLOCATOR METHOD ####################################
+    *  ################################################################ */
 
-	LinearAllocator& gLinearAllocator();
+    LinearAllocator& gLinearAllocator();
 
-	void* ege_linear_allocate(UINT32 numBytes);
-	void ege_linear_deallocate(void* data);
+    void* ege_linear_allocate(UINT32 numBytes);
+    void ege_linear_deallocate(void* data);
 
-	/* ###################################################################
-	*  ############# MEMORY ALLOCATOR FOR STD ALLOCATOR ##################
-	*  ################################################################ */
+    /* ###################################################################
+    *  ############# MEMORY ALLOCATOR FOR STD ALLOCATOR ##################
+    *  ################################################################ */
 
-	/**
-	* Memory allocator using LinearAllocator
-	*/
-	template<>
-	class MemoryAllocator<LinearAllocator> : public MemoryAllocatorBase
-	{
-	public:
-		static void* Allocate(size_t bytes)
-		{
+    /**
+    * Memory allocator using LinearAllocator
+    */
+    template<>
+    class MemoryAllocator<LinearAllocator> : public MemoryAllocatorBase
+    {
+    public:
+        static void* Allocate(size_t bytes)
+        {
 #if EGE_DEBUG
-			AddNewCount();
+            AddNewCount();
 #endif
-			return gLinearAllocator().Allocate((UINT32)bytes);
-		}
+            return gLinearAllocator().Allocate((UINT32)bytes);
+        }
 
-		static void Deallocate(void* ptr)
-		{
+        static void Deallocate(void* ptr)
+        {
 #if EGE_DEBUG
-			AddFreeCount();
+            AddFreeCount();
 #endif
-			gLinearAllocator().Deallocate(ptr);
-		}
-	};
+            gLinearAllocator().Deallocate(ptr);
+        }
+    };
 }

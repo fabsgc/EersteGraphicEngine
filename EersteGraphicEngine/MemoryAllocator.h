@@ -45,8 +45,8 @@ namespace ege {
         static UINT64 Frees;
     };
 
-    /** 
-    * Base class all memory allocators need to inherit. Provides allocation and free counting. 
+    /**
+    * Base class all memory allocators need to inherit. Provides allocation and free counting.
     */
     class MemoryAllocatorBase
     {
@@ -63,7 +63,7 @@ namespace ege {
     * Memory allocator providing a generic implementation. Specialize for specific categories as needed.
     */
     template<class T>
-    class MemoryAllocator: public MemoryAllocatorBase
+    class MemoryAllocator : public MemoryAllocatorBase
     {
     public:
         static void* Allocate(size_t bytes)
@@ -107,12 +107,12 @@ namespace ege {
         typedef std::size_t size_type;
         typedef std::ptrdiff_t difference_type;
 
-        StdAllocator() noexcept 
-		{}
+        StdAllocator() noexcept
+        {}
 
-		StdAllocator(Allocator* allocator)
-			: _allocator(allocator)
-		{}
+        StdAllocator(Allocator* allocator)
+            : _allocator(allocator)
+        {}
 
         template<class U, class Allocator2> StdAllocator(const StdAllocator<U, Allocator2>&) noexcept {}
         template<class U, class Allocator2> bool operator==(const StdAllocator<U, Allocator2>&) const noexcept { return false; }
@@ -128,7 +128,7 @@ namespace ege {
             if (num > static_cast<size_t>(-1) / sizeof(T))
                 return nullptr; // Error
 
-			void* const pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
+            void* const pv = ege_allocate<Allocator>((UINT32)(num * sizeof(T)));
 
             if (!pv)
                 return nullptr; // Error
@@ -139,7 +139,7 @@ namespace ege {
         /** Deallocate storage p of deleted elements. */
         void deallocate(T* p, size_t num) const noexcept
         {
-			ege_deallocate<Allocator>((void*)p);
+            ege_deallocate<Allocator>((void*)p);
         }
 
         size_t max_size() const { return std::numeric_limits<size_type>::max() / sizeof(T); }
@@ -152,8 +152,8 @@ namespace ege {
         //template<class U, class... Args>
         //void construct(U* p, Args&&... args) { new(p) U(std::forward<Args>(args)...); }
 
-	private:
-		Allocator * _allocator;
+    private:
+        Allocator * _allocator;
     };
 
     /* ###################################################################
