@@ -1306,3 +1306,253 @@ Date: Feb 19 2018
 Time: 11:47:16
 Message: Memory leak
 ############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:56:46
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:56:46
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:56:46
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:57:04
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:33 inside ege::StackAllocator::~StackAllocator
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory from stack allocator has not been properly free
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\stackallocator.h:82 inside ege::StackAllocator::Deallocate
+Date: Feb 19 2018
+Time: 12:59:07
+Message: Memory leak
+############################################: 

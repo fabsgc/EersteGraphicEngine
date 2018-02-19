@@ -11,29 +11,9 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
    //Vector<int, StdAllocator<int, StackAllocator>> test = { 1, 2, 3, 4 };
    //SPtr<int> ptr = ege_shared_ptr_new<int, BasicAllocator>();
    //UPtr<int> ptr2 = ege_unique_ptr_new<int, BasicAllocator>(1);
-
-   /*StackAllocator* stackAllocator = new StackAllocator(3 * sizeof(int));
-   
-   int* i = (int*)stackAllocator->Allocate(sizeof(int));
-   int* j = (int*)stackAllocator->Allocate(sizeof(int));
-   int* k = (int*)stackAllocator->Allocate(sizeof(int));
-   *i = 5;*/
-
-   //SPtr<int> ptr3 = ege_shared_ptr_new<int, StackAllocator>();
-   //*ptr3 = 10;
-
-   //EGE_LOG_DEBUG(*ptr3);
+   //List<int, StdStackAllocator<int>> test(stackAllocator);
 
    StackAllocator* stackAllocator = new StackAllocator();
-
-   //List<int, StdStackAllocator<int>> test(stackAllocator);
-   /*List<int> test;
-
-   test.push_back(1);
-   test.push_back(2);
-   test.push_back(3);
-   test.push_back(4);
-   test.clear();*/
 
    UINT8* var1 = (UINT8*)stackAllocator->Allocate(sizeof(UINT8));
    *var1 = (UINT8)'a';

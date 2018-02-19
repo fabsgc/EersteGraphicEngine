@@ -159,6 +159,9 @@
     <ClCompile Include="PoolAllocator.cpp">
       <Filter>Source Files\Utility\Allocator</Filter>
     </ClCompile>
+    <ClCompile Include="LinearAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files\Utility\Allocator</Filter>
     </ClInclude>
     <ClInclude Include="StackAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearAllocator.h">
       <Filter>Header Files\Utility\Allocator</Filter>
     </ClInclude>
   </ItemGroup>
