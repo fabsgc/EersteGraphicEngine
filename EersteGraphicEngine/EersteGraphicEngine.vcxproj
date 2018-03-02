@@ -131,6 +131,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="DynamicLib.cpp" />
+    <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="FreeListAllocator.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -143,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
+    <ClInclude Include="DynamicLib.h" />
+    <ClInclude Include="DynamicLibManager.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="FreeListAllocator.h" />

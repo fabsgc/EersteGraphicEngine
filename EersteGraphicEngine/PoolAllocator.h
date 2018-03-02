@@ -77,7 +77,7 @@ namespace ege
 
         }
 
-        void * Allocate()
+        void * Allocate(size_t amount = sizeof(UINT32))
         {
             if (_freePoolBlock == nullptr || _freePoolBlock->_freeElements == 0)
                 AllocatePoolBlock();

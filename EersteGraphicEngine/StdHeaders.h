@@ -83,6 +83,21 @@ namespace ege
     *  ############# SHARED PTR INSTANTIATION ############################
     *  ################################################################ */
 
+    /**
+    * Create a new shared pointer using a custom allocator instance.
+    */
+    template<class Type, class Allocator>
+    decltype(auto) ege_shared_ptr_allocator_new(Allocator* allocator)
+    {
+        Type* ptr = (Type*)allocator->Allocate(sizeof(Type));
+
+        auto deleter = [&](Type* ptr) {
+            allocator->Deallocate(ptr);
+        };
+
+        return std::shared_ptr<Type>(ptr, deleter);
+    }
+
     /** 
     * Create a new shared pointer using a custom allocator category. 
     */
@@ -102,31 +117,38 @@ namespace ege
         return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>(allocator));
     }
 
+    /**
+    * Create a new unique pointer from a previously constructed object.
+    * Pointer specific data will be allocated using the provided allocator instance
+    */
+    template<class Type, class Allocator>
+    decltype(auto) ege_shared_ptr_allocator(Type* data, Allocator* allocator)
+    {
+        auto deleter = [&](Type* ptr) {
+            allocator->Deallocate(ptr);
+        };
+
+        return std::shared_ptr<Type, decltype(deleter)>(data, deleter);
+    }
+
     /* ###################################################################
     *  ############# UNIQUE PTR INSTANTIATION ############################
     *  ################################################################ */
 
-    /** 
-    * Create a new unique pointer using a custom allocator category. 
+    /**
+    * Create a new unique pointer using a custom allocator instance.
     */
-    /*template<class Type, class Allocator, class... Args>
-    UPtr<Type> ege_unique_ptr_allocator_new(Allocator* allocator, Args &&... args)
+    template<class Type, class Allocator>
+    decltype(auto) ege_unique_ptr_allocator_new(Allocator* allocator)
     {
-        Type* rawPtr = rawPtr = (Type*)allocator->Allocate(sizeof(Type));
+        Type* ptr = (Type*)allocator->Allocate(sizeof(Type));
 
-        //auto myDeleter = std::bind(custom_deleter, std::placeholders::_1, rawPtr, allocator);
-
-        auto deleter = [](Type* rawPtr) {
-            //custom_deleter(rawPtr, )
+        auto deleter = [&](Type* ptr) {
+            allocator->Deallocate(ptr);
         };
 
-        return std::unique_ptr<Type, decltype(myDeleter)>(rawPtr, myDeleter);
-
-        //void (Allocator::*t) (void*) = &Allocator::Deallocate;
-
-        //return std::unique_ptr<Type, void (Allocator::*t) (void*)>(rawPtr, allocator->*t);
-        
-    }*/
+        return std::unique_ptr<Type, decltype(deleter)>(ptr, deleter);
+    }
 
     /**
     * Create a new unique pointer using a custom allocator category.
@@ -146,5 +168,19 @@ namespace ege
     UPtr<Type, Allocator> ege_unique_ptr(Type* data)
     {
         return std::unique_ptr<Type, decltype(&ege_delete<Type, Allocator>)>(data, ege_delete<Type, Allocator>);
+    }
+
+    /**
+    * Create a new unique pointer from a previously constructed object.
+    * Pointer specific data will be allocated using the provided allocator instance
+    */
+    template<class Type, class Allocator>
+    decltype(auto) ege_unique_ptr_allocator(Type* data, Allocator* allocator)
+    {
+        auto deleter = [&](Type* ptr) {
+            allocator->Deallocate(ptr);
+        };
+
+        return std::unique_ptr<Type, decltype(deleter)>(data, deleter);
     }
 }
