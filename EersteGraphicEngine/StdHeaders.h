@@ -109,20 +109,32 @@ namespace ege
     /** 
     * Create a new unique pointer using a custom allocator category. 
     */
-    template<class Type, class Allocator, class... Args>
-    UPtr<Type, Allocator> ege_unique_ptr_new(Allocator* allocator, Args &&... args)
+    /*template<class Type, class Allocator, class... Args>
+    UPtr<Type> ege_unique_ptr_allocator_new(Allocator* allocator, Args &&... args)
     {
-        Type* rawPtr = (Type*)nullptr;
+        Type* rawPtr = rawPtr = (Type*)allocator->Allocate(sizeof(Type));
 
-        if (allocator != nullptr)
-        {
-            rawPtr = (Type*)allocator->Allocate(std::forward<Args>(args)...);
-        }
-        else
-        {
-            rawPtr = (Type*)ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
-        }
+        //auto myDeleter = std::bind(custom_deleter, std::placeholders::_1, rawPtr, allocator);
 
+        auto deleter = [](Type* rawPtr) {
+            //custom_deleter(rawPtr, )
+        };
+
+        return std::unique_ptr<Type, decltype(myDeleter)>(rawPtr, myDeleter);
+
+        //void (Allocator::*t) (void*) = &Allocator::Deallocate;
+
+        //return std::unique_ptr<Type, void (Allocator::*t) (void*)>(rawPtr, allocator->*t);
+        
+    }*/
+
+    /**
+    * Create a new unique pointer using a custom allocator category.
+    */
+    template<class Type, class Allocator = GeneralAllocator, class... Args>
+    UPtr<Type> ege_unique_ptr_new(Args &&... args)
+    {
+        Type*rawPtr = (Type*)ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
         return ege_unique_ptr<Type, Allocator>(rawPtr);
     }
 
@@ -130,7 +142,7 @@ namespace ege
     * Create a new unique pointer from a previously constructed object.
     * Pointer specific data will be allocated using the provided allocator category.
     */
-    template<class Type, class Allocator = BasicAllocator>
+    template<class Type, class Allocator = GeneralAllocator>
     UPtr<Type, Allocator> ege_unique_ptr(Type* data)
     {
         return std::unique_ptr<Type, decltype(&ege_delete<Type, Allocator>)>(data, ege_delete<Type, Allocator>);

@@ -2,7 +2,7 @@
 
 #include "PrerequisitesUtil.h"
 
-namespace ee
+namespace ege
 {
     class Timer
     {

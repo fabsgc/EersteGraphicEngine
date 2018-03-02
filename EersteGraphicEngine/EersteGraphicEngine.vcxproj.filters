@@ -162,6 +162,12 @@
     <ClCompile Include="LinearAllocator.cpp">
       <Filter>Source Files\Utility\Allocator</Filter>
     </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeListAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -207,6 +213,15 @@
       <Filter>Header Files\Utility\Allocator</Filter>
     </ClInclude>
     <ClInclude Include="LinearAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeListAllocator.h">
       <Filter>Header Files\Utility\Allocator</Filter>
     </ClInclude>
   </ItemGroup>

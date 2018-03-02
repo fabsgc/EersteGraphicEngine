@@ -2,51 +2,30 @@
 
 using namespace ege;
 
+void custom_deleter(UINT32* type, void* allocator)
+{
+    PoolAllocator<sizeof(UINT32)>* alloc = static_cast<PoolAllocator<sizeof(UINT32)>*>(allocator);
+    alloc->Deallocate(type);
+}
+
 int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _In_  LPSTR lpCmdLine, _In_  int nCmdShow)
 {
-    //String str = "salut";
+    PoolAllocator<sizeof(UINT32)>* poolAllocator = new PoolAllocator<sizeof(UINT32)>();
 
-    // StackAllocator* stackAllocator = new StackAllocator(3 * sizeof(int));
+    //UPtr<UINT32> ptr = ege_unique_ptr_new<UINT32>(42);
+    //UPtr<UINT32> ptr2 = ege_unique_ptr_allocator_new<UINT32, PoolAllocator<sizeof(UINT32)>>(poolAllocator);
+    //*ptr2 = 45;
+    //EGE_LOG_DEBUG(*ptr);
+    //EGE_LOG_DEBUG(*ptr2);
 
-    //Vector<int, StdAllocator<int, StackAllocator>> test = { 1, 2, 3, 4 };
-    //SPtr<int> ptr = ege_shared_ptr_new<int, BasicAllocator>();
-    //UPtr<int> ptr2 = ege_unique_ptr_new<int, BasicAllocator>(1);
-    //List<int, StdStackAllocator<int>> test(stackAllocator);
+    /*UINT32* rawPtr = (UINT32*)poolAllocator->Allocate(sizeof(UINT32));
+    auto myDeleter = std::bind(custom_deleter, std::placeholders::_1, rawPtr, poolAllocator);
+    std::unique_ptr<UINT32, decltype(myDeleter)> ptr(rawPtr, myDeleter);
 
-    LinearAllocator* linearAllocator = new LinearAllocator();
+    //ptr.release();*/
 
-    StackAllocator* stackAllocator = new StackAllocator();
-
-    //UPtr<int> ptr2 = ege_unique_ptr_new<int, StackAllocator>(stackAllocator, 1);
-    //*ptr2 = 5;
-
-    List<int, StdAllocator<int, LinearAllocator>> test(linearAllocator);
-    test.push_back(1);
-
-    //SPtr<int> ptr3 = ege_shared_ptr_new<int, StackAllocator>(stackAllocator, 3);
-
-    /*UINT8* var1 = (UINT8*)stackAllocator->Allocate(sizeof(UINT8));
-    *var1 = (UINT8)'a';
-    EGE_LOG_DEBUG(*var1);
-
-    UINT16* var2 = (UINT16*)stackAllocator->Allocate(sizeof(UINT16));
-    *var2 = 16;
-    EGE_LOG_DEBUG(*var2);
-
-    UINT32* var3 = (UINT32*)stackAllocator->Allocate(sizeof(UINT32));
-    *var3 = 32;
-    EGE_LOG_DEBUG(*var3);
-
-    stackAllocator->Deallocate(var3);
-    stackAllocator->Deallocate(var2);
-    stackAllocator->Deallocate(var1);
-
-    UINT8* var4 = (UINT8*)stackAllocator->Allocate(sizeof(UINT8));
-    *var4 = (UINT8)'b';
-    EGE_LOG_DEBUG(*var4);
-
-    stackAllocator->Deallocate(var4);
-    delete stackAllocator;*/
+    UINT32* data = (UINT32*)poolAllocator->Allocate();
+    *data = 25;
 
     return 0;
 }

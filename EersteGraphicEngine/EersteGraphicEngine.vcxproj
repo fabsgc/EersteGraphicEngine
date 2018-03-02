@@ -97,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>lib\rapidjson;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib\rapidjson;lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"log/errors.log\" /DEGE_DEBUG_LOG_FILE=\"log/debug.log\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -131,18 +131,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="FreeListAllocator.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryAllocator.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
+    <ClInclude Include="FreeListAllocator.h" />
+    <ClInclude Include="IModule.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="PoolAllocator.h" />
@@ -153,6 +157,7 @@
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>

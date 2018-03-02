@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-namespace ee
+namespace ege
 {
     Timer::Timer()
     {

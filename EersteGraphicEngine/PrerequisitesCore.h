@@ -19,6 +19,8 @@
 
 #include "lib/rapidjson/rapidjson.h"
 
+#include "lib/tinyxml2/tinyxml2.h"
+
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")

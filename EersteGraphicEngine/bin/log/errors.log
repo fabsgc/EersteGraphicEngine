@@ -1,0 +1,12 @@
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\poolallocator.h:20 inside ege::PoolAllocator<1,512,4>::PoolAllocator
+Date: Mar  1 2018
+Time: 22:18:11
+Error: Pool allocator minimum allowed element size is 4 bytes.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\poolallocator.h:20 inside ege::PoolAllocator<1,512,4>::PoolAllocator
+Date: Mar  1 2018
+Time: 22:19:50
+Error: Pool allocator minimum allowed element size is 4 bytes.
+Condition: 0
+############################################: 
