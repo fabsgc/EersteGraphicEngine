@@ -21,7 +21,7 @@ namespace ege
         if (_handle)
             return;
 
-        _handle = (DYNAMIC_LIB_HANDLE)DYNAMIC_LIB_LOAD(_name.c_str());
+        _handle = (DYNAMIC_LIB_HANDLE)DYNAMIC_LIB_LOAD(ToWString(_name).c_str());
 
         EGE_ASSERT_ERROR(_handle, "Could not load dynamic library " + _name + ".  System Error: " + DynamicLibError());
     }

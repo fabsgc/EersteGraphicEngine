@@ -1,10 +1,11 @@
-#include "PrerequisitesCore.h"
+#include "CoreApplication.h"
+#include <windows.h>
 
 using namespace ege;
 
 int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _In_  LPSTR lpCmdLine, _In_  int nCmdShow)
 {
-    PoolAllocator<sizeof(UINT32)>* poolAllocator = new PoolAllocator<sizeof(UINT32)>();
+    /*PoolAllocator<sizeof(UINT32)>* poolAllocator = new PoolAllocator<sizeof(UINT32)>();
 
     {
         auto ptr1 = ege_unique_ptr_allocator_new<UINT32, PoolAllocator<sizeof(UINT32)>>(poolAllocator);
@@ -22,7 +23,19 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
 
     poolAllocator->Deallocate((void*)ptr4);
 
-    delete poolAllocator;
+    delete poolAllocator;*/
+
+    START_UP_DESC desc;
+
+    desc.WindowDesc.Width = 960;
+    desc.WindowDesc.Height = 540;
+    desc.WindowDesc.Title = "My first application";
+
+    CoreApplication::StartUp(desc);
+    CoreApplication& app = gCoreApplication();
+
+    app.RunMainLoop();
+    app.ShutDown();
 
     return 0;
 }

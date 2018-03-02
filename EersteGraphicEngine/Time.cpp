@@ -43,11 +43,6 @@ namespace ege
         return _timer->GetMicroseconds();
     }
 
-    Time& gTime()
-    {
-        return Time::Instance();
-    }
-
     void Time::Stop()
     {
         _run = false;
@@ -56,5 +51,10 @@ namespace ege
     void Time::Start()
     {
         _run = true;
+    }
+
+    Time& gTime()
+    {
+        return Time::Instance();
     }
 }

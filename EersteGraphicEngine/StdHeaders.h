@@ -44,6 +44,14 @@ extern "C" {
 #   include <sys/stat.h>
 }
 
+#ifndef UNICODE
+#define UNICODE
+#endif
+
+#ifndef _UNICODE
+#define _UNICODE
+#endif
+
 #include <Windows.h>
 #include "BasicAllocator.h"
 

@@ -81,4 +81,9 @@ namespace ege
         XMGLOBALCONST XMFLOAT4 Silver         = { 0.75f, 0.75f, 0.75f, 1.0f };
         XMGLOBALCONST XMFLOAT4 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
     }
+
+    class CoreApplication;
+    class Window;
+    class RenderAPI;
+    class RenderWindow;
 }
