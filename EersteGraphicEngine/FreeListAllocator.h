@@ -11,8 +11,27 @@ namespace ege
     *  ############# POOL ALLOCATOR  #####################################
     *  ################################################################ */
 
+    template <size_t BlockSize = sizeof(UINT32) * 64>
     class FreeListAllocator
     {
+    private:
+        struct FreeListHeader
+        {
+            size_t  Size;
+            UINT32* BlockPtr;
+
+            FreeListHeader()
+                : Size(0)
+                , BlockPtr(nullptr)
+            {}
+        };
+
+        class FreeListBlock
+        {
+        public:
+        };
+
+        
     public:
         FreeListAllocator()
         {}

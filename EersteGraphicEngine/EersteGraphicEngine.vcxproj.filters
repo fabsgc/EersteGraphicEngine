@@ -168,14 +168,14 @@
     <ClCompile Include="Time.cpp">
       <Filter>Source Files\Utility\Util</Filter>
     </ClCompile>
-    <ClCompile Include="FreeListAllocator.cpp">
-      <Filter>Source Files\Utility\Allocator</Filter>
-    </ClCompile>
     <ClCompile Include="DynamicLib.cpp">
       <Filter>Source Files\Utility\Util</Filter>
     </ClCompile>
     <ClCompile Include="DynamicLibManager.cpp">
       <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreApplication.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +230,6 @@
     <ClInclude Include="Time.h">
       <Filter>Header Files\Utility\Util</Filter>
     </ClInclude>
-    <ClInclude Include="FreeListAllocator.h">
-      <Filter>Header Files\Utility\Allocator</Filter>
-    </ClInclude>
     <ClInclude Include="DynamicLib.h">
       <Filter>Header Files\Utility\Util</Filter>
     </ClInclude>
@@ -241,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="ThreadDefines.h">
       <Filter>Header Files\Utility\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreApplication.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

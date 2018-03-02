@@ -19,15 +19,15 @@ namespace ege
         {
         public:
             PoolBlock(UINT8* poolBlock)
-                : _poolBlock(poolBlock)
-                , _freePtr(0)
-                , _freeElements(ElementsPerBlock)
-                , _nextBlock(nullptr)
+                : PoolBlockStart(poolBlock)
+                , FreePtr(0)
+                , FreeElements(ElementsPerBlock)
+                , NextBlock(nullptr)
             {
                 UINT32 offset = 0;
                 for (UINT32 i = 0; i < ElementsPerBlock; i++)
                 {
-                    UINT32* entryPtr = (UINT32*)&_poolBlock[offset];
+                    UINT32* entryPtr = (UINT32*)&PoolBlockStart[offset];
 
                     offset += ActualElementSize;
                     *entryPtr = offset;
@@ -36,14 +36,14 @@ namespace ege
 
             ~PoolBlock()
             {
-                EGE_ASSERT_ERROR((_freeElements == ElementsPerBlock), "Not all elements were deallocated from a block.");
+                EGE_ASSERT_ERROR((FreeElements == ElementsPerBlock), "Not all elements were deallocated from a block.");
             }
 
             UINT8 * Allocate()
             {
-                UINT8* freeEntry = &_poolBlock[_freePtr];
-                _freePtr = *(UINT32*)freeEntry;
-                --_freeElements;
+                UINT8* freeEntry = &PoolBlockStart[FreePtr];
+                FreePtr = *(UINT32*)freeEntry;
+                --FreeElements;
 
                 return freeEntry;
             }
@@ -51,17 +51,17 @@ namespace ege
             void Deallocate(void* data)
             {
                 UINT32* entryPtr = (UINT32*)data;
-                *entryPtr = _freePtr;
-                ++_freeElements;
+                *entryPtr = FreePtr;
+                ++FreeElements;
 
-                _freePtr = (UINT32)(((UINT8*)data) - _poolBlock);
+                FreePtr = (UINT32)(((UINT8*)data) - PoolBlockStart);
             }
 
         public:
-            UINT8 *    _poolBlock;
-            UINT32     _freePtr;
-            UINT32     _freeElements;
-            PoolBlock* _nextBlock;
+            UINT8 *    PoolBlockStart;
+            UINT32     FreePtr;
+            UINT32     FreeElements;
+            PoolBlock* NextBlock;
         };
 
     public:
@@ -79,7 +79,7 @@ namespace ege
 
         void * Allocate(size_t amount = sizeof(UINT32))
         {
-            if (_freePoolBlock == nullptr || _freePoolBlock->_freeElements == 0)
+            if (_freePoolBlock == nullptr || _freePoolBlock->FreeElements == 0)
                 AllocatePoolBlock();
 
             _totalElements++;
@@ -92,12 +92,12 @@ namespace ege
             while (currentBlock)
             {
                 constexpr UINT32 blockDataSize = ActualElementSize * ElementsPerBlock;
-                if (data >= currentBlock->_poolBlock && data < (currentBlock->_poolBlock + blockDataSize))
+                if (data >= currentBlock->PoolBlockStart && data < (currentBlock->PoolBlockStart + blockDataSize))
                 {
                     currentBlock->Deallocate(data);
                     _totalElements--;
 
-                    if (currentBlock->_freeElements == 0 && currentBlock->_nextBlock)
+                    if (currentBlock->FreeElements == 0 && currentBlock->NextBlock)
                     {
                         // Free the block, but only if there is some extra free space in other blocks
                         const UINT32 totalSpace = (_numberBlocks - 1) * ElementsPerBlock;
@@ -105,7 +105,7 @@ namespace ege
 
                         if (freeSpace > ElementsPerBlock / 2)
                         {
-                            _freePoolBlock = currentBlock->_nextBlock;
+                            _freePoolBlock = currentBlock->NextBlock;
                             DeallocatePoolBlock(currentBlock);
                         }
                     }
@@ -113,7 +113,7 @@ namespace ege
                     return;
                 }
 
-                currentBlock = currentBlock->_nextBlock;
+                currentBlock = currentBlock->NextBlock;
             }
             
             EGE_ASSERT_ERROR(false, "Can't deallocate memory pool");
@@ -130,14 +130,14 @@ namespace ege
 
             while (currentBlock != nullptr)
             {
-                PoolBlock* nextBlock = currentBlock->_nextBlock;
-                if (nextBlock != nullptr && nextBlock->_freeElements > 0)
+                PoolBlock* nextBlock = currentBlock->NextBlock;
+                if (nextBlock != nullptr && nextBlock->FreeElements > 0)
                 {
                     // Found an existing block with free space
                     newBlock = nextBlock;
 
-                    currentBlock->_nextBlock = newBlock->_nextBlock;
-                    newBlock->_nextBlock = _freePoolBlock;
+                    currentBlock->NextBlock = newBlock->NextBlock;
+                    newBlock->NextBlock = _freePoolBlock;
 
                     break;
                 }
@@ -158,7 +158,7 @@ namespace ege
                 newBlock = new (data) PoolBlock((UINT8*)blockData);
                 _numberBlocks++;
 
-                newBlock->_nextBlock = _freePoolBlock;
+                newBlock->NextBlock = _freePoolBlock;
             }
 
             _freePoolBlock = newBlock;
