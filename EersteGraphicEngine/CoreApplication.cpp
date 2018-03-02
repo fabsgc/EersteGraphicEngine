@@ -30,7 +30,7 @@ namespace ege
             }
             else
             {
-                EE_SLEEP(100);
+                EGE_SLEEP(100);
             }
         }
     }
