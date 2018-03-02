@@ -161,6 +161,7 @@
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Types.h" />

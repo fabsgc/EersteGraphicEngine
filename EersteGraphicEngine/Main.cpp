@@ -15,5 +15,8 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
     auto ptr2 = ege_shared_ptr_allocator_new<UINT32, PoolAllocator<sizeof(UINT32)>>(poolAllocator);
     *ptr2 = 42;
 
+    UINT32* ptr4 = (UINT32*)poolAllocator->Allocate();
+    *ptr4 = 50;
+
     return 0;
 }

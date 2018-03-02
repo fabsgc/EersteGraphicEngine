@@ -136,6 +136,9 @@
     <Filter Include="Header Files\Utility\Prerequistes">
       <UniqueIdentifier>{ecfc6c4a-76be-45a6-8fdb-aae4061a3851}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\Threading">
+      <UniqueIdentifier>{7c9c0978-666f-4e01-9137-f587be3f1eed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="DynamicLibManager.h">
       <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadDefines.h">
+      <Filter>Header Files\Utility\Threading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

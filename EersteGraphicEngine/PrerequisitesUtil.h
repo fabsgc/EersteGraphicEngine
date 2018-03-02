@@ -20,3 +20,6 @@
 
 // Forward declarations
 #include "ForwardDeclarationUtil.h"
+
+// Useful threading defines
+#include "ThreadDefines.h"

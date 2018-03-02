@@ -5,6 +5,10 @@
 
 namespace ege
 {
+    /* ###################################################################
+    *  ############# STRING TYPES ########################################
+    *  ################################################################ */
+
     template <typename T>
     using BasicString = std::basic_string <T, std::char_traits<T>, StdAllocator<T, BasicAllocator>>;
 
@@ -36,5 +40,128 @@ namespace ege
     /** Wide string stream used for primarily for constructing UTF-32 strings. */
     typedef BasicStringStream<char32_t> U32StringStream;
 
-    WString Str2WStr(const String& s);
+    /* ###################################################################
+    *  ############# STRING CONVERSION FUNCTIONS #########################
+    *  ################################################################ */
+
+    /** Converts a narrow string to a wide string. */
+    WString ToWString(const String& source);
+
+    /**	Converts a narrow string to a wide string. */
+    WString ToWString(const char* source);
+
+    /** Converts a float to a string. */
+    WString ToWString(float val, unsigned short precision = 6, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /** Converts a double to a string. */
+    WString ToWString(double val, unsigned short precision = 6, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an int to a string. */
+    WString ToWString(int val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an unsigned int to a string. */
+    WString ToWString(unsigned int val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an 64bit integer to a string. */
+    WString ToWString(INT64 val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an 64bit unsigned to a string. */
+    WString ToWString(UINT64 val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an narrow char unsigned to a string. */
+    WString ToWString(char val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an wide bit char unsigned to a string. */
+    WString ToWString(wchar_t val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /** Converts a wide string to a narrow string. */
+    String ToString(const WString& source);
+
+    /**	Converts a wide string to a narrow string. */
+    String ToString(const wchar_t* source);
+
+    /**	Converts a float to a string. */
+    String ToString(float val, unsigned short precision = 6, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts a double to a string. */
+    String ToString(double val, unsigned short precision = 6, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    String ToString(int val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an unsigned int to a string. */
+    String ToString(unsigned int val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts a 64bit int to a string. */
+    String ToString(INT64 val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**	Converts an 64bit unsigned int to a string. */
+    String ToString(UINT64 val, unsigned short width = 0, char fill = ' ', std::ios::fmtflags flags = std::ios::fmtflags(0));
+
+    /**
+    * Converts a String to a float.
+    * @note	0.0f if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    float ParseFloat(const String& val, float defaultValue = 0);
+
+    /**
+    * Converts a String to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    INT32 ParseINT32(const String& val, INT32 defaultValue = 0);
+
+    /**
+    * Converts a String to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    UINT32 ParseUINT32(const String& val, UINT32 defaultValue = 0);
+
+    /**
+    * Converts a String to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    INT64 ParseINT64(const String& val, INT64 defaultValue = 0);
+
+    /**
+    * Converts a String to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    UINT64 ParseUINT64(const String& val, UINT64 defaultValue = 0);
+
+    /** Checks the String is a valid number value. */
+    bool IsNumber(const String& val);
+
+    /**
+    * Converts a WString to a float.
+    * @note	0.0f if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    float ParseFloat(const WString& val, float defaultValue = 0);
+
+    /**
+    * Converts a WString to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    INT32 ParseINT32(const WString& val, INT32 defaultValue = 0);
+
+    /**
+    * Converts a WString to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    UINT32 ParseUINT32(const WString& val, UINT32 defaultValue = 0);
+
+    /**
+    * Converts a WString to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    INT64 ParseINT64(const WString& val, INT64 defaultValue = 0);
+
+    /**
+    * Converts a WString to a whole number.
+    * @note	0 if the value could not be parsed, otherwise the numeric version of the string.
+    */
+    UINT64 ParseUINT64(const WString& val, UINT64 defaultValue = 0);
+
+    /**
+    * Checks the WString is a valid number value.
+    */
+    bool IsNumber(const WString& val);
 }
