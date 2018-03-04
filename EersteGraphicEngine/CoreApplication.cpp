@@ -106,6 +106,10 @@ namespace ege
         Time::ShutDown();
         DynamicLibManager::ShutDown();
         Window::ShutDown();
+        Keyboard::ShutDown();
+        Joypad::ShutDown();
+        Mouse::ShutDown();
+        InputHandler::ShutDown();
     }
 
     void CoreApplication::StartUpRenderAPI()
