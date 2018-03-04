@@ -62,6 +62,8 @@ namespace ege
         void StartUpWindow();
         void StartUpComponents();
 
+        void SetApplicationConfig();
+
     protected:
         volatile bool _runMainLoop;
         volatile bool _paused;

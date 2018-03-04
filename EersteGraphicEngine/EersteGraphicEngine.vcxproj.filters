@@ -127,6 +127,12 @@
     <Filter Include="Header Files\Utility\Threading">
       <UniqueIdentifier>{7c9c0978-666f-4e01-9137-f587be3f1eed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility\Lib">
+      <UniqueIdentifier>{4b19e231-5dd6-4796-ad9f-596d9229ae21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib">
+      <UniqueIdentifier>{24179533-0b8a-48cf-b916-6e3712aa31ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -185,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp">
+      <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2\tinyxml2.h">
+      <Filter>Header Files\Utility\Lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

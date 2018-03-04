@@ -29,7 +29,7 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
 
     desc.WindowDesc.Width = 960;
     desc.WindowDesc.Height = 540;
-    desc.WindowDesc.Title = "My first application";
+    desc.WindowDesc.Title = String("saluyt");
 
     CoreApplication::StartUp(desc);
     CoreApplication& app = gCoreApplication();

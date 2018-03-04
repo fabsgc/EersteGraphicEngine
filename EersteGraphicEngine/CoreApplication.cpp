@@ -92,6 +92,10 @@ namespace ege
 
     void CoreApplication::OnStartUp()
     {
+#ifdef EGE_CONFIG_APP_FILE
+        SetApplicationConfig();
+#endif
+
         Time::StartUp();
         DynamicLibManager::StartUp();
 
@@ -103,14 +107,13 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
-        Time::ShutDown();
-        DynamicLibManager::ShutDown();
-        Window::ShutDown();
-
+        InputHandler::ShutDown();
         Keyboard::ShutDown();
         Joypad::ShutDown();
         Mouse::ShutDown();
-        InputHandler::ShutDown();
+        Window::ShutDown();
+        Time::ShutDown();
+        DynamicLibManager::ShutDown();
     }
 
     void CoreApplication::StartUpRenderAPI()
@@ -140,6 +143,16 @@ namespace ege
         InsertComponent(gJoypad());
         InsertComponent(gMouse());
         InsertComponent(gInputHandler());
+    }
+
+    void CoreApplication::SetApplicationConfig()
+    {
+        tinyxml2::XMLDocument doc;
+        doc.LoadFile(EGE_CONFIG_APP_FILE);
+
+        _startUpDesc.WindowDesc.Width  = doc.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
+        _startUpDesc.WindowDesc.Height = doc.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
+        _startUpDesc.WindowDesc.Title  = doc.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
     }
 
     void CoreApplication::KeyEventHandler(MSG* message)

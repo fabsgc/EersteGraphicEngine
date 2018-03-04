@@ -79,6 +79,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\</OutDir>
     <TargetName>$(ProjectName)d</TargetName>
+    <IncludePath>lib\assimp;lib\tinyxml2;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>bin\</OutDir>
@@ -97,8 +99,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>lib\rapidjson;lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"log/errors.log\" /DEGE_DEBUG_LOG_FILE=\"log/debug.log\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,6 +141,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryAllocator.cpp" />
@@ -163,6 +166,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="lib\tinyxml2\tinyxml2.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mouse.h" />

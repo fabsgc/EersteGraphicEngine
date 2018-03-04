@@ -17,8 +17,6 @@
 #include "lib/assimp/Scene.h"
 #include "lib/assimp/Postprocess.h"
 
-#include "lib/rapidjson/rapidjson.h"
-
 #include "lib/tinyxml2/tinyxml2.h"
 
 #pragma comment(lib, "d3d11.lib")
