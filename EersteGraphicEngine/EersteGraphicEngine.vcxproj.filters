@@ -46,9 +46,6 @@
     <Filter Include="Source Files\Core\Text">
       <UniqueIdentifier>{241c6cc5-380d-47c7-bbfa-7e1b2b48af62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Shader">
-      <UniqueIdentifier>{a45b846f-b38e-452a-85f4-d728e38341e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\Resources">
       <UniqueIdentifier>{ba7f66d6-ba63-4cc7-a09f-449d55162cb4}</UniqueIdentifier>
     </Filter>
@@ -75,9 +72,6 @@
     </Filter>
     <Filter Include="Header Files\Core\Resources">
       <UniqueIdentifier>{1aa42362-5ce4-4660-8029-b2ec3f3033c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Shader">
-      <UniqueIdentifier>{5b929509-7c83-4091-a797-b4464a38d76a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core\Manager">
       <UniqueIdentifier>{6c2d6902-77e5-4010-9d7c-1278bdc44d1e}</UniqueIdentifier>
@@ -111,12 +105,6 @@
     </Filter>
     <Filter Include="Header Files\Utility\String">
       <UniqueIdentifier>{baa33827-28f2-4056-9e25-059d8844ff69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Service">
-      <UniqueIdentifier>{26b7d067-414b-48e8-a84d-dfb7bf78e1c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Core\Service">
-      <UniqueIdentifier>{b2a70bb2-011e-4ffb-b8dc-aafc6a456c80}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\App">
       <UniqueIdentifier>{08a04a40-70d7-4bce-8f26-498ede0a4d1f}</UniqueIdentifier>
@@ -179,6 +167,21 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files\Core\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponentHandler.cpp">
+      <Filter>Source Files\Core\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Joypad.cpp">
+      <Filter>Source Files\Core\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +250,21 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\Core\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentHandler.h">
+      <Filter>Header Files\Core\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Joypad.h">
+      <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

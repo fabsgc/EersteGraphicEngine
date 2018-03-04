@@ -2,6 +2,8 @@
 
 #include "PrerequisitesCore.h"
 #include "DynamicLibManager.h"
+#include "IComponent.h"
+#include "IComponentHandler.h"
 #include "IModule.h"
 #include "Window.h"
 #include "Time.h"
@@ -13,7 +15,7 @@ namespace ege
         WINDOW_DESC WindowDesc;
     };
 
-    class CoreApplication : public IModule<CoreApplication>
+    class CoreApplication : public IModule<CoreApplication>, public IComponentHandler
     {
     public:
         CoreApplication(const START_UP_DESC& desc);
