@@ -103,8 +103,6 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
-        ClearComponents();
-
         Time::ShutDown();
         DynamicLibManager::ShutDown();
         Window::ShutDown();
