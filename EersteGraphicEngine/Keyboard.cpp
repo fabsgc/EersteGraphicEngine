@@ -147,4 +147,14 @@ namespace ege
     void Keyboard::OnShutDown()
     {
     }
+
+    Keyboard& gKeyboard()
+    {
+        return static_cast<Keyboard&>(Keyboard::Instance());
+    }
+
+    SPtr<Keyboard> gKeyboardPtr()
+    {
+        return ege_shared_ptr(static_cast<Keyboard*>(Keyboard::InstancePtr()));
+    }
 }

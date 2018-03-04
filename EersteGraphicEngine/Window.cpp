@@ -28,6 +28,22 @@ namespace ege
 
         while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
+            CoreApplication& application = gCoreApplication();
+
+            if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
+            {
+                application.KeyEventHandler(&msg);
+            }
+                
+            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
+                msg.message == WM_LBUTTONUP || msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
+            {
+                application.MouseEventHandler(&msg);
+            }
+
+            application.JoypadEventHandler();
+            application.InputEventHandler();
+            
             if (msg.message == WM_QUIT)
             {
                 gCoreApplication().OnStopRequested();

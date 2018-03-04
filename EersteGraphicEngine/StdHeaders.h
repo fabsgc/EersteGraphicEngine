@@ -110,9 +110,9 @@ namespace ege
     * Create a new shared pointer using a custom allocator category. 
     */
     template<class Type, class Allocator, class... Args>
-    SPtr<Type> ege_shared_ptr_new(Allocator* allocator, Args &&... args)
+    SPtr<Type> ege_shared_ptr_new(Args &&... args)
     {
-        return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(allocator), std::forward<Args>(args)...);
+        return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(), std::forward<Args>(args)...);
     }
 
     /**
@@ -120,9 +120,16 @@ namespace ege
     * Pointer specific data will be allocated using the provided allocator category.
     */
     template<class Type, class MainAllocator = BasicAllocator, class PtrDataAllocator = BasicAllocator>
-    SPtr<Type> ege_shared_ptr(PtrDataAllocator* allocator, Type* data)
+    SPtr<Type> ege_shared_ptr(Type* data, PtrDataAllocator* allocator = nullptr)
     {
-        return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>(allocator));
+        if (allocator != nullptr)
+        {
+            return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>(allocator));
+        }
+        else
+        {
+            return SPtr<Type>(data, &ege_delete<Type, MainAllocator>, StdAllocator<Type, PtrDataAllocator>());
+        }
     }
 
     /**

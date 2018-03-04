@@ -50,4 +50,7 @@ namespace ege
         XMFLOAT2            _position;
         Vector<MouseButton> _mouseButtons;
     };
+
+    Mouse&      gMouse();
+    SPtr<Mouse> gMousePtr();
 }

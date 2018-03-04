@@ -183,6 +183,9 @@
     <ClCompile Include="Joypad.cpp">
       <Filter>Source Files\Core\Input</Filter>
     </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -264,6 +267,9 @@
       <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
     <ClInclude Include="Joypad.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
   </ItemGroup>

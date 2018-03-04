@@ -136,6 +136,7 @@
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IModule.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LinearAllocator.h" />

@@ -51,4 +51,7 @@ namespace ege
     private:
         Vector<Key> _keys;
     };
+
+    Keyboard&      gKeyboard();
+    SPtr<Keyboard> gKeyboardPtr();
 }

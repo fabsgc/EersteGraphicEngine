@@ -8,6 +8,11 @@
 #include "Window.h"
 #include "Time.h"
 
+#include "InputHandler.h"
+#include "Keyboard.h"
+#include "Joypad.h"
+#include "Mouse.h"
+
 namespace ege
 {
     struct START_UP_DESC
@@ -37,6 +42,11 @@ namespace ege
         void OnStopRequested();
         void OnResize();
 
+        void KeyEventHandler(MSG* message);
+        void MouseEventHandler(MSG* message);
+        void JoypadEventHandler();
+        void InputEventHandler();
+
         template<class T = CoreApplication>
         static void StartUp(const START_UP_DESC& desc)
         {
@@ -50,6 +60,7 @@ namespace ege
         void StartUpRenderAPI();
         void StartUpRenderer();
         void StartUpWindow();
+        void StartUpComponents();
 
     protected:
         volatile bool _runMainLoop;

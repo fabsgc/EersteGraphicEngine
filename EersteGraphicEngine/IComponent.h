@@ -10,7 +10,7 @@ namespace ege
         KEYBOARD, JOYPAD, MOUSE, INPUT_HANDLER
     };
 
-    class IComponent : public IModule<CoreApplication>
+    class IComponent : public IModule<IComponent>
     {
     public:
         IComponent(ComponentType type);

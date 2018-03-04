@@ -84,4 +84,14 @@ namespace ege
     void Mouse::OnShutDown()
     {
     }
+
+    Mouse& gMouse()
+    {
+        return static_cast<Mouse&>(Mouse::Instance());
+    }
+
+    SPtr<Mouse> gMousePtr()
+    {
+        return ege_shared_ptr(static_cast<Mouse*>(Mouse::InstancePtr()));
+    }
 }

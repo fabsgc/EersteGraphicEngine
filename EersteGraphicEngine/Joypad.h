@@ -15,6 +15,11 @@ namespace ege
         ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN
     };
 
+    enum class JoypadStickName
+    {
+        LEFT, RIGHT
+    };
+
     enum class JoypadButtonState
     {
         TRIGGERED, RELEASED
@@ -38,19 +43,45 @@ namespace ege
         }
     };
 
+    struct JoyStick
+    {
+        JoypadStickName Name;
+        double          AxisX;
+        double          AxisY;
+
+        JoyStick(JoypadStickName name)
+            : Name(name)
+            , AxisX(0.0)
+            , AxisY(0.0)
+        {}
+
+        bool operator==(JoypadStickName name) const
+        {
+            return name == Name;
+        }
+    };
+
     class Joypad : public IComponent {
     public:
         Joypad();
         ~Joypad() {}
-        void              Update(MSG* message, float deltaTime);
+        void              Update(float deltaTime);
+        bool              IsConnected();
         JoypadButtonState GetState(JoypadButtonName name);
+        JoyStick&         GetJoyStick(JoypadStickName name);
 
     private:
-        void             UpdateState(JoypadButtonName name, JoypadButtonState state, double value = 0.0);
+        void             UpdateState(JoypadButton* button);
+        void             UpdateState(JoyStick* stick);
         void             OnStartUp() override;
         void             OnShutDown() override;
 
     private:
+        bool                 _isConnected;
         Vector<JoypadButton> _joypadButtons;
+        Vector<JoyStick>     _joysticks;
     };
+
+    Joypad&      gJoypad();
+    SPtr<Joypad> gJoypadPtr();
 }

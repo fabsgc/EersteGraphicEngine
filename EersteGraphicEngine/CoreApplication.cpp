@@ -98,6 +98,7 @@ namespace ege
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpWindow();
+        StartUpComponents();
     }
 
     void CoreApplication::OnShutDown()
@@ -109,16 +110,56 @@ namespace ege
 
     void CoreApplication::StartUpRenderAPI()
     {
+        //TODO
     }
 
     void CoreApplication::StartUpRenderer()
     {
+        //TODO
     }
 
     void CoreApplication::StartUpWindow()
     {
         Window::StartUp(_startUpDesc.WindowDesc);
         _window = gWindowPtr();
+    }
+
+    void CoreApplication::StartUpComponents()
+    {
+        ///########################
+        InputHandler* inputHandler = new (ege_allocate<InputHandler>()) InputHandler();
+        Keyboard* keyboard = new (ege_allocate<Keyboard>()) Keyboard();
+        Joypad* joypad = new (ege_allocate<Joypad>()) Joypad();
+        Mouse* mouse = new (ege_allocate<Mouse>()) Mouse();
+
+        InsertComponent(ege_shared_ptr(inputHandler));
+        InsertComponent(ege_shared_ptr(keyboard));
+        InsertComponent(ege_shared_ptr(joypad));
+        InsertComponent(ege_shared_ptr(mouse));
+    }
+
+    void CoreApplication::KeyEventHandler(MSG* message)
+    {
+        Keyboard& keyboard = static_cast<Keyboard&>(GetComponent(ComponentType::KEYBOARD));
+        keyboard.Update(message, gTime().GetFrameDelta());
+    }
+
+    void CoreApplication::MouseEventHandler(MSG* message)
+    {
+        Mouse& mouse = static_cast<Mouse&>(GetComponent(ComponentType::MOUSE));
+        mouse.Update(message, gTime().GetFrameDelta());
+    }
+
+    void CoreApplication::JoypadEventHandler()
+    {
+        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::JOYPAD));
+        inputHandler.Update(gTime().GetFrameDelta());
+    }
+
+    void CoreApplication::InputEventHandler()
+    {
+        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
+        inputHandler.Update(gTime().GetFrameDelta());
     }
 
     CoreApplication& gCoreApplication()
