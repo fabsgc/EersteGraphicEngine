@@ -103,9 +103,12 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
+        ClearComponents();
+
         Time::ShutDown();
         DynamicLibManager::ShutDown();
         Window::ShutDown();
+
         Keyboard::ShutDown();
         Joypad::ShutDown();
         Mouse::ShutDown();
@@ -135,10 +138,10 @@ namespace ege
         Mouse::StartUp();
         InputHandler::StartUp();
 
-        InsertComponent(gInputHandlerPtr());
-        InsertComponent(gKeyboardPtr());
-        InsertComponent(gJoypadPtr());
-        InsertComponent(gMousePtr());
+        InsertComponent(gKeyboard());
+        InsertComponent(gJoypad());
+        InsertComponent(gMouse());
+        InsertComponent(gInputHandler());
     }
 
     void CoreApplication::KeyEventHandler(MSG* message)
@@ -161,8 +164,8 @@ namespace ege
 
     void CoreApplication::InputEventHandler()
     {
-        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
-        inputHandler.Update(gTime().GetFrameDelta());
+        //InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
+        //inputHandler.Update(gTime().GetFrameDelta());
     }
 
     CoreApplication& gCoreApplication()
