@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponent.h"
+#include "IModule.h"
 
 namespace ege
 {
@@ -34,7 +35,7 @@ namespace ege
         }
     };
 
-    class Keyboard : public IComponent 
+    class Keyboard : public IModule<Keyboard>, public IComponent
     {
     public:
         Keyboard();

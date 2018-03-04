@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponent.h"
+#include "IModule.h"
 #include "Window.h"
 
 namespace ege
@@ -32,7 +33,7 @@ namespace ege
         }
     };
 
-    class Mouse : public IComponent {
+    class Mouse : public IModule<Mouse>, public IComponent {
     public:
         Mouse();
         ~Mouse() {}

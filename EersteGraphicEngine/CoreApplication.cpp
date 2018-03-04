@@ -126,16 +126,15 @@ namespace ege
 
     void CoreApplication::StartUpComponents()
     {
-        ///########################
-        InputHandler* inputHandler = new (ege_allocate<InputHandler>()) InputHandler();
-        Keyboard* keyboard = new (ege_allocate<Keyboard>()) Keyboard();
-        Joypad* joypad = new (ege_allocate<Joypad>()) Joypad();
-        Mouse* mouse = new (ege_allocate<Mouse>()) Mouse();
+        Keyboard::StartUp();
+        Joypad::StartUp();
+        Mouse::StartUp();
+        InputHandler::StartUp();
 
-        InsertComponent(ege_shared_ptr(inputHandler));
-        InsertComponent(ege_shared_ptr(keyboard));
-        InsertComponent(ege_shared_ptr(joypad));
-        InsertComponent(ege_shared_ptr(mouse));
+        InsertComponent(gInputHandlerPtr());
+        InsertComponent(gKeyboardPtr());
+        InsertComponent(gJoypadPtr());
+        InsertComponent(gMousePtr());
     }
 
     void CoreApplication::KeyEventHandler(MSG* message)

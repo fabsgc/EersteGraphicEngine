@@ -10,17 +10,11 @@ namespace ege
         KEYBOARD, JOYPAD, MOUSE, INPUT_HANDLER
     };
 
-    class IComponent : public IModule<IComponent>
+    class IComponent
     {
     public:
         IComponent(ComponentType type);
         virtual ~IComponent() = 0;
-
-        template<class T = IComponent>
-        static void StartUp(ComponentType type)
-        {
-            IModule::StartUp<T>(type);
-        }
 
         ComponentType GetType();
 

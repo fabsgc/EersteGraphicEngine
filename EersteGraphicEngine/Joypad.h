@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponent.h"
+#include "IModule.h"
 #include "Window.h"
 
 namespace ege
@@ -61,7 +62,7 @@ namespace ege
         }
     };
 
-    class Joypad : public IComponent {
+    class Joypad : public IModule<Joypad>, public IComponent {
     public:
         Joypad();
         ~Joypad() {}

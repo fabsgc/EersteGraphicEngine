@@ -3,13 +3,14 @@
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
 #include "IComponent.h"
+#include "IModule.h"
 #include "Keyboard.h"
 #include "Joypad.h"
 #include "Mouse.h"
 
 namespace ege
 {
-    class InputHandler : public IComponent, public IComponentHandler
+    class InputHandler : public IModule<InputHandler>, public IComponent, public IComponentHandler
     {
     public:
         InputHandler();
