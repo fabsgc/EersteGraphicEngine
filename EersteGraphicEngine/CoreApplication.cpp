@@ -164,8 +164,8 @@ namespace ege
 
     void CoreApplication::InputEventHandler()
     {
-        //InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
-        //inputHandler.Update(gTime().GetFrameDelta());
+        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
+        inputHandler.Update(gTime().GetFrameDelta());
     }
 
     CoreApplication& gCoreApplication()
