@@ -11,9 +11,8 @@ namespace ege
         IComponentHandler() {}
         virtual ~IComponentHandler() = 0;
 
-        void             ClearComponents();
-        void             InsertComponent(IComponent& component);
-        IComponent&      GetComponent(ComponentType type);
+        void        InsertComponent(IComponent& component);
+        IComponent& GetComponent(ComponentType type);
 
     private:
         Map<ComponentType, IComponent*> _components;

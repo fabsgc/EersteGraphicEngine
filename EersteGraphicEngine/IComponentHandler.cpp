@@ -6,11 +6,6 @@ namespace ege
     {
     }
 
-    void IComponentHandler::ClearComponents()
-    {
-        _components.clear();
-    }
-
     void IComponentHandler::InsertComponent(IComponent& component)
     {
         auto inserted = _components.insert(std::make_pair(component.GetType(), &component));
