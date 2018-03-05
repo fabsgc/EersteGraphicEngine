@@ -284,6 +284,12 @@
     <ClInclude Include="Joypad.h">
       <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
+    <ClInclude Include="IUpdatable.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">

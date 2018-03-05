@@ -162,8 +162,10 @@
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
+    <ClInclude Include="IDrawable.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="lib\tinyxml2\tinyxml2.h" />
