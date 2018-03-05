@@ -7,15 +7,35 @@ namespace ege
     {
     }
 
-    void InputHandler::Update()
+    InputHandlerState InputHandler::GetState(const String& handler)
     {
-        //TODO
+        InputMap* inputMap = nullptr;
+
+        for (auto it = _handlers.begin(); it != _handlers.end(); it++)
+        {
+            const Context& context = it->first;
+
+            if (context == *gCoreApplication().GetCurrentContext())
+            {
+                Vector<InputMap>& inputMaps = it->second;
+
+                for (auto itMap = inputMaps.begin(); itMap != inputMaps.end(); itMap++)
+                {
+                    if (itMap->Handler == handler)
+                    {
+                        Update(&*itMap);
+                        return itMap->State;
+                    }
+                }
+            }
+        }
+
+        EGE_ASSERT_ERROR(false,( "This handler does not exist (" + handler + ")"));
     }
 
-    InputHandlerState InputHandler::GetState()
+    void InputHandler::Update(InputMap* inputMap)
     {
         //TODO
-        return InputHandlerState::RELEASED;
     }
 
     void InputHandler::OnStartUp()

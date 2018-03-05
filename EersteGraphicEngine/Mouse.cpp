@@ -45,7 +45,7 @@ namespace ege
     {
         for (auto button = _mouseButtons.begin(); button != _mouseButtons.end(); button++)
         {
-            if ((*button).Name == name)
+            if ((*button) == name)
             {
                 (*button).State = state;
             }
@@ -57,13 +57,13 @@ namespace ege
         return _position;
     }
 
-    MouseButtonState Mouse::GetState(MouseButtonName name)
+    MouseButtonState& Mouse::GetState(const MouseButtonName& name)
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
         {
-            for (auto _button : _mouseButtons)
+            for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
             {
-                if (_button.Name == name) return _button.State;
+                if (*it == name) return it->State;
             }
         }
         else
@@ -72,6 +72,57 @@ namespace ege
         }
 
         return _mouseButtons.begin()->State;
+    }
+
+    MouseButtonState& Mouse::GetState(const String& label)
+    {
+        if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
+        {
+            for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
+            {
+                if (*it == label) return it->State;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return _mouseButtons.begin()->State;
+    }
+
+    MouseButton& Mouse::GetMouseButton(const MouseButtonName& name)
+    {
+        if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
+        {
+            for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
+            {
+                if (*it == name) return *it;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return *_mouseButtons.begin();
+    }
+
+    MouseButton& Mouse::GetMouseButton(const String& label)
+    {
+        if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
+        {
+            for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
+            {
+                if (*it == label) return *it;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return *_mouseButtons.begin();
     }
 
     void Mouse::OnStartUp()

@@ -195,14 +195,13 @@ namespace ege
 
     void CoreApplication::JoypadEventHandler()
     {
-        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::JOYPAD));
-        inputHandler.Update();
+        Joypad& joypad = static_cast<Joypad&>(GetComponent(ComponentType::JOYPAD));
+        joypad.Update();
     }
 
-    void CoreApplication::InputEventHandler()
+    const Context* CoreApplication::GetCurrentContext() const
     {
-        InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
-        inputHandler.Update();
+        return _currentContext;
     }
 
     CoreApplication& gCoreApplication()

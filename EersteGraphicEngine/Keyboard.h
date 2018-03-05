@@ -25,23 +25,30 @@ namespace ege
     struct Key
     {
         KeyName  Name;
+        String   Label;
         UINT     Value;
         KeyState State;
 
-        Key(KeyName name, UINT value)
+        Key(KeyName name, const String& label, UINT value)
             : Name(name)
             , Value(value)
+            , Label(label)
             , State(KeyState::RELEASED)
         {}
+
+        bool operator==(const Key& key) const
+        {
+            return key.Name == Name;
+        }
 
         bool operator==(const KeyName& name) const
         {
             return name == Name;
         }
 
-        bool operator==(const Key& key) const
+        bool operator==(const String& label) const
         {
-            return key.Name == Name;
+            return label == Label;
         }
     };
 
@@ -50,8 +57,11 @@ namespace ege
     public:
         Keyboard();
         ~Keyboard() {}
-        void     Update(MSG* message);
-        KeyState GetState(KeyName name);
+        void      Update(MSG* message);
+        KeyState& GetState(const KeyName& name);
+        KeyState& GetState(const String& label);
+        Key&      GetKey(const KeyName& name);
+        Key&      GetKey(const String& label);
 
     private:
         void UpdateState(Key* key, MSG* message);

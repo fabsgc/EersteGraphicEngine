@@ -8,10 +8,10 @@
 #include "Window.h"
 #include "Time.h"
 
-#include "InputHandler.h"
 #include "Keyboard.h"
 #include "Joypad.h"
 #include "Mouse.h"
+#include "InputHandler.h"
 
 namespace ege
 {
@@ -28,7 +28,7 @@ namespace ege
             : Name(name)
         {}
 
-        bool operator==(const Context& context)
+        bool operator==(const Context& context) const
         {
             return Name == context.Name;
         }
@@ -59,7 +59,8 @@ namespace ege
         void KeyEventHandler(MSG* message);
         void MouseEventHandler(MSG* message);
         void JoypadEventHandler();
-        void InputEventHandler();
+
+        const Context* GetCurrentContext() const;
 
         template<class T = CoreApplication>
         static void StartUp(const START_UP_DESC& desc)

@@ -29,46 +29,60 @@ namespace ege
     struct JoypadButton
     {
         JoypadButtonName  Name;
+        String            Label;
         JoypadButtonState State;
         UINT              Value;
 
-        JoypadButton(JoypadButtonName name)
+        JoypadButton(JoypadButtonName name, const String& label)
             : Name(name)
+            , Label(label)
             , Value(0)
             , State(JoypadButtonState::RELEASED)
         {}
+
+        bool operator==(const JoypadButton& button) const
+        {
+            return button.Name == Name;
+        }
 
         bool operator==(const JoypadButtonName& name) const
         {
             return name == Name;
         }
 
-        bool operator==(const JoypadButton& button) const
+        bool operator==(const String& label) const
         {
-            return button.Name == Name;
+            return label == Label;
         }
     };
 
     struct JoyStick
     {
         JoypadStickName Name;
+        String          Label;
         double          AxisX;
         double          AxisY;
 
-        JoyStick(JoypadStickName name)
+        JoyStick(JoypadStickName name, const String& label)
             : Name(name)
+            , Label(label)
             , AxisX(0.0)
             , AxisY(0.0)
         {}
+
+        bool operator==(const JoyStick& joystick) const
+        {
+            return joystick.Name == Name;
+        }
 
         bool operator==(const JoypadStickName& name) const
         {
             return name == Name;
         }
 
-        bool operator==(const JoyStick& joystick) const
+        bool operator==(const String& label) const
         {
-            return joystick.Name == Name;
+            return label == Label;
         }
     };
 
@@ -76,16 +90,20 @@ namespace ege
     public:
         Joypad();
         ~Joypad() {}
-        void              Update();
-        bool              IsConnected();
-        JoypadButtonState GetState(JoypadButtonName name);
-        JoyStick&         GetJoyStick(JoypadStickName name);
+        void               Update();
+        bool               IsConnected();
+        JoypadButtonState& GetState(const JoypadButtonName& name);
+        JoypadButtonState& GetState(const String& label);
+        JoypadButton&      GetJoypadButton(const JoypadButtonName& name);
+        JoypadButton&      GetJoypadButton(const String& label);
+        JoyStick&          GetJoyStick(const JoypadStickName& name);
+        JoyStick&          GetJoyStick(const String& label);
 
     private:
-        void             UpdateState(JoypadButton* button);
-        void             UpdateState(JoyStick* stick);
-        void             OnStartUp() override;
-        void             OnShutDown() override;
+        void               UpdateState(JoypadButton* button);
+        void               UpdateState(JoyStick* stick);
+        void               OnStartUp() override;
+        void               OnShutDown() override;
 
     private:
         bool                 _isConnected;

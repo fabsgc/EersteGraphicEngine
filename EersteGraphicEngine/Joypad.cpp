@@ -27,13 +27,13 @@ namespace ege
         //TODO
     }
 
-    JoypadButtonState Joypad::GetState(JoypadButtonName name)
+    JoypadButtonState& Joypad::GetState(const JoypadButtonName& name)
     {
         if (std::find(_joypadButtons.begin(), _joypadButtons.end(), name) != _joypadButtons.end())
         {
-            for (auto _button : _joypadButtons)
+            for (auto it = _joypadButtons.begin(); it != _joypadButtons.end(); it++)
             {
-                if (_button.Name == name) return _button.State;
+                if (*it == name) return it->State;
             }
         }
         else
@@ -44,13 +44,81 @@ namespace ege
         return _joypadButtons.begin()->State;
     }
 
-    JoyStick& Joypad::GetJoyStick(JoypadStickName name)
+    JoypadButtonState& Joypad::GetState(const String& label)
+    {
+        if (std::find(_joypadButtons.begin(), _joypadButtons.end(), label) != _joypadButtons.end())
+        {
+            for (auto it = _joypadButtons.begin(); it != _joypadButtons.end(); it++)
+            {
+                if (*it == label) return it->State;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return _joypadButtons.begin()->State;
+    }
+
+    JoypadButton& Joypad::GetJoypadButton(const JoypadButtonName& name)
+    {
+        if (std::find(_joypadButtons.begin(), _joypadButtons.end(), name) != _joypadButtons.end())
+        {
+            for (auto it = _joypadButtons.begin(); it != _joypadButtons.end(); it++)
+            {
+                if (*it == name) return *it;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return *_joypadButtons.begin();
+    }
+
+    JoypadButton& Joypad::GetJoypadButton(const String& label)
+    {
+        if (std::find(_joypadButtons.begin(), _joypadButtons.end(), label) != _joypadButtons.end())
+        {
+            for (auto it = _joypadButtons.begin(); it != _joypadButtons.end(); it++)
+            {
+                if (*it == label) return *it;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return *_joypadButtons.begin();
+    }
+
+    JoyStick& Joypad::GetJoyStick(const JoypadStickName& name)
     {
         if (std::find(_joysticks.begin(), _joysticks.end(), name) != _joysticks.end())
         {
             for (auto it = _joysticks.begin(); it != _joysticks.end(); it++)
             {
-                if (it->Name == name) return *it;
+                if (*it == name) return *it;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "No button with this name");
+        }
+
+        return *_joysticks.begin();
+    }
+
+    JoyStick& Joypad::GetJoyStick(const String& label)
+    {
+        if (std::find(_joysticks.begin(), _joysticks.end(), label) != _joysticks.end())
+        {
+            for (auto it = _joysticks.begin(); it != _joysticks.end(); it++)
+            {
+                if (*it == label) return *it;
             }
         }
         else
@@ -63,25 +131,25 @@ namespace ege
 
     void Joypad::OnStartUp()
     {
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::A));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::B));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::X));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::Y));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::START));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::SELECT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LB));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RB));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::JOYSTICK_LEFT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::JOYSTICK_RIGHT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_LEFT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_RIGHT));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_UP));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_DOWN));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::A, "A"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::B, "B"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::X, "X"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::Y, "Y"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::START, "START"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::SELECT, "SELECT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LB, "LB"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LT, "LT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RB, "RB"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RT, "RT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::JOYSTICK_LEFT, "JOYSTICK_LEFT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::JOYSTICK_RIGHT, "JOYSTICK_RIGHT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_LEFT, "ARROW_LEFT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_RIGHT, "ARROW_RIGHT"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_UP, "ARROW_UP"));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_DOWN, "ARROW_DOWN"));
 
-        _joysticks.push_back(JoyStick(JoypadStickName::LEFT));
-        _joysticks.push_back(JoyStick(JoypadStickName::RIGHT));
+        _joysticks.push_back(JoyStick(JoypadStickName::LEFT, "LEFT"));
+        _joysticks.push_back(JoyStick(JoypadStickName::RIGHT, "RIGHT"));
     }
 
     void Joypad::OnShutDown()

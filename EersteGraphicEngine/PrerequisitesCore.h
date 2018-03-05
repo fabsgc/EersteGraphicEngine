@@ -81,7 +81,19 @@ namespace ege
     }
 
     class CoreApplication;
+    struct Context;
+
     class Window;
+    class IDrawable;
+    class IUpdatable;
+
     class RenderAPI;
-    class RenderWindow;
+
+    class IComponent;
+    class IComponentHandler;
+
+    class InputHandler;
+    class Joypad;
+    class Keyboard;
+    class Mouse;
 }

@@ -42,7 +42,6 @@ namespace ege
             }
 
             application.JoypadEventHandler();
-            application.InputEventHandler();
             
             if (msg.message == WM_QUIT)
             {

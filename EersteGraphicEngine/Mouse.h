@@ -20,6 +20,7 @@ namespace ege
     struct MouseButton
     {
         MouseButtonName  Name;
+        String           Label;
         MouseButtonState State;
 
         MouseButton(MouseButtonName name)
@@ -27,14 +28,19 @@ namespace ege
             , State(MouseButtonState::RELEASED)
         {}
 
+        bool operator==(const MouseButton& mouse) const
+        {
+            return mouse.Name == Name;
+        }
+
         bool operator==(const MouseButtonName& name) const 
         {
             return name == Name;
         }
 
-        bool operator==(const MouseButton& mouse) const
+        bool operator==(const String& label) const
         {
-            return mouse.Name == Name;
+            return label == Label;
         }
     };
 
@@ -42,14 +48,17 @@ namespace ege
     public:
         Mouse();
         ~Mouse() {}
-        void             Update(MSG* message);
-        XMFLOAT2         GetPosition();
-        MouseButtonState GetState(MouseButtonName name);
+        void              Update(MSG* message);
+        XMFLOAT2          GetPosition();
+        MouseButtonState& GetState(const MouseButtonName& name);
+        MouseButtonState& GetState(const String& label);
+        MouseButton&      GetMouseButton(const MouseButtonName& name);
+        MouseButton&      GetMouseButton(const String& label);
 
     private:
-        void             UpdateState(MouseButtonName name, MouseButtonState state);
-        void             OnStartUp() override;
-        void             OnShutDown() override;
+        void              UpdateState(MouseButtonName name, MouseButtonState state);
+        void              OnStartUp() override;
+        void              OnShutDown() override;
 
     private:
         Window&             _window;
