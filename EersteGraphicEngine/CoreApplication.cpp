@@ -184,25 +184,25 @@ namespace ege
     void CoreApplication::KeyEventHandler(MSG* message)
     {
         Keyboard& keyboard = static_cast<Keyboard&>(GetComponent(ComponentType::KEYBOARD));
-        keyboard.Update(message, gTime().GetFrameDelta());
+        keyboard.Update(message);
     }
 
     void CoreApplication::MouseEventHandler(MSG* message)
     {
         Mouse& mouse = static_cast<Mouse&>(GetComponent(ComponentType::MOUSE));
-        mouse.Update(message, gTime().GetFrameDelta());
+        mouse.Update(message);
     }
 
     void CoreApplication::JoypadEventHandler()
     {
         InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::JOYPAD));
-        inputHandler.Update(gTime().GetFrameDelta());
+        inputHandler.Update();
     }
 
     void CoreApplication::InputEventHandler()
     {
         InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
-        inputHandler.Update(gTime().GetFrameDelta());
+        inputHandler.Update();
     }
 
     CoreApplication& gCoreApplication()

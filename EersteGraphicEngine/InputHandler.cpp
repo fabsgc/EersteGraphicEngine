@@ -7,7 +7,7 @@ namespace ege
     {
     }
 
-    void InputHandler::Update(float deltaTime)
+    void InputHandler::Update()
     {
         //TODO
     }

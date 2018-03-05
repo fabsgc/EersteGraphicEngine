@@ -8,7 +8,7 @@ namespace ege
         , _position(XMFLOAT2(0.0f, 0.0f))
     {}
 
-    void Mouse::Update(MSG* message, float deltaTime)
+    void Mouse::Update(MSG* message)
     {
         _position.x = (float)GET_X_LPARAM(message->lParam);
         _position.y = (float)GET_Y_LPARAM(message->lParam);

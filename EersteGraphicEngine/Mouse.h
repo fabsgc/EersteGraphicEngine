@@ -42,7 +42,7 @@ namespace ege
     public:
         Mouse();
         ~Mouse() {}
-        void             Update(MSG* message, float deltaTime);
+        void             Update(MSG* message);
         XMFLOAT2         GetPosition();
         MouseButtonState GetState(MouseButtonName name);
 

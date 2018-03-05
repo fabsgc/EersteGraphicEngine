@@ -7,7 +7,7 @@ namespace ege
     {
     }
 
-    void Keyboard::Update(MSG* message, float deltaTime)
+    void Keyboard::Update(MSG* message)
     {
         for (auto key = _keys.begin(); key != _keys.end(); key++)
         {

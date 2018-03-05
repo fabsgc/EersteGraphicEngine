@@ -7,7 +7,7 @@ namespace ege
         , _isConnected(false)
     {}
 
-    void Joypad::Update(float deltaTime)
+    void Joypad::Update()
     {
         //TODO
     }

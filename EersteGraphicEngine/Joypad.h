@@ -76,7 +76,7 @@ namespace ege
     public:
         Joypad();
         ~Joypad() {}
-        void              Update(float deltaTime);
+        void              Update();
         bool              IsConnected();
         JoypadButtonState GetState(JoypadButtonName name);
         JoyStick&         GetJoyStick(JoypadStickName name);

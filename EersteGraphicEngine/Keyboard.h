@@ -50,7 +50,7 @@ namespace ege
     public:
         Keyboard();
         ~Keyboard() {}
-        void     Update(MSG* message, float deltaTime);
+        void     Update(MSG* message);
         KeyState GetState(KeyName name);
 
     private:

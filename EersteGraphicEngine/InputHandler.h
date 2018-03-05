@@ -20,7 +20,7 @@ namespace ege
     public:
         InputHandler();
         ~InputHandler() {}
-        void Update(float deltaTime);
+        void Update();
         InputHandlerState GetState();
 
     private:
