@@ -17,21 +17,31 @@ namespace ege
         F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12
     };
 
+    enum class KeyState
+    {
+        TRIGGERED, RELEASED
+    };
+
     struct Key
     {
-        KeyName Name;
-        UINT    Value;
-        bool    Triggered;
+        KeyName  Name;
+        UINT     Value;
+        KeyState State;
 
         Key(KeyName name, UINT value)
             : Name(name)
             , Value(value)
-            , Triggered(false)
+            , State(KeyState::RELEASED)
         {}
 
-        bool operator==(KeyName name) const 
+        bool operator==(const KeyName& name) const
         {
             return name == Name;
+        }
+
+        bool operator==(const Key& key) const
+        {
+            return key.Name == Name;
         }
     };
 
@@ -40,8 +50,8 @@ namespace ege
     public:
         Keyboard();
         ~Keyboard() {}
-        void Update(MSG* message, float deltaTime);
-        bool IsKeyTriggered(KeyName name);
+        void     Update(MSG* message, float deltaTime);
+        KeyState GetState(KeyName name);
 
     private:
         void UpdateState(Key* key, MSG* message);

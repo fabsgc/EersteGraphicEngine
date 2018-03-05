@@ -12,10 +12,10 @@ namespace ege
         //TODO
     }
 
-    bool InputHandler::IsInputTriggered()
+    InputHandlerState InputHandler::GetState()
     {
         //TODO
-        return true;
+        return InputHandlerState::RELEASED;
     }
 
     void InputHandler::OnStartUp()

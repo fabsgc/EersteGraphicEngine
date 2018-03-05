@@ -1,3 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <keymap>
+    <context name="Default">
+        <keyboard>
+            <key handler="PAUSE" key="P"/>
+            <key handler="QUIT" key="ESCAPE"/>
+        </keyboard>
+        <joypad>
+            <button handler="PAUSE" key="START"/>
+            <button handler="QUIT" key="SELECT"/>
+        </joypad>
+    </context>
+    <context name="Game">
+        <keyboard>
+            <key handler="PAUSE" key="P"/>
+            <key handler="QUIT" key="ESCAPE"/>
+            <key handler="GO_UP" key="Z"/>
+            <key handler="GO_DOWN" key="S"/>
+            <key handler="GO_LEFT" key="Q"/>
+            <key handler="GO_RIGHT" key="D"/>
+        </keyboard>
+        <joypad>
+            <button handler="PAUSE" key="START"/>
+            <button handler="QUIT" key="SELECT"/>
+            <button handler="GO_UP" key="Y"/>
+            <button handler="GO_DOWN" key="A"/>
+            <button handler="GO_LEFT" key="X"/>
+            <button handler="GO_RIGHT" key="B"/>
+        </joypad>
+    </context>
+    <context name="Pause">
+        <keyboard>
+            <key handler="PAUSE" key="P"/>
+            <key handler="QUIT" key="ESCAPE"/>
+        </keyboard>
+        <joypad>
+            <button handler="PAUSE" key="START"/>
+            <button handler="QUIT" key="SELECT"/>
+        </joypad>
+    </context>
 </keymap>

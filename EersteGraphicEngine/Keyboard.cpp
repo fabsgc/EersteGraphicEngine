@@ -23,22 +23,22 @@ namespace ege
         switch (message->message)
         {
         case WM_KEYUP: {
-            key->Triggered = false;
+            key->State = KeyState::RELEASED;
         }break;
 
         case WM_KEYDOWN: {
-            key->Triggered = true;
+            key->State = KeyState::TRIGGERED;
         }break;
         }
     }
 
-    bool Keyboard::IsKeyTriggered(KeyName name)
+    KeyState Keyboard::GetState(KeyName name)
     {
         if (std::find(_keys.begin(), _keys.end(), name) != _keys.end())
         {
             for (auto key : _keys)
             {
-                if (key.Name == name) return key.Triggered;
+                if (key == name) return key.State;
             }
         }
         else
@@ -46,7 +46,7 @@ namespace ege
             EGE_ASSERT_ERROR(false, "Key does not exist");
         }
 
-        return _keys.begin()->Triggered;
+        return _keys.begin()->State;
     }
 
     void Keyboard::OnStartUp()

@@ -4,6 +4,7 @@ namespace ege
 {
     IComponentHandler::~IComponentHandler()
     {
+        _components.clear();
     }
 
     void IComponentHandler::InsertComponent(IComponent& component)

@@ -16,31 +16,36 @@ namespace ege
         ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN
     };
 
-    enum class JoypadStickName
-    {
-        LEFT, RIGHT
-    };
-
     enum class JoypadButtonState
     {
         TRIGGERED, RELEASED
+    };
+
+    enum class JoypadStickName
+    {
+        LEFT, RIGHT
     };
 
     struct JoypadButton
     {
         JoypadButtonName  Name;
         JoypadButtonState State;
-        double            Value;
+        UINT              Value;
 
         JoypadButton(JoypadButtonName name)
             : Name(name)
-            , Value(0.0)
+            , Value(0)
             , State(JoypadButtonState::RELEASED)
         {}
 
-        bool operator==(JoypadButtonName name) const
+        bool operator==(const JoypadButtonName& name) const
         {
             return name == Name;
+        }
+
+        bool operator==(const JoypadButton& button) const
+        {
+            return button.Name == Name;
         }
     };
 
@@ -56,9 +61,14 @@ namespace ege
             , AxisY(0.0)
         {}
 
-        bool operator==(JoypadStickName name) const
+        bool operator==(const JoypadStickName& name) const
         {
             return name == Name;
+        }
+
+        bool operator==(const JoyStick& joystick) const
+        {
+            return joystick.Name == Name;
         }
     };
 

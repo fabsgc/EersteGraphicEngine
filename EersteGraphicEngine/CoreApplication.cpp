@@ -10,6 +10,7 @@ namespace ege
         , _resizing(false)
         , _window(nullptr)
         , _startUpDesc(desc)
+        , _currentContext(nullptr)
     {
     }
 
@@ -92,9 +93,8 @@ namespace ege
 
     void CoreApplication::OnStartUp()
     {
-#ifdef EGE_CONFIG_APP_FILE
+        SetContexts();
         SetApplicationConfig();
-#endif
 
         Time::StartUp();
         DynamicLibManager::StartUp();
@@ -145,14 +145,40 @@ namespace ege
         InsertComponent(gInputHandler());
     }
 
+    void CoreApplication::SetContexts()
+    {
+#ifdef EGE_CONFIG_CONTEXT_FILE
+        tinyxml2::XMLDocument document;
+        document.LoadFile(EGE_CONFIG_CONTEXT_FILE);
+
+        tinyxml2::XMLElement* contextsElement = document.FirstChildElement("contexts");
+
+        for (tinyxml2::XMLElement* contextElement = contextsElement->FirstChildElement("context"); contextElement != nullptr; contextElement = contextElement->NextSiblingElement())
+        {
+            Context context(contextElement->Attribute("name"));
+            _contexts.push_back(context);
+        }        
+#endif
+
+        if (_contexts.size() > 0)
+        {
+            Context context("Default");
+            _contexts.push_back(context);
+        }
+
+        _currentContext = &_contexts[0];
+    }
+
     void CoreApplication::SetApplicationConfig()
     {
-        tinyxml2::XMLDocument doc;
-        doc.LoadFile(EGE_CONFIG_APP_FILE);
+#ifdef EGE_CONFIG_APP_FILE
+        tinyxml2::XMLDocument document;
+        document.LoadFile(EGE_CONFIG_APP_FILE);
 
-        _startUpDesc.WindowDesc.Width  = doc.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
-        _startUpDesc.WindowDesc.Height = doc.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
-        _startUpDesc.WindowDesc.Title  = doc.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
+        _startUpDesc.WindowDesc.Width  = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
+        _startUpDesc.WindowDesc.Height = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
+        _startUpDesc.WindowDesc.Title  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
+#endif
     }
 
     void CoreApplication::KeyEventHandler(MSG* message)

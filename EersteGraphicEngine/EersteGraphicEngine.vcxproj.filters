@@ -275,14 +275,14 @@
     <ClInclude Include="Mouse.h">
       <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Joypad.h">
-      <Filter>Header Files\Core\Input</Filter>
-    </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
     <ClInclude Include="lib\tinyxml2\tinyxml2.h">
       <Filter>Header Files\Utility\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Joypad.h">
+      <Filter>Header Files\Core\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

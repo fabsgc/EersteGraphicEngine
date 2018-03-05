@@ -27,9 +27,14 @@ namespace ege
             , State(MouseButtonState::RELEASED)
         {}
 
-        bool operator==(MouseButtonName name) const 
+        bool operator==(const MouseButtonName& name) const 
         {
             return name == Name;
+        }
+
+        bool operator==(const MouseButton& mouse) const
+        {
+            return mouse.Name == Name;
         }
     };
 

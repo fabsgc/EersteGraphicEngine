@@ -20,6 +20,20 @@ namespace ege
         WINDOW_DESC WindowDesc;
     };
 
+    struct Context
+    {
+        String Name;
+
+        Context(String name)
+            : Name(name)
+        {}
+
+        bool operator==(const Context& context)
+        {
+            return Name == context.Name;
+        }
+    };
+
     class CoreApplication : public IModule<CoreApplication>, public IComponentHandler
     {
     public:
@@ -62,6 +76,7 @@ namespace ege
         void StartUpWindow();
         void StartUpComponents();
 
+        void SetContexts();
         void SetApplicationConfig();
 
     protected:
@@ -74,6 +89,9 @@ namespace ege
         START_UP_DESC _startUpDesc;
 
         Window*	      _window;
+
+        Vector<Context> _contexts;
+        Context*        _currentContext;
     };
 
     CoreApplication& gCoreApplication();

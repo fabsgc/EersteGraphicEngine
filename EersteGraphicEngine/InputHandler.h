@@ -10,13 +10,18 @@
 
 namespace ege
 {
+    enum class InputHandlerState
+    {
+        TRIGGERED, RELEASED
+    };
+
     class InputHandler : public IModule<InputHandler>, public IComponent, public IComponentHandler
     {
     public:
         InputHandler();
         ~InputHandler() {}
         void Update(float deltaTime);
-        bool IsInputTriggered();
+        InputHandlerState GetState();
 
     private:
         void OnStartUp() override;
