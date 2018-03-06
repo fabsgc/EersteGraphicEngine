@@ -32,6 +32,11 @@ namespace ege
         {
             return Name == context.Name;
         }
+
+        bool operator <(const Context& context) const
+        {
+            return Name < context.Name;
+        }
     };
 
     class CoreApplication : public IModule<CoreApplication>, public IComponentHandler

@@ -84,11 +84,11 @@ namespace ege
     template <typename T, typename A = StdAllocator<T, BasicAllocator>>
     using List = std::list<T, A>;
 
-    template <typename K, typename V, typename P = std::less<K>, typename A = StdAllocator<std::pair<const K, V>, BasicAllocator>>
-    using Map = std::map<K, V, P, A>;
-
     template <typename L, typename R>
     using Pair = std::pair<L, R>;
+
+    template <typename K, typename V, typename P = std::less<K>, typename A = StdAllocator<Pair<const K, V>, BasicAllocator>>
+    using Map = std::map<K, V, P, A>;
 
     /* ###################################################################
     *  ############# SHARED PTR INSTANTIATION ############################

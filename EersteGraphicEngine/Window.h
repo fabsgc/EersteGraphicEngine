@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "IComponentHandler.h"
 #include "IModule.h"
 
 namespace ege
@@ -19,7 +20,7 @@ namespace ege
         {}
     };
 
-    class Window : public IModule<Window>
+    class Window : public IModule<Window>, public IComponentHandler
     {
     public:
         Window(const WINDOW_DESC& desc);

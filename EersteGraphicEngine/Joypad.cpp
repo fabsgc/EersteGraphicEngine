@@ -55,7 +55,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, ("No button with this name (" + label + ")"));
         }
 
         return _joypadButtons.begin()->State;
@@ -89,7 +89,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, ("No button with this name (" + label + ")"));
         }
 
         return *_joypadButtons.begin();
@@ -106,7 +106,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, "No joystick with this name");
         }
 
         return *_joysticks.begin();
@@ -123,7 +123,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, ("No joystick with this name (" + label + ")"));
         }
 
         return *_joysticks.begin();

@@ -85,7 +85,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, ("No button with this name (" + label + ")"));
         }
 
         return _mouseButtons.begin()->State;
@@ -119,7 +119,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "No button with this name");
+            EGE_ASSERT_ERROR(false, ("No button with this name (" + label + ")"));
         }
 
         return *_mouseButtons.begin();

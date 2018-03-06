@@ -143,6 +143,11 @@ namespace ege
         InsertComponent(gJoypad());
         InsertComponent(gMouse());
         InsertComponent(gInputHandler());
+
+        _window->InsertComponent(gKeyboard());
+        _window->InsertComponent(gJoypad());
+        _window->InsertComponent(gMouse());
+        _window->InsertComponent(gInputHandler());
     }
 
     void CoreApplication::SetContexts()
@@ -152,6 +157,7 @@ namespace ege
         document.LoadFile(EGE_CONFIG_CONTEXT_FILE);
 
         tinyxml2::XMLElement* contextsElement = document.FirstChildElement("contexts");
+        EGE_ASSERT_ERROR((contextsElement != nullptr), "Context file malformed");
 
         for (tinyxml2::XMLElement* contextElement = contextsElement->FirstChildElement("context"); contextElement != nullptr; contextElement = contextElement->NextSiblingElement())
         {

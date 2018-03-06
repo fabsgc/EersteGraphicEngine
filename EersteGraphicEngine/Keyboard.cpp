@@ -60,7 +60,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "Key does not exist");
+            EGE_ASSERT_ERROR(false, ("Key does not exist (" + label + ")"));
         }
 
         return _keys.begin()->State;
@@ -94,7 +94,7 @@ namespace ege
         }
         else
         {
-            EGE_ASSERT_ERROR(false, "Key does not exist");
+            EGE_ASSERT_ERROR(false, ("Key does not exist (" + label + ")"));
         }
 
         return *_keys.begin();

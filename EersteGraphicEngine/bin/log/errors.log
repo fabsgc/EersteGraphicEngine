@@ -10,3 +10,9 @@ Time: 22:19:50
 Error: Pool allocator minimum allowed element size is 4 bytes.
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52 inside ege::IModule<class ege::Window>::Instance
+Date: Mar  6 2018
+Time: 10:36:53
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 

@@ -23,7 +23,14 @@ namespace ege
         JoypadButton* ButtonPtr;
         InputHandlerState State;
 
-        InputMap(Key* key, JoypadButton* button, String handler)
+        InputMap(const String& handler)
+            : KeyPtr(nullptr)
+            , ButtonPtr(nullptr)
+            , Handler(handler)
+            , State(InputHandlerState::RELEASED)
+        {}
+
+        InputMap(Key* key, JoypadButton* button, const String& handler)
             : KeyPtr(key)
             , ButtonPtr(button)
             , Handler(handler)

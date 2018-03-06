@@ -48,6 +48,14 @@ namespace ege
                 gCoreApplication().OnStopRequested();
             }
 
+            InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
+            InputHandlerState state = inputHandler.GetState("QUIT");
+
+            if (state == InputHandlerState::TRIGGERED)
+            {
+                gCoreApplication().OnStopRequested();
+            }
+
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
