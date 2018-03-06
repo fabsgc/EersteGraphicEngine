@@ -84,6 +84,7 @@ namespace ege
 
         void SetContexts();
         void SetApplicationConfig();
+        void SetComponents();
 
     protected:
         volatile bool _runMainLoop;

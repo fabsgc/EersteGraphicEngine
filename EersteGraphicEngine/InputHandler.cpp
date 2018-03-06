@@ -35,6 +35,7 @@ namespace ege
 
     void InputHandler::Update(InputMap* inputMap)
     {
+        Joypad& joypad = static_cast<Joypad&>(GetComponent(ComponentType::JOYPAD));
         bool triggered = false;
 
         if (inputMap->KeyPtr != nullptr)
@@ -45,7 +46,8 @@ namespace ege
             }
         }
 
-        if (inputMap->ButtonPtr != nullptr)
+
+        if (joypad.IsConnected() && inputMap->ButtonPtr != nullptr)
         {
             if (inputMap->ButtonPtr->State == JoypadButtonState::TRIGGERED)
             {

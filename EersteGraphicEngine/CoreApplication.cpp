@@ -103,6 +103,8 @@ namespace ege
         StartUpRenderer();
         StartUpWindow();
         StartUpComponents();
+
+        SetComponents();
     }
 
     void CoreApplication::OnShutDown()
@@ -138,16 +140,6 @@ namespace ege
         Joypad::StartUp();
         Mouse::StartUp();
         InputHandler::StartUp();
-
-        InsertComponent(gKeyboard());
-        InsertComponent(gJoypad());
-        InsertComponent(gMouse());
-        InsertComponent(gInputHandler());
-
-        _window->InsertComponent(gKeyboard());
-        _window->InsertComponent(gJoypad());
-        _window->InsertComponent(gMouse());
-        _window->InsertComponent(gInputHandler());
     }
 
     void CoreApplication::SetContexts()
@@ -185,6 +177,19 @@ namespace ege
         _startUpDesc.WindowDesc.Height = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
         _startUpDesc.WindowDesc.Title  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
 #endif
+    }
+
+    void CoreApplication::SetComponents()
+    {
+        InsertComponent(gKeyboard());
+        InsertComponent(gJoypad());
+        InsertComponent(gMouse());
+        InsertComponent(gInputHandler());
+
+        _window->InsertComponent(gKeyboard());
+        _window->InsertComponent(gJoypad());
+        _window->InsertComponent(gMouse());
+        _window->InsertComponent(gInputHandler());
     }
 
     void CoreApplication::KeyEventHandler(MSG* message)
