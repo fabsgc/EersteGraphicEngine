@@ -2,8 +2,8 @@
 
 #include "PrerequisitesCore.h"
 #include "DynamicLibManager.h"
-#include "IComponent.h"
 #include "IComponentHandler.h"
+#include "IComponent.h"
 #include "IModule.h"
 #include "Window.h"
 #include "Time.h"
@@ -17,6 +17,7 @@ namespace ege
 {
     struct START_UP_DESC
     {
+        UINT        MaxFPS;
         WINDOW_DESC WindowDesc;
     };
 
@@ -63,7 +64,6 @@ namespace ege
 
         void KeyEventHandler(MSG* message);
         void MouseEventHandler(MSG* message);
-        void JoypadEventHandler();
 
         const Context* GetCurrentContext() const;
 
@@ -102,4 +102,5 @@ namespace ege
     };
 
     CoreApplication& gCoreApplication();
+    CoreApplication* gCoreApplicationPtr();
 }

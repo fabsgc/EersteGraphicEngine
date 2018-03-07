@@ -1,13 +1,12 @@
 #pragma once
 
-#include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
 #include "CoreApplication.h"
 #include "IComponent.h"
 #include "IModule.h"
 #include "Keyboard.h"
 #include "Joypad.h"
-#include "Mouse.h"
+#include "Time.h"
 
 namespace ege
 {

@@ -4,15 +4,15 @@
 #include "IComponent.h"
 #include "IModule.h"
 #include "Window.h"
+#include "Time.h"
 
 namespace ege
 {
     enum class JoypadButtonName
     {
         A, B, X, Y,
-        START, SELECT,
-        LB, LT, RT, RB,
-        JOYSTICK_LEFT, JOYSTICK_RIGHT,
+        START, BACK,
+        LB, LS, RB, RS,
         ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN
     };
 
@@ -26,17 +26,22 @@ namespace ege
         LEFT, RIGHT
     };
 
+    enum class JoypadThumbStickName
+    {
+        LEFT, RIGHT
+    };
+
     struct JoypadButton
     {
         JoypadButtonName  Name;
         String            Label;
         JoypadButtonState State;
-        UINT              Value;
+        WORD              Value;
 
-        JoypadButton(JoypadButtonName name, const String& label)
+        JoypadButton(const JoypadButtonName& name, const String& label, UINT value)
             : Name(name)
             , Label(label)
-            , Value(0)
+            , Value(value)
             , State(JoypadButtonState::RELEASED)
         {}
 
@@ -60,10 +65,11 @@ namespace ege
     {
         JoypadStickName Name;
         String          Label;
+        UINT            Value;
         double          AxisX;
         double          AxisY;
 
-        JoyStick(JoypadStickName name, const String& label)
+        JoyStick(const JoypadStickName& name, const String& label)
             : Name(name)
             , Label(label)
             , AxisX(0.0)
@@ -86,6 +92,34 @@ namespace ege
         }
     };
 
+    struct ThumbStick
+    {
+        JoypadThumbStickName Name;
+        String               Label;
+        double               Position;
+
+        ThumbStick(const JoypadThumbStickName& name, const String& label)
+            : Name(name)
+            , Label(label)
+            , Position(0.0)
+        {}
+
+        bool operator==(const ThumbStick& thumbStick) const
+        {
+            return thumbStick.Name == Name;
+        }
+
+        bool operator==(const JoypadThumbStickName& name) const
+        {
+            return name == Name;
+        }
+
+        bool operator==(const String& label) const
+        {
+            return label == Label;
+        }
+    };
+
     class Joypad : public IModule<Joypad>, public IComponent {
     public:
         Joypad();
@@ -98,17 +132,28 @@ namespace ege
         JoypadButton&      GetJoypadButton(const String& label);
         JoyStick&          GetJoyStick(const JoypadStickName& name);
         JoyStick&          GetJoyStick(const String& label);
+        ThumbStick&        GetThumbStick(const JoypadThumbStickName& name);
+        ThumbStick&        GetThumbStick(const String& label);
 
     private:
-        void               UpdateState(JoypadButton* button);
-        void               UpdateState(JoyStick* stick);
         void               OnStartUp() override;
         void               OnShutDown() override;
+        void               CheckJoypadConnected();
+
+    private:
+        static float DEAD_ZONE_X;
+        static float DEAD_ZONE_Y;
 
     private:
         bool                 _isConnected;
         Vector<JoypadButton> _joypadButtons;
         Vector<JoyStick>     _joysticks;
+        Vector<ThumbStick>   _thumbSticks;
+
+        XINPUT_STATE         _state;
+        XINPUT_STATE         _oldState;
+
+        float                _lastUpdateState;
     };
 
     Joypad&      gJoypad();

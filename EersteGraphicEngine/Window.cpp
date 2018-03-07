@@ -26,7 +26,7 @@ namespace ege
     {
         MSG  msg;
 
-        while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
+        if (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
             CoreApplication& application = gCoreApplication();
 
@@ -40,24 +40,24 @@ namespace ege
             {
                 application.MouseEventHandler(&msg);
             }
-
-            application.JoypadEventHandler();
             
             if (msg.message == WM_QUIT)
             {
                 gCoreApplication().OnStopRequested();
             }
 
-            InputHandler& inputHandler = static_cast<InputHandler&>(GetComponent(ComponentType::INPUT_HANDLER));
-            InputHandlerState state = inputHandler.GetState("QUIT");
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+        else
+        {
+            gJoypad().Update();
+            gInputHandler().GetState("QUIT");
 
-            if (state == InputHandlerState::TRIGGERED)
+            if (gInputHandler().GetState("QUIT") == InputHandlerState::TRIGGERED)
             {
                 gCoreApplication().OnStopRequested();
             }
-
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
         }
     }
 
@@ -219,7 +219,7 @@ namespace ege
 
         if (gTime().GetTime() - timeElapsed >= 1.0f)
         {
-            float fps = (float)frameCnt / 1000.0f;
+            /*float fps = (float)frameCnt / 1000.0f;
             float mspf = 1000.0f / fps;
 
             WStringStream outs;
@@ -228,6 +228,14 @@ namespace ege
             outs << ToWString(_windowDesc.Title).c_str() << L"    "
                 << L"FPS: " << fps << L"    "
                 << L"Frame Time: " << mspf << L" (ms)";
+            SetWindowText(_hWnd, outs.str().c_str());*/
+
+            WStringStream outs;
+            outs.precision(6);
+
+            outs << ToWString(_windowDesc.Title).c_str() << L"    "
+                << L"FPS: " << (1.0f / gTime().GetFrameDelta()) << L"    "
+                << L"Frame Time: " << (gTime().GetFrameDelta()) << L" (ms)";
             SetWindowText(_hWnd, outs.str().c_str());
 
             frameCnt = 0;

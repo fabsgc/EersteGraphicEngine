@@ -30,12 +30,14 @@ namespace ege
             }
         }
 
-        EGE_ASSERT_ERROR(false,( "This handler does not exist (" + handler + ")"));
+        EGE_ASSERT_ERROR(false, ("This handler does not exist (" + handler + ")"));
+
+        return InputHandlerState::RELEASED;
     }
 
     void InputHandler::Update(InputMap* inputMap)
     {
-        Joypad& joypad = static_cast<Joypad&>(GetComponent(ComponentType::JOYPAD));
+        Joypad& joypad = gJoypad();
         bool triggered = false;
 
         if (inputMap->KeyPtr != nullptr)
@@ -46,9 +48,9 @@ namespace ege
             }
         }
 
-
         if (joypad.IsConnected() && inputMap->ButtonPtr != nullptr)
         {
+
             if (inputMap->ButtonPtr->State == JoypadButtonState::TRIGGERED)
             {
                 triggered = true;

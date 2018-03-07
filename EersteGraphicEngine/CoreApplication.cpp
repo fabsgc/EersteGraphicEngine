@@ -22,16 +22,23 @@ namespace ege
     {
         while (_runMainLoop)
         {
+            gTime().Update();
+            gJoypad().Update();
             _window->Update();
 
             if (!_paused)
             {
-                gTime().Update();
-                _window->ComputeFrameRate();
+                _window->ComputeFrameRate(); 
             }
             else
             {
                 EGE_SLEEP(100);
+            }
+
+            if (gTime().GetFrameDelta() * 1000.0f < (1.0f / _startUpDesc.MaxFPS * 1000))
+            {
+                float sleep = (((1.0f / _startUpDesc.MaxFPS) * 1000) - (gTime().GetFrameDelta() * 1000));
+                EGE_SLEEP((DWORD)sleep);
             }
         }
     }
@@ -173,6 +180,7 @@ namespace ege
         tinyxml2::XMLDocument document;
         document.LoadFile(EGE_CONFIG_APP_FILE);
 
+        _startUpDesc.MaxFPS = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("fps", 60);
         _startUpDesc.WindowDesc.Width  = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
         _startUpDesc.WindowDesc.Height = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
         _startUpDesc.WindowDesc.Title  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
@@ -204,12 +212,6 @@ namespace ege
         mouse.Update(message);
     }
 
-    void CoreApplication::JoypadEventHandler()
-    {
-        Joypad& joypad = static_cast<Joypad&>(GetComponent(ComponentType::JOYPAD));
-        joypad.Update();
-    }
-
     const Context* CoreApplication::GetCurrentContext() const
     {
         return _currentContext;
@@ -218,5 +220,10 @@ namespace ege
     CoreApplication& gCoreApplication()
     {
         return CoreApplication::Instance();
+    }
+
+    CoreApplication* gCoreApplicationPtr()
+    {
+        return CoreApplication::InstancePtr();
     }
 }

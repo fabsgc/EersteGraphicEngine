@@ -1,6 +1,5 @@
 #pragma once
 
-#include "PrerequisitesCore.h"
 #include "IComponent.h"
 #include "IModule.h"
 

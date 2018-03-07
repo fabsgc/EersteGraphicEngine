@@ -1,5 +1,7 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
+
 #include "PrerequisitesUtil.h"
 
 #include <dxgi.h>
@@ -23,6 +25,8 @@
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "xinput9_1_0.lib")
+#pragma comment(lib, "xinput.lib")
 
 using namespace DirectX;
 

@@ -1,8 +1,5 @@
 #pragma once
 
-#include "PrerequisitesCore.h"
-#include "IModule.h"
-
 namespace ege
 {
     enum class ComponentType

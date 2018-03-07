@@ -27,9 +27,10 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
 
     START_UP_DESC desc;
 
+    desc.MaxFPS = 60;
     desc.WindowDesc.Width = 960;
     desc.WindowDesc.Height = 540;
-    desc.WindowDesc.Title = String("saluyt");
+    desc.WindowDesc.Title = String("My Application");
 
     CoreApplication::StartUp(desc);
     CoreApplication& app = gCoreApplication();

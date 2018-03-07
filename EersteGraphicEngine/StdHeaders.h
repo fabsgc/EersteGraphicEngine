@@ -64,7 +64,7 @@ extern "C" {
 #    include <unistd.h>
 #endif
 
-#define EGE_SLEEP(us) Sleep(us)
+#define EGE_SLEEP(ms) Sleep(ms)
 
 namespace ege
 {
