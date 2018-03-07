@@ -85,6 +85,7 @@ namespace ege
         void SetContexts();
         void SetApplicationConfig();
         void SetComponents();
+        void LimitFps();
 
     protected:
         volatile bool _runMainLoop;

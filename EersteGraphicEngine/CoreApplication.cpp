@@ -29,12 +29,19 @@ namespace ege
             if (!_paused)
             {
                 _window->ComputeFrameRate(); 
+                LimitFps();
             }
             else
             {
                 EGE_SLEEP(100);
             }
+        }
+    }
 
+    void CoreApplication::LimitFps()
+    {
+        if (_startUpDesc.MaxFPS > 0)
+        {
             if (gTime().GetFrameDelta() * 1000.0f < (1.0f / _startUpDesc.MaxFPS * 1000))
             {
                 float sleep = (((1.0f / _startUpDesc.MaxFPS) * 1000) - (gTime().GetFrameDelta() * 1000));
