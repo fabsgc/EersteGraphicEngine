@@ -13,39 +13,42 @@ namespace ege
 
     void Joypad::Update()
     {
-        _lastUpdateState += gTime().GetFrameDelta();
-
-        if (_lastUpdateState > 0.1f)
+        if (_isConnected)
         {
-            _lastUpdateState = 0;
-            CheckJoypadConnected();
+            _lastUpdateState += gTime().GetFrameDelta();
 
-            if (_isConnected)
+            if (_lastUpdateState > 0.1f)
             {
-                float normLX = fmaxf(-1, (float)_state.Gamepad.sThumbLX / 32767);
-                float normLY = fmaxf(-1, (float)_state.Gamepad.sThumbLY / 32767);
-                float normRX = fmaxf(-1, (float)_state.Gamepad.sThumbRX / 32767);
-                float normRY = fmaxf(-1, (float)_state.Gamepad.sThumbRY / 32767);
+                _lastUpdateState = 0;
+                CheckJoypadConnected();
 
-                _joysticks[0].AxisX = (abs(normLX) < DEAD_ZONE_X ? 0 : normLX);
-                _joysticks[0].AxisX = (abs(normLY) < DEAD_ZONE_X ? 0 : normLY);
-                _joysticks[1].AxisX = (abs(normRX) < DEAD_ZONE_X ? 0 : normRX);
-                _joysticks[1].AxisX = (abs(normRY) < DEAD_ZONE_X ? 0 : normRY);
-
-                _thumbSticks[0].Position = (float)_state.Gamepad.bLeftTrigger / 255;
-                _thumbSticks[1].Position = (float)_state.Gamepad.bRightTrigger / 255;
-
-                if (_oldState.Gamepad.wButtons != _state.Gamepad.wButtons)
+                if (_isConnected)
                 {
-                    for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
+                    float normLX = fmaxf(-1, (float)_state.Gamepad.sThumbLX / 32767);
+                    float normLY = fmaxf(-1, (float)_state.Gamepad.sThumbLY / 32767);
+                    float normRX = fmaxf(-1, (float)_state.Gamepad.sThumbRX / 32767);
+                    float normRY = fmaxf(-1, (float)_state.Gamepad.sThumbRY / 32767);
+
+                    _joysticks[0].AxisX = (abs(normLX) < DEAD_ZONE_X ? 0 : normLX);
+                    _joysticks[0].AxisX = (abs(normLY) < DEAD_ZONE_X ? 0 : normLY);
+                    _joysticks[1].AxisX = (abs(normRX) < DEAD_ZONE_X ? 0 : normRX);
+                    _joysticks[1].AxisX = (abs(normRY) < DEAD_ZONE_X ? 0 : normRY);
+
+                    _thumbSticks[0].Position = (float)_state.Gamepad.bLeftTrigger / 255;
+                    _thumbSticks[1].Position = (float)_state.Gamepad.bRightTrigger / 255;
+
+                    if (_oldState.Gamepad.wButtons != _state.Gamepad.wButtons)
                     {
-                        if ((_state.Gamepad.wButtons & itButtons->Value) != 0)
+                        for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
                         {
-                            itButtons->State = JoypadButtonState::TRIGGERED;
-                        }
-                        else
-                        {
-                            itButtons->State = JoypadButtonState::RELEASED;
+                            if ((_state.Gamepad.wButtons & itButtons->Value) != 0)
+                            {
+                                itButtons->State = JoypadButtonState::TRIGGERED;
+                            }
+                            else
+                            {
+                                itButtons->State = JoypadButtonState::RELEASED;
+                            }
                         }
                     }
                 }
