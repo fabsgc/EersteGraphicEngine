@@ -219,6 +219,12 @@ namespace ege
         mouse.Update(message);
     }
 
+    void CoreApplication::JoypadEventHandler()
+    {
+        Joypad& joypad = static_cast<Joypad&>(GetComponent(ComponentType::JOYPAD));
+        joypad.Update();
+    }
+
     const Context* CoreApplication::GetCurrentContext() const
     {
         return _currentContext;

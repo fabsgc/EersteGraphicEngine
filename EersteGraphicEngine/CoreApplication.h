@@ -64,6 +64,7 @@ namespace ege
 
         void KeyEventHandler(MSG* message);
         void MouseEventHandler(MSG* message);
+        void JoypadEventHandler();
 
         const Context* GetCurrentContext() const;
 

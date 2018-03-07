@@ -24,6 +24,7 @@ namespace ege
 
     void Window::Update()
     {
+        CoreApplication& application = gCoreApplication();
         MSG  msg;
 
         if (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
@@ -43,7 +44,7 @@ namespace ege
             
             if (msg.message == WM_QUIT)
             {
-                gCoreApplication().OnStopRequested();
+                application.OnStopRequested();
             }
 
             TranslateMessage(&msg);
@@ -51,12 +52,11 @@ namespace ege
         }
         else
         {
-            gJoypad().Update();
-            gInputHandler().GetState("QUIT");
+            application.JoypadEventHandler();
 
             if (gInputHandler().GetState("QUIT") == InputHandlerState::TRIGGERED)
             {
-                gCoreApplication().OnStopRequested();
+                application.OnStopRequested();
             }
         }
     }
