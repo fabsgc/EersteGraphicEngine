@@ -47,12 +47,12 @@ namespace ege
     public:
         InputHandler();
         ~InputHandler() {}
-        InputHandlerState GetState(const String& handler);
+        const InputHandlerState GetState(const String& handler);
 
     private:
         void Update(InputMap* inputMap);
         void OnStartUp() override;
-        void OnShutDown() override;
+        void OnShutDown() override {};
 
     private:
         Map<Context, Vector<InputMap>> _handlers;

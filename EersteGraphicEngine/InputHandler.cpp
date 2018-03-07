@@ -7,15 +7,16 @@ namespace ege
     {
     }
 
-    InputHandlerState InputHandler::GetState(const String& handler)
+    const InputHandlerState InputHandler::GetState(const String& handler)
     {
+        CoreApplication& application = gCoreApplication();
         InputMap* inputMap = nullptr;
 
         for (auto itHandler = _handlers.begin(); itHandler != _handlers.end(); itHandler++)
         {
             const Context& context = itHandler->first;
 
-            if (context == *gCoreApplication().GetCurrentContext())
+            if (context == *application.GetCurrentContext())
             {
                 Vector<InputMap>& inputMaps = itHandler->second;
 
@@ -106,10 +107,6 @@ namespace ege
 #else
         EGE_ASSERT_ERROR_SHORT("Keymap file path not found");
 #endif
-    }
-
-    void InputHandler::OnShutDown()
-    {
     }
 
     InputHandler& gInputHandler()

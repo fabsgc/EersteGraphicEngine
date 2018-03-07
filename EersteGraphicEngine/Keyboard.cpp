@@ -32,7 +32,7 @@ namespace ege
         }
     }
 
-    KeyState& Keyboard::GetState(const KeyName& name)
+    const KeyState& Keyboard::GetState(const KeyName& name) const 
     {
         if (std::find(_keys.begin(), _keys.end(), name) != _keys.end())
         {
@@ -49,7 +49,7 @@ namespace ege
         return _keys.begin()->State;
     }
 
-    KeyState& Keyboard::GetState(const String& label)
+    const KeyState& Keyboard::GetState(const String& label) const 
     {
         if (std::find(_keys.begin(), _keys.end(), label) != _keys.end())
         {
@@ -193,10 +193,6 @@ namespace ege
         _keys.push_back(Key(KeyName::F10, "", VK_F10));
         _keys.push_back(Key(KeyName::F11, "", VK_F11));
         _keys.push_back(Key(KeyName::F12, "", VK_F12));
-    }
-
-    void Keyboard::OnShutDown()
-    {
     }
 
     Keyboard& gKeyboard()

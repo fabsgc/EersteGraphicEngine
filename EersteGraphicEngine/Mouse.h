@@ -16,6 +16,11 @@ namespace ege
         TRIGGERED, RELEASED
     };
 
+    enum class MouseWheelState
+    {
+        ROLL_UP, ROLL_DOWN, STATIC
+    };
+
     struct MouseButton
     {
         MouseButtonName  Name;
@@ -47,22 +52,24 @@ namespace ege
     public:
         Mouse();
         ~Mouse() {}
-        void              Update(MSG* message);
-        XMFLOAT2          GetPosition();
-        MouseButtonState& GetState(const MouseButtonName& name);
-        MouseButtonState& GetState(const String& label);
-        MouseButton&      GetMouseButton(const MouseButtonName& name);
-        MouseButton&      GetMouseButton(const String& label);
+        void                    Update(MSG* message);
+        void                    ResetState();
+        XMFLOAT2                GetPosition();
+        const MouseButtonState& GetState(const MouseButtonName& name) const;
+        const MouseButtonState& GetState(const String& label) const;
+        MouseButton&            GetMouseButton(const MouseButtonName& name);
+        MouseButton&            GetMouseButton(const String& label);
 
     private:
-        void              UpdateState(MouseButtonName name, MouseButtonState state);
-        void              OnStartUp() override;
-        void              OnShutDown() override;
+        void UpdateState(const MouseButtonName& name, const MouseButtonState& state);
+        void OnStartUp() override;
+        void OnShutDown() override {};
 
     private:
         Window&             _window;
         XMFLOAT2            _position;
         Vector<MouseButton> _mouseButtons;
+        MouseWheelState     _mouseWheel;
     };
 
     Mouse&      gMouse();

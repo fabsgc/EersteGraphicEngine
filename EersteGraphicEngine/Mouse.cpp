@@ -6,6 +6,7 @@ namespace ege
         : IComponent(ComponentType::MOUSE)
         , _window(gWindow())
         , _position(XMFLOAT2(0.0f, 0.0f))
+        , _mouseWheel(MouseWheelState::STATIC)
     {}
 
     void Mouse::Update(MSG* message)
@@ -38,10 +39,32 @@ namespace ege
         case WM_MBUTTONUP:
             UpdateState(MouseButtonName::MIDDLE, MouseButtonState::RELEASED);
             break;
+
+        case WM_MOUSEHWHEEL:
+        {
+        }break;
+
+        case WM_MOUSEWHEEL: 
+        {
+            if (((short)HIWORD(message->wParam)) / 120 > 0)
+            {
+                _mouseWheel = MouseWheelState::ROLL_UP;
+            }
+            
+            if (((short)HIWORD(message->wParam)) / 120 < 0)
+            {
+                _mouseWheel = MouseWheelState::ROLL_DOWN;
+            }
+            }break;
         }
     }
 
-    void Mouse::UpdateState(MouseButtonName name, MouseButtonState state)
+    void Mouse::ResetState()
+    {
+        _mouseWheel = MouseWheelState::STATIC;
+    }
+
+    void Mouse::UpdateState(const MouseButtonName& name, const MouseButtonState& state)
     {
         for (auto button = _mouseButtons.begin(); button != _mouseButtons.end(); button++)
         {
@@ -57,7 +80,7 @@ namespace ege
         return _position;
     }
 
-    MouseButtonState& Mouse::GetState(const MouseButtonName& name)
+    const MouseButtonState& Mouse::GetState(const MouseButtonName& name) const 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
         {
@@ -74,7 +97,7 @@ namespace ege
         return _mouseButtons.begin()->State;
     }
 
-    MouseButtonState& Mouse::GetState(const String& label)
+    const MouseButtonState& Mouse::GetState(const String& label) const 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
         {
@@ -130,10 +153,6 @@ namespace ege
         _mouseButtons.push_back(MouseButton(MouseButtonName::LEFT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::RIGHT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::MIDDLE));
-    }
-
-    void Mouse::OnShutDown()
-    {
     }
 
     Mouse& gMouse()

@@ -100,4 +100,12 @@ namespace ege
     class Joypad;
     class Keyboard;
     class Mouse;
+    struct JoypadButton;
+    struct JoyStick;
+    struct ThumbStick;
+    struct Key;
+    struct MouseButton;
+
+    class Event;
+    struct EventType;
 }

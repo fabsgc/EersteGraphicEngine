@@ -124,20 +124,20 @@ namespace ege
     public:
         Joypad();
         ~Joypad() {}
-        void               Update();
-        bool               IsConnected();
-        JoypadButtonState& GetState(const JoypadButtonName& name);
-        JoypadButtonState& GetState(const String& label);
-        JoypadButton&      GetJoypadButton(const JoypadButtonName& name);
-        JoypadButton&      GetJoypadButton(const String& label);
-        JoyStick&          GetJoyStick(const JoypadStickName& name);
-        JoyStick&          GetJoyStick(const String& label);
-        ThumbStick&        GetThumbStick(const JoypadThumbStickName& name);
-        ThumbStick&        GetThumbStick(const String& label);
+        void                     Update();
+        bool                     IsConnected();
+        const JoypadButtonState& GetState(const JoypadButtonName& name) const;
+        const JoypadButtonState& GetState(const String& label) const;
+        JoypadButton&            GetJoypadButton(const JoypadButtonName& name);
+        JoypadButton&            GetJoypadButton(const String& label);
+        JoyStick&                GetJoyStick(const JoypadStickName& name);
+        JoyStick&                GetJoyStick(const String& label);
+        ThumbStick&              GetThumbStick(const JoypadThumbStickName& name);
+        ThumbStick&               GetThumbStick(const String& label);
 
     private:
         void               OnStartUp() override;
-        void               OnShutDown() override;
+        void               OnShutDown() override {};
         void               CheckJoypadConnected();
 
     private:

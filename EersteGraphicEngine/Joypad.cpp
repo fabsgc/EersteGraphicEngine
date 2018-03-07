@@ -61,7 +61,7 @@ namespace ege
         return _isConnected;
     }
 
-    JoypadButtonState& Joypad::GetState(const JoypadButtonName& name)
+    const JoypadButtonState& Joypad::GetState(const JoypadButtonName& name) const
     {
         if (std::find(_joypadButtons.begin(), _joypadButtons.end(), name) != _joypadButtons.end())
         {
@@ -78,7 +78,7 @@ namespace ege
         return _joypadButtons.begin()->State;
     }
 
-    JoypadButtonState& Joypad::GetState(const String& label)
+    const JoypadButtonState& Joypad::GetState(const String& label) const
     {
         if (std::find(_joypadButtons.begin(), _joypadButtons.end(), label) != _joypadButtons.end())
         {
@@ -221,10 +221,6 @@ namespace ege
 
         _thumbSticks.push_back(ThumbStick(JoypadThumbStickName::LEFT, "LEFT"));
         _thumbSticks.push_back(ThumbStick(JoypadThumbStickName::RIGHT, "RIGHT"));
-    }
-
-    void Joypad::OnShutDown()
-    {
     }
 
     void Joypad::CheckJoypadConnected()

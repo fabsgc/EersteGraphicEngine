@@ -133,6 +133,12 @@
     <Filter Include="Header Files\Utility\Lib">
       <UniqueIdentifier>{24179533-0b8a-48cf-b916-6e3712aa31ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Event">
+      <UniqueIdentifier>{8400094d-65f6-4d03-81ba-a335df91a133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Event">
+      <UniqueIdentifier>{f60b36dd-acc6-4900-ae0e-4b5f91497507}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

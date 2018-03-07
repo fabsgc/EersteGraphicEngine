@@ -8,18 +8,10 @@ namespace ege
     {
     }
 
-    Window::~Window()
-    {
-    }
-
     void Window::OnStartUp()
     {
         HRESULT HR = InitWindow();
         EGE_ASSERT_ERROR((HR != E_FAIL), "Can't create window instance");
-    }
-
-    void Window::OnShutDown()
-    {
     }
 
     void Window::Update()
@@ -36,8 +28,9 @@ namespace ege
                 application.KeyEventHandler(&msg);
             }
                 
-            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
-                msg.message == WM_LBUTTONUP || msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
+            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN || 
+                msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
+                msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
             {
                 application.MouseEventHandler(&msg);
             }
@@ -52,6 +45,7 @@ namespace ege
         }
         else
         {
+            gMouse().ResetState();
             application.JoypadEventHandler();
 
             if (gInputHandler().GetState("QUIT") == InputHandlerState::TRIGGERED)
@@ -177,7 +171,6 @@ namespace ege
                     application.Minimized(false);
                     window.OnResize();
                 }
-
                 // Restoring from maximized state?
                 else if (application.GetMaximized())
                 {
@@ -219,17 +212,6 @@ namespace ege
 
         if (gTime().GetTime() - timeElapsed >= 1.0f)
         {
-            /*float fps = (float)frameCnt / 1000.0f;
-            float mspf = 1000.0f / fps;
-
-            WStringStream outs;
-            outs.precision(6);
-
-            outs << ToWString(_windowDesc.Title).c_str() << L"    "
-                << L"FPS: " << fps << L"    "
-                << L"Frame Time: " << mspf << L" (ms)";
-            SetWindowText(_hWnd, outs.str().c_str());*/
-
             WStringStream outs;
             outs.precision(6);
 

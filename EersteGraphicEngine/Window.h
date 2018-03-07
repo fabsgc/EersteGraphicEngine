@@ -24,7 +24,7 @@ namespace ege
     {
     public:
         Window(const WINDOW_DESC& desc);
-        ~Window();
+        ~Window() {};
 
         template<class T = Window>
         static void StartUp(const WINDOW_DESC& desc)
@@ -37,7 +37,7 @@ namespace ege
         void OnResize();
 
         void OnStartUp() override;
-        void OnShutDown() override;
+        void OnShutDown() override {};
 
         static LRESULT CALLBACK MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

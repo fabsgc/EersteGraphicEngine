@@ -56,17 +56,17 @@ namespace ege
     public:
         Keyboard();
         ~Keyboard() {}
-        void      Update(MSG* message);
-        KeyState& GetState(const KeyName& name);
-        KeyState& GetState(const String& label);
-        Key&      GetKey(const KeyName& name);
-        Key&      GetKey(const String& label);
+        void            Update(MSG* message);
+        const KeyState& GetState(const KeyName& name) const;
+        const KeyState& GetState(const String& label) const;
+        Key&            GetKey(const KeyName& name);
+        Key&            GetKey(const String& label);
 
     private:
         void UpdateState(Key* key, MSG* message);
 
         void OnStartUp() override;
-        void OnShutDown() override;
+        void OnShutDown() override {};
 
     private:
         Vector<Key> _keys;
