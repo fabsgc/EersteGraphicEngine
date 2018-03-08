@@ -107,5 +107,5 @@ namespace ege
     struct MouseButton;
 
     class Event;
-    struct EventType;
+    class EventManager;
 }

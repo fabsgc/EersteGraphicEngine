@@ -1,10 +1,12 @@
 #pragma once
 
+#include "PrerequisitesCore.h"
+
 namespace ege
 {
     enum EventType
     {
-        NONE
+        NONE, CUSTOM
     };
 
     class Event
@@ -12,10 +14,13 @@ namespace ege
     public:
         Event();
         Event(EventType type);
+        Event(EventType type, const String& data);
         ~Event() {};
         const EventType& GetType() const;
+        const String& GetData() const;
 
     private:
         EventType _type;
+        String    _data;
     };
 }

@@ -201,6 +201,12 @@
     <ClCompile Include="lib\tinyxml2\tinyxml2.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\Core\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -295,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\Core\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

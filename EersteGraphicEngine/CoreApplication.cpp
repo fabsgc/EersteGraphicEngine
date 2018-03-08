@@ -110,19 +110,20 @@ namespace ege
         SetContexts();
         SetApplicationConfig();
 
-        Time::StartUp();
-        DynamicLibManager::StartUp();
-
+        StartUpTime();
+        StartUpDynamicLibManager();
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpWindow();
         StartUpComponents();
+        StartUpEventManager();
 
         SetComponents();
     }
 
     void CoreApplication::OnShutDown()
     {
+        EventManager::ShutDown();
         InputHandler::ShutDown();
         Keyboard::ShutDown();
         Joypad::ShutDown();
@@ -154,6 +155,21 @@ namespace ege
         Joypad::StartUp();
         Mouse::StartUp();
         InputHandler::StartUp();
+    }
+
+    void CoreApplication::StartUpEventManager()
+    {
+        EventManager::StartUp();
+    }
+
+    void CoreApplication::StartUpDynamicLibManager()
+    {
+        DynamicLibManager::StartUp();
+    }
+
+    void CoreApplication::StartUpTime()
+    {
+        Time::StartUp();
     }
 
     void CoreApplication::SetContexts()

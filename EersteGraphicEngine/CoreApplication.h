@@ -13,6 +13,9 @@
 #include "Mouse.h"
 #include "InputHandler.h"
 
+#include "EventManager.h"
+#include "Event.h"
+
 namespace ege
 {
     struct START_UP_DESC
@@ -82,6 +85,9 @@ namespace ege
         void StartUpRenderer();
         void StartUpWindow();
         void StartUpComponents();
+        void StartUpEventManager();
+        void StartUpDynamicLibManager();
+        void StartUpTime();
 
         void SetContexts();
         void SetApplicationConfig();

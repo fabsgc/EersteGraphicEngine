@@ -136,6 +136,8 @@
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
     <ClCompile Include="DynamicLibManager.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -159,6 +161,8 @@
     <ClInclude Include="DynamicLib.h" />
     <ClInclude Include="DynamicLibManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />

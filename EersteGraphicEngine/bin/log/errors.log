@@ -22,3 +22,15 @@ Time: 21:35:51
 Error: Trying to access a module but it hasn't been started up yet.
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:37 inside ege::IModule<class ege::EventManager>::ShutDown
+Date: Mar  8 2018
+Time: 17:36:55
+Error: Trying to shut down a module which was never started.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:37 inside ege::IModule<class ege::EventManager>::ShutDown
+Date: Mar  8 2018
+Time: 17:36:55
+Error: Trying to shut down a module which was never started.
+Condition: 0
+############################################: 
