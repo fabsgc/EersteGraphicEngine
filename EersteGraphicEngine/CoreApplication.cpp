@@ -119,6 +119,8 @@ namespace ege
         StartUpEventManager();
 
         SetComponents();
+
+        SetContext("Game");
     }
 
     void CoreApplication::OnShutDown()
@@ -244,6 +246,20 @@ namespace ege
     const Context* CoreApplication::GetCurrentContext() const
     {
         return _currentContext;
+    }
+
+    void CoreApplication::SetContext(const String& name)
+    {
+        for (auto contextIt = _contexts.begin(); contextIt != _contexts.end(); contextIt++)
+        {
+            if (*contextIt == name)
+            {
+                _currentContext = &*contextIt;
+                return;
+            }
+        }
+
+        EGE_ASSERT_ERROR(false, ("The context \"" + name + "\" does not exist"));
     }
 
     CoreApplication& gCoreApplication()

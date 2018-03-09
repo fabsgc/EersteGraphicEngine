@@ -37,6 +37,11 @@ namespace ege
             return Name == context.Name;
         }
 
+        bool operator==(const String& name) const
+        {
+            return Name == name;
+        }
+
         bool operator <(const Context& context) const
         {
             return Name < context.Name;
@@ -94,16 +99,18 @@ namespace ege
         void SetComponents();
         void LimitFps();
 
+        void SetContext(const String& name);
+
     protected:
-        volatile bool _runMainLoop;
-        volatile bool _paused;
-        volatile bool _minimized;
-        volatile bool _maximized;
-        volatile bool _resizing;
+        volatile bool   _runMainLoop;
+        volatile bool   _paused;
+        volatile bool   _minimized;
+        volatile bool   _maximized;
+        volatile bool   _resizing;
 
-        START_UP_DESC _startUpDesc;
+        START_UP_DESC   _startUpDesc;
 
-        Window*	      _window;
+        Window*	        _window;
 
         Vector<Context> _contexts;
         Context*        _currentContext;

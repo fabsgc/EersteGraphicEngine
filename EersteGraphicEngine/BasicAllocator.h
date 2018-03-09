@@ -25,7 +25,7 @@ namespace ege
 
         void Deallocate(void* data)
         {
-            ::free(data);
+            free(data);
         }
 
     private:

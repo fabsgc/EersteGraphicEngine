@@ -4,23 +4,18 @@
 
 namespace ege
 {
-    enum EventType
-    {
-        NONE, CUSTOM
-    };
-
     class Event
     {
     public:
-        Event();
-        Event(EventType type);
-        Event(EventType type, const String& data);
+        Event(const String& data);
         ~Event() {};
-        const EventType& GetType() const;
-        const String& GetData() const;
+        const String& GetName() const;
+        void          Suscribe(std::function<void()> callback);
+        void          Execute();
+        bool          operator==(const String& name) const;
 
     private:
-        EventType _type;
-        String    _data;
+        String _name;
+        std::vector<std::function<void()>> _callbacks;
     };
 }

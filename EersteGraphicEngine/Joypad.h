@@ -133,12 +133,12 @@ namespace ege
         JoyStick&                GetJoyStick(const JoypadStickName& name);
         JoyStick&                GetJoyStick(const String& label);
         ThumbStick&              GetThumbStick(const JoypadThumbStickName& name);
-        ThumbStick&               GetThumbStick(const String& label);
+        ThumbStick&              GetThumbStick(const String& label);
 
     private:
-        void               OnStartUp() override;
-        void               OnShutDown() override {};
-        void               CheckJoypadConnected();
+        void                     OnStartUp() override;
+        void                     OnShutDown() override {};
+        void                     CheckJoypadConnected();
 
     private:
         static float DEAD_ZONE_X;

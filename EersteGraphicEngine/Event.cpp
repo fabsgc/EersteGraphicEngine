@@ -2,28 +2,35 @@
 
 namespace ege
 {
-    Event::Event()
-        : _type(EventType::NONE)
-        , _data("")
+    Event::Event(const String& name)
+        : _name(name)
     {}
 
-    Event::Event(EventType type)
-        : _type(type)
-        , _data("")
-    {}
-
-    Event::Event(EventType type, const String& data)
-        : _type(type)
-        , _data(data)
-    {}
-
-    const EventType& Event::GetType() const
+    const String& Event::GetName() const
     {
-        return _type;
+        return _name;
     }
 
-    const String& Event::GetData() const
+    void Event::Suscribe(std::function<void()> callback)
     {
-        return _data;
+        _callbacks.push_back(callback);
+    }
+
+    void Event::Execute()
+    {
+        for (auto callbackIt = _callbacks.begin(); callbackIt != _callbacks.end(); callbackIt++)
+        {
+            (*callbackIt)();
+        }
+    }
+
+    bool Event::operator==(const String& name) const
+    {
+        if (_name == name)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

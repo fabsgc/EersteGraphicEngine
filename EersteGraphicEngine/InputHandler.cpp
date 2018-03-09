@@ -16,7 +16,7 @@ namespace ege
         {
             const Context& context = itHandler->first;
 
-            if (context == *application.GetCurrentContext())
+            if (context.Name == application.GetCurrentContext()->Name)
             {
                 Vector<InputMap>& inputMaps = itHandler->second;
 

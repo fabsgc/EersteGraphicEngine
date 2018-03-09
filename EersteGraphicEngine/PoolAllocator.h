@@ -74,13 +74,14 @@ namespace ege
 
         ~PoolAllocator()
         {
-
         }
 
         void * Allocate(size_t amount = sizeof(UINT32))
         {
             if (_freePoolBlock == nullptr || _freePoolBlock->FreeElements == 0)
+            {
                 AllocatePoolBlock();
+            }
 
             _totalElements++;
             return (void*)_freePoolBlock->Allocate();

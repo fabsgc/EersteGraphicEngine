@@ -34,3 +34,57 @@ Time: 17:36:55
 Error: Trying to shut down a module which was never started.
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\eventmanager.cpp:33 inside ege::EventManager::Execute
+Date: Mar  9 2018
+Time: 23:05:03
+Error: The event "inita" does not exist
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\eventmanager.cpp:33 inside ege::EventManager::Execute
+Date: Mar  9 2018
+Time: 23:05:03
+Error: The event "inita" does not exist
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\coreapplication.cpp:261 inside ege::CoreApplication::SetContext
+Date: Mar  9 2018
+Time: 23:59:59
+Error: The context "Game" does not exist
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:00:01
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:00:01
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:03:14
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:04:26
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:05:04
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:34 inside ege::InputHandler::GetState
+Date: Mar 10 2018
+Time: 00:05:04
+Error: This handler does not exist (QUIT)
+Condition: 0
+############################################: 
