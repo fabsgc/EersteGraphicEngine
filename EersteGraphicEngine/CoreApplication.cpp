@@ -2,7 +2,7 @@
 
 namespace ege
 {
-    CoreApplication::CoreApplication(const START_UP_DESC& desc)
+    CoreApplication::CoreApplication(const StartUpDescription& desc)
         : _runMainLoop(true)
         , _paused(false)
         , _minimized(false)

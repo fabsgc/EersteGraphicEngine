@@ -84,8 +84,9 @@ namespace ege
         XMGLOBALCONST XMFLOAT4 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
     }
 
-    class CoreApplication;
+    struct StartUpDescription;
     struct Context;
+    class CoreApplication;
 
     class Window;
     class IDrawable;
@@ -96,15 +97,16 @@ namespace ege
     class IComponent;
     class IComponentHandler;
 
+    struct InputMap;
     class InputHandler;
-    class Joypad;
-    class Keyboard;
-    class Mouse;
     struct JoypadButton;
     struct JoyStick;
     struct ThumbStick;
+    class Joypad;
     struct Key;
+    class Keyboard;
     struct MouseButton;
+    class Mouse;
 
     class Event;
     class EventManager;

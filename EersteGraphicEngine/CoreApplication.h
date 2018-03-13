@@ -18,7 +18,7 @@
 
 namespace ege
 {
-    struct START_UP_DESC
+    struct StartUpDescription
     {
         UINT        MaxFPS;
         WINDOW_DESC WindowDesc;
@@ -51,7 +51,7 @@ namespace ege
     class CoreApplication : public IModule<CoreApplication>, public IComponentHandler
     {
     public:
-        CoreApplication(const START_UP_DESC& desc);
+        CoreApplication(const StartUpDescription& desc);
         ~CoreApplication();
 
         void RunMainLoop();
@@ -77,7 +77,7 @@ namespace ege
         const Context* GetCurrentContext() const;
 
         template<class T = CoreApplication>
-        static void StartUp(const START_UP_DESC& desc)
+        static void StartUp(const StartUpDescription& desc)
         {
             IModule::StartUp<T>(desc);
         }
@@ -102,18 +102,18 @@ namespace ege
         void SetContext(const String& name);
 
     protected:
-        volatile bool   _runMainLoop;
-        volatile bool   _paused;
-        volatile bool   _minimized;
-        volatile bool   _maximized;
-        volatile bool   _resizing;
+        volatile bool      _runMainLoop;
+        volatile bool      _paused;
+        volatile bool      _minimized;
+        volatile bool      _maximized;
+        volatile bool      _resizing;
 
-        START_UP_DESC   _startUpDesc;
+        StartUpDescription _startUpDesc;
 
-        Window*	        _window;
+        Window*	           _window;
 
-        Vector<Context> _contexts;
-        Context*        _currentContext;
+        Vector<Context>    _contexts;
+        Context*           _currentContext;
     };
 
     CoreApplication& gCoreApplication();

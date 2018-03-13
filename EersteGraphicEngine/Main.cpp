@@ -5,7 +5,7 @@ using namespace ege;
 
 int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _In_  LPSTR lpCmdLine, _In_  int nCmdShow)
 {
-    START_UP_DESC desc;
+    StartUpDescription desc;
 
     desc.MaxFPS            = 60;
     desc.WindowDesc.Width  = 960;
