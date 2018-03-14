@@ -139,6 +139,9 @@
     <Filter Include="Source Files\Core\Event">
       <UniqueIdentifier>{f60b36dd-acc6-4900-ae0e-4b5f91497507}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility\Threading">
+      <UniqueIdentifier>{44080e1e-47a3-4093-94c7-43bb1ca1c149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
