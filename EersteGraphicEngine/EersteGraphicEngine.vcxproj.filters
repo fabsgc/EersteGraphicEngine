@@ -311,6 +311,9 @@
     <ClInclude Include="EventManager.h">
       <Filter>Header Files\Core\Event</Filter>
     </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files\Utility\Error</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">

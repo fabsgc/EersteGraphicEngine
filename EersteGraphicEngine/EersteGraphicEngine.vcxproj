@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="DynamicLib.h" />
     <ClInclude Include="DynamicLibManager.h" />

@@ -107,6 +107,8 @@ namespace ege
 
     void CoreApplication::OnStartUp()
     {
+        EGE_ENABLE_CONSOLE();
+
         SetContexts();
         SetApplicationConfig();
 
@@ -133,6 +135,8 @@ namespace ege
         Window::ShutDown();
         Time::ShutDown();
         DynamicLibManager::ShutDown();
+
+        EGE_FREE_CONSOLE();
     }
 
     void CoreApplication::StartUpRenderAPI()

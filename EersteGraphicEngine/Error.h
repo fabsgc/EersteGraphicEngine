@@ -2,7 +2,7 @@
 
 #if defined(EGE_DEBUG)
 #   ifndef EGE_ERROR_LOG_FILE
-#       define EGE_ERROR_LOG_FILE "log/errors.log"
+#       define EGE_ERROR_LOG_FILE "log/Errors.log"
 #   endif
 
 #   ifndef EGE_ASSERT_ERROR
@@ -19,7 +19,7 @@
                 errorFile << "Error: " << error << std::endl;                                           \
                 errorFile << "Condition: " << condition << std::endl;                                   \
                 errorFile << "############################################: " << std::endl;             \
-                abort();                                                                                \
+                assert(condition);                                                                      \
             }                                                                                           \
         }                                                                                   
 #   endif
@@ -37,16 +37,16 @@
                 errorFile << "Time: " << __TIME__ << std::endl;                                         \
                 errorFile << "Condition: " << condition;                                                \
                 errorFile << "############################################: " << std::endl;             \
-                abort();                                                                                \
+                assert(condition);                                                                      \
             }                                                                                           \
         }                                                                                   
 #   endif
 #else 
 #   ifndef EGE_ASSERT_ERROR
-#   define EGE_ASSERT_ERROR(condition, error, abort) (condition)
+#   define EGE_ASSERT_ERROR(condition, error) (condition)
 #   endif
 
 #   ifndef EGE_ASSERT_ERROR_SHORT
-#   define EGE_ASSERT_ERROR_SHORT(condition, abort) (condition)
+#   define EGE_ASSERT_ERROR_SHORT(condition) (condition)
 #   endif
 #endif
