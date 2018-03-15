@@ -121,3 +121,14 @@ Date: Mar  2 2018
 Time: 00:04:29
 Message: 42
 ############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\coreapplication.cpp:127 inside ege::CoreApplication::OnStartUp
+Date: Mar 15 2018
+Time: 10:18:05
+Message: debug
+############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\coreapplication.cpp:127
+Inside ege::CoreApplication::OnStartUp
+Date: Mar 15 2018
+Time: 10:20:08
+Message: debug
+############################################: 
