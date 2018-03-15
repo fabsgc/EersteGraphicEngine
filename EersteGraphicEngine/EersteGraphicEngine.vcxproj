@@ -125,6 +125,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -138,6 +139,7 @@
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="HThread.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -165,6 +167,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
+    <ClInclude Include="HThread.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />

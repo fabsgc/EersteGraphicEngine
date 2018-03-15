@@ -199,9 +199,16 @@ namespace ege {
     * Create a new object with the specified allocator and the specified parameters.
     */
     template<class Type, class Allocator, class... Args>
-    Type* ege_allocate(Args &&...args)
+    Type* ege_new(Args &&...args)
     {
         return new (ege_allocate<Allocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
+    }
+
+    /** Create a new object with the specified allocator and the specified parameters. */
+    template<class Type, class... Args>
+    Type* ege_new(Args &&...args)
+    {
+        return new (ege_allocate<GeneralAllocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
     }
 
     /**

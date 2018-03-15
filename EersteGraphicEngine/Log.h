@@ -26,7 +26,7 @@
         }                                                                                   
 #   endif
 #else 
-#   ifndef EGE_DEBUG
-#   define EGE_DEBUG(message)
+#   ifndef EGE_LOG_DEBUG
+#   define EGE_LOG_DEBUG(message)
 #   endif
 #endif

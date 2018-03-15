@@ -210,6 +210,9 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files\Core\Event</Filter>
     </ClCompile>
+    <ClCompile Include="HThread.cpp">
+      <Filter>Source Files\Utility\Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Header Files\Utility\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="HThread.h">
+      <Filter>Header Files\Utility\Threading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
