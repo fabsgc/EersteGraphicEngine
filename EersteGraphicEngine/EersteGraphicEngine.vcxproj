@@ -134,12 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="HThread.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -153,9 +153,14 @@
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TaskPool.cpp" />
+    <ClCompile Include="TaskScheduler.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Worker.cpp" />
+    <ClCompile Include="WorkerPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
@@ -167,7 +172,6 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
-    <ClInclude Include="HThread.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />
@@ -188,11 +192,16 @@
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TaskPool.h" />
+    <ClInclude Include="TaskScheduler.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="Worker.h" />
+    <ClInclude Include="WorkerPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc" />

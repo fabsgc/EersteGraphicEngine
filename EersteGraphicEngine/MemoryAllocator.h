@@ -178,7 +178,7 @@ namespace ege {
     *  ################################################################ */
 
     /**
-    * Allocates the specified number of bytes.
+    * Allocates the specified number of bytes (custom allocator)
     */
     template<class Allocator = GeneralAllocator>
     inline void* ege_allocate(UINT32 count)
@@ -187,7 +187,7 @@ namespace ege {
     }
 
     /**
-    * Allocates enough bytes to hold the specified type, but doesn't construct it.
+    * Allocates enough bytes to hold the specified type, but doesn't construct it (custom allocator).
     */
     template<class T, class Allocator = GeneralAllocator>
     inline T* ege_allocate()
@@ -196,7 +196,7 @@ namespace ege {
     }
 
     /**
-    * Create a new object with the specified allocator and the specified parameters.
+    * Create a new object with the specified allocator and the specified parameters (custom allocator).
     */
     template<class Type, class Allocator, class... Args>
     Type* ege_new(Args &&...args)

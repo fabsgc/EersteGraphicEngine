@@ -1,8 +1,5 @@
 #pragma once
 
-// Enable console support for debug
-#include "Console.h"
-
 // Short-hand names for various built-in types
 #include "Types.h"
 

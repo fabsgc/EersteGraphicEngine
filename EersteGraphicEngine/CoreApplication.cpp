@@ -107,12 +107,12 @@ namespace ege
 
     void CoreApplication::OnStartUp()
     {
-        EGE_ENABLE_CONSOLE();
-
         SetContexts();
         SetApplicationConfig();
 
+        StartUpConsole();
         StartUpTime();
+        StartUpTaskScheduler();
         StartUpDynamicLibManager();
         StartUpRenderAPI();
         StartUpRenderer();
@@ -133,10 +133,10 @@ namespace ege
         Joypad::ShutDown();
         Mouse::ShutDown();
         Window::ShutDown();
-        Time::ShutDown();
         DynamicLibManager::ShutDown();
-
-        EGE_FREE_CONSOLE();
+        TaskScheduler::ShutDown();
+        Time::ShutDown();
+        Console::ShutDown();
     }
 
     void CoreApplication::StartUpRenderAPI()
@@ -176,6 +176,16 @@ namespace ege
     void CoreApplication::StartUpTime()
     {
         Time::StartUp();
+    }
+
+    void CoreApplication::StartUpConsole()
+    {
+        Console::StartUp();
+    }
+
+    void CoreApplication::StartUpTaskScheduler()
+    {
+        TaskScheduler::StartUp();
     }
 
     void CoreApplication::SetContexts()

@@ -16,6 +16,11 @@
 #include "EventManager.h"
 #include "Event.h"
 
+#include "TaskScheduler.h"
+#include "Task.h"
+
+#include "Console.h"
+
 namespace ege
 {
     struct StartUpDescription
@@ -93,6 +98,8 @@ namespace ege
         void StartUpEventManager();
         void StartUpDynamicLibManager();
         void StartUpTime();
+        void StartUpConsole();
+        void StartUpTaskScheduler();
 
         void SetContexts();
         void SetApplicationConfig();

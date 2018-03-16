@@ -139,8 +139,14 @@
     <Filter Include="Source Files\Core\Event">
       <UniqueIdentifier>{f60b36dd-acc6-4900-ae0e-4b5f91497507}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utility\Threading">
-      <UniqueIdentifier>{44080e1e-47a3-4093-94c7-43bb1ca1c149}</UniqueIdentifier>
+    <Filter Include="Header Files\Utility\Task">
+      <UniqueIdentifier>{5e470e50-76e1-4d0e-b344-3a00d833c549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Task">
+      <UniqueIdentifier>{70e53dda-b27e-480c-8701-4c298cef77f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Error">
+      <UniqueIdentifier>{9bd61a1f-38d2-4566-99bf-59bd1c54e532}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,8 +216,23 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files\Core\Event</Filter>
     </ClCompile>
-    <ClCompile Include="HThread.cpp">
-      <Filter>Source Files\Utility\Threading</Filter>
+    <ClCompile Include="TaskScheduler.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskPool.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Worker.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkerPool.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Source Files\Utility\Error</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,8 +338,20 @@
     <ClInclude Include="Console.h">
       <Filter>Header Files\Utility\Error</Filter>
     </ClInclude>
-    <ClInclude Include="HThread.h">
-      <Filter>Header Files\Utility\Threading</Filter>
+    <ClInclude Include="TaskScheduler.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskPool.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Worker.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkerPool.h">
+      <Filter>Header Files\Utility\Task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

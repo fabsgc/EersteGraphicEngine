@@ -12,6 +12,7 @@
 #include <ctime>
 #include <memory>
 #include <string>
+#include <cstdio>
 
 // STL containers
 #include <vector>
@@ -53,6 +54,9 @@ extern "C" {
 #endif
 
 #include <Windows.h>
+#include <fcntl.h>
+#include <io.h>
+
 #include "BasicAllocator.h"
 
 #undef min

@@ -5,20 +5,18 @@
 
 namespace ege
 {
-    class Console: public IModule<Console>
+    class TaskScheduler: public IModule<TaskScheduler>
     {
     public:
-        Console() {}
-        ~Console() {}
+        TaskScheduler() {}
+        ~TaskScheduler() {}
 
     private:
         void OnStartUp() override;
         void OnShutDown() override;
 
     private:
-        int _hCrtIn;
-        int _hCrtOut;
     };
 
-    Console& gConsole();
+    TaskScheduler& gScheduler();
 }
