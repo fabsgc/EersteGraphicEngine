@@ -145,8 +145,11 @@
     <Filter Include="Source Files\Utility\Task">
       <UniqueIdentifier>{70e53dda-b27e-480c-8701-4c298cef77f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Utility\Error">
+    <Filter Include="Source Files\Utility\Console">
       <UniqueIdentifier>{9bd61a1f-38d2-4566-99bf-59bd1c54e532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Console">
+      <UniqueIdentifier>{0bf0a6ac-9d9c-4868-aca2-25b5f13681f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +235,7 @@
       <Filter>Source Files\Utility\Task</Filter>
     </ClCompile>
     <ClCompile Include="Console.cpp">
-      <Filter>Source Files\Utility\Error</Filter>
+      <Filter>Source Files\Utility\Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +338,6 @@
     <ClInclude Include="EventManager.h">
       <Filter>Header Files\Core\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Console.h">
-      <Filter>Header Files\Utility\Error</Filter>
-    </ClInclude>
     <ClInclude Include="TaskScheduler.h">
       <Filter>Header Files\Utility\Task</Filter>
     </ClInclude>
@@ -352,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="WorkerPool.h">
       <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files\Utility\Console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
