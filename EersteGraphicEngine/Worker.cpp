@@ -3,6 +3,7 @@
 namespace ege
 {
     Worker::Worker()
+        : _state(WorkerState::Idle)
     {
     }
 

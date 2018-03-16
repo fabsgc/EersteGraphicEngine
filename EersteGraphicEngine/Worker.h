@@ -4,6 +4,12 @@
 
 namespace ege
 {
+    enum class WorkerState
+    {
+        Idle, Running, Stopping
+    };
+
+
     class Worker
     {
     public:
@@ -11,5 +17,6 @@ namespace ege
         ~Worker();
 
     private:
+        WorkerState _state;
     };
 }

@@ -4,11 +4,6 @@
 
 namespace ege
 {
-    enum class TaskState
-    {
-        Idle, Running, Stopping
-    };
-
     class Task
     {
     public:
