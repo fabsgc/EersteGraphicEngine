@@ -185,7 +185,7 @@ namespace ege
 
     void CoreApplication::StartUpTaskScheduler()
     {
-        TaskScheduler::StartUp();
+        TaskScheduler::StartUp(10);
     }
 
     void CoreApplication::SetContexts()

@@ -26,7 +26,10 @@ namespace ege
 
     void Task::Reset(std::function<void()> workerMethod, Task* parent)
     {
-        Initialise(workerMethod, parent);
+        if (Finished())
+        {
+            Initialise(workerMethod, parent);
+        }
     }
 
     void Task::Run()

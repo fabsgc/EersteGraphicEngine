@@ -33,6 +33,7 @@
 #include <algorithm>
 #include <functional>
 #include <limits>
+#include <random>
 
 // C++ Stream stuff
 #include <fstream>
@@ -120,6 +121,15 @@ namespace ege
     SPtr<Type> ege_shared_ptr_new(Args &&... args)
     {
         return std::allocate_shared<Type>(StdAllocator<Type, Allocator>(), std::forward<Args>(args)...);
+    }
+
+    /**
+    * Create a new shared pointer using the default allocator category
+    */
+    template<class Type, class... Args>
+    SPtr<Type> ege_shared_ptr_new(Args &&... args)
+    {
+        return std::allocate_shared<Type>(StdAllocator<Type, BasicAllocator>(), std::forward<Args>(args)...);
     }
 
     /**
