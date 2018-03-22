@@ -55,7 +55,7 @@ namespace ege
         }
     }
 
-    bool EventManager::Exist(const String& name)
+    const bool EventManager::Exist(const String& name) const
     {
         for (auto event : _events)
         {

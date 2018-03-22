@@ -4,14 +4,9 @@ namespace ege
 {
     IComponent::IComponent(ComponentType type)
         : _type(type)
-    {
-    }
+    {}
 
-    IComponent::~IComponent()
-    {
-    }
-
-    ComponentType IComponent::GetType()
+    const ComponentType IComponent::GetType() const
     {
         return _type;
     }

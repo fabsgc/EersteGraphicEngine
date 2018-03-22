@@ -11,9 +11,9 @@ namespace ege
     {
     public:
         IComponent(ComponentType type);
-        virtual ~IComponent() = 0;
+        virtual ~IComponent() = 0 {};
 
-        ComponentType GetType();
+        const ComponentType GetType() const;
 
     protected:
         ComponentType _type;

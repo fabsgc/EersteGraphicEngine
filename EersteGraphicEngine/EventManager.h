@@ -20,7 +20,7 @@ namespace ege
         void OnShutDown() override {};
 
     private:
-        bool Exist(const String& name);
+        const bool Exist(const String& name) const;
 
     private:
         std::vector<SPtr<Event>> _events;
