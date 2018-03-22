@@ -2,9 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponent.h"
-#include "IModule.h"
 #include "Window.h"
-#include "Time.h"
 
 namespace ege
 {

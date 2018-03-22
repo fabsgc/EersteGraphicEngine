@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IModule.h"
 #include "Event.h"
 
 namespace ege

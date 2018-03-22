@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PrerequisitesCore.h"
-
 namespace ege
 {
     class IUpdatable

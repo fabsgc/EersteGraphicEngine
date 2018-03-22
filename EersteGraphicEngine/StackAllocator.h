@@ -11,20 +11,17 @@
 namespace ege
 {
     /* ###################################################################
-    *  ############# STACK ALLOCATOR HEADER ##############################
-    *  ################################################################ */
-
-    struct StackAllocationHeader {
-        size_t padding;
-        size_t size;
-    };
-
-    /* ###################################################################
     *  ############# STACK ALLOCATOR #####################################
     *  ################################################################ */
 
     class StackAllocator
     {
+    private:
+        struct StackAllocationHeader {
+            size_t padding;
+            size_t size;
+        };
+
     public:
         StackAllocator(size_t size = sizeof(UINT32) * 8192)
             : _totalSize(size)

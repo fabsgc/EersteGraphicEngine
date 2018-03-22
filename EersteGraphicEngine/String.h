@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesUtil.h"
-#include "MemoryAllocator.h"
 
 namespace ege
 {

@@ -3,7 +3,6 @@
 #include "IComponentHandler.h"
 #include "CoreApplication.h"
 #include "IComponent.h"
-#include "IModule.h"
 #include "Keyboard.h"
 #include "Joypad.h"
 #include "Time.h"

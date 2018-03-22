@@ -1,12 +1,9 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "DynamicLibManager.h"
 #include "IComponentHandler.h"
 #include "IComponent.h"
-#include "IModule.h"
 #include "Window.h"
-#include "Time.h"
 
 #include "Keyboard.h"
 #include "Joypad.h"

@@ -28,6 +28,10 @@
 #pragma comment(lib, "xinput9_1_0.lib")
 #pragma comment(lib, "xinput.lib")
 
+#include "DynamicLibManager.h"
+#include "IModule.h"
+#include "Time.h"
+
 using namespace DirectX;
 
 #if defined(EGE_DEBUG)
@@ -84,30 +88,30 @@ namespace ege
         XMGLOBALCONST XMFLOAT4 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
     }
 
-    struct StartUpDescription;
-    struct Context;
-    class CoreApplication;
+    class  IComponent;
+    class  IComponentHandler;
 
-    class Window;
-    class IDrawable;
-    class IUpdatable;
-
-    class RenderAPI;
-
-    class IComponent;
-    class IComponentHandler;
+    class  Event;
+    class  EventManager;
 
     struct InputMap;
-    class InputHandler;
-    struct JoypadButton;
+    class  InputHandler;
     struct JoyStick;
     struct ThumbStick;
-    class Joypad;
-    struct Key;
-    class Keyboard;
-    struct MouseButton;
-    class Mouse;
+    struct JoypadButton;
+    class  Joypad;
 
-    class Event;
-    class EventManager;
+    struct Key;
+    class  Keyboard;
+
+    struct MouseButton;
+    class  Mouse;
+
+    class  Window;
+    class  IDrawable;
+    class  IUpdatable;
+
+    struct Context;
+    struct StartUpDescription;
+    class  CoreApplication;
 }

@@ -7,4 +7,21 @@ namespace ege
 
     /** Enum used for matrix/quaternion constructor specifying it should be initialized with an identity value. */
     enum EGE_IDENTITY { EgeIdentity };
+
+    class BasicAllocator;
+    class LinearAllocator;
+
+    class MemoryCounter;
+    class MemoryAllocatorBase;
+    class GeneralAllocator;
+
+    class Console;
+
+    class DynamicLib;
+    class DynamicLibManager;
+    
+    template<class T> class IModule;
+
+    class Time;
+    class Timer;
 }

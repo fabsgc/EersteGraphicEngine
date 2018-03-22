@@ -1,5 +1,8 @@
 #pragma once
 
+// Forward declarations
+#include "ForwardDeclarationUtil.h"
+
 // Short-hand names for various built-in types
 #include "Types.h"
 
@@ -17,9 +20,6 @@
 
 // Custom error macros
 #include "Error.h"
-
-// Forward declarations
-#include "ForwardDeclarationUtil.h"
 
 // Useful threading defines
 #include "ThreadDefines.h"

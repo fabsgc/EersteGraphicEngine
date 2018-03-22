@@ -1,5 +1,4 @@
 #include "CoreApplication.h"
-#include <windows.h>
 
 using namespace ege;
 
