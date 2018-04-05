@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-	<window width="1285" height="720" title="My First Graphic Engine" fps="0"/>
+	<window width="1285" height="720" title="My First Graphic Engine" fps="0" fullscreen="true"/>
 </application>

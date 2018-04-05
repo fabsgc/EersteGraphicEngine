@@ -67,7 +67,6 @@ namespace ege
         wcex.cbWndExtra = 0;
         wcex.hInstance = _hInst;
         wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-        wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
         wcex.lpszClassName = L"Eerste Engine";
 
@@ -245,6 +244,11 @@ namespace ege
         return _windowDesc.Width;
     }
 
+    bool Window::IsFullScreen()
+    {
+        return _windowDesc.FullScreen;
+    }
+
     float Window::GetAspectRatio() const
     {
         return static_cast<float>(_windowDesc.Width) / _windowDesc.Height;
@@ -258,6 +262,11 @@ namespace ege
     void Window::SetWindowWidth(UINT height)
     {
         _windowDesc.Height = height;
+    }
+
+    void Window::SetFullScreen(bool fullscreen)
+    {
+        _windowDesc.FullScreen = fullscreen;
     }
 
     Window& gWindow()

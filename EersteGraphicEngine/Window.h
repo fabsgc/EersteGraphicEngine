@@ -9,13 +9,14 @@ namespace ege
     {
         UINT32 Width;
         UINT32 Height;
-
         String Title;
+        bool   FullScreen;
 
         WINDOW_DESC()
             : Width((UINT32)1280)
             , Height((UINT32)720)
             , Title("Eerste Graphic Engine")
+            , FullScreen(false)
         {}
     };
 
@@ -44,10 +45,12 @@ namespace ege
         HWND&      GetHWnd();
         UINT       GetWindowHeight();
         UINT       GetWindowWidth();
+        bool       IsFullScreen();
         float      GetAspectRatio() const;
 
         void       SetWindowHeight(UINT width);
         void       SetWindowWidth(UINT height);
+        void       SetFullScreen(bool fullscreen);
 
     private:
         HRESULT InitWindow();

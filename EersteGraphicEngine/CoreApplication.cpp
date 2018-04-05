@@ -222,7 +222,8 @@ namespace ege
         _startUpDesc.MaxFPS = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("fps", 60);
         _startUpDesc.WindowDesc.Width  = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
         _startUpDesc.WindowDesc.Height = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
-        _startUpDesc.WindowDesc.Title  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
+        _startUpDesc.WindowDesc.Title = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
+        _startUpDesc.WindowDesc.FullScreen  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("fullscreen") == "true" ? true : false;
 #endif
     }
 
