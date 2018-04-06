@@ -5,6 +5,9 @@
 #include "IComponent.h"
 #include "Window.h"
 
+#include "RenderAPI.h"
+#include "Renderer.h"
+
 #include "Keyboard.h"
 #include "Joypad.h"
 #include "Mouse.h"

@@ -133,6 +133,8 @@ namespace ege
         Joypad::ShutDown();
         Mouse::ShutDown();
         Window::ShutDown();
+        Renderer::ShutDown();
+        RenderAPI::ShutDown();
         DynamicLibManager::ShutDown();
         TaskScheduler::ShutDown();
         Time::ShutDown();
@@ -141,12 +143,12 @@ namespace ege
 
     void CoreApplication::StartUpRenderAPI()
     {
-        //TODO
+        RenderAPI::StartUp();
     }
 
     void CoreApplication::StartUpRenderer()
     {
-        //TODO
+        Renderer::StartUp();
     }
 
     void CoreApplication::StartUpWindow()

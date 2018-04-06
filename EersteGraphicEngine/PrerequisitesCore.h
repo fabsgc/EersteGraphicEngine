@@ -28,6 +28,8 @@
 #pragma comment(lib, "xinput9_1_0.lib")
 #pragma comment(lib, "xinput.lib")
 
+#include "lib/ddstextureloader/DDSTextureLoader.h"
+
 #include "DynamicLibManager.h"
 #include "IModule.h"
 #include "Time.h"
