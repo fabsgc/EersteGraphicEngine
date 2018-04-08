@@ -18,7 +18,7 @@ namespace ege
         void Finish();
 
     private:
-        Task *                _parent;
+        Task*                 _parent;
         std::atomic_size_t    _tasksToRun;
         std::function<void()> _workerMethod;
     };

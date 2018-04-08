@@ -58,7 +58,12 @@ namespace ege
         return nullptr;
     }
 
-    TaskScheduler& gScheduler()
+    void TaskScheduler::Submit(SPtr<Task> task, TaskPriority priority)
+    {
+        _queues[priority].Push(task);
+    }
+
+    TaskScheduler& gTaskScheduler()
     {
         return TaskScheduler::Instance();
     }

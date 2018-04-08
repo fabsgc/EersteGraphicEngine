@@ -24,4 +24,9 @@ namespace ege
 
     class Time;
     class Timer;
+
+    class Task;
+    class TaskQueue;
+    class TaskScheduler;
+    class Worker;
 }

@@ -4,6 +4,7 @@ namespace ege
 {
     Task::Task()
         : _tasksToRun(0)
+        , _parent(nullptr)
     {
     }
 

@@ -1,11 +1,17 @@
 #pragma once
 
 #include "PrerequisitesUtil.h"
+#include "TaskQueue.h"
 #include "IModule.h"
 #include "Worker.h"
 
 namespace ege
 {
+    enum class TaskPriority
+    {
+        Low, Normal, High
+    };
+
     class TaskScheduler: public IModule<TaskScheduler>
     {
     public:
@@ -14,6 +20,8 @@ namespace ege
 
         SPtr<Worker> RandomWorker();
         SPtr<Worker> ThreadWorker();
+
+        void Submit(SPtr<Task> task, TaskPriority priority);
 
         template<class T = TaskScheduler>
         static void StartUp(UINT8 tasksPerThread)
@@ -24,15 +32,15 @@ namespace ege
     private:
         void OnStartUp() override {};
         void OnShutDown() override {};
+        SPtr<Worker> FindThreadWorker(const std::thread::id threadId);
 
     private:
-        Vector<SPtr<Worker>> _workers;
-        UINT8                _numberThreads;
-        UINT8                _tasksPerThread;
-        
+        Vector<SPtr<Worker>>         _workers;
+        UINT8                        _numberThreads;
+        UINT8                        _tasksPerThread;
 
-        SPtr<Worker> FindThreadWorker(const std::thread::id threadId);
+        Map<TaskPriority, TaskQueue> _queues;
     };
 
-    TaskScheduler& gScheduler();
+    TaskScheduler& gTaskScheduler();
 }

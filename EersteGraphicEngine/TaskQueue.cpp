@@ -2,6 +2,11 @@
 
 namespace ege
 {
+    TaskQueue::TaskQueue()
+    {
+        _tasks.reserve(10);
+    }
+
     TaskQueue::TaskQueue(std::size_t _maxTasks)
     {
         _tasks.reserve(_maxTasks);
@@ -62,11 +67,6 @@ namespace ege
             _bottom.store(top, std::memory_order_release);
             return nullptr;
         }
-    }
-
-    SPtr<Task> TaskQueue::Steal()
-    {
-        return nullptr; //TODO
     }
 
     std::size_t TaskQueue::Size() const

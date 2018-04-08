@@ -4,7 +4,7 @@ namespace ege
 {
     Worker::Worker()
         : _state(WorkerState::Idle)
-        , _queue(10)
+        , _taskScehduler(gTaskScheduler())
     {
     }
 
@@ -18,11 +18,6 @@ namespace ege
 
     void Worker::Join()
     {
-    }
-
-    void Worker::Submit(SPtr<Task> task)
-    {
-        _queue.Push(task);
     }
 
     void Worker::Wait(SPtr<Task> task)

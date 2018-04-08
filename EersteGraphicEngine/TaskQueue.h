@@ -8,12 +8,12 @@ namespace ege
     class TaskQueue
     {
     public:
+        TaskQueue();
         TaskQueue(std::size_t _maxTasks);
         ~TaskQueue() {}
 
         bool        Push(SPtr<Task> task);
         SPtr<Task>  Pop();
-        SPtr<Task>  Steal();
         std::size_t Size() const;
         bool        Empty() const;
 

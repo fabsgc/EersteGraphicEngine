@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrerequisitesUtil.h"
+#include "TaskScheduler.h"
 #include "TaskQueue.h"
 #include "Task.h"
 
@@ -19,7 +20,6 @@ namespace ege
 
         void Run();
         void Stop();
-        void Submit(SPtr<Task> task);
         void Wait(SPtr<Task> task);
         bool Running();
         std::thread::id GetThreadId();
@@ -33,6 +33,6 @@ namespace ege
         std::thread::id          _threadId;
         std::atomic<WorkerState> _state;
 
-        TaskQueue                _queue;
+        TaskScheduler&           _taskScehduler;
     };
 }
