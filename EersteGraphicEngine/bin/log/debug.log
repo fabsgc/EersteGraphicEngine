@@ -138,3 +138,9 @@ Date: Mar 15 2018
 Time: 10:20:08
 Message: debug
 ############################################: 
+Log: c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\taskscheduler.cpp:30
+Inside ege::TaskScheduler::OnStartUp
+Date: Apr 20 2018
+Time: 12:10:42
+Message: Worker initialized
+############################################: 

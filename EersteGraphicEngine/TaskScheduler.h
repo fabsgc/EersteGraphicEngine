@@ -30,7 +30,7 @@ namespace ege
         }
 
     private:
-        void OnStartUp() override {};
+        void OnStartUp();
         void OnShutDown() override {};
         SPtr<Worker> FindThreadWorker(const std::thread::id threadId);
 
