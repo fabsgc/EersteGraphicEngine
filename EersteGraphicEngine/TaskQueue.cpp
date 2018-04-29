@@ -3,6 +3,8 @@
 namespace ege
 {
     TaskQueue::TaskQueue()
+        : _bottom(0)
+        , _top(0)
     {
         _tasks.reserve(10);
     }

@@ -123,6 +123,8 @@ namespace ege
         SetComponents();
 
         SetContext("Game");
+
+        return;
     }
 
     void CoreApplication::OnShutDown()

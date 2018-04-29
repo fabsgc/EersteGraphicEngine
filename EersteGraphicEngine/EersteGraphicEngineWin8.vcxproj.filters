@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{24fee7aa-d333-408e-997c-4c48538158da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{c43d331d-892a-4174-b30c-7ab2545a6327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Allocator">
+      <UniqueIdentifier>{72ebaeb7-9f58-47ed-b886-ac0829baf588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Audio">
+      <UniqueIdentifier>{c41643b7-02f7-420e-800b-21654de12249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Input">
+      <UniqueIdentifier>{2c33046d-a63f-4cbf-9472-258fde4ceb56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Manager">
+      <UniqueIdentifier>{734d5323-24fd-4859-8e5d-e5602b924330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Model">
+      <UniqueIdentifier>{f604778b-ed4b-4641-ad23-df9c917b9481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Component">
+      <UniqueIdentifier>{60356789-59d7-4a1a-866d-4f0c4545338c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Material">
+      <UniqueIdentifier>{0b18df5d-160f-4e10-b165-fa5d50652aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\2D">
+      <UniqueIdentifier>{2164a876-ca71-41c6-bf88-b22a5d0734b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Text">
+      <UniqueIdentifier>{241c6cc5-380d-47c7-bbfa-7e1b2b48af62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Resources">
+      <UniqueIdentifier>{ba7f66d6-ba63-4cc7-a09f-449d55162cb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI">
+      <UniqueIdentifier>{58211f9a-c2b3-461a-9141-5a4c62c9eecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer">
+      <UniqueIdentifier>{abac7786-10dc-4074-9f25-c23f9e23695a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{360d4321-89d9-4eb6-afe8-dff01b4506a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Audio">
+      <UniqueIdentifier>{63c61410-6294-4b7f-84a6-7f0f5964dff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Input">
+      <UniqueIdentifier>{ae9f604e-8b00-49a7-82b0-1c50dee4efaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer">
+      <UniqueIdentifier>{5886a685-b54a-4cb3-ba65-bb8466482e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI">
+      <UniqueIdentifier>{7fbc8d22-66d4-4805-82f2-4999ea070503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Resources">
+      <UniqueIdentifier>{1aa42362-5ce4-4660-8029-b2ec3f3033c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Manager">
+      <UniqueIdentifier>{6c2d6902-77e5-4010-9d7c-1278bdc44d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Text">
+      <UniqueIdentifier>{7ba5a514-b41e-453c-8060-589790ec2419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Model">
+      <UniqueIdentifier>{39d01d1b-5fbd-4898-8dd9-ca8754895f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Material">
+      <UniqueIdentifier>{cac825dc-0d50-45b0-8fa4-9108acb080b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\2D">
+      <UniqueIdentifier>{7412d337-81ae-4dca-9225-fce6c6c8e317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Component">
+      <UniqueIdentifier>{58462e4c-48a0-40d1-b365-35457f43ce02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{854cbe68-c95c-4868-98ab-416fb5f5fa12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Allocator">
+      <UniqueIdentifier>{18196b40-2887-45ea-aa9a-ec9962b1ebff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Error">
+      <UniqueIdentifier>{366f91f9-7988-4d7e-b5bb-a0c32927a42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Util">
+      <UniqueIdentifier>{d4c4b208-18b6-4b86-9811-bc06923f0399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\String">
+      <UniqueIdentifier>{baa33827-28f2-4056-9e25-059d8844ff69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App">
+      <UniqueIdentifier>{08a04a40-70d7-4bce-8f26-498ede0a4d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{16c23b85-2128-41bc-81b0-e6eb5f6c5944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Log">
+      <UniqueIdentifier>{1fd22b89-6f7c-4eb4-8979-ff509c0ec9a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\String">
+      <UniqueIdentifier>{18ae20c6-ba4b-4414-bf48-0c3e30f309eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Util">
+      <UniqueIdentifier>{627cb71f-496a-4636-953e-34746c5be6c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Prerequistes">
+      <UniqueIdentifier>{ecfc6c4a-76be-45a6-8fdb-aae4061a3851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Threading">
+      <UniqueIdentifier>{7c9c0978-666f-4e01-9137-f587be3f1eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib">
+      <UniqueIdentifier>{4b19e231-5dd6-4796-ad9f-596d9229ae21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib">
+      <UniqueIdentifier>{24179533-0b8a-48cf-b916-6e3712aa31ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Event">
+      <UniqueIdentifier>{8400094d-65f6-4d03-81ba-a335df91a133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Event">
+      <UniqueIdentifier>{f60b36dd-acc6-4900-ae0e-4b5f91497507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Task">
+      <UniqueIdentifier>{5e470e50-76e1-4d0e-b344-3a00d833c549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Task">
+      <UniqueIdentifier>{70e53dda-b27e-480c-8701-4c298cef77f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Console">
+      <UniqueIdentifier>{9bd61a1f-38d2-4566-99bf-59bd1c54e532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Console">
+      <UniqueIdentifier>{0bf0a6ac-9d9c-4868-aca2-25b5f13681f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Source Files\Utility\String</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="StackAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearAllocator.cpp">
+      <Filter>Source Files\Utility\Allocator</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicLib.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicLibManager.cpp">
+      <Filter>Source Files\Utility\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreApplication.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files\Core\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponentHandler.cpp">
+      <Filter>Source Files\Core\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Joypad.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp">
+      <Filter>Source Files\Utility\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskScheduler.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Worker.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Source Files\Utility\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskQueue.cpp">
+      <Filter>Source Files\Utility\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderAPI.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
+      <Filter>Source Files\Utility\Lib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Header Files\Utility\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files\Utility\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardDeclarationUtil.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="StdHeaders.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="PrerequisitesUtil.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files\Utility\Prerequistes</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="PrerequisitesCore.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Header Files\Utility\String</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="StackAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearAllocator.h">
+      <Filter>Header Files\Utility\Allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicLib.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicLibManager.h">
+      <Filter>Header Files\Utility\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadDefines.h">
+      <Filter>Header Files\Utility\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreApplication.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\Core\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentHandler.h">
+      <Filter>Header Files\Core\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2\tinyxml2.h">
+      <Filter>Header Files\Utility\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Joypad.h">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpdatable.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskScheduler.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Worker.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files\Utility\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskQueue.h">
+      <Filter>Header Files\Utility\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderAPI.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
+      <Filter>Header Files\Utility\Lib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EersteGraphicEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\directx.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

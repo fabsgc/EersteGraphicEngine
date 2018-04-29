@@ -1,20 +1,47 @@
 #pragma once
 
-#define WIN32_LEAN_AND_MEAN
-#define _WIN32_WINNT _WIN32_WINNT_WIN7
+#if defined(EGE_WIN_SDK_7)
+#   define WIN32_LEAN_AND_MEAN
+#   define _WIN32_WINNT _WIN32_WINNT_WIN7
+#   pragma warning(push)
+#   pragma warning( disable : 4005 )
+#elif defined(EGE_WIN_SDK_8)
+#   define WIN32_LEAN_AND_MEAN
+#   define _WIN32_WINNT _WIN32_WINNT_WIN8
+#elif defined(EGE_WIN_SDK_10)
+#   define WIN32_LEAN_AND_MEAN
+#   define _WIN32_WINNT _WIN32_WINNT_WIN10
+#endif
 
 #include "PrerequisitesUtil.h"
 
+#include <d3d11.h>
 #include <dxgi.h>
-#include <d3d11_1.h>
 #include <d3dcompiler.h>
+
 #include <DirectXMath.h>
 #include <DirectXColors.h>
 #include <DirectXPackedVector.h>
-#include <Windowsx.h>
 
+#include <Windowsx.h>
 #include <Xinput.h>
-#include <xaudio2.h>
+
+#if defined(EGE_WIN_SDK_7)
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\comdecl.h>
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xaudio2.h>
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xaudio2fx.h>
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xapofx.h>
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\x3daudio.h>
+#   pragma warning(pop)
+#   pragma comment(lib,"x3daudio.lib")
+#   pragma comment(lib,"xapofx.lib")
+#elif defined(EGE_WIN_SDK_8) || defined(EGE_WIN_SDK_10)
+#   include <xaudio2.h>
+#   include <xaudio2fx.h>
+#   include <x3daudio.h>
+#   include <xapofx.h>
+#   pragma comment(lib,"xaudio2.lib")
+#endif
 
 #include "lib/assimp/Importer.hpp"
 #include "lib/assimp/Scene.h"
