@@ -7,7 +7,15 @@ namespace ege
         , _tasksPerThread(tasksPerThread)
     {
         _workers.reserve(_numberThreads);
+    }
 
+    TaskScheduler::~TaskScheduler()
+    {
+        _workers.clear();
+    }
+
+    void TaskScheduler::OnStartUp()
+    {
         for (UINT8 i = 0; i < _numberThreads; ++i)
         {
             auto worker = ege_shared_ptr_new<Worker>();
@@ -18,11 +26,6 @@ namespace ege
         {
             worker->Run();
         }
-    }
-
-    TaskScheduler::~TaskScheduler()
-    {
-        _workers.clear();
     }
 
     SPtr<Worker> TaskScheduler::RandomWorker()

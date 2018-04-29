@@ -124,3 +124,31 @@ Time: 09:15:24
 Error: Tu as raté
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::TaskScheduler>::Instance
+Date: Apr 20 2018
+Time: 12:03:10
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::TaskScheduler>::Instance
+Date: Apr 20 2018
+Time: 12:03:10
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::TaskScheduler>::Instance
+Date: Apr 20 2018
+Time: 12:03:10
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::TaskScheduler>::Instance
+Date: Apr 20 2018
+Time: 12:03:10
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
