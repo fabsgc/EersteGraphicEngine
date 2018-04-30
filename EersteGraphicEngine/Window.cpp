@@ -66,7 +66,7 @@ namespace ege
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = _hInst;
-        wcex.hbrBackground = (HBRUSH)5;
+        wcex.hbrBackground = (HBRUSH)(CreateSolidBrush(RGB(70, 140, 255)));
         wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
         wcex.lpszMenuName = nullptr;
         wcex.lpszClassName = L"Eerste Engine";
