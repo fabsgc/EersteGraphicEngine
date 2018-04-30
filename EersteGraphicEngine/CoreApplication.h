@@ -87,6 +87,8 @@ namespace ege
             IModule::StartUp<T>(desc);
         }
 
+        void MyTask(const String& key);
+
     protected:
         void OnStartUp() override;
         void OnShutDown() override;

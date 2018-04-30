@@ -23,10 +23,10 @@ namespace ege
 
     struct Key
     {
-        KeyName  Name;
-        String   Label;
-        UINT     Value;
-        KeyState State;
+        KeyName          Name;
+        String           Label;
+        UINT             Value;
+        KeyState         State;
 
         Key(KeyName name, const String& label, UINT value)
             : Name(name)
@@ -57,10 +57,10 @@ namespace ege
         Keyboard();
         ~Keyboard() {}
         void            Update(MSG* message);
-        const KeyState& GetState(const KeyName& name) const;
-        const KeyState& GetState(const String& label) const;
         Key&            GetKey(const KeyName& name);
         Key&            GetKey(const String& label);
+        const KeyState& GetState(const KeyName& name) const;
+        const KeyState& GetState(const String& label) const;        
 
     private:
         void UpdateState(Key* key, MSG* message);

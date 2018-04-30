@@ -7,10 +7,9 @@ namespace ege
     {
     }
 
-    const InputHandlerState InputHandler::GetState(const String& handler)
+    const InputState InputHandler::GetState(const String& handler)
     {
         CoreApplication& application = gCoreApplication();
-        InputMap* inputMap = nullptr;
 
         for (auto itHandler = _handlers.begin(); itHandler != _handlers.end(); itHandler++)
         {
@@ -25,7 +24,7 @@ namespace ege
                     if (itMap->Handler == handler)
                     {
                         Update(&*itMap);
-                        return itMap->State;
+                        return InputState(*itMap);
                     }
                 }
             }
@@ -33,13 +32,14 @@ namespace ege
 
         EGE_ASSERT_ERROR(false, ("This handler does not exist (" + handler + ")"));
 
-        return InputHandlerState::RELEASED;
+        return InputState();
     }
 
     void InputHandler::Update(InputMap* inputMap)
     {
         Joypad& joypad = gJoypad();
         bool triggered = false;
+        bool switched  = false;
 
         if (inputMap->KeyPtr != nullptr)
         {
@@ -51,14 +51,19 @@ namespace ege
 
         if (joypad.IsConnected() && inputMap->ButtonPtr != nullptr)
         {
-
             if (inputMap->ButtonPtr->State == JoypadButtonState::TRIGGERED)
             {
                 triggered = true;
             }
         }
 
-        inputMap->State = (triggered) ?InputHandlerState::TRIGGERED : InputHandlerState::RELEASED;
+        if ((inputMap->State == InputHandlerState::RELEASED && triggered) || (inputMap->State == InputHandlerState::TRIGGERED && !triggered))
+        {
+            switched = true;
+        }
+
+        inputMap->State    = (triggered) ? InputHandlerState::TRIGGERED : InputHandlerState::RELEASED;
+        inputMap->Switched = (switched) ? InputHandlerSwitchedState::YES : InputHandlerSwitchedState::NO;
     }
 
     void InputHandler::OnStartUp()

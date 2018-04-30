@@ -32,40 +32,6 @@ namespace ege
         }
     }
 
-    const KeyState& Keyboard::GetState(const KeyName& name) const 
-    {
-        if (std::find(_keys.begin(), _keys.end(), name) != _keys.end())
-        {
-            for (auto it = _keys.begin(); it != _keys.end(); it++)
-            {
-                if (*it == name) return it->State;
-            }
-        }
-        else
-        {
-            EGE_ASSERT_ERROR(false, "Key does not exist");
-        }
-
-        return _keys.begin()->State;
-    }
-
-    const KeyState& Keyboard::GetState(const String& label) const 
-    {
-        if (std::find(_keys.begin(), _keys.end(), label) != _keys.end())
-        {
-            for (auto it = _keys.begin(); it != _keys.end(); it++)
-            {
-                if (*it == label) return it->State;
-            }
-        }
-        else
-        {
-            EGE_ASSERT_ERROR(false, ("Key does not exist (" + label + ")"));
-        }
-
-        return _keys.begin()->State;
-    }
-
     Key& Keyboard::GetKey(const KeyName& name)
     {
         if (std::find(_keys.begin(), _keys.end(), name) != _keys.end())
@@ -98,6 +64,40 @@ namespace ege
         }
 
         return *_keys.begin();
+    }
+
+    const KeyState& Keyboard::GetState(const KeyName& name) const 
+    {
+        if (std::find(_keys.begin(), _keys.end(), name) != _keys.end())
+        {
+            for (auto it = _keys.begin(); it != _keys.end(); it++)
+            {
+                if (*it == name) return it->State;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, "Key does not exist");
+        }
+
+        return _keys.begin()->State;
+    }
+
+    const KeyState& Keyboard::GetState(const String& label) const 
+    {
+        if (std::find(_keys.begin(), _keys.end(), label) != _keys.end())
+        {
+            for (auto it = _keys.begin(); it != _keys.end(); it++)
+            {
+                if (*it == label) return it->State;
+            }
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, ("Key does not exist (" + label + ")"));
+        }
+
+        return _keys.begin()->State;
     }
 
     void Keyboard::OnStartUp()

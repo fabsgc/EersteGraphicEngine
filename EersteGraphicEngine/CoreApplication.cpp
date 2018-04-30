@@ -28,14 +28,38 @@ namespace ege
 
             if (!_paused)
             {
-                _window->ComputeFrameRate(); 
                 LimitFps();
+                _window->ComputeFrameRate();
+
+                InputState state = gInputHandler().GetState("GO_UP");
+
+                if (state.State == InputHandlerState::TRIGGERED && state.Switched == InputHandlerSwitchedState::YES)
+                {
+                    std::function<void(void)> f = std::bind(&CoreApplication::MyTask, this, "UP");
+                    auto task = ege_shared_ptr_new<Task>();
+                    task->Initialise(f, nullptr);
+                    gTaskScheduler().Submit(task, TaskPriority::Low);
+
+                    EGE_LOG_DEBUG("Key Up");
+                }
+
+                MouseButton mouse = gMouse().GetMouseButton(MouseButtonName::LEFT);
+
+                if (mouse.State == MouseButtonState::TRIGGERED && mouse.Switched == MouseButtonSwitchedState::YES)
+                {
+                    EGE_LOG_DEBUG("Mouse Left");
+                }
             }
             else
             {
                 EGE_SLEEP(100);
             }
         }
+    }
+
+    void CoreApplication::MyTask(const String& key)
+    {
+        EGE_LOG_DEBUG("Key : " + key);
     }
 
     void CoreApplication::LimitFps()

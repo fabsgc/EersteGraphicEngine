@@ -48,7 +48,7 @@ namespace ege
             gMouse().ResetState();
             application.JoypadEventHandler();
 
-            if (gInputHandler().GetState("QUIT") == InputHandlerState::TRIGGERED)
+            if (gInputHandler().GetState("QUIT").State == InputHandlerState::TRIGGERED)
             {
                 application.OnStopRequested();
             }
@@ -66,6 +66,7 @@ namespace ege
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = _hInst;
+        wcex.hbrBackground = (HBRUSH)5;
         wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
         wcex.lpszMenuName = nullptr;
         wcex.lpszClassName = L"Eerste Engine";

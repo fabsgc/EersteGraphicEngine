@@ -7,10 +7,13 @@ namespace ege
         , _window(gWindow())
         , _position(XMFLOAT2(0.0f, 0.0f))
         , _mouseWheel(MouseWheelState::STATIC)
+        , _updatedStates(false)
     {}
 
     void Mouse::Update(MSG* message)
     {
+        _updatedStates = true;
+
         _position.x = (float)GET_X_LPARAM(message->lParam);
         _position.y = (float)GET_Y_LPARAM(message->lParam);
 
@@ -50,8 +53,7 @@ namespace ege
             {
                 _mouseWheel = MouseWheelState::ROLL_UP;
             }
-            
-            if (((short)HIWORD(message->wParam)) / 120 < 0)
+            else if (((short)HIWORD(message->wParam)) / 120 < 0)
             {
                 _mouseWheel = MouseWheelState::ROLL_DOWN;
             }
@@ -71,7 +73,20 @@ namespace ege
             if ((*button) == name)
             {
                 (*button).State = state;
+                (*button).Switched = MouseButtonSwitchedState::YES;
             }
+        }
+    }
+
+    void Mouse::UpdateSwitched(MouseButton* button)
+    {
+        if (_updatedStates)
+        {
+            _updatedStates = false;
+        }
+        else
+        {
+            button->Switched = MouseButtonSwitchedState::NO;
         }
     }
 
@@ -80,13 +95,17 @@ namespace ege
         return _position;
     }
 
-    const MouseButtonState& Mouse::GetState(const MouseButtonName& name) const 
+    MouseButtonState& Mouse::GetState(const MouseButtonName& name) 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
         {
             for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
             {
-                if (*it == name) return it->State;
+                if (*it == name)
+                {
+                    UpdateSwitched(&*it);
+                    return it->State;
+                }
             }
         }
         else
@@ -97,13 +116,17 @@ namespace ege
         return _mouseButtons.begin()->State;
     }
 
-    const MouseButtonState& Mouse::GetState(const String& label) const 
+    MouseButtonState& Mouse::GetState(const String& label) 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
         {
             for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
             {
-                if (*it == label) return it->State;
+                if (*it == label)
+                {
+                    UpdateSwitched(&*it);
+                    return it->State;
+                }
             }
         }
         else
@@ -120,7 +143,11 @@ namespace ege
         {
             for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
             {
-                if (*it == name) return *it;
+                if (*it == name)
+                {
+                    UpdateSwitched(&*it);
+                    return *it;
+                }
             }
         }
         else
@@ -137,7 +164,11 @@ namespace ege
         {
             for (auto it = _mouseButtons.begin(); it != _mouseButtons.end(); it++)
             {
-                if (*it == label) return *it;
+                if (*it == label)
+                {
+                    UpdateSwitched(&*it);
+                    return *it;
+                }
             }
         }
         else
@@ -146,6 +177,11 @@ namespace ege
         }
 
         return *_mouseButtons.begin();
+    }
+
+    const MouseWheelState& Mouse::GetWheelState() const
+    {
+        return _mouseWheel;
     }
 
     void Mouse::OnStartUp()
