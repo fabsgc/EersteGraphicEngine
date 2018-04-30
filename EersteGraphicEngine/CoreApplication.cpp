@@ -39,22 +39,6 @@ namespace ege
                     auto task = ege_shared_ptr_new<Task>();
                     task->Initialise(f, nullptr);
                     gTaskScheduler().Submit(task, TaskPriority::Low);
-
-                    EGE_LOG_DEBUG("Key Up");
-                }
-
-                MouseButton mouse = gMouse().GetMouseButton(MouseButtonName::LEFT);
-
-                if (mouse.State == MouseButtonState::TRIGGERED && mouse.Switched == MouseButtonSwitchedState::YES)
-                {
-                    EGE_LOG_DEBUG("Mouse Left");
-                }
-
-                mouse = gMouse().GetMouseButton(MouseButtonName::RIGHT);
-
-                if (mouse.State == MouseButtonState::TRIGGERED && mouse.Switched == MouseButtonSwitchedState::YES)
-                {
-                    EGE_LOG_DEBUG("Mouse Right");
                 }
             }
             else
