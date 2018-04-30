@@ -7,13 +7,10 @@ namespace ege
         , _window(gWindow())
         , _position(XMFLOAT2(0.0f, 0.0f))
         , _mouseWheel(MouseWheelState::STATIC)
-        , _updatedStates(false)
     {}
 
     void Mouse::Update(MSG* message)
     {
-        _updatedStates = true;
-
         _position.x = (float)GET_X_LPARAM(message->lParam);
         _position.y = (float)GET_Y_LPARAM(message->lParam);
 
@@ -80,14 +77,7 @@ namespace ege
 
     void Mouse::UpdateSwitched(MouseButton* button)
     {
-        if (_updatedStates)
-        {
-            _updatedStates = false;
-        }
-        else
-        {
-            button->Switched = MouseButtonSwitchedState::NO;
-        }
+        button->Switched = MouseButtonSwitchedState::NO;
     }
 
     XMFLOAT2 Mouse::GetPosition()
@@ -95,7 +85,7 @@ namespace ege
         return _position;
     }
 
-    MouseButtonState& Mouse::GetState(const MouseButtonName& name) 
+    MouseButtonState Mouse::GetState(const MouseButtonName& name) 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
         {
@@ -103,8 +93,9 @@ namespace ege
             {
                 if (*it == name)
                 {
+                    MouseButtonState state = it->State;
                     UpdateSwitched(&*it);
-                    return it->State;
+                    return state;
                 }
             }
         }
@@ -116,7 +107,7 @@ namespace ege
         return _mouseButtons.begin()->State;
     }
 
-    MouseButtonState& Mouse::GetState(const String& label) 
+    MouseButtonState Mouse::GetState(const String& label) 
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
         {
@@ -124,8 +115,9 @@ namespace ege
             {
                 if (*it == label)
                 {
+                    MouseButtonState state = it->State;
                     UpdateSwitched(&*it);
-                    return it->State;
+                    return state;
                 }
             }
         }
@@ -137,7 +129,7 @@ namespace ege
         return _mouseButtons.begin()->State;
     }
 
-    MouseButton& Mouse::GetMouseButton(const MouseButtonName& name)
+    MouseButton Mouse::GetMouseButton(const MouseButtonName& name)
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), name) != _mouseButtons.end())
         {
@@ -145,8 +137,9 @@ namespace ege
             {
                 if (*it == name)
                 {
+                    MouseButton mouse = *it;
                     UpdateSwitched(&*it);
-                    return *it;
+                    return mouse;
                 }
             }
         }
@@ -158,7 +151,7 @@ namespace ege
         return *_mouseButtons.begin();
     }
 
-    MouseButton& Mouse::GetMouseButton(const String& label)
+    MouseButton Mouse::GetMouseButton(const String& label)
     {
         if (std::find(_mouseButtons.begin(), _mouseButtons.end(), label) != _mouseButtons.end())
         {
@@ -166,8 +159,9 @@ namespace ege
             {
                 if (*it == label)
                 {
+                    MouseButton mouse = *it;
                     UpdateSwitched(&*it);
-                    return *it;
+                    return mouse;
                 }
             }
         }

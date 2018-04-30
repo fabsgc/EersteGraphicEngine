@@ -62,10 +62,10 @@ namespace ege
         void                   Update(MSG* message);
         void                   ResetState();
         XMFLOAT2               GetPosition();
-        MouseButtonState&      GetState(const MouseButtonName& name);
-        MouseButtonState&      GetState(const String& label);
-        MouseButton&           GetMouseButton(const MouseButtonName& name);
-        MouseButton&           GetMouseButton(const String& label);
+        MouseButtonState       GetState(const MouseButtonName& name);
+        MouseButtonState       GetState(const String& label);
+        MouseButton            GetMouseButton(const MouseButtonName& name);
+        MouseButton            GetMouseButton(const String& label);
         const MouseWheelState& GetWheelState() const;
 
     private:
@@ -79,8 +79,6 @@ namespace ege
         XMFLOAT2            _position;
         Vector<MouseButton> _mouseButtons;
         MouseWheelState     _mouseWheel;
-
-        bool                _updatedStates;
     };
 
     Mouse&      gMouse();

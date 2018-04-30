@@ -49,6 +49,13 @@ namespace ege
                 {
                     EGE_LOG_DEBUG("Mouse Left");
                 }
+
+                mouse = gMouse().GetMouseButton(MouseButtonName::RIGHT);
+
+                if (mouse.State == MouseButtonState::TRIGGERED && mouse.Switched == MouseButtonSwitchedState::YES)
+                {
+                    EGE_LOG_DEBUG("Mouse Right");
+                }
             }
             else
             {
