@@ -83,7 +83,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin\</OutDir>
     <TargetName>$(ProjectName)d</TargetName>
-    <IncludePath>lib\assimp;lib\tinyxml2;$(IncludePath);F:\softwares\Microsoft DirectX SDK %28June 2010%29\Include;F:\softwares\Microsoft DirectX SDK (June 2010)\Include;F:\softwares\Microsoft SDKs\Windows\v7.1\Include</IncludePath>
+    <IncludePath>lib\assimp;lib\tinyxml2;$(IncludePath);F:\softwares\Microsoft DirectX SDK (June 2010)\Include;F:\softwares\Microsoft SDKs\Windows\v7.1\Include</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
     <LibraryPath>F:\softwares\Microsoft DirectX SDK (June 2010)\Lib\x64;$(LibraryPath);F:\softwares\Microsoft SDKs\Windows\v7.1\Lib\</LibraryPath>
   </PropertyGroup>
@@ -145,6 +145,7 @@
     <ClCompile Include="BasicAllocator.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
+    <ClCompile Include="D3D11Device.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="Event.cpp" />
@@ -161,7 +162,7 @@
     <ClCompile Include="MemoryAllocator.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
-    <ClCompile Include="RenderAPI.cpp" />
+    <ClCompile Include="D3D11RenderAPI.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
@@ -185,9 +186,11 @@
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
+    <ClInclude Include="D3D11Device.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
@@ -199,7 +202,7 @@
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
     <ClInclude Include="PrerequisitesUtil.h" />
-    <ClInclude Include="RenderAPI.h" />
+    <ClInclude Include="D3D11RenderAPI.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="MemoryAllocator.h" />

@@ -21,24 +21,14 @@ namespace ege
 
     struct InputMap
     {
-        Key* KeyPtr;
+        Vector<Key*> KeyPtrs;
         String Handler;
-        JoypadButton* ButtonPtr;
+        Vector<JoypadButton*> ButtonPtrs;
         InputHandlerState State;
         InputHandlerSwitchedState Switched;
 
         InputMap(const String& handler)
-            : KeyPtr(nullptr)
-            , ButtonPtr(nullptr)
-            , Handler(handler)
-            , State(InputHandlerState::RELEASED)
-            , Switched(InputHandlerSwitchedState::NO)
-        {}
-
-        InputMap(Key* key, JoypadButton* button, const String& handler)
-            : KeyPtr(key)
-            , ButtonPtr(button)
-            , Handler(handler)
+            : Handler(handler)
             , State(InputHandlerState::RELEASED)
             , Switched(InputHandlerSwitchedState::NO)
         {}

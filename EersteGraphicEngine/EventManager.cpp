@@ -21,8 +21,11 @@ namespace ege
 
         for (auto eventIt = _events.begin(); eventIt != _events.end(); eventIt++)
         {
-            (*eventIt)->Suscribe(callback);
-            break;
+            if (**eventIt == name)
+            {
+                (*eventIt)->Suscribe(callback);
+                break;
+            }
         }
     }
 

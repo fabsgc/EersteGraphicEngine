@@ -38,22 +38,30 @@ namespace ege
     void InputHandler::Update(InputMap* inputMap)
     {
         Joypad& joypad = gJoypad();
-        bool triggered = false;
+        bool triggered = true;
         bool switched  = false;
 
-        if (inputMap->KeyPtr != nullptr)
+        if (inputMap->KeyPtrs.size() > 0)
         {
-            if (inputMap->KeyPtr->State == KeyState::TRIGGERED)
+            for (auto key : inputMap->KeyPtrs)
             {
-                triggered = true;
+                if (key->State == KeyState::RELEASED)
+                {
+                    triggered = false;
+                }
             }
         }
 
-        if (joypad.IsConnected() && inputMap->ButtonPtr != nullptr)
+        if (joypad.IsConnected() && inputMap->ButtonPtrs.size() > 0 && triggered == false)
         {
-            if (inputMap->ButtonPtr->State == JoypadButtonState::TRIGGERED)
+            triggered = true;
+
+            for (auto button : inputMap->ButtonPtrs)
             {
-                triggered = true;
+                if (button->State == JoypadButtonState::RELEASED)
+                {
+                    triggered = false;
+                }
             }
         }
 
@@ -96,12 +104,22 @@ namespace ege
 
                 if (keyLabel != "")
                 {
-                    inputMap.KeyPtr = &keyboard.GetKey(keyLabel);
+                    Vector<String> keys = Split(keyLabel, '+');
+
+                    for (auto key : keys)
+                    {
+                        inputMap.KeyPtrs.push_back(&keyboard.GetKey(key));
+                    }
                 }
 
                 if (buttonLabel != "")
                 {
-                    inputMap.ButtonPtr = &joypad.GetJoypadButton(buttonLabel);
+                    Vector<String> buttons = Split(buttonLabel, '+');
+                    
+                    for (auto button : buttons)
+                    {
+                        inputMap.ButtonPtrs.push_back(&joypad.GetJoypadButton(button));
+                    }
                 }
 
                 inputMaps.push_back(inputMap);

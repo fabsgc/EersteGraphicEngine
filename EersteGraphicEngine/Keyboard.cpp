@@ -181,18 +181,18 @@ namespace ege
         _keys.push_back(Key(KeyName::NUM_8, "NUM_8", 0x38));
         _keys.push_back(Key(KeyName::NUM_9, "NUM_9", 0x39));
 
-        _keys.push_back(Key(KeyName::F1, "", VK_F1));
-        _keys.push_back(Key(KeyName::F2, "", VK_F3));
-        _keys.push_back(Key(KeyName::F3, "", VK_F3));
-        _keys.push_back(Key(KeyName::F4, "", VK_F4));
-        _keys.push_back(Key(KeyName::F5, "", VK_F5));
-        _keys.push_back(Key(KeyName::F6, "", VK_F6));
-        _keys.push_back(Key(KeyName::F7, "", VK_F7));
-        _keys.push_back(Key(KeyName::F8, "", VK_F8));
-        _keys.push_back(Key(KeyName::F9, "", VK_F9));
-        _keys.push_back(Key(KeyName::F10, "", VK_F10));
-        _keys.push_back(Key(KeyName::F11, "", VK_F11));
-        _keys.push_back(Key(KeyName::F12, "", VK_F12));
+        _keys.push_back(Key(KeyName::F1, "F1", VK_F1));
+        _keys.push_back(Key(KeyName::F2, "F2", VK_F3));
+        _keys.push_back(Key(KeyName::F3, "F3", VK_F3));
+        _keys.push_back(Key(KeyName::F4, "F4", VK_F4));
+        _keys.push_back(Key(KeyName::F5, "F5", VK_F5));
+        _keys.push_back(Key(KeyName::F6, "F6", VK_F6));
+        _keys.push_back(Key(KeyName::F7, "F7", VK_F7));
+        _keys.push_back(Key(KeyName::F8, "F8", VK_F8));
+        _keys.push_back(Key(KeyName::F9, "F9", VK_F9));
+        _keys.push_back(Key(KeyName::F10, "F10", VK_F10));
+        _keys.push_back(Key(KeyName::F11, "F11", VK_F11));
+        _keys.push_back(Key(KeyName::F12, "F12", VK_F12));
     }
 
     Keyboard& gKeyboard()

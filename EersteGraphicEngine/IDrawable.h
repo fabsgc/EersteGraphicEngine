@@ -7,6 +7,6 @@ namespace ege
     public:
         IDrawable() {}
         virtual ~IDrawable() = 0 {}
-        virtual void Draw();
+        virtual void Draw() = 0;
     };
 }

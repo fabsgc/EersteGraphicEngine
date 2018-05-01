@@ -237,11 +237,14 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="RenderAPI.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D11Device.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D11RenderAPI.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,11 +365,17 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Core\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="RenderAPI.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
       <Filter>Header Files\Utility\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="IResourceManager.h">
+      <Filter>Header Files\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D11Device.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D11RenderAPI.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

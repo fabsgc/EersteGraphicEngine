@@ -348,4 +348,18 @@ namespace ege
         str >> tst;
         return !str.fail() && str.eof();
     }
+
+    Vector<String> Split(const String& s, char delimiter)
+    {
+        Vector<String> tokens;
+        String token;
+        IStringStream tokenStream(s);
+
+        while (std::getline(tokenStream, token, delimiter))
+        {
+            tokens.push_back(token);
+        }
+
+        return tokens;
+    }
 }

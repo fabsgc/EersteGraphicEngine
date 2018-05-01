@@ -12,6 +12,9 @@ namespace ege
     {
         HRESULT HR = InitWindow();
         EGE_ASSERT_ERROR((HR != E_FAIL), "Can't create window instance");
+
+        gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&Window::OnResize, this));
+        gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&Window::OnFullScreen, this));
     }
 
     void Window::Update()
@@ -37,7 +40,7 @@ namespace ege
             
             if (msg.message == WM_QUIT)
             {
-                application.OnStopRequested();
+                gEventManager().Execute("STOP_REQUESTED");
             }
 
             TranslateMessage(&msg);
@@ -50,7 +53,14 @@ namespace ege
 
             if (gInputHandler().GetState("QUIT").State == InputHandlerState::TRIGGERED)
             {
-                application.OnStopRequested();
+                gEventManager().Execute("STOP_REQUESTED");
+            }
+
+            InputState fullScreenState = gInputHandler().GetState("FULLSCREEN");
+
+            if (fullScreenState.State == InputHandlerState::TRIGGERED && fullScreenState.Switched == InputHandlerSwitchedState::YES)
+            {
+                gEventManager().Execute("WINDOW_FULLSCREEN");
             }
         }
     }
@@ -66,7 +76,7 @@ namespace ege
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = _hInst;
-        wcex.hbrBackground = (HBRUSH)(CreateSolidBrush(RGB(70, 140, 255)));
+        wcex.hbrBackground = (HBRUSH)(CreateSolidBrush(RGB(0, 0, 0)));
         wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
         wcex.lpszMenuName = nullptr;
         wcex.lpszClassName = L"Eerste Engine";
@@ -90,7 +100,28 @@ namespace ege
 
     void Window::OnResize()
     {
-        gCoreApplication().OnResize();
+    }
+
+    void Window::OnFullScreen()
+    {
+        if (_windowDesc.FullScreen)
+        {
+            SetWindowLongPtr(_hWnd, GWL_STYLE, WS_OVERLAPPEDWINDOW);
+            SetWindowLongPtr(_hWnd, GWL_EXSTYLE, 0);
+
+            ShowWindow(_hWnd, SW_SHOWNORMAL);
+            SetWindowPos(_hWnd, HWND_TOP, 0, 0, _windowDesc.LastWidth, _windowDesc.LastHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+        }
+        else
+        {
+            SetWindowLongPtr(_hWnd, GWL_STYLE, 0);
+            SetWindowLongPtr(_hWnd, GWL_EXSTYLE, WS_EX_TOPMOST);
+
+            SetWindowPos(_hWnd, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+            ShowWindow(_hWnd, SW_SHOWMAXIMIZED);
+        }
+
+        SetFullScreen(!_windowDesc.FullScreen);
     }
 
     LRESULT CALLBACK Window::MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -136,7 +167,7 @@ namespace ege
             application.Pause(false);
             application.Resizing(false);
             time.Start();
-            window.OnResize();
+            gEventManager().Execute("WINDOW_RESIZED");
             break;
 
         case WM_GETMINMAXINFO:
@@ -145,10 +176,6 @@ namespace ege
             return 0;
 
         case WM_SIZE:
-            // Save the new client area dimensions.
-            window.SetWindowWidth(LOWORD(lParam));
-            window.SetWindowHeight(HIWORD(lParam));
-
             if (wParam == SIZE_MINIMIZED)
             {
                 application.Pause(true);
@@ -157,26 +184,32 @@ namespace ege
             }
             else if (wParam == SIZE_MAXIMIZED)
             {
+                window.SetWindowWidth(LOWORD(lParam));
+                window.SetWindowHeight(HIWORD(lParam));
+
                 application.Pause(false);
                 application.Minimized(false);
                 application.Maximized(true);
-                window.OnResize();
+                gEventManager().Execute("WINDOW_RESIZED");
             }
             else if (wParam == SIZE_RESTORED)
             {
+                window.SetWindowWidth(LOWORD(lParam));
+                window.SetWindowHeight(HIWORD(lParam));
+
                 // Restoring from minimized state?
                 if (application.GetMinimized())
                 {
                     application.Pause(false);
                     application.Minimized(false);
-                    window.OnResize();
+                    gEventManager().Execute("WINDOW_RESIZED");
                 }
                 // Restoring from maximized state?
                 else if (application.GetMaximized())
                 {
                     application.Pause(false);
                     application.Maximized(false);
-                    window.OnResize();
+                    gEventManager().Execute("WINDOW_RESIZED");
                 }
                 else if (application.GetResizing())
                 {
@@ -191,7 +224,7 @@ namespace ege
                 }
                 else // API call such as SetWindowPos or mSwapChain->SetFullscreenState.
                 {
-                    window.OnResize();
+                    gEventManager().Execute("WINDOW_RESIZED");
                 }
             }
             break;
@@ -255,12 +288,12 @@ namespace ege
         return static_cast<float>(_windowDesc.Width) / _windowDesc.Height;
     }
 
-    void Window::SetWindowHeight(UINT width)
+    void Window::SetWindowWidth(UINT width)
     {
         _windowDesc.Width = width;
     }
 
-    void Window::SetWindowWidth(UINT height)
+    void Window::SetWindowHeight(UINT height)
     {
         _windowDesc.Height = height;
     }

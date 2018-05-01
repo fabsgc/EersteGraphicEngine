@@ -15,7 +15,7 @@
 
 #include "PrerequisitesUtil.h"
 
-#include <d3d11.h>
+#include <d3d11_1.h>
 #include <dxgi.h>
 #include <d3dcompiler.h>
 
@@ -66,13 +66,13 @@ using namespace DirectX;
 
 #if defined(EGE_DEBUG)
     #ifndef HR
-    #define HR(x)               \
-        {                       \
-            HRESULT hr = (x);   \
-            if(FAILED(hr))      \
-            {                   \
-                return hr;      \
-            }                   \
+    #define HR(x, message)                           \
+        {                                            \
+            HRESULT hr = (x);                        \
+            if(FAILED(hr))                           \
+            {                                        \
+                EGE_ASSERT_ERROR(false, message);    \
+            }                                        \
         }
     #endif
 #else
@@ -144,4 +144,9 @@ namespace ege
     struct Context;
     struct StartUpDescription;
     class  CoreApplication;
+
+    struct RenderDesc;
+    struct ConstantBuffer;
+    class  D3D11RenderAPI;
+    class  D3D11Device;
 }

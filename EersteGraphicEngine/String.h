@@ -21,6 +21,12 @@ namespace ege
     /** Narrow string used for handling narrow encoded text (either locale specific ANSI or UTF-8). */
     typedef BasicString<char> String;
 
+    /** IStringStream wrapper */
+    template <typename T>
+    using BasicIStringStream = std::basic_istringstream<T, std::char_traits<T>, StdAllocator<T, BasicAllocator>>;
+
+    typedef BasicIStringStream<char> IStringStream;
+
     /** Wide string used UTF-16 encoded strings. */
     typedef BasicString<char16_t> U16String;
 
@@ -163,4 +169,9 @@ namespace ege
     * Checks the WString is a valid number value.
     */
     bool IsNumber(const WString& val);
+
+    /**
+    * Split string according to delimiter
+    */
+    Vector<String> Split(const String& s, char delimiter);
 }

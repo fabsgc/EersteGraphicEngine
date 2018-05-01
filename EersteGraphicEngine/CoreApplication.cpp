@@ -22,24 +22,13 @@ namespace ege
     {
         while (_runMainLoop)
         {
-            gTime().Update();
-            gJoypad().Update();
-            _window->Update();
+            Update();
 
             if (!_paused)
             {
                 LimitFps();
                 _window->ComputeFrameRate();
-
-                InputState state = gInputHandler().GetState("GO_UP");
-
-                if (state.State == InputHandlerState::TRIGGERED && state.Switched == InputHandlerSwitchedState::YES)
-                {
-                    std::function<void(void)> f = std::bind(&CoreApplication::MyTask, this, "UP");
-                    auto task = ege_shared_ptr_new<Task>();
-                    task->Initialise(f, nullptr);
-                    gTaskScheduler().Submit(task, TaskPriority::Low);
-                }
+                Draw();
             }
             else
             {
@@ -48,9 +37,19 @@ namespace ege
         }
     }
 
-    void CoreApplication::MyTask(const String& key)
+    void CoreApplication::Update()
     {
-        EGE_LOG_DEBUG("Key : " + key);
+        gTime().Update();
+        gJoypad().Update();
+        gRenderer().Update();
+        _window->Update();
+    }
+
+    void CoreApplication::Draw()
+    {
+        gD3D11RenderAPI().Draw();
+        gRenderer().Draw();
+        gD3D11RenderAPI().SwapBuffers();
     }
 
     void CoreApplication::LimitFps()
@@ -116,12 +115,13 @@ namespace ege
         _runMainLoop = false;
     }
 
-    void CoreApplication::OnResize()
-    {
-    }
-
     void CoreApplication::OnStartUp()
     {
+        if (!XMVerifyCPUSupport())
+        {
+            EGE_ASSERT_ERROR(false, "Failed to verify DirectX Math library support.");
+        }
+
         SetContexts();
         SetApplicationConfig();
 
@@ -129,11 +129,11 @@ namespace ege
         StartUpTime();
         StartUpTaskScheduler();
         StartUpDynamicLibManager();
+        StartUpEventManager();
+        StartUpWindow();
         StartUpRenderAPI();
         StartUpRenderer();
-        StartUpWindow();
         StartUpComponents();
-        StartUpEventManager();
 
         SetComponents();
 
@@ -144,14 +144,14 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
-        EventManager::ShutDown();
         InputHandler::ShutDown();
         Keyboard::ShutDown();
         Joypad::ShutDown();
         Mouse::ShutDown();
-        Window::ShutDown();
         Renderer::ShutDown();
-        RenderAPI::ShutDown();
+        D3D11RenderAPI::ShutDown();
+        Window::ShutDown();
+        EventManager::ShutDown();
         DynamicLibManager::ShutDown();
         TaskScheduler::ShutDown();
         Time::ShutDown();
@@ -160,7 +160,7 @@ namespace ege
 
     void CoreApplication::StartUpRenderAPI()
     {
-        RenderAPI::StartUp();
+        D3D11RenderAPI::StartUp();
     }
 
     void CoreApplication::StartUpRenderer()
@@ -185,6 +185,12 @@ namespace ege
     void CoreApplication::StartUpEventManager()
     {
         EventManager::StartUp();
+
+        gEventManager().Create("WINDOW_RESIZED");
+        gEventManager().Create("WINDOW_FULLSCREEN");
+        gEventManager().Create("STOP_REQUESTED");
+
+        gEventManager().Suscribe("STOP_REQUESTED", std::bind(&CoreApplication::OnStopRequested, this));
     }
 
     void CoreApplication::StartUpDynamicLibManager()

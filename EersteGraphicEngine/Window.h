@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
+#include "EventManager.h"
 
 namespace ege
 {
@@ -9,15 +10,33 @@ namespace ege
     {
         UINT32 Width;
         UINT32 Height;
+        UINT32 LastWidth;
+        UINT32 LastHeight;
         String Title;
         bool   FullScreen;
 
         WINDOW_DESC()
             : Width((UINT32)1280)
             , Height((UINT32)720)
+            , LastWidth(Width)
+            , LastHeight(Height)
             , Title("Eerste Graphic Engine")
             , FullScreen(false)
         {}
+
+        void SetWidth(UINT32 width)
+        {
+            LastWidth = Width;
+            Width = width;
+
+            EGE_LOG_DEBUG("Set Width");
+        }
+
+        void SetHeight(UINT32 height)
+        {
+            LastHeight = Height;
+            Height = height;
+        }
     };
 
     class Window : public IModule<Window>, public IComponentHandler
@@ -34,10 +53,12 @@ namespace ege
 
         void Update();
         void ComputeFrameRate();
-        void OnResize();
 
         void OnStartUp() override;
         void OnShutDown() override {};
+
+        void OnResize();
+        void OnFullScreen();
 
         static LRESULT CALLBACK MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

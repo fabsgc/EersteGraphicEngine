@@ -3,9 +3,11 @@
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
 #include "IComponent.h"
+#include "IUpdatable.h"
+#include "IDrawable.h"
 #include "Window.h"
 
-#include "RenderAPI.h"
+#include "D3D11RenderAPI.h"
 #include "Renderer.h"
 
 #include "Keyboard.h"
@@ -53,7 +55,7 @@ namespace ege
         }
     };
 
-    class CoreApplication : public IModule<CoreApplication>, public IComponentHandler
+    class CoreApplication : public IModule<CoreApplication>, public IComponentHandler, public IUpdatable, public IDrawable
     {
     public:
         CoreApplication(const StartUpDescription& desc);
@@ -73,7 +75,6 @@ namespace ege
         bool GetResizing();
 
         void OnStopRequested();
-        void OnResize();
 
         void KeyEventHandler(MSG* message);
         void MouseEventHandler(MSG* message);
@@ -87,7 +88,8 @@ namespace ege
             IModule::StartUp<T>(desc);
         }
 
-        void MyTask(const String& key);
+        void Update() override;
+        void Draw() override;
 
     protected:
         void OnStartUp() override;

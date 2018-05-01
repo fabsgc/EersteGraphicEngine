@@ -7,3 +7,5 @@ Debug/
 Release/
 x64/
 .vs/
+EersteGraphicEngine/bin/Log/Debug.log
+EersteGraphicEngine/bin/Log/Errors.log
