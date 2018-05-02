@@ -25,7 +25,7 @@ namespace ege
             return *found->second;
         }
 
-        std::shared_ptr<Resource> GetPtr(std::string name)
+        SPtr<Resource> GetPtr(std::string name)
         {
             auto found = _resources.find(name);
             EGE_ASSERT_ERROR(found != _resources.end(), ("Resource " + name + " not found"));

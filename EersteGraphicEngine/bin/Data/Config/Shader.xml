@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shaders>
+    <shader-bundle name="default">
+		<shader type="vertex-shader" file="Default/Color_VS.hlsl"/>
+		<shader type="pixel-shader" file="Default/Color_PS.hlsl"/>
+	</shader-bundle>
+</shaders>

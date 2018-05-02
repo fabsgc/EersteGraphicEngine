@@ -15,9 +15,8 @@
 
 #include "PrerequisitesUtil.h"
 
-#include <d3d11_1.h>
 #include <dxgi.h>
-#include <d3dcompiler.h>
+#include <d3d11_1.h>
 
 #include <DirectXMath.h>
 #include <DirectXColors.h>
@@ -27,15 +26,19 @@
 #include <Xinput.h>
 
 #if defined(EGE_WIN_SDK_7)
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\d3dx11.h>
+#   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\d3dcompiler.h>
 #   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\comdecl.h>
 #   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xaudio2.h>
 #   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xaudio2fx.h>
 #   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\xapofx.h>
 #   include <F:\softwares\Microsoft DirectX SDK (June 2010)\Include\x3daudio.h>
 #   pragma warning(pop)
+#   pragma comment(lib,"d3dx11.lib")
 #   pragma comment(lib,"x3daudio.lib")
 #   pragma comment(lib,"xapofx.lib")
 #elif defined(EGE_WIN_SDK_8) || defined(EGE_WIN_SDK_10)
+#   include <d3dcompiler.h>
 #   include <xaudio2.h>
 #   include <xaudio2fx.h>
 #   include <x3daudio.h>
@@ -49,8 +52,8 @@
 
 #include "lib/tinyxml2/tinyxml2.h"
 
-#pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "xinput9_1_0.lib")
@@ -149,4 +152,8 @@ namespace ege
     struct ConstantBuffer;
     class  D3D11RenderAPI;
     class  D3D11Device;
+
+    class  ShaderManager;
+    class  ShaderBundle;
+    class  Shader;
 }

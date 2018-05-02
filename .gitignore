@@ -3,6 +3,7 @@
 *.ilk
 *.pdb
 *.exe
+*.VC.db
 Debug/
 Release/
 x64/

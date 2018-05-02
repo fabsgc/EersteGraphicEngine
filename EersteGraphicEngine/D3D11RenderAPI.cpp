@@ -27,6 +27,8 @@ namespace ege
 
     void D3D11RenderAPI::OnStartUp()
     {
+        ShaderManager::StartUp();
+
         gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&D3D11RenderAPI::OnResize, this));
         gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&D3D11RenderAPI::OnFullScreen, this));
 
@@ -36,6 +38,8 @@ namespace ege
 
     void D3D11RenderAPI::OnShutDown()
     {
+        ShaderManager::ShutDown();
+
         if (_swapChain != nullptr)
         {
             _swapChain->SetFullscreenState(FALSE, NULL);
@@ -115,7 +119,7 @@ namespace ege
         {
             D3D_DRIVER_TYPE_HARDWARE,
             D3D_DRIVER_TYPE_WARP,
-            D3D_DRIVER_TYPE_REFERENCE,
+            D3D_DRIVER_TYPE_REFERENCE
         };
 
         UINT numDriverTypes = ARRAYSIZE(driverTypes);
@@ -124,7 +128,7 @@ namespace ege
         {
             D3D_FEATURE_LEVEL_11_0,
             D3D_FEATURE_LEVEL_10_1,
-            D3D_FEATURE_LEVEL_10_0,
+            D3D_FEATURE_LEVEL_10_0
         };
 
         UINT numFeatureLevels = ARRAYSIZE(featureLevels);
@@ -225,10 +229,13 @@ namespace ege
         bdFrame.CPUAccessFlags = 0;
         hr = device->CreateBuffer(&bdFrame, nullptr, &_constantBuffer);
 
-        //Set constant buffers for vertex_shader and pixel_shader
+        //Set constant buffers for each type of shader
         context->VSSetConstantBuffers(0, 1, &_constantBuffer);
+        context->HSSetConstantBuffers(0, 1, &_constantBuffer);
+        context->DSSetConstantBuffers(0, 1, &_constantBuffer);
+        context->GSSetConstantBuffers(0, 1, &_constantBuffer);
         context->PSSetConstantBuffers(0, 1, &_constantBuffer);
-
+        
         //Create Color Sampler
         D3D11_SAMPLER_DESC sampDesc;
         ZeroMemory(&sampDesc, sizeof(sampDesc));
@@ -241,6 +248,10 @@ namespace ege
         sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
         hr = device->CreateSamplerState(&sampDesc, &_colorSampler);
+        context->VSSetSamplers(0, 1, &_colorSampler);
+        context->HSSetSamplers(0, 1, &_colorSampler);
+        context->DSSetSamplers(0, 1, &_colorSampler);
+        context->GSSetSamplers(0, 1, &_colorSampler);
         context->PSSetSamplers(0, 1, &_colorSampler);
 
         if (_renderDesc.BackfaceCulling)
@@ -341,6 +352,11 @@ namespace ege
             }
         }
 #endif
+    }
+
+    D3D11Device* D3D11RenderAPI::GetDevice()
+    {
+        return _device;
     }
 
     D3D11RenderAPI& gD3D11RenderAPI()

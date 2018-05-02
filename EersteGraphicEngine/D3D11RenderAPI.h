@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
+#include "ShaderManager.h"
 #include "IDrawable.h"
 #include "D3D11Device.h"
 #include "Window.h"
@@ -50,6 +51,8 @@ namespace ege
         void Initialise();
         void Resize();
 
+        D3D11Device* GetDevice();
+
     private:
         D3D11RenderAPI(D3D11RenderAPI const&) = delete;
         D3D11RenderAPI& operator=(D3D11RenderAPI const&) = delete;
@@ -77,7 +80,7 @@ namespace ege
         D3D11_VIEWPORT            _screenViewport;
 
         UINT                      _4xMsaaQuality;
-        ID3D11SamplerState *      _colorSampler;
+        ID3D11SamplerState*       _colorSampler;
         ID3D11RasterizerState*    _backFaceCulling;
 
         ID3D11Buffer*             _constantBuffer;

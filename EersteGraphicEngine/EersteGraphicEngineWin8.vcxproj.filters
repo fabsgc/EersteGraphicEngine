@@ -37,9 +37,6 @@
     <Filter Include="Source Files\Core\Component">
       <UniqueIdentifier>{60356789-59d7-4a1a-866d-4f0c4545338c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Material">
-      <UniqueIdentifier>{0b18df5d-160f-4e10-b165-fa5d50652aae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\2D">
       <UniqueIdentifier>{2164a876-ca71-41c6-bf88-b22a5d0734b4}</UniqueIdentifier>
     </Filter>
@@ -81,9 +78,6 @@
     </Filter>
     <Filter Include="Header Files\Core\Model">
       <UniqueIdentifier>{39d01d1b-5fbd-4898-8dd9-ca8754895f9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Material">
-      <UniqueIdentifier>{cac825dc-0d50-45b0-8fa4-9108acb080b6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core\2D">
       <UniqueIdentifier>{7412d337-81ae-4dca-9225-fce6c6c8e317}</UniqueIdentifier>
@@ -150,6 +144,12 @@
     </Filter>
     <Filter Include="Header Files\Utility\Console">
       <UniqueIdentifier>{0bf0a6ac-9d9c-4868-aca2-25b5f13681f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Material">
+      <UniqueIdentifier>{cac825dc-0d50-45b0-8fa4-9108acb080b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI\Material">
+      <UniqueIdentifier>{0b18df5d-160f-4e10-b165-fa5d50652aae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="D3D11Device.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Core\RenderAPI\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files\Core\RenderAPI\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +382,12 @@
     </ClInclude>
     <ClInclude Include="D3D11Device.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Core\RenderAPI\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files\Core\RenderAPI\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
