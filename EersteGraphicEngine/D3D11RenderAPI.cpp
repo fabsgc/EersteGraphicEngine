@@ -107,7 +107,7 @@ namespace ege
         UINT createDeviceFlags = 0;
         Window& window = gWindow();
 
-#ifdef EGE_DEBUG
+#if defined(EGE_DEBUG) && defined(EGE_GRAPHIC_DEBUG) 
         createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 

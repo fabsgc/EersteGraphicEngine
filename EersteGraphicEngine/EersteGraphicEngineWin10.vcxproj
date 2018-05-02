@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{78CBA3A1-DB54-4280-82D2-5B71E3719328}</ProjectGuid>
     <RootNamespace>EersteGraphicEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_WIN_SDK_8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_WIN_SDK_10 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -101,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_WIN_SDK_8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_WIN_SDK_10 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

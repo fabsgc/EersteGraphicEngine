@@ -20,7 +20,7 @@ namespace ege
         {
             device->GetImmediateContext(&_immediateContext);
 
-#if EGE_DEBUG
+#if defined(EGE_DEBUG) && defined(EGE_GRAPHIC_DEBUG) 
             // This interface is not available unless we created the device with debug layer
             HRESULT hr = _D3D11Device->QueryInterface(__uuidof(ID3D11InfoQueue), (LPVOID*)&_infoQueue);
 
