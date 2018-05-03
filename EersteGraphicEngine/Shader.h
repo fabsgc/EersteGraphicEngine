@@ -14,6 +14,24 @@ namespace ege
         PIXEL_SHADER
     };
 
+    struct ShaderConfig
+    {
+        String Name;
+        String VertexShaderPath;
+        String HullShaderPath;
+        String DomainShaderPath;
+        String GeometryShaderPath;
+        String PixelShaderPath;
+
+        ShaderConfig()
+            : VertexShaderPath("")
+            , HullShaderPath("")
+            , DomainShaderPath("")
+            , GeometryShaderPath("")
+            , PixelShaderPath("")
+        {}
+    };
+
     template <typename D3D11Shader>
     struct ShaderData
     {
@@ -24,7 +42,7 @@ namespace ege
         ID3D10Blob*  Blob;
 #endif
         D3D11Shader* Shader;
-        LPCWSTR      Path;
+        WString      Path;
 
         ShaderData(ShaderType type)
             : Type(type)
@@ -37,7 +55,7 @@ namespace ege
     class Shader
     {
     public:
-        Shader(String filePath);
+        Shader(ShaderConfig config);
         ~Shader();
         void Initialise();
         void Apply();
@@ -56,13 +74,15 @@ namespace ege
         HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob);
 
     private:
-        LPCWSTR                           _szFilePath;
+        ShaderConfig                      _config;
 
         ShaderData<ID3D11VertexShader>    _vertexShader;
         ShaderData<ID3D11HullShader>      _hullShader;
         ShaderData<ID3D11DomainShader>    _domainShader;
         ShaderData<ID3D11GeometryShader>  _geometryShader;
         ShaderData<ID3D11PixelShader>     _pixelShader;
+
+        D3D11_INPUT_ELEMENT_DESC*         _vertexData;
 
         ID3D11InputLayout*                _inputLayout;
     };

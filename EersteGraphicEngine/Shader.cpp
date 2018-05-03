@@ -8,8 +8,8 @@ namespace ege
         { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
-    Shader::Shader(String filePath)
-        : _szFilePath(ToWString(filePath).c_str())
+    Shader::Shader(ShaderConfig config)
+        : _config(config)
         , _vertexShader(ShaderType::VERTEX_SHADER)
         , _hullShader(ShaderType::HULL_SHADER)
         , _domainShader(ShaderType::DOMAIN_SHADER)
@@ -30,7 +30,13 @@ namespace ege
 
     void Shader::Initialise()
     {
-        if (!HasShader(ShaderType::PIXEL_SHADER) || !HasShader(ShaderType::PIXEL_SHADER))
+        _vertexShader.Path   = StringToWString(_config.VertexShaderPath);
+        _hullShader.Path     = StringToWString(_config.HullShaderPath);
+        _domainShader.Path   = StringToWString(_config.DomainShaderPath);
+        _geometryShader.Path = StringToWString(_config.GeometryShaderPath);
+        _pixelShader.Path    = StringToWString(_config.PixelShaderPath);
+
+        if (!HasShader(ShaderType::VERTEX_SHADER) || !HasShader(ShaderType::PIXEL_SHADER))
         {
             EGE_ASSERT_ERROR(false, "Shader object must have at least one vertex shader and one pixel shader");
         }
@@ -88,7 +94,6 @@ namespace ege
             _vertexShader.Blob->GetBufferPointer(),
             _vertexShader.Blob->GetBufferSize(),
             &_inputLayout);
-        if (FAILED(hr)) return hr;
 
         return hr;
     }
@@ -108,27 +113,27 @@ namespace ege
 
     HRESULT Shader::CompileVertexShader()
     {
-        return CompileShader(_vertexShader.Path, "VS_MAIN", "vs_5_0", &_vertexShader.Blob);
+        return CompileShader(_vertexShader.Path.c_str(), "VS_MAIN", "vs_5_0", &_vertexShader.Blob);
     }
 
     HRESULT Shader::CompileHullShader()
     {
-        return CompileShader(_hullShader.Path, "HS_MAIN", "ps_5_0", &_hullShader.Blob);
+        return CompileShader(_hullShader.Path.c_str(), "HS_MAIN", "hs_5_0", &_hullShader.Blob);
     }
 
     HRESULT Shader::CompileDomainShader()
     {
-        return CompileShader(_vertexShader.Path, "DS_MAIN", "ds_5_0", &_domainShader.Blob);
+        return CompileShader(_vertexShader.Path.c_str(), "DS_MAIN", "ds_5_0", &_domainShader.Blob);
     }
 
     HRESULT Shader::CompileGeometryShader()
     {
-        return CompileShader(_vertexShader.Path, "GS_MAIN", "gs_5_0", &_geometryShader.Blob);
+        return CompileShader(_vertexShader.Path.c_str(), "GS_MAIN", "gs_5_0", &_geometryShader.Blob);
     }
 
     HRESULT Shader::CompilePixelShader()
     {
-        return CompileShader(_pixelShader.Path, "PS_MAIN", "gs_5_0", &_vertexShader.Blob);
+        return CompileShader(_pixelShader.Path.c_str(), "PS_MAIN", "ps_5_0", &_pixelShader.Blob);
     }
 
     HRESULT Shader::CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob)
@@ -157,8 +162,6 @@ namespace ege
 
                 EGE_ASSERT_ERROR((errorBlob != nullptr), ("Can't compie shader file : " + ToString(srcFile)))
             }
-
-            return hr;
         }
 
         return hr;
@@ -166,6 +169,28 @@ namespace ege
 
     bool Shader::HasShader(ShaderType type)
     {
-        return true;
+        switch (type)
+        {
+        case ShaderType::VERTEX_SHADER:
+            if (_config.VertexShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::HULL_SHADER:
+            if (_config.HullShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::DOMAIN_SHADER:
+            if (_config.DomainShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::GEOMETRY_SHADER:
+            if (_config.GeometryShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::PIXEL_SHADER:
+            if (_config.PixelShaderPath.length() > 0) return true;
+            break;
+        default:
+            return false;
+            break;
+        }
+
+        return false;
     }
 }

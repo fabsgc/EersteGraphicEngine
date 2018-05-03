@@ -23,10 +23,10 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
 {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 	
-    output.Position = mul( Position, World );
+    output.Position = mul( IN.Position, World );
     output.Position = mul( output.Position, View );
     output.Position = mul( output.Position, Projection );
-    output.Color = Color;
+    output.Color = IN.Color;
 
     return output;
 }

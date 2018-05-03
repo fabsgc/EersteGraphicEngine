@@ -15,5 +15,5 @@ struct PS_INPUT
 
 float4 PS_MAIN( PS_INPUT IN ) : SV_Target
 {
-	return input.Color;
+	return IN.Color;
 }

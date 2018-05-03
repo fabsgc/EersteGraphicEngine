@@ -27,13 +27,13 @@ namespace ege
 
     void D3D11RenderAPI::OnStartUp()
     {
-        ShaderManager::StartUp();
-
         gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&D3D11RenderAPI::OnResize, this));
         gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&D3D11RenderAPI::OnFullScreen, this));
 
         LoadRenderConfig();
         Initialise();
+
+        ShaderManager::StartUp();
     }
 
     void D3D11RenderAPI::OnShutDown()
