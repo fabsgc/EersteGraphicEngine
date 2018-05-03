@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "D3D11RenderAPI.h"
+#include "RenderAPI.h"
 
 namespace ege
 {

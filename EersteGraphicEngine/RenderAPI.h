@@ -4,7 +4,7 @@
 #include "IComponentHandler.h"
 #include "ShaderManager.h"
 #include "IDrawable.h"
-#include "D3D11Device.h"
+#include "Device.h"
 #include "Window.h"
 
 namespace ege
@@ -33,11 +33,11 @@ namespace ege
         XMMATRIX World;
     };
 
-    class D3D11RenderAPI : public IModule<D3D11RenderAPI>, public IComponentHandler, public IDrawable
+    class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable
     {
     public:
-        D3D11RenderAPI();
-        ~D3D11RenderAPI();
+        RenderAPI();
+        ~RenderAPI();
 
         void OnStartUp() override;
         void OnShutDown() override;
@@ -51,11 +51,11 @@ namespace ege
         void Initialise();
         void Resize();
 
-        D3D11Device* GetDevice();
+        Device* GetDevice();
 
     private:
-        D3D11RenderAPI(D3D11RenderAPI const&) = delete;
-        D3D11RenderAPI& operator=(D3D11RenderAPI const&) = delete;
+        RenderAPI(RenderAPI const&) = delete;
+        RenderAPI& operator=(RenderAPI const&) = delete;
 
         void LoadRenderConfig();
 
@@ -66,7 +66,7 @@ namespace ege
         IDXGIAdapter*             _dxgiAdapter;
         IDXGIFactory *            _dxgiFactory;
 
-        D3D11Device*              _device;
+        Device*                   _device;
 
         D3D_DRIVER_TYPE           _driverType;
         D3D_FEATURE_LEVEL         _featureLevel;
@@ -87,6 +87,6 @@ namespace ege
         ConstantBuffer            _constantBufferUpdate;
     };
 
-    D3D11RenderAPI& gD3D11RenderAPI();
-    D3D11RenderAPI* gD3D11RenderAPIPtr();
+    RenderAPI& gRenderAPI();
+    RenderAPI* gRenderAPIPtr();
 }

@@ -1,8 +1,8 @@
-#include "D3D11RenderAPI.h"
+#include "RenderAPI.h"
 
 namespace ege
 {
-    D3D11RenderAPI::D3D11RenderAPI()
+    RenderAPI::RenderAPI()
     {
         _driverType         = D3D_DRIVER_TYPE_HARDWARE;
         _featureLevel       = D3D_FEATURE_LEVEL_11_0;
@@ -21,14 +21,14 @@ namespace ege
         _constantBuffer     = nullptr;
     }
 
-    D3D11RenderAPI::~D3D11RenderAPI()
+    RenderAPI::~RenderAPI()
     {
     }
 
-    void D3D11RenderAPI::OnStartUp()
+    void RenderAPI::OnStartUp()
     {
-        gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&D3D11RenderAPI::OnResize, this));
-        gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&D3D11RenderAPI::OnFullScreen, this));
+        gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&RenderAPI::OnResize, this));
+        gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&RenderAPI::OnFullScreen, this));
 
         LoadRenderConfig();
         Initialise();
@@ -36,7 +36,7 @@ namespace ege
         ShaderManager::StartUp();
     }
 
-    void D3D11RenderAPI::OnShutDown()
+    void RenderAPI::OnShutDown()
     {
         ShaderManager::ShutDown();
 
@@ -62,18 +62,18 @@ namespace ege
         SafeReleaseCom(_dxgiFactory);
     }
 
-    void D3D11RenderAPI::OnResize()
+    void RenderAPI::OnResize()
     {
         Resize();
     }
 
-    void D3D11RenderAPI::OnFullScreen()
+    void RenderAPI::OnFullScreen()
     {
         Resize();
         _renderDesc.FullScreen = (_renderDesc.FullScreen) ? false : true;
     }
 
-    void D3D11RenderAPI::Draw()
+    void RenderAPI::Draw()
     {
         ID3D11DeviceContext* context = _device->GetImmediateContext();
 
@@ -83,7 +83,7 @@ namespace ege
         context->UpdateSubresource(_constantBuffer, 0, nullptr, &_constantBufferUpdate, 0, 0);
     }
 
-    void D3D11RenderAPI::SwapBuffers()
+    void RenderAPI::SwapBuffers()
     {
         if (_device->GetD3D11Device() != nullptr)
         {
@@ -105,7 +105,7 @@ namespace ege
         }
     }
 
-    void D3D11RenderAPI::Initialise()
+    void RenderAPI::Initialise()
     {
         HRESULT hr = S_OK;
         UINT createDeviceFlags = 0;
@@ -138,7 +138,7 @@ namespace ege
         hr = D3D11CreateDevice(nullptr, _driverType, nullptr, createDeviceFlags, featureLevels,
             numFeatureLevels, D3D11_SDK_VERSION, &device, &_featureLevel, nullptr);
 
-        _device = new D3D11Device(device);
+        _device = new Device(device);
         ID3D11DeviceContext* context = _device->GetImmediateContext();
 
         if (FAILED(hr))
@@ -266,7 +266,7 @@ namespace ege
         }
     }
 
-    void D3D11RenderAPI::Resize()
+    void RenderAPI::Resize()
     {
         ID3D11Device* device = _device->GetD3D11Device();
         ID3D11DeviceContext* context = _device->GetImmediateContext();
@@ -316,7 +316,7 @@ namespace ege
         context->RSSetViewports(1, &_screenViewport);
     }
 
-    void D3D11RenderAPI::LoadRenderConfig()
+    void RenderAPI::LoadRenderConfig()
     {
 #ifdef EGE_CONFIG_RENDER_FILE
         tinyxml2::XMLDocument document;
@@ -354,18 +354,18 @@ namespace ege
 #endif
     }
 
-    D3D11Device* D3D11RenderAPI::GetDevice()
+    Device* RenderAPI::GetDevice()
     {
         return _device;
     }
 
-    D3D11RenderAPI& gD3D11RenderAPI()
+    RenderAPI& gRenderAPI()
     {
-        return static_cast<D3D11RenderAPI&>(D3D11RenderAPI::Instance());
+        return static_cast<RenderAPI&>(RenderAPI::Instance());
     }
 
-    D3D11RenderAPI* gD3D11RenderAPIPtr()
+    RenderAPI* gRenderAPIPtr()
     {
-        return static_cast<D3D11RenderAPI*>(D3D11RenderAPI::InstancePtr());
+        return static_cast<RenderAPI*>(RenderAPI::InstancePtr());
     }
 }

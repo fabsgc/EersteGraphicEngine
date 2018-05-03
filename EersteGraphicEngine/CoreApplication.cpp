@@ -47,9 +47,9 @@ namespace ege
 
     void CoreApplication::Draw()
     {
-        gD3D11RenderAPI().Draw();
+        gRenderAPI().Draw();
         gRenderer().Draw();
-        gD3D11RenderAPI().SwapBuffers();
+        gRenderAPI().SwapBuffers();
     }
 
     void CoreApplication::LimitFps()
@@ -134,6 +134,7 @@ namespace ege
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpComponents();
+        StartUpModelManager();
 
         SetComponents();
 
@@ -144,12 +145,13 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
+        ModelManager::ShutDown();
         InputHandler::ShutDown();
         Keyboard::ShutDown();
         Joypad::ShutDown();
         Mouse::ShutDown();
         Renderer::ShutDown();
-        D3D11RenderAPI::ShutDown();
+        RenderAPI::ShutDown();
         Window::ShutDown();
         EventManager::ShutDown();
         DynamicLibManager::ShutDown();
@@ -160,7 +162,7 @@ namespace ege
 
     void CoreApplication::StartUpRenderAPI()
     {
-        D3D11RenderAPI::StartUp();
+        RenderAPI::StartUp();
     }
 
     void CoreApplication::StartUpRenderer()
@@ -211,6 +213,11 @@ namespace ege
     void CoreApplication::StartUpTaskScheduler()
     {
         TaskScheduler::StartUp(10);
+    }
+
+    void CoreApplication::StartUpModelManager()
+    {
+        ModelManager::StartUp();
     }
 
     void CoreApplication::SetContexts()

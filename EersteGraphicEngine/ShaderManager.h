@@ -16,7 +16,6 @@ namespace ege
         void OnStartUp() override;
         void OnShutDown() override;
         void Initialise() override;
-
     };
 
     ShaderManager& gShaderManager();

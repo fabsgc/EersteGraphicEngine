@@ -7,7 +7,7 @@
 #include "IDrawable.h"
 #include "Window.h"
 
-#include "D3D11RenderAPI.h"
+#include "RenderAPI.h"
 #include "Renderer.h"
 
 #include "Keyboard.h"
@@ -22,6 +22,8 @@
 #include "Task.h"
 
 #include "Console.h"
+
+#include "ModelManager.h"
 
 namespace ege
 {
@@ -49,7 +51,7 @@ namespace ege
             return Name == name;
         }
 
-        bool operator <(const Context& context) const
+        bool operator<(const Context& context) const
         {
             return Name < context.Name;
         }
@@ -104,6 +106,7 @@ namespace ege
         void StartUpTime();
         void StartUpConsole();
         void StartUpTaskScheduler();
+        void StartUpModelManager();
 
         void SetContexts();
         void SetApplicationConfig();

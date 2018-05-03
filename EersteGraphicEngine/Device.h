@@ -14,11 +14,11 @@ namespace ege
         D3D11ERR_INFO
     };
 
-    class D3D11Device
+    class Device
     {
     public:
-        D3D11Device(ID3D11Device* device);
-        ~D3D11Device();
+        Device(ID3D11Device* device);
+        ~Device();
 
         /**	Shuts down the device any releases any internal resources. */
         void Shutdown();
@@ -51,7 +51,7 @@ namespace ege
         void SetExceptionsErrorLevel(const D3D11_ERROR_LEVEL exceptionsErrorLevel);
 
     private:
-        D3D11Device();
+        Device();
 
     private:
         ID3D11Device* _D3D11Device;

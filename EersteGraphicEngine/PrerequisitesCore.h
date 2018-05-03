@@ -143,6 +143,7 @@ namespace ege
     class  Window;
     class  IDrawable;
     class  IUpdatable;
+    class  IMoveable;
 
     struct Context;
     struct StartUpDescription;
@@ -150,10 +151,20 @@ namespace ege
 
     struct RenderDesc;
     struct ConstantBuffer;
-    class  D3D11RenderAPI;
-    class  D3D11Device;
-
+    class  RenderAPI;
+    class  Device;
+    class  Geometry;
     class  ShaderManager;
-    class  ShaderBundle;
+    struct ShaderConfig;
     class  Shader;
+    struct VertexDesc;
+
+    class  Scene;
+    class  Node;
+    class  Entity;
+
+    class  ModelManager;
+    class  ModelLoader;
+    struct ModelDesc;
+    class  Model;
 }

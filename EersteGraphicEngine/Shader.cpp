@@ -50,7 +50,7 @@ namespace ege
 
     void Shader::Apply()
     {
-        ID3D11DeviceContext* context = gD3D11RenderAPI().GetDevice()->GetImmediateContext();
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
 
         context->IASetInputLayout(_inputLayout);
 
@@ -95,8 +95,8 @@ namespace ege
     HRESULT Shader::Compile()
     {
         HRESULT hr = S_OK;
-        ID3D11DeviceContext* context = gD3D11RenderAPI().GetDevice()->GetImmediateContext();
-        ID3D11Device* device = gD3D11RenderAPI().GetDevice()->GetD3D11Device();
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
+        ID3D11Device* device = gRenderAPI().GetDevice()->GetD3D11Device();
 
         if (HasShader(ShaderType::VERTEX_SHADER))
         {

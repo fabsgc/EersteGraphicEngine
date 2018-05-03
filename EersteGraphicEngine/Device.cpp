@@ -1,14 +1,14 @@
-#include "D3D11Device.h"
+#include "Device.h"
 
 namespace ege
 {
-    D3D11Device::D3D11Device()
+    Device::Device()
         : _D3D11Device(nullptr)
         , _immediateContext(nullptr)
         , _classLinkage(nullptr)
     {}
 
-    D3D11Device::D3D11Device(ID3D11Device* device)
+    Device::Device(ID3D11Device* device)
         : _D3D11Device(device)
         , _immediateContext(nullptr)
         , _infoQueue(nullptr)
@@ -45,12 +45,12 @@ namespace ege
         }
     }
 
-    D3D11Device::~D3D11Device()
+    Device::~Device()
     {
         Shutdown();
     }
 
-    void D3D11Device::Shutdown()
+    void Device::Shutdown()
     {
         if (_immediateContext)
         {
@@ -64,7 +64,7 @@ namespace ege
         SafeReleaseCom(_classLinkage);
     }
 
-    String D3D11Device::GetErrorDescription(bool doClearErrors)
+    String Device::GetErrorDescription(bool doClearErrors)
     {
         if (_D3D11Device == nullptr)
             return "Null device.";
@@ -95,7 +95,7 @@ namespace ege
         return res;
     }
 
-    bool D3D11Device::HasError() const
+    bool Device::HasError() const
     {
         if (_infoQueue != nullptr)
         {
@@ -114,7 +114,7 @@ namespace ege
         }
     }
 
-    void D3D11Device::ClearErrors()
+    void Device::ClearErrors()
     {
         if (_D3D11Device != nullptr && _infoQueue != nullptr)
         {
@@ -122,7 +122,7 @@ namespace ege
         }
     }
 
-    void D3D11Device::SetExceptionsErrorLevel(const D3D11_ERROR_LEVEL exceptionsErrorLevel)
+    void Device::SetExceptionsErrorLevel(const D3D11_ERROR_LEVEL exceptionsErrorLevel)
     {
         if (_infoQueue == nullptr)
         {

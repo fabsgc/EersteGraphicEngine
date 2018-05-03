@@ -145,11 +145,11 @@
     <Filter Include="Header Files\Utility\Console">
       <UniqueIdentifier>{0bf0a6ac-9d9c-4868-aca2-25b5f13681f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\RenderAPI\Material">
-      <UniqueIdentifier>{cac825dc-0d50-45b0-8fa4-9108acb080b6}</UniqueIdentifier>
+    <Filter Include="Header Files\Core\Scene">
+      <UniqueIdentifier>{16720fd5-3d66-4f7d-9630-c1c675f30005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\RenderAPI\Material">
-      <UniqueIdentifier>{0b18df5d-160f-4e10-b165-fa5d50652aae}</UniqueIdentifier>
+    <Filter Include="Source Files\Core\Scene">
+      <UniqueIdentifier>{550bd949-c8d3-4262-ab6b-ce49af9a8ae2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,17 +240,35 @@
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11Device.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="D3D11RenderAPI.cpp">
+    <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files\Core\RenderAPI\Material</Filter>
+      <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Core\RenderAPI\Material</Filter>
+    <ClCompile Include="Device.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderAPI.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\Core\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\Core\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Source Files\Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>Source Files\Core\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,17 +395,44 @@
     <ClInclude Include="IResourceManager.h">
       <Filter>Header Files\Core\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11Device.h">
+    <ClInclude Include="Device.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11RenderAPI.h">
+    <ClInclude Include="RenderAPI.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Header Files\Core\RenderAPI\Material</Filter>
+      <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
-      <Filter>Header Files\Core\RenderAPI\Material</Filter>
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexDesc.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Core\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Core\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntity.h">
+      <Filter>Header Files\Core\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="IMoveable.h">
+      <Filter>Header Files\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Header Files\Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>Header Files\Core\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
