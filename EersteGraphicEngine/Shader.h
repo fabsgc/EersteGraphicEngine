@@ -11,7 +11,8 @@ namespace ege
         HULL_SHADER,
         DOMAIN_SHADER,
         GEOMETRY_SHADER,
-        PIXEL_SHADER
+        PIXEL_SHADER,
+        COMPUTE_SHADER
     };
 
     struct ShaderConfig
@@ -22,6 +23,7 @@ namespace ege
         String DomainShaderPath;
         String GeometryShaderPath;
         String PixelShaderPath;
+        String ComputeShaderPath;
 
         ShaderConfig()
             : VertexShaderPath("")
@@ -29,6 +31,7 @@ namespace ege
             , DomainShaderPath("")
             , GeometryShaderPath("")
             , PixelShaderPath("")
+            , ComputeShaderPath("")
         {}
     };
 
@@ -71,6 +74,7 @@ namespace ege
         HRESULT CompileDomainShader();
         HRESULT CompileGeometryShader();
         HRESULT CompilePixelShader();
+        HRESULT CompileComputeShader();
         HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob);
 
     private:
@@ -81,6 +85,7 @@ namespace ege
         ShaderData<ID3D11DomainShader>    _domainShader;
         ShaderData<ID3D11GeometryShader>  _geometryShader;
         ShaderData<ID3D11PixelShader>     _pixelShader;
+        ShaderData<ID3D11ComputeShader>   _computeShader;
 
         D3D11_INPUT_ELEMENT_DESC*         _vertexData;
 

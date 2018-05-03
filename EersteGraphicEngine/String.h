@@ -174,9 +174,4 @@ namespace ege
     * Split string according to delimiter
     */
     Vector<String> Split(const String& s, char delimiter);
-
-    /**
-    * Convert a String to a WString
-    */
-    WString StringToWString(const String& s);
 }

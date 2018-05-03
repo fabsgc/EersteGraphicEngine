@@ -15,6 +15,7 @@ namespace ege
         , _domainShader(ShaderType::DOMAIN_SHADER)
         , _geometryShader(ShaderType::GEOMETRY_SHADER)
         , _pixelShader(ShaderType::PIXEL_SHADER)
+        , _computeShader(ShaderType::COMPUTE_SHADER)
         , _inputLayout(nullptr)
     {}
 
@@ -25,16 +26,18 @@ namespace ege
         SafeReleaseCom(_domainShader.Shader);
         SafeReleaseCom(_geometryShader.Shader);
         SafeReleaseCom(_pixelShader.Shader);
+        SafeReleaseCom(_computeShader.Shader);
         SafeReleaseCom(_inputLayout);
     }
 
     void Shader::Initialise()
     {
-        _vertexShader.Path   = StringToWString(_config.VertexShaderPath);
-        _hullShader.Path     = StringToWString(_config.HullShaderPath);
-        _domainShader.Path   = StringToWString(_config.DomainShaderPath);
-        _geometryShader.Path = StringToWString(_config.GeometryShaderPath);
-        _pixelShader.Path    = StringToWString(_config.PixelShaderPath);
+        _vertexShader.Path   = ToWString(_config.VertexShaderPath);
+        _hullShader.Path     = ToWString(_config.HullShaderPath);
+        _domainShader.Path   = ToWString(_config.DomainShaderPath);
+        _geometryShader.Path = ToWString(_config.GeometryShaderPath);
+        _pixelShader.Path    = ToWString(_config.PixelShaderPath);
+        _computeShader.Path  = ToWString(_config.ComputeShaderPath);
 
         if (!HasShader(ShaderType::VERTEX_SHADER) || !HasShader(ShaderType::PIXEL_SHADER))
         {
@@ -43,6 +46,50 @@ namespace ege
 
         HRESULT hr = Compile();
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't compile shader");
+    }
+
+    void Shader::Apply()
+    {
+        ID3D11DeviceContext* context = gD3D11RenderAPI().GetDevice()->GetImmediateContext();
+
+        context->IASetInputLayout(_inputLayout);
+
+        if (HasShader(ShaderType::VERTEX_SHADER)) context->VSSetShader(_vertexShader.Shader, nullptr, 0);
+        if (HasShader(ShaderType::HULL_SHADER)) context->HSSetShader(_hullShader.Shader, nullptr, 0);
+        if (HasShader(ShaderType::DOMAIN_SHADER)) context->DSSetShader(_domainShader.Shader, nullptr, 0);
+        if (HasShader(ShaderType::GEOMETRY_SHADER)) context->GSSetShader(_geometryShader.Shader, nullptr, 0);
+        if (HasShader(ShaderType::PIXEL_SHADER)) context->PSSetShader(_pixelShader.Shader, nullptr, 0);
+        if (HasShader(ShaderType::COMPUTE_SHADER)) context->CSSetShader(_computeShader.Shader, nullptr, 0);
+    }
+
+    bool Shader::HasShader(ShaderType type)
+    {
+        switch (type)
+        {
+        case ShaderType::VERTEX_SHADER:
+            if (_config.VertexShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::HULL_SHADER:
+            if (_config.HullShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::DOMAIN_SHADER:
+            if (_config.DomainShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::GEOMETRY_SHADER:
+            if (_config.GeometryShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::PIXEL_SHADER:
+            if (_config.PixelShaderPath.length() > 0) return true;
+            break;
+        case ShaderType::COMPUTE_SHADER:
+            if (_config.ComputeShaderPath.length() > 0) return true;
+            break;
+        default:
+            return false;
+            break;
+        }
+
+        return false;
     }
 
     HRESULT Shader::Compile()
@@ -86,6 +133,13 @@ namespace ege
             if (FAILED(hr)) return hr;
         }
 
+        if (HasShader(ShaderType::COMPUTE_SHADER))
+        {
+            hr = CompilePixelShader();
+            hr = device->CreateComputeShader(_computeShader.Blob->GetBufferPointer(), _computeShader.Blob->GetBufferSize(), nullptr, &_computeShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
         UINT numberElements = ARRAYSIZE(Shader::VertexData);
 
         hr = device->CreateInputLayout(
@@ -96,19 +150,6 @@ namespace ege
             &_inputLayout);
 
         return hr;
-    }
-
-    void Shader::Apply()
-    {
-        ID3D11DeviceContext* context = gD3D11RenderAPI().GetDevice()->GetImmediateContext();
-
-        context->IASetInputLayout(_inputLayout);
-
-        if (HasShader(ShaderType::VERTEX_SHADER)) context->VSSetShader(_vertexShader.Shader, nullptr, 0);
-        if (HasShader(ShaderType::HULL_SHADER)) context->HSSetShader(_hullShader.Shader, nullptr, 0);
-        if (HasShader(ShaderType::DOMAIN_SHADER)) context->DSSetShader(_domainShader.Shader, nullptr, 0);
-        if (HasShader(ShaderType::GEOMETRY_SHADER)) context->GSSetShader(_geometryShader.Shader, nullptr, 0);
-        if (HasShader(ShaderType::PIXEL_SHADER)) context->PSSetShader(_pixelShader.Shader, nullptr, 0);
     }
 
     HRESULT Shader::CompileVertexShader()
@@ -134,6 +175,11 @@ namespace ege
     HRESULT Shader::CompilePixelShader()
     {
         return CompileShader(_pixelShader.Path.c_str(), "PS_MAIN", "ps_5_0", &_pixelShader.Blob);
+    }
+
+    HRESULT Shader::CompileComputeShader()
+    {
+        return CompileShader(_computeShader.Path.c_str(), "PS_MAIN", "ps_5_0", &_computeShader.Blob);
     }
 
     HRESULT Shader::CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob)
@@ -165,32 +211,5 @@ namespace ege
         }
 
         return hr;
-    }
-
-    bool Shader::HasShader(ShaderType type)
-    {
-        switch (type)
-        {
-        case ShaderType::VERTEX_SHADER:
-            if (_config.VertexShaderPath.length() > 0) return true;
-            break;
-        case ShaderType::HULL_SHADER:
-            if (_config.HullShaderPath.length() > 0) return true;
-            break;
-        case ShaderType::DOMAIN_SHADER:
-            if (_config.DomainShaderPath.length() > 0) return true;
-            break;
-        case ShaderType::GEOMETRY_SHADER:
-            if (_config.GeometryShaderPath.length() > 0) return true;
-            break;
-        case ShaderType::PIXEL_SHADER:
-            if (_config.PixelShaderPath.length() > 0) return true;
-            break;
-        default:
-            return false;
-            break;
-        }
-
-        return false;
     }
 }
