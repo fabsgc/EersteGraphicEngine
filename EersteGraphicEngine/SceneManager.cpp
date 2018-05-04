@@ -4,6 +4,7 @@ namespace ege
 {
     void SceneManager::OnStartUp()
     {
+        Initialise();
     }
 
     void SceneManager::OnShutDown()

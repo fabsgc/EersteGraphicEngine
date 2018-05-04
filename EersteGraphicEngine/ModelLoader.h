@@ -10,9 +10,11 @@ namespace ege
         std::vector<VertexDesc>   Vertices;
         std::vector<WORD>         Indices;
         bool                      HasColor;
+        bool                      HasMaterial;
 
         ModelDesc()
-            : HasColor(false)
+            : HasMaterial(false)
+            , HasColor(true)
         {}
     };
 
@@ -22,6 +24,6 @@ namespace ege
         ModelLoader() {};
         ~ModelLoader() {};
 
-        void Load(String filePath, ModelDesc& meshDatas);
+        void Load(String filePath, SPtr<ModelDesc> modelDesc);
     };
 }

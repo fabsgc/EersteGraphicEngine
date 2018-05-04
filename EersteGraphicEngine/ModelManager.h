@@ -4,6 +4,7 @@
 #include "IResourceManager.h"
 #include "ModelLoader.h"
 #include "IModule.h"
+#include "Model.h"
 
 namespace ege
 {
@@ -16,6 +17,8 @@ namespace ege
         void OnStartUp() override;
         void OnShutDown() override;
         void Initialise() override;
+        void Load(String filePath, String name);
+        void Get(String name, Model& model);
 
     private:
         ModelLoader _modelLoader;

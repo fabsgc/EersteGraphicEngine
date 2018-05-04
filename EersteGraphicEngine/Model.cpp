@@ -22,4 +22,23 @@ namespace ege
     void Model::Draw()
     {
     }
+
+    void Model::Build(SPtr<ModelDesc> modelDesc)
+    {
+    }
+
+    void Model::SetShader(SPtr<Shader> shader)
+    {
+        _shader = shader;
+    }
+
+    Geometry& Model::GetGeometry()
+    {
+        return _geometry;
+    }
+
+    SPtr<Shader> Model::GetShader()
+    {
+        return _shader;
+    }
 }

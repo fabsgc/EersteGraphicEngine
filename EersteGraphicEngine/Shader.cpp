@@ -206,7 +206,7 @@ namespace ege
                 OutputDebugStringA((char*)errorBlob->GetBufferPointer());
                 errorBlob->Release();
 
-                EGE_ASSERT_ERROR((errorBlob != nullptr), ("Can't compie shader file : " + ToString(srcFile)))
+                EGE_ASSERT_ERROR((errorBlob != nullptr), ("Can't compie shader file : " + ToString(srcFile)));
             }
         }
 

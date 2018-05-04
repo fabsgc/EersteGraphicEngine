@@ -1,0 +1,92 @@
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\d3d11renderapi.cpp:82
+Inside ege::D3D11RenderAPI::LoadRenderConfig
+Date: May  1 2018
+Time: 16:25:43
+Error: Render file malformed
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\d3d11device.cpp:17 inside ege::D3D11Device::D3D11Device
+Date: May  1 2018
+Time: 16:19:03
+Condition: 0############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\d3d11device.cpp:17 inside ege::D3D11Device::D3D11Device
+Date: May  1 2018
+Time: 16:19:03
+Condition: 0############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Window>::Instance
+Date: May  1 2018
+Time: 16:52:01
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::EventManager>::Instance
+Date: May  1 2018
+Time: 16:19:09
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:33
+Inside ege::InputHandler::GetState
+Date: May  1 2018
+Time: 17:26:26
+Error: This handler does not exist (CTRL)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: May  1 2018
+Time: 16:19:16
+Error: Key does not exist (F11)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: May  1 2018
+Time: 16:19:16
+Error: Key does not exist (F11)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: May  1 2018
+Time: 19:44:22
+Error: Key does not exist (CTRL+ENTER)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: May  1 2018
+Time: 19:44:22
+Error: Key does not exist (CTRL+ENTER)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\joypad.cpp:126
+Inside ege::Joypad::GetJoypadButton
+Date: May  1 2018
+Time: 19:44:21
+Error: No button with this name (SELECT)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: May  5 2018
+Time: 00:07:22
+Error: Can't load scene : Data/Model/Model/Cube.obj
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: May  5 2018
+Time: 00:07:22
+Error: Can't load scene : Data/Model/Model/Cube.obj
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: May  5 2018
+Time: 00:24:37
+Error: Can't load scene : Data/Model/Model/Cube.obj
+Condition: 0
+############################################: 

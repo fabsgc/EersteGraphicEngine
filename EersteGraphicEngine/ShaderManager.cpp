@@ -18,7 +18,7 @@ namespace ege
         document.LoadFile(EGE_CONFIG_SHADER_FILE);
 
         tinyxml2::XMLElement* shadersElement = document.FirstChildElement("shaders");
-        EGE_ASSERT_ERROR((shadersElement != nullptr), "Context file malformed");
+        EGE_ASSERT_ERROR((shadersElement != nullptr), "Shader file malformed");
 
         for (tinyxml2::XMLElement* shaderProgramElement = shadersElement->FirstChildElement("shader-program"); shaderProgramElement != nullptr; shaderProgramElement = shaderProgramElement->NextSiblingElement())
         {

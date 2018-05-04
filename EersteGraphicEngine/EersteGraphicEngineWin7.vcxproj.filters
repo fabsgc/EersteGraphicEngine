@@ -216,9 +216,6 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Source Files\Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="lib\tinyxml2\tinyxml2.cpp">
-      <Filter>Source Files\Utility\Lib</Filter>
-    </ClCompile>
     <ClCompile Include="Event.cpp">
       <Filter>Source Files\Core\Event</Filter>
     </ClCompile>
@@ -290,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\Core\Renderer\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
+      <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="InputHandler.h">
       <Filter>Header Files\Core\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\tinyxml2\tinyxml2.h">
-      <Filter>Header Files\Utility\Lib</Filter>
     </ClInclude>
     <ClInclude Include="Joypad.h">
       <Filter>Header Files\Core\Input</Filter>
@@ -469,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\Core\Renderer\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
+      <Filter>Header Files\Utility\Lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

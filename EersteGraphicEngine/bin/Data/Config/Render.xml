@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<render>
-    <option type="msaa" value="4"/>
-	<option type="back-face-culling" value="true"/>
-    <option type="frustum-culling" value="true"/>
-    <option type="fullscreen" value="false"/>
-    <option type="vsync" value="true" />
-</render>

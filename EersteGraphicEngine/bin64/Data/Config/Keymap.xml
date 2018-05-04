@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymap>
+    <context name="Default">
+        <input handler="PAUSE" key="P" button="START"/>
+        <input handler="QUIT" key="ESCAPE" button="BACK"/>
+        <input handler="FULLSCREEN" key="CTRL+ENTER" button=""/>
+    </context>
+    <context name="Game">
+        <input handler="PAUSE" key="P" button="START"/>
+        <input handler="QUIT" key="ESCAPE" button="BACK"/>
+        <input handler="GO_UP" key="Z" button="Y"/>
+        <input handler="GO_DOWN" key="S" button="A"/>
+        <input handler="GO_LEFT" key="Q" button="X"/>
+        <input handler="GO_RIGHT" key="D" button="B"/>
+        <input handler="FULLSCREEN" key="CTRL+ENTER" button=""/>
+    </context>
+    <context name="Pause">
+        <input handler="PAUSE" key="P" button="START"/>
+        <input handler="QUIT" key="ESCAPE" button="BACK"/>
+        <input handler="FULLSCREEN" key="CTRL+ENTER" button=""/>
+    </context>
+</keymap>

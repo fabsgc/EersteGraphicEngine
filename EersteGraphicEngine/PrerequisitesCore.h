@@ -46,11 +46,11 @@
 #   pragma comment(lib,"xaudio2.lib")
 #endif
 
-#include "lib/assimp/Importer.hpp"
-#include "lib/assimp/Scene.h"
-#include "lib/assimp/Postprocess.h"
+#include "assimp/Importer.hpp"
+#include "assimp/Scene.h"
+#include "assimp/Postprocess.h"
 
-#include "lib/tinyxml2/tinyxml2.h"
+#include "tinyxml2.h"
 
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
@@ -80,7 +80,7 @@ using namespace DirectX;
     #endif
 #else
     #ifndef HR
-    #define HR(x) (x)
+    #define HR(x, message) (x)
     #endif
 #endif 
 

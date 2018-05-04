@@ -13,9 +13,13 @@ namespace ege
         Model();
         ~Model();
 
-        void Initialise() override;
-        void Update() override;
-        void Draw() override;
+        void         Initialise() override;
+        void         Update() override;
+        void         Draw() override;
+        void         Build(SPtr<ModelDesc> modelDesc);
+        void         SetShader(SPtr<Shader> shader);
+        Geometry&    GetGeometry();
+        SPtr<Shader> GetShader();
         
     private:
         SPtr<Shader> _shader;
