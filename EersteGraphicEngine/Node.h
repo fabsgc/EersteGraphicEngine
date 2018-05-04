@@ -3,24 +3,24 @@
 #include "PrerequisitesCore.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
+#include "IMoveable.h"
 #include "IEntity.h"
-#include "Model.h"
 
 namespace ege
 {
-    class Node: public IEntity
+    class Node : public IUpdatable, public IDrawable, public IMoveable
     {
     public:
-        Node() {};
-        ~Node() {};
+        Node();
+        ~Node();
 
-        void Initialise() override;
-        void Update() override;
-        void Draw() override;
+        void     Initialise();
+        void     Update() override;
+        void     Draw() override;
 
     private:
-        SPtr<Node>          _parent;
-        Vector<SPtr<Node>>  _child;
-        Vector<SPtr<Model>> _models;
+        SPtr<Node>            _parent;
+        Vector<SPtr<Node>>    _child;
+        Vector<SPtr<IEntity>> _entities;
     };
 }

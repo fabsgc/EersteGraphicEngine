@@ -28,9 +28,6 @@
     <Filter Include="Source Files\Core\Input">
       <UniqueIdentifier>{2c33046d-a63f-4cbf-9472-258fde4ceb56}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Model">
-      <UniqueIdentifier>{f604778b-ed4b-4641-ad23-df9c917b9481}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\Component">
       <UniqueIdentifier>{60356789-59d7-4a1a-866d-4f0c4545338c}</UniqueIdentifier>
     </Filter>
@@ -69,9 +66,6 @@
     </Filter>
     <Filter Include="Header Files\Core\Text">
       <UniqueIdentifier>{7ba5a514-b41e-453c-8060-589790ec2419}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Model">
-      <UniqueIdentifier>{39d01d1b-5fbd-4898-8dd9-ca8754895f9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core\2D">
       <UniqueIdentifier>{7412d337-81ae-4dca-9225-fce6c6c8e317}</UniqueIdentifier>
@@ -139,11 +133,29 @@
     <Filter Include="Header Files\Utility\Console">
       <UniqueIdentifier>{0bf0a6ac-9d9c-4868-aca2-25b5f13681f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Scene">
+    <Filter Include="Header Files\Core\Renderer\Model">
+      <UniqueIdentifier>{39d01d1b-5fbd-4898-8dd9-ca8754895f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Scene">
       <UniqueIdentifier>{16720fd5-3d66-4f7d-9630-c1c675f30005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Scene">
+    <Filter Include="Source Files\Core\Renderer\Scene">
       <UniqueIdentifier>{550bd949-c8d3-4262-ab6b-ce49af9a8ae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Model">
+      <UniqueIdentifier>{f604778b-ed4b-4641-ad23-df9c917b9481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Light">
+      <UniqueIdentifier>{360ff5a9-ac42-4763-9c1e-84bf1b953f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera">
+      <UniqueIdentifier>{f778cd68-3908-404c-9262-3a3d590445a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Light">
+      <UniqueIdentifier>{1e3d1b1d-6c0d-4777-81f9-4a82acd34d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera">
+      <UniqueIdentifier>{331ff870-751d-4516-807a-d49bceda3905}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -247,22 +259,28 @@
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\Core\Scene</Filter>
+      <Filter>Source Files\Core\Renderer\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Node.cpp">
-      <Filter>Source Files\Core\Scene</Filter>
+      <Filter>Source Files\Core\Renderer\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files\Core\Model</Filter>
+      <Filter>Source Files\Core\Renderer\Model</Filter>
     </ClCompile>
     <ClCompile Include="Geometry.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="ModelLoader.cpp">
-      <Filter>Source Files\Core\Model</Filter>
+      <Filter>Source Files\Core\Renderer\Model</Filter>
     </ClCompile>
     <ClCompile Include="ModelManager.cpp">
-      <Filter>Source Files\Core\Model</Filter>
+      <Filter>Source Files\Core\Renderer\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -402,16 +420,16 @@
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files\Core\Scene</Filter>
+      <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files\Core\Scene</Filter>
+      <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Header Files\Core\Model</Filter>
+      <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
     <ClInclude Include="IEntity.h">
-      <Filter>Header Files\Core\Scene</Filter>
+      <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
     <ClInclude Include="IMoveable.h">
       <Filter>Header Files\Core\Renderer</Filter>
@@ -420,13 +438,19 @@
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="ModelLoader.h">
-      <Filter>Header Files\Core\Model</Filter>
+      <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
     <ClInclude Include="ModelManager.h">
-      <Filter>Header Files\Core\Model</Filter>
+      <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
     <ClInclude Include="IResourceManager.h">
       <Filter>Header Files\Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,15 +2,24 @@
 
 namespace ege
 {
+    Model::Model()
+        : IEntity(EntityType::Model)
+    {
+    }
+
+    Model::~Model()
+    {
+    }
+
     void Model::Initialise()
     {
     }
 
-    void Model::Draw()
+    void Model::Update()
     {
     }
 
-    void Model::Update()
+    void Model::Draw()
     {
     }
 }

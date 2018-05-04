@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Device.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
     <ClCompile Include="lib\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryAllocator.cpp" />
@@ -158,9 +160,11 @@
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
@@ -175,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="Device.h" />
@@ -188,6 +193,7 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />
+    <ClInclude Include="IEntity.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IMoveable.h" />
     <ClInclude Include="InputHandler.h" />
@@ -197,12 +203,14 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
     <ClInclude Include="lib\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
     <ClInclude Include="PrerequisitesUtil.h" />
@@ -210,6 +218,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="MemoryAllocator.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="StackAllocator.h" />

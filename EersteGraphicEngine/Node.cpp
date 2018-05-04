@@ -2,23 +2,41 @@
 
 namespace ege
 {
+    Node::Node()
+    {
+    }
+    
+    Node::~Node()
+    {
+    }
+
     void Node::Initialise()
     {
     }
 
     void Node::Update()
     {
-        for (auto model : _models)
+        for (auto child : _child)
         {
-            model->Update();
+            child->Update();
+        }
+
+        for (auto entity : _entities)
+        {
+            entity->Update();
         }
     }
 
     void Node::Draw()
     {
-        for (auto model : _models)
+        for (auto child : _child)
         {
-            model->Draw();
+            child->Draw();
+        }
+
+        for (auto entity : _entities)
+        {
+            entity->Draw();
         }
     }
 }

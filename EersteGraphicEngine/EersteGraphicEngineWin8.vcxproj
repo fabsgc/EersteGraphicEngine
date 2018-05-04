@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Device.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
     <ClCompile Include="lib\tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryAllocator.cpp" />
@@ -177,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicAllocator.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="Device.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
     <ClInclude Include="lib\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Model.h" />

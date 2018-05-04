@@ -1,8 +1,9 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IDrawable.h"
 #include "IUpdatable.h"
+#include "IDrawable.h"
+#include "Camera.h"
 #include "Node.h"
 
 namespace ege
@@ -18,7 +19,9 @@ namespace ege
         void Draw() override;
 
     private:
-        String             _filePath;
-        Vector<SPtr<Node>> _nodes;
+        String              _filePath;
+        Vector<SPtr<Node>>  _nodes;
+        Vector<SPtr<Light>> _lights;
+        SPtr<Camera>        _camera;
     };
 }

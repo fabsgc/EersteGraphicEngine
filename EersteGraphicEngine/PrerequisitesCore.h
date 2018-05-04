@@ -167,4 +167,8 @@ namespace ege
     class  ModelLoader;
     struct ModelDesc;
     class  Model;
+
+    class  Light;
+
+    class  Camera;
 }
