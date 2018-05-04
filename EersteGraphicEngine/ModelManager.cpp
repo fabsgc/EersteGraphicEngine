@@ -28,6 +28,7 @@ namespace ege
             String filePath = modelElement->Attribute("file");
 
             _modelLoader.Load(EGE_MODEL_FOLDER + filePath, modelDesc);
+            Insert(name, modelDesc);
         }
 #endif
     }
