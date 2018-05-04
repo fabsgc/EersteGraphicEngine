@@ -14,13 +14,19 @@ namespace ege
         Node();
         ~Node();
 
-        void     Initialise();
-        void     Update() override;
-        void     Draw() override;
+        void        Initialise();
+        void        InsertNode(String name, SPtr<Node> node);
+        void        InsertEntity(String name, SPtr<IEntity> entity);
+        void        Update() override;
+        void        Draw() override;
+
+        SPtr<Scene> GetScene();
+        SPtr<Node>  GetParent();
 
     private:
-        SPtr<Node>            _parent;
-        Vector<SPtr<Node>>    _child;
-        Vector<SPtr<IEntity>> _entities;
+        SPtr<Scene>                _scene;
+        SPtr<Node>                 _parent;
+        Map<String, SPtr<Node>>    _child;
+        Map<String, SPtr<IEntity>> _entities;
     };
 }

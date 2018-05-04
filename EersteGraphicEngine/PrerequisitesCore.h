@@ -162,6 +162,8 @@ namespace ege
     class  Scene;
     class  Node;
     class  Entity;
+    class  SceneLoader;
+    class  SceneManager;
 
     class  ModelManager;
     class  ModelLoader;
@@ -169,6 +171,7 @@ namespace ege
     class  Model;
 
     class  Light;
+    class  PointLight;
 
     class  Camera;
 }

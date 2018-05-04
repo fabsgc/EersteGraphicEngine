@@ -25,6 +25,8 @@
 
 #include "ModelManager.h"
 
+#include "SceneManager.h"
+
 namespace ege
 {
     struct StartUpDescription
@@ -107,6 +109,7 @@ namespace ege
         void StartUpConsole();
         void StartUpTaskScheduler();
         void StartUpModelManager();
+        void StartUpSceneManager();
 
         void SetContexts();
         void SetApplicationConfig();

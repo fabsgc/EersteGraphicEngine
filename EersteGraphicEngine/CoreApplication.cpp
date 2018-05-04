@@ -220,6 +220,11 @@ namespace ege
         ModelManager::StartUp();
     }
 
+    void CoreApplication::StartUpSceneManager()
+    {
+        SceneManager::StartUp();
+    }
+
     void CoreApplication::SetContexts()
     {
 #ifdef EGE_CONFIG_CONTEXT_FILE

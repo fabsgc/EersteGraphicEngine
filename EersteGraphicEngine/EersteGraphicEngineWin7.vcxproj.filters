@@ -282,6 +282,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoader.cpp">
+      <Filter>Source Files\Core\Renderer\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Core\Renderer\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -451,6 +460,15 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoader.h">
+      <Filter>Header Files\Core\Renderer\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

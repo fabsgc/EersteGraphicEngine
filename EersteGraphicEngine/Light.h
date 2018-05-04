@@ -6,17 +6,26 @@
 
 namespace ege
 {
+    enum class LightType
+    {
+        PointLight,
+        SportLight,
+        DirectionalLight
+    };
+
     class Light: public IEntity
     {
     public:
-        Light();
-        ~Light();
+        Light(LightType type);
+        virtual ~Light() = 0;
 
-        void Initialise() override;
-        void Update() override;
-        void Draw() override;
+        virtual void Initialise() = 0;
+        virtual void Update() = 0;
+        virtual void Draw() = 0;
 
-    private:
-        SPtr<Shader> _shader;
+        LightType    GetType();
+
+    protected:
+        LightType _type;
     };
 }

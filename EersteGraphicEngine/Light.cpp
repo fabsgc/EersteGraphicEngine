@@ -2,8 +2,9 @@
 
 namespace ege
 {
-    Light::Light()
+    Light::Light(LightType type)
         : IEntity(EntityType::Light)
+        , _type(type)
     {
     }
 
@@ -21,5 +22,10 @@ namespace ege
 
     void Light::Draw()
     {
+    }
+
+    LightType Light::GetType()
+    {
+        return _type;
     }
 }

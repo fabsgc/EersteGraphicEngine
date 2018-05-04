@@ -22,6 +22,6 @@ namespace ege
         ModelLoader() {};
         ~ModelLoader() {};
 
-        void Load(String fileName, ModelDesc& meshDatas);
+        void Load(String filePath, ModelDesc& meshDatas);
     };
 }

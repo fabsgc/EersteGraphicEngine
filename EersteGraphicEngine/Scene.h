@@ -15,13 +15,16 @@ namespace ege
         ~Scene();
 
         void Initialise();
+        void InsertNode(String name, SPtr<Node> node);
+        void InsertLight(String name, SPtr<Light> light);
+        void SetCamera(SPtr<Camera> camera);
         void Update() override;
         void Draw() override;
 
     private:
-        String              _filePath;
-        Vector<SPtr<Node>>  _nodes;
-        Vector<SPtr<Light>> _lights;
-        SPtr<Camera>        _camera;
+        String                   _filePath;
+        Map<String, SPtr<Node>>  _nodes;
+        Map<String, SPtr<Light>> _lights;
+        SPtr<Camera>             _camera;
     };
 }

@@ -17,6 +17,11 @@ namespace ege
             _resources.insert(Pair<String, SPtr<Resource>>(name, resource));
         }
 
+        void Delete(String name)
+        {
+            _resources.erase(name);
+        }
+
         Resource& Get(std::string name)
         {
             auto found = _resources.find(name);

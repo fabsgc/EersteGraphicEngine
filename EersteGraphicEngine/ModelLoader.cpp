@@ -2,7 +2,7 @@
 
 namespace ege
 {
-    void ModelLoader::Load(String fileName, ModelDesc& meshDatas)
+    void ModelLoader::Load(String filePath, ModelDesc& meshDatas)
     {
 
     }
