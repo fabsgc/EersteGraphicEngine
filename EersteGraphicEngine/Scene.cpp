@@ -25,6 +25,27 @@ namespace ege
         _lights.insert(Pair<String, SPtr<Light>>(name, std::move(light)));
     }
 
+    SPtr<Node> Scene::GetNode(String name)
+    {
+        auto found = _nodes.find(name);
+        EGE_ASSERT_ERROR((found != _nodes.end()), ("Node " + name + " not found"));
+
+        return found->second;
+    }
+
+    SPtr<Light> Scene::GetLight(String name)
+    {
+        auto found = _lights.find(name);
+        EGE_ASSERT_ERROR((found != _lights.end()), ("Light " + name + " not found"));
+
+        return found->second;
+    }
+
+    SPtr<Camera> Scene::GetCamera()
+    {
+        return _camera;
+    }
+
     void Scene::SetCamera(SPtr<Camera> camera)
     {
         _camera = camera;

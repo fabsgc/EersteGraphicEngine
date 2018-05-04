@@ -14,12 +14,15 @@ namespace ege
         Scene(String filePath);
         ~Scene();
 
-        void Initialise();
-        void InsertNode(String name, SPtr<Node> node);
-        void InsertLight(String name, SPtr<Light> light);
-        void SetCamera(SPtr<Camera> camera);
-        void Update() override;
-        void Draw() override;
+        void         Initialise();
+        void         InsertNode(String name, SPtr<Node> node);
+        void         InsertLight(String name, SPtr<Light> light);
+        SPtr<Node>   GetNode(String name);
+        SPtr<Light>  GetLight(String name);
+        SPtr<Camera> GetCamera();
+        void         SetCamera(SPtr<Camera> camera);
+        void         Update() override;
+        void         Draw() override;
 
     private:
         String                   _filePath;

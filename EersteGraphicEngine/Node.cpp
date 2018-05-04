@@ -61,4 +61,22 @@ namespace ege
     {
         return _parent;
     }
+
+    SPtr<IEntity> Node::GetEntity(String name)
+    {
+        auto found = _entities.find(name);
+        EGE_ASSERT_ERROR((found != _entities.end()), ("Entity " + name + " not found"));
+
+        return found->second;
+    }
+
+    void Node::SetScene(SPtr<Scene> scene)
+    {
+        _scene = scene;
+    }
+
+    void Node::SetParent(SPtr<Node> parent)
+    {
+        _parent = parent;
+    }
 }

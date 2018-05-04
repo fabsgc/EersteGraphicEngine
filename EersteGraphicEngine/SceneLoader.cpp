@@ -2,7 +2,7 @@
 
 namespace ege
 {
-    void SceneLoader::Load(String filePath, Scene& scene)
+    void SceneLoader::Load(String filePath, SPtr<Scene> scene)
     {
     }
 }

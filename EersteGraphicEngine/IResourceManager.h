@@ -22,7 +22,7 @@ namespace ege
             _resources.erase(name);
         }
 
-        Resource& Get(std::string name)
+        Resource& Get(String name)
         {
             auto found = _resources.find(name);
             EGE_ASSERT_ERROR(found != _resources.end(), ("Resource " + name + " not found"));
@@ -30,7 +30,7 @@ namespace ege
             return *found->second;
         }
 
-        SPtr<Resource> GetPtr(std::string name)
+        SPtr<Resource> GetPtr(String name)
         {
             auto found = _resources.find(name);
             EGE_ASSERT_ERROR(found != _resources.end(), ("Resource " + name + " not found"));

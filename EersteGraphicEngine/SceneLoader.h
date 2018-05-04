@@ -10,6 +10,6 @@ namespace ege
         SceneLoader() {};
         ~SceneLoader() {};
 
-        void Load(String filePath, Scene& scene);
+        void Load(String filePath, SPtr<Scene> scene);
     };
 }
