@@ -4,6 +4,8 @@
 *.pdb
 *.exe
 *.VC.db
+*.iobj
+*.ipdb
 Debug/
 Release/
 x64/
