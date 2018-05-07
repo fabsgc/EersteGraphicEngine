@@ -15,16 +15,49 @@ namespace ege
         tinyxml2::XMLElement* nodesElement = sceneElement->FirstChildElement("nodes");
         for (tinyxml2::XMLElement* nodeElement = nodesElement->FirstChildElement("node"); nodeElement != nullptr; nodeElement = nodeElement->NextSiblingElement())
         {
-            tinyxml2::XMLElement* entitiesElement = nodeElement->FirstChildElement("entities");
-            for (tinyxml2::XMLElement* entityElement = entitiesElement->FirstChildElement("entity"); entityElement != nullptr; entityElement = entityElement->NextSiblingElement())
-            {
-            }
+            LoadNode(scene, nullptr, nodeElement);
         }
 #endif
     }
 
     void SceneLoader::LoadNode(SPtr<Scene> scene, SPtr<Node> parent, tinyxml2::XMLElement* element)
     {
+        SPtr<Node> node = ege_shared_ptr_new<Node>();
+        String name = element->Attribute("name");
+
+        for (tinyxml2::XMLElement* nodeElement = element->FirstChildElement("node"); nodeElement != nullptr; nodeElement = nodeElement->NextSiblingElement())
+        {
+            LoadNode(scene, node, nodeElement);
+        }
+
+        tinyxml2::XMLElement* entitiesElement = element->FirstChildElement("entities");
+        for (tinyxml2::XMLElement* entityElement = entitiesElement->FirstChildElement("entity"); entityElement != nullptr; entityElement = entityElement->NextSiblingElement())
+        {
+            String type = entityElement->Attribute("type");
+            String name = entityElement->Attribute("name");
+
+            if (type == "model")
+            {
+                LoadEntityModel(node, entityElement);
+            }
+            else if (type == "light")
+            {
+                LoadEntityLight(node, entityElement);
+            }
+            else if (type == "camera")
+            {
+                LoadEntityCamera(node, entityElement);
+            }
+        }
+
+        if (parent != nullptr)
+        {
+            parent->InsertNode(name, node);
+        }
+        else
+        {
+            scene->InsertNode(name, node);
+        }
     }
 
     void SceneLoader::LoadEntityModel(SPtr<Node> node, tinyxml2::XMLElement* element)
