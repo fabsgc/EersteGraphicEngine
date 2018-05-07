@@ -138,8 +138,6 @@ namespace ege
         Context*           _currentContext;
 
         SPtr<Scene>        _scene;
-        SPtr<Model>        _model;
-        SPtr<Camera>       _camera;
     };
 
     CoreApplication& gCoreApplication();

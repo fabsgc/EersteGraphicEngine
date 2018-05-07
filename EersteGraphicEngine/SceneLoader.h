@@ -1,7 +1,10 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "ShaderManager.h"
+#include "ModelManager.h"
 #include "PointLight.h"
+#include "Shader.h"
 #include "Camera.h"
 #include "Model.h"
 #include "Light.h"
@@ -20,8 +23,8 @@ namespace ege
     
     private:
         void LoadNode(SPtr<Scene> scene, SPtr<Node> parent, tinyxml2::XMLElement* element);
-        void LoadEntityModel(SPtr<Node> node, tinyxml2::XMLElement* element);
-        void LoadEntityLight(SPtr<Node> node, tinyxml2::XMLElement* element);
-        void LoadEntityCamera(SPtr<Node> node, tinyxml2::XMLElement* element);
+        void LoadEntityModel(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element);
+        void LoadEntityLight(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element);
+        void LoadEntityCamera(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element);
     };
 }

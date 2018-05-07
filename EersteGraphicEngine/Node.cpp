@@ -48,7 +48,10 @@ namespace ege
 
         for (auto entity : _entities)
         {
-            entity.second->Draw();
+            if (entity.second->GetType() != EntityType::Camera)
+            {
+                entity.second->Draw();
+            }
         }
     }
 

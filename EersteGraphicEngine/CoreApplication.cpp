@@ -59,10 +59,6 @@ namespace ege
             _scene->Draw();
         }
 
-        ///TODO : to be deleted
-        _camera->Draw();
-        _model->Draw();
-        
         gRenderAPI().SwapBuffers();
     }
 
@@ -148,17 +144,13 @@ namespace ege
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpComponents();
-        StartUpSceneManager();
         StartUpModelManager();
+        StartUpSceneManager();
 
         SetComponents();
 
         SetContext("Game");
 
-        ///TODO : must be cleaned
-        _camera.reset(new Camera());
-        _model.reset(new Model());
-        gModelManager().Get("cube", *_model);
         _scene = gSceneManager().GetPtr("default");
 
         return;
@@ -166,6 +158,7 @@ namespace ege
 
     void CoreApplication::OnShutDown()
     {
+        SceneManager::ShutDown();
         ModelManager::ShutDown();
         InputHandler::ShutDown();
         Keyboard::ShutDown();

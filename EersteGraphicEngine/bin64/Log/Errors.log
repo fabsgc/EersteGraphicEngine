@@ -111,3 +111,17 @@ Time: 14:10:33
 Error: Scene file malformed
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::ModelManager>::Instance
+Date: May  7 2018
+Time: 17:51:59
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: May  7 2018
+Time: 18:50:30
+Error: Resource model-1-1 not found
+Condition: 0
+############################################: 
