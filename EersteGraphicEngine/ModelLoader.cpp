@@ -139,7 +139,7 @@ namespace ege
             {
                 for (UINT j = 0; j < aiMesh->mNumVertices; j++)
                 {
-                    modelDesc->Vertices.at(j).Color = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
+                    modelDesc->Vertices.at(j).Color = XMFLOAT4(0.2f, 0.32f, 0.5f, 1.0f);
                 }
             }
         }

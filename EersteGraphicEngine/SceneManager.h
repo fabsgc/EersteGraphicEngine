@@ -3,6 +3,7 @@
 #include "PrerequisitesCore.h"
 #include "IResourceManager.h"
 #include "SceneLoader.h"
+#include "Scene.h"
 #include "IModule.h"
 
 namespace ege

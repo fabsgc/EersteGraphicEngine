@@ -53,7 +53,6 @@ namespace ege
                         config.PixelShaderPath = EGE_SHADERS_FOLDER + file;
                     }
                 }
-                
             }
 
             SPtr<Shader> shader = ege_shared_ptr_new<Shader>(config);

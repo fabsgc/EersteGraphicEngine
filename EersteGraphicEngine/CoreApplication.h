@@ -24,8 +24,13 @@
 #include "Console.h"
 
 #include "ModelManager.h"
+#include "Model.h"
 
 #include "SceneManager.h"
+#include "Scene.h"
+
+#include "Camera.h"
+
 
 namespace ege
 {
@@ -131,6 +136,10 @@ namespace ege
 
         Vector<Context>    _contexts;
         Context*           _currentContext;
+
+        SPtr<Scene>        _scene;
+        SPtr<Model>        _model;
+        SPtr<Camera>       _camera;
     };
 
     CoreApplication& gCoreApplication();

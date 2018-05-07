@@ -1,6 +1,10 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "ShaderManager.h"
+#include "ModelLoader.h"
+#include "VertexDesc.h"
+#include "RenderAPI.h"
 #include "Geometry.h"
 #include "IEntity.h"
 #include "Shader.h"
@@ -22,6 +26,8 @@ namespace ege
         SPtr<Shader> GetShader();
         
     private:
+        RenderAPI&   _renderAPI;
+
         SPtr<Shader> _shader;
         Geometry     _geometry;
     };

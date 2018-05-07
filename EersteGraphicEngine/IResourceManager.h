@@ -25,7 +25,7 @@ namespace ege
         Resource& Get(String name)
         {
             auto found = _resources.find(name);
-            EGE_ASSERT_ERROR(found != _resources.end(), ("Resource " + name + " not found"));
+            EGE_ASSERT_ERROR((found != _resources.end()), ("Resource " + name + " not found"));
 
             return *found->second;
         }
@@ -33,7 +33,7 @@ namespace ege
         SPtr<Resource> GetPtr(String name)
         {
             auto found = _resources.find(name);
-            EGE_ASSERT_ERROR(found != _resources.end(), ("Resource " + name + " not found"));
+            EGE_ASSERT_ERROR((found != _resources.end()), ("Resource " + name + " not found"));
 
             return found->second;
         }

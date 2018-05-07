@@ -359,6 +359,16 @@ namespace ege
         return _device;
     }
 
+    ID3D11Buffer*   RenderAPI::GetConstantBuffer()
+    {
+        return _constantBuffer;
+    }
+
+    ConstantBuffer* RenderAPI::GetConstantBufferUpdate()
+    {
+        return &_constantBufferUpdate;
+    }
+
     RenderAPI& gRenderAPI()
     {
         return static_cast<RenderAPI&>(RenderAPI::Instance());

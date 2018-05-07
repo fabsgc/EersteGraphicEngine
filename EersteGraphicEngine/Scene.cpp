@@ -2,8 +2,7 @@
 
 namespace ege
 {
-    Scene::Scene(String filePath)
-        : _filePath(filePath)
+    Scene::Scene()
     {
     }
 
@@ -25,6 +24,11 @@ namespace ege
         _lights.insert(Pair<String, SPtr<Light>>(name, std::move(light)));
     }
 
+    void Scene::InsertCamera(String name, SPtr<Camera> camera)
+    {
+        _cameras.insert(Pair<String, SPtr<Camera>>(name, std::move(camera)));
+    }
+
     SPtr<Node> Scene::GetNode(String name)
     {
         auto found = _nodes.find(name);
@@ -41,12 +45,20 @@ namespace ege
         return found->second;
     }
 
-    SPtr<Camera> Scene::GetCamera()
+    SPtr<Camera> Scene::GetCamera(String name)
+    {
+        auto found = _cameras.find(name);
+        EGE_ASSERT_ERROR((found != _cameras.end()), ("Camera " + name + " not found"));
+
+        return found->second;
+    }
+
+    SPtr<Camera> Scene::GetActiveCamera()
     {
         return _camera;
     }
 
-    void Scene::SetCamera(SPtr<Camera> camera)
+    void Scene::SetActiveCamera(SPtr<Camera> camera)
     {
         _camera = camera;
     }
@@ -61,6 +73,11 @@ namespace ege
 
     void Scene::Draw()
     {
+        if (_camera != nullptr)
+        {
+            _camera->Draw();
+        }
+       
         for (auto node : _nodes)
         {
             node.second->Draw();

@@ -4,7 +4,9 @@ namespace ege
 {
     Model::Model()
         : IEntity(EntityType::Model)
+        , _renderAPI(gRenderAPI())
     {
+        XMStoreFloat4x4(&_world, XMMatrixIdentity());
     }
 
     Model::~Model()
@@ -21,10 +23,24 @@ namespace ege
 
     void Model::Draw()
     {
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer();
+        ConstantBuffer* constantBufferUpdate = _renderAPI.GetConstantBufferUpdate();
+
+        XMMATRIX world = XMLoadFloat4x4(&_world);
+        constantBufferUpdate->World = XMMatrixTranspose(world);
+
+        _shader->Apply();
+        _geometry.Draw();
     }
 
     void Model::Build(SPtr<ModelDesc> modelDesc)
     {
+        //############# Set geometry
+        _geometry.Build(modelDesc);
+
+        //############# Set shader
+        _shader = gShaderManager().GetPtr("default");
     }
 
     void Model::SetShader(SPtr<Shader> shader)

@@ -41,14 +41,28 @@ namespace ege
     {
         gTime().Update();
         gJoypad().Update();
-        gRenderer().Update();
         _window->Update();
+
+        if (_scene != nullptr)
+        {
+            _scene->Update();
+        }
     }
 
     void CoreApplication::Draw()
     {
         gRenderAPI().Draw();
         gRenderer().Draw();
+
+        if (_scene != nullptr)
+        {
+            _scene->Draw();
+        }
+
+        ///TODO : to be deleted
+        _camera->Draw();
+        _model->Draw();
+        
         gRenderAPI().SwapBuffers();
     }
 
@@ -134,11 +148,18 @@ namespace ege
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpComponents();
+        StartUpSceneManager();
         StartUpModelManager();
 
         SetComponents();
 
         SetContext("Game");
+
+        ///TODO : must be cleaned
+        _camera.reset(new Camera());
+        _model.reset(new Model());
+        gModelManager().Get("cube", *_model);
+        _scene = gSceneManager().GetPtr("default");
 
         return;
     }

@@ -51,7 +51,9 @@ namespace ege
         void Initialise();
         void Resize();
 
-        Device* GetDevice();
+        Device*         GetDevice();
+        ID3D11Buffer*   GetConstantBuffer();
+        ConstantBuffer* GetConstantBufferUpdate();
 
     private:
         RenderAPI(RenderAPI const&) = delete;

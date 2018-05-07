@@ -7,10 +7,10 @@ namespace ege
 {
     struct ModelDesc
     {
-        std::vector<VertexDesc>   Vertices;
-        std::vector<WORD>         Indices;
-        bool                      HasColor;
-        bool                      HasMaterial;
+        Vector<VertexDesc>   Vertices;
+        Vector<WORD>         Indices;
+        bool                 HasColor;
+        bool                 HasMaterial;
 
         ModelDesc()
             : HasMaterial(false)
