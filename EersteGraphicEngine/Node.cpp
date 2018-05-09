@@ -26,6 +26,40 @@ namespace ege
         _entities.insert(Pair<String, SPtr<IEntity>>(name, std::move(entity)));
     }
 
+    void Node::DeleteNode(String name)
+    {
+        _child.erase(name);
+    }
+
+    void Node::DeleteNode(SPtr<Node> node)
+    {
+        for (auto it = _child.begin(); it != _child.end(); it++)
+        {
+            if (it->second == node)
+            {
+                _child.erase(it);
+                break;
+            }
+        }
+    }
+
+    void Node::DeleteEntity(String name)
+    {
+        _entities.erase(name);
+    }
+
+    void Node::DeleteEntity(SPtr<IEntity> entity)
+    {
+        for (auto it = _entities.begin(); it != _entities.end(); it++)
+        {
+            if (it->second == entity)
+            {
+                _entities.erase(it);
+                break;
+            }
+        }
+    }
+
     void Node::Update()
     {
         for (auto child : _child)

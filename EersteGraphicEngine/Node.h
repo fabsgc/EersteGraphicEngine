@@ -17,6 +17,10 @@ namespace ege
         void          Initialise();
         void          InsertNode(String name, SPtr<Node> node);
         void          InsertEntity(String name, SPtr<IEntity> entity);
+        void          DeleteNode(String name);
+        void          DeleteNode(SPtr<Node> node);
+        void          DeleteEntity(String name);
+        void          DeleteEntity(SPtr<IEntity> entity);
         void          Update() override;
         void          Draw() override;
 

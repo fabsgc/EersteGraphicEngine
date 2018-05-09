@@ -157,11 +157,14 @@
     <Filter Include="Source Files\Core\Renderer\Scene">
       <UniqueIdentifier>{85824ba7-9e2f-48f5-8006-d9c24e4b18db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\GUI">
+      <UniqueIdentifier>{7a128599-f79e-4908-a097-aaa0c1508c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GUI">
+      <UniqueIdentifier>{f0291191-e960-49c2-92b7-2fea419d2370}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Utility\Util</Filter>
     </ClCompile>
@@ -290,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
