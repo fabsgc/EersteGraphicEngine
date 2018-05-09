@@ -157,11 +157,14 @@
     <Filter Include="Source Files\Core\Renderer\Camera">
       <UniqueIdentifier>{86f6eabc-83c4-430c-9051-fcca6a78dfe9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\GUI">
+      <UniqueIdentifier>{7e338ff1-490d-418c-a882-554f7ebb4119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GUI">
+      <UniqueIdentifier>{05660b3d-2efa-4479-8226-09e89033b5ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Utility\Util</Filter>
     </ClCompile>
@@ -290,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Header Files\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -480,5 +486,9 @@
     <Image Include="..\directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl" />
+    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl" />
   </ItemGroup>
 </Project>

@@ -487,4 +487,8 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl" />
+    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl" />
+  </ItemGroup>
 </Project>
