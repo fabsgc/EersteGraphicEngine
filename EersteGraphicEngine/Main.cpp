@@ -1,4 +1,4 @@
-#include "CoreApplication.h"
+#include "Application.h"
 
 using namespace ege;
 
@@ -11,8 +11,8 @@ int CALLBACK WinMain(_In_  HINSTANCE hInstance, _In_  HINSTANCE hPrevInstance, _
     desc.WindowDesc.Height = 540;
     desc.WindowDesc.Title  = String("My Application");
 
-    CoreApplication::StartUp(desc);
-    CoreApplication& app = gCoreApplication();
+    Application::StartUp(desc);
+    Application& app = gApplication();
 
     app.RunMainLoop();
     app.ShutDown();

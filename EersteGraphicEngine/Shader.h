@@ -59,13 +59,14 @@ namespace ege
     {
     public:
         Shader(ShaderConfig config);
+        Shader(ShaderConfig config, Vector<D3D11_INPUT_ELEMENT_DESC>& inputElementsDesc);
         ~Shader();
         void Initialise();
         void Apply();
         bool HasShader(ShaderType type);
 
     public:
-        static const D3D11_INPUT_ELEMENT_DESC VertexData[2];
+        static Vector<D3D11_INPUT_ELEMENT_DESC> VertexElementDesc;
 
     private:
         HRESULT Compile();
@@ -87,7 +88,8 @@ namespace ege
         ShaderData<ID3D11PixelShader>     _pixelShader;
         ShaderData<ID3D11ComputeShader>   _computeShader;
 
-        D3D11_INPUT_ELEMENT_DESC*         _vertexData;
+        D3D11_INPUT_ELEMENT_DESC*         _inputElementsDesc;
+        UINT32                            _numberElementsDesc;
 
         ID3D11InputLayout*                _inputLayout;
     };

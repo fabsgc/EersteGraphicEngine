@@ -163,6 +163,12 @@
     <Filter Include="Source Files\Core\GUI">
       <UniqueIdentifier>{f0291191-e960-49c2-92b7-2fea419d2370}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\Material">
+      <UniqueIdentifier>{c06691b3-40b8-4d13-a898-e6e36a0eb998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Material">
+      <UniqueIdentifier>{e2d738e8-5e80-4c7b-97a1-eae109e124be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -295,6 +301,12 @@
       <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Core\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
   </ItemGroup>
@@ -475,6 +487,12 @@
     </ClInclude>
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
       <Filter>Header Files\Utility\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Core\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

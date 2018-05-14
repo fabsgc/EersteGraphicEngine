@@ -2,13 +2,21 @@
 
 namespace ege
 {
-    const D3D11_INPUT_ELEMENT_DESC Shader::VertexData[2] =
+    Vector<D3D11_INPUT_ELEMENT_DESC> Shader::VertexElementDesc =
     {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TANGENT", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "BINORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
     Shader::Shader(ShaderConfig config)
+        : Shader(config, VertexElementDesc)
+    {}
+
+    Shader::Shader(ShaderConfig config, Vector<D3D11_INPUT_ELEMENT_DESC>& inputElementsDesc)
         : _config(config)
         , _vertexShader(ShaderType::VERTEX_SHADER)
         , _hullShader(ShaderType::HULL_SHADER)
@@ -17,6 +25,8 @@ namespace ege
         , _pixelShader(ShaderType::PIXEL_SHADER)
         , _computeShader(ShaderType::COMPUTE_SHADER)
         , _inputLayout(nullptr)
+        , _inputElementsDesc(&inputElementsDesc[0])
+        , _numberElementsDesc((UINT32)inputElementsDesc.size())
     {}
 
     Shader::~Shader()
@@ -140,11 +150,9 @@ namespace ege
             if (FAILED(hr)) return hr;
         }
 
-        UINT numberElements = ARRAYSIZE(Shader::VertexData);
-
         hr = device->CreateInputLayout(
-            Shader::VertexData,
-            numberElements,
+            _inputElementsDesc,
+            _numberElementsDesc,
             _vertexShader.Blob->GetBufferPointer(),
             _vertexShader.Blob->GetBufferSize(),
             &_inputLayout);
