@@ -163,6 +163,39 @@
     <Filter Include="Source Files\Core\GUI">
       <UniqueIdentifier>{05660b3d-2efa-4479-8226-09e89033b5ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\Material">
+      <UniqueIdentifier>{49beb28b-2e01-4559-8a1e-edd784722d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Material">
+      <UniqueIdentifier>{1d0433ce-b6e5-43cd-8273-5eb980d4505d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{45ed83fd-bbe7-4b4f-aa77-9595c46c149d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Config">
+      <UniqueIdentifier>{e104416c-13d8-4cfa-9cde-fd4c2d4b5a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Font">
+      <UniqueIdentifier>{2007c522-e9c1-4f37-aa29-c1269652a48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Model">
+      <UniqueIdentifier>{04c07a64-f05c-4d7d-bd9f-2e30f41c9a09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Texture">
+      <UniqueIdentifier>{ab876f53-a78d-413d-9cb8-dc52f5634864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Sound">
+      <UniqueIdentifier>{0362e43b-b2d8-454f-a230-1124e0e2717e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader">
+      <UniqueIdentifier>{b2ae59f9-4fa2-4cf3-bb33-2475249f30fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Scene">
+      <UniqueIdentifier>{e75ff315-6183-49c8-a895-74d17c0d5929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Color">
+      <UniqueIdentifier>{9754ada3-3755-4cf5-8d1a-b74c0223afa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -295,7 +328,19 @@
       <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Header Files\App</Filter>
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files\Core\Renderer\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -476,6 +521,18 @@
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
       <Filter>Header Files\Utility\Lib</Filter>
     </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Core\Renderer\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -486,9 +543,65 @@
     <Image Include="..\directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="bin64\Data\Texture\cube-color.dds">
+      <Filter>Data\Texture</Filter>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-color.jpeg">
+      <Filter>Data\Texture</Filter>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-normal.dds">
+      <Filter>Data\Texture</Filter>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-normal.jpeg">
+      <Filter>Data\Texture</Filter>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-specular.dds">
+      <Filter>Data\Texture</Filter>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-specular.jpeg">
+      <Filter>Data\Texture</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl" />
-    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl" />
+    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl">
+      <Filter>Data\Shader\Color</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
+      <Filter>Data\Shader\Color</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="bin64\Data\Config\Application.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Context.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Keymap.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Model.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Render.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Scene.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Shader.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Texture.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
+    <Xml Include="bin64\Data\Scene\Default.xml">
+      <Filter>Data\Scene</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="bin64\Data\Model\Cube.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
   </ItemGroup>
 </Project>

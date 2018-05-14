@@ -125,3 +125,24 @@ Time: 18:50:30
 Error: Resource model-1-1 not found
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texturemanager.cpp:21
+Inside ege::TextureManager::Initialise
+Date: May 14 2018
+Time: 22:48:59
+Error: Texture file malformed
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: May 14 2018
+Time: 22:48:58
+Error: Can't load texture from file : cube-color.ddsData/Shader/
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: May 14 2018
+Time: 22:48:58
+Error: Can't load texture from file : cube-color.ddsData/Shader/
+Condition: 0
+############################################: 

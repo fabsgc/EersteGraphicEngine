@@ -2,13 +2,47 @@
 
 namespace ege
 {
-    Application& gApplication()
+    Application::Application(const StartUpDescription& desc)
+        : CoreApplication(desc)
     {
-        return Application::Instance();
     }
 
-    Application* gCoreApplicationPtr()
+    Application::~Application()
     {
-        return Application::InstancePtr();
+    }
+
+    void Application::RunMainLoop()
+    {
+        CoreApplication::RunMainLoop();
+    }
+
+    void Application::Update()
+    {
+        CoreApplication::Update();
+    }
+
+    void Application::Draw()
+    {
+        CoreApplication::Draw();
+    }
+
+    void Application::OnStartUp()
+    {
+        CoreApplication::OnStartUp();
+    }
+
+    void Application::OnShutDown()
+    {
+        CoreApplication::OnShutDown();
+    }
+
+    Application& gApplication()
+    {
+        return static_cast<Application&>(Application::Instance());
+    }
+
+    Application* gApplicationPtr()
+    {
+        return static_cast<Application*>(Application::InstancePtr());
     }
 }

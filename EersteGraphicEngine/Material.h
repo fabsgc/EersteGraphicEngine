@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "RenderAPI.h"
+#include "Texture.h"
 #include "Shader.h"
 
 namespace ege
@@ -14,7 +15,9 @@ namespace ege
         virtual void Apply();
 
     protected:
-        RenderAPI&   _renderAPI;
-        SPtr<Shader> _shader;
+        RenderAPI&               _renderAPI;
+
+        Map<UINT, SPtr<Texture>> _textures;
+        SPtr<Shader>             _shader;
     };
 }

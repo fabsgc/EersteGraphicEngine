@@ -98,7 +98,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" </AdditionalOptions>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>lib\assimp\lib\lib32\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" </AdditionalOptions>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" </AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>lib\assimp\lib\lib64\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,7 +125,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/DEGE_WIN_SDK_8 /DEGE_GRAPHIC_DEBUG /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="BasicAllocator.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MemoryAllocator.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
@@ -190,12 +192,15 @@
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskQueue.cpp" />
     <ClCompile Include="TaskScheduler.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="BasicAllocator.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
@@ -224,6 +229,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="ModelManager.h" />
@@ -248,6 +254,8 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskQueue.h" />
     <ClInclude Include="TaskScheduler.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />
@@ -261,6 +269,24 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\directx.ico" />
+    <Image Include="bin64\Data\Texture\cube-color.dds">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-color.jpeg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-normal.dds">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-normal.jpeg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-specular.dds">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
+    <Image Include="bin64\Data\Texture\cube-specular.jpeg">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
@@ -315,6 +341,40 @@
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AssemblyCodeAndHex</AssemblerOutput>
       <AssemblerOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)%(Filename).asm</AssemblerOutputFile>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="bin64\Data\Config\Application.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Context.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Keymap.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Model.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Render.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Scene.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Shader.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Config\Texture.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="bin64\Data\Scene\Default.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="bin64\Data\Model\Cube.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

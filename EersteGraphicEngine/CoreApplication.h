@@ -29,6 +29,9 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
+#include "TextureManager.h"
+#include "Texture.h"
+
 #include "Camera.h"
 
 
@@ -70,7 +73,7 @@ namespace ege
         CoreApplication(const StartUpDescription& desc);
         ~CoreApplication();
 
-        void RunMainLoop();
+        virtual void RunMainLoop();
         void StopMainLoop();
 
         void Pause(bool pause);
@@ -113,6 +116,7 @@ namespace ege
         void StartUpTime();
         void StartUpConsole();
         void StartUpTaskScheduler();
+        void StartUpTextureManager();
         void StartUpModelManager();
         void StartUpSceneManager();
 

@@ -11,12 +11,10 @@ namespace ege
         , _window(nullptr)
         , _startUpDesc(desc)
         , _currentContext(nullptr)
-    {
-    }
+    {}
 
     CoreApplication::~CoreApplication()
-    {
-    }
+    {}
 
     void CoreApplication::RunMainLoop()
     {
@@ -144,6 +142,7 @@ namespace ege
         StartUpRenderAPI();
         StartUpRenderer();
         StartUpComponents();
+        StartUpTextureManager();
         StartUpModelManager();
         StartUpSceneManager();
 
@@ -160,6 +159,7 @@ namespace ege
     {
         SceneManager::ShutDown();
         ModelManager::ShutDown();
+        TextureManager::ShutDown();
         InputHandler::ShutDown();
         Keyboard::ShutDown();
         Joypad::ShutDown();
@@ -227,6 +227,11 @@ namespace ege
     void CoreApplication::StartUpTaskScheduler()
     {
         TaskScheduler::StartUp(10);
+    }
+
+    void CoreApplication::StartUpTextureManager()
+    {
+        TextureManager::StartUp();
     }
 
     void CoreApplication::StartUpModelManager()
