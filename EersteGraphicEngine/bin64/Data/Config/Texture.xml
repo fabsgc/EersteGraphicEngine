@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <textures>
-	<texture name="cube-color" file="cube-color.dds"/>
-  <texture name="cube-specular" file="cube-specular.dds"/>
-  <texture name="cube-normal" file="cube-normal.dds"/>
+    <texture name="cube-color" file="cube-color.dds"/>
+    <texture name="cube-specular" file="cube-specular.dds"/>
+    <texture name="cube-normal" file="cube-normal.dds"/>
 </textures>

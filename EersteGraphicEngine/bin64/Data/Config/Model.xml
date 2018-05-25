@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-	<model name="cube" file="Cube.obj"/>
+    <model name="cube" file="Cube.obj"/>
 </models>

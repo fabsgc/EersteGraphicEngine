@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shaders>
-	<shader-program name="default">
-		<shader type="vertex-shader" file="Color/Color_VS.hlsl"/>
-		<shader type="pixel-shader" file="Color/Color_PS.hlsl"/>
-	</shader-program>
+    <shader-program name="default">
+        <shader type="vertex-shader" file="Color/Color_VS.hlsl"/>
+        <shader type="pixel-shader" file="Color/Color_PS.hlsl"/>
+    </shader-program>
 </shaders>

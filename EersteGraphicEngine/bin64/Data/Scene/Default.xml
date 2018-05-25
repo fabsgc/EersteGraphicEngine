@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scene>
-	<nodes>
+    <nodes>
         <node name="node-1">
             <properties>
             </properties>
@@ -61,5 +61,5 @@
                 </entity>
             </entities>
         </node>
-	</nodes>
+    </nodes>
 </scene>
