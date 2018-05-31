@@ -25,7 +25,7 @@ namespace ege
         static const float DefaultTranslationSpeed;
         static const float DefaultRotationSpeed;
 
-    private:
+    protected:
         RenderAPI&         _renderAPI;
 
         XMFLOAT4X4         _view;
@@ -41,7 +41,5 @@ namespace ege
         float              _farZ;
         float              _rotationSpeed;
         float              _translationSpeed;
-
-        
     };
 }

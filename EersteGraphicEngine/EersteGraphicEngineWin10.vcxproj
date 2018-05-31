@@ -155,11 +155,14 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FirstPersonCamera.cpp" />
+    <ClCompile Include="FlyingCamera.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="TaskScheduler.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ThirdPersonCamera.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -205,12 +209,15 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreApplication.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="DynamicLib.h" />
     <ClInclude Include="DynamicLibManager.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FirstPersonCamera.h" />
+    <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="IComponent.h" />
@@ -256,6 +263,7 @@
     <ClInclude Include="TaskScheduler.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="ThirdPersonCamera.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />

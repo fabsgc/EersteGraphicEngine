@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IComponentHandler.h"
 
 namespace ege
 {

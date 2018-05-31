@@ -150,8 +150,6 @@ namespace ege
 
         SetContext("Game");
 
-        _scene = gSceneManager().GetPtr("default");
-
         return;
     }
 

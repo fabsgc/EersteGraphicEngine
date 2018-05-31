@@ -36,11 +36,7 @@ namespace ege
 
     void Model::Build(SPtr<ModelDesc> modelDesc)
     {
-        //############# Set geometry
         _geometry.Build(modelDesc);
-
-        //############# Set shader
-        _shader = gShaderManager().GetPtr("default");
     }
 
     void Model::SetShader(SPtr<Shader> shader)

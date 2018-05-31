@@ -94,7 +94,7 @@ namespace ege
 
         const Context* GetCurrentContext() const;
 
-        template<class T = CoreApplication>
+        template<class T = Application>
         static void StartUp(const StartUpDescription& desc)
         {
             IModule::StartUp<T>(desc);

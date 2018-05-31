@@ -196,6 +196,12 @@
     <Filter Include="Data\Shader\Color">
       <UniqueIdentifier>{8602ca61-593a-4d17-8b53-2e75f7bc33ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\App\Model">
+      <UniqueIdentifier>{f6277936-68ef-407d-b362-891f6da4397f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Model">
+      <UniqueIdentifier>{d4322708-ded0-43f6-9319-976d8ced37ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -341,6 +347,18 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +550,18 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
