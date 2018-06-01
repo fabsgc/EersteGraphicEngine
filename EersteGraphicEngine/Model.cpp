@@ -34,7 +34,7 @@ namespace ege
         XMMATRIX world = XMLoadFloat4x4(&_world);
         constantBufferUpdate->World = XMMatrixTranspose(world);
 
-        _shader->Apply();
+        _material->Apply();
         _geometry.Draw();
     }
 
@@ -43,9 +43,9 @@ namespace ege
         _geometry.Build(modelDesc);
     }
 
-    void Model::SetShader(SPtr<Shader> shader)
+    void Model::SetMaterial(SPtr<Material> material)
     {
-        _shader = shader;
+        _material = material;
     }
 
     Geometry& Model::GetGeometry()
@@ -53,8 +53,8 @@ namespace ege
         return _geometry;
     }
 
-    SPtr<Shader> Model::GetShader()
+    SPtr<Material> Model::GetMaterial()
     {
-        return _shader;
+        return _material;
     }
 }

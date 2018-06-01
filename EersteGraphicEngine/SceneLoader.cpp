@@ -1,6 +1,6 @@
 #include "SceneLoader.h"
 
-#include "ShaderManager.h"
+#include "MaterialManager.h"
 #include "ModelManager.h"
 #include "PointLight.h"
 #include "Shader.h"
@@ -98,9 +98,9 @@ namespace ege
                 String key = propertyElement->Attribute("key");
                 String value = propertyElement->Attribute("value");
 
-                if (key == "shader")
+                if (key == "material")
                 {
-                    model->SetShader(gShaderManager().GetPtr(value));
+                    model->SetMaterial(gMaterialManager().GetPtr(value));
                 }
                 else if (key == "model")
                 {

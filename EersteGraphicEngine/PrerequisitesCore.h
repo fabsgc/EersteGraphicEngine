@@ -170,6 +170,9 @@ namespace ege
     struct ModelDesc;
     class  Model;
 
+    class  Material;
+    class  MaterialManager;
+
     class  Light;
     class  PointLight;
 

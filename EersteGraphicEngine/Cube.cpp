@@ -1,7 +1,7 @@
 #include "Cube.h"
 
 #include "ModelManager.h"
-#include "ShaderManager.h"
+#include "CubeMaterial.h"
 
 namespace ege
 {
@@ -16,7 +16,10 @@ namespace ege
 
     void Cube::Initialise()
     {
-        SetShader(gShaderManager().GetPtr("default"));
+        SPtr<Material> material = ege_shared_ptr_new<CubeMaterial>();
+        material->Initialise();
+        SetMaterial(material);
+
         Build(gModelManager().GetPtr("cube"));
     }
 }
