@@ -10,4 +10,9 @@ namespace ege
     FlyingCamera::~FlyingCamera()
     {
     }
+
+    void FlyingCamera::Update()
+    {
+        Camera::Update();
+    }
 }

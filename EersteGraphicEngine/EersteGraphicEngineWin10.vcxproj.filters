@@ -360,6 +360,9 @@
     <ClCompile Include="ThirdPersonCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -561,6 +564,9 @@
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
   </ItemGroup>

@@ -163,6 +163,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
+    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
+    <ClInclude Include="Frustum.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />

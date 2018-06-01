@@ -3,6 +3,7 @@
 #include "PrerequisitesCore.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
+#include "Frustum.h"
 #include "Window.h"
 
 namespace ege
@@ -13,10 +14,22 @@ namespace ege
         Camera();
         ~Camera();
 
-        void Initialise() override;
-        void Update() override;
-        void Draw() override;
-        void ComputeProjectionMatrix();
+        void              Initialise() override;
+        void              Update() override;
+        void              Draw() override;
+        void              ComputeProjectionMatrix();
+
+        const XMFLOAT4X4& GetView() const;
+        const XMFLOAT4X4& GetProjection() const;
+        const XMFLOAT3&   GetPosition() const;
+        const XMFLOAT3&   GetRight() const;
+        const XMFLOAT3&   GetLook() const;
+        const XMFLOAT3&   GetUp() const;
+        const float&      GetFov() const;
+        const float&      GetNearZ() const;
+        const float&      GetFarZ() const;
+        const float&      GetRotationSpeed() const;
+        const float&      GetTranslationSpeed() const;
 
     public:
         static const float DefaultFov;
@@ -41,5 +54,7 @@ namespace ege
         float              _farZ;
         float              _rotationSpeed;
         float              _translationSpeed;
+
+        Frustum            _frustum;
     };
 }

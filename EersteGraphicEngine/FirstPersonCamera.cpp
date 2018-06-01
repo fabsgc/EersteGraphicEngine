@@ -10,4 +10,9 @@ namespace ege
     FirstPersonCamera::~FirstPersonCamera()
     {
     }
+
+    void FirstPersonCamera::Update()
+    {
+        Camera::Update();
+    }
 }

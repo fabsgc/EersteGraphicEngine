@@ -10,5 +10,7 @@ namespace ege
     public:
         FlyingCamera();
         ~FlyingCamera();
+
+        void Update();
     };
 }

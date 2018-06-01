@@ -10,4 +10,9 @@ namespace ege
     ThirdPersonCamera::~ThirdPersonCamera()
     {
     }
+
+    void ThirdPersonCamera::Update()
+    {
+        Camera::Update();
+    }
 }

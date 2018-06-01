@@ -10,5 +10,7 @@ namespace ege
     public:
         FirstPersonCamera();
         ~FirstPersonCamera();
+
+        void Update();
     };
 }

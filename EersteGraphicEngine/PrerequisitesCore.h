@@ -174,4 +174,8 @@ namespace ege
     class  PointLight;
 
     class  Camera;
+    class  Frustum;
+    class  FlyingCamera;
+    class  FirstPersonCamera;
+    class  ThirdPersonCamera;
 }

@@ -36,6 +36,7 @@ namespace ege
 
     void Camera::Update()
     {
+        _frustum.Build(*this);
     }
 
     void Camera::Draw()
@@ -100,5 +101,60 @@ namespace ege
         _view(3, 3) = 1.0f;
 
         XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(_fov, windowWidth / (FLOAT)windowHeight, _nearZ, _farZ));
+    }
+
+    const XMFLOAT4X4& Camera::GetView() const
+    {
+        return _view;
+    }
+
+    const XMFLOAT4X4& Camera::GetProjection() const
+    {
+        return _projection;
+    }
+
+    const XMFLOAT3& Camera::GetPosition() const
+    {
+        return _position;
+    }
+
+    const XMFLOAT3& Camera::GetRight() const
+    {
+        return _right;
+    }
+
+    const XMFLOAT3& Camera::GetLook() const
+    {
+        return _look;
+    }
+
+    const XMFLOAT3& Camera::GetUp() const
+    {
+        return _up;
+    }
+
+    const float& Camera::GetFov() const
+    {
+        return _fov;
+    }
+
+    const float& Camera::GetNearZ() const
+    {
+        return _nearZ;
+    }
+
+    const float& Camera::GetFarZ() const
+    {
+        return _farZ;
+    }
+
+    const float& Camera::GetRotationSpeed() const
+    {
+        return _rotationSpeed;
+    }
+
+    const float& Camera::GetTranslationSpeed() const
+    {
+        return _translationSpeed;
     }
 }

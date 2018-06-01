@@ -10,5 +10,7 @@ namespace ege
     public:
         ThirdPersonCamera();
         ~ThirdPersonCamera();
+
+        void Update();
     };
 }
