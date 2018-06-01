@@ -1,5 +1,10 @@
 #include "Application.h"
 
+#include "FlyingCamera.h"
+#include "PointLight.h"
+#include "Node.h"
+#include "Cube.h"
+
 namespace ege
 {
     Application::Application(const StartUpDescription& desc)

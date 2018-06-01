@@ -2,7 +2,6 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponent.h"
-#include "Window.h"
 
 namespace ege
 {

@@ -1,4 +1,5 @@
 #include "ShaderManager.h"
+#include "Shader.h"
 
 namespace ege
 {

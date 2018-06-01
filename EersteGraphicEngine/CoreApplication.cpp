@@ -1,5 +1,29 @@
 #include "CoreApplication.h"
 
+#include "RenderAPI.h"
+#include "Renderer.h"
+
+#include "Keyboard.h"
+#include "Joypad.h"
+#include "Mouse.h"
+#include "InputHandler.h"
+
+#include "ModelManager.h"
+#include "Model.h"
+
+#include "SceneManager.h"
+
+#include "TextureManager.h"
+#include "Texture.h"
+
+#include "TaskScheduler.h"
+#include "Task.h"
+
+#include "EventManager.h"
+#include "Event.h"
+
+#include "Console.h"
+
 namespace ege
 {
     CoreApplication::CoreApplication(const StartUpDescription& desc)

@@ -3,12 +3,6 @@
 #include "PrerequisitesCore.h"
 #include "CoreApplication.h"
 
-#include "FlyingCamera.h"
-#include "PointLight.h"
-#include "Node.h"
-
-#include "Cube.h"
-
 namespace ege
 {
     class Application : public CoreApplication

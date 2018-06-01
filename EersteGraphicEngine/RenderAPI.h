@@ -2,10 +2,8 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
-#include "ShaderManager.h"
 #include "IDrawable.h"
 #include "Device.h"
-#include "Window.h"
 
 namespace ege
 {

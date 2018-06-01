@@ -2,7 +2,6 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
-#include "EventManager.h"
 
 namespace ege
 {

@@ -1,5 +1,8 @@
 #include "Cube.h"
 
+#include "ModelManager.h"
+#include "ShaderManager.h"
+
 namespace ege
 {
     Cube::Cube()

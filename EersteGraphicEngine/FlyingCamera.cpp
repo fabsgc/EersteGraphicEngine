@@ -1,4 +1,6 @@
 #include "FlyingCamera.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 namespace ege
 {
@@ -13,6 +15,9 @@ namespace ege
 
     void FlyingCamera::Update()
     {
+        Keyboard& keyboard = gKeyboard();
+        Mouse& mouse       = gMouse();
+
         Camera::Update();
     }
 }

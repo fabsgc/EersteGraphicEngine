@@ -202,6 +202,12 @@
     <Filter Include="Source Files\App\Model">
       <UniqueIdentifier>{d4322708-ded0-43f6-9319-976d8ced37ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\App\Material">
+      <UniqueIdentifier>{105298db-ce26-4467-8e62-dfa2c09272bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Material">
+      <UniqueIdentifier>{9d1404fd-2c7e-4228-abf3-e40f827b94a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">

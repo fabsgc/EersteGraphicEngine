@@ -1,15 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "ShaderManager.h"
-#include "ModelManager.h"
-#include "PointLight.h"
-#include "Shader.h"
-#include "Camera.h"
-#include "Model.h"
-#include "Light.h"
-#include "Scene.h"
-#include "Node.h"
 
 namespace ege
 {

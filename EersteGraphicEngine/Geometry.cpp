@@ -1,4 +1,5 @@
 #include "Geometry.h"
+#include "ModelLoader.h"
 
 namespace ege
 {

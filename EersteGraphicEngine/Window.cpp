@@ -1,6 +1,11 @@
 #include "Window.h"
 #include "CoreApplication.h"
 
+#include "EventManager.h"
+#include "InputHandler.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+
 namespace ege
 {
     Window::Window(const WINDOW_DESC& desc)

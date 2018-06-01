@@ -1,5 +1,9 @@
 #include "RenderAPI.h"
 
+#include "ShaderManager.h"
+#include "EventManager.h"
+#include "Window.h"
+
 namespace ege
 {
     RenderAPI::RenderAPI()

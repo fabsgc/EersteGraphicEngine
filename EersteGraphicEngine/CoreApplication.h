@@ -7,33 +7,7 @@
 #include "IDrawable.h"
 #include "Window.h"
 
-#include "RenderAPI.h"
-#include "Renderer.h"
-
-#include "Keyboard.h"
-#include "Joypad.h"
-#include "Mouse.h"
-#include "InputHandler.h"
-
-#include "EventManager.h"
-#include "Event.h"
-
-#include "TaskScheduler.h"
-#include "Task.h"
-
-#include "Console.h"
-
-#include "ModelManager.h"
-#include "Model.h"
-
-#include "SceneManager.h"
 #include "Scene.h"
-
-#include "TextureManager.h"
-#include "Texture.h"
-
-#include "Camera.h"
-
 
 namespace ege
 {

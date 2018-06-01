@@ -3,7 +3,6 @@
 #include "PrerequisitesCore.h"
 #include "IResourceManager.h"
 #include "IModule.h"
-#include "Shader.h"
 
 namespace ege
 {

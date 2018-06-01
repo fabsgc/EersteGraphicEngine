@@ -1,5 +1,11 @@
 #include "InputHandler.h"
 
+#include "CoreApplication.h"
+#include "Keyboard.h"
+#include "Joypad.h"
+#include "Time.h"
+
+
 namespace ege
 {
     InputHandler::InputHandler()

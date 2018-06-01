@@ -10,6 +10,8 @@ namespace ege
 
     class BasicAllocator;
     class LinearAllocator;
+    template<size_t ElementSize, size_t ElementsPerBlock, size_t Alignment> class PoolAllocator;
+    class StackAllocator;
 
     class MemoryCounter;
     class MemoryAllocatorBase;

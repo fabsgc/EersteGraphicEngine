@@ -4,7 +4,6 @@
 #include "RenderAPI.h"
 #include "IEntity.h"
 #include "Frustum.h"
-#include "Window.h"
 
 namespace ege
 {

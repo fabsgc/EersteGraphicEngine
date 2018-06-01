@@ -1,5 +1,9 @@
 #include "Model.h"
 
+#include "ShaderManager.h"
+#include "ModelLoader.h"
+#include "VertexDesc.h"
+
 namespace ege
 {
     Model::Model()

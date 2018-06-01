@@ -2,7 +2,6 @@
 
 #include "PrerequisitesCore.h"
 #include "IEntity.h"
-#include "Shader.h"
 
 namespace ege
 {

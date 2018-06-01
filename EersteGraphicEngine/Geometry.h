@@ -5,7 +5,6 @@
 #include "IDrawable.h"
 #include "RenderAPI.h"
 #include "VertexDesc.h"
-#include "ModelLoader.h"
 
 namespace ege
 {
