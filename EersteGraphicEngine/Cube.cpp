@@ -16,10 +16,10 @@ namespace ege
 
     void Cube::Initialise()
     {
+        Build(gModelManager().GetPtr("cube"));
+
         SPtr<Material> material = ege_shared_ptr_new<CubeMaterial>();
         material->Initialise();
         SetMaterial(material);
-
-        Build(gModelManager().GetPtr("cube"));
     }
 }
