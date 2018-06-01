@@ -104,6 +104,48 @@ namespace ege
         XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(_fov, windowWidth / (FLOAT)windowHeight, _nearZ, _farZ));
     }
 
+    void Camera::Move(XMFLOAT3 vector)
+    {
+        XMVECTOR right = XMLoadFloat3(&_right);
+        XMVECTOR look = XMLoadFloat3(&_look);
+        XMVECTOR up = XMLoadFloat3(&_up);
+        XMVECTOR position = XMLoadFloat3(&_position);
+        XMVECTOR movement = XMLoadFloat3(&vector);
+
+        XMVECTOR strafe = right * XMVectorGetX(movement);
+        position += strafe;
+
+        XMVECTOR forward = look * XMVectorGetY(movement);
+        position += forward;
+
+        XMVECTOR climb = up * XMVectorGetZ(movement);
+        position += climb;
+
+        XMStoreFloat3(&_position, position);
+
+        ComputeProjectionMatrix();
+    }
+    
+    void Camera::Move(float x, float y, float z)
+    {
+        Move(XMFLOAT3(x, y, z));
+    }
+
+    void Camera::MoveX(float x)
+    {
+        Move(x, 0.0f, 0.0f);
+    }
+
+    void Camera::MoveY(float y)
+    {
+        Move(0.0f, y, 0.0f);
+    }
+
+    void Camera::MoveZ(float z)
+    {
+        Move(0.0f, 0.0f, z);
+    }
+
     const XMFLOAT4X4& Camera::GetView() const
     {
         return _view;

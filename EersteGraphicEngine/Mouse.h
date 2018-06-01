@@ -67,8 +67,10 @@ namespace ege
         MouseButton            GetMouseButton(const MouseButtonName& name);
         MouseButton            GetMouseButton(const String& label);
         const MouseWheelState& GetWheelState() const;
+        const XMFLOAT2&        GetCursorDistanceFromCenter() const;
 
     private:
+        void UpdatePosition(MSG* message);
         void UpdateState(const MouseButtonName& name, const MouseButtonState& state);
         void UpdateSwitched(MouseButton* button);
         void OnStartUp() override;
@@ -79,6 +81,10 @@ namespace ege
         XMFLOAT2            _position;
         Vector<MouseButton> _mouseButtons;
         MouseWheelState     _mouseWheel;
+
+        XMFLOAT2            _oldPosition;
+        XMFLOAT2            _centralPosition;
+        XMFLOAT2            _cursorDistanceFromCenter;
     };
 
     Mouse&      gMouse();

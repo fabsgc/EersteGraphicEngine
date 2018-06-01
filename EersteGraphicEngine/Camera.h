@@ -30,6 +30,12 @@ namespace ege
         const float&      GetRotationSpeed() const;
         const float&      GetTranslationSpeed() const;
 
+        void              Move(XMFLOAT3 vector);
+        void              Move(float x, float y, float z);
+        void              MoveX(float x);
+        void              MoveY(float y);
+        void              MoveZ(float z);
+
     public:
         static const float DefaultFov;
         static const float DefaultNearZ;

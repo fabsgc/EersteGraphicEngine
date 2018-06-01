@@ -1,7 +1,11 @@
 #pragma once
 
 #include "IComponentHandler.h"
+#include "CoreApplication.h"
 #include "IComponent.h"
+#include "Keyboard.h"
+#include "Joypad.h"
+#include "Mouse.h"
 
 namespace ege
 {

@@ -12,5 +12,6 @@ namespace ege
         ~FlyingCamera();
 
         void Update();
+        void Fly(float distance);
     };
 }

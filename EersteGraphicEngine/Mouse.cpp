@@ -11,8 +11,7 @@ namespace ege
 
     void Mouse::Update(MSG* message)
     {
-        _position.x = (float)GET_X_LPARAM(message->lParam);
-        _position.y = (float)GET_Y_LPARAM(message->lParam);
+        UpdatePosition(message);
 
         switch (message->message)
         {
@@ -178,11 +177,44 @@ namespace ege
         return _mouseWheel;
     }
 
+    const XMFLOAT2& Mouse::GetCursorDistanceFromCenter() const
+    {
+        return _cursorDistanceFromCenter;
+    }
+
     void Mouse::OnStartUp()
     {
+        _oldPosition.x = (float)_window.GetWindowWidth() / 2;
+        _oldPosition.y = (float)_window.GetWindowHeight() / 2;
+        _centralPosition = _oldPosition;
+
         _mouseButtons.push_back(MouseButton(MouseButtonName::LEFT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::RIGHT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::MIDDLE));
+    }
+
+    void Mouse::UpdatePosition(MSG* message)
+    {
+        _position.x = (float)GET_X_LPARAM(message->lParam);
+        _position.y = (float)GET_Y_LPARAM(message->lParam);
+
+        _centralPosition.x = (float)_window.GetWindowWidth() / 2;
+        _centralPosition.y = (float)_window.GetWindowHeight() / 2;
+
+        _cursorDistanceFromCenter.x = _position.x - _centralPosition.x;
+        _cursorDistanceFromCenter.y = _position.y - _centralPosition.y;
+
+        if (abs(_cursorDistanceFromCenter.x) < 25.0f || _position.x == 0.0f)
+        {
+            _cursorDistanceFromCenter.x = 0.0f;
+        }
+
+        if (abs(_cursorDistanceFromCenter.y) < 25.0f || _position.y == 0.0f)
+        {
+            _cursorDistanceFromCenter.y = 0.0f;
+        }
+
+        _oldPosition = _position;
     }
 
     Mouse& gMouse()
