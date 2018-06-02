@@ -7,7 +7,7 @@ namespace ege
     const float Camera::DefaultNearZ = 0.01f;
     const float Camera::DefaultFarZ = 100.0f;
     const float Camera::DefaultTranslationSpeed = 4.0f;
-    const float Camera::DefaultRotationSpeed = 0.4f;
+    const float Camera::DefaultRotationSpeed = 0.25f;
 
     Camera::Camera()
         : IEntity(EntityType::Camera)

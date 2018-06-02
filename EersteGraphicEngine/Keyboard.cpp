@@ -136,6 +136,7 @@ namespace ege
         _keys.push_back(Key(KeyName::SHIFT, "SHIFT", VK_SHIFT));
         _keys.push_back(Key(KeyName::CAPS_LOCK, "CAPS_LOCK", VK_CAPITAL));
         _keys.push_back(Key(KeyName::TAB, "TAB", VK_TAB));
+        _keys.push_back(Key(KeyName::ALT_GR, "ALT_GR", VK_MENU));
         _keys.push_back(Key(KeyName::ALT, "ALT", VK_MENU));
         _keys.push_back(Key(KeyName::BACK, "BACK", VK_BACK));
         _keys.push_back(Key(KeyName::ENTER, "ENTER", VK_RETURN));
