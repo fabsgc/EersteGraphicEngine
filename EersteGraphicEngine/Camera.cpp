@@ -104,13 +104,13 @@ namespace ege
         XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(_fov, windowWidth / (FLOAT)windowHeight, _nearZ, _farZ));
     }
 
-    void Camera::Move(XMFLOAT3 vector)
+    void Camera::Move(XMFLOAT3 distance)
     {
         XMVECTOR right = XMLoadFloat3(&_right);
         XMVECTOR look = XMLoadFloat3(&_look);
         XMVECTOR up = XMLoadFloat3(&_up);
         XMVECTOR position = XMLoadFloat3(&_position);
-        XMVECTOR movement = XMLoadFloat3(&vector);
+        XMVECTOR movement = XMLoadFloat3(&distance);
 
         XMVECTOR strafe = right * XMVectorGetX(movement);
         position += strafe;
@@ -144,6 +144,95 @@ namespace ege
     void Camera::MoveZ(float z)
     {
         Move(0.0f, 0.0f, z);
+    }
+
+    void Camera:: RotateFrom(XMFLOAT3 angle, XMFLOAT3 position)
+    {
+        ComputeProjectionMatrix();
+    }
+
+    void Camera::RotateFrom(float x, float y, float z, XMFLOAT3 position)
+    {
+        RotateFrom(XMFLOAT3(x, y, z), position);
+    }
+
+    void Camera::RotateX(float x, XMFLOAT3 position)
+    {
+        RotateFrom(x, 0.0f, 0.0f, position);
+    }
+
+    void Camera::RotateY(float y, XMFLOAT3 position)
+    {
+        RotateFrom(0.0f, y, 0.0f, position);
+    }
+
+    void Camera::RotateZ(float z, XMFLOAT3 position)
+    {
+        RotateFrom(0.0f, 0.0f, z, position);
+    }
+
+    void Camera::Rotate(XMFLOAT3 angle)
+    {
+        RotateFrom(angle, _position);
+    }
+
+    void Camera::Rotate(float x, float y, float z)
+    {
+        Rotate(XMFLOAT3(x, y, z));
+    }
+
+    void Camera::RotateX(float x)
+    {
+        Rotate(x, 0.0f, 0.0f);
+    }
+
+    void Camera::RotateY(float y)
+    {
+        Rotate(0.0f, y, 0.0f);
+    }
+
+    void Camera::RotateZ(float z)
+    {
+        Rotate(0.0f, 0.0f, z);
+    }
+
+    void Camera::Pitch(float angle)
+    {
+        XMMATRIX T = XMMatrixRotationAxis(XMLoadFloat3(&_right), angle);
+
+		XMVECTOR up = XMVector3TransformCoord(XMLoadFloat3(&_up), T);
+		XMVECTOR look = XMVector3TransformCoord(XMLoadFloat3(&_look), T);
+
+		XMStoreFloat3(&_up, up);
+		XMStoreFloat3(&_look, look);
+
+        ComputeProjectionMatrix();
+    }
+
+    void Camera::Roll(float angle)
+    {
+        XMMATRIX T = XMMatrixRotationAxis(XMLoadFloat3(&_look), angle);
+
+        XMVECTOR right = XMVector3TransformCoord(XMLoadFloat3(&_right), T);
+        XMVECTOR up = XMVector3TransformCoord(XMLoadFloat3(&_up), T);
+
+        XMStoreFloat3(&_right, right);
+        XMStoreFloat3(&_up, up);
+
+        ComputeProjectionMatrix();
+    }
+
+    void Camera::Yaw(float angle)
+    {
+        XMMATRIX T = XMMatrixRotationY(angle);
+
+        XMVECTOR right = XMVector3TransformCoord(XMLoadFloat3(&_right), T);
+        XMVECTOR look = XMVector3TransformCoord(XMLoadFloat3(&_look), T);
+
+        XMStoreFloat3(&_right, right);
+        XMStoreFloat3(&_look, look);
+
+        ComputeProjectionMatrix();
     }
 
     const XMFLOAT4X4& Camera::GetView() const

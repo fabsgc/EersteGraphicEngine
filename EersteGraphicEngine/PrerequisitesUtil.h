@@ -1,5 +1,8 @@
 #pragma once
 
+// Math Utility
+#include "MathUtility.h"
+
 // Forward declarations
 #include "ForwardDeclarationUtil.h"
 

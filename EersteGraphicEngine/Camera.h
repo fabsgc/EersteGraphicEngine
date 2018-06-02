@@ -30,11 +30,27 @@ namespace ege
         const float&      GetRotationSpeed() const;
         const float&      GetTranslationSpeed() const;
 
-        void              Move(XMFLOAT3 vector);
+        void              Move(XMFLOAT3 distance);
         void              Move(float x, float y, float z);
         void              MoveX(float x);
         void              MoveY(float y);
         void              MoveZ(float z);
+
+        void              RotateFrom(XMFLOAT3 angle, XMFLOAT3 position);
+        void              RotateFrom(float x, float y, float z, XMFLOAT3 position);
+        void              RotateX(float x, XMFLOAT3 position);
+        void              RotateY(float y, XMFLOAT3 position);
+        void              RotateZ(float z, XMFLOAT3 position);
+
+        void              Rotate(XMFLOAT3 angle);
+        void              Rotate(float x, float y, float z);
+        void              RotateX(float x);
+        void              RotateY(float y);
+        void              RotateZ(float z);
+
+        void              Pitch(float angle);
+        void              Roll(float angle);
+        void              Yaw(float angle);
 
     public:
         static const float DefaultFov;

@@ -196,6 +196,24 @@
     <Filter Include="Data\Shader\Color">
       <UniqueIdentifier>{2985c837-d99f-48e0-ac58-7300e4ed38e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\App\Material">
+      <UniqueIdentifier>{37fc9ebc-bcb6-4067-bd7a-ac71fea17158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App\Model">
+      <UniqueIdentifier>{5e864f15-024e-40b9-ac11-9796dd043b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Material">
+      <UniqueIdentifier>{4ee4eb12-9db8-4653-8d7c-36eed6c4804f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Model">
+      <UniqueIdentifier>{9df28da1-abc8-4bac-9fd9-b1910c175296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Math">
+      <UniqueIdentifier>{89f6a1c5-357a-4f31-9575-aa3fe235e03b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Math">
+      <UniqueIdentifier>{16f66005-21e7-45b7-9c4e-b7dbcdec84b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -341,6 +359,30 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Source Files\Core\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtility.cpp">
+      <Filter>Source Files\Utility\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +574,30 @@
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Header Files\Core\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtility.h">
+      <Filter>Header Files\Utility\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

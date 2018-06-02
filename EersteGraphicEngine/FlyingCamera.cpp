@@ -21,6 +21,13 @@ namespace ege
         Time& time                 = gTime();
 
         float deltaTime = time.GetFrameDelta();
+        XMFLOAT2 cursorDistanceFromCenter = mouse.GetCursorDistanceFromCenter();
+
+        float angleY = cursorDistanceFromCenter.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+        float angleX = cursorDistanceFromCenter.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+        
+        Pitch(angleX);
+        Yaw(angleY);
 
         if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
         {

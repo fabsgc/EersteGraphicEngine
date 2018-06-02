@@ -11,5 +11,6 @@ namespace ege
         Cube();
         ~Cube();
         void Initialise() override;
+        void Update();
     };
 }

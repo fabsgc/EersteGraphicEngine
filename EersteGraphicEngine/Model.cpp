@@ -23,6 +23,10 @@ namespace ege
 
     void Model::Update()
     {
+        if (_material != nullptr)
+        {
+            _material->Update();
+        }
     }
 
     void Model::Draw()
@@ -34,7 +38,11 @@ namespace ege
         XMMATRIX world = XMLoadFloat4x4(&_world);
         constantBufferUpdate->World = XMMatrixTranspose(world);
 
-        _material->Apply();
+        if (_material != nullptr)
+        {
+            _material->Apply();
+        }
+        
         _geometry.Draw();
     }
 

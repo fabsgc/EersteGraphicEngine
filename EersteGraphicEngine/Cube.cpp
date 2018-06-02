@@ -22,4 +22,9 @@ namespace ege
         material->Initialise();
         SetMaterial(material);
     }
+
+    void Cube::Update()
+    {
+        Model::Update();
+    }
 }
