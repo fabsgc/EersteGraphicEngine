@@ -208,6 +208,12 @@
     <Filter Include="Source Files\App\Material">
       <UniqueIdentifier>{9d1404fd-2c7e-4228-abf3-e40f827b94a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\Math">
+      <UniqueIdentifier>{e8ae7e28-3494-459f-86fa-0db3056f2099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Math">
+      <UniqueIdentifier>{a21d5cf0-5cd8-4ecb-b3bf-c5f6be77fdc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -374,6 +380,9 @@
     </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Source Files\Core\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtility.cpp">
+      <Filter>Source Files\Utility\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -586,6 +595,9 @@
     </ClInclude>
     <ClInclude Include="MaterialManager.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtility.h">
+      <Filter>Header Files\Utility\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
