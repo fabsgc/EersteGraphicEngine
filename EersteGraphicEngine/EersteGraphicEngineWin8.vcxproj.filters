@@ -196,6 +196,27 @@
     <Filter Include="Data\Shader\Color">
       <UniqueIdentifier>{9754ada3-3755-4cf5-8d1a-b74c0223afa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Material">
+      <UniqueIdentifier>{47e78c73-df26-4452-9ada-ce51b7d693a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App\Material">
+      <UniqueIdentifier>{83b88573-0240-4c5c-80b0-1b10927f0efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App\Model">
+      <UniqueIdentifier>{bf87a93f-2428-445c-b8cb-886bce6e197a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Math">
+      <UniqueIdentifier>{9ba245d2-3a42-4295-83ba-783085f179c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Material">
+      <UniqueIdentifier>{b0ea68ad-58b7-47d3-b52a-3e45d2b5d443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Model">
+      <UniqueIdentifier>{2b28a1a3-422e-4468-9db4-0b7090c6f267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Math">
+      <UniqueIdentifier>{46bfe031-b777-49d9-8c87-0d7320315793}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -341,6 +362,48 @@
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Core\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Source Files\Core\Renderer\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtility.cpp">
+      <Filter>Source Files\Utility\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -533,6 +596,48 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
     </ClInclude>
+    <ClInclude Include="CubeMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Header Files\Core\Renderer\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtility.h">
+      <Filter>Header Files\Utility\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -598,9 +703,18 @@
     <Xml Include="bin64\Data\Scene\Default.xml">
       <Filter>Data\Scene</Filter>
     </Xml>
+    <Xml Include="bin64\Data\Config\Material.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Object Include="bin64\Data\Model\Cube.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Plane.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Sphere.obj">
       <Filter>Data\Model</Filter>
     </Object>
   </ItemGroup>

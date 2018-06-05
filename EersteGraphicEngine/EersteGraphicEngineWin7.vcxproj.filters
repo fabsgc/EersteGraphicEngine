@@ -214,6 +214,9 @@
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{16f66005-21e7-45b7-9c4e-b7dbcdec84b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Material">
+      <UniqueIdentifier>{dffddd1c-543b-4893-bc6f-3b4b1f54a6f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -383,6 +386,24 @@
     </ClCompile>
     <ClCompile Include="MathUtility.cpp">
       <Filter>Source Files\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -599,6 +620,24 @@
     <ClInclude Include="MathUtility.h">
       <Filter>Header Files\Utility\Math</Filter>
     </ClInclude>
+    <ClInclude Include="PlaneMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -656,9 +695,18 @@
     <Xml Include="bin64\Data\Scene\Default.xml">
       <Filter>Data\Scene</Filter>
     </Xml>
+    <Xml Include="bin64\Data\Config\Material.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Object Include="bin64\Data\Model\Cube.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Plane.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Sphere.obj">
       <Filter>Data\Model</Filter>
     </Object>
   </ItemGroup>

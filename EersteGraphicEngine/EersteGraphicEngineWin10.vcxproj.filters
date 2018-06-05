@@ -214,6 +214,9 @@
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{a21d5cf0-5cd8-4ecb-b3bf-c5f6be77fdc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Material">
+      <UniqueIdentifier>{46281408-7e89-4bd1-9b6e-159defbba66b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -700,9 +703,18 @@
     <Xml Include="bin64\Data\Scene\Default.xml">
       <Filter>Data\Scene</Filter>
     </Xml>
+    <Xml Include="bin64\Data\Config\Material.xml">
+      <Filter>Data\Config</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Object Include="bin64\Data\Model\Cube.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Plane.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Sphere.obj">
       <Filter>Data\Model</Filter>
     </Object>
   </ItemGroup>
