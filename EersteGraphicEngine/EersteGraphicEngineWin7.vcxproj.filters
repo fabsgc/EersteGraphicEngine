@@ -217,6 +217,9 @@
     <Filter Include="Data\Material">
       <UniqueIdentifier>{dffddd1c-543b-4893-bc6f-3b4b1f54a6f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Shader\Color\Include">
+      <UniqueIdentifier>{bd4689cd-70b6-4e44-be8a-3490e99a30ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -404,6 +407,9 @@
     </ClCompile>
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderInclude.cpp">
+      <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -638,6 +644,9 @@
     <ClInclude Include="AmbientLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderInclude.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -717,5 +726,10 @@
     <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
       <Filter>Data\Shader\Color</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin64\Data\Shader\Color\Include\Include.hlsli">
+      <Filter>Data\Shader\Color\Include</Filter>
+    </None>
   </ItemGroup>
 </Project>

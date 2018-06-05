@@ -198,6 +198,7 @@
     <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderInclude.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereMaterial.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="SceneLoader.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderInclude.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereMaterial.h" />
@@ -414,6 +416,9 @@
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AssemblyCodeAndHex</AssemblerOutput>
       <AssemblerOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)%(Filename).asm</AssemblerOutputFile>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin64\Data\Shader\Color\Include\Include.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,6 +24,8 @@ namespace ege
         String GeometryShaderPath;
         String PixelShaderPath;
         String ComputeShaderPath;
+        String ShaderIncludeDirectory;
+        String SystemShaderIncludeDirectory;
 
         ShaderConfig()
             : VertexShaderPath("")
@@ -32,6 +34,8 @@ namespace ege
             , GeometryShaderPath("")
             , PixelShaderPath("")
             , ComputeShaderPath("")
+            , ShaderIncludeDirectory("")
+            , SystemShaderIncludeDirectory("")
         {}
     };
 
