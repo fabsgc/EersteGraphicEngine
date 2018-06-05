@@ -175,6 +175,8 @@ namespace ege
 
     class  Light;
     class  PointLight;
+    class  AmbientLight;
+    class  DirectionalLight;
 
     class  Camera;
     class  Frustum;

@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BasicAllocator.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="CubeMaterial.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
     <ClCompile Include="DynamicLibManager.cpp" />
     <ClCompile Include="Event.cpp" />
@@ -185,6 +187,8 @@
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PlaneMaterial.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
@@ -194,6 +198,8 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphereMaterial.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task.cpp" />
@@ -208,6 +214,7 @@
     <ClCompile Include="Worker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="BasicAllocator.h" />
     <ClInclude Include="Camera.h" />
@@ -216,6 +223,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubeMaterial.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="DynamicLib.h" />
     <ClInclude Include="DynamicLibManager.h" />
     <ClInclude Include="Error.h" />
@@ -250,6 +258,7 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
@@ -263,6 +272,9 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="PlaneMaterial.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphereMaterial.h" />
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />

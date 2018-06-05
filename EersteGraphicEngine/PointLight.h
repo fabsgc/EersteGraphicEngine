@@ -1,11 +1,11 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "Light.h"
+#include "DirectionalLight.h"
 
 namespace ege
 {
-    class PointLight : public Light
+    class PointLight : public DirectionalLight
     {
     public:
         PointLight();
@@ -14,5 +14,12 @@ namespace ege
         void Initialise() override;
         void Update()  override;
         void Draw()  override;
+
+    protected:
+        static const XMFLOAT3 DefaultPosition;
+        static const float    DefaultRadius;
+
+    protected:
+        float    _radius;
     };
 }

@@ -146,3 +146,10 @@ Time: 22:48:58
 Error: Can't load texture from file : cube-color.ddsData/Shader/
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: Jun  5 2018
+Time: 11:02:01
+Error: Can't load scene : Data/Model/Plane.obj
+Condition: 0
+############################################: 

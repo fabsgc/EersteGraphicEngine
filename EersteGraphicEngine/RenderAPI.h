@@ -29,6 +29,28 @@ namespace ege
         XMMATRIX View;
         XMMATRIX Projection;
         XMMATRIX World;
+
+        XMFLOAT4 AmbientColor;
+
+        XMFLOAT4 CameraPosition;
+
+        XMFLOAT4 LightColor;
+        XMFLOAT4 LightDirection;
+        XMFLOAT4 LightPosition;
+        XMFLOAT4 LightRadius;
+
+        XMFLOAT4 SpecularColor;
+        XMFLOAT4 SpecularPower;
+
+        ConstantBuffer()
+            : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
+            , LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , LightDirection(XMFLOAT4(0.5f, -0.5f, 0.5f, 0.0f))
+            , LightPosition(XMFLOAT4(-2.0f, 2.0f, -2.0f, 0.0f))
+            , LightRadius(XMFLOAT4(5.0f, 0.0f, 0.0f, 0.0f))
+            , SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , SpecularPower(XMFLOAT4(8.0f, 0.0f, 0.0f, 0.0f))
+        {}
     };
 
     class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable

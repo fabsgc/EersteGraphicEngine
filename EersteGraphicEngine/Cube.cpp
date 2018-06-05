@@ -18,7 +18,7 @@ namespace ege
     {
         Build(gModelManager().GetPtr("cube"));
 
-        SPtr<Material> material = ege_shared_ptr_new<CubeMaterial>();
+        SPtr<CubeMaterial> material = ege_shared_ptr_new<CubeMaterial>();
         material->Initialise();
         SetMaterial(material);
     }

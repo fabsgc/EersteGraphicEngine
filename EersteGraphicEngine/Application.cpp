@@ -1,9 +1,11 @@
 #include "Application.h"
 
+#include "DirectionalLight.h"
 #include "FlyingCamera.h"
-#include "PointLight.h"
+#include "AmbientLight.h"
+#include "Sphere.h"
+#include "Plane.h"
 #include "Node.h"
-#include "Cube.h"
 
 namespace ege
 {
@@ -44,27 +46,38 @@ namespace ege
 
     void Application::SceneLoader()
     {
-        _scene                    = ege_shared_ptr_new<Scene>();
-        SPtr<Node> node           = ege_shared_ptr_new<Node>();
-        SPtr<FlyingCamera> camera = ege_shared_ptr_new<FlyingCamera>();
-        SPtr<PointLight> light    = ege_shared_ptr_new<PointLight>();
-        SPtr<Cube> model          = ege_shared_ptr_new<Cube>();
+        _scene                       = ege_shared_ptr_new<Scene>();
+
+        SPtr<Node> node              = ege_shared_ptr_new<Node>();
+        SPtr<FlyingCamera> camera    = ege_shared_ptr_new<FlyingCamera>();
+        SPtr<DirectionalLight> light = ege_shared_ptr_new<DirectionalLight>();
+        SPtr<Sphere> sphere          = ege_shared_ptr_new<Sphere>();
+        SPtr<Plane> plane            = ege_shared_ptr_new<Plane>();
+        SPtr<AmbientLight> ambient   = ege_shared_ptr_new<AmbientLight>();
 
         _scene->Initialise();
         camera->Initialise();
         light->Initialise();
-        model->Initialise();
+        sphere->Initialise();
+        plane->Initialise();
+
+        light->SetColor(XMFLOAT4(1.0f, 1.0, 1.0f, 0.8f));
+        light->SetDirection(XMFLOAT3(0.5f, -0.5f, 0.5f));
+
+        ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);
         node->InsertEntity("light", light);
-        node->InsertEntity("model", model);
+        node->InsertEntity("sphere", sphere);
+        node->InsertEntity("plane", plane);
 
         _scene->InsertCamera("camera", camera);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
         _scene->SetActiveCamera(camera);
+        _scene->SetAmbientLight(ambient);
     }
 
     Application& gApplication()

@@ -1,8 +1,20 @@
-cbuffer ConstantBuffer : register( b0 )
+cbuffer ConstantBuffer : register(b0)
 {
     matrix View;
     matrix Projection;
     matrix World;
+
+    float4 AmbientColor;
+
+    float4 CameraPosition;
+
+    float4 LightColor;
+    float4 LightDirection;
+    float4 LightPosition;
+    float4 LightRadius;
+
+    float4 SpecularColor;
+    float4 SpecularPower;
 }
 
 SamplerState ColorSampler : register(s0);
@@ -15,9 +27,64 @@ struct PS_INPUT
     float3 Normal   : NORMAL;
     float3 Tangent  : TANGENT;
     float3 Binormal : BINORMAL;
+
+    float3 ViewWorldDirection : COLOR1;
+
+    //float4 LightWorldDirection : COLOR2;
+    //float3 LightViewDirection : COLOR3;
 };
+
+struct ColorComponent
+{
+    float3 Ambient;
+    float3 Diffuse;
+    float3 Specular;
+};
+
+ColorComponent ComputeAmbient(ColorComponent colorComponent, PS_INPUT IN);
+ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN);
 
 float4 PS_MAIN( PS_INPUT IN ) : SV_Target
 {
-    return IN.Color;
+    ColorComponent colorComponent;
+    float4 OUT       = (float4) 0;
+
+    colorComponent.Ambient = (float3) 0;
+    colorComponent.Diffuse = (float3) 0;
+    colorComponent.Specular = (float3) 0;
+
+    colorComponent = ComputeAmbient(colorComponent, IN);
+    colorComponent = ComputeLight(colorComponent, IN);
+
+    OUT.rgb = colorComponent.Ambient + colorComponent.Diffuse + colorComponent.Specular;
+    OUT.a   = 1.0f;
+
+    return OUT;
+}
+
+ColorComponent ComputeAmbient(ColorComponent colorComponent, PS_INPUT IN)
+{
+    colorComponent.Ambient += AmbientColor.rgb * AmbientColor.a * IN.Color.rgb;
+    return colorComponent;
+}
+
+ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN)
+{
+    float3 refVector = (float3) 0;
+    float3 lightDirection = normalize(-LightDirection.xyz);
+    float n_dot_l = dot(lightDirection, normalize(IN.Normal));
+
+    if (n_dot_l > 0)
+    {
+		// D = kd * ld * md
+        colorComponent.Diffuse += max(n_dot_l, 0.0f) * LightColor.rgb * LightColor.a * IN.Color.rgb;
+
+		// R = I - 2(n.I) * n
+        refVector = normalize(reflect(lightDirection, IN.Normal));
+
+		// S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
+        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower.x) * SpecularColor.rgb * SpecularColor.a * IN.Color.rgb;
+    }
+
+    return colorComponent;
 }

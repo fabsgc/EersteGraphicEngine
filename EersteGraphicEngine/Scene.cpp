@@ -29,7 +29,7 @@ namespace ege
         _cameras.insert(Pair<String, SPtr<Camera>>(name, std::move(camera)));
     }
 
-    SPtr<Node> Scene::GetNode(String name)
+    SPtr<Node>& Scene::GetNode(String name)
     {
         auto found = _nodes.find(name);
         EGE_ASSERT_ERROR((found != _nodes.end()), ("Node " + name + " not found"));
@@ -37,7 +37,7 @@ namespace ege
         return found->second;
     }
 
-    SPtr<Light> Scene::GetLight(String name)
+    SPtr<Light>& Scene::GetLight(String name)
     {
         auto found = _lights.find(name);
         EGE_ASSERT_ERROR((found != _lights.end()), ("Light " + name + " not found"));
@@ -45,7 +45,7 @@ namespace ege
         return found->second;
     }
 
-    SPtr<Camera> Scene::GetCamera(String name)
+    SPtr<Camera>& Scene::GetCamera(String name)
     {
         auto found = _cameras.find(name);
         EGE_ASSERT_ERROR((found != _cameras.end()), ("Camera " + name + " not found"));
@@ -53,7 +53,12 @@ namespace ege
         return found->second;
     }
 
-    SPtr<Camera> Scene::GetActiveCamera()
+    SPtr<AmbientLight>& Scene::GetAmbientLight()
+    {
+        return _ambientLight;
+    }
+
+    SPtr<Camera>& Scene::GetActiveCamera()
     {
         return _camera;
     }
@@ -63,8 +68,18 @@ namespace ege
         _camera = camera;
     }
 
+    void Scene::SetAmbientLight(SPtr<AmbientLight> ambientLight)
+    {
+        _ambientLight = ambientLight;
+    }
+
     void Scene::Update()
     {
+        if (_ambientLight != nullptr)
+        {
+            _ambientLight->Update();
+        }
+
         for (auto node : _nodes)
         {
             node.second->Update();
@@ -76,6 +91,16 @@ namespace ege
         if (_camera != nullptr)
         {
             _camera->Draw();
+        }
+
+        if (_ambientLight != nullptr)
+        {
+            _ambientLight->Draw();
+        }
+
+        for (auto light : _lights)
+        {
+            light.second->Draw();
         }
        
         for (auto node : _nodes)

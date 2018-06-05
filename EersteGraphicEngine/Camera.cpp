@@ -51,6 +51,7 @@ namespace ege
 
         constantBufferUpdate->View = XMMatrixTranspose(view);
         constantBufferUpdate->Projection = XMMatrixTranspose(projection);
+        constantBufferUpdate->CameraPosition = XMFLOAT4(_position.x, _position.y, _position.z, 0.0f);
 
         context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
     }
