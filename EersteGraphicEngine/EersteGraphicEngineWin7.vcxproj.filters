@@ -220,6 +220,9 @@
     <Filter Include="Data\Shader\Color\Include">
       <UniqueIdentifier>{bd4689cd-70b6-4e44-be8a-3490e99a30ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Shader\Include">
+      <UniqueIdentifier>{35098237-1e46-4c0b-8e72-96cb6e1dc6c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -728,7 +731,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin64\Data\Shader\Color\Include\Include.hlsli">
+    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli">
       <Filter>Data\Shader\Color\Include</Filter>
     </None>
   </ItemGroup>

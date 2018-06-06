@@ -68,38 +68,38 @@ dcl_temps 8
 //   v6.x <- IN.ViewWorldDirection.x; v6.y <- IN.ViewWorldDirection.y; v6.z <- IN.ViewWorldDirection.z; 
 //   o0.x <- <PS_MAIN return value>.x; o0.y <- <PS_MAIN return value>.y; o0.z <- <PS_MAIN return value>.z; o0.w <- <PS_MAIN return value>.w
 //
-#line 52 "F:\3D-engine\EersteGraphicEngine\EersteGraphicEngine\bin64\Data\Shader\Color\Color_PS.hlsl"
+#line 26 "F:\3D-engine\EersteGraphicEngine\EersteGraphicEngine\bin64\Data\Shader\Color\Color_PS.hlsl"
 itof r0.xyz, l(0, 0, 0, 0)  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
 
-#line 53
+#line 27
 itof r1.xyz, l(0, 0, 0, 0)  // r1.x <- colorComponent.Diffuse.x; r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
 
-#line 54
+#line 28
 itof r2.xyz, l(0, 0, 0, 0)  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y; r2.z <- colorComponent.Specular.z
 
-#line 56
+#line 30
 nop 
 mov r0.xyz, r0.xyzx
 mov r1.xyz, r1.xyzx
 mov r2.xyz, r2.xyzx
 mov r3.xyz, v1.xyzx
 
-#line 67
+#line 41
 mul r4.xyz, cb0[12].wwww, cb0[12].xyzx
 mul r3.xyz, r3.xyzx, r4.xyzx
 add r0.xyz, r0.xyzx, r3.xyzx
 
-#line 68
+#line 42
 mov r0.xyz, r0.xyzx  // r0.x <- <ComputeAmbient return value>.Ambient.x; r0.y <- <ComputeAmbient return value>.Ambient.y; r0.z <- <ComputeAmbient return value>.Ambient.z
 mov r1.xyz, r1.xyzx  // r1.x <- <ComputeAmbient return value>.Diffuse.x; r1.y <- <ComputeAmbient return value>.Diffuse.y; r1.z <- <ComputeAmbient return value>.Diffuse.z
 mov r2.xyz, r2.xyzx  // r2.x <- <ComputeAmbient return value>.Specular.x; r2.y <- <ComputeAmbient return value>.Specular.y; r2.z <- <ComputeAmbient return value>.Specular.z
 
-#line 56
+#line 30
 mov r0.xyz, r0.xyzx  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
 mov r1.xyz, r1.xyzx
 mov r2.xyz, r2.xyzx
 
-#line 57
+#line 31
 nop 
 mov r0.xyz, r0.xyzx
 mov r1.xyz, r1.xyzx
@@ -108,31 +108,31 @@ mov r3.xyz, v1.xyzx
 mov r4.xyz, v3.xyzx
 mov r5.xyz, v6.xyzx
 
-#line 74
+#line 48
 mov r6.xyz, -cb0[15].xyzx
 dp3 r0.w, r6.xyzx, r6.xyzx
 rsq r0.w, r0.w
 mul r6.xyz, r0.wwww, r6.xyzx  // r6.x <- lightDirection.x; r6.y <- lightDirection.y; r6.z <- lightDirection.z
 
-#line 75
+#line 49
 dp3 r0.w, r4.xyzx, r4.xyzx
 rsq r0.w, r0.w
 mul r7.xyz, r0.wwww, r4.xyzx
 dp3 r0.w, r6.xyzx, r7.xyzx  // r0.w <- n_dot_l
 
-#line 77
+#line 51
 itof r1.w, l(0)
 lt r1.w, r1.w, r0.w
 if_nz r1.w
 
-#line 80
+#line 54
   max r0.w, r0.w, l(0.000000)
   mul r7.xyz, r0.wwww, cb0[14].xyzx
   mul r7.xyz, r7.xyzx, cb0[14].wwww
   mul r7.xyz, r3.xyzx, r7.xyzx
   add r1.xyz, r1.xyzx, r7.xyzx
 
-#line 83
+#line 57
   dp3 r0.w, r6.xyzx, r4.xyzx
   add r0.w, r0.w, r0.w
   mov r0.w, -r0.w
@@ -142,7 +142,7 @@ if_nz r1.w
   rsq r0.w, r0.w
   mul r4.xyz, r0.wwww, r4.xyzx  // r4.x <- refVector.x; r4.y <- refVector.y; r4.z <- refVector.z
 
-#line 86
+#line 60
   dp3 r0.w, r5.xyzx, r4.xyzx
   itof r1.w, l(0)
   max r0.w, r0.w, r1.w
@@ -154,35 +154,35 @@ if_nz r1.w
   mul r3.xyz, r3.xyzx, r4.xyzx
   add r2.xyz, r2.xyzx, r3.xyzx
 
-#line 87
+#line 61
 endif 
 
-#line 89
+#line 63
 mov r0.xyz, r0.xyzx  // r0.x <- <ComputeLight return value>.Ambient.x; r0.y <- <ComputeLight return value>.Ambient.y; r0.z <- <ComputeLight return value>.Ambient.z
 mov r1.xyz, r1.xyzx  // r1.x <- <ComputeLight return value>.Diffuse.x; r1.y <- <ComputeLight return value>.Diffuse.y; r1.z <- <ComputeLight return value>.Diffuse.z
 mov r2.xyz, r2.xyzx  // r2.x <- <ComputeLight return value>.Specular.x; r2.y <- <ComputeLight return value>.Specular.y; r2.z <- <ComputeLight return value>.Specular.z
 
-#line 57
+#line 31
 mov r0.xyz, r0.xyzx
 mov r1.xyz, r1.xyzx  // r1.x <- colorComponent.Diffuse.x; r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
 mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y; r2.z <- colorComponent.Specular.z
 
-#line 59
+#line 33
 add r0.xyz, r0.xyzx, r1.xyzx
 add r0.xyz, r2.xyzx, r0.xyzx  // r0.x <- OUT.x; r0.y <- OUT.y; r0.z <- OUT.z
 
-#line 60
+#line 34
 mov r0.w, l(1.000000)  // r0.w <- OUT.w
 
-#line 62
+#line 36
 mov o0.xyz, r0.xyzx
 mov o0.w, r0.w
 ret 
 // Approximately 71 instruction slots used
 
 
-// 0000:  43425844  91af1b90  ad3829ed  297ea361  DXBC.....)8.a.~)
-// 0010:  822811f8  00000001  0000621c  00000006  ..(..___.b__.___
+// 0000:  43425844  a8c3b8fa  78e56cbf  048fdd55  DXBC.....l.xU...
+// 0010:  b82a0d20  00000001  0000621c  00000006   .*..___.b__.___
 // 0020:  00000038  00000384  00000470  000004a4  8___..__p.__..__
 // 0030:  00000b78  00000c14  46454452  00000344  x.__..__RDEFD.__
 // 0040:  00000001  0000006c  00000001  0000003c  .___l___.___<___
@@ -377,7 +377,7 @@ ret
 // 0c10:  00000000  42445053  00005600  7263694d  ____SPDB_V__Micr
 // 0c20:  666f736f  2f432074  202b2b43  2046534d  osoft C/C++ MSF 
 // 0c30:  30302e37  441a0a0d  00000053  00000200  7.00...DS____.__
-// 0c40:  00000002  0000002b  000000d0  00000000  .___+___._______
+// 0c40:  00000002  0000002b  000000d4  00000000  .___+___._______
 // 0c50:  00000029  00000000  00000000  00000000  )_______________
 // 0c60:  00000000  00000000  00000000  00000000  ________________
 // 0c70:  00000000  00000000  00000000  00000000  ________________
@@ -535,8 +535,8 @@ ret
 // 15f0:  00000000  00000000  00000000  00000000  ________________
 // 1600:  00000000  00000000  00000000  00000000  ________________
 // 1610:  00000000  00000000  00000000  01312e94  ____________..1.
-// 1620:  5b16e473  00000001  4a027caf  405685da  s..[.___.|.J..V@
-// 1630:  2bd93db1  921b2739  00000000  00000000  .=.+9'..________
+// 1620:  5b18229b  00000001  a959ff48  4ee1eded  .".[.___H.Y....N
+// 1630:  9f07fea4  2b18aea5  00000000  00000000  .......+________
 // 1640:  00000001  00000001  00000000  00000000  .___.___________
 // 1650:  00000000  013351dc  00000000  00000000  ____.Q3.________
 // 1660:  00000000  00000000  00000000  00000000  ________________
@@ -566,39 +566,39 @@ ret
 // 17e0:  00000000  00000000  00000000  00000000  ________________
 // 17f0:  00000000  00000000  00000000  00000000  ________________
 // 1800:  00000000  00000000  00000000  00000000  ________________
-// 1810:  00000000  00000000  00000000  7265776f  ____________ower
-// 1820:  7d0a0d3b  0a0d0a0d  706d6153  5372656c  ;..}....SamplerS
-// 1830:  65746174  6c6f4320  6153726f  656c706d  tate ColorSample
-// 1840:  203a2072  69676572  72657473  29307328  r : register(s0)
-// 1850:  0d0a0d3b  7274730a  20746375  495f5350  ;....struct PS_I
-// 1860:  5455504e  0d7b0a0d  2020200a  6f6c6620  NPUT..{..    flo
-// 1870:  20347461  69736f50  6e6f6974  53203a20  at4 Position : S
-// 1880:  4f505f56  49544953  0d3b4e4f  2020200a  V_POSITION;..   
-// 1890:  6f6c6620  20347461  6f6c6f43  20202072   float4 Color   
-// 18a0:  43203a20  524f4c4f  0a0d3b30  20202020   : COLOR0;..    
-// 18b0:  616f6c66  54203274  75747865  20206572  float2 Texture  
-// 18c0:  4554203a  4f4f4358  3b304452  20200a0d  : TEXCOORD0;..  
-// 18d0:  6c662020  3374616f  726f4e20  206c616d    float3 Normal 
-// 18e0:  203a2020  4d524f4e  0d3b4c41  2020200a    : NORMAL;..   
-// 18f0:  6f6c6620  20337461  676e6154  20746e65   float3 Tangent 
-// 1900:  54203a20  45474e41  0d3b544e  2020200a   : TANGENT;..   
-// 1910:  6f6c6620  20337461  6f6e6942  6c616d72   float3 Binormal
-// 1920:  42203a20  524f4e49  3b4c414d  0a0d0a0d   : BINORMAL;....
-// 1930:  20202020  616f6c66  56203374  57776569      float3 ViewW
-// 1940:  646c726f  65726944  6f697463  203a206e  orldDirection : 
-// 1950:  4f4c4f43  0d3b3152  200a0d0a  2f202020  COLOR1;....    /
-// 1960:  6f6c662f  20347461  6867694c  726f5774  /float4 LightWor
-// 1970:  6944646c  74636572  206e6f69  4f43203a  ldDirection : CO
-// 1980:  32524f4c  200a0d3b  2f202020  6f6c662f  LOR2;..    //flo
-// 1990:  20337461  6867694c  65695674  72694477  at3 LightViewDir
-// 19a0:  69746365  3a206e6f  4c4f4320  3b33524f  ection : COLOR3;
-// 19b0:  3b7d0a0d  0a0d0a0d  75727473  43207463  ..};....struct C
-// 19c0:  726f6c6f  706d6f43  6e656e6f  7b0a0d74  olorComponent..{
-// 19d0:  20200a0d  6c662020  3374616f  626d4120  ..    float3 Amb
-// 19e0:  746e6569  200a0d3b  66202020  74616f6c  ient;..    float
-// 19f0:  69442033  73756666  0a0d3b65  20202020  3 Diffuse;..    
-// 1a00:  616f6c66  53203374  75636570  3b72616c  float3 Specular;
-// 1a10:  3b7d0a0d  0a0d0a0d  6f6c6f43  00005ac6  ..};....Colo.Z__
+// 1810:  00000000  00000000  00000000  20200a0d  ____________..  
+// 1820:  6c662020  3274616f  78655420  65727574    float2 Texture
+// 1830:  203a2020  43584554  44524f4f  0a0d3b30    : TEXCOORD0;..
+// 1840:  20202020  616f6c66  4e203374  616d726f      float3 Norma
+// 1850:  2020206c  4f4e203a  4c414d52  200a0d3b  l   : NORMAL;.. 
+// 1860:  66202020  74616f6c  61542033  6e65676e     float3 Tangen
+// 1870:  3a202074  4e415420  544e4547  200a0d3b  t  : TANGENT;.. 
+// 1880:  66202020  74616f6c  69422033  6d726f6e     float3 Binorm
+// 1890:  3a206c61  4e494220  414d524f  0a0d3b4c  al : BINORMAL;..
+// 18a0:  20200a0d  6c662020  3374616f  65695620  ..    float3 Vie
+// 18b0:  726f5777  6944646c  74636572  206e6f69  wWorldDirection 
+// 18c0:  4f43203a  31524f4c  0d0a0d3b  2020200a  : COLOR1;....   
+// 18d0:  662f2f20  74616f6c  694c2034  57746867   //float4 LightW
+// 18e0:  646c726f  65726944  6f697463  203a206e  orldDirection : 
+// 18f0:  4f4c4f43  0d3b3252  2020200a  662f2f20  COLOR2;..    //f
+// 1900:  74616f6c  694c2033  56746867  44776569  loat3 LightViewD
+// 1910:  63657269  6e6f6974  43203a20  524f4c4f  irection : COLOR
+// 1920:  0a0d3b33  0a0d3b7d  6f430a0d  43726f6c  3;..};....ColorC
+// 1930:  6f706d6f  746e656e  6d6f4320  65747570  omponent Compute
+// 1940:  69626d41  28746e65  6f6c6f43  6d6f4372  Ambient(ColorCom
+// 1950:  656e6f70  6320746e  726f6c6f  706d6f43  ponent colorComp
+// 1960:  6e656e6f  50202c74  4e495f53  20545550  onent, PS_INPUT 
+// 1970:  3b294e49  6f430a0d  43726f6c  6f706d6f  IN);..ColorCompo
+// 1980:  746e656e  6d6f4320  65747570  6867694c  nent ComputeLigh
+// 1990:  6f432874  43726f6c  6f706d6f  746e656e  t(ColorComponent
+// 19a0:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
+// 19b0:  5f535020  55504e49  4e492054  0a0d3b29   PS_INPUT IN);..
+// 19c0:  6c660a0d  3474616f  5f535020  4e49414d  ..float4 PS_MAIN
+// 19d0:  53502028  504e495f  49205455  2029204e  ( PS_INPUT IN ) 
+// 19e0:  5653203a  7261545f  0d746567  0a0d7b0a  : SV_Target..{..
+// 19f0:  20202020  6f6c6f43  6d6f4372  656e6f70      ColorCompone
+// 1a00:  6320746e  726f6c6f  706d6f43  6e656e6f  nt colorComponen
+// 1a10:  0a0d3b74  20202020  616f6c66  00005ac6  t;..    floa.Z__
 // 1a20:  00018375  0003e84c  00038775  0001caa2  u.._L.._u.._..._
 // 1a30:  0002131c  00012441  0001b3ec  00008b91  ..._A$._..._..__
 // 1a40:  0001d7c0  0000449f  000037ce  000200d4  ..._.D__.7__._._
@@ -630,168 +630,168 @@ ret
 // 1be0:  00000000  00000000  00000000  00000000  ________________
 // 1bf0:  00000000  00000000  00000000  00000000  ________________
 // 1c00:  00000000  00000000  00000000  00000000  ________________
-// 1c10:  00000000  00000000  00000000  66756263  ____________cbuf
-// 1c20:  20726566  736e6f43  746e6174  66667542  fer ConstantBuff
-// 1c30:  3a207265  67657220  65747369  30622872  er : register(b0
-// 1c40:  7b0a0d29  20200a0d  616d2020  78697274  )..{..    matrix
-// 1c50:  65695620  0a0d3b77  20202020  7274616d   View;..    matr
-// 1c60:  50207869  656a6f72  6f697463  0a0d3b6e  ix Projection;..
-// 1c70:  20202020  7274616d  57207869  646c726f      matrix World
-// 1c80:  0d0a0d3b  2020200a  6f6c6620  20347461  ;....    float4 
-// 1c90:  69626d41  43746e65  726f6c6f  0d0a0d3b  AmbientColor;...
-// 1ca0:  2020200a  6f6c6620  20347461  656d6143  .    float4 Came
-// 1cb0:  6f506172  69746973  0d3b6e6f  200a0d0a  raPosition;.... 
-// 1cc0:  66202020  74616f6c  694c2034  43746867     float4 LightC
-// 1cd0:  726f6c6f  200a0d3b  66202020  74616f6c  olor;..    float
-// 1ce0:  694c2034  44746867  63657269  6e6f6974  4 LightDirection
-// 1cf0:  200a0d3b  66202020  74616f6c  694c2034  ;..    float4 Li
-// 1d00:  50746867  7469736f  3b6e6f69  20200a0d  ghtPosition;..  
-// 1d10:  6c662020  3474616f  67694c20  61527468    float4 LightRa
-// 1d20:  73756964  0d0a0d3b  2020200a  6f6c6620  dius;....    flo
-// 1d30:  20347461  63657053  72616c75  6f6c6f43  at4 SpecularColo
-// 1d40:  0a0d3b72  20202020  616f6c66  53203474  r;..    float4 S
-// 1d50:  75636570  5072616c  7265776f  7d0a0d3b  pecularPower;..}
-// 1d60:  0a0d0a0d  706d6153  5372656c  65746174  ....SamplerState
-// 1d70:  6c6f4320  6153726f  656c706d  203a2072   ColorSampler : 
-// 1d80:  69676572  72657473  29307328  0d0a0d3b  register(s0);...
-// 1d90:  7274730a  20746375  495f5350  5455504e  .struct PS_INPUT
-// 1da0:  0d7b0a0d  2020200a  6f6c6620  20347461  ..{..    float4 
-// 1db0:  69736f50  6e6f6974  53203a20  4f505f56  Position : SV_PO
-// 1dc0:  49544953  0d3b4e4f  2020200a  6f6c6620  SITION;..    flo
-// 1dd0:  20347461  6f6c6f43  20202072  43203a20  at4 Color    : C
-// 1de0:  524f4c4f  0a0d3b30  20202020  616f6c66  OLOR0;..    floa
-// 1df0:  54203274  75747865  20206572  4554203a  t2 Texture  : TE
-// 1e00:  4f4f4358  3b304452  20200a0d  6c662020  XCOORD0;..    fl
-// 1e10:  3374616f  726f4e20  206c616d  203a2020  oat3 Normal   : 
-// 1e20:  4d524f4e  0d3b4c41  2020200a  6f6c6620  NORMAL;..    flo
-// 1e30:  20337461  676e6154  20746e65  54203a20  at3 Tangent  : T
-// 1e40:  45474e41  0d3b544e  2020200a  6f6c6620  ANGENT;..    flo
-// 1e50:  20337461  6f6e6942  6c616d72  42203a20  at3 Binormal : B
-// 1e60:  524f4e49  3b4c414d  0a0d0a0d  20202020  INORMAL;....    
-// 1e70:  616f6c66  56203374  57776569  646c726f  float3 ViewWorld
-// 1e80:  65726944  6f697463  203a206e  4f4c4f43  Direction : COLO
-// 1e90:  0d3b3152  200a0d0a  2f202020  6f6c662f  R1;....    //flo
-// 1ea0:  20347461  6867694c  726f5774  6944646c  at4 LightWorldDi
-// 1eb0:  74636572  206e6f69  4f43203a  32524f4c  rection : COLOR2
-// 1ec0:  200a0d3b  2f202020  6f6c662f  20337461  ;..    //float3 
-// 1ed0:  6867694c  65695674  72694477  69746365  LightViewDirecti
-// 1ee0:  3a206e6f  4c4f4320  3b33524f  3b7d0a0d  on : COLOR3;..};
-// 1ef0:  0a0d0a0d  75727473  43207463  726f6c6f  ....struct Color
-// 1f00:  706d6f43  6e656e6f  7b0a0d74  20200a0d  Component..{..  
-// 1f10:  6c662020  3374616f  626d4120  746e6569    float3 Ambient
-// 1f20:  200a0d3b  66202020  74616f6c  69442033  ;..    float3 Di
-// 1f30:  73756666  0a0d3b65  20202020  616f6c66  ffuse;..    floa
-// 1f40:  53203374  75636570  3b72616c  3b7d0a0d  t3 Specular;..};
-// 1f50:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
-// 1f60:  4320746e  75706d6f  6d416574  6e656962  nt ComputeAmbien
-// 1f70:  6f432874  43726f6c  6f706d6f  746e656e  t(ColorComponent
-// 1f80:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
-// 1f90:  5f535020  55504e49  4e492054  0a0d3b29   PS_INPUT IN);..
-// 1fa0:  6f6c6f43  6d6f4372  656e6f70  4320746e  ColorComponent C
-// 1fb0:  75706d6f  694c6574  28746867  6f6c6f43  omputeLight(Colo
-// 1fc0:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
-// 1fd0:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
-// 1fe0:  20545550  3b294e49  0a0d0a0d  616f6c66  PUT IN);....floa
-// 1ff0:  50203474  414d5f53  20284e49  495f5350  t4 PS_MAIN( PS_I
-// 2000:  5455504e  204e4920  203a2029  545f5653  NPUT IN ) : SV_T
-// 2010:  65677261  7b0a0d74  20200a0d  6f432020  arget..{..    Co
-// 2020:  43726f6c  6f706d6f  746e656e  6c6f6320  lorComponent col
-// 2030:  6f43726f  6e6f706d  3b746e65  20200a0d  orComponent;..  
-// 2040:  6c662020  3474616f  54554f20  20202020    float4 OUT    
-// 2050:  3d202020  6c662820  3474616f  3b302029     = (float4) 0;
-// 2060:  0a0d0a0d  20202020  6f6c6f63  6d6f4372  ....    colorCom
-// 2070:  656e6f70  412e746e  6569626d  3d20746e  ponent.Ambient =
-// 2080:  6c662820  3374616f  3b302029  20200a0d   (float3) 0;..  
-// 2090:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
-// 20a0:  6669442e  65737566  28203d20  616f6c66  .Diffuse = (floa
-// 20b0:  20293374  0a0d3b30  20202020  6f6c6f63  t3) 0;..    colo
-// 20c0:  6d6f4372  656e6f70  532e746e  75636570  rComponent.Specu
-// 20d0:  2072616c  6628203d  74616f6c  30202933  lar = (float3) 0
-// 20e0:  0d0a0d3b  2020200a  6c6f6320  6f43726f  ;....    colorCo
-// 20f0:  6e6f706d  20746e65  6f43203d  7475706d  mponent = Comput
-// 2100:  626d4165  746e6569  6c6f6328  6f43726f  eAmbient(colorCo
-// 2110:  6e6f706d  2c746e65  294e4920  200a0d3b  mponent, IN);.. 
-// 2120:  63202020  726f6c6f  706d6f43  6e656e6f     colorComponen
-// 2130:  203d2074  706d6f43  4c657475  74686769  t = ComputeLight
-// 2140:  6c6f6328  6f43726f  6e6f706d  2c746e65  (colorComponent,
-// 2150:  294e4920  0d0a0d3b  2020200a  54554f20   IN);....    OUT
-// 2160:  6267722e  63203d20  726f6c6f  706d6f43  .rgb = colorComp
-// 2170:  6e656e6f  6d412e74  6e656962  202b2074  onent.Ambient + 
-// 2180:  6f6c6f63  6d6f4372  656e6f70  442e746e  colorComponent.D
-// 2190:  75666669  2b206573  6c6f6320  6f43726f  iffuse + colorCo
-// 21a0:  6e6f706d  2e746e65  63657053  72616c75  mponent.Specular
-// 21b0:  200a0d3b  4f202020  612e5455  3d202020  ;..    OUT.a   =
-// 21c0:  302e3120  0a0d3b66  20200a0d  65722020   1.0f;....    re
-// 21d0:  6e727574  54554f20  7d0a0d3b  0a0d0a0d  turn OUT;..}....
-// 21e0:  6f6c6f43  6d6f4372  656e6f70  4320746e  ColorComponent C
-// 21f0:  75706d6f  6d416574  6e656962  6f432874  omputeAmbient(Co
-// 2200:  43726f6c  6f706d6f  746e656e  6c6f6320  lorComponent col
-// 2210:  6f43726f  6e6f706d  2c746e65  5f535020  orComponent, PS_
-// 2220:  55504e49  4e492054  7b0a0d29  20200a0d  INPUT IN)..{..  
-// 2230:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
-// 2240:  626d412e  746e6569  203d2b20  69626d41  .Ambient += Ambi
-// 2250:  43746e65  726f6c6f  6267722e  41202a20  entColor.rgb * A
-// 2260:  6569626d  6f43746e  2e726f6c  202a2061  mbientColor.a * 
-// 2270:  432e4e49  726f6c6f  6267722e  200a0d3b  IN.Color.rgb;.. 
-// 2280:  72202020  72757465  6f63206e  43726f6c     return colorC
-// 2290:  6f706d6f  746e656e  7d0a0d3b  0a0d0a0d  omponent;..}....
-// 22a0:  6f6c6f43  6d6f4372  656e6f70  4320746e  ColorComponent C
-// 22b0:  75706d6f  694c6574  28746867  6f6c6f43  omputeLight(Colo
-// 22c0:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
-// 22d0:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
-// 22e0:  20545550  0d294e49  0a0d7b0a  20202020  PUT IN)..{..    
-// 22f0:  616f6c66  72203374  65566665  726f7463  float3 refVector
-// 2300:  28203d20  616f6c66  20293374  0a0d3b30   = (float3) 0;..
-// 2310:  20202020  616f6c66  6c203374  74686769      float3 light
-// 2320:  65726944  6f697463  203d206e  6d726f6e  Direction = norm
-// 2330:  7a696c61  4c2d2865  74686769  65726944  alize(-LightDire
-// 2340:  6f697463  79782e6e  0d3b297a  2020200a  ction.xyz);..   
-// 2350:  6f6c6620  6e207461  746f645f  3d206c5f   float n_dot_l =
-// 2360:  746f6420  67696c28  69447468  74636572   dot(lightDirect
-// 2370:  2c6e6f69  726f6e20  696c616d  4928657a  ion, normalize(I
-// 2380:  6f4e2e4e  6c616d72  0d3b2929  200a0d0a  N.Normal));.... 
-// 2390:  69202020  6e282066  746f645f  3e206c5f     if (n_dot_l >
-// 23a0:  0d293020  2020200a  0a0d7b20  2f2f0909   0)..    {....//
-// 23b0:  3d204420  20646b20  646c202a  6d202a20   D = kd * ld * m
-// 23c0:  200a0d64  20202020  63202020  726f6c6f  d..        color
-// 23d0:  706d6f43  6e656e6f  69442e74  73756666  Component.Diffus
-// 23e0:  3d2b2065  78616d20  645f6e28  6c5f746f  e += max(n_dot_l
-// 23f0:  2e30202c  20296630  694c202a  43746867  , 0.0f) * LightC
-// 2400:  726f6c6f  6267722e  4c202a20  74686769  olor.rgb * Light
-// 2410:  6f6c6f43  20612e72  4e49202a  6c6f432e  Color.a * IN.Col
-// 2420:  722e726f  0d3b6267  090a0d0a  202f2f09  or.rgb;......// 
-// 2430:  203d2052  202d2049  2e6e2832  2a202949  R = I - 2(n.I) *
-// 2440:  0a0d6e20  20202020  20202020  56666572   n..        refV
-// 2450:  6f746365  203d2072  6d726f6e  7a696c61  ector = normaliz
-// 2460:  65722865  63656c66  696c2874  44746867  e(reflect(lightD
-// 2470:  63657269  6e6f6974  4e49202c  726f4e2e  irection, IN.Nor
-// 2480:  296c616d  0a0d3b29  09090a0d  53202f2f  mal));......// S
-// 2490:  6d203d20  64287861  5628746f  2c29522e   = max(dot(V.R),
-// 24a0:  505e2930  53202a20  75636570  4372616c  0)^P * SpecularC
-// 24b0:  726f6c6f  6267722e  53202a20  75636570  olor.rgb * Specu
-// 24c0:  4372616c  726f6c6f  2a20612e  6c6f6320  larColor.a * col
-// 24d0:  722e726f  0d3b6267  2020200a  20202020  or.rgb;..       
-// 24e0:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
-// 24f0:  63657053  72616c75  203d2b20  28776f70  Specular += pow(
-// 2500:  2878616d  28746f64  562e4e49  57776569  max(dot(IN.ViewW
-// 2510:  646c726f  65726944  6f697463  72202c6e  orldDirection, r
-// 2520:  65566665  726f7463  30202c29  53202c29  efVector), 0), S
-// 2530:  75636570  5072616c  7265776f  2029782e  pecularPower.x) 
-// 2540:  7053202a  6c756365  6f437261  2e726f6c  * SpecularColor.
-// 2550:  20626772  7053202a  6c756365  6f437261  rgb * SpecularCo
-// 2560:  2e726f6c  202a2061  432e4e49  726f6c6f  lor.a * IN.Color
-// 2570:  6267722e  200a0d3b  7d202020  0a0d0a0d  .rgb;..    }....
-// 2580:  20202020  75746572  63206e72  726f6c6f      return color
-// 2590:  706d6f43  6e656e6f  0a0d3b74  0000007d  Component;..}___
-// 25a0:  00000000  00000000  00000000  00000000  ________________
-// 25b0:  00000000  00000000  00000000  00000000  ________________
-// 25c0:  00000000  00000000  00000000  00000000  ________________
-// 25d0:  00000000  00000000  00000000  00000000  ________________
-// 25e0:  00000000  00000000  00000000  00000000  ________________
+// 1c10:  00000000  00000000  00000000  636e6923  ____________#inc
+// 1c20:  6564756c  6e492220  64756c63  6f432f65  lude "Include/Co
+// 1c30:  6e6f6d6d  736c682e  0d22696c  730a0d0a  mmon.hlsli"....s
+// 1c40:  63757274  53502074  504e495f  0a0d5455  truct PS_INPUT..
+// 1c50:  200a0d7b  66202020  74616f6c  6f502034  {..    float4 Po
+// 1c60:  69746973  3a206e6f  5f565320  49534f50  sition : SV_POSI
+// 1c70:  4e4f4954  200a0d3b  66202020  74616f6c  TION;..    float
+// 1c80:  6f432034  20726f6c  3a202020  4c4f4320  4 Color    : COL
+// 1c90:  3b30524f  20200a0d  6c662020  3274616f  OR0;..    float2
+// 1ca0:  78655420  65727574  203a2020  43584554   Texture  : TEXC
+// 1cb0:  44524f4f  0a0d3b30  20202020  616f6c66  OORD0;..    floa
+// 1cc0:  4e203374  616d726f  2020206c  4f4e203a  t3 Normal   : NO
+// 1cd0:  4c414d52  200a0d3b  66202020  74616f6c  RMAL;..    float
+// 1ce0:  61542033  6e65676e  3a202074  4e415420  3 Tangent  : TAN
+// 1cf0:  544e4547  200a0d3b  66202020  74616f6c  GENT;..    float
+// 1d00:  69422033  6d726f6e  3a206c61  4e494220  3 Binormal : BIN
+// 1d10:  414d524f  0a0d3b4c  20200a0d  6c662020  ORMAL;....    fl
+// 1d20:  3374616f  65695620  726f5777  6944646c  oat3 ViewWorldDi
+// 1d30:  74636572  206e6f69  4f43203a  31524f4c  rection : COLOR1
+// 1d40:  0d0a0d3b  2020200a  662f2f20  74616f6c  ;....    //float
+// 1d50:  694c2034  57746867  646c726f  65726944  4 LightWorldDire
+// 1d60:  6f697463  203a206e  4f4c4f43  0d3b3252  ction : COLOR2;.
+// 1d70:  2020200a  662f2f20  74616f6c  694c2033  .    //float3 Li
+// 1d80:  56746867  44776569  63657269  6e6f6974  ghtViewDirection
+// 1d90:  43203a20  524f4c4f  0a0d3b33  0a0d3b7d   : COLOR3;..};..
+// 1da0:  6f430a0d  43726f6c  6f706d6f  746e656e  ..ColorComponent
+// 1db0:  6d6f4320  65747570  69626d41  28746e65   ComputeAmbient(
+// 1dc0:  6f6c6f43  6d6f4372  656e6f70  6320746e  ColorComponent c
+// 1dd0:  726f6c6f  706d6f43  6e656e6f  50202c74  olorComponent, P
+// 1de0:  4e495f53  20545550  3b294e49  6f430a0d  S_INPUT IN);..Co
+// 1df0:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
+// 1e00:  65747570  6867694c  6f432874  43726f6c  puteLight(ColorC
+// 1e10:  6f706d6f  746e656e  6c6f6320  6f43726f  omponent colorCo
+// 1e20:  6e6f706d  2c746e65  5f535020  55504e49  mponent, PS_INPU
+// 1e30:  4e492054  0a0d3b29  6c660a0d  3474616f  T IN);....float4
+// 1e40:  5f535020  4e49414d  53502028  504e495f   PS_MAIN( PS_INP
+// 1e50:  49205455  2029204e  5653203a  7261545f  UT IN ) : SV_Tar
+// 1e60:  0d746567  0a0d7b0a  20202020  6f6c6f43  get..{..    Colo
+// 1e70:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
+// 1e80:  706d6f43  6e656e6f  0a0d3b74  20202020  Component;..    
+// 1e90:  616f6c66  4f203474  20205455  20202020  float4 OUT      
+// 1ea0:  28203d20  616f6c66  20293474  0a0d3b30   = (float4) 0;..
+// 1eb0:  20200a0d  6f632020  43726f6c  6f706d6f  ..    colorCompo
+// 1ec0:  746e656e  626d412e  746e6569  28203d20  nent.Ambient = (
+// 1ed0:  616f6c66  20293374  0a0d3b30  20202020  float3) 0;..    
+// 1ee0:  6f6c6f63  6d6f4372  656e6f70  442e746e  colorComponent.D
+// 1ef0:  75666669  3d206573  6c662820  3374616f  iffuse = (float3
+// 1f00:  3b302029  20200a0d  6f632020  43726f6c  ) 0;..    colorC
+// 1f10:  6f706d6f  746e656e  6570532e  616c7563  omponent.Specula
+// 1f20:  203d2072  6f6c6628  29337461  0d3b3020  r = (float3) 0;.
+// 1f30:  200a0d0a  63202020  726f6c6f  706d6f43  ...    colorComp
+// 1f40:  6e656e6f  203d2074  706d6f43  41657475  onent = ComputeA
+// 1f50:  6569626d  6328746e  726f6c6f  706d6f43  mbient(colorComp
+// 1f60:  6e656e6f  49202c74  0d3b294e  2020200a  onent, IN);..   
+// 1f70:  6c6f6320  6f43726f  6e6f706d  20746e65   colorComponent 
+// 1f80:  6f43203d  7475706d  67694c65  63287468  = ComputeLight(c
+// 1f90:  726f6c6f  706d6f43  6e656e6f  49202c74  olorComponent, I
+// 1fa0:  0d3b294e  200a0d0a  4f202020  722e5455  N);....    OUT.r
+// 1fb0:  3d206267  6c6f6320  6f43726f  6e6f706d  gb = colorCompon
+// 1fc0:  2e746e65  69626d41  20746e65  6f63202b  ent.Ambient + co
+// 1fd0:  43726f6c  6f706d6f  746e656e  6669442e  lorComponent.Dif
+// 1fe0:  65737566  63202b20  726f6c6f  706d6f43  fuse + colorComp
+// 1ff0:  6e656e6f  70532e74  6c756365  0d3b7261  onent.Specular;.
+// 2000:  2020200a  54554f20  2020612e  31203d20  .    OUT.a   = 1
+// 2010:  3b66302e  0a0d0a0d  20202020  75746572  .0f;....    retu
+// 2020:  4f206e72  0d3b5455  0a0d7d0a  6f430a0d  rn OUT;..}....Co
+// 2030:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
+// 2040:  65747570  69626d41  28746e65  6f6c6f43  puteAmbient(Colo
+// 2050:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
+// 2060:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
+// 2070:  20545550  0d294e49  0a0d7b0a  20202020  PUT IN)..{..    
+// 2080:  6f6c6f63  6d6f4372  656e6f70  412e746e  colorComponent.A
+// 2090:  6569626d  2b20746e  6d41203d  6e656962  mbient += Ambien
+// 20a0:  6c6f4374  722e726f  2a206267  626d4120  tColor.rgb * Amb
+// 20b0:  746e6569  6f6c6f43  20612e72  4e49202a  ientColor.a * IN
+// 20c0:  6c6f432e  722e726f  0d3b6267  2020200a  .Color.rgb;..   
+// 20d0:  74657220  206e7275  6f6c6f63  6d6f4372   return colorCom
+// 20e0:  656e6f70  0d3b746e  0a0d7d0a  6f430a0d  ponent;..}....Co
+// 20f0:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
+// 2100:  65747570  6867694c  6f432874  43726f6c  puteLight(ColorC
+// 2110:  6f706d6f  746e656e  6c6f6320  6f43726f  omponent colorCo
+// 2120:  6e6f706d  2c746e65  5f535020  55504e49  mponent, PS_INPU
+// 2130:  4e492054  7b0a0d29  20200a0d  6c662020  T IN)..{..    fl
+// 2140:  3374616f  66657220  74636556  3d20726f  oat3 refVector =
+// 2150:  6c662820  3374616f  3b302029  20200a0d   (float3) 0;..  
+// 2160:  6c662020  3374616f  67696c20  69447468    float3 lightDi
+// 2170:  74636572  206e6f69  6f6e203d  6c616d72  rection = normal
+// 2180:  28657a69  67694c2d  69447468  74636572  ize(-LightDirect
+// 2190:  2e6e6f69  297a7978  200a0d3b  66202020  ion.xyz);..    f
+// 21a0:  74616f6c  645f6e20  6c5f746f  64203d20  loat n_dot_l = d
+// 21b0:  6c28746f  74686769  65726944  6f697463  ot(lightDirectio
+// 21c0:  6e202c6e  616d726f  657a696c  2e4e4928  n, normalize(IN.
+// 21d0:  6d726f4e  29296c61  0d0a0d3b  2020200a  Normal));....   
+// 21e0:  20666920  645f6e28  6c5f746f  30203e20   if (n_dot_l > 0
+// 21f0:  200a0d29  7b202020  09090a0d  44202f2f  )..    {....// D
+// 2200:  6b203d20  202a2064  2a20646c  0d646d20   = kd * ld * md.
+// 2210:  2020200a  20202020  6c6f6320  6f43726f  .        colorCo
+// 2220:  6e6f706d  2e746e65  66666944  20657375  mponent.Diffuse 
+// 2230:  6d203d2b  6e287861  746f645f  202c6c5f  += max(n_dot_l, 
+// 2240:  66302e30  202a2029  6867694c  6c6f4374  0.0f) * LightCol
+// 2250:  722e726f  2a206267  67694c20  6f437468  or.rgb * LightCo
+// 2260:  2e726f6c  202a2061  432e4e49  726f6c6f  lor.a * IN.Color
+// 2270:  6267722e  0d0a0d3b  2f09090a  2052202f  .rgb;......// R 
+// 2280:  2049203d  2832202d  29492e6e  6e202a20  = I - 2(n.I) * n
+// 2290:  20200a0d  20202020  65722020  63655666  ..        refVec
+// 22a0:  20726f74  6f6e203d  6c616d72  28657a69  tor = normalize(
+// 22b0:  6c666572  28746365  6867696c  72694474  reflect(lightDir
+// 22c0:  69746365  202c6e6f  4e2e4e49  616d726f  ection, IN.Norma
+// 22d0:  3b29296c  0a0d0a0d  2f2f0909  3d205320  l));......// S =
+// 22e0:  78616d20  746f6428  522e5628  29302c29   max(dot(V.R),0)
+// 22f0:  2a20505e  65705320  616c7563  6c6f4372  ^P * SpecularCol
+// 2300:  722e726f  2a206267  65705320  616c7563  or.rgb * Specula
+// 2310:  6c6f4372  612e726f  63202a20  726f6c6f  rColor.a * color
+// 2320:  6267722e  200a0d3b  20202020  63202020  .rgb;..        c
+// 2330:  726f6c6f  706d6f43  6e656e6f  70532e74  olorComponent.Sp
+// 2340:  6c756365  2b207261  6f70203d  616d2877  ecular += pow(ma
+// 2350:  6f642878  4e492874  6569562e  726f5777  x(dot(IN.ViewWor
+// 2360:  6944646c  74636572  2c6e6f69  66657220  ldDirection, ref
+// 2370:  74636556  2c29726f  2c293020  65705320  Vector), 0), Spe
+// 2380:  616c7563  776f5072  782e7265  202a2029  cularPower.x) * 
+// 2390:  63657053  72616c75  6f6c6f43  67722e72  SpecularColor.rg
+// 23a0:  202a2062  63657053  72616c75  6f6c6f43  b * SpecularColo
+// 23b0:  20612e72  4e49202a  6c6f432e  722e726f  r.a * IN.Color.r
+// 23c0:  0d3b6267  2020200a  0a0d7d20  20200a0d  gb;..    }....  
+// 23d0:  65722020  6e727574  6c6f6320  6f43726f    return colorCo
+// 23e0:  6e6f706d  3b746e65  007d0a0d  00000000  mponent;..}_____
+// 23f0:  00000000  00000000  00000000  00000000  ________________
+// 2400:  00000000  00000000  00000000  00000000  ________________
+// 2410:  00000000  00000000  00000000  66756263  ____________cbuf
+// 2420:  20726566  736e6f43  746e6174  66667542  fer ConstantBuff
+// 2430:  3a207265  67657220  65747369  30622872  er : register(b0
+// 2440:  7b0a0d29  20200a0d  616d2020  78697274  )..{..    matrix
+// 2450:  65695620  0a0d3b77  20202020  7274616d   View;..    matr
+// 2460:  50207869  656a6f72  6f697463  0a0d3b6e  ix Projection;..
+// 2470:  20202020  7274616d  57207869  646c726f      matrix World
+// 2480:  0d0a0d3b  2020200a  6f6c6620  20347461  ;....    float4 
+// 2490:  69626d41  43746e65  726f6c6f  0d0a0d3b  AmbientColor;...
+// 24a0:  2020200a  6f6c6620  20347461  656d6143  .    float4 Came
+// 24b0:  6f506172  69746973  0d3b6e6f  200a0d0a  raPosition;.... 
+// 24c0:  66202020  74616f6c  694c2034  43746867     float4 LightC
+// 24d0:  726f6c6f  200a0d3b  66202020  74616f6c  olor;..    float
+// 24e0:  694c2034  44746867  63657269  6e6f6974  4 LightDirection
+// 24f0:  200a0d3b  66202020  74616f6c  694c2034  ;..    float4 Li
+// 2500:  50746867  7469736f  3b6e6f69  20200a0d  ghtPosition;..  
+// 2510:  6c662020  3474616f  67694c20  61527468    float4 LightRa
+// 2520:  73756964  0d0a0d3b  2020200a  6f6c6620  dius;....    flo
+// 2530:  20347461  63657053  72616c75  6f6c6f43  at4 SpecularColo
+// 2540:  0a0d3b72  20202020  616f6c66  53203474  r;..    float4 S
+// 2550:  75636570  5072616c  7265776f  7d0a0d3b  pecularPower;..}
+// 2560:  0a0d0a0d  706d6153  5372656c  65746174  ....SamplerState
+// 2570:  6c6f4320  6153726f  656c706d  203a2072   ColorSampler : 
+// 2580:  69676572  72657473  29307328  0d0a0d3b  register(s0);...
+// 2590:  7274730a  20746375  6f6c6f43  6d6f4372  .struct ColorCom
+// 25a0:  656e6f70  0a0d746e  200a0d7b  66202020  ponent..{..    f
+// 25b0:  74616f6c  6d412033  6e656962  0a0d3b74  loat3 Ambient;..
+// 25c0:  20202020  616f6c66  44203374  75666669      float3 Diffu
+// 25d0:  0d3b6573  2020200a  6f6c6620  20337461  se;..    float3 
+// 25e0:  63657053  72616c75  7d0a0d3b  0000003b  Specular;..};___
 // 25f0:  00000000  00000000  00000000  00000000  ________________
 // 2600:  00000000  00000000  00000000  00000000  ________________
 // 2610:  00000000  00000000  00000000  effeeffe  ____________....
-// 2620:  00000001  00000a3a  5c3a4600  652d4433  .___:.___F:\3D-e
+// 2620:  00000001  00000b1e  5c3a4600  652d4433  .___..___F:\3D-e
 // 2630:  6e69676e  65455c65  65747372  70617247  ngine\EersteGrap
 // 2640:  45636968  6e69676e  65455c65  65747372  hicEngine\Eerste
 // 2650:  70617247  45636968  6e69676e  69625c65  GraphicEngine\bi
@@ -803,36 +803,36 @@ ret
 // 26b0:  65636968  6e69676e  69625c65  5c34366e  hicengine\bin64\
 // 26c0:  61746164  6168735c  5c726564  6f6c6f63  data\shader\colo
 // 26d0:  6f635c72  5f726f6c  682e7370  006c736c  r\color_ps.hlsl_
-// 26e0:  66756263  20726566  736e6f43  746e6174  cbuffer Constant
-// 26f0:  66667542  3a207265  67657220  65747369  Buffer : registe
-// 2700:  30622872  7b0a0d29  20200a0d  616d2020  r(b0)..{..    ma
-// 2710:  78697274  65695620  0a0d3b77  20202020  trix View;..    
-// 2720:  7274616d  50207869  656a6f72  6f697463  matrix Projectio
-// 2730:  0a0d3b6e  20202020  7274616d  57207869  n;..    matrix W
-// 2740:  646c726f  0d0a0d3b  2020200a  6f6c6620  orld;....    flo
-// 2750:  20347461  69626d41  43746e65  726f6c6f  at4 AmbientColor
-// 2760:  0d0a0d3b  2020200a  6f6c6620  20347461  ;....    float4 
-// 2770:  656d6143  6f506172  69746973  0d3b6e6f  CameraPosition;.
-// 2780:  200a0d0a  66202020  74616f6c  694c2034  ...    float4 Li
-// 2790:  43746867  726f6c6f  200a0d3b  66202020  ghtColor;..    f
-// 27a0:  74616f6c  694c2034  44746867  63657269  loat4 LightDirec
-// 27b0:  6e6f6974  200a0d3b  66202020  74616f6c  tion;..    float
-// 27c0:  694c2034  50746867  7469736f  3b6e6f69  4 LightPosition;
-// 27d0:  20200a0d  6c662020  3474616f  67694c20  ..    float4 Lig
-// 27e0:  61527468  73756964  0d0a0d3b  2020200a  htRadius;....   
-// 27f0:  6f6c6620  20347461  63657053  72616c75   float4 Specular
-// 2800:  6f6c6f43  0a0d3b72  20202020  616f6c66  Color;..    floa
-// 2810:  53203474  75636570  5072616c  0130e21b  t4 SpecularP..0.
-// 2820:  00000080  6edd10f0  01d3fd03  00000001  .___...n.....___
+// 26e0:  335c3a46  6e652d44  656e6967  7265455c  F:\3D-engine\Eer
+// 26f0:  47657473  68706172  6e456369  656e6967  steGraphicEngine
+// 2700:  7265455c  47657473  68706172  6e456369  \EersteGraphicEn
+// 2710:  656e6967  6e69625c  445c3436  5c617461  gine\bin64\Data\
+// 2720:  64616853  435c7265  726f6c6f  636e495c  Shader\Color\Inc
+// 2730:  6564756c  6d6f435c  2e6e6f6d  6c736c68  lude\Common.hlsl
+// 2740:  3a660069  2d64335c  69676e65  655c656e  i_f:\3d-engine\e
+// 2750:  74737265  61726765  63696870  69676e65  erstegraphicengi
+// 2760:  655c656e  74737265  61726765  63696870  ne\eerstegraphic
+// 2770:  69676e65  625c656e  34366e69  7461645c  engine\bin64\dat
+// 2780:  68735c61  72656461  6c6f635c  695c726f  a\shader\color\i
+// 2790:  756c636e  635c6564  6f6d6d6f  6c682e6e  nclude\common.hl
+// 27a0:  00696c73  636e6923  6564756c  6e492220  sli_#include "In
+// 27b0:  64756c63  6f432f65  6e6f6d6d  736c682e  clude/Common.hls
+// 27c0:  0d22696c  730a0d0a  63757274  53502074  li"....struct PS
+// 27d0:  504e495f  0a0d5455  200a0d7b  66202020  _INPUT..{..    f
+// 27e0:  74616f6c  6f502034  69746973  3a206e6f  loat4 Position :
+// 27f0:  5f565320  49534f50  4e4f4954  200a0d3b   SV_POSITION;.. 
+// 2800:  66202020  74616f6c  6f432034  20726f6c     float4 Color 
+// 2810:  3a202020  4c4f4320  3b30524f  0130e21b     : COLOR0;..0.
+// 2820:  000000ac  11fcff2d  01d3fdc1  00000001  .___-........___
 // 2830:  00000000  00000000  00000000  00000000  ________________
 // 2840:  00000000  00000000  00000000  00000000  ________________
-// 2850:  00000000  00000000  00000000  00000001  ____________.___
-// 2860:  00000002  00000001  00000002  00000000  .___.___._______
-// 2870:  0000005d  00000028  0130e21b  175451f2  ]___(___..0..QT.
-// 2880:  00000981  00000001  0000005c  0000005d  ..__.___\___]___
-// 2890:  00000000  00000000  00000000  00000000  ________________
-// 28a0:  00000000  00000000  00000000  00000000  ________________
-// 28b0:  00000000  00000000  00000000  00000000  ________________
+// 2850:  00000000  00000000  00000000  00000002  ____________.___
+// 2860:  00000004  00000001  00000006  00000000  .___.___._______
+// 2870:  0000005d  00000028  0130e21b  66dfd8d8  ]___(___..0....f
+// 2880:  000007cf  00000001  0000005c  0000005d  ..__.___\___]___
+// 2890:  00000000  00000000  00000000  0000011a  ____________..__
+// 28a0:  00000028  0130e21b  e1f312fc  000001d1  (___..0.......__
+// 28b0:  000000b8  0000005c  0000011a  00000000  .___\___..______
 // 28c0:  00000000  00000000  00000000  00000000  ________________
 // 28d0:  00000000  00000000  00000000  00000000  ________________
 // 28e0:  00000000  00000000  00000000  00000000  ________________
@@ -1071,91 +1071,91 @@ ret
 // 3770:  00000000  00000000  00000000  00000000  ________________
 // 3780:  11500016  00010000  00040000  00000328  ._P.__.___._(.__
 // 3790:  00580001  0000000c  114e0002  00060002  ._X_.___._N.._._
-// 37a0:  000000f4  00000018  00000001  a1320110  .___.___.___..2.
-// 37b0:  278461e9  1abbdba4  84be68f4  00004943  .a.'.....h..CI__
-// 37c0:  000000f2  000006c0  00000000  00010001  .___..______._._
-// 37d0:  000006cc  00000000  0000008e  000006b4  ..______.___..__
-// 37e0:  00000054  80000034  00000054  00000034  T___4__.T___4___
-// 37f0:  00000074  80000035  00000074  00000035  t___5__.t___5___
-// 3800:  00000094  80000036  00000094  00000036  .___6__..___6___
-// 3810:  000000b4  80000038  000000b4  00000038  .___8__..___8___
-// 3820:  000000b8  80000038  000000b8  00000038  .___8__..___8___
-// 3830:  000000cc  80000038  000000cc  00000038  .___8__..___8___
-// 3840:  000000e0  80000038  000000e0  00000038  .___8__..___8___
-// 3850:  000000f4  80000038  000000f4  00000038  .___8__..___8___
-// 3860:  00000108  80000038  00000108  00000038  ..__8__...__8___
-// 3870:  0000012c  80000038  0000012c  00000038  ,.__8__.,.__8___
-// 3880:  00000148  80000038  00000148  00000038  H.__8__.H.__8___
-// 3890:  00000164  80000038  00000164  00000038  d.__8__.d.__8___
-// 38a0:  00000178  80000038  00000178  00000038  x.__8__.x.__8___
-// 38b0:  0000018c  80000038  0000018c  00000038  ..__8__...__8___
-// 38c0:  000001a0  80000038  000001a0  00000038  ..__8__...__8___
-// 38d0:  000001b4  80000038  000001b4  00000038  ..__8__...__8___
-// 38e0:  000001c8  80000038  000001c8  00000038  ..__8__...__8___
-// 38f0:  000001dc  80000039  000001dc  00000039  ..__9__...__9___
-// 3900:  000001e0  80000039  000001e0  00000039  ..__9__...__9___
-// 3910:  000001f4  80000039  000001f4  00000039  ..__9__...__9___
-// 3920:  00000208  80000039  00000208  00000039  ..__9__...__9___
-// 3930:  0000021c  80000039  0000021c  00000039  ..__9__...__9___
-// 3940:  00000230  80000039  00000230  00000039  0.__9__.0.__9___
-// 3950:  00000244  80000039  00000244  00000039  D.__9__.D.__9___
-// 3960:  00000258  80000039  00000258  00000039  X.__9__.X.__9___
-// 3970:  00000274  80000039  00000274  00000039  t.__9__.t.__9___
-// 3980:  00000290  80000039  00000290  00000039  ..__9__...__9___
-// 3990:  000002a4  80000039  000002a4  00000039  ..__9__...__9___
-// 39a0:  000002c0  80000039  000002c0  00000039  ..__9__...__9___
-// 39b0:  000002dc  80000039  000002dc  00000039  ..__9__...__9___
-// 39c0:  000002f0  80000039  000002f0  00000039  ..__9__...__9___
-// 39d0:  0000030c  80000039  0000030c  00000039  ..__9__...__9___
-// 39e0:  00000328  80000039  00000328  00000039  (.__9__.(.__9___
-// 39f0:  0000033c  80000039  0000033c  00000039  <.__9__.<.__9___
-// 3a00:  00000358  80000039  00000358  00000039  X.__9__.X.__9___
-// 3a10:  00000364  80000039  00000364  00000039  d.__9__.d.__9___
-// 3a20:  00000380  80000039  00000380  00000039  ..__9__...__9___
-// 3a30:  000003a0  80000039  000003a0  00000039  ..__9__...__9___
-// 3a40:  000003c0  80000039  000003c0  00000039  ..__9__...__9___
-// 3a50:  000003dc  80000039  000003dc  00000039  ..__9__...__9___
-// 3a60:  000003f8  80000039  000003f8  00000039  ..__9__...__9___
-// 3a70:  00000414  80000039  00000414  00000039  ..__9__...__9___
-// 3a80:  00000430  80000039  00000430  00000039  0.__9__.0.__9___
-// 3a90:  00000448  80000039  00000448  00000039  H.__9__.H.__9___
-// 3aa0:  00000464  80000039  00000464  00000039  d.__9__.d.__9___
-// 3ab0:  00000480  80000039  00000480  00000039  ..__9__...__9___
-// 3ac0:  0000049c  80000039  0000049c  00000039  ..__9__...__9___
-// 3ad0:  000004b0  80000039  000004b0  00000039  ..__9__...__9___
-// 3ae0:  000004cc  80000039  000004cc  00000039  ..__9__...__9___
-// 3af0:  000004e8  80000039  000004e8  00000039  ..__9__...__9___
-// 3b00:  000004fc  80000039  000004fc  00000039  ..__9__...__9___
-// 3b10:  00000518  80000039  00000518  00000039  ..__9__...__9___
-// 3b20:  0000052c  80000039  0000052c  00000039  ,.__9__.,.__9___
-// 3b30:  0000054c  80000039  0000054c  00000039  L.__9__.L.__9___
-// 3b40:  00000560  80000039  00000560  00000039  `.__9__.`.__9___
-// 3b50:  00000580  80000039  00000580  00000039  ..__9__...__9___
-// 3b60:  000005a0  80000039  000005a0  00000039  ..__9__...__9___
-// 3b70:  000005bc  80000039  000005bc  00000039  ..__9__...__9___
-// 3b80:  000005d8  80000039  000005d8  00000039  ..__9__...__9___
-// 3b90:  000005dc  80000039  000005dc  00000039  ..__9__...__9___
-// 3ba0:  000005f0  80000039  000005f0  00000039  ..__9__...__9___
-// 3bb0:  00000604  80000039  00000604  00000039  ..__9__...__9___
-// 3bc0:  00000618  80000039  00000618  00000039  ..__9__...__9___
-// 3bd0:  0000062c  80000039  0000062c  00000039  ,.__9__.,.__9___
-// 3be0:  00000640  80000039  00000640  00000039  @.__9__.@.__9___
-// 3bf0:  00000654  8000003b  00000654  0000003b  T.__;__.T.__;___
-// 3c00:  00000670  8000003b  00000670  0000003b  p.__;__.p.__;___
-// 3c10:  0000068c  8000003c  0000068c  0000003c  ..__<__...__<___
-// 3c20:  000006a0  8000003e  000006a0  0000003e  ..__>__...__>___
-// 3c30:  000006b4  8000003e  000006b4  0000003e  ..__>__...__>___
-// 3c40:  000006c8  8000003e  000006c8  0000003e  ..__>__...__>___
-// 3c50:  00280005  0027001e  00280005  0027001e  ._(_._'_._(_._'_
-// 3c60:  00290005  0028001f  00380005  00370016  ._)_._(_._8_._7_
-// 3c70:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
+// 37a0:  000000f4  00000030  00000001  f8b30110  .___0___.___....
+// 37b0:  b461f9f9  fce1e8a6  11ecb6e8  00000f2f  ..a........./.__
+// 37c0:  000000b8  ba210110  a5460b62  f134dfb5  .___..!.b.F...4.
+// 37d0:  a47d9fd9  00002d94  000000f2  000006c0  ..}..-__.___..__
+// 37e0:  00000000  00010001  000006cc  00000000  ____._._..______
+// 37f0:  0000008e  000006b4  00000054  8000001a  .___..__T___.__.
+// 3800:  00000054  0000001a  00000074  8000001b  T___.___t___.__.
+// 3810:  00000074  0000001b  00000094  8000001c  t___.___.___.__.
+// 3820:  00000094  0000001c  000000b4  8000001e  .___.___.___.__.
+// 3830:  000000b4  0000001e  000000b8  8000001e  .___.___.___.__.
+// 3840:  000000b8  0000001e  000000cc  8000001e  .___.___.___.__.
+// 3850:  000000cc  0000001e  000000e0  8000001e  .___.___.___.__.
+// 3860:  000000e0  0000001e  000000f4  8000001e  .___.___.___.__.
+// 3870:  000000f4  0000001e  00000108  8000001e  .___.___..__.__.
+// 3880:  00000108  0000001e  0000012c  8000001e  ..__.___,.__.__.
+// 3890:  0000012c  0000001e  00000148  8000001e  ,.__.___H.__.__.
+// 38a0:  00000148  0000001e  00000164  8000001e  H.__.___d.__.__.
+// 38b0:  00000164  0000001e  00000178  8000001e  d.__.___x.__.__.
+// 38c0:  00000178  0000001e  0000018c  8000001e  x.__.___..__.__.
+// 38d0:  0000018c  0000001e  000001a0  8000001e  ..__.___..__.__.
+// 38e0:  000001a0  0000001e  000001b4  8000001e  ..__.___..__.__.
+// 38f0:  000001b4  0000001e  000001c8  8000001e  ..__.___..__.__.
+// 3900:  000001c8  0000001e  000001dc  8000001f  ..__.___..__.__.
+// 3910:  000001dc  0000001f  000001e0  8000001f  ..__.___..__.__.
+// 3920:  000001e0  0000001f  000001f4  8000001f  ..__.___..__.__.
+// 3930:  000001f4  0000001f  00000208  8000001f  ..__.___..__.__.
+// 3940:  00000208  0000001f  0000021c  8000001f  ..__.___..__.__.
+// 3950:  0000021c  0000001f  00000230  8000001f  ..__.___0.__.__.
+// 3960:  00000230  0000001f  00000244  8000001f  0.__.___D.__.__.
+// 3970:  00000244  0000001f  00000258  8000001f  D.__.___X.__.__.
+// 3980:  00000258  0000001f  00000274  8000001f  X.__.___t.__.__.
+// 3990:  00000274  0000001f  00000290  8000001f  t.__.___..__.__.
+// 39a0:  00000290  0000001f  000002a4  8000001f  ..__.___..__.__.
+// 39b0:  000002a4  0000001f  000002c0  8000001f  ..__.___..__.__.
+// 39c0:  000002c0  0000001f  000002dc  8000001f  ..__.___..__.__.
+// 39d0:  000002dc  0000001f  000002f0  8000001f  ..__.___..__.__.
+// 39e0:  000002f0  0000001f  0000030c  8000001f  ..__.___..__.__.
+// 39f0:  0000030c  0000001f  00000328  8000001f  ..__.___(.__.__.
+// 3a00:  00000328  0000001f  0000033c  8000001f  (.__.___<.__.__.
+// 3a10:  0000033c  0000001f  00000358  8000001f  <.__.___X.__.__.
+// 3a20:  00000358  0000001f  00000364  8000001f  X.__.___d.__.__.
+// 3a30:  00000364  0000001f  00000380  8000001f  d.__.___..__.__.
+// 3a40:  00000380  0000001f  000003a0  8000001f  ..__.___..__.__.
+// 3a50:  000003a0  0000001f  000003c0  8000001f  ..__.___..__.__.
+// 3a60:  000003c0  0000001f  000003dc  8000001f  ..__.___..__.__.
+// 3a70:  000003dc  0000001f  000003f8  8000001f  ..__.___..__.__.
+// 3a80:  000003f8  0000001f  00000414  8000001f  ..__.___..__.__.
+// 3a90:  00000414  0000001f  00000430  8000001f  ..__.___0.__.__.
+// 3aa0:  00000430  0000001f  00000448  8000001f  0.__.___H.__.__.
+// 3ab0:  00000448  0000001f  00000464  8000001f  H.__.___d.__.__.
+// 3ac0:  00000464  0000001f  00000480  8000001f  d.__.___..__.__.
+// 3ad0:  00000480  0000001f  0000049c  8000001f  ..__.___..__.__.
+// 3ae0:  0000049c  0000001f  000004b0  8000001f  ..__.___..__.__.
+// 3af0:  000004b0  0000001f  000004cc  8000001f  ..__.___..__.__.
+// 3b00:  000004cc  0000001f  000004e8  8000001f  ..__.___..__.__.
+// 3b10:  000004e8  0000001f  000004fc  8000001f  ..__.___..__.__.
+// 3b20:  000004fc  0000001f  00000518  8000001f  ..__.___..__.__.
+// 3b30:  00000518  0000001f  0000052c  8000001f  ..__.___,.__.__.
+// 3b40:  0000052c  0000001f  0000054c  8000001f  ,.__.___L.__.__.
+// 3b50:  0000054c  0000001f  00000560  8000001f  L.__.___`.__.__.
+// 3b60:  00000560  0000001f  00000580  8000001f  `.__.___..__.__.
+// 3b70:  00000580  0000001f  000005a0  8000001f  ..__.___..__.__.
+// 3b80:  000005a0  0000001f  000005bc  8000001f  ..__.___..__.__.
+// 3b90:  000005bc  0000001f  000005d8  8000001f  ..__.___..__.__.
+// 3ba0:  000005d8  0000001f  000005dc  8000001f  ..__.___..__.__.
+// 3bb0:  000005dc  0000001f  000005f0  8000001f  ..__.___..__.__.
+// 3bc0:  000005f0  0000001f  00000604  8000001f  ..__.___..__.__.
+// 3bd0:  00000604  0000001f  00000618  8000001f  ..__.___..__.__.
+// 3be0:  00000618  0000001f  0000062c  8000001f  ..__.___,.__.__.
+// 3bf0:  0000062c  0000001f  00000640  8000001f  ,.__.___@.__.__.
+// 3c00:  00000640  0000001f  00000654  80000021  @.__.___T.__!__.
+// 3c10:  00000654  00000021  00000670  80000021  T.__!___p.__!__.
+// 3c20:  00000670  00000021  0000068c  80000022  p.__!___..__"__.
+// 3c30:  0000068c  00000022  000006a0  80000024  ..__"___..__$__.
+// 3c40:  000006a0  00000024  000006b4  80000024  ..__$___..__$__.
+// 3c50:  000006b4  00000024  000006c8  80000024  ..__$___..__$__.
+// 3c60:  000006c8  00000024  00280005  0027001e  ..__$___._(_._'_
+// 3c70:  00280005  0027001e  00290005  0028001f  ._(_._'_._)_._(_
 // 3c80:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
 // 3c90:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
 // 3ca0:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
 // 3cb0:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
-// 3cc0:  00380005  00370005  00380005  00370005  ._8_._7_._8_._7_
-// 3cd0:  00380005  00370005  00360005  00350016  ._8_._7_._6_._5_
-// 3ce0:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
+// 3cc0:  00380005  00370016  00380005  00370016  ._8_._7_._8_._7_
+// 3cd0:  00380005  00370016  00380005  00370005  ._8_._7_._8_._7_
+// 3ce0:  00380005  00370005  00380005  00370005  ._8_._7_._8_._7_
 // 3cf0:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
 // 3d00:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
 // 3d10:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
@@ -1177,16 +1177,16 @@ ret
 // 3e10:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
 // 3e20:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
 // 3e30:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
-// 3e40:  00360005  00350005  00360005  00350005  ._6_._5_._6_._5_
-// 3e50:  00360005  00350005  00580005  003d000f  ._6_._5_._X_._=_
-// 3e60:  00580005  0057000f  00130005  00120005  ._X_._W_._._._._
-// 3e70:  000f0005  000f0005  000f0005  000f0005  ._._._._._._._._
-// 3e80:  000f0005  000f0005  000000f6  0000001c  ._._._._.___.___
-// 3e90:  00000000  00001000  00000000  00000042  _____.______B___
-// 3ea0:  00001001  00000000  00000048  00000018  ..______H___.___
-// 3eb0:  00000000  00000018  0000003c  0000005c  ____.___<___\___
-// 3ec0:  00000080  000000a4  00000000  00000000  .___.___________
-// 3ed0:  00000000  00000000  00000000  00000000  ________________
+// 3e40:  00360005  00350016  00360005  00350016  ._6_._5_._6_._5_
+// 3e50:  00360005  00350016  00360005  00350005  ._6_._5_._6_._5_
+// 3e60:  00360005  00350005  00360005  00350005  ._6_._5_._6_._5_
+// 3e70:  00580005  003d000f  00580005  0057000f  ._X_._=_._X_._W_
+// 3e80:  00130005  00120005  000f0005  000f0005  ._._._._._._._._
+// 3e90:  000f0005  000f0005  000f0005  000f0005  ._._._._._._._._
+// 3ea0:  000000f6  0000001c  00000000  00001000  .___.________.__
+// 3eb0:  00000000  00000028  00001001  00000000  ____(___..______
+// 3ec0:  0000002e  00000018  00000000  00000018  .___._______.___
+// 3ed0:  0000003c  0000005c  00000080  000000a4  <___\___.___.___
 // 3ee0:  00000000  00000000  00000000  00000000  ________________
 // 3ef0:  00000000  00000000  00000000  00000000  ________________
 // 3f00:  00000000  00000000  00000000  00000000  ________________
@@ -1208,7 +1208,7 @@ ret
 // 4000:  00000000  00000000  00000000  00000000  ________________
 // 4010:  00000000  00000000  00000000  0131ca0b  ____________..1.
 // 4020:  00000038  00001000  0000100e  000001c8  8____.__..__..__
-// 4030:  ffff000a  00000004  0003ffff  00000000  ._...___..._____
+// 4030:  ffff000b  00000004  0003ffff  00000000  ._...___..._____
 // 4040:  00000038  00000038  00000008  00000040  8___8___.___@___
 // 4050:  00000000  151b0016  00000040  00000004  ____._..@___.___
 // 4060:  6c660010  3474616f  f1f2f300  151b0016  ._float4_...._..
@@ -1270,125 +1270,125 @@ ret
 // 43e0:  00000000  00000000  00000000  00000000  ________________
 // 43f0:  00000000  00000000  00000000  00000000  ________________
 // 4400:  00000000  00000000  00000000  00000000  ________________
-// 4410:  00000000  00000000  00000000  6d6f4372  ____________rCom
-// 4420:  656e6f70  4320746e  75706d6f  6d416574  ponent ComputeAm
-// 4430:  6e656962  6f432874  43726f6c  6f706d6f  bient(ColorCompo
-// 4440:  746e656e  6c6f6320  6f43726f  6e6f706d  nent colorCompon
-// 4450:  2c746e65  5f535020  55504e49  4e492054  ent, PS_INPUT IN
-// 4460:  0a0d3b29  6f6c6f43  6d6f4372  656e6f70  );..ColorCompone
-// 4470:  4320746e  75706d6f  694c6574  28746867  nt ComputeLight(
-// 4480:  6f6c6f43  6d6f4372  656e6f70  6320746e  ColorComponent c
-// 4490:  726f6c6f  706d6f43  6e656e6f  50202c74  olorComponent, P
-// 44a0:  4e495f53  20545550  3b294e49  0a0d0a0d  S_INPUT IN);....
-// 44b0:  616f6c66  50203474  414d5f53  20284e49  float4 PS_MAIN( 
-// 44c0:  495f5350  5455504e  204e4920  203a2029  PS_INPUT IN ) : 
-// 44d0:  545f5653  65677261  7b0a0d74  20200a0d  SV_Target..{..  
-// 44e0:  6f432020  43726f6c  6f706d6f  746e656e    ColorComponent
-// 44f0:  6c6f6320  6f43726f  6e6f706d  3b746e65   colorComponent;
-// 4500:  20200a0d  6c662020  3474616f  54554f20  ..    float4 OUT
-// 4510:  20202020  3d202020  6c662820  3474616f         = (float4
-// 4520:  3b302029  0a0d0a0d  20202020  6f6c6f63  ) 0;....    colo
-// 4530:  6d6f4372  656e6f70  412e746e  6569626d  rComponent.Ambie
-// 4540:  3d20746e  6c662820  3374616f  3b302029  nt = (float3) 0;
-// 4550:  20200a0d  6f632020  43726f6c  6f706d6f  ..    colorCompo
-// 4560:  746e656e  6669442e  65737566  28203d20  nent.Diffuse = (
-// 4570:  616f6c66  20293374  0a0d3b30  20202020  float3) 0;..    
-// 4580:  6f6c6f63  6d6f4372  656e6f70  532e746e  colorComponent.S
-// 4590:  75636570  2072616c  6628203d  74616f6c  pecular = (float
-// 45a0:  30202933  0d0a0d3b  2020200a  6c6f6320  3) 0;....    col
-// 45b0:  6f43726f  6e6f706d  20746e65  6f43203d  orComponent = Co
-// 45c0:  7475706d  626d4165  746e6569  6c6f6328  mputeAmbient(col
-// 45d0:  6f43726f  6e6f706d  2c746e65  294e4920  orComponent, IN)
-// 45e0:  200a0d3b  63202020  726f6c6f  706d6f43  ;..    colorComp
-// 45f0:  6e656e6f  203d2074  706d6f43  4c657475  onent = ComputeL
-// 4600:  74686769  6c6f6328  6f43726f  6e6f706d  ight(colorCompon
-// 4610:  2c746e65  294e4920  0d0a0d3b  2020200a  ent, IN);....   
-// 4620:  54554f20  6267722e  63203d20  726f6c6f   OUT.rgb = color
-// 4630:  706d6f43  6e656e6f  6d412e74  6e656962  Component.Ambien
-// 4640:  202b2074  6f6c6f63  6d6f4372  656e6f70  t + colorCompone
-// 4650:  442e746e  75666669  2b206573  6c6f6320  nt.Diffuse + col
-// 4660:  6f43726f  6e6f706d  2e746e65  63657053  orComponent.Spec
-// 4670:  72616c75  200a0d3b  4f202020  612e5455  ular;..    OUT.a
-// 4680:  3d202020  302e3120  0a0d3b66  20200a0d     = 1.0f;....  
-// 4690:  65722020  6e727574  54554f20  7d0a0d3b    return OUT;..}
-// 46a0:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
-// 46b0:  4320746e  75706d6f  6d416574  6e656962  nt ComputeAmbien
-// 46c0:  6f432874  43726f6c  6f706d6f  746e656e  t(ColorComponent
-// 46d0:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
-// 46e0:  5f535020  55504e49  4e492054  7b0a0d29   PS_INPUT IN)..{
-// 46f0:  20200a0d  6f632020  43726f6c  6f706d6f  ..    colorCompo
-// 4700:  746e656e  626d412e  746e6569  203d2b20  nent.Ambient += 
-// 4710:  69626d41  43746e65  726f6c6f  6267722e  AmbientColor.rgb
-// 4720:  41202a20  6569626d  6f43746e  2e726f6c   * AmbientColor.
-// 4730:  202a2061  432e4e49  726f6c6f  6267722e  a * IN.Color.rgb
-// 4740:  200a0d3b  72202020  72757465  6f63206e  ;..    return co
-// 4750:  43726f6c  6f706d6f  746e656e  7d0a0d3b  lorComponent;..}
-// 4760:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
-// 4770:  4320746e  75706d6f  694c6574  28746867  nt ComputeLight(
-// 4780:  6f6c6f43  6d6f4372  656e6f70  6320746e  ColorComponent c
-// 4790:  726f6c6f  706d6f43  6e656e6f  50202c74  olorComponent, P
-// 47a0:  4e495f53  20545550  0d294e49  0a0d7b0a  S_INPUT IN)..{..
-// 47b0:  20202020  616f6c66  72203374  65566665      float3 refVe
-// 47c0:  726f7463  28203d20  616f6c66  20293374  ctor = (float3) 
-// 47d0:  0a0d3b30  20202020  616f6c66  6c203374  0;..    float3 l
-// 47e0:  74686769  65726944  6f697463  203d206e  ightDirection = 
-// 47f0:  6d726f6e  7a696c61  4c2d2865  74686769  normalize(-Light
-// 4800:  65726944  6f697463  79782e6e  0d3b297a  Direction.xyz);.
-// 4810:  2020200a  6f6c6620  6e207461  746f645f  .    float n_dot
-// 4820:  3d206c5f  746f6420  67696c28  69447468  _l = dot(lightDi
-// 4830:  74636572  2c6e6f69  726f6e20  696c616d  rection, normali
-// 4840:  4928657a  6f4e2e4e  6c616d72  0d3b2929  ze(IN.Normal));.
-// 4850:  200a0d0a  69202020  6e282066  746f645f  ...    if (n_dot
-// 4860:  3e206c5f  0d293020  2020200a  0a0d7b20  _l > 0)..    {..
-// 4870:  2f2f0909  3d204420  20646b20  646c202a  ..// D = kd * ld
-// 4880:  6d202a20  200a0d64  20202020  63202020   * md..        c
-// 4890:  726f6c6f  706d6f43  6e656e6f  69442e74  olorComponent.Di
-// 48a0:  73756666  3d2b2065  78616d20  645f6e28  ffuse += max(n_d
-// 48b0:  6c5f746f  2e30202c  20296630  694c202a  ot_l, 0.0f) * Li
-// 48c0:  43746867  726f6c6f  6267722e  4c202a20  ghtColor.rgb * L
-// 48d0:  74686769  6f6c6f43  20612e72  4e49202a  ightColor.a * IN
-// 48e0:  6c6f432e  722e726f  0d3b6267  090a0d0a  .Color.rgb;.....
-// 48f0:  202f2f09  203d2052  202d2049  2e6e2832  .// R = I - 2(n.
-// 4900:  2a202949  0a0d6e20  20202020  20202020  I) * n..        
-// 4910:  56666572  6f746365  203d2072  6d726f6e  refVector = norm
-// 4920:  7a696c61  65722865  63656c66  696c2874  alize(reflect(li
-// 4930:  44746867  63657269  6e6f6974  4e49202c  ghtDirection, IN
-// 4940:  726f4e2e  296c616d  0a0d3b29  09090a0d  .Normal));......
-// 4950:  53202f2f  6d203d20  64287861  5628746f  // S = max(dot(V
-// 4960:  2c29522e  505e2930  53202a20  75636570  .R),0)^P * Specu
-// 4970:  4372616c  726f6c6f  6267722e  53202a20  larColor.rgb * S
-// 4980:  75636570  4372616c  726f6c6f  2a20612e  pecularColor.a *
-// 4990:  6c6f6320  722e726f  0d3b6267  2020200a   color.rgb;..   
-// 49a0:  20202020  6c6f6320  6f43726f  6e6f706d       colorCompon
-// 49b0:  2e746e65  63657053  72616c75  203d2b20  ent.Specular += 
-// 49c0:  28776f70  2878616d  28746f64  562e4e49  pow(max(dot(IN.V
-// 49d0:  57776569  646c726f  65726944  6f697463  iewWorldDirectio
-// 49e0:  72202c6e  65566665  726f7463  30202c29  n, refVector), 0
-// 49f0:  53202c29  75636570  5072616c  7265776f  ), SpecularPower
-// 4a00:  2029782e  7053202a  6c756365  6f437261  .x) * SpecularCo
-// 4a10:  2e726f6c  20626772  7053202a  6c756365  lor.rgb * Specul
-// 4a20:  6f437261  2e726f6c  202a2061  432e4e49  arColor.a * IN.C
-// 4a30:  726f6c6f  6267722e  200a0d3b  7d202020  olor.rgb;..    }
-// 4a40:  0a0d0a0d  20202020  75746572  63206e72  ....    return c
-// 4a50:  726f6c6f  706d6f43  6e656e6f  0a0d3b74  olorComponent;..
-// 4a60:  0007007d  00000000  005c0000  005d0000  }_._______\___]_
-// 4a70:  00b80000  00010000  00000000  00000000  __.___._________
-// 4a80:  00040000  00000000  00000000  00000000  __._____________
-// 4a90:  00000000  00000000  00000000  00000000  ________________
-// 4aa0:  00000000  00000000  00000000  00000000  ________________
-// 4ab0:  00000000  00000000  00000000  00000000  ________________
-// 4ac0:  00000000  00000000  00000000  00000000  ________________
-// 4ad0:  00000000  00000000  00000000  00000000  ________________
-// 4ae0:  00000000  00000000  00000000  00000000  ________________
-// 4af0:  00000000  00000000  00000000  00000000  ________________
-// 4b00:  00000000  00000000  00000000  00000000  ________________
-// 4b10:  00000000  00000000  00000000  00000000  ________________
-// 4b20:  00000000  00000000  00000000  00000000  ________________
-// 4b30:  00000000  00000000  00000000  00000000  ________________
-// 4b40:  00000000  00000000  00000000  00000000  ________________
-// 4b50:  00000000  00000000  00000000  00000000  ________________
-// 4b60:  00000000  00000000  00000000  00000000  ________________
-// 4b70:  00000000  00000000  00000000  00000000  ________________
+// 4410:  00000000  00000000  00000000  4f203474  ____________t4 O
+// 4420:  20205455  20202020  28203d20  616f6c66  UT       = (floa
+// 4430:  20293474  0a0d3b30  20200a0d  6f632020  t4) 0;....    co
+// 4440:  43726f6c  6f706d6f  746e656e  626d412e  lorComponent.Amb
+// 4450:  746e6569  28203d20  616f6c66  20293374  ient = (float3) 
+// 4460:  0a0d3b30  20202020  6f6c6f63  6d6f4372  0;..    colorCom
+// 4470:  656e6f70  442e746e  75666669  3d206573  ponent.Diffuse =
+// 4480:  6c662820  3374616f  3b302029  20200a0d   (float3) 0;..  
+// 4490:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
+// 44a0:  6570532e  616c7563  203d2072  6f6c6628  .Specular = (flo
+// 44b0:  29337461  0d3b3020  200a0d0a  63202020  at3) 0;....    c
+// 44c0:  726f6c6f  706d6f43  6e656e6f  203d2074  olorComponent = 
+// 44d0:  706d6f43  41657475  6569626d  6328746e  ComputeAmbient(c
+// 44e0:  726f6c6f  706d6f43  6e656e6f  49202c74  olorComponent, I
+// 44f0:  0d3b294e  2020200a  6c6f6320  6f43726f  N);..    colorCo
+// 4500:  6e6f706d  20746e65  6f43203d  7475706d  mponent = Comput
+// 4510:  67694c65  63287468  726f6c6f  706d6f43  eLight(colorComp
+// 4520:  6e656e6f  49202c74  0d3b294e  200a0d0a  onent, IN);.... 
+// 4530:  4f202020  722e5455  3d206267  6c6f6320     OUT.rgb = col
+// 4540:  6f43726f  6e6f706d  2e746e65  69626d41  orComponent.Ambi
+// 4550:  20746e65  6f63202b  43726f6c  6f706d6f  ent + colorCompo
+// 4560:  746e656e  6669442e  65737566  63202b20  nent.Diffuse + c
+// 4570:  726f6c6f  706d6f43  6e656e6f  70532e74  olorComponent.Sp
+// 4580:  6c756365  0d3b7261  2020200a  54554f20  ecular;..    OUT
+// 4590:  2020612e  31203d20  3b66302e  0a0d0a0d  .a   = 1.0f;....
+// 45a0:  20202020  75746572  4f206e72  0d3b5455      return OUT;.
+// 45b0:  0a0d7d0a  6f430a0d  43726f6c  6f706d6f  .}....ColorCompo
+// 45c0:  746e656e  6d6f4320  65747570  69626d41  nent ComputeAmbi
+// 45d0:  28746e65  6f6c6f43  6d6f4372  656e6f70  ent(ColorCompone
+// 45e0:  6320746e  726f6c6f  706d6f43  6e656e6f  nt colorComponen
+// 45f0:  50202c74  4e495f53  20545550  0d294e49  t, PS_INPUT IN).
+// 4600:  0a0d7b0a  20202020  6f6c6f63  6d6f4372  .{..    colorCom
+// 4610:  656e6f70  412e746e  6569626d  2b20746e  ponent.Ambient +
+// 4620:  6d41203d  6e656962  6c6f4374  722e726f  = AmbientColor.r
+// 4630:  2a206267  626d4120  746e6569  6f6c6f43  gb * AmbientColo
+// 4640:  20612e72  4e49202a  6c6f432e  722e726f  r.a * IN.Color.r
+// 4650:  0d3b6267  2020200a  74657220  206e7275  gb;..    return 
+// 4660:  6f6c6f63  6d6f4372  656e6f70  0d3b746e  colorComponent;.
+// 4670:  0a0d7d0a  6f430a0d  43726f6c  6f706d6f  .}....ColorCompo
+// 4680:  746e656e  6d6f4320  65747570  6867694c  nent ComputeLigh
+// 4690:  6f432874  43726f6c  6f706d6f  746e656e  t(ColorComponent
+// 46a0:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
+// 46b0:  5f535020  55504e49  4e492054  7b0a0d29   PS_INPUT IN)..{
+// 46c0:  20200a0d  6c662020  3374616f  66657220  ..    float3 ref
+// 46d0:  74636556  3d20726f  6c662820  3374616f  Vector = (float3
+// 46e0:  3b302029  20200a0d  6c662020  3374616f  ) 0;..    float3
+// 46f0:  67696c20  69447468  74636572  206e6f69   lightDirection 
+// 4700:  6f6e203d  6c616d72  28657a69  67694c2d  = normalize(-Lig
+// 4710:  69447468  74636572  2e6e6f69  297a7978  htDirection.xyz)
+// 4720:  200a0d3b  66202020  74616f6c  645f6e20  ;..    float n_d
+// 4730:  6c5f746f  64203d20  6c28746f  74686769  ot_l = dot(light
+// 4740:  65726944  6f697463  6e202c6e  616d726f  Direction, norma
+// 4750:  657a696c  2e4e4928  6d726f4e  29296c61  lize(IN.Normal))
+// 4760:  0d0a0d3b  2020200a  20666920  645f6e28  ;....    if (n_d
+// 4770:  6c5f746f  30203e20  200a0d29  7b202020  ot_l > 0)..    {
+// 4780:  09090a0d  44202f2f  6b203d20  202a2064  ....// D = kd * 
+// 4790:  2a20646c  0d646d20  2020200a  20202020  ld * md..       
+// 47a0:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
+// 47b0:  66666944  20657375  6d203d2b  6e287861  Diffuse += max(n
+// 47c0:  746f645f  202c6c5f  66302e30  202a2029  _dot_l, 0.0f) * 
+// 47d0:  6867694c  6c6f4374  722e726f  2a206267  LightColor.rgb *
+// 47e0:  67694c20  6f437468  2e726f6c  202a2061   LightColor.a * 
+// 47f0:  432e4e49  726f6c6f  6267722e  0d0a0d3b  IN.Color.rgb;...
+// 4800:  2f09090a  2052202f  2049203d  2832202d  ...// R = I - 2(
+// 4810:  29492e6e  6e202a20  20200a0d  20202020  n.I) * n..      
+// 4820:  65722020  63655666  20726f74  6f6e203d    refVector = no
+// 4830:  6c616d72  28657a69  6c666572  28746365  rmalize(reflect(
+// 4840:  6867696c  72694474  69746365  202c6e6f  lightDirection, 
+// 4850:  4e2e4e49  616d726f  3b29296c  0a0d0a0d  IN.Normal));....
+// 4860:  2f2f0909  3d205320  78616d20  746f6428  ..// S = max(dot
+// 4870:  522e5628  29302c29  2a20505e  65705320  (V.R),0)^P * Spe
+// 4880:  616c7563  6c6f4372  722e726f  2a206267  cularColor.rgb *
+// 4890:  65705320  616c7563  6c6f4372  612e726f   SpecularColor.a
+// 48a0:  63202a20  726f6c6f  6267722e  200a0d3b   * color.rgb;.. 
+// 48b0:  20202020  63202020  726f6c6f  706d6f43         colorComp
+// 48c0:  6e656e6f  70532e74  6c756365  2b207261  onent.Specular +
+// 48d0:  6f70203d  616d2877  6f642878  4e492874  = pow(max(dot(IN
+// 48e0:  6569562e  726f5777  6944646c  74636572  .ViewWorldDirect
+// 48f0:  2c6e6f69  66657220  74636556  2c29726f  ion, refVector),
+// 4900:  2c293020  65705320  616c7563  776f5072   0), SpecularPow
+// 4910:  782e7265  202a2029  63657053  72616c75  er.x) * Specular
+// 4920:  6f6c6f43  67722e72  202a2062  63657053  Color.rgb * Spec
+// 4930:  72616c75  6f6c6f43  20612e72  4e49202a  ularColor.a * IN
+// 4940:  6c6f432e  722e726f  0d3b6267  2020200a  .Color.rgb;..   
+// 4950:  0a0d7d20  20200a0d  65722020  6e727574   }....    return
+// 4960:  6c6f6320  6f43726f  6e6f706d  3b746e65   colorComponent;
+// 4970:  007d0a0d  66756263  20726566  736e6f43  ..}_cbuffer Cons
+// 4980:  746e6174  66667542  3a207265  67657220  tantBuffer : reg
+// 4990:  65747369  30622872  7b0a0d29  20200a0d  ister(b0)..{..  
+// 49a0:  616d2020  78697274  65695620  0a0d3b77    matrix View;..
+// 49b0:  20202020  7274616d  50207869  656a6f72      matrix Proje
+// 49c0:  6f697463  0a0d3b6e  20202020  7274616d  ction;..    matr
+// 49d0:  57207869  646c726f  0d0a0d3b  2020200a  ix World;....   
+// 49e0:  6f6c6620  20347461  69626d41  43746e65   float4 AmbientC
+// 49f0:  726f6c6f  0d0a0d3b  2020200a  6f6c6620  olor;....    flo
+// 4a00:  20347461  656d6143  6f506172  69746973  at4 CameraPositi
+// 4a10:  0d3b6e6f  200a0d0a  66202020  74616f6c  on;....    float
+// 4a20:  694c2034  43746867  726f6c6f  200a0d3b  4 LightColor;.. 
+// 4a30:  66202020  74616f6c  694c2034  44746867     float4 LightD
+// 4a40:  63657269  6e6f6974  200a0d3b  66202020  irection;..    f
+// 4a50:  74616f6c  694c2034  50746867  7469736f  loat4 LightPosit
+// 4a60:  3b6e6f69  20200a0d  6c662020  3474616f  ion;..    float4
+// 4a70:  67694c20  61527468  73756964  0d0a0d3b   LightRadius;...
+// 4a80:  2020200a  6f6c6620  20347461  63657053  .    float4 Spec
+// 4a90:  72616c75  6f6c6f43  0a0d3b72  20202020  ularColor;..    
+// 4aa0:  616f6c66  53203474  75636570  5072616c  float4 SpecularP
+// 4ab0:  7265776f  7d0a0d3b  0a0d0a0d  706d6153  ower;..}....Samp
+// 4ac0:  5372656c  65746174  6c6f4320  6153726f  lerState ColorSa
+// 4ad0:  656c706d  203a2072  69676572  72657473  mpler : register
+// 4ae0:  29307328  0d0a0d3b  7274730a  20746375  (s0);....struct 
+// 4af0:  6f6c6f43  6d6f4372  656e6f70  0a0d746e  ColorComponent..
+// 4b00:  200a0d7b  66202020  74616f6c  6d412033  {..    float3 Am
+// 4b10:  6e656962  0a0d3b74  20202020  616f6c66  bient;..    floa
+// 4b20:  44203374  75666669  0d3b6573  2020200a  t3 Diffuse;..   
+// 4b30:  6f6c6620  20337461  63657053  72616c75   float3 Specular
+// 4b40:  7d0a0d3b  000b003b  017c0000  005c0000  ;..};_.___|.__\_
+// 4b50:  094c0000  00000000  011a0000  00b80000  __L.______..__._
+// 4b60:  00000000  00000000  00000000  005d0000  ______________]_
+// 4b70:  00010000  00070000  00000000  00000000  __.___._________
 // 4b80:  00000000  00000000  00000000  00000000  ________________
 // 4b90:  00000000  00000000  00000000  00000000  ________________
 // 4ba0:  00000000  00000000  00000000  00000000  ________________
@@ -1400,7 +1400,7 @@ ret
 // 4c00:  00000000  00000000  00000000  00000000  ________________
 // 4c10:  00000000  00000000  00000000  0131ca0b  ____________..1.
 // 4c20:  00000038  00001000  00001002  00000038  8____.__..__8___
-// 4c30:  ffff000b  00000004  0003ffff  00000000  ._...___..._____
+// 4c30:  ffff000c  00000004  0003ffff  00000000  ._...___..._____
 // 4c40:  00000008  00000008  00000008  00000010  .___.___.___.___
 // 4c50:  00000000  1601001a  00000000  0000100c  ____._..____..__
 // 4c60:  706d6f43  41657475  6569626d  f100746e  ComputeAmbient_.
@@ -1591,40 +1591,40 @@ ret
 // 57f0:  00000000  00000000  00000000  00000000  ________________
 // 5800:  00000000  00000000  00000000  00000000  ________________
 // 5810:  00000000  00000000  00000000  ffffffff  ____________....
-// 5820:  01310977  00000001  8c0a000d  9cb4000e  w.1..___._..._..
-// 5830:  000b000f  00000050  00000020  0000002c  ._._P___ ___,___
-// 5840:  00000068  00000000  00000000  00000016  h___________.___
+// 5820:  01310977  00000001  8c0a000e  9cb4000f  w.1..___._..._..
+// 5830:  000b0010  00000050  00000020  0000002c  ._._P___ ___,___
+// 5840:  000000d0  00000000  00000000  00000016  .___________.___
 // 5850:  00000019  00000000  00000000  00000000  ._______________
 // 5860:  00000001  00000000  000006cc  60000020  ._______..__ __`
-// 5870:  00000000  00000000  00000000  00090002  ____________._._
-// 5880:  00000d84  00000000  0000070c  00000001  ..______..__.___
-// 5890:  005c3228  00000000  00000000  4d5f5350  (2\_________PS_M
+// 5870:  2b180000  00000000  00000000  000a0002  __.+________._._
+// 5880:  00000d84  00000000  00000724  00000002  ..______$.__.___
+// 5890:  00703458  00000000  00000000  4d5f5350  X4p_________PS_M
 // 58a0:  004e4941  656e6f6e  00000000  f12eba2d  AIN_none____-...
 // 58b0:  00000001  00000000  000006cc  60000020  ._______..__ __`
-// 58c0:  00000000  00000000  00000000  00020002  ____________._._
+// 58c0:  2b180000  00000000  00000000  00020002  __.+________._._
 // 58d0:  00000007  00010000  ffffffff  00000000  ._____._....____
 // 58e0:  000006cc  00000208  00000000  ffffffff  ..__..______....
-// 58f0:  00000000  ffffffff  00010001  00010000  ____....._.___._
-// 5900:  00000000  335c3a46  6e652d44  656e6967  ____F:\3D-engine
-// 5910:  7265455c  47657473  68706172  6e456369  \EersteGraphicEn
-// 5920:  656e6967  7265455c  47657473  68706172  gine\EersteGraph
-// 5930:  6e456369  656e6967  6e69625c  445c3436  icEngine\bin64\D
-// 5940:  5c617461  64616853  435c7265  726f6c6f  ata\Shader\Color
-// 5950:  6c6f435c  505f726f  6c682e53  00006c73  \Color_PS.hlsl__
-// 5960:  effeeffe  00000001  00000001  00000100  .....___.____.__
-// 5970:  00000000  00000000  ffffff00  ffffffff  _________.......
-// 5980:  0cffffff  ffffff00  ffffffff  00ffffff  ...._.........._
-// 5990:  00000000  00000000  00000000  00000000  ________________
-// 59a0:  00000000  00000000  00000000  00000000  ________________
-// 59b0:  00000000  00000000  00000000  00000000  ________________
-// 59c0:  00000000  00000000  00000000  00000000  ________________
-// 59d0:  00000000  00000000  00000000  00000000  ________________
-// 59e0:  00000000  00000000  00000000  00000000  ________________
-// 59f0:  00000000  00000000  00000000  00000000  ________________
+// 58f0:  00000000  ffffffff  00020001  00020000  ____....._.___._
+// 5900:  00000000  0000005b  335c3a46  6e652d44  ____[___F:\3D-en
+// 5910:  656e6967  7265455c  47657473  68706172  gine\EersteGraph
+// 5920:  6e456369  656e6967  7265455c  47657473  icEngine\EersteG
+// 5930:  68706172  6e456369  656e6967  6e69625c  raphicEngine\bin
+// 5940:  445c3436  5c617461  64616853  435c7265  64\Data\Shader\C
+// 5950:  726f6c6f  6c6f435c  505f726f  6c682e53  olor\Color_PS.hl
+// 5960:  46006c73  44335c3a  676e652d  5c656e69  sl_F:\3D-engine\
+// 5970:  73726545  72476574  69687061  676e4563  EersteGraphicEng
+// 5980:  5c656e69  73726545  72476574  69687061  ine\EersteGraphi
+// 5990:  676e4563  5c656e69  366e6962  61445c34  cEngine\bin64\Da
+// 59a0:  535c6174  65646168  6f435c72  5c726f6c  ta\Shader\Color\
+// 59b0:  6c636e49  5c656475  6d6d6f43  682e6e6f  Include\Common.h
+// 59c0:  696c736c  00000000  effeeffe  00000001  lsli____.....___
+// 59d0:  00000001  00000100  00000000  00000000  .____.__________
+// 59e0:  ffffff00  ffffffff  0dffffff  ffffff00  _..........._...
+// 59f0:  ffffffff  00ffffff  00000000  00000000  ......._________
 // 5a00:  00000000  00000000  00000000  00000000  ________________
 // 5a10:  00000000  00000000  00000000  01312e94  ____________..1.
-// 5a20:  5b16e473  00000001  4a027caf  405685da  s..[.___.|.J..V@
-// 5a30:  2bd93db1  921b2739  00000088  6e694c2f  .=.+9'...___/Lin
+// 5a20:  5b18229b  00000001  a959ff48  4ee1eded  .".[.___H.Y....N
+// 5a30:  9f07fea4  2b18aea5  000000f5  6e694c2f  .......+.___/Lin
 // 5a40:  666e496b  6e2f006f  73656d61  72732f00  kInfo_/names_/sr
 // 5a50:  65682f63  72656461  636f6c62  732f006b  c/headerblock_/s
 // 5a60:  662f6372  73656c69  5c3a662f  652d6433  rc/files/f:\3d-e
@@ -1633,18 +1633,18 @@ ret
 // 5a90:  70617267  65636968  6e69676e  69625c65  graphicengine\bi
 // 5aa0:  5c34366e  61746164  6168735c  5c726564  n64\data\shader\
 // 5ab0:  6f6c6f63  6f635c72  5f726f6c  682e7370  color\color_ps.h
-// 5ac0:  006c736c  00000004  00000006  00000001  lsl_.___.___.___
-// 5ad0:  0000001e  00000000  00000011  00000007  ._______.___.___
-// 5ae0:  00000022  00000008  0000000a  00000006  "___.___.___.___
-// 5af0:  00000000  00000005  00000000  013351dc  ____._______.Q3.
-// 5b00:  00000000  00000000  00000000  00000000  ________________
-// 5b10:  00000000  00000000  00000000  00000000  ________________
-// 5b20:  00000000  00000000  00000000  00000000  ________________
-// 5b30:  00000000  00000000  00000000  00000000  ________________
-// 5b40:  00000000  00000000  00000000  00000000  ________________
-// 5b50:  00000000  00000000  00000000  00000000  ________________
-// 5b60:  00000000  00000000  00000000  00000000  ________________
-// 5b70:  00000000  00000000  00000000  00000000  ________________
+// 5ac0:  006c736c  6372732f  6c69662f  662f7365  lsl_/src/files/f
+// 5ad0:  64335c3a  676e652d  5c656e69  73726565  :\3d-engine\eers
+// 5ae0:  72676574  69687061  676e6563  5c656e69  tegraphicengine\
+// 5af0:  73726565  72676574  69687061  676e6563  eerstegraphiceng
+// 5b00:  5c656e69  366e6962  61645c34  735c6174  ine\bin64\data\s
+// 5b10:  65646168  6f635c72  5c726f6c  6c636e69  hader\color\incl
+// 5b20:  5c656475  6d6d6f63  682e6e6f  696c736c  ude\common.hlsli
+// 5b30:  00000500  00000a00  00000100  00022e00  _.___.___.___.._
+// 5b40:  00000000  00001100  00000700  00000000  _____.___.______
+// 5b50:  00000500  00008800  00000900  00000a00  _.___.___.___.__
+// 5b60:  00000600  00002200  00000800  00000000  _.___"___.______
+// 5b70:  3351dc00  00000001  00000000  00000000  _.Q3.___________
 // 5b80:  00000000  00000000  00000000  00000000  ________________
 // 5b90:  00000000  00000000  00000000  00000000  ________________
 // 5ba0:  00000000  00000000  00000000  00000000  ________________
@@ -1654,20 +1654,20 @@ ret
 // 5be0:  00000000  00000000  00000000  00000000  ________________
 // 5bf0:  00000000  00000000  00000000  00000000  ________________
 // 5c00:  00000000  00000000  00000000  00000000  ________________
-// 5c10:  00000000  00000000  00000000  00000010  ____________.___
-// 5c20:  00000020  000000e4  00000200  00000173   ___.____.__s.__
-// 5c30:  00000070  00000000  00000a6a  00000080  p_______j.__.___
-// 5c40:  00000981  000014ac  00000040  00000010  ..__..__@___.___
-// 5c50:  00000028  0000025c  0000002c  000000c8  (___\.__,___.___
-// 5c60:  00000003  00000027  0000001a  00000026  .___'___.___&___
-// 5c70:  00000020  0000000d  00000006  0000001c   ___.___.___.___
-// 5c80:  0000001d  0000001e  0000001f  0000000e  .___.___.___.___
-// 5c90:  00000008  00000009  0000000a  0000000b  .___.___.___.___
-// 5ca0:  0000000c  0000000f  00000010  00000011  .___.___.___.___
-// 5cb0:  00000012  00000013  00000014  00000015  .___.___.___.___
-// 5cc0:  00000016  00000017  00000018  00000019  .___.___.___.___
-// 5cd0:  00000007  0000001b  00000021  00000022  .___.___!___"___
-// 5ce0:  00000023  00000025  00000024  00000000  #___%___$_______
+// 5c10:  00000000  00000000  00000000  00000011  ____________.___
+// 5c20:  00000020  00000159  00000200  000001db   ___Y.___.__..__
+// 5c30:  00000070  00000000  00000b5e  000000ac  p_______^.__.___
+// 5c40:  000007cf  000001d1  000014c4  00000040  ..__..__..__@___
+// 5c50:  00000010  00000028  0000025c  0000002c  .___(___\.__,___
+// 5c60:  000000c8  00000003  00000027  0000001a  .___.___'___.___
+// 5c70:  00000026  00000020  0000000d  00000006  &___ ___.___.___
+// 5c80:  0000001c  0000001d  0000001e  0000001f  .___.___.___.___
+// 5c90:  0000000e  00000008  00000009  0000000a  .___.___.___.___
+// 5ca0:  0000000b  0000000c  0000000f  00000010  .___.___.___.___
+// 5cb0:  00000011  00000012  00000013  00000014  .___.___.___.___
+// 5cc0:  00000015  00000016  00000017  00000018  .___.___.___.___
+// 5cd0:  00000019  00000007  0000001b  00000021  .___.___.___!___
+// 5ce0:  00000022  00000023  00000025  00000024  "___#___%___$___
 // 5cf0:  00000000  00000000  00000000  00000000  ________________
 // 5d00:  00000000  00000000  00000000  00000000  ________________
 // 5d10:  00000000  00000000  00000000  00000000  ________________

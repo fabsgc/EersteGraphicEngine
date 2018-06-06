@@ -217,6 +217,12 @@
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{46bfe031-b777-49d9-8c87-0d7320315793}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Shader\Color\Include">
+      <UniqueIdentifier>{d672f14f-df21-4483-821a-949871e8aeba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Include">
+      <UniqueIdentifier>{22191525-7d9f-4f98-a80c-9715f4224702}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -717,5 +723,10 @@
     <Object Include="bin64\Data\Model\Sphere.obj">
       <Filter>Data\Model</Filter>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli">
+      <Filter>Data\Shader\Color\Include</Filter>
+    </None>
   </ItemGroup>
 </Project>
