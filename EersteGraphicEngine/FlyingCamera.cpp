@@ -1,5 +1,6 @@
 #include "FlyingCamera.h"
 #include "InputHandler.h"
+#include "Joypad.h"
 #include "Mouse.h"
 #include "Time.h"
 
@@ -17,49 +18,51 @@ namespace ege
     void FlyingCamera::Update()
     {
         InputHandler& inputHandler = gInputHandler();
+        Joypad& joypad             = gJoypad();
         Mouse& mouse               = gMouse();
         Time& time                 = gTime();
 
         float deltaTime = time.GetFrameDelta();
-        XMFLOAT2 cursorDistanceFromCenter = mouse.GetCursorDistanceFromCenter();
 
-        float angleY = cursorDistanceFromCenter.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-        float angleX = cursorDistanceFromCenter.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+            MoveZ(1.0f * deltaTime);
+        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+            MoveZ(-1.0f * deltaTime);
+        if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
+            Fly(_translationSpeed * deltaTime);
+        if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
+            Fly(-_translationSpeed * deltaTime);
+        if (inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
+            MoveX(-_translationSpeed * deltaTime);
+        if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
+            MoveX(_translationSpeed * deltaTime);
         
         if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
+            XMFLOAT2 cursorDistanceFromCenter = mouse.GetCursorDistanceFromCenter();
+            float angleY = cursorDistanceFromCenter.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleX = cursorDistanceFromCenter.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+
             Pitch(angleX);
             Yaw(angleY);
         }
 
-        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+        if (joypad.IsConnected())
         {
-            MoveZ(_translationSpeed * deltaTime);
-        }
+            float joypadRX = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 200.0f;
+            float joypadRY = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 200.0f;
 
-        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-        {
-            MoveZ(-_translationSpeed * deltaTime);
-        }
+            float joypadLX = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
+            float joypadLY = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-        if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-        {
-            Fly(_translationSpeed * deltaTime);
-        }
+            float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleY = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
-        if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-        {
-            Fly(-_translationSpeed * deltaTime);
-        }
+            Fly(joypadLY * _translationSpeed * deltaTime);
+            MoveX(joypadLX * _translationSpeed * deltaTime);
 
-        if (inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-        {
-            MoveX(-_translationSpeed * deltaTime);
-        }
-
-        if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-        {
-            MoveX(_translationSpeed * deltaTime);
+            Pitch(angleX);
+            Yaw(angleY);
         }
 
         Camera::Update();

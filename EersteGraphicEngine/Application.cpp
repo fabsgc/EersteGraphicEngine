@@ -1,8 +1,10 @@
 #include "Application.h"
 
+#include "ThirdPersonCamera.h"
 #include "DirectionalLight.h"
 #include "FlyingCamera.h"
 #include "AmbientLight.h"
+#include "Landscape.h"
 #include "Sphere.h"
 #include "Plane.h"
 #include "Node.h"
@@ -46,20 +48,24 @@ namespace ege
 
     void Application::SceneLoader()
     {
-        _scene                       = ege_shared_ptr_new<Scene>();
+        _scene                          = ege_shared_ptr_new<Scene>();
 
-        SPtr<Node> node              = ege_shared_ptr_new<Node>();
-        SPtr<FlyingCamera> camera    = ege_shared_ptr_new<FlyingCamera>();
-        SPtr<DirectionalLight> light = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<Sphere> sphere          = ege_shared_ptr_new<Sphere>();
-        SPtr<Plane> plane            = ege_shared_ptr_new<Plane>();
-        SPtr<AmbientLight> ambient   = ege_shared_ptr_new<AmbientLight>();
+        SPtr<Node> node                 = ege_shared_ptr_new<Node>();
+        SPtr<FlyingCamera> camera1      = ege_shared_ptr_new<FlyingCamera>();
+        SPtr<ThirdPersonCamera> camera2 = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<DirectionalLight> light    = ege_shared_ptr_new<DirectionalLight>();
+        SPtr<Sphere> sphere             = ege_shared_ptr_new<Sphere>();
+        SPtr<Plane> plane               = ege_shared_ptr_new<Plane>();
+        SPtr<Landscape> landscape       = ege_shared_ptr_new<Landscape>();
+        SPtr<AmbientLight> ambient      = ege_shared_ptr_new<AmbientLight>();
 
         _scene->Initialise();
-        camera->Initialise();
+        camera1->Initialise();
+        camera2->Initialise();
         light->Initialise();
         sphere->Initialise();
         plane->Initialise();
+        landscape->Initialise();
 
         light->SetColor(XMFLOAT4(1.0f, 1.0, 1.0f, 0.8f));
         light->SetDirection(XMFLOAT3(0.5f, -0.5f, 0.5f));
@@ -67,16 +73,17 @@ namespace ege
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera);
+        node->InsertEntity("camera", camera1);
         node->InsertEntity("light", light);
-        node->InsertEntity("sphere", sphere);
-        node->InsertEntity("plane", plane);
+        //node->InsertEntity("sphere", sphere);
+        //node->InsertEntity("plane", plane);
+        node->InsertEntity("landscape", landscape);
 
-        _scene->InsertCamera("camera", camera);
+        _scene->InsertCamera("camera", camera1);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera);
+        _scene->SetActiveCamera(camera1);
         _scene->SetAmbientLight(ambient);
     }
 

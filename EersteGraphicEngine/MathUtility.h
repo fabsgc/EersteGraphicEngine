@@ -6,5 +6,6 @@ namespace ege
     {
     public:
         static const float G_PI;
+        static const float G_PIDIV3;
     };
 }

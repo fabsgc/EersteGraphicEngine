@@ -42,12 +42,12 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
     //Compute Camera vector from model
     output.ViewWorldDirection = normalize(worldPosition - CameraPosition.xyz);
 
-    //Compute Camera vector from model
+    //Compute vector between light and model
     //float3 lightWorldDirection = (LightPosition.xyz) - worldPosition;
     //output.LightWorldDirection.xyz = normalize(-(lightWorldDirection.xyz));
-   // output.LightWorldDirection.w = saturate(1.0f - (length(-lightWorldDirection) / LightRadius.x));
+    //output.LightWorldDirection.w = saturate(1.0f - (length(-lightWorldDirection) / LightRadius.x));
 
-    //Compute Light vector from camera
+    //Compute vector between light and camera
     //output.LightViewDirection = normalize(CameraPosition.xyz - worldPosition);
 
     return output;

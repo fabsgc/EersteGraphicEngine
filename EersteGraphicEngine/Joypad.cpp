@@ -2,8 +2,8 @@
 
 namespace ege
 {
-    float Joypad::DEAD_ZONE_X = 0.05f;
-    float Joypad::DEAD_ZONE_Y = 0.02f;
+    float Joypad::DEAD_ZONE_X = 0.2f;
+    float Joypad::DEAD_ZONE_Y = 0.2f;
 
     Joypad::Joypad()
         : IComponent(ComponentType::JOYPAD)
@@ -30,9 +30,9 @@ namespace ege
                     float normRY = fmaxf(-1, (float)_state.Gamepad.sThumbRY / 32767);
 
                     _joysticks[0].AxisX = (abs(normLX) < DEAD_ZONE_X ? 0 : normLX);
-                    _joysticks[0].AxisX = (abs(normLY) < DEAD_ZONE_X ? 0 : normLY);
+                    _joysticks[0].AxisY = (abs(normLY) < DEAD_ZONE_Y ? 0 : normLY);
                     _joysticks[1].AxisX = (abs(normRX) < DEAD_ZONE_X ? 0 : normRX);
-                    _joysticks[1].AxisX = (abs(normRY) < DEAD_ZONE_X ? 0 : normRY);
+                    _joysticks[1].AxisY = (abs(normRY) < DEAD_ZONE_Y ? 0 : normRY);
 
                     _thumbSticks[0].Position = (float)_state.Gamepad.bLeftTrigger / 255;
                     _thumbSticks[1].Position = (float)_state.Gamepad.bRightTrigger / 255;

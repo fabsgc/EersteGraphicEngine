@@ -3,4 +3,5 @@
   <model name="cube" file="Cube.obj"/>
   <model name="plane" file="Plane.obj"/>
   <model name="sphere" file="Sphere.obj"/>
+  <model name="landscape" file="Landscape.obj"/>
 </models>
