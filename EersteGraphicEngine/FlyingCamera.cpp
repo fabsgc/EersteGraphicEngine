@@ -58,11 +58,15 @@ namespace ege
             float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
             float angleY = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
-            Fly(joypadLY * _translationSpeed * deltaTime);
-            MoveX(joypadLX * _translationSpeed * deltaTime);
+            if(abs(joypadLY) > 0.0f)
+                Fly(joypadLY * _translationSpeed * deltaTime);
+            if(abs(joypadLX) > 0.0f)
+                MoveX(joypadLX * _translationSpeed * deltaTime);
 
-            Pitch(angleX);
-            Yaw(angleY);
+            if (abs(angleX) > 0.0f)
+                Pitch(angleX);
+            if (abs(angleY) > 0.0f)
+                Yaw(angleY);
         }
 
         Camera::Update();
