@@ -18,3 +18,10 @@ cbuffer ConstantBuffer : register(b0)
 }
 
 SamplerState ColorSampler : register(s0);
+
+struct ColorComponent
+{
+    float3 Ambient;
+    float3 Diffuse;
+    float3 Specular;
+};

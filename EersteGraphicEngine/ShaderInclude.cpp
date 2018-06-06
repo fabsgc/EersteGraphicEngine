@@ -18,32 +18,34 @@ namespace ege
         switch (IncludeType)
         {
         case D3D_INCLUDE_LOCAL: // #include "FILE"
-            finalPath = GetFullPath(_shaderDir);
+            finalPath = GetFullPath(_shaderDir) + "\\" + String(pFileName);
             break;
         case D3D_INCLUDE_SYSTEM: // #include <FILE>
-            finalPath = GetFullPath(_systemDir);
+            finalPath = GetFullPath(_systemDir) + "\\" + String(pFileName);
             break;
         default:
             assert(0);
         }
 
-        std::ifstream fs;
-        fs.open(finalPath.c_str(), std::ios::binary | std::ios::ate);
-        fs.seekg(0, std::ios::end);
-        UINT32 fileSize = (UINT32)fs.tellg();
+        std::ifstream includeFile(finalPath.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
 
-        if (fileSize)
+        if (includeFile.is_open())  
         {
+            long long fileSize = includeFile.tellg();
             char* buf = new char[fileSize];
-            fs.read(buf, fileSize);
+            includeFile.seekg(0, std::ios::beg);
+            includeFile.read(buf, fileSize);
+            includeFile.close();
 
             *ppData = buf;
-            *pBytes = fileSize;
+            *pBytes = (UINT)fileSize;
         }
-        else
+        else 
         {
             *ppData = nullptr;
             *pBytes = 0;
+
+            return E_FAIL;
         }
 
         return S_OK;

@@ -17,9 +17,9 @@
                 errorFile << "Date: " << __DATE__ << std::endl;                                         \
                 errorFile << "Time: " << __TIME__ << std::endl;                                         \
                 errorFile << "Error: " << error << std::endl;                                           \
-                errorFile << "Condition: " << condition << std::endl;                                   \
+                errorFile << "Condition: " << (condition) << std::endl;                                   \
                 errorFile << "############################################: " << std::endl;             \
-                assert(condition);                                                                      \
+                assert((condition));                                                                      \
             }                                                                                           \
         }                                                                                   
 #   endif

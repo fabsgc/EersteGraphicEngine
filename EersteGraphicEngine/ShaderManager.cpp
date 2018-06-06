@@ -25,7 +25,8 @@ namespace ege
         {
             ShaderConfig config;
             config.Name = shaderProgramElement->Attribute("name");
-
+            config.IncludeDirectory = shaderProgramElement->Attribute("include-path");
+            
             for (tinyxml2::XMLElement* shaderElement = shaderProgramElement->FirstChildElement("shader"); shaderElement != nullptr; shaderElement = shaderElement->NextSiblingElement())
             {
                 String type = shaderElement->Attribute("type");

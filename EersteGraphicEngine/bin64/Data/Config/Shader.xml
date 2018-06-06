@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<shaders include-path="Include">
-    <shader-program name="default" include-path="Include">
+<shaders>
+    <shader-program name="default" include-path="Data/Shader/Color">
         <shader type="vertex-shader" file="Color/Color_VS.hlsl"/>
         <shader type="pixel-shader" file="Color/Color_PS.hlsl"/>
     </shader-program>

@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_10 /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_CONFIG_MATERIAL_FILE=\"Data/Config/Material.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" /DEGE_MATERIAL_FOLDER=\"Data/Material/\" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_10 /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_CONFIG_MATERIAL_FILE=\"Data/Config/Material.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" /DEGE_MATERIAL_FOLDER=\"Data/Material/\" /DEGE_SHADERS_INCLUDE_FOLDER=\"Data/Shader/Include/\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>lib\assimp\lib\lib64\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,6 +197,7 @@
     <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderInclude.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereMaterial.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="SceneLoader.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderInclude.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="PlaneMaterial.h" />
     <ClInclude Include="Sphere.h" />
@@ -354,6 +356,10 @@
       <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableDebuggingInformation>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bin64\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bin64\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bin32\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin32\Data\Shader\Include</AdditionalIncludeDirectories>
     </FxCompile>
     <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS_MAIN</EntryPointName>
@@ -372,6 +378,10 @@
       <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</EnableDebuggingInformation>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bin64\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bin32\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin32\Data\Shader\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bin64\Data\Shader\Include</AdditionalIncludeDirectories>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -455,6 +465,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

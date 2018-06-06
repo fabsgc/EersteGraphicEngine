@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "ShaderInclude.h"
 
 namespace ege
 {
@@ -200,11 +201,12 @@ namespace ege
 #endif
 
         ID3DBlob* errorBlob = nullptr;
+        ShaderInclude includeObj(_config.IncludeDirectory.c_str(), EGE_SHADERS_INCLUDE_FOLDER);
 
 #if defined(EGE_WIN_SDK_8) || defined(EGE_WIN_SDK_10)
-        hr = D3DCompileFromFile(srcFile, nullptr, nullptr, entryPoint, profile, dwShaderFlags, 0, blob, &errorBlob);
+        hr = D3DCompileFromFile(srcFile, nullptr, &includeObj, entryPoint, profile, dwShaderFlags, 0, blob, &errorBlob);
 #elif defined(EGE_WIN_SDK_7)
-        hr = D3DX11CompileFromFile(srcFile, nullptr, nullptr, entryPoint, profile, D3D10_SHADER_ENABLE_STRICTNESS, 0, nullptr, blob, &errorBlob, nullptr);
+        hr = D3DX11CompileFromFile(srcFile, nullptr, &includeObj, entryPoint, profile, D3D10_SHADER_ENABLE_STRICTNESS, 0, nullptr, blob, &errorBlob, nullptr);
 #endif
 
         if (FAILED(hr))
@@ -214,7 +216,11 @@ namespace ege
                 OutputDebugStringA((char*)errorBlob->GetBufferPointer());
                 errorBlob->Release();
 
-                EGE_ASSERT_ERROR((errorBlob != nullptr), ("Can't compie shader file : " + ToString(srcFile)));
+                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't compie shader file : " + ToString(srcFile)));
+            }
+            else
+            {
+                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't compie shader file : " + ToString(srcFile)));
             }
         }
 

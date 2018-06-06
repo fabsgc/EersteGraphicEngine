@@ -153,3 +153,24 @@ Time: 11:02:01
 Error: Can't load scene : Data/Model/Plane.obj
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:220
+Inside ege::Shader::CompileShader
+Date: Jun  6 2018
+Time: 16:31:07
+Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:219
+Inside ege::Shader::CompileShader
+Date: Jun  6 2018
+Time: 16:34:41
+Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:219
+Inside ege::Shader::CompileShader
+Date: Jun  6 2018
+Time: 16:34:41
+Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
