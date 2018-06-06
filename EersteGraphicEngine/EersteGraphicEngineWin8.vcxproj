@@ -173,6 +173,8 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Landscape.cpp" />
+    <ClCompile Include="LandscapeMaterial.cpp" />
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -197,6 +199,7 @@
     <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderInclude.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereMaterial.cpp" />
@@ -245,6 +248,8 @@
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Landscape.h" />
+    <ClInclude Include="LandscapeMaterial.h" />
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h" />
     <ClInclude Include="Light.h" />
@@ -272,6 +277,7 @@
     <ClInclude Include="SceneLoader.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderInclude.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereMaterial.h" />
