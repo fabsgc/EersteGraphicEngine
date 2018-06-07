@@ -61,7 +61,8 @@ namespace ege
         ~Mouse() {}
         void                   Update(MSG* message);
         void                   ResetState();
-        XMFLOAT2               GetPosition();
+        const XMFLOAT2&        GetPosition() const;
+        const XMFLOAT2&        GetOldPosition() const;
         MouseButtonState       GetState(const MouseButtonName& name);
         MouseButtonState       GetState(const String& label);
         MouseButton            GetMouseButton(const MouseButtonName& name);

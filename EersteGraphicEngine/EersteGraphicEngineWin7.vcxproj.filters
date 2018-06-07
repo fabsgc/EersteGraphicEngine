@@ -369,9 +369,6 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
-    <ClCompile Include="CubeMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Source Files\App\Model</Filter>
     </ClCompile>
@@ -393,12 +390,6 @@
     <ClCompile Include="MathUtility.cpp">
       <Filter>Source Files\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>Source Files\App\Model</Filter>
     </ClCompile>
@@ -414,11 +405,11 @@
     <ClCompile Include="ShaderInclude.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
-    <ClCompile Include="LandscapeMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Landscape.cpp">
       <Filter>Source Files\App\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -611,9 +602,6 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
-    <ClInclude Include="CubeMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files\App\Model</Filter>
     </ClInclude>
@@ -635,12 +623,6 @@
     <ClInclude Include="MathUtility.h">
       <Filter>Header Files\Utility\Math</Filter>
     </ClInclude>
-    <ClInclude Include="PlaneMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Header Files\App\Model</Filter>
     </ClInclude>
@@ -656,11 +638,11 @@
     <ClInclude Include="ShaderInclude.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
-    <ClInclude Include="LandscapeMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Landscape.h">
       <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -79,9 +79,14 @@ namespace ege
         button->Switched = MouseButtonSwitchedState::NO;
     }
 
-    XMFLOAT2 Mouse::GetPosition()
+    const XMFLOAT2& Mouse::GetPosition() const
     {
         return _position;
+    }
+
+    const XMFLOAT2& Mouse::GetOldPosition() const
+    {
+        return _oldPosition;
     }
 
     MouseButtonState Mouse::GetState(const MouseButtonName& name) 
@@ -195,6 +200,8 @@ namespace ege
 
     void Mouse::UpdatePosition(MSG* message)
     {
+        _oldPosition = _position;
+
         _position.x = (float)GET_X_LPARAM(message->lParam);
         _position.y = (float)GET_Y_LPARAM(message->lParam);
 
@@ -213,8 +220,6 @@ namespace ege
         {
             _cursorDistanceFromCenter.y = 0.0f;
         }
-
-        _oldPosition = _position;
     }
 
     Mouse& gMouse()
