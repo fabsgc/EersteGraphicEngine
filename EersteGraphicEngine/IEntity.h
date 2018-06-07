@@ -3,7 +3,6 @@
 #include "PrerequisitesCore.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
-#include "IMoveable.h"
 
 namespace ege
 {
@@ -15,7 +14,7 @@ namespace ege
         Generic
     };
 
-    class IEntity: public IUpdatable, public IDrawable, public IMoveable
+    class IEntity: public IUpdatable, public IDrawable
     {
     public:
         IEntity(EntityType type) : _type(type) {};

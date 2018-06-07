@@ -57,7 +57,7 @@ ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN)
         refVector = normalize(reflect(lightDirection, IN.Normal));
 
 		// S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
-        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower.x) * SpecularColor.rgb * SpecularColor.a * IN.Color.rgb;
+        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * IN.Color.rgb;
     }
 
     return colorComponent;

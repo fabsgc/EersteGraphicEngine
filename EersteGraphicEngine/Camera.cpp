@@ -27,7 +27,7 @@ namespace ege
 
     void Camera::Initialise()
     {
-        _position = XMFLOAT3(0.0f, 2.0f, -6.0f);
+        _position = XMFLOAT3(0.0f, 1.0f, -4.0f);
         _right = XMFLOAT3(1.0f, 0.0f, 0.0f);
         _look = XMFLOAT3(0.0f, -0.5f, 1.5f);
         _up = XMFLOAT3(0.0f, 1.0f, 0.0f);
@@ -51,12 +51,12 @@ namespace ege
 
         constantBufferUpdate->View = XMMatrixTranspose(view);
         constantBufferUpdate->Projection = XMMatrixTranspose(projection);
-        constantBufferUpdate->CameraPosition = XMFLOAT4(_position.x, _position.y, _position.z, 0.0f);
+        constantBufferUpdate->CameraPosition = _position;
     }
 
     void Camera::ComputeProjectionMatrix()
     {
-        UINT windowWidth = gWindow().GetWindowWidth();;
+        UINT windowWidth = gWindow().GetWindowWidth();
         UINT windowHeight = gWindow().GetWindowHeight();
 
         XMVECTOR R = XMLoadFloat3(&_right);

@@ -38,11 +38,11 @@ namespace ege
         }
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
-        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);
 
         constantBufferUpdate->SpecularColor = _specularColor;
-        constantBufferUpdate->SpecularPower = XMFLOAT4(_specularPower, 0.0f, 0.0f, 0.0f);
+        constantBufferUpdate->SpecularPower = (_specularPower);
     }
 
     const XMFLOAT4& Material::GetSpecularColor() const

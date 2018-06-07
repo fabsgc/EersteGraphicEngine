@@ -87,6 +87,9 @@ namespace ege
 
         context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::LightSteelBlue));
         context->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+        context->UpdateSubresource(_frameConstantBuffer, 0, nullptr, &_frameConstantBufferUpdate, 0, 0);
+        context->UpdateSubresource(_lightConstantBuffer, 0, nullptr, &_lightConstantBufferUpdate, 0, 0);
     }
 
     void RenderAPI::SwapBuffers()
@@ -255,11 +258,11 @@ namespace ege
         context->GSSetConstantBuffers(1, 1, &_objectConstantBuffer);
         context->PSSetConstantBuffers(1, 1, &_objectConstantBuffer);
 
-        context->VSSetConstantBuffers(2, 1, &_objectConstantBuffer);
-        context->HSSetConstantBuffers(2, 1, &_objectConstantBuffer);
-        context->DSSetConstantBuffers(2, 1, &_objectConstantBuffer);
-        context->GSSetConstantBuffers(2, 1, &_objectConstantBuffer);
-        context->PSSetConstantBuffers(2, 1, &_objectConstantBuffer);
+        context->VSSetConstantBuffers(2, 1, &_lightConstantBuffer);
+        context->HSSetConstantBuffers(2, 1, &_lightConstantBuffer);
+        context->DSSetConstantBuffers(2, 1, &_lightConstantBuffer);
+        context->GSSetConstantBuffers(2, 1, &_lightConstantBuffer);
+        context->PSSetConstantBuffers(2, 1, &_lightConstantBuffer);
         
         //Create Color Sampler
         D3D11_SAMPLER_DESC sampDesc;

@@ -27,12 +27,11 @@ namespace ege
     void PointLight::Draw()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
-        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
 
         constantBufferUpdate->LightColor = _color;
-        constantBufferUpdate->LightDirection = XMFLOAT4(_direction.x, _direction.y, _direction.z, 0.0f);
-        constantBufferUpdate->LightPosition = XMFLOAT4(_position.x, _position.y, _position.z, 0.0f);
-        constantBufferUpdate->LightRadius = XMFLOAT4(_radius, 0.0f, 0.0f, 0.0f);
+        constantBufferUpdate->LightDirection = _direction;
+        constantBufferUpdate->LightPosition = _position;
     }
 }

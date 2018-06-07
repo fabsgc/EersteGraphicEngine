@@ -58,8 +58,8 @@ namespace ege
     void Geometry::Draw()
     {
         ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = gRenderAPI().GetConstantBuffer(ConstantBufferType::FRAME);
-        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);
 
         UINT stride = sizeof(VertexDesc);
         UINT offset = 0;

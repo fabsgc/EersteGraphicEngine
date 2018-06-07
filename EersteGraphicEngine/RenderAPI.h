@@ -34,39 +34,47 @@ namespace ege
     {
         XMMATRIX View;
         XMMATRIX Projection;
-        XMMATRIX World;
-
-        XMFLOAT4 AmbientColor;
-
-        XMFLOAT4 CameraPosition;
-
-        XMFLOAT4 LightColor;
-        XMFLOAT4 LightDirection;
-        XMFLOAT4 LightPosition;
-        XMFLOAT4 LightRadius;
-
-        XMFLOAT4 SpecularColor;
-        XMFLOAT4 SpecularPower;
+        
+        XMFLOAT3 CameraPosition;
+        /* PADDING */ float    Padding1;
 
         FrameConstantBuffer()
-            : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
-            , LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
-            , LightDirection(XMFLOAT4(0.5f, -0.5f, 0.5f, 0.0f))
-            , LightPosition(XMFLOAT4(-2.0f, 2.0f, -2.0f, 0.0f))
-            , LightRadius(XMFLOAT4(5.0f, 0.0f, 0.0f, 0.0f))
-            , SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
-            , SpecularPower(XMFLOAT4(8.0f, 0.0f, 0.0f, 0.0f))
         {}
     };
 
     struct ObjectConstantBuffer: public ConstantBuffer
     {
+        XMMATRIX World;
 
+        XMFLOAT4 SpecularColor;
+        float    SpecularPower;
+        /* PADDING */ float    Padding1[3];
+
+        ObjectConstantBuffer()
+            : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , SpecularPower(8.0f)
+        {}
     };
 
     struct LightConstantBuffer : public ConstantBuffer
     {
+        XMFLOAT4 AmbientColor;
 
+        XMFLOAT4 LightColor;
+        XMFLOAT3 LightDirection;
+        /* PADDING */ float    Padding1;
+        XMFLOAT3 LightPosition;
+        /* PADDING */ float    Padding2;
+        float    LightRadius;
+        /* PADDING */ float    Padding3[3];
+
+        LightConstantBuffer()
+            : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
+            , LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , LightDirection(XMFLOAT3(0.5f, -0.5f, 0.5f))
+            , LightPosition(XMFLOAT3(-2.0f, 2.0f, -2.0f))
+            , LightRadius(5.0f)
+        {}
     };
 
     class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable
