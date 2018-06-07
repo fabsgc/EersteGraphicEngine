@@ -1,7 +1,7 @@
 #include "Landscape.h"
 
 #include "ModelManager.h"
-#include "LandscapeMaterial.h"
+#include "DefaultMaterial.h"
 
 namespace ege
 {
@@ -18,7 +18,7 @@ namespace ege
     {
         Build(gModelManager().GetPtr("landscape"));
 
-        SPtr<LandscapeMaterial> material = ege_shared_ptr_new<LandscapeMaterial>();
+        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
         material->Initialise();
         SetMaterial(material);
     }

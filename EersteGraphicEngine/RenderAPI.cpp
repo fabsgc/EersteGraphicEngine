@@ -8,21 +8,23 @@ namespace ege
 {
     RenderAPI::RenderAPI()
     {
-        _driverType         = D3D_DRIVER_TYPE_HARDWARE;
-        _featureLevel       = D3D_FEATURE_LEVEL_11_0;
+        _driverType           = D3D_DRIVER_TYPE_HARDWARE;
+        _featureLevel         = D3D_FEATURE_LEVEL_11_0;
 
-        _swapChain          = nullptr;
-        _renderTargetView   = nullptr;
-        _depthStencilView   = nullptr;
-        _depthStencilBuffer = nullptr;
-        _depthStencilState  = nullptr;
-        _rasterizerState    = nullptr;
-        _screenViewport     = { 0 };
+        _swapChain            = nullptr;
+        _renderTargetView     = nullptr;
+        _depthStencilView     = nullptr;
+        _depthStencilBuffer   = nullptr;
+        _depthStencilState    = nullptr;
+        _rasterizerState      = nullptr;
+        _screenViewport       = { 0 };
 
-        _colorSampler       = nullptr;
-        _backFaceCulling    = nullptr;
+        _colorSampler         = nullptr;
+        _backFaceCulling      = nullptr;
 
-        _constantBuffer     = nullptr;
+        _frameConstantBuffer  = nullptr;
+        _objectConstantBuffer = nullptr;
+        _lightConstantBuffer  = nullptr;
     }
 
     RenderAPI::~RenderAPI()
@@ -59,7 +61,9 @@ namespace ege
         SafeReleaseCom(_colorSampler);
         SafeReleaseCom(_backFaceCulling);
 
-        SafeReleaseCom(_constantBuffer);
+        SafeReleaseCom(_frameConstantBuffer);
+        SafeReleaseCom(_objectConstantBuffer);
+        SafeReleaseCom(_lightConstantBuffer);
 
         SafeReleaseCom(_dxgiDevice);
         SafeReleaseCom(_dxgiAdapter);
@@ -83,8 +87,6 @@ namespace ege
 
         context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::LightSteelBlue));
         context->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-        context->UpdateSubresource(_constantBuffer, 0, nullptr, &_constantBufferUpdate, 0, 0);
     }
 
     void RenderAPI::SwapBuffers()
@@ -228,17 +230,36 @@ namespace ege
         D3D11_BUFFER_DESC bdFrame;
         ZeroMemory(&bdFrame, sizeof(bdFrame));
         bdFrame.Usage = D3D11_USAGE_DEFAULT;
-        bdFrame.ByteWidth = sizeof(ConstantBuffer);
         bdFrame.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         bdFrame.CPUAccessFlags = 0;
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_constantBuffer);
+
+        bdFrame.ByteWidth = sizeof(FrameConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer);
+
+        bdFrame.ByteWidth = sizeof(ObjectConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer);
+
+        bdFrame.ByteWidth = sizeof(LightConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer);
 
         //Set constant buffers for each type of shader
-        context->VSSetConstantBuffers(0, 1, &_constantBuffer);
-        context->HSSetConstantBuffers(0, 1, &_constantBuffer);
-        context->DSSetConstantBuffers(0, 1, &_constantBuffer);
-        context->GSSetConstantBuffers(0, 1, &_constantBuffer);
-        context->PSSetConstantBuffers(0, 1, &_constantBuffer);
+        context->VSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+        context->HSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+        context->DSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+        context->GSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+        context->PSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+
+        context->VSSetConstantBuffers(1, 1, &_objectConstantBuffer);
+        context->HSSetConstantBuffers(1, 1, &_objectConstantBuffer);
+        context->DSSetConstantBuffers(1, 1, &_objectConstantBuffer);
+        context->GSSetConstantBuffers(1, 1, &_objectConstantBuffer);
+        context->PSSetConstantBuffers(1, 1, &_objectConstantBuffer);
+
+        context->VSSetConstantBuffers(2, 1, &_objectConstantBuffer);
+        context->HSSetConstantBuffers(2, 1, &_objectConstantBuffer);
+        context->DSSetConstantBuffers(2, 1, &_objectConstantBuffer);
+        context->GSSetConstantBuffers(2, 1, &_objectConstantBuffer);
+        context->PSSetConstantBuffers(2, 1, &_objectConstantBuffer);
         
         //Create Color Sampler
         D3D11_SAMPLER_DESC sampDesc;
@@ -363,14 +384,44 @@ namespace ege
         return _device;
     }
 
-    ID3D11Buffer*   RenderAPI::GetConstantBuffer()
+    ID3D11Buffer*   RenderAPI::GetConstantBuffer(ConstantBufferType type)
     {
-        return _constantBuffer;
+        switch (type)
+        {
+        case ConstantBufferType::FRAME:
+            return _frameConstantBuffer;
+            break;
+
+        case ConstantBufferType::OBJECT:
+            return _objectConstantBuffer;
+            break;
+
+        case ConstantBufferType::LIGHT:
+            return _lightConstantBuffer;
+            break;
+        }
+
+        return _frameConstantBuffer;
     }
 
-    ConstantBuffer* RenderAPI::GetConstantBufferUpdate()
+    ConstantBuffer* RenderAPI::GetConstantBufferUpdate(ConstantBufferType type)
     {
-        return &_constantBufferUpdate;
+        switch (type)
+        {
+        case ConstantBufferType::FRAME:
+            return &_frameConstantBufferUpdate;
+            break;
+
+        case ConstantBufferType::OBJECT:
+            return &_objectConstantBufferUpdate;
+            break;
+
+        case ConstantBufferType::LIGHT:
+            return &_lightConstantBufferUpdate;
+            break;
+        }
+
+        return &_frameConstantBufferUpdate;
     }
 
     RenderAPI& gRenderAPI()

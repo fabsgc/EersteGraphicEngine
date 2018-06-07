@@ -42,8 +42,8 @@ namespace ege
 
     void Camera::Draw()
     {
-        ConstantBuffer* constantBufferUpdate = _renderAPI.GetConstantBufferUpdate();
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer();
+        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 
         XMMATRIX view = XMLoadFloat4x4(&_view);
@@ -52,8 +52,6 @@ namespace ege
         constantBufferUpdate->View = XMMatrixTranspose(view);
         constantBufferUpdate->Projection = XMMatrixTranspose(projection);
         constantBufferUpdate->CameraPosition = XMFLOAT4(_position.x, _position.y, _position.z, 0.0f);
-
-        context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
     }
 
     void Camera::ComputeProjectionMatrix()

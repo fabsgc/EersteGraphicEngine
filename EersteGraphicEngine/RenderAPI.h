@@ -2,11 +2,17 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
+#include "ConstantBuffer.h"
 #include "IDrawable.h"
 #include "Device.h"
 
 namespace ege
 {
+    enum class ConstantBufferType
+    {
+        FRAME, OBJECT, LIGHT
+    };
+
     struct RenderDesc
     {
         UINT Msaa;
@@ -24,7 +30,7 @@ namespace ege
         {}
     };
 
-    struct ConstantBuffer
+    struct FrameConstantBuffer: public ConstantBuffer
     {
         XMMATRIX View;
         XMMATRIX Projection;
@@ -42,7 +48,7 @@ namespace ege
         XMFLOAT4 SpecularColor;
         XMFLOAT4 SpecularPower;
 
-        ConstantBuffer()
+        FrameConstantBuffer()
             : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
             , LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
             , LightDirection(XMFLOAT4(0.5f, -0.5f, 0.5f, 0.0f))
@@ -51,6 +57,16 @@ namespace ege
             , SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
             , SpecularPower(XMFLOAT4(8.0f, 0.0f, 0.0f, 0.0f))
         {}
+    };
+
+    struct ObjectConstantBuffer: public ConstantBuffer
+    {
+
+    };
+
+    struct LightConstantBuffer : public ConstantBuffer
+    {
+
     };
 
     class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable
@@ -72,8 +88,8 @@ namespace ege
         void Resize();
 
         Device*         GetDevice();
-        ID3D11Buffer*   GetConstantBuffer();
-        ConstantBuffer* GetConstantBufferUpdate();
+        ID3D11Buffer*   GetConstantBuffer(ConstantBufferType type);
+        ConstantBuffer* GetConstantBufferUpdate(ConstantBufferType type);
 
     private:
         RenderAPI(RenderAPI const&) = delete;
@@ -105,8 +121,12 @@ namespace ege
         ID3D11SamplerState*       _colorSampler;
         ID3D11RasterizerState*    _backFaceCulling;
 
-        ID3D11Buffer*             _constantBuffer;
-        ConstantBuffer            _constantBufferUpdate;
+        ID3D11Buffer*             _frameConstantBuffer;
+        ID3D11Buffer*             _objectConstantBuffer;
+        ID3D11Buffer*             _lightConstantBuffer;
+        FrameConstantBuffer       _frameConstantBufferUpdate;
+        ObjectConstantBuffer      _objectConstantBufferUpdate;
+        LightConstantBuffer       _lightConstantBufferUpdate;
     };
 
     RenderAPI& gRenderAPI();

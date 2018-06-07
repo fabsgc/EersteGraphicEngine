@@ -1,7 +1,7 @@
 #include "Cube.h"
 
 #include "ModelManager.h"
-#include "CubeMaterial.h"
+#include "DefaultMaterial.h"
 
 namespace ege
 {
@@ -18,7 +18,7 @@ namespace ege
     {
         Build(gModelManager().GetPtr("cube"));
 
-        SPtr<CubeMaterial> material = ege_shared_ptr_new<CubeMaterial>();
+        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
         material->Initialise();
         SetMaterial(material);
     }

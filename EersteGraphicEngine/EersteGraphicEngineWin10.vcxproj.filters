@@ -384,9 +384,6 @@
     <ClCompile Include="Frustum.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CubeMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Source Files\Core\Renderer\Material</Filter>
     </ClCompile>
@@ -399,20 +396,20 @@
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>Source Files\App\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereMaterial.cpp">
-      <Filter>Source Files\App\Material</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\App\Model</Filter>
     </ClCompile>
     <ClCompile Include="ShaderInclude.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultMaterial.cpp">
+      <Filter>Source Files\App\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Landscape.cpp">
+      <Filter>Source Files\App\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -620,9 +617,6 @@
     <ClInclude Include="Frustum.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CubeMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
     <ClInclude Include="MaterialManager.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
     </ClInclude>
@@ -635,19 +629,22 @@
     <ClInclude Include="DirectionalLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
-    <ClInclude Include="PlaneMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Header Files\App\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereMaterial.h">
-      <Filter>Header Files\App\Material</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\App\Model</Filter>
     </ClInclude>
     <ClInclude Include="ShaderInclude.h">
+      <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultMaterial.h">
+      <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Landscape.h">
+      <Filter>Header Files\App\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "Plane.h"
 
 #include "ModelManager.h"
-#include "PlaneMaterial.h"
+#include "DefaultMaterial.h"
 
 namespace ege
 {
@@ -18,7 +18,7 @@ namespace ege
     {
         Build(gModelManager().GetPtr("plane"));
 
-        SPtr<PlaneMaterial> material = ege_shared_ptr_new<PlaneMaterial>();
+        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
         material->Initialise();
         SetMaterial(material);
     }

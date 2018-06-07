@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
 #include "ModelManager.h"
-#include "SphereMaterial.h"
+#include "DefaultMaterial.h"
 
 namespace ege
 {
@@ -18,9 +18,8 @@ namespace ege
     {
         Build(gModelManager().GetPtr("sphere"));
 
-        SPtr<SphereMaterial> material = ege_shared_ptr_new<SphereMaterial>();
+        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
         material->Initialise();
-        material->SetSpecularPower(16.0f);
         SetMaterial(material);
     }
 

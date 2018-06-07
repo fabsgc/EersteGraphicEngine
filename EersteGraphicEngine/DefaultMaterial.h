@@ -5,11 +5,11 @@
 
 namespace ege
 {
-    class CubeMaterial : public Material
+    class DefaultMaterial : public Material
     {
     public:
-        CubeMaterial();
-        ~CubeMaterial();
+        DefaultMaterial();
+        ~DefaultMaterial();
         void Initialise() override;
         void Update() override;
     };
