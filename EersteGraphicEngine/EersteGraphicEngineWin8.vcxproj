@@ -157,7 +157,7 @@
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="CubeMaterial.cpp" />
+    <ClCompile Include="DefaultMaterial.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
@@ -174,7 +174,6 @@
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Landscape.cpp" />
-    <ClCompile Include="LandscapeMaterial.cpp" />
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -190,7 +189,6 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Plane.cpp" />
-    <ClCompile Include="PlaneMaterial.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
@@ -202,7 +200,6 @@
     <ClCompile Include="ShaderInclude.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="SphereMaterial.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task.cpp" />
@@ -224,7 +221,7 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="CubeMaterial.h" />
+    <ClInclude Include="DefaultMaterial.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="DynamicLib.h" />
@@ -249,7 +246,6 @@
     <ClInclude Include="Joypad.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Landscape.h" />
-    <ClInclude Include="LandscapeMaterial.h" />
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h" />
     <ClInclude Include="Light.h" />
@@ -264,7 +260,6 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Plane.h" />
-    <ClInclude Include="PlaneMaterial.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
@@ -280,7 +275,6 @@
     <ClInclude Include="ShaderInclude.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sphere.h" />
-    <ClInclude Include="SphereMaterial.h" />
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />
