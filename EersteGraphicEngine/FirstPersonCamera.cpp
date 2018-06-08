@@ -50,8 +50,8 @@ namespace ege
 
         if (joypad.IsConnected())
         {
-            float joypadRX = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 200.0f;
-            float joypadRY = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 200.0f;
+            float joypadRX = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 300.0f;
+            float joypadRY = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 300.0f;
 
             float joypadLX = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;

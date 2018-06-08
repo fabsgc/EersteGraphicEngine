@@ -8,6 +8,8 @@
     <context name="Game">
         <input handler="PAUSE" key="P" button="START"/>
         <input handler="QUIT" key="ESCAPE" button="BACK"/>
+        <input handler="ZOOM_UP" key="ADD" button=""/>
+        <input handler="ZOOM_DOWN" key="SUBTRACT" button=""/>
         <input handler="GO_UP" key="SPACE" button="RB"/>
         <input handler="GO_DOWN" key="SHIFT" button="LB"/>
         <input handler="GO_FORWARD" key="Z" button="Y"/>

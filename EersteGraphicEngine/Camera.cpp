@@ -5,7 +5,7 @@ namespace ege
 {
     const float Camera::DefaultFov = XM_PIDIV4;
     const float Camera::DefaultNearZ = 0.01f;
-    const float Camera::DefaultFarZ = 100.0f;
+    const float Camera::DefaultFarZ = 1000.0f;
     const float Camera::DefaultTranslationSpeed = 4.0f;
     const float Camera::DefaultRotationSpeed = 0.25f;
 
@@ -17,7 +17,7 @@ namespace ege
         , _farZ(DefaultFarZ)
         , _translationSpeed(DefaultTranslationSpeed)
         , _rotationSpeed(DefaultRotationSpeed)
-        , _position(XMFLOAT3(0.0f, 0.0f, -6.0f))
+        , _position(XMFLOAT3(0.0f, 1.0f, -10.0f))
         , _right(XMFLOAT3(1.0f, 0.0f, 0.0f))
         , _up(XMFLOAT3(0.0f, 1.0f, 0.0f))
         , _look(XMFLOAT3(0.0f, 0.0f, 1.0f))

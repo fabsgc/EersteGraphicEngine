@@ -122,41 +122,21 @@ namespace ege
         Scale(0.0f, 0.0f, z);
     }
 
-    void IMoveable::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    void IMoveable::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
     {
-        /*XMFLOAT3 C = XMFLOAT3(0.0f, 0.0f, 0.0f);
-        XMFLOAT3 P = GetPosition();
-        XMVECTOR position = XMLoadFloat3(&P);
-        XMVECTOR center = XMLoadFloat3(&C);
-        XMVECTOR distance = origin - position;
-        XMVECTOR ddd = position - center;
+        XMFLOAT3 O = XMFLOAT3(0.0f, 0.0f, 0.0f);
+        XMVECTOR origin = XMLoadFloat3(&O);
 
-        Move(-distance);
-        Move(-ddd);
+        XMMATRIX pointToOrigin = XMMatrixTranslationFromVector(origin - point);
+        XMMATRIX originToPoint = XMMatrixTranslationFromVector(point - origin);
 
-        XMMATRIX W = XMLoadFloat4x4(&_world);
-        XMVECTOR quaternion = XMQuaternionRotationRollPitchYawFromVector(eulerAngles);
-        XMMATRIX rotation = XMMatrixRotationQuaternion(quaternion);
+        XMMATRIX rotation0 = XMMatrixRotationQuaternion(XMQuaternionRotationRollPitchYawFromVector(eulerAngles));
 
-        W = rotation * W;
-        XMStoreFloat4x4(&_world, W);
-        
-        Move(distance);
-
-        UpdateLocalPosition();*/
-
-        XMFLOAT3 P = GetPosition();
-        XMVECTOR position = XMLoadFloat3(&P);
-        XMVECTOR distance = origin - position;
+        XMMATRIX rotation = pointToOrigin * rotation0 * originToPoint;
 
         XMMATRIX W = XMLoadFloat4x4(&_world);
-        XMVECTOR quaternion = XMQuaternionRotationRollPitchYawFromVector(eulerAngles);
-        XMMATRIX rotation = XMMatrixRotationQuaternion(quaternion);
-
-        W = rotation * W;
+        W *= rotation;
         XMStoreFloat4x4(&_world, W);
-
-        Move(distance);
 
         UpdateLocalPosition();
     }
@@ -164,8 +144,7 @@ namespace ege
     void IMoveable::Rotate(XMVECTOR eulerAngles)
     {
         XMMATRIX W = XMLoadFloat4x4(&_world);
-        XMVECTOR quaternion = XMQuaternionRotationRollPitchYawFromVector(eulerAngles);
-        XMMATRIX rotation = XMMatrixRotationQuaternion(quaternion);
+        XMMATRIX rotation = XMMatrixRotationQuaternion(XMQuaternionRotationRollPitchYawFromVector(eulerAngles));
 
         W = rotation * W;
         XMStoreFloat4x4(&_world, W);
