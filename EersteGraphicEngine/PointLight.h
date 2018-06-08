@@ -15,6 +15,8 @@ namespace ege
         void Update()  override;
         void Draw()  override;
 
+        void UpdateLocalPosition() override;
+
     protected:
         static const XMFLOAT3 DefaultPosition;
         static const float    DefaultRadius;

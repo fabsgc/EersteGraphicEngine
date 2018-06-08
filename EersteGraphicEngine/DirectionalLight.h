@@ -18,6 +18,8 @@ namespace ege
         const XMFLOAT3& GetDirection() const;
         void            SetDirection(XMFLOAT3 direction);
 
+        void            UpdateLocalPosition() override {};
+
     protected:
         static const XMFLOAT3 DefaultDirection;
 

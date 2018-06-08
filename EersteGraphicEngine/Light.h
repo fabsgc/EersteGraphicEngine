@@ -14,7 +14,7 @@ namespace ege
         AmbientLight
     };
 
-    class Light: public IEntity
+    class Light: public IEntity, public IMoveable
     {
     public:
         Light(LightType type);
@@ -25,9 +25,10 @@ namespace ege
         virtual void    Draw() = 0;
 
         LightType       GetType();
-
         const XMFLOAT4& GetColor() const;
         void            SetColor(XMFLOAT4 color);
+
+        virtual void    UpdateLocalPosition() = 0;
         
     public:
         static const XMFLOAT4 DefaultLightColor;

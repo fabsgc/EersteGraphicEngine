@@ -1,9 +1,9 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "IMoveable.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
-#include "IMoveable.h"
 #include "IEntity.h"
 
 namespace ege
@@ -29,6 +29,8 @@ namespace ege
         SPtr<IEntity> GetEntity(String name);
         void          SetScene(SPtr<Scene> scene);
         void          SetParent(SPtr<Node> parent);
+
+        virtual void  UpdateLocalPosition() override;
 
     private:
         SPtr<Scene>                _scene;

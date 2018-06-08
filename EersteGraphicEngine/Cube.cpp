@@ -25,6 +25,9 @@ namespace ege
 
     void Cube::Update()
     {
+        RotatePitch(0.01f);
+        //RotateRoll(GetPosition(), 0.01f);
+
         Model::Update();
     }
 }

@@ -9,16 +9,46 @@ namespace ege
     public:
         IMoveable() {}
         virtual ~IMoveable() = 0 {}
+        virtual void UpdateLocalPosition() = 0;
 
-        void UpdateLocalPosition()
-        {
-            XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
-            XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
-            XMStoreFloat3(&_position, position);
-        }
+        virtual XMFLOAT3   GetPosition();
+        virtual XMFLOAT4X4 GetWrodl();
+
+        virtual void Move(XMVECTOR movement);
+        virtual void Move(XMFLOAT3 movement);
+        virtual void Move(float x = 0.0f, float y = 0.0f, float z = 0.0f);
+        virtual void MoveX(float x = 0.0f);
+        virtual void MoveY(float y = 0.0f);
+        virtual void MoveZ(float z = 0.0f);
+
+        virtual void Scale(XMVECTOR origin, XMVECTOR scale);
+        virtual void Scale(XMVECTOR scale);
+        virtual void Scale(XMFLOAT3 origin, XMFLOAT3 scale);
+        virtual void Scale(XMFLOAT3 scale);
+        virtual void Scale(XMFLOAT3 origin, float x, float y, float z);
+        virtual void Scale(float x, float y, float z);
+        virtual void ScaleX(XMFLOAT3 origin, float x);
+        virtual void ScaleX(float x);
+        virtual void ScaleY(XMFLOAT3 origin, float y);
+        virtual void ScaleY(float y);
+        virtual void ScaleZ(XMFLOAT3 origin, float z);
+        virtual void ScaleZ(float z);
+
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles);
+        virtual void Rotate(XMVECTOR eulerAngles);
+        virtual void Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles);
+        virtual void Rotate(XMFLOAT3 eulerAngles);
+        virtual void Rotate(XMFLOAT3 origin, float yaw, float pitch, float roll);
+        virtual void Rotate(float yaw, float pitch, float roll);
+        virtual void RotateYaw(XMFLOAT3 origin, float yaw);
+        virtual void RotateYaw(float yaw);
+        virtual void RotatePitch(XMFLOAT3 origin, float pitch);
+        virtual void RotatePitch(float pitch);
+        virtual void RotateRoll(XMFLOAT3 origin, float roll);
+        virtual void RotateRoll(float roll);
 
     protected:
-        XMFLOAT4X4 _world;
         XMFLOAT3   _position;
+        XMFLOAT4X4 _world;
     };
 }

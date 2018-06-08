@@ -34,4 +34,11 @@ namespace ege
         constantBufferUpdate->LightDirection = _direction;
         constantBufferUpdate->LightPosition = _position;
     }
+
+    void PointLight::UpdateLocalPosition()
+    {
+        XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
+        XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
+        XMStoreFloat3(&_position, position);
+    }
 }

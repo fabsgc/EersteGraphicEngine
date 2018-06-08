@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "IMoveable.h"
 #include "RenderAPI.h"
 #include "Material.h"
 #include "Geometry.h"
@@ -9,7 +10,7 @@
 
 namespace ege
 {
-    class Model: public IEntity
+    class Model: public IEntity, public IMoveable
     {
     public:
         Model();
@@ -22,6 +23,8 @@ namespace ege
         void           SetMaterial(SPtr<Material> shader);
         Geometry&      GetGeometry();
         SPtr<Material> GetMaterial();
+
+        void           UpdateLocalPosition();
         
     private:
         RenderAPI&     _renderAPI;

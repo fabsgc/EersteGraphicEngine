@@ -63,6 +63,7 @@ namespace ege
         SPtr<Sphere> sphere             = ege_shared_ptr_new<Sphere>();
         SPtr<Plane> plane               = ege_shared_ptr_new<Plane>();
         SPtr<Cube> cube                 = ege_shared_ptr_new<Cube>();
+        SPtr<Cube> cube2                = ege_shared_ptr_new<Cube>();
         SPtr<Landscape> landscape       = ege_shared_ptr_new<Landscape>();
         SPtr<AmbientLight> ambient      = ege_shared_ptr_new<AmbientLight>();
 
@@ -74,6 +75,7 @@ namespace ege
         sphere->Initialise();
         plane->Initialise();
         cube->Initialise();
+        cube2->Initialise();
         landscape->Initialise();
 
         light->SetColor(XMFLOAT4(1.0f, 1.0, 1.0f, 0.8f));
@@ -84,10 +86,20 @@ namespace ege
         node->SetScene(_scene);
         node->InsertEntity("camera", camera2);
         node->InsertEntity("light", light);
-        //node->InsertEntity("sphere", sphere);
-        //node->InsertEntity("plane", plane);
-        //node->InsertEntity("cube", cube);
-        node->InsertEntity("landscape", landscape);
+        node->InsertEntity("sphere", sphere);
+        node->InsertEntity("plane", plane);
+        node->InsertEntity("cube", cube);
+        node->InsertEntity("cube2", cube2);
+        //node->InsertEntity("landscape", landscape);
+
+        cube->Move(3.0f, 1.0f, -3.0f);
+        cube->Scale(XMFLOAT3(2.0f, 0.0f, -2.0f), 0.5f, 0.5f, 0.5f);
+        //cube->RotatePitch(cube->GetPosition(), 3.0f);
+
+        //cube2->Scale(0.5f, 0.5f, 0.5f);
+        //cube2->RotatePitch(cube2->GetPosition(), 3.0f);
+
+        sphere->Move(-2.0f, 1.0f, 2.0f);
 
         _scene->InsertCamera("camera", camera2);
         _scene->InsertLight("light", light);
