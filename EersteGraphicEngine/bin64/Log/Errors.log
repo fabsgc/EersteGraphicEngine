@@ -174,3 +174,24 @@ Time: 16:34:41
 Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\window.cpp:108
+Inside ege::Window::InitWindow
+Date: Jun  8 2018
+Time: 11:18:08
+Error: Failed to init raw inpute device
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\window.cpp:301
+Inside ege::Window::MsgProc
+Date: Jun  8 2018
+Time: 11:58:23
+Error: paRawInput NULL
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\window.cpp:300
+Inside ege::Window::MsgProc
+Date: Jun  8 2018
+Time: 11:59:18
+Error: paRawInput NULL
+Condition: 0
+############################################: 

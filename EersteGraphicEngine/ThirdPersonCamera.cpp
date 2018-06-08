@@ -42,10 +42,6 @@ namespace ege
         UINT windowWidth = gWindow().GetWindowWidth();
         UINT windowHeight = gWindow().GetWindowHeight();
 
-        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(-deltaTime * 5.0f);
-        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            Zoom(deltaTime * 5.0f);
         if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
             Walk(_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
@@ -54,6 +50,10 @@ namespace ege
             Strafe(-_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             Strafe(_translationSpeed * deltaTime);
+        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+            Zoom(-deltaTime * 5.0f);
+        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+            Zoom(deltaTime * 5.0f);
 
         if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -65,9 +65,9 @@ namespace ege
             float angleY =  - distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 100.0f;
             float angleX =  distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 100.0f;
 
-            if (abs(angleX) > 0.0125f)
+            if (abs(angleX) > 0.02f)
                 Pitch(angleX);
-            if (abs(angleY) > 0.0125f)
+            if (abs(angleY) > 0.02f)
                 Yaw(angleY);
         }
 
@@ -95,15 +95,15 @@ namespace ege
             float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
             float angleY = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
-            if(abs(angleX) > 0)
-                Pitch(angleX);
-            if(abs(angleY) > 0)
-                Yaw(angleY);
-
             if (abs(joypadLY) > 0.0f)
                 Walk(joypadLY * _translationSpeed * deltaTime);
             if (abs(joypadLX) > 0.0f)
                 Strafe(joypadLX * _translationSpeed * deltaTime);
+
+            if (abs(angleX) > 0.0f)
+                Pitch(angleX);
+            if (abs(angleY) > 0.0f)
+                Yaw(angleY);
         }
 
         Camera::Update();
@@ -155,10 +155,6 @@ namespace ege
         XMVECTOR _L = XMLoadFloat3(&_look);
         XMVECTOR _P = XMLoadFloat3(&_position);
         XMVECTOR _T = XMLoadFloat3(&_target);
-
-        XMVECTOR T = XMLoadFloat3(&target);
-        XMVECTOR U = XMLoadFloat3(&up);
-        XMVECTOR P = XMLoadFloat3(&position);
 
         _L = XMVector3Normalize(_T - _P);
         _R = XMVector3Normalize(XMVector3Cross(_U, _L));

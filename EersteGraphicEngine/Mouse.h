@@ -68,7 +68,10 @@ namespace ege
         MouseButton            GetMouseButton(const MouseButtonName& name);
         MouseButton            GetMouseButton(const String& label);
         const MouseWheelState& GetWheelState() const;
+        const XMFLOAT2&        GetCentralPosition() const;
         const XMFLOAT2&        GetCursorDistanceFromCenter() const;
+        const XMFLOAT2&        GetRelativeMovement() const;
+        void                   SetRelativeMovement(const XMFLOAT2& relativeMovement);
 
     private:
         void UpdatePosition(MSG* message);
@@ -86,6 +89,7 @@ namespace ege
         XMFLOAT2            _oldPosition;
         XMFLOAT2            _centralPosition;
         XMFLOAT2            _cursorDistanceFromCenter;
+        XMFLOAT2            _relativeMovement;
     };
 
     Mouse&      gMouse();

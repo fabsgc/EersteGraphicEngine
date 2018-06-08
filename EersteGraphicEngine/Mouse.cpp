@@ -6,7 +6,9 @@ namespace ege
         : IComponent(ComponentType::MOUSE)
         , _window(gWindow())
         , _position(XMFLOAT2(0.0f, 0.0f))
+        , _oldPosition(XMFLOAT2(0.0f, 0.0f))
         , _mouseWheel(MouseWheelState::STATIC)
+        , _relativeMovement(XMFLOAT2(0.0f, 0.0f))
     {}
 
     void Mouse::Update(MSG* message)
@@ -60,6 +62,8 @@ namespace ege
     void Mouse::ResetState()
     {
         _mouseWheel = MouseWheelState::STATIC;
+        _relativeMovement = XMFLOAT2(0.0f, 0.0f);
+
     }
 
     void Mouse::UpdateState(const MouseButtonName& name, const MouseButtonState& state)
@@ -182,16 +186,30 @@ namespace ege
         return _mouseWheel;
     }
 
+    const XMFLOAT2& Mouse::GetCentralPosition() const
+    {
+        return _centralPosition;
+    }
+
     const XMFLOAT2& Mouse::GetCursorDistanceFromCenter() const
     {
         return _cursorDistanceFromCenter;
     }
 
+    const XMFLOAT2& Mouse::GetRelativeMovement() const
+    {
+        return _relativeMovement;
+    }
+
+    void Mouse::SetRelativeMovement(const XMFLOAT2& relativeMovement)
+    {
+        _relativeMovement = relativeMovement;
+    }
+
     void Mouse::OnStartUp()
     {
-        _oldPosition.x = (float)_window.GetWindowWidth() / 2;
-        _oldPosition.y = (float)_window.GetWindowHeight() / 2;
-        _centralPosition = _oldPosition;
+        _centralPosition.x = (float)_window.GetWindowWidth() / 2;
+        _centralPosition.y = (float)_window.GetWindowHeight() / 2;
 
         _mouseButtons.push_back(MouseButton(MouseButtonName::LEFT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::RIGHT));
@@ -210,16 +228,6 @@ namespace ege
 
         _cursorDistanceFromCenter.x = _position.x - _centralPosition.x;
         _cursorDistanceFromCenter.y = _position.y - _centralPosition.y;
-
-        if (abs(_cursorDistanceFromCenter.x) < 25.0f || _position.x == 0.0f)
-        {
-            _cursorDistanceFromCenter.x = 0.0f;
-        }
-
-        if (abs(_cursorDistanceFromCenter.y) < 25.0f || _position.y == 0.0f)
-        {
-            _cursorDistanceFromCenter.y = 0.0f;
-        }
     }
 
     Mouse& gMouse()

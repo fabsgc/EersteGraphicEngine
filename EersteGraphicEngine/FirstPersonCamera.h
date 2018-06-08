@@ -1,16 +1,21 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "Camera.h"
+#include "FlyingCamera.h"
 
 namespace ege
 {
-    class FirstPersonCamera : public Camera
+    class FirstPersonCamera : public FlyingCamera
     {
     public:
         FirstPersonCamera();
         ~FirstPersonCamera();
 
-        void Update();
+        void Update() override;
+        void Walk(float distance) override;
+
+    protected:
+        XMFLOAT2 _totalRotation;
+        XMFLOAT2 _lastRotation;
     };
 }

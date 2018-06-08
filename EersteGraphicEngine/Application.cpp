@@ -1,6 +1,7 @@
 #include "Application.h"
 
 #include "ThirdPersonCamera.h"
+#include "FirstPersonCamera.h"
 #include "DirectionalLight.h"
 #include "FlyingCamera.h"
 #include "AmbientLight.h"
@@ -54,6 +55,7 @@ namespace ege
         SPtr<Node> node                 = ege_shared_ptr_new<Node>();
         SPtr<FlyingCamera> camera1      = ege_shared_ptr_new<FlyingCamera>();
         SPtr<ThirdPersonCamera> camera2 = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<FirstPersonCamera> camera3 = ege_shared_ptr_new<FirstPersonCamera>();
         SPtr<DirectionalLight> light    = ege_shared_ptr_new<DirectionalLight>();
         SPtr<Sphere> sphere             = ege_shared_ptr_new<Sphere>();
         SPtr<Plane> plane               = ege_shared_ptr_new<Plane>();
@@ -64,6 +66,7 @@ namespace ege
         _scene->Initialise();
         camera1->Initialise();
         camera2->Initialise();
+        camera3->Initialise();
         light->Initialise();
         sphere->Initialise();
         plane->Initialise();
@@ -76,18 +79,18 @@ namespace ege
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera2);
+        node->InsertEntity("camera", camera3);
         node->InsertEntity("light", light);
         //node->InsertEntity("sphere", sphere);
         //node->InsertEntity("plane", plane);
         //node->InsertEntity("cube", cube);
         node->InsertEntity("landscape", landscape);
 
-        _scene->InsertCamera("camera", camera2);
+        _scene->InsertCamera("camera", camera3);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera2);
+        _scene->SetActiveCamera(camera3);
         _scene->SetAmbientLight(ambient);
     }
 

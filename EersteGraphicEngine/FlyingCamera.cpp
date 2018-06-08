@@ -24,18 +24,18 @@ namespace ege
 
         float deltaTime = time.GetFrameDelta();
 
-        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            MoveZ(1.0f * deltaTime);
-        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            MoveZ(-1.0f * deltaTime);
         if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Fly(_translationSpeed * deltaTime);
+            Walk(_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Fly(-_translationSpeed * deltaTime);
+            Walk(-_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
             MoveX(-_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             MoveX(_translationSpeed * deltaTime);
+        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+            MoveZ(1.0f * deltaTime);
+        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+            MoveZ(-1.0f * deltaTime);
         
         if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -61,7 +61,7 @@ namespace ege
             float angleY = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
             if(abs(joypadLY) > 0.0f)
-                Fly(joypadLY * _translationSpeed * deltaTime);
+                Walk(joypadLY * _translationSpeed * deltaTime);
             if(abs(joypadLX) > 0.0f)
                 MoveX(joypadLX * _translationSpeed * deltaTime);
 
@@ -123,7 +123,7 @@ namespace ege
         XMStoreFloat4x4(&_projection, XMMatrixPerspectiveFovLH(_fov, windowWidth / (FLOAT)windowHeight, _nearZ, _farZ));
     }
 
-    void FlyingCamera::Fly(float distance)
+    void FlyingCamera::Walk(float distance)
     {
         XMVECTOR s = XMVectorReplicate(distance);
         XMVECTOR l = XMLoadFloat3(&_look);

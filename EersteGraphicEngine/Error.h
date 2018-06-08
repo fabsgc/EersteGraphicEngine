@@ -35,9 +35,9 @@
                 errorFile << " inside " << __FUNCTION__ << std::endl;                                   \
                 errorFile << "Date: " << __DATE__ << std::endl;                                         \
                 errorFile << "Time: " << __TIME__ << std::endl;                                         \
-                errorFile << "Condition: " << condition;                                                \
+                errorFile << "Condition: " << (condition);                                                \
                 errorFile << "############################################: " << std::endl;             \
-                assert(condition);                                                                      \
+                assert((condition));                                                                      \
             }                                                                                           \
         }                                                                                   
 #   endif

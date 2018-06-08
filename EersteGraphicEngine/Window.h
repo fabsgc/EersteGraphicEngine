@@ -59,6 +59,11 @@ namespace ege
         void OnResize();
         void OnFullScreen();
 
+        void SetShowCursor(bool cursor);
+        void SetClipCursor(bool clip);
+        void ShowCursor();
+        void ClipCursor();
+
         static LRESULT CALLBACK MsgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
         HINSTANCE& GetHInst();
@@ -78,6 +83,9 @@ namespace ege
     private:
         HINSTANCE _hInst;
         HWND      _hWnd;
+
+        bool      _showCursor;
+        bool      _clipCursor;
 
     protected:
         WINDOW_DESC _windowDesc;

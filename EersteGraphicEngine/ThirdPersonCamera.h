@@ -21,7 +21,6 @@ namespace ege
         void Strafe(float distance);
         void Walk(float distance);
         void Up(float distance);
-
         void Zoom(float zoom);
 
     protected:
