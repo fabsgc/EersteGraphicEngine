@@ -195,3 +195,10 @@ Time: 11:59:18
 Error: paRawInput NULL
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: Jun  8 2018
+Time: 23:06:49
+Error: Key does not exist (SUBSTRACT)
+Condition: 0
+############################################: 

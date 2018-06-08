@@ -171,6 +171,7 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
+    <ClCompile Include="IMoveable.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />

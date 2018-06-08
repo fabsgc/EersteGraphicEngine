@@ -93,11 +93,9 @@ namespace ege
         //node->InsertEntity("landscape", landscape);
 
         cube->Move(3.0f, 1.0f, -3.0f);
-        cube->Scale(XMFLOAT3(2.0f, 0.0f, -2.0f), 0.5f, 0.5f, 0.5f);
-        //cube->RotatePitch(cube->GetPosition(), 3.0f);
+        cube->Scale(cube->GetPosition(), 0.5f, 0.5f, 0.5f);
 
-        //cube2->Scale(0.5f, 0.5f, 0.5f);
-        //cube2->RotatePitch(cube2->GetPosition(), 3.0f);
+        cube2->Move(0.0f, 1.0f, -0.0f);
 
         sphere->Move(-2.0f, 1.0f, 2.0f);
 

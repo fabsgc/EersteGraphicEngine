@@ -51,9 +51,19 @@ namespace ege
         if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             Strafe(_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(-deltaTime * 5.0f);
+            Up(_translationSpeed * deltaTime);
         if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+            Up(-_translationSpeed * deltaTime);
+
+        if (inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
             Zoom(deltaTime * 5.0f);
+        if (inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
+            Zoom(-deltaTime * 5.0f);
+
+        if (joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
+            Zoom(deltaTime * 5.0f);
+        if (joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
+            Zoom(-deltaTime * 5.0f);
 
         if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -215,7 +225,7 @@ namespace ege
 
     void ThirdPersonCamera::Zoom(float zoom)
     {
-        _radius += zoom;
+        _radius -= zoom;
         _radius = MathUtility::Clamp(_radius, 0.75f, 128.0f);
 
         ComputeProjectionMatrix();
