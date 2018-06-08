@@ -34,5 +34,7 @@ namespace ege
         float    _beta;
         float    _minZoom;
         float    _maxZoom;
+
+        XMFLOAT2 _lastMousePosition;
     };
 }

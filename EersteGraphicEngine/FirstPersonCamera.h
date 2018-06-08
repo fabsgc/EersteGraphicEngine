@@ -13,9 +13,5 @@ namespace ege
 
         void Update() override;
         void Walk(float distance) override;
-
-    protected:
-        XMFLOAT2 _totalRotation;
-        XMFLOAT2 _lastRotation;
     };
 }

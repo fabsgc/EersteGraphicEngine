@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IMoveable.h"
 #include "RenderAPI.h"
 #include "Material.h"
 #include "Geometry.h"
@@ -10,7 +9,7 @@
 
 namespace ege
 {
-    class Model: public IEntity, public IMoveable
+    class Model: public IEntity
     {
     public:
         Model();

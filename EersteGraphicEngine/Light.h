@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IMoveable.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
 
@@ -15,7 +14,7 @@ namespace ege
         AmbientLight
     };
 
-    class Light: public IEntity, public IMoveable
+    class Light: public IEntity
     {
     public:
         Light(LightType type);

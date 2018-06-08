@@ -18,6 +18,7 @@ namespace ege
         , _beta(0.0f)
         , _radius(10.0f)
         , _target(XMFLOAT3(0.0f, 0.0f, 0.0f))
+        , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
     }
 
@@ -57,18 +58,21 @@ namespace ege
 
         if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
-            XMFLOAT2 position = mouse.GetPosition();
-            XMFLOAT2 oldPosition = mouse.GetOldPosition();
+            XMFLOAT2 mousePosition = mouse.GetPosition();
+            XMFLOAT2 mouseOldPosition = mouse.GetOldPosition();
 
-            XMFLOAT2 distance = XMFLOAT2(position.x - oldPosition.x, position.y - oldPosition.y);
+            if (mousePosition.x != _lastMousePosition.x || mousePosition.y != _lastMousePosition.y)
+            {
+                XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
-            float angleY =  - distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 100.0f;
-            float angleX =  distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 100.0f;
+                float angleY = -distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
+                float angleX = distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
 
-            if (abs(angleX) > 0.02f)
                 Pitch(angleX);
-            if (abs(angleY) > 0.02f)
                 Yaw(angleY);
+                    
+                _lastMousePosition = mousePosition;
+            }
         }
 
         MouseWheelState mouseWheelState = mouse.GetWheelState();

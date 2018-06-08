@@ -9,11 +9,7 @@ namespace ege
 {
     FirstPersonCamera::FirstPersonCamera()
         : FlyingCamera()
-        , _totalRotation(0.0f, 0.0f)
-        , _lastRotation(0.0f, 0.0f)
     {
-        gWindow().SetShowCursor(false);
-        gWindow().SetClipCursor(true);
     }
 
     FirstPersonCamera::~FirstPersonCamera()

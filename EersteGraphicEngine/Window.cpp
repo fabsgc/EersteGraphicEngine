@@ -42,14 +42,14 @@ namespace ege
             {
                 application.KeyEventHandler(&msg);
             }
-                
-            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN || 
+
+            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
                 msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
                 msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
             {
                 application.MouseEventHandler(&msg);
             }
-            
+
             if (msg.message == WM_QUIT)
             {
                 gEventManager().Execute("STOP_REQUESTED");
@@ -124,7 +124,7 @@ namespace ege
 
     void Window::OnResize()
     {
-        //ShowCursor();
+        ShowCursor();
         ClipCursor();
     }
 
@@ -147,7 +147,7 @@ namespace ege
             ShowWindow(_hWnd, SW_SHOWMAXIMIZED);
         }
 
-        //ShowCursor();
+        ShowCursor();
         ClipCursor();
         SetFullScreen(!_windowDesc.FullScreen);
     }
@@ -261,6 +261,8 @@ namespace ege
         {
             UINT cbSize;
 
+            Sleep(1);
+
             GetRawInputBuffer(NULL, &cbSize, /*0,*/sizeof(RAWINPUTHEADER));
             cbSize *= 16;
             PRAWINPUT pRawInput = (PRAWINPUT)malloc(cbSize);
@@ -279,7 +281,7 @@ namespace ege
                 {
                     break;
                 }
-                
+
                 PRAWINPUT* paRawInput = (PRAWINPUT*)malloc(sizeof(PRAWINPUT) * nInput);
                 if (paRawInput == NULL)
                 {

@@ -50,6 +50,9 @@ namespace ege
 
     void Application::SceneLoader()
     {
+        //gWindow().SetShowCursor(false);
+        //gWindow().SetClipCursor(true);
+
         _scene                          = ege_shared_ptr_new<Scene>();
 
         SPtr<Node> node                 = ege_shared_ptr_new<Node>();
@@ -79,18 +82,18 @@ namespace ege
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera3);
+        node->InsertEntity("camera", camera2);
         node->InsertEntity("light", light);
         //node->InsertEntity("sphere", sphere);
         //node->InsertEntity("plane", plane);
         //node->InsertEntity("cube", cube);
         node->InsertEntity("landscape", landscape);
 
-        _scene->InsertCamera("camera", camera3);
+        _scene->InsertCamera("camera", camera2);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera3);
+        _scene->SetActiveCamera(camera2);
         _scene->SetAmbientLight(ambient);
     }
 
