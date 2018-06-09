@@ -28,9 +28,9 @@ namespace ege
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             MoveX(_translationSpeed * deltaTime);
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            MoveZ(1.0f * deltaTime);
+            MoveY(1.0f * deltaTime);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            MoveZ(-1.0f * deltaTime);
+            MoveY(-1.0f * deltaTime);
         
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -66,9 +66,9 @@ namespace ege
                 Yaw(angleY);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                MoveZ(_translationSpeed * deltaTime);
+                MoveY(_translationSpeed * deltaTime);
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                MoveZ(_translationSpeed * deltaTime);
+                MoveY(_translationSpeed * deltaTime);
         }
 
         Camera::Update();
@@ -144,11 +144,11 @@ namespace ege
         XMVECTOR strafe = right * XMVectorGetX(movement);
         position += strafe;
 
-        XMVECTOR forward = look * XMVectorGetY(movement);
-        position += forward;
-
-        XMVECTOR climb = up * XMVectorGetZ(movement);
+        XMVECTOR climb = up * XMVectorGetY(movement);
         position += climb;
+
+        XMVECTOR forward = look * XMVectorGetZ(movement);
+        position += forward;
 
         XMStoreFloat3(&_position, position);
 

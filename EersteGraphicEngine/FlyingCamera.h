@@ -15,7 +15,7 @@ namespace ege
         void         ComputeProjectionMatrix() override;
 
         virtual void Walk(float distance);
-        void         Move(XMFLOAT3 distance);
+        virtual void Move(XMFLOAT3 distance);
         void         Move(float x, float y, float z);
         void         MoveX(float x);
         void         MoveY(float y);

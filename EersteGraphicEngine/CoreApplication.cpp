@@ -67,7 +67,7 @@ namespace ege
         }
 
         gTime().Update();
-        gJoypad().Update();
+        //gJoypad().Update();
         _window->Update();
 
         if (_scene != nullptr)

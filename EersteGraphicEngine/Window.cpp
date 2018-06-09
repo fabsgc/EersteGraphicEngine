@@ -38,17 +38,17 @@ namespace ege
         {
             if (!_application.GetStartUpDescription().UseRawInput)
             {
-                /*if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
+                if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
                 {
                     _application.KeyEventHandler(&msg);
-                }*/
-
-                if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
-                    msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
-                    msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
-                {
-                    _application.MouseEventHandler(&msg);
                 }
+            }
+
+            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
+                msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
+                msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
+            {
+                _application.MouseEventHandler(&msg);
             }
 
             TranslateMessage(&msg);
@@ -126,7 +126,7 @@ namespace ege
             Rid[2].dwFlags = 0; // adds joystick
             Rid[2].hwndTarget = nullptr;
 
-            if (RegisterRawInputDevices(Rid, 3, sizeof(Rid[0])) == FALSE) {
+            if (RegisterRawInputDevices(Rid, 4, sizeof(Rid[0])) == FALSE) {
                 EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
             }
         }
@@ -271,18 +271,11 @@ namespace ege
             }
             break;
 
-        case RIM_INPUTSINK:
-        {
-
-            }break;
-
         case WM_INPUT:
         {
             UINT cbSize;
 
-            Sleep(2);
-
-            GetRawInputBuffer(NULL, &cbSize, /*0,*/sizeof(RAWINPUTHEADER));
+            GetRawInputBuffer(NULL, &cbSize, sizeof(RAWINPUTHEADER));
             cbSize *= 8;
             PRAWINPUT pRawInput = (PRAWINPUT)malloc(cbSize);
 
@@ -294,7 +287,7 @@ namespace ege
             for (;;)
             {
                 UINT cbSizeT = cbSize;
-                UINT nInput = GetRawInputBuffer(pRawInput, &cbSizeT, /*0,*/sizeof(RAWINPUTHEADER));
+                UINT nInput = GetRawInputBuffer(pRawInput, &cbSizeT, sizeof(RAWINPUTHEADER));
 
                 if (nInput == 0)
                 {
@@ -343,7 +336,7 @@ namespace ege
                         std::cout << "Game pad or Joystick" << std::endl;
                     }
 
-                    ///pri = NEXTRAWINPUTBLOCK(pri);
+                    pri = NEXTRAWINPUTBLOCK(pri);
                 }
 
                 // to clean the buffer

@@ -29,9 +29,9 @@ namespace ege
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             MoveX(_translationSpeed * deltaTime);
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            MoveZ(_translationSpeed * deltaTime);
+            MoveY(_translationSpeed * deltaTime);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            MoveZ(-_translationSpeed * deltaTime);
+            MoveY(-_translationSpeed * deltaTime);
 
         if (_joypad.IsConnected())
         {
@@ -55,9 +55,9 @@ namespace ege
                 Yaw(angleY);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                MoveZ(-_translationSpeed * deltaTime);
+                MoveY(-_translationSpeed * deltaTime);
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                MoveZ(_translationSpeed * deltaTime);
+                MoveY(_translationSpeed * deltaTime);
         }
 
         XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
@@ -80,6 +80,33 @@ namespace ege
         XMVECTOR p = XMLoadFloat3(&_position);
         XMStoreFloat3(&_position, XMVectorMultiplyAdd(s, l, p));
         _position.y = oldPosition.y;
+
+        _needUpdate = true;
+    }
+
+    void FirstPersonCamera::Move(XMFLOAT3 distance)
+    {
+        XMVECTOR right = XMLoadFloat3(&_right);
+        XMVECTOR look = XMLoadFloat3(&_look);
+        XMVECTOR up = XMLoadFloat3(&_up);
+        XMVECTOR position = XMLoadFloat3(&_position);
+        XMVECTOR movement = XMLoadFloat3(&distance);
+
+        if (distance.y == 0.0f)
+        {
+            XMVECTOR strafe = right * XMVectorGetX(movement);
+            position += strafe;
+
+            XMVECTOR forward = look * XMVectorGetZ(movement);
+            position += forward;
+
+            XMStoreFloat3(&_position, position);
+        }
+        else
+        {
+            XMVECTOR climb = up * XMVectorGetY(movement);
+            _position.y += XMVectorGetY(climb);
+        }
 
         _needUpdate = true;
     }

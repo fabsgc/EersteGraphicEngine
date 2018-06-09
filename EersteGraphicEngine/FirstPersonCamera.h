@@ -13,5 +13,6 @@ namespace ege
 
         void Update() override;
         void Walk(float distance) override;
+        void Move(XMFLOAT3 distance) override;
     };
 }
