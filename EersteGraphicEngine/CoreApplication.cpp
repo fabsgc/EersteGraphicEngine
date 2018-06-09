@@ -298,10 +298,11 @@ namespace ege
         document.LoadFile(EGE_CONFIG_APP_FILE);
 
         _startUpDesc.MaxFPS = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("fps", 60);
+        _startUpDesc.UseRawInput = strcmp(document.FirstChildElement("application")->FirstChildElement("window")->Attribute("rawinput"), "true") == 0 ? true : false;
         _startUpDesc.WindowDesc.Width  = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("width", 1280);
         _startUpDesc.WindowDesc.Height = document.FirstChildElement("application")->FirstChildElement("window")->IntAttribute("height", 720);
         _startUpDesc.WindowDesc.Title = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("title");
-        _startUpDesc.WindowDesc.FullScreen  = document.FirstChildElement("application")->FirstChildElement("window")->Attribute("fullscreen") == "true" ? true : false;
+        _startUpDesc.WindowDesc.FullScreen  = strcmp(document.FirstChildElement("application")->FirstChildElement("window")->Attribute("fullscreen"), "true") == 0 ? true : false;
 #endif
     }
 
@@ -353,6 +354,11 @@ namespace ege
         }
 
         EGE_ASSERT_ERROR(false, ("The context \"" + name + "\" does not exist"));
+    }
+
+    const StartUpDescription& CoreApplication::GetStartUpDescription() const
+    {
+        return _startUpDesc;
     }
 
     CoreApplication& gCoreApplication()

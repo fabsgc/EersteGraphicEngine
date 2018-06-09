@@ -33,42 +33,30 @@ namespace ege
 
     void ThirdPersonCamera::Update()
     {
-        InputHandler& inputHandler = gInputHandler();
-        Joypad& joypad = gJoypad();
-        Mouse& mouse = gMouse();
-        Time& time = gTime();
+        float deltaTime = _time.GetFrameDelta();
 
-        float deltaTime = time.GetFrameDelta();
-        UINT windowWidth = gWindow().GetWindowWidth();
-        UINT windowHeight = gWindow().GetWindowHeight();
-
-        if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
             Walk(_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
             Walk(-_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
             Strafe(-_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             Strafe(_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
             Up(_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
             Up(-_translationSpeed * deltaTime);
 
-        if (inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(deltaTime * 5.0f);
-        if (inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
-            Zoom(-deltaTime * 5.0f);
+        if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
+            Zoom(_translationSpeed * deltaTime);
+        else if (_inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
+            Zoom(-_translationSpeed * deltaTime);
 
-        if (joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-            Zoom(deltaTime * 5.0f);
-        if (joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-            Zoom(-deltaTime * 5.0f);
-
-        if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
+        if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
-            XMFLOAT2 mousePosition = mouse.GetPosition();
-            XMFLOAT2 mouseOldPosition = mouse.GetOldPosition();
+            XMFLOAT2 mousePosition = _mouse.GetPosition();
+            XMFLOAT2 mouseOldPosition = _mouse.GetOldPosition();
 
             if (mousePosition.x != _lastMousePosition.x || mousePosition.y != _lastMousePosition.y)
             {
@@ -84,26 +72,26 @@ namespace ege
             }
         }
 
-        MouseWheelState mouseWheelState = mouse.GetWheelState();
+        MouseWheelState mouseWheelState = _mouse.GetWheelState();
 
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(-deltaTime * 15.0f);
+            Zoom(deltaTime * 15.0f);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(deltaTime * 15.0f);
+            Zoom(-deltaTime * 15.0f);
             break;
         }
 
-        if (joypad.IsConnected())
+        if (_joypad.IsConnected())
         {
-            float joypadRX = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 300.0f;
-            float joypadRY = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 300.0f;
+            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 300.0f;
+            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 300.0f;
 
-            float joypadLX = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
-            float joypadLY = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
+            float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
+            float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
             float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
             float angleY = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
@@ -117,6 +105,11 @@ namespace ege
                 Pitch(angleX);
             if (abs(angleY) > 0.0f)
                 Yaw(angleY);
+
+            if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
+                Up(_translationSpeed * deltaTime);
+            else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
+                Up(-_translationSpeed * deltaTime);
         }
 
         Camera::Update();
@@ -186,14 +179,14 @@ namespace ege
         _beta += angle;
         _beta = MathUtility::Clamp(_beta, - XM_PI / 2.0f + 0.01f, XM_PI / 2.0f - 0.01f);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::Yaw(float angle)
     {
         _alpha = fmodf(_alpha + angle, XM_PI * 2.0f);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::Strafe(float distance)
@@ -202,7 +195,7 @@ namespace ege
         T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(_right.x, 0.0f, _right.z))) * distance;
         XMStoreFloat3(&_target, T);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::Walk(float distance)
@@ -211,16 +204,16 @@ namespace ege
         T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(_look.x, 0, _look.z))) * distance;
         XMStoreFloat3(&_target, T);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::Up(float distance)
     {
         XMVECTOR T = XMLoadFloat3(&_target);
-        T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(0.0f, _look.y, 0.0f))) * distance;
+        T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(0.0f, _look.y, 0.0f))) * - distance;
         XMStoreFloat3(&_target, T);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::Zoom(float zoom)
@@ -228,6 +221,6 @@ namespace ege
         _radius -= zoom;
         _radius = MathUtility::Clamp(_radius, 0.75f, 128.0f);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 }

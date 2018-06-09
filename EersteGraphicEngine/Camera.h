@@ -1,9 +1,13 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "InputHandler.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
 #include "Frustum.h"
+#include "Joypad.h"
+#include "Mouse.h"
+#include "Time.h"
 
 namespace ege
 {
@@ -43,6 +47,11 @@ namespace ege
 
     protected:
         RenderAPI&         _renderAPI;
+        InputHandler&      _inputHandler;
+        Keyboard&          _keyboard;
+        Joypad&            _joypad;
+        Mouse&             _mouse;
+        Time&              _time;
 
         XMFLOAT4X4         _view;
         XMFLOAT4X4         _projection;
@@ -59,5 +68,7 @@ namespace ege
         float              _translationSpeed;
 
         Frustum            _frustum;
+
+        bool               _needUpdate;
     };
 }

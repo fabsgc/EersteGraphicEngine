@@ -1,27 +1,21 @@
 #include "InputHandler.h"
 
-#include "CoreApplication.h"
-#include "Keyboard.h"
-#include "Joypad.h"
-#include "Time.h"
-
 
 namespace ege
 {
     InputHandler::InputHandler()
         : IComponent(ComponentType::INPUT_HANDLER)
+        , _coreApplication(gCoreApplication())
     {
     }
 
     const InputState InputHandler::GetState(const String& handler)
     {
-        CoreApplication& application = gCoreApplication();
-
         for (auto itHandler = _handlers.begin(); itHandler != _handlers.end(); itHandler++)
         {
             const Context& context = itHandler->first;
 
-            if (context.Name == application.GetCurrentContext()->Name)
+            if (context.Name == _coreApplication.GetCurrentContext()->Name)
             {
                 Vector<InputMap>& inputMaps = itHandler->second;
 

@@ -14,7 +14,13 @@ namespace ege
     struct StartUpDescription
     {
         UINT        MaxFPS;
+        bool        UseRawInput;
         WINDOW_DESC WindowDesc;
+
+        StartUpDescription()
+            : MaxFPS(0)
+            , UseRawInput(false)
+        {}
     };
 
     struct Context
@@ -76,6 +82,8 @@ namespace ege
 
         void Update() override;
         void Draw() override;
+
+        const StartUpDescription& GetStartUpDescription() const;
 
     protected:
         void OnStartUp() override;

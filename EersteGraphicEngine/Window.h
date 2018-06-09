@@ -88,7 +88,8 @@ namespace ege
         bool      _clipCursor;
 
     protected:
-        WINDOW_DESC _windowDesc;
+        CoreApplication& _application;
+        WINDOW_DESC      _windowDesc;
     };
 
     Window& gWindow();

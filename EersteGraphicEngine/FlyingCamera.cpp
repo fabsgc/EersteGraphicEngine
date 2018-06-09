@@ -17,29 +17,24 @@ namespace ege
 
     void FlyingCamera::Update()
     {
-        InputHandler& inputHandler = gInputHandler();
-        Joypad& joypad             = gJoypad();
-        Mouse& mouse               = gMouse();
-        Time& time                 = gTime();
+        float deltaTime = _time.GetFrameDelta();
 
-        float deltaTime = time.GetFrameDelta();
-
-        if (inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
             Walk(_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
             Walk(-_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
             MoveX(-_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             MoveX(_translationSpeed * deltaTime);
-        if (inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
+        if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
             MoveZ(1.0f * deltaTime);
-        if (inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
             MoveZ(-1.0f * deltaTime);
         
-        if (mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
+        if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
-            XMFLOAT2 cursorDistanceFromCenter = mouse.GetCursorDistanceFromCenter();
+            XMFLOAT2 cursorDistanceFromCenter = _mouse.GetCursorDistanceFromCenter();
             float angleY = cursorDistanceFromCenter.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
             float angleX = cursorDistanceFromCenter.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
@@ -49,13 +44,13 @@ namespace ege
                 Yaw(angleY);
         }
 
-        if (joypad.IsConnected())
+        if (_joypad.IsConnected())
         {
-            float joypadRX = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 200.0f;
-            float joypadRY = (float)joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 200.0f;
+            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 200.0f;
+            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 200.0f;
 
-            float joypadLX = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
-            float joypadLY = (float)joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
+            float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
+            float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
             float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
             float angleY = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
@@ -69,6 +64,11 @@ namespace ege
                 Pitch(angleX);
             if (abs(angleY) > 0.0f)
                 Yaw(angleY);
+
+            if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
+                MoveZ(_translationSpeed * deltaTime);
+            else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
+                MoveZ(_translationSpeed * deltaTime);
         }
 
         Camera::Update();
@@ -130,7 +130,7 @@ namespace ege
         XMVECTOR p = XMLoadFloat3(&_position);
         XMStoreFloat3(&_position, XMVectorMultiplyAdd(s, l, p));
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void FlyingCamera::Move(XMFLOAT3 distance)
@@ -152,7 +152,7 @@ namespace ege
 
         XMStoreFloat3(&_position, position);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void FlyingCamera::Move(float x, float y, float z)
@@ -185,7 +185,7 @@ namespace ege
         XMStoreFloat3(&_up, up);
         XMStoreFloat3(&_look, look);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void FlyingCamera::Roll(float angle)
@@ -198,7 +198,7 @@ namespace ege
         XMStoreFloat3(&_right, right);
         XMStoreFloat3(&_up, up);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 
     void FlyingCamera::Yaw(float angle)
@@ -211,6 +211,6 @@ namespace ege
         XMStoreFloat3(&_right, right);
         XMStoreFloat3(&_look, look);
 
-        ComputeProjectionMatrix();
+        _needUpdate = true;
     }
 }

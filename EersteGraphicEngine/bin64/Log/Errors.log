@@ -202,3 +202,10 @@ Time: 23:06:49
 Error: Key does not exist (SUBSTRACT)
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\keyboard.cpp:63
+Inside ege::Keyboard::GetKey
+Date: Jun  9 2018
+Time: 12:51:11
+Error: Key does not exist (ESCAPE)
+Condition: 0
+############################################: 

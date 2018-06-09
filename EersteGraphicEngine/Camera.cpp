@@ -12,6 +12,11 @@ namespace ege
     Camera::Camera()
         : IEntity(EntityType::Camera)
         , _renderAPI(gRenderAPI())
+        , _inputHandler(gInputHandler())
+        , _keyboard(gKeyboard())
+        , _joypad(gJoypad())
+        , _mouse(gMouse())
+        , _time(gTime())
         , _fov(DefaultFov)
         , _nearZ(DefaultNearZ)
         , _farZ(DefaultFarZ)
@@ -21,6 +26,7 @@ namespace ege
         , _right(XMFLOAT3(1.0f, 0.0f, 0.0f))
         , _up(XMFLOAT3(0.0f, 1.0f, 0.0f))
         , _look(XMFLOAT3(0.0f, 0.0f, 1.0f))
+        , _needUpdate(false)
     {
         Initialise();
     }
@@ -37,6 +43,12 @@ namespace ege
     void Camera::Update()
     {
         _frustum.Build(*this);
+
+        if (_needUpdate)
+        {
+            ComputeProjectionMatrix();
+            _needUpdate = false;
+        }
     }
 
     void Camera::Draw()

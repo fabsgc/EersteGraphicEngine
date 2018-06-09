@@ -17,6 +17,7 @@ namespace ege
         : _windowDesc(desc)
         , _showCursor(true)
         , _clipCursor(false)
+        , _application(gCoreApplication())
     {
     }
 
@@ -31,23 +32,23 @@ namespace ege
 
     void Window::Update()
     {
-        CoreApplication& application = gCoreApplication();
         MSG  msg;
 
         if (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
-            CoreApplication& application = gCoreApplication();
-
-            if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
+            if (!_application.GetStartUpDescription().UseRawInput)
             {
-                application.KeyEventHandler(&msg);
-            }
+                if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
+                {
+                    _application.KeyEventHandler(&msg);
+                }
 
-            if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
-                msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
-                msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
-            {
-                application.MouseEventHandler(&msg);
+                if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
+                    msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
+                    msg.message == WM_RBUTTONUP || msg.message == WM_MOUSEHOVER || msg.message == WM_MOUSELEAVE)
+                {
+                    _application.MouseEventHandler(&msg);
+                }
             }
 
             if (msg.message == WM_QUIT)
@@ -61,7 +62,7 @@ namespace ege
         else
         {
             gMouse().ResetState();
-            application.JoypadEventHandler();
+            _application.JoypadEventHandler();
 
             if (gInputHandler().GetState("QUIT").State == InputHandlerState::TRIGGERED)
             {
@@ -105,18 +106,26 @@ namespace ege
         if (!_hWnd)
             return E_FAIL;
 
-        //Enable raw input support for mouse
-        RAWINPUTDEVICE Rid[1];
+        if (_application.GetStartUpDescription().UseRawInput)
+        {
+            //Enable raw input support for mouse
+            RAWINPUTDEVICE Rid[2];
 
-        Rid[0].usUsagePage = 0x01;
-        Rid[0].usUsage = 0x02;
-        Rid[0].dwFlags = 0;
-        Rid[0].hwndTarget = 0;
+            Rid[0].usUsagePage = 0x01;
+            Rid[0].usUsage = 0x02;
+            Rid[0].dwFlags = 0;   // adds HID mouse and also ignores legacy mouse messages
+            Rid[0].hwndTarget = _hWnd;
 
-        if (RegisterRawInputDevices(Rid, 1, sizeof(Rid[0])) == FALSE) {
-            EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
+            Rid[1].usUsagePage = 0x01;
+            Rid[1].usUsage = 0x06;
+            Rid[1].dwFlags = RIDEV_NOLEGACY;   // adds HID keyboard and also ignores legacy keyboard messages
+            Rid[1].hwndTarget = _hWnd;
+
+            if (RegisterRawInputDevices(Rid, 2, sizeof(Rid[0])) == FALSE) {
+                EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
+            }
         }
-
+        
         ShowWindow(_hWnd, SW_SHOW);
 
         return S_OK;
@@ -261,8 +270,6 @@ namespace ege
         {
             UINT cbSize;
 
-            Sleep(1);
-
             GetRawInputBuffer(NULL, &cbSize, /*0,*/sizeof(RAWINPUTHEADER));
             cbSize *= 16;
             PRAWINPUT pRawInput = (PRAWINPUT)malloc(cbSize);
@@ -299,6 +306,24 @@ namespace ege
                         XMFLOAT2 relativeMovement = XMFLOAT2((float)paRawInput[i]->data.mouse.lLastX, (float)paRawInput[i]->data.mouse.lLastY);
                         gMouse().SetRelativeMovement(relativeMovement);
                     }
+
+                    /*if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
+                    {
+                        std::cout << "keyboard" << std::endl;
+
+                        if (paRawInput[i]->data.keyboard.Message == WM_KEYUP ||
+                            paRawInput[i]->data.keyboard.Message == WM_KEYDOWN)
+                        {
+                            USHORT usKey;
+                            usKey = paRawInput[i]->data.keyboard.VKey;
+
+                            MSG msg;
+                            msg.message = paRawInput[i]->data.keyboard.Message;
+                            msg.wParam = usKey;
+
+                            gCoreApplication().KeyEventHandler(&msg);
+                        }
+                    }*/
                 }
 
                 // to clean the buffer
@@ -307,7 +332,6 @@ namespace ege
                 free(paRawInput);
             }
             free(pRawInput);
-
         }break;
 
         default:

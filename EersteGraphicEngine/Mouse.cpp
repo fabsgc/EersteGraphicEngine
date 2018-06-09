@@ -63,7 +63,6 @@ namespace ege
     {
         _mouseWheel = MouseWheelState::STATIC;
         _relativeMovement = XMFLOAT2(0.0f, 0.0f);
-
     }
 
     void Mouse::UpdateState(const MouseButtonName& name, const MouseButtonState& state)

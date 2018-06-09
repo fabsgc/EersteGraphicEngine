@@ -69,6 +69,7 @@ namespace ege
 
     private:
         Map<Context, Vector<InputMap>> _handlers;
+        CoreApplication&               _coreApplication;
     };
 
     InputHandler&      gInputHandler();
