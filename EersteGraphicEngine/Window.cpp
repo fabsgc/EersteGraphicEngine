@@ -38,10 +38,10 @@ namespace ege
         {
             if (!_application.GetStartUpDescription().UseRawInput)
             {
-                if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
+                /*if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
                 {
                     _application.KeyEventHandler(&msg);
-                }
+                }*/
 
                 if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
                     msg.message == WM_MOUSEWHEEL || msg.message == WM_MOUSEHWHEEL || msg.message == WM_LBUTTONUP ||
@@ -49,11 +49,6 @@ namespace ege
                 {
                     _application.MouseEventHandler(&msg);
                 }
-            }
-
-            if (msg.message == WM_QUIT)
-            {
-                gEventManager().Execute("STOP_REQUESTED");
             }
 
             TranslateMessage(&msg);
@@ -109,19 +104,29 @@ namespace ege
         if (_application.GetStartUpDescription().UseRawInput)
         {
             //Enable raw input support for mouse
-            RAWINPUTDEVICE Rid[2];
+            RAWINPUTDEVICE Rid[4];
+
+            Rid[3].usUsagePage = 0x01;
+            Rid[3].usUsage = 0x02;
+            Rid[3].dwFlags = 0;   // adds HID mouse and also ignores legacy mouse messages
+            Rid[3].hwndTarget = nullptr;
 
             Rid[0].usUsagePage = 0x01;
-            Rid[0].usUsage = 0x02;
-            Rid[0].dwFlags = 0;   // adds HID mouse and also ignores legacy mouse messages
-            Rid[0].hwndTarget = _hWnd;
-
+            Rid[0].usUsage = 0x06;
+            Rid[0].dwFlags = RIDEV_NOLEGACY; // adds HID keyboard and also ignores legacy keyboard messages
+            Rid[0].hwndTarget = nullptr;
+             
             Rid[1].usUsagePage = 0x01;
-            Rid[1].usUsage = 0x06;
-            Rid[1].dwFlags = RIDEV_NOLEGACY;   // adds HID keyboard and also ignores legacy keyboard messages
-            Rid[1].hwndTarget = _hWnd;
+            Rid[1].usUsage = 0x05;
+            Rid[1].dwFlags = 0; // adds game pad
+            Rid[1].hwndTarget = nullptr;
 
-            if (RegisterRawInputDevices(Rid, 2, sizeof(Rid[0])) == FALSE) {
+            Rid[2].usUsagePage = 0x01;
+            Rid[2].usUsage = 0x04;
+            Rid[2].dwFlags = 0; // adds joystick
+            Rid[2].hwndTarget = nullptr;
+
+            if (RegisterRawInputDevices(Rid, 3, sizeof(Rid[0])) == FALSE) {
                 EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
             }
         }
@@ -266,12 +271,19 @@ namespace ege
             }
             break;
 
+        case RIM_INPUTSINK:
+        {
+
+            }break;
+
         case WM_INPUT:
         {
             UINT cbSize;
 
+            Sleep(2);
+
             GetRawInputBuffer(NULL, &cbSize, /*0,*/sizeof(RAWINPUTHEADER));
-            cbSize *= 16;
+            cbSize *= 8;
             PRAWINPUT pRawInput = (PRAWINPUT)malloc(cbSize);
 
             if (pRawInput == NULL)
@@ -299,15 +311,16 @@ namespace ege
                 for (UINT i = 0; i < nInput; ++i)
                 {
                     paRawInput[i] = pri;
-                    pri = NEXTRAWINPUTBLOCK(pri);
 
                     if (paRawInput[i]->header.dwType == RIM_TYPEMOUSE)
                     {
+                        std::cout << "Mouse" << std::endl;
+
                         XMFLOAT2 relativeMovement = XMFLOAT2((float)paRawInput[i]->data.mouse.lLastX, (float)paRawInput[i]->data.mouse.lLastY);
                         gMouse().SetRelativeMovement(relativeMovement);
                     }
 
-                    /*if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
+                    if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
                     {
                         std::cout << "keyboard" << std::endl;
 
@@ -323,7 +336,14 @@ namespace ege
 
                             gCoreApplication().KeyEventHandler(&msg);
                         }
-                    }*/
+                    }
+
+                    if (paRawInput[i]->header.dwType == RIM_TYPEHID)
+                    {
+                        std::cout << "Game pad or Joystick" << std::endl;
+                    }
+
+                    ///pri = NEXTRAWINPUTBLOCK(pri);
                 }
 
                 // to clean the buffer

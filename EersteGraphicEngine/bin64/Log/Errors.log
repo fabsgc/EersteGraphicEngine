@@ -209,3 +209,17 @@ Time: 12:51:11
 Error: Key does not exist (ESCAPE)
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\window.cpp:130
+Inside ege::Window::InitWindow
+Date: Jun  9 2018
+Time: 21:29:52
+Error: Failed to init raw inpute device
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\window.cpp:130
+Inside ege::Window::InitWindow
+Date: Jun  9 2018
+Time: 21:32:50
+Error: Failed to init raw inpute device
+Condition: 0
+############################################: 

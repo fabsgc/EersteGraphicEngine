@@ -61,6 +61,11 @@ namespace ege
 
     void CoreApplication::Update()
     {
+        if (gInputHandler().GetState("QUIT").State == InputHandlerState::TRIGGERED)
+        {
+            gEventManager().Execute("STOP_REQUESTED");
+        }
+
         gTime().Update();
         gJoypad().Update();
         _window->Update();
