@@ -62,7 +62,6 @@ namespace ege
     void Mouse::ResetState()
     {
         _mouseWheel = MouseWheelState::STATIC;
-        _relativeMovement = XMFLOAT2(0.0f, 0.0f);
     }
 
     void Mouse::UpdateState(const MouseButtonName& name, const MouseButtonState& state)
@@ -210,6 +209,12 @@ namespace ege
         _centralPosition.x = (float)_window.GetWindowWidth() / 2;
         _centralPosition.y = (float)_window.GetWindowHeight() / 2;
 
+        _position.x = _oldPosition.x = _centralPosition.x;
+        _position.y = _oldPosition.y = _centralPosition.y;
+
+        _relativeMovement.x = 0.0f;
+        _relativeMovement.y = 0.0f;
+
         _mouseButtons.push_back(MouseButton(MouseButtonName::LEFT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::RIGHT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::MIDDLE));
@@ -227,6 +232,17 @@ namespace ege
 
         _cursorDistanceFromCenter.x = _position.x - _centralPosition.x;
         _cursorDistanceFromCenter.y = _position.y - _centralPosition.y;
+
+        if (gTime().GetTime() > 2.0f)
+        {
+            _relativeMovement.x = _position.x - _oldPosition.x;
+            _relativeMovement.y = _position.y - _oldPosition.y;
+
+            if (_relativeMovement.x != 0.0f)
+            {
+                std::cout << _relativeMovement.x << "/" << _relativeMovement.y << std::endl;
+            }
+        }  
     }
 
     Mouse& gMouse()

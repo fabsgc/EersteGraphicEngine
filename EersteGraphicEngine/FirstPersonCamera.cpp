@@ -61,15 +61,13 @@ namespace ege
         }
 
         XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
-        /*float angleX = relativeMovement.x * _rotationSpeed * deltaTime;
-        float angleY = relativeMovement.y * _rotationSpeed * deltaTime * 2.0f;
+        float angleX = relativeMovement.x * _rotationSpeed * deltaTime * 0.1f;
+        float angleY = relativeMovement.y * _rotationSpeed * deltaTime * 0.5f;
 
-        if (abs(angleY) > 0.001f)
+        //if (abs(angleY) > 0.001f)
             Pitch(angleY);
-        if (abs(angleX) > 0.001f)
-            Yaw(angleX);*/
-
-        std::cout << relativeMovement.x << "/" << relativeMovement.y << std::endl;
+        //if (abs(angleX) > 0.001f)
+            Yaw(angleX);
 
         Camera::Update();
     }

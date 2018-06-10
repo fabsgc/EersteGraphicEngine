@@ -30,7 +30,11 @@ namespace ege
     void Application::Update()
     {
         CoreApplication::Update();
-        SetCursorPos(_window->GetWindowWidth() / 2, _window->GetWindowHeight() / 2);
+
+        if (!_paused)
+        {
+            SetCursorPos(_window->GetWindowWidth() / 2, _window->GetWindowHeight() / 2);
+        }
     }
 
     void Application::Draw()
