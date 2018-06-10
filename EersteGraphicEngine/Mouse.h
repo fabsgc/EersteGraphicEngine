@@ -89,6 +89,8 @@ namespace ege
         XMFLOAT2            _oldPosition;
         XMFLOAT2            _centralPosition;
         XMFLOAT2            _cursorDistanceFromCenter;
+
+        //Works only with raw input enabled
         XMFLOAT2            _relativeMovement;
     };
 

@@ -115,17 +115,7 @@ namespace ege
             Rid[0].usUsage = 0x06;
             Rid[0].dwFlags = RIDEV_NOLEGACY; // adds HID keyboard and also ignores legacy keyboard messages
             Rid[0].hwndTarget = nullptr;
-             
-            Rid[1].usUsagePage = 0x01;
-            Rid[1].usUsage = 0x05;
-            Rid[1].dwFlags = 0; // adds game pad
-            Rid[1].hwndTarget = nullptr;
-
-            Rid[2].usUsagePage = 0x01;
-            Rid[2].usUsage = 0x04;
-            Rid[2].dwFlags = 0; // adds joystick
-            Rid[2].hwndTarget = nullptr;
-
+            
             if (RegisterRawInputDevices(Rid, 4, sizeof(Rid[0])) == FALSE) {
                 EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
             }
@@ -307,8 +297,6 @@ namespace ege
 
                     if (paRawInput[i]->header.dwType == RIM_TYPEMOUSE)
                     {
-                        std::cout << "Mouse" << std::endl;
-
                         XMFLOAT2 relativeMovement = XMFLOAT2((float)paRawInput[i]->data.mouse.lLastX, (float)paRawInput[i]->data.mouse.lLastY);
                         gMouse().SetRelativeMovement(relativeMovement);
                     }
@@ -333,7 +321,6 @@ namespace ege
 
                     if (paRawInput[i]->header.dwType == RIM_TYPEHID)
                     {
-                        std::cout << "Game pad or Joystick" << std::endl;
                     }
 
                     pri = NEXTRAWINPUTBLOCK(pri);
