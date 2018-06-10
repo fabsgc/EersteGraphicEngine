@@ -34,7 +34,7 @@ namespace ege
     {
         MSG  msg;
 
-        if (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
+        while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
             if (!_application.GetStartUpDescription().UseRawInput)
             {
@@ -54,7 +54,7 @@ namespace ege
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
-        else
+        
         {
             gMouse().ResetState();
             _application.JoypadEventHandler();
