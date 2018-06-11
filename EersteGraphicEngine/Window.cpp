@@ -36,12 +36,9 @@ namespace ege
 
         while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
-            //if (!_application.GetStartUpDescription().UseRawInput)
+            if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
             {
-                if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
-                {
-                    _application.KeyEventHandler(&msg);
-                }
+                _application.KeyEventHandler(&msg);
             }
 
             if (msg.message == WM_MOUSEMOVE || msg.message == WM_LBUTTONDOWN || msg.message == WM_RBUTTONDOWN ||
@@ -104,17 +101,12 @@ namespace ege
         if (_application.GetStartUpDescription().UseRawInput)
         {
             //Enable raw input support for mouse
-            RAWINPUTDEVICE Rid[2];
+            RAWINPUTDEVICE Rid[1];
 
             Rid[0].usUsagePage = 0x01;
             Rid[0].usUsage = 0x02;
             Rid[0].dwFlags = RIDEV_INPUTSINK;   // adds HID mouse and also ignores legacy mouse messages
             Rid[0].hwndTarget = _hWnd;
-
-            Rid[1].usUsagePage = 0x01;
-            Rid[1].usUsage = 0x06;
-            Rid[1].dwFlags = RIDEV_NOLEGACY | RIDEV_INPUTSINK; // adds HID keyboard and also ignores legacy keyboard messages
-            Rid[1].hwndTarget = _hWnd;
             
             if (RegisterRawInputDevices(Rid, 1, sizeof(Rid[0])) == FALSE) {
                 EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
@@ -300,29 +292,6 @@ namespace ege
                         XMFLOAT2 relativeMovement = XMFLOAT2((float)paRawInput[i]->data.mouse.lLastX, (float)paRawInput[i]->data.mouse.lLastY);
                         gMouse().SetRelativeMovement(relativeMovement);
                     }
-
-                    //TODO: remove
-                    /*if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
-                    {
-                        std::cout << "keyboard" << std::endl;
-
-                        if (paRawInput[i]->data.keyboard.Message == WM_KEYUP ||
-                            paRawInput[i]->data.keyboard.Message == WM_KEYDOWN)
-                        {
-                            USHORT usKey;
-                            usKey = paRawInput[i]->data.keyboard.VKey;
-
-                            MSG msg;
-                            msg.message = paRawInput[i]->data.keyboard.Message;
-                            msg.wParam = usKey;
-
-                            gCoreApplication().KeyEventHandler(&msg);
-                        }
-                    }
-
-                    if (paRawInput[i]->header.dwType == RIM_TYPEHID)
-                    {
-                    }*/
 
                     pri = NEXTRAWINPUTBLOCK(pri);
                 }

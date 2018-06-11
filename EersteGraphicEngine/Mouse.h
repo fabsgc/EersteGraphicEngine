@@ -73,10 +73,6 @@ namespace ege
         const XMFLOAT2&        GetRelativeMovement() const;
         void                   SetRelativeMovement(const XMFLOAT2& relativeMovement);
 
-        void                   OnSetCursorPosCalled();
-
-        void UpdateMovement();
-
     private:
         void UpdatePosition(MSG* message);
         void UpdateState(const MouseButtonName& name, const MouseButtonState& state);
@@ -95,8 +91,6 @@ namespace ege
         XMFLOAT2            _cursorDistanceFromCenter;
 
         XMFLOAT2            _relativeMovement;
-
-        bool                _checkRelativeMovement;
     };
 
     Mouse&      gMouse();

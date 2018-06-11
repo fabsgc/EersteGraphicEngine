@@ -1,5 +1,6 @@
 #include "Mouse.h"
 
+#include "CoreApplication.h"
 #include "EventManager.h"
 
 namespace ege
@@ -11,7 +12,6 @@ namespace ege
         , _oldPosition(XMFLOAT2(0.0f, 0.0f))
         , _mouseWheel(MouseWheelState::STATIC)
         , _relativeMovement(XMFLOAT2(0.0f, 0.0f))
-        , _checkRelativeMovement(true)
     {}
 
     void Mouse::Update(MSG* message)
@@ -221,9 +221,6 @@ namespace ege
         _mouseButtons.push_back(MouseButton(MouseButtonName::LEFT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::RIGHT));
         _mouseButtons.push_back(MouseButton(MouseButtonName::MIDDLE));
-
-        //TODO : remove
-        //gEventManager().Suscribe("SET_CURSOR_POS_CALLED", std::bind(&Mouse::OnSetCursorPosCalled, this));
     }
 
     void Mouse::UpdatePosition(MSG* message)
@@ -239,31 +236,11 @@ namespace ege
         _cursorDistanceFromCenter.x = _position.x - _centralPosition.x;
         _cursorDistanceFromCenter.y = _position.y - _centralPosition.y;
 
-        /*if (_checkRelativeMovement)
+        if (!gCoreApplication().GetStartUpDescription().UseRawInput)
         {
-            _relativeMovement.x = _position.x - _oldPosition.x;
-            _relativeMovement.y = _position.y - _oldPosition.y;
-
-            if (_relativeMovement.x != 0.0f || _relativeMovement.y != 0.0f)
-            {
-                std::cout << "### " << _relativeMovement.x << "/" << _relativeMovement.y << std::endl;
-            }
+            _relativeMovement.x = _position.x - _centralPosition.x;
+            _relativeMovement.y = _position.y - _centralPosition.y;
         }
-        else
-        {
-            _relativeMovement.x = 0.0f;
-            _relativeMovement.y = 0.0f;
-        }*/
-    }
-
-    void Mouse::UpdateMovement()
-    {
-    }
-
-    void Mouse::OnSetCursorPosCalled()
-    {
-        /*std::cout << "called" << std::endl;
-        _checkRelativeMovement = false;*/
     }
 
     Mouse& gMouse()

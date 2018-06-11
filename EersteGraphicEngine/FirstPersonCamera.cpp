@@ -64,16 +64,6 @@ namespace ege
         float angleX = relativeMovement.x * _rotationSpeed * deltaTime;
         float angleY = relativeMovement.y * _rotationSpeed * deltaTime;
 
-        if (relativeMovement.x != 0.0f || relativeMovement.y != 0.0f)
-        {
-            std::cout << "- " << relativeMovement.x << "/" << relativeMovement.y << std::endl;
-        }
-
-        if (relativeMovement.x != 0.0f || relativeMovement.y != 0.0f)
-        {
-            _mouse.SetRelativeMovement(XMFLOAT2(0.0f, 0.0f));
-        }
-
         if (abs(angleY) > 0.001f)
             Pitch(angleY);
         if (abs(angleX) > 0.001f)

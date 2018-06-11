@@ -68,8 +68,6 @@ namespace ege
 
         void OnStopRequested();
 
-        void SetCursorPosition();
-
         void KeyEventHandler(MSG* message);
         void MouseEventHandler(MSG* message);
         void JoypadEventHandler();
