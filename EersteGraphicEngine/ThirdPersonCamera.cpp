@@ -62,11 +62,11 @@ namespace ege
             {
                 XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
-                float angleY = -distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
-                float angleX = distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
-
-                Pitch(angleX);
-                Yaw(angleY);
+                float angleX = -distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
+                float angleY = distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
+                
+                Pitch(angleY);
+                Yaw(angleX);
                     
                 _lastMousePosition = mousePosition;
             }
@@ -77,11 +77,11 @@ namespace ege
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * 15.0f);
+            Zoom(deltaTime * 32.0f);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * 15.0f);
+            Zoom(-deltaTime * 32.0f);
             break;
         }
 
@@ -93,18 +93,18 @@ namespace ege
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            float angleY = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleX = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f ;
 
             if (abs(joypadLY) > 0.0f)
                 Walk(joypadLY * _translationSpeed * deltaTime);
             if (abs(joypadLX) > 0.0f)
                 Strafe(joypadLX * _translationSpeed * deltaTime);
 
-            if (abs(angleX) > 0.0f)
-                Pitch(angleX);
             if (abs(angleY) > 0.0f)
-                Yaw(angleY);
+                Pitch(angleY);
+            if (abs(angleX) > 0.0f)
+                Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
                 Up(_translationSpeed * deltaTime);

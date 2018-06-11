@@ -234,8 +234,6 @@ namespace ege
         gEventManager().Create("WINDOW_RESIZED");
         gEventManager().Create("WINDOW_FULLSCREEN");
         gEventManager().Create("STOP_REQUESTED");
-        //TODO : remove
-        //gEventManager().Create("SET_CURSOR_POS_CALLED");
 
         gEventManager().Suscribe("STOP_REQUESTED", std::bind(&CoreApplication::OnStopRequested, this));
     }

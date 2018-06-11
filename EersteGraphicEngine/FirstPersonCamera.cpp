@@ -41,18 +41,18 @@ namespace ege
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float angleX = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            float angleY = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleX = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
             if (abs(joypadLY) > 0.0f)
                 Walk(joypadLY * _translationSpeed * deltaTime);
             if (abs(joypadLX) > 0.0f)
                 MoveX(joypadLX * _translationSpeed * deltaTime);
 
-            if (abs(angleX) > 0.0f)
-                Pitch(angleX);
             if (abs(angleY) > 0.0f)
-                Yaw(angleY);
+                Pitch(angleY);
+            if (abs(angleX) > 0.0f)
+                Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
                 MoveY(-_translationSpeed * deltaTime);

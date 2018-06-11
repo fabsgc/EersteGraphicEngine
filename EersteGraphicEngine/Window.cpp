@@ -33,9 +33,12 @@ namespace ege
     void Window::Update()
     {
         MSG  msg;
+        bool hadMessageToRead = false;
 
         while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
+            hadMessageToRead = true;
+
             if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
             {
                 _application.KeyEventHandler(&msg);
@@ -53,9 +56,13 @@ namespace ege
         }
         
         {
-            gMouse().ResetState();
             _application.JoypadEventHandler();
 
+            if (!hadMessageToRead)
+            {
+                gMouse().ResetState();
+            }
+            
             if (gInputHandler().GetState("QUIT").State == InputHandlerState::TRIGGERED)
             {
                 gEventManager().Execute("STOP_REQUESTED");
