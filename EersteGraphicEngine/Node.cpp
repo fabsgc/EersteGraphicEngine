@@ -62,6 +62,9 @@ namespace ege
 
     void Node::Update()
     {
+        float deltaTime = gTime().GetFrameDelta();
+        RotatePitch(deltaTime);
+
         for (auto child : _child)
         {
             child.second->Update();
@@ -122,5 +125,121 @@ namespace ege
         XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
         XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
         XMStoreFloat3(&_position, position);
+    }
+
+    void Node::Move(XMVECTOR movement)
+    {
+        for (auto child : _child)
+        {
+            child.second->Move(movement);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->Move(movement);
+                break;
+
+            case EntityType::Model:
+                entity.second->Move(movement);
+                break;
+            }
+        }
+    }
+
+    void Node::Scale(XMVECTOR origin, XMVECTOR scale)
+    {
+        for (auto child : _child)
+        {
+            child.second->Scale(origin, scale);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->Scale(origin, scale);
+                break;
+
+            case EntityType::Model:
+                entity.second->Scale(origin, scale);
+                break;
+            }
+        }
+    }
+
+    void Node::Scale(XMVECTOR scale)
+    {
+        XMFLOAT3 position = GetPosition();
+        XMVECTOR P = XMLoadFloat3(&position);
+
+        for (auto child : _child)
+        {
+            child.second->Scale(P, scale);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->Scale(P, scale);
+                break;
+
+            case EntityType::Model:
+                entity.second->Scale(P, scale);
+                break;
+            }
+        }
+    }
+
+    void Node::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {
+        for (auto child : _child)
+        {
+            child.second->Rotate(origin, eulerAngles);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->Rotate(origin, eulerAngles);
+                break;
+
+            case EntityType::Model:
+                entity.second->Rotate(origin, eulerAngles);
+                break;
+            }
+        }
+    }
+
+    void Node::Rotate(XMVECTOR eulerAngles)
+    {
+        XMFLOAT3 position = GetPosition();
+        XMVECTOR P = XMLoadFloat3(&position);
+
+        for (auto child : _child)
+        {
+            child.second->Rotate(P, eulerAngles);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->Rotate(P, eulerAngles);
+                break;
+
+            case EntityType::Model:
+                entity.second->Rotate(P, eulerAngles);
+                break;
+            }
+        }
     }
 }

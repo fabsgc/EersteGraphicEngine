@@ -10,7 +10,7 @@
 
 namespace ege
 {
-    class Model: public IEntity, public IMoveable
+    class Model: public IEntity
     {
     public:
         Model();

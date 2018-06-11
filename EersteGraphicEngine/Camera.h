@@ -49,6 +49,13 @@ namespace ege
         virtual void      Roll(float angle);
         virtual void      Yaw(float angle);
 
+        virtual void      UpdateLocalPosition() override {};
+        virtual void      Move(XMVECTOR movement) override {};
+        virtual void      Scale(XMVECTOR origin, XMVECTOR scale) override {};
+        virtual void      Scale(XMVECTOR scale) override {};
+        virtual void      Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void      Rotate(XMVECTOR eulerAngles) override {};
+
     public:
         static const float DefaultFov;
         static const float DefaultNearZ;

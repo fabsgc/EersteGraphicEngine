@@ -14,7 +14,7 @@ namespace ege
         AmbientLight
     };
 
-    class Light: public IEntity, public IMoveable
+    class Light: public IEntity
     {
     public:
         Light(LightType type);
@@ -29,6 +29,11 @@ namespace ege
         void            SetColor(XMFLOAT4 color);
 
         virtual void    UpdateLocalPosition() = 0;
+        virtual void    Move(XMVECTOR movement) override {};
+        virtual void    Scale(XMVECTOR origin, XMVECTOR scale) override {};
+        virtual void    Scale(XMVECTOR scale) override {};
+        virtual void    Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void    Rotate(XMVECTOR eulerAngles) override {};
         
     public:
         static const XMFLOAT4 DefaultLightColor;

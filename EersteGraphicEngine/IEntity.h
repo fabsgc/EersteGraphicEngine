@@ -15,7 +15,7 @@ namespace ege
         Generic
     };
 
-    class IEntity: public IUpdatable, public IDrawable
+    class IEntity: public IUpdatable, public IDrawable, public IMoveable
     {
     public:
         IEntity(EntityType type) : _type(type) {};

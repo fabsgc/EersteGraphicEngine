@@ -28,16 +28,16 @@ namespace ege
     void Cube::Update()
     {
         float deltaTime = gTime().GetFrameDelta();
-        Keyboard& keyboard = gKeyboard();
+        //Keyboard& keyboard = gKeyboard();
 
-        RotatePitch(XMFLOAT3(1.0f, 0.0f, -1.0f), 1.0f * deltaTime);
+        //RotatePitch(XMFLOAT3(1.0f, 0.0f, -1.0f), 1.0f * deltaTime);
         //Scale(XMFLOAT3(0.999f, 0.999f, 0.999f));
         //Scale(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.999f, 0.999f, 0.999f));
         //RotatePitch(XMFLOAT3(0.0f, 0.0f, 0.0f), 0.01f);
         //RotateRoll(GetPosition(), 0.01f);
 
-        if (keyboard.GetKey("G").State == KeyState::TRIGGERED)
-            MoveZ(1.0f * deltaTime);
+        //if (keyboard.GetKey("G").State == KeyState::TRIGGERED)
+        //    MoveZ(1.0f * deltaTime);
 
         Model::Update();
     }

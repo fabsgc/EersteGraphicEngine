@@ -31,6 +31,11 @@ namespace ege
         void          SetParent(SPtr<Node> parent);
 
         virtual void  UpdateLocalPosition() override;
+        virtual void  Move(XMVECTOR movement) override;
+        virtual void  Scale(XMVECTOR origin, XMVECTOR scale) override;
+        virtual void  Scale(XMVECTOR scale) override;
+        virtual void  Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void  Rotate(XMVECTOR eulerAngles) override;
 
     private:
         SPtr<Scene>                _scene;
