@@ -10,7 +10,13 @@ namespace ege
     const float Camera::DefaultRotationSpeed = 0.25f;
 
     Camera::Camera()
+        : Camera(CameraType::Genereic)
+    {
+    }
+
+    Camera::Camera(CameraType type)
         : IEntity(EntityType::Camera)
+        , _cameraType(type)
         , _renderAPI(gRenderAPI())
         , _inputHandler(gInputHandler())
         , _keyboard(gKeyboard())
@@ -67,6 +73,11 @@ namespace ege
 
     void Camera::ComputeProjectionMatrix()
     {
+    }
+
+    const CameraType& Camera::GetType() const
+    {
+        return _cameraType;
     }
 
     void Camera::Pitch(float angle)

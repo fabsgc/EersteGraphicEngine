@@ -7,7 +7,12 @@
 namespace ege
 {
     FlyingCamera::FlyingCamera()
-        : Camera()
+        : Camera(CameraType::ThirdPerson)
+    {
+    }
+
+    FlyingCamera::FlyingCamera(CameraType type)
+        : Camera(type)
     {
     }
 

@@ -8,7 +8,7 @@
 namespace ege
 {
     FirstPersonCamera::FirstPersonCamera()
-        : FlyingCamera()
+        : FlyingCamera(CameraType::FirstPerson)
     {
     }
 
@@ -61,12 +61,22 @@ namespace ege
         }
 
         XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
-        float angleX = relativeMovement.x * _rotationSpeed * deltaTime * 0.1f;
-        float angleY = relativeMovement.y * _rotationSpeed * deltaTime * 0.5f;
+        float angleX = relativeMovement.x * _rotationSpeed * deltaTime;
+        float angleY = relativeMovement.y * _rotationSpeed * deltaTime;
 
-        //if (abs(angleY) > 0.001f)
+        if (relativeMovement.x != 0.0f || relativeMovement.y != 0.0f)
+        {
+            std::cout << "- " << relativeMovement.x << "/" << relativeMovement.y << std::endl;
+        }
+
+        if (relativeMovement.x != 0.0f || relativeMovement.y != 0.0f)
+        {
+            _mouse.SetRelativeMovement(XMFLOAT2(0.0f, 0.0f));
+        }
+
+        if (abs(angleY) > 0.001f)
             Pitch(angleY);
-        //if (abs(angleX) > 0.001f)
+        if (abs(angleX) > 0.001f)
             Yaw(angleX);
 
         Camera::Update();

@@ -3,6 +3,7 @@
 #include "ThirdPersonCamera.h"
 #include "FirstPersonCamera.h"
 #include "DirectionalLight.h"
+#include "EventManager.h"
 #include "FlyingCamera.h"
 #include "AmbientLight.h"
 #include "Landscape.h"
@@ -30,11 +31,6 @@ namespace ege
     void Application::Update()
     {
         CoreApplication::Update();
-
-        if (!_paused)
-        {
-            SetCursorPos(_window->GetWindowWidth() / 2, _window->GetWindowHeight() / 2);
-        }
     }
 
     void Application::Draw()

@@ -66,14 +66,47 @@ namespace ege
             gEventManager().Execute("STOP_REQUESTED");
         }
 
+        //TODO : remove
+        //SetCursorPosition();
         gTime().Update();
         gJoypad().Update();
+        //gMouse().UpdateMovement();
+
         _window->Update();
 
         if (_scene != nullptr)
         {
             _scene->Update();
         }
+    }
+
+    void CoreApplication::SetCursorPosition()
+    {
+        //TODO : remove
+        /*if (_scene != nullptr && !_paused)
+        {
+            POINT point;
+            if (GetCursorPos(&point)) {
+
+                SPtr<Camera> camera = _scene->GetActiveCamera();
+                if (camera != nullptr && camera->GetType() == CameraType::FirstPerson)
+                {
+                    UINT windowWidth = _window->GetWindowWidth() / 2;
+                    UINT windowHeight = _window->GetWindowHeight() / 2;
+
+                    if (point.x != windowWidth && point.y != windowHeight)
+                    {
+                        gEventManager().Execute("SET_CURSOR_POS_CALLED");
+                        SetCursorPos(windowWidth, windowHeight);
+                    }
+                }
+            }
+        }
+
+        if (_paused)
+        {
+            gEventManager().Execute("SET_CURSOR_POS_CALLED");
+        }*/
     }
 
     void CoreApplication::Draw()
@@ -232,6 +265,8 @@ namespace ege
         gEventManager().Create("WINDOW_RESIZED");
         gEventManager().Create("WINDOW_FULLSCREEN");
         gEventManager().Create("STOP_REQUESTED");
+        //TODO : remove
+        //gEventManager().Create("SET_CURSOR_POS_CALLED");
 
         gEventManager().Suscribe("STOP_REQUESTED", std::bind(&CoreApplication::OnStopRequested, this));
     }

@@ -9,6 +9,7 @@ namespace ege
     {
     public:
         FlyingCamera();
+        FlyingCamera(CameraType type);
         ~FlyingCamera();
 
         void         Update();

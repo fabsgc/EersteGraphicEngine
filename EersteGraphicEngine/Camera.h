@@ -11,16 +11,27 @@
 
 namespace ege
 {
+    enum class CameraType
+    {
+        FirstPerson,
+        FlyingCamera,
+        ThirdPerson,
+        Genereic
+    };
+
     class Camera: public IEntity
     {
     public:
         Camera();
+        Camera(CameraType type);
         ~Camera();
 
         void              Initialise() override;
         void              Update() override;
         void              Draw() override;
         virtual void      ComputeProjectionMatrix();
+
+        const CameraType& GetType() const;
 
         const XMFLOAT4X4& GetView() const;
         const XMFLOAT4X4& GetProjection() const;
@@ -46,6 +57,8 @@ namespace ege
         static const float DefaultRotationSpeed;
 
     protected:
+        CameraType         _cameraType;
+
         RenderAPI&         _renderAPI;
         InputHandler&      _inputHandler;
         Keyboard&          _keyboard;

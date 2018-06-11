@@ -230,3 +230,17 @@ Time: 00:02:40
 Error: Failed to init raw inpute device
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\window.cpp:120
+Inside ege::Window::InitWindow
+Date: Jun 11 2018
+Time: 13:30:29
+Error: Failed to init raw inpute device
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\eventmanager.cpp:19
+Inside ege::EventManager::Suscribe
+Date: Jun 11 2018
+Time: 10:49:03
+Error: The event "SET_CURSOR_POS_CALLED" does not exist
+Condition: 0
+############################################: 

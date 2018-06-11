@@ -36,7 +36,7 @@ namespace ege
 
         while (PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
-            if (!_application.GetStartUpDescription().UseRawInput)
+            //if (!_application.GetStartUpDescription().UseRawInput)
             {
                 if (msg.message == WM_KEYUP || msg.message == WM_KEYDOWN)
                 {
@@ -108,15 +108,15 @@ namespace ege
 
             Rid[0].usUsagePage = 0x01;
             Rid[0].usUsage = 0x02;
-            Rid[0].dwFlags = 0;   // adds HID mouse and also ignores legacy mouse messages
-            Rid[0].hwndTarget = nullptr;
+            Rid[0].dwFlags = RIDEV_INPUTSINK;   // adds HID mouse and also ignores legacy mouse messages
+            Rid[0].hwndTarget = _hWnd;
 
             Rid[1].usUsagePage = 0x01;
             Rid[1].usUsage = 0x06;
-            Rid[1].dwFlags = RIDEV_NOLEGACY; // adds HID keyboard and also ignores legacy keyboard messages
-            Rid[1].hwndTarget = nullptr;
+            Rid[1].dwFlags = RIDEV_NOLEGACY | RIDEV_INPUTSINK; // adds HID keyboard and also ignores legacy keyboard messages
+            Rid[1].hwndTarget = _hWnd;
             
-            if (RegisterRawInputDevices(Rid, 2, sizeof(Rid[0])) == FALSE) {
+            if (RegisterRawInputDevices(Rid, 1, sizeof(Rid[0])) == FALSE) {
                 EGE_ASSERT_ERROR(false, "Failed to init raw inpute device");
             }
         }
@@ -301,7 +301,8 @@ namespace ege
                         gMouse().SetRelativeMovement(relativeMovement);
                     }
 
-                    if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
+                    //TODO: remove
+                    /*if (paRawInput[i]->header.dwType == RIM_TYPEKEYBOARD)
                     {
                         std::cout << "keyboard" << std::endl;
 
@@ -321,7 +322,7 @@ namespace ege
 
                     if (paRawInput[i]->header.dwType == RIM_TYPEHID)
                     {
-                    }
+                    }*/
 
                     pri = NEXTRAWINPUTBLOCK(pri);
                 }
