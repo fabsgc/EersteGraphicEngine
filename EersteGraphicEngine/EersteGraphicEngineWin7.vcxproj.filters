@@ -223,6 +223,12 @@
     <Filter Include="Data\Shader\Include">
       <UniqueIdentifier>{35098237-1e46-4c0b-8e72-96cb6e1dc6c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\Light\Schema">
+      <UniqueIdentifier>{9b7aefb3-020a-45f0-ae02-1618faa4095f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Light\Schema">
+      <UniqueIdentifier>{cea553ef-a24f-4893-bc27-ea3e1fbc4d31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -413,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="IMoveable.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSchema.cpp">
+      <Filter>Source Files\Core\Renderer\Light\Schema</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -646,6 +655,9 @@
     </ClInclude>
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSchema.h">
+      <Filter>Header Files\Core\Renderer\Light\Schema</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
