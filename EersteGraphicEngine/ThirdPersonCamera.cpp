@@ -13,7 +13,7 @@ namespace ege
     const float ThirdPersonCamera::DefaultMaxZoom = 128.0f;
 
     ThirdPersonCamera::ThirdPersonCamera()
-        : Camera(CameraType::ThirdPerson)
+        : PerspectiveCamera(CameraType::ThirdPersonCamera)
         , _alpha(-0.1f)
         , _beta(0.4f)
         , _radius(12.0f)
@@ -112,7 +112,7 @@ namespace ege
                 Up(-_translationSpeed * deltaTime);
         }
 
-        Camera::Update();
+        PerspectiveCamera::Update();
     }
 
     void ThirdPersonCamera::ComputeProjectionMatrix()

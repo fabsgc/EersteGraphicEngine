@@ -1,5 +1,5 @@
 #include "Frustum.h"
-#include "Camera.h"
+#include "PerspectiveCamera.h"
 
 namespace ege
 {
@@ -11,12 +11,12 @@ namespace ege
     {
     }
 
-    void Frustum::Build(const Camera& camera)
+    void Frustum::Build(PerspectiveCamera* camera)
     {
         XMMATRIX matrix;
-        XMFLOAT4X4 projection  = camera.GetProjection();
-        const XMFLOAT4X4& view = camera.GetView();
-        const float& farZ      = camera.GetFarZ();
+        XMFLOAT4X4 projection  = camera->GetProjection();
+        const XMFLOAT4X4& view = camera->GetView();
+        const float& farZ      = camera->GetFarZ();
         float zMinimum         = 0.0f;
         float r                = 0.0f;
         
@@ -77,11 +77,11 @@ namespace ege
         _planes[5] = XMVector3Normalize(XMLoadFloat4(&planeFloat));
     }
 
-    bool Frustum::CheckSphere(const Camera& camera, const float radius)
+    bool Frustum::CheckSphere(PerspectiveCamera* camera, const float radius)
     {
-        const XMFLOAT4X4 projection = camera.GetProjection();
-        const XMFLOAT3& position    = camera.GetPosition();
-        const XMFLOAT4X4& view      = camera.GetView();
+        const XMFLOAT4X4 projection = camera->GetProjection();
+        const XMFLOAT3& position    = camera->GetPosition();
+        const XMFLOAT4X4& view      = camera->GetView();
 
         // Check if the radius of the sphere is inside the view frustum.
         for (UINT8 i = 0; i<6; i++)

@@ -1,5 +1,6 @@
 #include "Application.h"
 
+#include "OrthographicCamera.h"
 #include "ThirdPersonCamera.h"
 #include "FirstPersonCamera.h"
 #include "DirectionalLight.h"
@@ -54,24 +55,26 @@ namespace ege
         //gWindow().SetShowCursor(false);
         //gWindow().SetClipCursor(true);
 
-        _scene                          = ege_shared_ptr_new<Scene>();
+        _scene                           = ege_shared_ptr_new<Scene>();
 
-        SPtr<Node> node                 = ege_shared_ptr_new<Node>();
-        SPtr<FlyingCamera> camera1      = ege_shared_ptr_new<FlyingCamera>();
-        SPtr<ThirdPersonCamera> camera2 = ege_shared_ptr_new<ThirdPersonCamera>();
-        SPtr<FirstPersonCamera> camera3 = ege_shared_ptr_new<FirstPersonCamera>();
-        SPtr<DirectionalLight> light    = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<Sphere> sphere             = ege_shared_ptr_new<Sphere>();
-        SPtr<Plane> plane               = ege_shared_ptr_new<Plane>();
-        SPtr<Cube> cube                 = ege_shared_ptr_new<Cube>();
-        SPtr<Cube> cube2                = ege_shared_ptr_new<Cube>();
-        SPtr<Landscape> landscape       = ege_shared_ptr_new<Landscape>();
-        SPtr<AmbientLight> ambient      = ege_shared_ptr_new<AmbientLight>();
+        SPtr<Node> node                  = ege_shared_ptr_new<Node>();
+        SPtr<FlyingCamera> camera1       = ege_shared_ptr_new<FlyingCamera>();
+        SPtr<ThirdPersonCamera> camera2  = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<FirstPersonCamera> camera3  = ege_shared_ptr_new<FirstPersonCamera>();
+        SPtr<OrthographicCamera> camera4 = ege_shared_ptr_new<OrthographicCamera>();
+        SPtr<DirectionalLight> light     = ege_shared_ptr_new<DirectionalLight>();
+        SPtr<Sphere> sphere              = ege_shared_ptr_new<Sphere>();
+        SPtr<Plane> plane                = ege_shared_ptr_new<Plane>();
+        SPtr<Cube> cube                  = ege_shared_ptr_new<Cube>();
+        SPtr<Cube> cube2                 = ege_shared_ptr_new<Cube>();
+        SPtr<Landscape> landscape        = ege_shared_ptr_new<Landscape>();
+        SPtr<AmbientLight> ambient       = ege_shared_ptr_new<AmbientLight>();
 
         _scene->Initialise();
         camera1->Initialise();
         camera2->Initialise();
         camera3->Initialise();
+        camera4->Initialise();
         light->Initialise();
         sphere->Initialise();
         plane->Initialise();
@@ -85,7 +88,7 @@ namespace ege
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera2);
+        node->InsertEntity("camera", camera4);
         node->InsertEntity("light", light);
         node->InsertEntity("sphere", sphere);
         node->InsertEntity("plane", plane);
@@ -100,11 +103,11 @@ namespace ege
 
         sphere->Move(-2.0f, 1.0f, 2.0f);
 
-        _scene->InsertCamera("camera", camera2);
+        _scene->InsertCamera("camera", camera4);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera2);
+        _scene->SetActiveCamera(camera4);
         _scene->SetAmbientLight(ambient);
     }
 

@@ -9,6 +9,9 @@ namespace ege
         , _direction(DefaultDirection)
     {
         _lightSchema = ege_shared_ptr_new<LightSchema>("directional-light");
+        _lightSchema->Initialise();
+
+        _lightSchema->MoveY(8.0f);
     }
 
     DirectionalLight::~DirectionalLight()

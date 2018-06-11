@@ -1,11 +1,11 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "Camera.h"
+#include "PerspectiveCamera.h"
 
 namespace ege
 {
-    class ThirdPersonCamera : public Camera
+    class ThirdPersonCamera : public PerspectiveCamera
     {
     public:
         ThirdPersonCamera();

@@ -11,6 +11,7 @@ namespace ege
     {
         _position = DefaultPosition;
         _lightSchema = ege_shared_ptr_new<LightSchema>("point-light");
+        _lightSchema->Initialise();
     }
 
     PointLight::~PointLight()

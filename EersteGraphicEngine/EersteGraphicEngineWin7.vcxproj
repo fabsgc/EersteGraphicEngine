@@ -191,6 +191,8 @@
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PerspectiveCamera.cpp" />
+    <ClCompile Include="OrthographicCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
@@ -203,6 +205,7 @@
     <ClCompile Include="ShaderInclude.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StackAllocator.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="Task.cpp" />
@@ -263,6 +266,8 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PerspectiveCamera.h" />
+    <ClInclude Include="OrthographicCamera.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />
@@ -279,6 +284,7 @@
     <ClInclude Include="ShaderInclude.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="StackAllocator.h" />
     <ClInclude Include="StdHeaders.h" />
     <ClInclude Include="String.h" />

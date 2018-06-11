@@ -1,11 +1,11 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "Camera.h"
+#include "PerspectiveCamera.h"
 
 namespace ege
 {
-    class FlyingCamera : public Camera
+    class FlyingCamera : public PerspectiveCamera
     {
     public:
         FlyingCamera();
@@ -16,11 +16,7 @@ namespace ege
         void         ComputeProjectionMatrix() override;
 
         virtual void Walk(float distance);
-        virtual void Move(XMFLOAT3 distance);
-        void         Move(float x, float y, float z);
-        void         MoveX(float x);
-        void         MoveY(float y);
-        void         MoveZ(float z);
+        virtual void Move(XMFLOAT3 distance) override;
         void         Pitch(float angle) override;
         void         Roll(float angle) override;
         void         Yaw(float angle) override;

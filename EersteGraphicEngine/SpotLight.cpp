@@ -13,6 +13,7 @@ namespace ege
     {
         _position    = DefaultPosition;
         _lightSchema = ege_shared_ptr_new<LightSchema>("spot-light");
+        _lightSchema->Initialise();
     }
 
     SpotLight::~SpotLight()

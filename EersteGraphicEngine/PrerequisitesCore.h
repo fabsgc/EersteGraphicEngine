@@ -174,12 +174,16 @@ namespace ege
     class  MaterialManager;
 
     class  Light;
+    class  SpotLight;
     class  PointLight;
     class  AmbientLight;
     class  DirectionalLight;
+    class  LightSchema;
 
     class  Camera;
     class  Frustum;
+    class  PerspectiveCamera;
+    class  OrthographicCamera;
     class  FlyingCamera;
     class  FirstPersonCamera;
     class  ThirdPersonCamera;

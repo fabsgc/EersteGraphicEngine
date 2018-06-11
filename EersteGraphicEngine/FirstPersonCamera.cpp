@@ -8,7 +8,7 @@
 namespace ege
 {
     FirstPersonCamera::FirstPersonCamera()
-        : FlyingCamera(CameraType::FirstPerson)
+        : FlyingCamera(CameraType::FirstPersonCamera)
     {
     }
 
@@ -69,7 +69,7 @@ namespace ege
         if (abs(angleX) > 0.001f)
             Yaw(angleX);
 
-        Camera::Update();
+        PerspectiveCamera::Update();
     }
 
     void FirstPersonCamera::Walk(float distance)

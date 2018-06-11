@@ -7,12 +7,12 @@
 namespace ege
 {
     FlyingCamera::FlyingCamera()
-        : Camera(CameraType::ThirdPerson)
+        : PerspectiveCamera(CameraType::FlyingCamera)
     {
     }
 
     FlyingCamera::FlyingCamera(CameraType type)
-        : Camera(type)
+        : PerspectiveCamera(type)
     {
     }
 
@@ -76,7 +76,7 @@ namespace ege
                 MoveY(_translationSpeed * deltaTime);
         }
 
-        Camera::Update();
+        PerspectiveCamera::Update();
     }
 
     void FlyingCamera::ComputeProjectionMatrix()
@@ -158,26 +158,6 @@ namespace ege
         XMStoreFloat3(&_position, position);
 
         _needUpdate = true;
-    }
-
-    void FlyingCamera::Move(float x, float y, float z)
-    {
-        Move(XMFLOAT3(x, y, z));
-    }
-
-    void FlyingCamera::MoveX(float x)
-    {
-        Move(x, 0.0f, 0.0f);
-    }
-
-    void FlyingCamera::MoveY(float y)
-    {
-        Move(0.0f, y, 0.0f);
-    }
-
-    void FlyingCamera::MoveZ(float z)
-    {
-        Move(0.0f, 0.0f, z);
     }
 
     void FlyingCamera::Pitch(float angle)

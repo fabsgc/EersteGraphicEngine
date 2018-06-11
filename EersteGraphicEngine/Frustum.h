@@ -9,8 +9,8 @@ namespace ege
     public:
         Frustum();
         ~Frustum();
-        void Build(const Camera& camera);
-        bool CheckSphere(const Camera& camera, const float radius = 1.0f);
+        void Build(PerspectiveCamera* camera);
+        bool CheckSphere(PerspectiveCamera* camera, const float radius = 1.0f);
 
     private:
         XMVECTOR _planes[6];

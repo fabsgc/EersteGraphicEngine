@@ -229,6 +229,18 @@
     <Filter Include="Source Files\Core\Renderer\Light\Schema">
       <UniqueIdentifier>{cea553ef-a24f-4893-bc27-ea3e1fbc4d31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Orthogonal">
+      <UniqueIdentifier>{e2d32427-7dcd-40c6-be11-57a24d2d002c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{c882a51c-0c13-4477-86c4-72eb5e2fbe74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{8761ad6c-678e-42ec-9a84-13e6681b380e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Orthogonal">
+      <UniqueIdentifier>{3d0e6062-76cd-4038-ab36-35e07a5a45f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -378,16 +390,7 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Source Files\App\Model</Filter>
     </ClCompile>
-    <ClCompile Include="FirstPersonCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdPersonCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
@@ -422,6 +425,24 @@
     </ClCompile>
     <ClCompile Include="LightSchema.cpp">
       <Filter>Source Files\Core\Renderer\Light\Schema</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthogonal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -617,16 +638,7 @@
     <ClInclude Include="Cube.h">
       <Filter>Header Files\App\Model</Filter>
     </ClInclude>
-    <ClInclude Include="FirstPersonCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Frustum.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdPersonCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="MaterialManager.h">
@@ -658,6 +670,24 @@
     </ClInclude>
     <ClInclude Include="LightSchema.h">
       <Filter>Header Files\Core\Renderer\Light\Schema</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthogonal</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthogonal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

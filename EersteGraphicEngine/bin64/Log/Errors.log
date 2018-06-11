@@ -251,3 +251,10 @@ Time: 10:49:38
 Error: Can't load scene : Data/Model/SpotLight.obj
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 11 2018
+Time: 19:57:46
+Error: Resource directional-light not found
+Condition: 0
+############################################: 
