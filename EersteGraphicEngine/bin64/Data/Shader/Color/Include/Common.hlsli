@@ -1,3 +1,7 @@
+#define POINT_LIGHT 1.0f
+#define SPOT_LIGHT 2.0f
+#define DIRECTIONAL_LIGHT 3.0f
+
 cbuffer FrameConstantBuffer : register(b0)
 {
     matrix View;
@@ -22,6 +26,7 @@ cbuffer LightConstantBuffer : register(b2)
     float3 LightDirection;
     float3 LightPosition;
     float  LightRadius;
+    float  LightType;
 }
 
 SamplerState ColorSampler : register(s0);

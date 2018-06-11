@@ -4,4 +4,7 @@
   <model name="plane" file="Plane.obj"/>
   <model name="sphere" file="Sphere.obj"/>
   <model name="landscape" file="Landscape.obj"/>
+  <model name="spot-light" file="SpotLight.obj"/>
+  <model name="point-light" file="PointLight.obj"/>
+  <model name="directional-light" file="DirectionalLight.obj"/>
 </models>

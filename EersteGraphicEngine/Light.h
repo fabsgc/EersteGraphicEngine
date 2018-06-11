@@ -1,17 +1,19 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "LightSchema.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
+
 
 namespace ege
 {
     enum class LightType
     {
-        PointLight,
-        SportLight,
-        DirectionalLight,
-        AmbientLight
+        PointLight = 0,
+        SpotLight = 1,
+        DirectionalLight = 2,
+        AmbientLight = 3
     };
 
     class Light: public IEntity
@@ -28,7 +30,7 @@ namespace ege
         const XMFLOAT4& GetColor() const;
         void            SetColor(XMFLOAT4 color);
 
-        virtual void    UpdateLocalPosition() = 0;
+        virtual void    UpdateLocalPosition() override;
         virtual void    Move(XMVECTOR movement) override {};
         virtual void    Scale(XMVECTOR origin, XMVECTOR scale) override {};
         virtual void    Scale(XMVECTOR scale) override {};
@@ -39,9 +41,11 @@ namespace ege
         static const XMFLOAT4 DefaultLightColor;
 
     protected:
-        RenderAPI& _renderAPI;
+        RenderAPI&        _renderAPI;
 
-        LightType  _type;
-        XMFLOAT4   _color;
+        LightType         _type;
+        XMFLOAT4          _color;
+
+        SPtr<LightSchema> _lightSchema;
     };
 }

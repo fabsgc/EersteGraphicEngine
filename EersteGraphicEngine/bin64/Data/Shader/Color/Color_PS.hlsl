@@ -11,12 +11,14 @@ struct PS_INPUT
 
     float3 ViewWorldDirection : COLOR1;
 
-    //float4 LightWorldDirection : COLOR2;
-    //float3 LightViewDirection : COLOR3;
+    float4 LightWorldDirection : COLOR2;
+    float3 LightViewDirection : COLOR3;
 };
 
-ColorComponent ComputeAmbient(ColorComponent colorComponent, PS_INPUT IN);
-ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN);
+ColorComponent ComputeAmbientLight(ColorComponent colorComponent, PS_INPUT IN);
+ColorComponent ComputeDirectionalLight(ColorComponent colorComponent, PS_INPUT IN);
+ColorComponent ComputePointLight(ColorComponent colorComponent, PS_INPUT IN);
+ColorComponent ComputeSpotLight(ColorComponent colorComponent, PS_INPUT IN);
 
 float4 PS_MAIN( PS_INPUT IN ) : SV_Target
 {
@@ -27,8 +29,8 @@ float4 PS_MAIN( PS_INPUT IN ) : SV_Target
     colorComponent.Diffuse = (float3) 0;
     colorComponent.Specular = (float3) 0;
 
-    colorComponent = ComputeAmbient(colorComponent, IN);
-    colorComponent = ComputeLight(colorComponent, IN);
+    colorComponent = ComputeAmbientLight(colorComponent, IN);
+    colorComponent = ComputeDirectionalLight(colorComponent, IN);
 
     OUT.rgb = colorComponent.Ambient + colorComponent.Diffuse + colorComponent.Specular;
     OUT.a   = 1.0f;
@@ -36,13 +38,13 @@ float4 PS_MAIN( PS_INPUT IN ) : SV_Target
     return OUT;
 }
 
-ColorComponent ComputeAmbient(ColorComponent colorComponent, PS_INPUT IN)
+ColorComponent ComputeAmbientLight(ColorComponent colorComponent, PS_INPUT IN)
 {
     colorComponent.Ambient += AmbientColor.rgb * AmbientColor.a * IN.Color.rgb;
     return colorComponent;
 }
 
-ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN)
+ColorComponent ComputeDirectionalLight(ColorComponent colorComponent, PS_INPUT IN)
 {
     float3 refVector = (float3) 0;
     float3 lightDirection = normalize(-LightDirection.xyz);
@@ -61,4 +63,14 @@ ColorComponent ComputeLight(ColorComponent colorComponent, PS_INPUT IN)
     }
 
     return colorComponent;
+}
+
+ColorComponent ComputePointLight(ColorComponent colorComponent, PS_INPUT IN)
+{
+
+}
+
+ColorComponent ComputeSpotLight(ColorComponent colorComponent, PS_INPUT IN)
+{
+
 }

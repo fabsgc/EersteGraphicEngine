@@ -223,6 +223,12 @@
     <Filter Include="Data\Shader\Color\Include">
       <UniqueIdentifier>{7b0f8667-47f5-4514-b69d-0cd9070ed8ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\Model\Light">
+      <UniqueIdentifier>{649fdc9e-1b02-4be9-ad32-b6b948b456d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Model\Light">
+      <UniqueIdentifier>{10d82474-14ab-4b89-b04a-f2f0eac177f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -413,6 +419,12 @@
     </ClCompile>
     <ClCompile Include="IMoveable.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSchema.cpp">
+      <Filter>Source Files\Core\Renderer\Model\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -649,6 +661,12 @@
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSchema.h">
+      <Filter>Header Files\Core\Renderer\Model\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

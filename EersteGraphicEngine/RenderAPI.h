@@ -67,6 +67,8 @@ namespace ege
         /* PADDING */ float    Padding2;
         float    LightRadius;
         /* PADDING */ float    Padding3[3];
+        float    LightType;
+        /* PADDING */ float    Padding4[3];
 
         LightConstantBuffer()
             : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))

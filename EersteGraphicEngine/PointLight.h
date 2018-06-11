@@ -1,11 +1,11 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "DirectionalLight.h"
+#include "Light.h"
 
 namespace ege
 {
-    class PointLight : public DirectionalLight
+    class PointLight : public Light
     {
     public:
         PointLight();
@@ -15,9 +15,8 @@ namespace ege
         void Update()  override;
         void Draw()  override;
 
-        void UpdateLocalPosition() override;
-
     protected:
+        //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultPosition;
         static const float    DefaultRadius;
 

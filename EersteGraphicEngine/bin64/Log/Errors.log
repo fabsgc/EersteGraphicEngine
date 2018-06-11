@@ -244,3 +244,10 @@ Time: 10:49:03
 Error: The event "SET_CURSOR_POS_CALLED" does not exist
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: Jun 11 2018
+Time: 10:49:38
+Error: Can't load scene : Data/Model/SpotLight.obj
+Condition: 0
+############################################: 

@@ -5,15 +5,15 @@
 
 namespace ege
 {
-    class DirectionalLight : public Light
+    class SpotLight : public Light
     {
     public:
-        DirectionalLight();
-        ~DirectionalLight();
+        SpotLight();
+        ~SpotLight();
 
-        void            Initialise() override;
-        void            Update()  override;
-        void            Draw()  override;
+        void Initialise() override;
+        void Update()  override;
+        void Draw()  override;
 
         //TODO : remove when rotate method implemented
         const XMFLOAT3& GetDirection() const;
@@ -23,8 +23,12 @@ namespace ege
     protected:
         //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultDirection;
+        //TODO : remove when rotate method implemented
+        static const XMFLOAT3 DefaultPosition;
+        static const float    DefaultRadius;
 
     protected:
         XMFLOAT3 _direction;
+        float    _radius;
     };
 }
