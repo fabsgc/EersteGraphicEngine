@@ -223,10 +223,10 @@
     <Filter Include="Data\Shader\Color\Include">
       <UniqueIdentifier>{7b0f8667-47f5-4514-b69d-0cd9070ed8ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Renderer\Model\Light">
+    <Filter Include="Header Files\Core\Renderer\Light\Light">
       <UniqueIdentifier>{649fdc9e-1b02-4be9-ad32-b6b948b456d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Renderer\Model\Light">
+    <Filter Include="Source Files\Core\Renderer\Light\Light">
       <UniqueIdentifier>{10d82474-14ab-4b89-b04a-f2f0eac177f7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -424,7 +424,13 @@
       <Filter>Source Files\Core\Renderer\Light</Filter>
     </ClCompile>
     <ClCompile Include="LightSchema.cpp">
-      <Filter>Source Files\Core\Renderer\Model\Light</Filter>
+      <Filter>Source Files\Core\Renderer\Light\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -666,7 +672,13 @@
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
     <ClInclude Include="LightSchema.h">
-      <Filter>Header Files\Core\Renderer\Model\Light</Filter>
+      <Filter>Header Files\Core\Renderer\Light\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

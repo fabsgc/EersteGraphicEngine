@@ -83,7 +83,7 @@ namespace ege
         landscape->Initialise();
 
         light->SetColor(XMFLOAT4(1.0f, 1.0, 1.0f, 0.8f));
-        light->SetDirection(XMFLOAT3(0.5f, -0.5f, 0.5f));
+        light->SetDirection(XMFLOAT3(-0.5f, -1.0f, 1.0f));
 
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
