@@ -223,6 +223,12 @@
     <Filter Include="Data\Shader\Include">
       <UniqueIdentifier>{22191525-7d9f-4f98-a80c-9715f4224702}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Renderer\Light\Schema">
+      <UniqueIdentifier>{d4c4f48b-dbb5-4129-abcf-4d4c46b11898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Light\Schema">
+      <UniqueIdentifier>{1c432b12-3465-47b0-87a2-f7553d5f4fb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -413,6 +419,15 @@
     </ClCompile>
     <ClCompile Include="IMoveable.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSchema.cpp">
+      <Filter>Source Files\Core\Renderer\Light\Schema</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -647,6 +662,15 @@
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
     </ClInclude>
+    <ClInclude Include="LightSchema.h">
+      <Filter>Header Files\Core\Renderer\Light\Schema</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -724,6 +748,18 @@
       <Filter>Data\Model</Filter>
     </Object>
     <Object Include="bin64\Data\Model\Sphere.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\DirectionalLight.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\Landscape.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\PointLight.obj">
+      <Filter>Data\Model</Filter>
+    </Object>
+    <Object Include="bin64\Data\Model\SpotLight.obj">
       <Filter>Data\Model</Filter>
     </Object>
   </ItemGroup>

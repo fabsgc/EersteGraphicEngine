@@ -88,7 +88,7 @@ namespace ege
         ambient->SetColor(XMFLOAT4(0.95f, 0.9f, 0.54f, 0.6f));
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera4);
+        node->InsertEntity("camera", camera2);
         node->InsertEntity("light", light);
         node->InsertEntity("sphere", sphere);
         node->InsertEntity("plane", plane);
@@ -103,11 +103,11 @@ namespace ege
 
         sphere->Move(-2.0f, 1.0f, 2.0f);
 
-        _scene->InsertCamera("camera", camera4);
+        _scene->InsertCamera("camera", camera2);
         _scene->InsertLight("light", light);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera4);
+        _scene->SetActiveCamera(camera2);
         _scene->SetAmbientLight(ambient);
     }
 

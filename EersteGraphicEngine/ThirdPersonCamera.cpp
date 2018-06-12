@@ -72,6 +72,24 @@ namespace ege
             }
         }
 
+		if (_mouse.GetState(MouseButtonName::RIGHT) == MouseButtonState::TRIGGERED)
+		{
+			XMFLOAT2 mousePosition = _mouse.GetPosition();
+			XMFLOAT2 mouseOldPosition = _mouse.GetOldPosition();
+
+			if (mousePosition.x != _lastMousePosition.x || mousePosition.y != _lastMousePosition.y)
+			{
+				XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
+
+				if (abs(distance.y) > 0.0f)
+					Walk(distance.y * deltaTime);
+				if (abs(distance.x) > 0.0f)
+					Strafe(-distance.x * deltaTime);
+
+				_lastMousePosition = mousePosition;
+			}
+		}
+
         MouseWheelState mouseWheelState = _mouse.GetWheelState();
 
         switch (mouseWheelState)
