@@ -40,10 +40,10 @@ namespace ege
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
 
-        constantBufferUpdate->LightColor = _color;
+        constantBufferUpdate->LightColor     = _color;
         constantBufferUpdate->LightDirection = _direction;
-        constantBufferUpdate->LightPosition = _position;
-        constantBufferUpdate->LightType = (float)_type;
+        constantBufferUpdate->LightPosition  = _position;
+        constantBufferUpdate->LightType      = static_cast<UINT>(_type);
     }
 
     const XMFLOAT3& SpotLight::GetDirection() const

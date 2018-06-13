@@ -286,3 +286,10 @@ Time: 00:13:24
 Error: Resource landscape not found
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:252
+Inside ege::RenderAPI::Initialise
+Date: Jun 13 2018
+Time: 17:03:34
+Error: Can't create light constant buffer
+Condition: 0
+############################################: 

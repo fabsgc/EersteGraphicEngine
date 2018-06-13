@@ -40,6 +40,6 @@ namespace ege
 
         constantBufferUpdate->LightColor     = _color;
         constantBufferUpdate->LightPosition  = _position;
-        constantBufferUpdate->LightType      = (float)_type;
+        constantBufferUpdate->LightType      = static_cast<UINT>(_type);
     }
 }

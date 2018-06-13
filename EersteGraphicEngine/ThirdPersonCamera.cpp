@@ -34,19 +34,20 @@ namespace ege
     void ThirdPersonCamera::Update()
     {
         float deltaTime = _time.GetFrameDelta();
+        float speedModulation = (_radius / 10.0f > 2.0f) ? _radius / 10.0f : 2.0f;
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Walk(_translationSpeed * deltaTime * (_radius / 10.0f));
+            Walk(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Walk(-_translationSpeed * deltaTime * (_radius / 10.0f));
+            Walk(-_translationSpeed * deltaTime * speedModulation);
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            Strafe(-_translationSpeed * deltaTime * (_radius / 10.0f));
+            Strafe(-_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            Strafe(_translationSpeed * deltaTime * (_radius / 10.0f));
+            Strafe(_translationSpeed * deltaTime * speedModulation);
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Up(_translationSpeed * deltaTime * (_radius / 10.0f));
+            Up(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            Up(-_translationSpeed * deltaTime * (_radius / 10.0f));
+            Up(-_translationSpeed * deltaTime * speedModulation);
 
         if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
             Zoom(_translationSpeed * deltaTime * 3.0f);
@@ -82,9 +83,9 @@ namespace ege
 				XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
 				if (abs(distance.y) > 0.0f)
-					Walk(distance.y * deltaTime * (_radius / 10.0f));
+					Walk(distance.y * deltaTime * speedModulation);
 				if (abs(distance.x) > 0.0f)
-					Strafe(-distance.x * deltaTime * (_radius / 10.0f));
+					Strafe(-distance.x * deltaTime * speedModulation);
 
 				_lastMousePosition = mousePosition;
 			}
@@ -115,9 +116,9 @@ namespace ege
             float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f ;
 
             if (abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime *  (_radius / 10.0f));
+                Walk(joypadLY * _translationSpeed * deltaTime *  speedModulation);
             if (abs(joypadLX) > 0.0f)
-                Strafe(joypadLX * _translationSpeed * deltaTime * (_radius / 10.0f));
+                Strafe(joypadLX * _translationSpeed * deltaTime * speedModulation);
 
             if (abs(angleY) > 0.0f)
                 Pitch(angleY);
@@ -125,9 +126,9 @@ namespace ege
                 Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                Up(-_translationSpeed * deltaTime * (_radius / 10.0f));
+                Up(-_translationSpeed * deltaTime * speedModulation);
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                Up(_translationSpeed * deltaTime * (_radius / 10.0f));
+                Up(_translationSpeed * deltaTime * speedModulation);
         }
 
         PerspectiveCamera::Update();

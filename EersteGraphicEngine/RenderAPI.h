@@ -48,20 +48,16 @@ namespace ege
 
         XMFLOAT4 SpecularColor;
         float    SpecularPower;
-        /* PADDING */ float    Padding1[3];
-        float    HasDiffuseTexture;
-        /* PADDING */ float    Padding2[3];
-        float    HasSpecularTexture;
-        /* PADDING */ float    Padding3[3];
-        float    HasNormalTexture;
-        /* PADDING */ float    Padding4[3];
+        BOOL     HasDiffuseTexture;
+        BOOL     HasSpecularTexture;
+        BOOL     HasNormalTexture;
 
         ObjectConstantBuffer()
             : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
             , SpecularPower(8.0f)
-            , HasDiffuseTexture(1.0f)
-            , HasSpecularTexture(1.0f)
-            , HasNormalTexture(0.0f)
+            , HasDiffuseTexture(true)
+            , HasSpecularTexture(true)
+            , HasNormalTexture(true)
         {}
     };
 
@@ -73,11 +69,9 @@ namespace ege
         XMFLOAT3 LightDirection;
         /* PADDING */ float    Padding1;
         XMFLOAT3 LightPosition;
-        /* PADDING */ float    Padding2;
         float    LightRadius;
+        UINT     LightType;
         /* PADDING */ float    Padding3[3];
-        float    LightType;
-        /* PADDING */ float    Padding4[3];
 
         LightConstantBuffer()
             : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))

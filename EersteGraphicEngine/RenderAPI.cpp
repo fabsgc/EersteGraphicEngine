@@ -239,11 +239,17 @@ namespace ege
         bdFrame.ByteWidth = sizeof(FrameConstantBuffer);
         hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer);
 
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create frame constant buffer");
+
         bdFrame.ByteWidth = sizeof(ObjectConstantBuffer);
         hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer);
 
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create object constant buffer");
+
         bdFrame.ByteWidth = sizeof(LightConstantBuffer);
         hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer);
+
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create light constant buffer");
 
         //Set constant buffers for each type of shader
         context->VSSetConstantBuffers(0, 1, &_frameConstantBuffer);

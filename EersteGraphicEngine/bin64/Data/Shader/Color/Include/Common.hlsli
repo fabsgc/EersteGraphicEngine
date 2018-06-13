@@ -20,9 +20,9 @@ cbuffer ObjectConstantBuffer : register(b1)
     float4 SpecularColor;
     float  SpecularPower;
 
-    float  HasDiffuseTexture;
-    float  HasSpecularTexture;
-    float  HasNormalTexture;
+    bool   HasDiffuseTexture;
+    bool   HasSpecularTexture;
+    bool   HasNormalTexture;
 }
 
 cbuffer LightConstantBuffer : register(b2)
@@ -33,7 +33,7 @@ cbuffer LightConstantBuffer : register(b2)
     float3 LightDirection;
     float3 LightPosition;
     float  LightRadius;
-    float  LightType;
+    int    LightType;
 }
 
 Texture2D DiffuseTexture : register(t0);

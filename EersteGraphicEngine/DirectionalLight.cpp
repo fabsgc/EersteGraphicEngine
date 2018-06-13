@@ -40,7 +40,7 @@ namespace ege
 
         constantBufferUpdate->LightColor     = _color;
         constantBufferUpdate->LightDirection = _direction;
-        constantBufferUpdate->LightType      = (float)_type;
+        constantBufferUpdate->LightType      = static_cast<UINT>(_type);
     }
 
     const XMFLOAT3& DirectionalLight::GetDirection() const

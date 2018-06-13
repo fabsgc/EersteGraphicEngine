@@ -46,10 +46,9 @@ namespace ege
 
         constantBufferUpdate->SpecularColor = _specularColor;
         constantBufferUpdate->SpecularPower = _specularPower;
-        constantBufferUpdate->HasDiffuseTexture = 1.0f;
-        constantBufferUpdate->HasSpecularTexture = 1.0f;
-        constantBufferUpdate->HasNormalTexture = 0.0f;
-
+        constantBufferUpdate->HasDiffuseTexture = _hasDiffuseTexture;
+        constantBufferUpdate->HasSpecularTexture = _hasSpecularTexture;
+        constantBufferUpdate->HasNormalTexture = _hasNormalTexture;
     }
 
     const XMFLOAT4& Material::GetSpecularColor() const

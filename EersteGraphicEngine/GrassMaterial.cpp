@@ -21,8 +21,6 @@ namespace ege
         _hasSpecularTexture = true;
         _hasNormalTexture = false;
 
-        _specularPower = 1024.0f;
-
         InsertTexture(0, gTextureManager().GetPtr("grass-diffuse"));
         InsertTexture(1, gTextureManager().GetPtr("grass-specular"));
     }
