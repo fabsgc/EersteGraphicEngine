@@ -18,6 +18,8 @@
 
   <model name="map" file="City/Nature/Map.obj"/>
   <model name="grass" file="City/Nature/Grass.obj"/>
-  
+
   <model name="building-1" file="City/Building/Building-1.obj"/>
+  <model name="building-2" file="City/Building/Building-2.obj"/>
+  <model name="building-3" file="City/Building/Building-3.obj"/>
 </models>

@@ -1,9 +1,7 @@
-#include "Cube.h"
+#include "Road6.h"
 
 #include "ModelManager.h"
 #include "Road6Material.h"
-
-#include "Road6.h"
 
 namespace ege
 {

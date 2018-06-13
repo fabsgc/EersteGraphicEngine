@@ -1,9 +1,7 @@
-#include "Cube.h"
+#include "Building1.h"
 
 #include "ModelManager.h"
 #include "Building1Material.h"
-
-#include "Building1.h"
 
 namespace ege
 {

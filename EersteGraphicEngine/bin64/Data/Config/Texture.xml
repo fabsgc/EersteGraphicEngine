@@ -6,6 +6,10 @@
 
   <texture name="building-1-diffuse" file="City/Building/Building-1-diffuse.dds"/>
   <texture name="building-1-specular" file="City/Building/Building-1-specular.dds"/>
+  <texture name="building-2-diffuse" file="City/Building/Building-2-diffuse.dds"/>
+  <texture name="building-2-specular" file="City/Building/Building-2-specular.dds"/>
+  <texture name="building-3-diffuse" file="City/Building/Building-3-diffuse.dds"/>
+  <texture name="building-3-specular" file="City/Building/Building-3-specular.dds"/>
 
   <texture name="grass-diffuse" file="City/Nature/Grass-diffuse.dds"/>
   <texture name="grass-specular" file="City/Nature/Grass-specular.dds"/>

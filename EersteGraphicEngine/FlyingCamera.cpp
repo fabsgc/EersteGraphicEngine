@@ -33,9 +33,9 @@ namespace ege
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             MoveX(_translationSpeed * deltaTime);
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            MoveY(1.0f * deltaTime);
+            MoveY(1.0f * deltaTime * _translationSpeed);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            MoveY(-1.0f * deltaTime);
+            MoveY(-1.0f * deltaTime * _translationSpeed);
         
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {

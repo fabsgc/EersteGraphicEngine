@@ -85,7 +85,7 @@ namespace ege
             ((windowWidth / 2.0f) + _position.x) * _zoom,
             (((-(INT)windowHeight) / 2.0f) + _position.y) * _zoom,
             ((windowHeight / 2.0f) + _position.y) * _zoom,
-            -50.0f,
+            -500.0f,
             1000.0f);
 
         XMVECTOR Right = XMVectorSet(_position.x + 1.0f, _position.y, 0.0f, 0.0f);

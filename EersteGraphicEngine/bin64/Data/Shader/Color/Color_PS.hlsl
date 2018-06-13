@@ -88,22 +88,22 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
     pixelComponent.Specular = (float3) 0;
     pixelComponent.Normal = (float3) 0;
 
-    if (LightType == 1.0f)
+    //if (LightType == 1.0f)
     {
         pixelComponent.Diffuse = DiffuseTexture.Sample(ColorSampler, IN.Texture);
     }
-    else
+    //else
     {
-        pixelComponent.Diffuse = IN.Color;
+        //pixelComponent.Diffuse = IN.Color;
     }
 
-    if (HasSpecularTexture == 1.0f)
+    //if (HasSpecularTexture == 1.0f)
     {
         pixelComponent.Specular = SpecularTexture.Sample(ColorSampler, IN.Texture).xyz;
     }
-    else
+    //else
     {
-        pixelComponent.Specular = SpecularColor.rgb;
+        //pixelComponent.Specular = SpecularColor.rgb;
     }
 
     if (HasNormalTexture == 1.0f)
@@ -114,7 +114,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
     }
     else
     {
-        pixelComponent.Normal = normalize(IN.Normal);
+        //pixelComponent.Normal = normalize(IN.Normal);
     }
 
     return pixelComponent;

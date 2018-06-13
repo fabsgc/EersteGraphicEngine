@@ -21,6 +21,9 @@ namespace ege
         virtual void MoveY(float y = 0.0f);
         virtual void MoveZ(float z = 0.0f);
 
+        virtual void GoTo(XMVECTOR position);
+        virtual void GoTo(XMFLOAT3 position);
+
         virtual void Scale(XMVECTOR origin, XMVECTOR scale);
         virtual void Scale(XMVECTOR scale);
         virtual void Scale(XMFLOAT3 origin, XMFLOAT3 scale);

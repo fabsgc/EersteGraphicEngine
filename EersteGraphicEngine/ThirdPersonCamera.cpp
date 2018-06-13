@@ -9,12 +9,12 @@
 
 namespace ege
 {
-    const float ThirdPersonCamera::DefaultMinZoom = 0.75f;
-    const float ThirdPersonCamera::DefaultMaxZoom = 128.0f;
+    const float ThirdPersonCamera::DefaultMinZoom = 0.5f;
+    const float ThirdPersonCamera::DefaultMaxZoom = 512.0f;
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
-        , _alpha(0.9f)
+        , _alpha(-0.9f)
         , _beta(0.4f)
         , _radius(64.0f)
         , _target(XMFLOAT3(0.0f, 8.0f, 0.0f))
@@ -36,17 +36,17 @@ namespace ege
         float deltaTime = _time.GetFrameDelta();
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Walk(_translationSpeed * deltaTime);
+            Walk(_translationSpeed * deltaTime * (_radius / 10.0f));
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Walk(-_translationSpeed * deltaTime);
+            Walk(-_translationSpeed * deltaTime * (_radius / 10.0f));
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            Strafe(-_translationSpeed * deltaTime);
+            Strafe(-_translationSpeed * deltaTime * (_radius / 10.0f));
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            Strafe(_translationSpeed * deltaTime);
+            Strafe(_translationSpeed * deltaTime * (_radius / 10.0f));
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Up(_translationSpeed * deltaTime);
+            Up(_translationSpeed * deltaTime * (_radius / 10.0f));
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            Up(-_translationSpeed * deltaTime);
+            Up(-_translationSpeed * deltaTime * (_radius / 10.0f));
 
         if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
             Zoom(_translationSpeed * deltaTime * 3.0f);
@@ -82,9 +82,9 @@ namespace ege
 				XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
 				if (abs(distance.y) > 0.0f)
-					Walk(distance.y * deltaTime * 2.0f);
+					Walk(distance.y * deltaTime * (_radius / 10.0f));
 				if (abs(distance.x) > 0.0f)
-					Strafe(-distance.x * deltaTime * 2.0f);
+					Strafe(-distance.x * deltaTime * (_radius / 10.0f));
 
 				_lastMousePosition = mousePosition;
 			}
@@ -95,11 +95,11 @@ namespace ege
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * 32.0f);
+            Zoom(deltaTime * _translationSpeed * 64.0f);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * 32.0f);
+            Zoom(-deltaTime * _translationSpeed * 64.0f);
             break;
         }
 
@@ -115,9 +115,9 @@ namespace ege
             float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f ;
 
             if (abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime * 2.0f);
+                Walk(joypadLY * _translationSpeed * deltaTime *  (_radius / 10.0f));
             if (abs(joypadLX) > 0.0f)
-                Strafe(joypadLX * _translationSpeed * deltaTime * 2.0f);
+                Strafe(joypadLX * _translationSpeed * deltaTime * (_radius / 10.0f));
 
             if (abs(angleY) > 0.0f)
                 Pitch(angleY);
@@ -125,9 +125,9 @@ namespace ege
                 Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                Up(-_translationSpeed * deltaTime);
+                Up(-_translationSpeed * deltaTime * (_radius / 10.0f));
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                Up(_translationSpeed * deltaTime);
+                Up(_translationSpeed * deltaTime * (_radius / 10.0f));
         }
 
         PerspectiveCamera::Update();
@@ -237,7 +237,7 @@ namespace ege
     void ThirdPersonCamera::Zoom(float zoom)
     {
         _radius -= zoom;
-        _radius = MathUtility::Clamp(_radius, 0.75f, 128.0f);
+        _radius = MathUtility::Clamp(_radius, DefaultMinZoom, DefaultMaxZoom);
 
         _needUpdate = true;
     }
