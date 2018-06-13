@@ -28,6 +28,12 @@ namespace ege
 
         gEventManager().Suscribe("WINDOW_RESIZED", std::bind(&Window::OnResize, this));
         gEventManager().Suscribe("WINDOW_FULLSCREEN", std::bind(&Window::OnFullScreen, this));
+
+        if (_windowDesc.FullScreen)
+        {
+            SetFullScreen(false);
+            gEventManager().Execute("WINDOW_FULLSCREEN");
+        }
     }
 
     void Window::Update()

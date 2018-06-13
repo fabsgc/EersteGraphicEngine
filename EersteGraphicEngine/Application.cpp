@@ -13,6 +13,9 @@
 #include "Cube.h"
 #include "Node.h"
 
+#include "Building1.h"
+#include "Road6.h"
+
 namespace ege
 {
     Application::Application(const StartUpDescription& desc)
@@ -52,10 +55,44 @@ namespace ege
 
     void Application::SceneLoader()
     {
+        _scene = ege_shared_ptr_new<Scene>();
+
+        SPtr<Node> node                = ege_shared_ptr_new<Node>();
+        SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
+        SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
+        SPtr<Building1> building       = ege_shared_ptr_new<Building1>();
+        SPtr<Road6> road               = ege_shared_ptr_new<Road6>();
+
+        _scene->Initialise();
+        camera->Initialise();
+        ambient->Initialise();
+        sun->Initialise();
+        building->Initialise();
+        road->Initialise();
+
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.7f));
+
+        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.8f));
+        sun->SetDirection(XMFLOAT3(-0.5f, -1.0f, -1.0f));
+
+        node->SetScene(_scene);
+        node->InsertEntity("camera", camera);
+        node->InsertEntity("sun", sun);
+        node->InsertEntity("building", building);
+        node->InsertEntity("road", road);
+
+        _scene->InsertCamera("camera", camera);
+        _scene->InsertLight("sun", sun);
+        _scene->InsertNode("root", node);
+
+        _scene->SetActiveCamera(camera);
+        _scene->SetAmbientLight(ambient);
+
         //gWindow().SetShowCursor(false);
         //gWindow().SetClipCursor(true);
 
-        _scene                           = ege_shared_ptr_new<Scene>();
+        /*_scene                           = ege_shared_ptr_new<Scene>();
 
         SPtr<Node> node                  = ege_shared_ptr_new<Node>();
         SPtr<FlyingCamera> camera1       = ege_shared_ptr_new<FlyingCamera>();
@@ -108,7 +145,7 @@ namespace ege
         _scene->InsertNode("root", node);
 
         _scene->SetActiveCamera(camera2);
-        _scene->SetAmbientLight(ambient);
+        _scene->SetAmbientLight(ambient);*/
     }
 
     Application& gApplication()

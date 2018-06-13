@@ -9,6 +9,7 @@ namespace ege
         , _renderAPI(gRenderAPI())
         , _type(type)
         , _color(DefaultLightColor)
+        , _drawLightSchema(false)
     {
     }
 
@@ -48,5 +49,10 @@ namespace ege
         XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
         XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
         XMStoreFloat3(&_position, position);
+    }
+
+    void Light::DrawLightSchema(bool drawLightSchema)
+    {
+        _drawLightSchema = drawLightSchema;
     }
 }

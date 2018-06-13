@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-  <model name="cube" file="Cube.obj"/>
-  <model name="plane" file="Plane.obj"/>
-  <model name="sphere" file="Sphere.obj"/>
-  <model name="landscape" file="Landscape.obj"/>
-  <model name="spot-light" file="SpotLight.obj"/>
-  <model name="point-light" file="PointLight.obj"/>
-  <model name="directional-light" file="DirectionalLight.obj"/>
+  <model name="cube" file="Primitive/Cube.obj"/>
+  <model name="plane" file="Primitive/Plane.obj"/>
+  <model name="sphere" file="Primitive/Sphere.obj"/>
+  <!--<model name="landscape" file="Primitive/Landscape.obj"/>-->
+  
+  <model name="spot-light" file="LightSchema/SpotLight.obj"/>
+  <model name="point-light" file="LightSchema/PointLight.obj"/>
+  <model name="directional-light" file="LightSchema/DirectionalLight.obj"/>
+
+  <model name="road-1" file="City/Road/Road-1.obj"/>
+  <model name="road-2" file="City/Road/Road-2.obj"/>
+  <model name="road-3" file="City/Road/Road-3.obj"/>
+  <model name="road-4" file="City/Road/Road-4.obj"/>
+  <model name="road-5" file="City/Road/Road-5.obj"/>
+  <model name="road-6" file="City/Road/Road-6.obj"/>
+
+  <model name="map" file="City/Nature/Map.obj"/>
+  <model name="grass" file="City/Nature/Grass.obj"/>
+  
+  <model name="building-1" file="City/Building/Building-1.obj"/>
 </models>

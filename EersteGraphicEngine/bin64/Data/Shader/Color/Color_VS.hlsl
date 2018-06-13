@@ -33,6 +33,7 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
     output.Position = mul( output.Position, View );
     output.Position = mul( output.Position, Projection );
     output.Color    = IN.Color;
+    output.Texture  = GetCorrectedTextureCoordinate(IN.Texture);
     output.Normal   = normalize(mul(float4(IN.Normal, 0.0f), World)).xyz;
     output.Tangent  = normalize(mul(float4(IN.Tangent, 0.0f), World)).xyz;
     output.Binormal = cross(output.Normal, output.Tangent);

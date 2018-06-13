@@ -14,10 +14,10 @@ namespace ege
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
-        , _alpha(0.0f)
-        , _beta(0.0f)
-        , _radius(12.0f)
-        , _target(XMFLOAT3(0.0f, 0.0f, 0.0f))
+        , _alpha(0.9f)
+        , _beta(0.4f)
+        , _radius(64.0f)
+        , _target(XMFLOAT3(0.0f, 8.0f, 0.0f))
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
     }
@@ -49,9 +49,9 @@ namespace ege
             Up(-_translationSpeed * deltaTime);
 
         if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(_translationSpeed * deltaTime);
+            Zoom(_translationSpeed * deltaTime * 3.0f);
         else if (_inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
-            Zoom(-_translationSpeed * deltaTime);
+            Zoom(-_translationSpeed * deltaTime * 3.0f);
 
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -82,9 +82,9 @@ namespace ege
 				XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
 				if (abs(distance.y) > 0.0f)
-					Walk(distance.y * deltaTime);
+					Walk(distance.y * deltaTime * 2.0f);
 				if (abs(distance.x) > 0.0f)
-					Strafe(-distance.x * deltaTime);
+					Strafe(-distance.x * deltaTime * 2.0f);
 
 				_lastMousePosition = mousePosition;
 			}
@@ -115,9 +115,9 @@ namespace ege
             float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f ;
 
             if (abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime);
+                Walk(joypadLY * _translationSpeed * deltaTime * 2.0f);
             if (abs(joypadLX) > 0.0f)
-                Strafe(joypadLX * _translationSpeed * deltaTime);
+                Strafe(joypadLX * _translationSpeed * deltaTime * 2.0f);
 
             if (abs(angleY) > 0.0f)
                 Pitch(angleY);
@@ -125,9 +125,9 @@ namespace ege
                 Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                Up(_translationSpeed * deltaTime);
-            else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
                 Up(-_translationSpeed * deltaTime);
+            else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
+                Up(_translationSpeed * deltaTime);
         }
 
         PerspectiveCamera::Update();
@@ -228,7 +228,7 @@ namespace ege
     void ThirdPersonCamera::Up(float distance)
     {
         XMVECTOR T = XMLoadFloat3(&_target);
-        T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(0.0f, _look.y, 0.0f))) * - distance;
+        T += XMVector3Normalize(XMLoadFloat3(&XMFLOAT3(0.0f, _up.y, 0.0f))) * distance;
         XMStoreFloat3(&_target, T);
 
         _needUpdate = true;

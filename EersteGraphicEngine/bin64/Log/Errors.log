@@ -258,3 +258,31 @@ Time: 19:57:46
 Error: Resource directional-light not found
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 12 2018
+Time: 00:14:29
+Error: Can't load texture from file : Data/Texture/Cube-diffuse.dds
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 12 2018
+Time: 00:14:29
+Error: Can't load texture from file : Data/Texture/City/Road/Road-1-diffuse.dds
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: Jun 12 2018
+Time: 00:14:00
+Error: Can't load scene : Data/Model/City/Builing/Building-1.obj
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 12 2018
+Time: 00:13:24
+Error: Resource landscape not found
+Condition: 0
+############################################: 

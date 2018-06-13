@@ -10,6 +10,9 @@ namespace ege
         , _shader(nullptr)
         , _specularColor(DefaultSpecularColor)
         , _specularPower(DefaultSpecularPower)
+        , _hasDiffuseTexture(false)
+        , _hasSpecularTexture(false)
+        , _hasNormalTexture(false)
     {}
 
     Material::Material(SPtr<Shader> shader)
@@ -42,7 +45,11 @@ namespace ege
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);
 
         constantBufferUpdate->SpecularColor = _specularColor;
-        constantBufferUpdate->SpecularPower = (_specularPower);
+        constantBufferUpdate->SpecularPower = _specularPower;
+        constantBufferUpdate->HasDiffuseTexture = 1.0f;
+        constantBufferUpdate->HasSpecularTexture = 1.0f;
+        constantBufferUpdate->HasNormalTexture = 0.0f;
+
     }
 
     const XMFLOAT4& Material::GetSpecularColor() const
@@ -63,5 +70,10 @@ namespace ege
     void Material::SetSpecularPower(float specularPower)
     {
         _specularPower = specularPower;
+    }
+
+    void Material::InsertTexture(UINT slot, SPtr<Texture> texture)
+    {
+        _textures.insert(Pair<UINT, SPtr<Texture>>(slot, texture));
     }
 }

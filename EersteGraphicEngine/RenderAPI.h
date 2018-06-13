@@ -49,10 +49,19 @@ namespace ege
         XMFLOAT4 SpecularColor;
         float    SpecularPower;
         /* PADDING */ float    Padding1[3];
+        float    HasDiffuseTexture;
+        /* PADDING */ float    Padding2[3];
+        float    HasSpecularTexture;
+        /* PADDING */ float    Padding3[3];
+        float    HasNormalTexture;
+        /* PADDING */ float    Padding4[3];
 
         ObjectConstantBuffer()
             : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
             , SpecularPower(8.0f)
+            , HasDiffuseTexture(1.0f)
+            , HasSpecularTexture(1.0f)
+            , HasNormalTexture(0.0f)
         {}
     };
 

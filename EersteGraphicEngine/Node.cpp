@@ -62,9 +62,6 @@ namespace ege
 
     void Node::Update()
     {
-        float deltaTime = gTime().GetFrameDelta();
-        //RotatePitch(deltaTime);
-
         for (auto child : _child)
         {
             child.second->Update();
