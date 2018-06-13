@@ -66,7 +66,7 @@ namespace ege
         _scene = ege_shared_ptr_new<Scene>();
 
         SPtr<Node> node                = ege_shared_ptr_new<Node>();
-        SPtr<FlyingCamera> camera = ege_shared_ptr_new<FlyingCamera>();
+        SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
         SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
 
