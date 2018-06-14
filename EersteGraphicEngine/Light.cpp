@@ -10,6 +10,8 @@ namespace ege
         , _type(type)
         , _color(DefaultLightColor)
         , _drawLightSchema(false)
+        , _isEnabled(true)
+        , _castShadow(true)
     {
     }
 
@@ -51,8 +53,28 @@ namespace ege
         XMStoreFloat3(&_position, position);
     }
 
-    void Light::DrawLightSchema(bool drawLightSchema)
+    void Light::SetDrawLightSchema(bool drawLightSchema)
     {
         _drawLightSchema = drawLightSchema;
+    }
+
+    void Light::SetCastShadow(bool castShadow)
+    {
+        _castShadow = castShadow;
+    }
+
+    void Light::SetEnabled(bool enabled)
+    {
+        _isEnabled = enabled;
+    }
+
+    bool Light::GetCastShadow()
+    {
+        return _castShadow;
+    }
+
+    bool Light::IsEnabled()
+    {
+        return _isEnabled;
     }
 }

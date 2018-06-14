@@ -37,7 +37,11 @@ namespace ege
         virtual void    Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
         virtual void    Rotate(XMVECTOR eulerAngles) override {};
 
-        void            DrawLightSchema(bool drawLightSchema);
+        void            SetDrawLightSchema(bool drawLightSchema);
+        void            SetCastShadow(bool castShadow);
+        void            SetEnabled(bool enabled);
+        bool            GetCastShadow();
+        bool            IsEnabled();
         
     public:
         static const XMFLOAT4 DefaultLightColor;
@@ -47,8 +51,9 @@ namespace ege
 
         LightType         _type;
         XMFLOAT4          _color;
-
-        SPtr<LightSchema> _lightSchema;
+        bool              _isEnabled;
+        bool              _castShadow;
         bool              _drawLightSchema;
+        SPtr<LightSchema> _lightSchema;
     };
 }

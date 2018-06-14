@@ -103,62 +103,62 @@ itof r2.xyz, l(0, 0, 0, 0)  // r2.x <- colorComponent.Specular.x; r2.y <- colorC
 
 #line 35
 nop 
-mov r3.xyz, v1.xyzx
+mov r3.yzw, v1.xxyz
 mov r4.xyz, v3.xyzx
 mov r5.x, v4.x
 mov r6.x, v4.y
 mov r7.x, v4.z
 mov r7.yzw, v5.xxyz
 
-#line 91
+#line 104
 ine r0.w, l(0, 0, 0, 0), cb1[5].y
 ieq r0.w, r0.w, l(-1)
-ieq r1.w, cb2[4].x, l(2)
-and r0.w, r0.w, r1.w
 if_nz r0.w
 
-#line 93
-  sample_indexable(texture2d)(float,float,float,float) r3.xyz, v2.xyxx, t0.xyzw, s0  // r3.x <- pixelComponent.Diffuse.x; r3.y <- pixelComponent.Diffuse.y; r3.z <- pixelComponent.Diffuse.z
+#line 106
+  sample_indexable(texture2d)(float,float,float,float) r3.yzw, v2.xyxx, t0.wxyz, s0  // r3.y <- pixelComponent.Diffuse.x; r3.z <- pixelComponent.Diffuse.y; r3.w <- pixelComponent.Diffuse.z
 
-#line 94
-else   // Prior locations: r3.x <- IN.Color.x; r3.y <- IN.Color.y; r3.z <- IN.Color.z
+#line 107
+else   // Prior locations: r3.y <- IN.Color.x; r3.z <- IN.Color.y; r3.w <- IN.Color.z
 
-#line 97
-  mov r3.xyz, r3.xyzx  // r3.x <- pixelComponent.Diffuse.x; r3.y <- pixelComponent.Diffuse.y; r3.z <- pixelComponent.Diffuse.z
+#line 110
+  mov r3.yzw, r3.yyzw  // r3.y <- pixelComponent.Diffuse.x; r3.z <- pixelComponent.Diffuse.y; r3.w <- pixelComponent.Diffuse.z
 
-#line 98
+#line 111
 endif 
 
-#line 100
+#line 113
 ine r0.w, l(0, 0, 0, 0), cb1[5].z
 ieq r0.w, r0.w, l(-1)
 if_nz r0.w
 
-#line 102
-  sample_indexable(texture2d)(float,float,float,float) r8.xyz, v2.xyxx, t1.xyzw, s0  // r8.x <- pixelComponent.Specular.x; r8.y <- pixelComponent.Specular.y; r8.z <- pixelComponent.Specular.z
+#line 115
+  sample_indexable(texture2d)(float,float,float,float) r8.xyz, v2.xyxx, t1.yzxw, s0  // r8.z <- pixelComponent.Specular.x; r8.x <- pixelComponent.Specular.y; r8.y <- pixelComponent.Specular.z
 
-#line 103
+#line 116
+  mov r3.x, r8.z  // r3.x <- pixelComponent.Specular.x
 else 
 
-#line 106
-  mov r8.xyz, cb1[4].xyzx  // r8.x <- pixelComponent.Specular.x; r8.y <- pixelComponent.Specular.y; r8.z <- pixelComponent.Specular.z
+#line 119
+  mov r8.xyz, cb1[4].yzxy  // r8.z <- pixelComponent.Specular.x; r8.x <- pixelComponent.Specular.y; r8.y <- pixelComponent.Specular.z
 
-#line 107
+#line 120
+  mov r3.x, r8.z  // r3.x <- pixelComponent.Specular.x
 endif 
 
-#line 109
+#line 122
 ine r0.w, l(0, 0, 0, 0), cb1[5].w
 ieq r0.w, r0.w, l(-1)
 if_nz r0.w
 
-#line 111
+#line 124
   itof r9.xyz, l(2, 2, 2, 0)
   sample_indexable(texture2d)(float,float,float,float) r10.xyz, v2.xyxx, t2.xyzw, s0
   mul r9.xyz, r9.xyzx, r10.xyzx
   mov r10.xyz, l(-1.000000,-1.000000,-1.000000,-0.000000)
   add r9.xyz, r9.xyzx, r10.xyzx  // r9.x <- sampledNormal.x; r9.y <- sampledNormal.y; r9.z <- sampledNormal.z
 
-#line 112
+#line 125
   mov r5.x, r5.x  // r5.x <- tbn._m00
   mov r5.y, r7.y  // r5.y <- tbn._m10
   mov r5.z, r4.x  // r5.z <- tbn._m20
@@ -168,142 +168,219 @@ if_nz r0.w
   mov r4.xy, r7.xwxx  // r4.x <- tbn._m02; r4.y <- tbn._m12
   mov r4.z, r4.z  // r4.z <- tbn._m22
 
-#line 113
-  dp3 r5.x, r9.xyzx, r5.xyzx  // r5.x <- pixelComponent.Normal.x
-  dp3 r5.y, r9.xyzx, r6.xyzx  // r5.y <- pixelComponent.Normal.y
+#line 126
+  dp3 r8.z, r9.xyzx, r5.xyzx  // r8.z <- pixelComponent.Normal.x
+  dp3 r8.w, r9.xyzx, r6.xyzx  // r8.w <- pixelComponent.Normal.y
   dp3 r5.z, r9.xyzx, r4.xyzx  // r5.z <- pixelComponent.Normal.z
 
-#line 114
-else   // Prior locations: r4.x <- IN.Normal.x; r4.y <- IN.Normal.y; r5.x <- IN.Tangent.x
+#line 127
+else   // Prior locations: r4.x <- IN.Normal.x; r4.y <- IN.Normal.y
 
-#line 117
+#line 130
   dp3 r0.w, r4.xyzx, r4.xyzx
   rsq r0.w, r0.w
-  mul r5.xyz, r0.wwww, r4.xyzx  // r5.x <- pixelComponent.Normal.x; r5.y <- pixelComponent.Normal.y; r5.z <- pixelComponent.Normal.z
+  mul r5.xyz, r0.wwww, r4.xyzx  // r5.z <- pixelComponent.Normal.z; r5.x <- pixelComponent.Normal.x; r5.y <- pixelComponent.Normal.y
 
-#line 118
+#line 131
+  mov r8.zw, r5.xxxy  // r8.z <- pixelComponent.Normal.x; r8.w <- pixelComponent.Normal.y
 endif 
 
-#line 120
-mov r3.xyz, r3.xyzx  // r3.x <- <ComputePixelComponent return value>.Diffuse.x; r3.y <- <ComputePixelComponent return value>.Diffuse.y; r3.z <- <ComputePixelComponent return value>.Diffuse.z
-mov r8.xyz, r8.xyzx  // r8.x <- <ComputePixelComponent return value>.Specular.x; r8.y <- <ComputePixelComponent return value>.Specular.y; r8.z <- <ComputePixelComponent return value>.Specular.z
-mov r5.xyz, r5.xyzx  // r5.x <- <ComputePixelComponent return value>.Normal.x; r5.y <- <ComputePixelComponent return value>.Normal.y; r5.z <- <ComputePixelComponent return value>.Normal.z
+#line 133
+mov r3.yzw, r3.yyzw  // r3.y <- <ComputePixelComponent return value>.Diffuse.x; r3.z <- <ComputePixelComponent return value>.Diffuse.y; r3.w <- <ComputePixelComponent return value>.Diffuse.z
+mov r3.x, r3.x  // r3.x <- <ComputePixelComponent return value>.Specular.x
+mov r8.xy, r8.xyxx  // r8.x <- <ComputePixelComponent return value>.Specular.y; r8.y <- <ComputePixelComponent return value>.Specular.z
+mov r8.zw, r8.zzzw  // r8.z <- <ComputePixelComponent return value>.Normal.x; r8.w <- <ComputePixelComponent return value>.Normal.y
+mov r5.z, r5.z  // r5.z <- <ComputePixelComponent return value>.Normal.z
 
 #line 35
-mov r3.xyz, r3.xyzx  // r3.x <- pixelComponent.Diffuse.x; r3.y <- pixelComponent.Diffuse.y; r3.z <- pixelComponent.Diffuse.z
-mov r8.xyz, r8.xyzx  // r8.x <- pixelComponent.Specular.x; r8.y <- pixelComponent.Specular.y; r8.z <- pixelComponent.Specular.z
-mov r5.xyz, r5.xyzx  // r5.x <- pixelComponent.Normal.x; r5.y <- pixelComponent.Normal.y; r5.z <- pixelComponent.Normal.z
+mov r3.xyzw, r3.xyzw  // r3.x <- pixelComponent.Specular.x; r3.y <- pixelComponent.Diffuse.x; r3.z <- pixelComponent.Diffuse.y; r3.w <- pixelComponent.Diffuse.z
+mov r8.xyzw, r8.xyzw  // r8.x <- pixelComponent.Specular.y; r8.y <- pixelComponent.Specular.z; r8.z <- pixelComponent.Normal.x; r8.w <- pixelComponent.Normal.y
+mov r5.z, r5.z  // r5.z <- pixelComponent.Normal.z
 
-#line 37
+#line 36
 nop 
-mov r3.xyz, r3.xyzx
+mov r4.xyz, r3.yzwy
+mov r6.xy, r1.yzyy
+mov r6.zw, r2.xxxy
 mov r0.xyz, r0.xyzx
-mov r1.xyz, r1.xyzx
-mov r2.xyz, r2.xyzx
-
-#line 48
-mul r4.xyz, cb2[0].wwww, cb2[0].xyzx
-mul r4.xyz, r3.xyzx, r4.xyzx
-add r0.xyz, r0.xyzx, r4.xyzx
-
-#line 49
-mov r0.xyz, r0.xyzx  // r0.x <- <ComputeAmbientLight return value>.Ambient.x; r0.y <- <ComputeAmbientLight return value>.Ambient.y; r0.z <- <ComputeAmbientLight return value>.Ambient.z
-mov r1.xyz, r1.xyzx  // r1.x <- <ComputeAmbientLight return value>.Diffuse.x; r1.y <- <ComputeAmbientLight return value>.Diffuse.y; r1.z <- <ComputeAmbientLight return value>.Diffuse.z
-mov r2.xyz, r2.xyzx  // r2.x <- <ComputeAmbientLight return value>.Specular.x; r2.y <- <ComputeAmbientLight return value>.Specular.y; r2.z <- <ComputeAmbientLight return value>.Specular.z
-
-#line 37
-mov r0.xyz, r0.xyzx  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
-mov r1.xyz, r1.xyzx
-mov r2.xyz, r2.xyzx
-
-#line 38
-nop 
-mov r3.xyz, r3.xyzx
-mov r8.xyz, r8.xyzx
-mov r5.xyz, r5.xyzx
-mov r0.xyz, r0.xyzx
-mov r1.xyz, r1.xyzx
-mov r2.xyz, r2.xyzx
-mov r4.xyz, v3.xyzx
-mov r6.xyz, v6.xyzx
-
-#line 55
-mov r7.xyz, -cb2[2].xyzx
-dp3 r0.w, r7.xyzx, r7.xyzx
-rsq r0.w, r0.w
-mul r7.xyz, r0.wwww, r7.xyzx  // r7.x <- lightDirection.x; r7.y <- lightDirection.y; r7.z <- lightDirection.z
-
-#line 56
-dp3 r0.w, r4.xyzx, r4.xyzx
-rsq r0.w, r0.w
-mul r4.xyz, r0.wwww, r4.xyzx
-dp3 r0.w, r7.xyzx, r4.xyzx  // r0.w <- n_dot_l
-
-#line 58
-itof r1.w, l(0)
-lt r1.w, r1.w, r0.w
-if_nz r1.w
+mov r1.x, r1.x
+mov r2.z, r2.z
 
 #line 61
-  max r0.w, r0.w, l(0.000000)
-  mul r4.xyz, r0.wwww, cb2[1].xyzx
-  mul r4.xyz, r4.xyzx, cb2[1].wwww
-  mul r4.xyz, r3.xyzx, r4.xyzx
-  add r1.xyz, r1.xyzx, r4.xyzx
+mul r7.xyz, cb2[0].wwww, cb2[0].xyzx
+mul r7.xyz, r4.xyzx, r7.xyzx
+add r1.yzw, r0.xxyz, r7.xxyz  // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z
 
-#line 64
-  dp3 r0.w, r7.xyzx, r5.xyzx
-  add r0.w, r0.w, r0.w
-  mov r0.w, -r0.w
-  mul r4.xyz, r0.wwww, r5.xyzx
-  add r4.xyz, r7.xyzx, r4.xyzx
-  dp3 r0.w, r4.xyzx, r4.xyzx
-  rsq r0.w, r0.w
-  mul r4.xyz, r0.wwww, r4.xyzx  // r4.x <- refVector.x; r4.y <- refVector.y; r4.z <- refVector.z
+#line 62
+mov r1.yzw, r1.yyzw  // r1.y <- <ComputeAmbientLight return value>.Ambient.x; r1.z <- <ComputeAmbientLight return value>.Ambient.y; r1.w <- <ComputeAmbientLight return value>.Ambient.z
+mov r1.x, r1.x  // r1.x <- <ComputeAmbientLight return value>.Diffuse.x
+mov r6.xyzw, r6.xyzw  // r6.x <- <ComputeAmbientLight return value>.Diffuse.y; r6.y <- <ComputeAmbientLight return value>.Diffuse.z; r6.z <- <ComputeAmbientLight return value>.Specular.x; r6.w <- <ComputeAmbientLight return value>.Specular.y
+mov r2.z, r2.z  // r2.z <- <ComputeAmbientLight return value>.Specular.z
 
-#line 67
-  dp3 r0.w, r6.xyzx, r4.xyzx
-  itof r1.w, l(0)
-  max r0.w, r0.w, r1.w
-  log r0.w, r0.w
-  mul r0.w, r0.w, cb1[5].x
-  exp r0.w, r0.w
-  mul r4.xyz, r0.wwww, cb1[4].xyzx
-  mul r4.xyz, r8.xyzx, r4.xyzx
-  mul r3.xyz, r3.xyzx, r4.xyzx
-  add r2.xyz, r2.xyzx, r3.xyzx
-
-#line 68
-endif 
-
-#line 70
-mov r0.xyz, r0.xyzx  // r0.x <- <ComputeDirectionalLight return value>.Ambient.x; r0.y <- <ComputeDirectionalLight return value>.Ambient.y; r0.z <- <ComputeDirectionalLight return value>.Ambient.z
-mov r1.xyz, r1.xyzx  // r1.x <- <ComputeDirectionalLight return value>.Diffuse.x; r1.y <- <ComputeDirectionalLight return value>.Diffuse.y; r1.z <- <ComputeDirectionalLight return value>.Diffuse.z
-mov r2.xyz, r2.xyzx  // r2.x <- <ComputeDirectionalLight return value>.Specular.x; r2.y <- <ComputeDirectionalLight return value>.Specular.y; r2.z <- <ComputeDirectionalLight return value>.Specular.z
+#line 36
+mov r1.xyzw, r1.xyzw  // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z
+mov r6.xyzw, r6.xyzw  // r6.x <- colorComponent.Diffuse.y; r6.y <- colorComponent.Diffuse.z; r6.z <- colorComponent.Specular.x; r6.w <- colorComponent.Specular.y
+mov r2.z, r2.z
 
 #line 38
-mov r0.xyz, r0.xyzx
-mov r1.xyz, r1.xyzx  // r1.x <- colorComponent.Diffuse.x; r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
-mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y; r2.z <- colorComponent.Specular.z
+mov r0.x, cb2[4].x
+switch r0.x
 
 #line 40
+  case l(0)
+
+#line 41
+  nop 
+  mov r0.xyz, r1.yzwy
+  mov r1.x, r1.x
+  mov r1.yz, r6.xxyx
+  mov r2.xy, r6.zwzz
+  mov r2.z, r2.z
+
+#line 67
+  mov r0.xyz, r0.xyzx  // r0.x <- <ComputePointLight return value>.Ambient.x; r0.y <- <ComputePointLight return value>.Ambient.y; r0.z <- <ComputePointLight return value>.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.x <- <ComputePointLight return value>.Diffuse.x; r1.y <- <ComputePointLight return value>.Diffuse.y; r1.z <- <ComputePointLight return value>.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- <ComputePointLight return value>.Specular.x; r2.y <- <ComputePointLight return value>.Specular.y; r2.z <- <ComputePointLight return value>.Specular.z
+
+#line 41
+  mov r0.xyz, r0.xyzx  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y
+
+#line 42
+  break   // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z; r6.x <- colorComponent.Diffuse.y; r6.y <- colorComponent.Diffuse.z; r6.z <- colorComponent.Specular.x; r6.w <- colorComponent.Specular.y
+
+#line 44
+  case l(1)
+
+#line 45
+  nop 
+  mov r0.xyz, r1.yzwy
+  mov r1.x, r1.x
+  mov r1.yz, r6.xxyx
+  mov r2.xy, r6.zwzz
+  mov r2.z, r2.z
+
+#line 72
+  mov r0.xyz, r0.xyzx  // r0.x <- <ComputeSpotLight return value>.Ambient.x; r0.y <- <ComputeSpotLight return value>.Ambient.y; r0.z <- <ComputeSpotLight return value>.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.x <- <ComputeSpotLight return value>.Diffuse.x; r1.y <- <ComputeSpotLight return value>.Diffuse.y; r1.z <- <ComputeSpotLight return value>.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- <ComputeSpotLight return value>.Specular.x; r2.y <- <ComputeSpotLight return value>.Specular.y; r2.z <- <ComputeSpotLight return value>.Specular.z
+
+#line 45
+  mov r0.xyz, r0.xyzx  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y
+
+#line 46
+  break   // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z; r6.x <- colorComponent.Diffuse.y; r6.y <- colorComponent.Diffuse.z; r6.z <- colorComponent.Specular.x; r6.w <- colorComponent.Specular.y
+
+#line 48
+  case l(2)
+
+#line 49
+  nop 
+  mov r4.xyz, r4.xyzx
+  mov r3.x, r3.x
+  mov r3.yz, r8.xxyx
+  mov r5.xy, r8.zwzz
+  mov r5.z, r5.z
+  mov r0.xyz, r1.yzwy
+  mov r1.x, r1.x
+  mov r1.yz, r6.xxyx
+  mov r2.xy, r6.zwzz
+  mov r2.z, r2.z
+  mov r7.xyz, v3.xyzx
+  mov r8.xyz, v6.xyzx
+
+#line 78
+  mov r9.xyz, -cb2[2].xyzx
+  dp3 r0.w, r9.xyzx, r9.xyzx
+  rsq r0.w, r0.w
+  mul r9.xyz, r0.wwww, r9.xyzx  // r9.x <- lightDirection.x; r9.y <- lightDirection.y; r9.z <- lightDirection.z
+
+#line 79
+  dp3 r0.w, r7.xyzx, r7.xyzx
+  rsq r0.w, r0.w
+  mul r7.xyz, r0.wwww, r7.xyzx
+  dp3 r0.w, r9.xyzx, r7.xyzx  // r0.w <- n_dot_l
+
+#line 81
+  itof r2.w, l(0)
+  lt r2.w, r2.w, r0.w
+  if_nz r2.w
+
+#line 84
+    max r0.w, r0.w, l(0.000000)
+    mul r7.xyz, r0.wwww, cb2[1].xyzx
+    mul r7.xyz, r7.xyzx, cb2[1].wwww
+    mul r7.xyz, r4.xyzx, r7.xyzx
+    add r1.xyz, r1.xyzx, r7.xyzx
+
+#line 87
+    dp3 r0.w, r9.xyzx, r5.xyzx
+    add r0.w, r0.w, r0.w
+    mov r0.w, -r0.w
+    mul r5.xyz, r0.wwww, r5.xyzx
+    add r5.xyz, r9.xyzx, r5.xyzx
+    dp3 r0.w, r5.xyzx, r5.xyzx
+    rsq r0.w, r0.w
+    mul r5.xyz, r0.wwww, r5.xyzx  // r5.x <- refVector.x; r5.y <- refVector.y; r5.z <- refVector.z
+
+#line 90
+    dp3 r0.w, r8.xyzx, r5.xyzx
+    itof r2.w, l(0)
+    max r0.w, r0.w, r2.w
+    log r0.w, r0.w
+    mul r0.w, r0.w, cb1[5].x
+    exp r0.w, r0.w
+    mul r5.xyz, r0.wwww, cb1[4].xyzx
+    mul r3.xyz, r3.xyzx, r5.xyzx
+    mul r3.xyz, r4.xyzx, r3.xyzx
+    add r2.xyz, r2.xyzx, r3.xyzx
+
+#line 91
+  endif 
+
+#line 93
+  mov r0.xyz, r0.xyzx  // r0.x <- <ComputeDirectionalLight return value>.Ambient.x; r0.y <- <ComputeDirectionalLight return value>.Ambient.y; r0.z <- <ComputeDirectionalLight return value>.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.x <- <ComputeDirectionalLight return value>.Diffuse.x; r1.y <- <ComputeDirectionalLight return value>.Diffuse.y; r1.z <- <ComputeDirectionalLight return value>.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- <ComputeDirectionalLight return value>.Specular.x; r2.y <- <ComputeDirectionalLight return value>.Specular.y; r2.z <- <ComputeDirectionalLight return value>.Specular.z
+
+#line 49
+  mov r0.xyz, r0.xyzx  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
+  mov r1.xyz, r1.xyzx  // r1.x <- colorComponent.Diffuse.x; r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
+  mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y; r2.z <- colorComponent.Specular.z
+
+#line 50
+  break   // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z; r6.x <- colorComponent.Diffuse.y; r6.y <- colorComponent.Diffuse.z; r6.z <- colorComponent.Specular.x; r6.w <- colorComponent.Specular.y; r3.x <- pixelComponent.Specular.x; r3.y <- pixelComponent.Diffuse.x; r3.z <- pixelComponent.Diffuse.y; r8.x <- pixelComponent.Specular.y; r8.y <- pixelComponent.Specular.z; r8.z <- pixelComponent.Normal.x; r5.z <- pixelComponent.Normal.z
+
+#line 51
+  default 
+  mov r0.xyz, r1.yzwy  // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z
+  mov r1.yz, r6.xxyx  // r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z
+  mov r2.xy, r6.zwzz
+  mov r2.xyz, r2.xyzx  // r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y
+  break   // r1.y <- colorComponent.Ambient.x; r1.z <- colorComponent.Ambient.y; r1.w <- colorComponent.Ambient.z; r6.x <- colorComponent.Diffuse.y; r6.y <- colorComponent.Diffuse.z; r6.z <- colorComponent.Specular.x; r6.w <- colorComponent.Specular.y
+endswitch   // r0.x <- colorComponent.Ambient.x; r0.y <- colorComponent.Ambient.y; r0.z <- colorComponent.Ambient.z; r1.y <- colorComponent.Diffuse.y; r1.z <- colorComponent.Diffuse.z; r2.x <- colorComponent.Specular.x; r2.y <- colorComponent.Specular.y
+
+#line 53
 add r0.xyz, r0.xyzx, r1.xyzx
 add r0.xyz, r2.xyzx, r0.xyzx  // r0.x <- OUT.x; r0.y <- OUT.y; r0.z <- OUT.z
 
-#line 41
+#line 54
 mov r0.w, l(1.000000)  // r0.w <- OUT.w
 
-#line 43
+#line 56
 mov o0.xyz, r0.xyzx
 mov o0.w, r0.w
 ret 
-// Approximately 126 instruction slots used
+// Approximately 175 instruction slots used
 
 
-// 0000:  43425844  69ea1ebc  f6eda926  4cfd309b  DXBC...i&....0.L
-// 0010:  f5389f19  00000001  00009188  00000006  ..8..___..__.___
+// 0000:  43425844  08641e49  ed1902b6  f56841ac  DXBCI.d......Ah.
+// 0010:  58f83044  00000001  0000a4ac  00000006  D0.X.___..__.___
 // 0020:  00000038  00000580  0000069c  000006d0  8___..__..__..__
-// 0030:  000012e4  00001380  46454452  00000540  ..__..__RDEF@.__
+// 0030:  00001608  000016a4  46454452  00000540  ..__..__RDEF@.__
 // 0040:  00000002  00000160  00000006  0000003c  .___`.__.___<___
 // 0050:  ffff0500  00000105  00000518  31314452  _.....__..__RD11
 // 0060:  0000003c  00000018  00000020  00000028  <___.___ ___(___
@@ -409,7 +486,7 @@ ret
 // 06a0:  0000002c  00000001  00000008  00000020  ,___.___.___ ___
 // 06b0:  00000000  00000000  00000003  00000000  ________._______
 // 06c0:  0000000f  545f5653  65677261  abab0074  .___SV_Target_..
-// 06d0:  58454853  00000c0c  00000050  00000303  SHEX..__P___..__
+// 06d0:  58454853  00000f30  00000050  000003cc  SHEX0.__P___..__
 // 06e0:  0100886a  04000059  00208e46  00000001  j._.Y__.F. _.___
 // 06f0:  00000006  04000059  00208e46  00000002  .___Y__.F. _.___
 // 0700:  00000005  0300005a  00106000  00000000  .___Z__._`._____
@@ -428,7 +505,7 @@ ret
 // 07d0:  00000000  00000000  00000000  0800002b  ____________+__.
 // 07e0:  00100072  00000002  00004002  00000000  r_._.___.@______
 // 07f0:  00000000  00000000  00000000  0100003a  ____________:__.
-// 0800:  05000036  00100072  00000003  00101246  6__.r_._.___F.._
+// 0800:  05000036  001000e2  00000003  00101906  6__.._._.___..._
 // 0810:  00000001  05000036  00100072  00000004  .___6__.r_._.___
 // 0820:  00101246  00000003  05000036  00100012  F.._.___6__.._._
 // 0830:  00000005  0010100a  00000004  05000036  .___..._.___6__.
@@ -440,261 +517,261 @@ ret
 // 0890:  00000000  00000000  0020801a  00000001  ________.. _.___
 // 08a0:  00000005  07000020  00100082  00000000  .___ __.._._____
 // 08b0:  0010003a  00000000  00004001  ffffffff  :_._____.@__....
-// 08c0:  08000020  00100082  00000001  0020800a   __.._._.___.. _
-// 08d0:  00000002  00000004  00004001  00000002  .___.___.@__.___
-// 08e0:  07000001  00100082  00000000  0010003a  .__.._._____:_._
-// 08f0:  00000000  0010003a  00000001  0304001f  ____:_._.___._..
-// 0900:  0010003a  00000000  8b000045  800000c2  :_._____E__..__.
-// 0910:  00155543  00100072  00000003  00101046  CU._r_._.___F.._
-// 0920:  00000002  00107e46  00000000  00106000  .___F~.______`._
-// 0930:  00000000  01000012  05000036  00100072  ____.__.6__.r_._
-// 0940:  00000003  00100246  00000003  01000015  .___F.._.___.__.
-// 0950:  0b000027  00100082  00000000  00004002  '__.._._____.@__
-// 0960:  00000000  00000000  00000000  00000000  ________________
-// 0970:  0020802a  00000001  00000005  07000020  *. _.___.___ __.
-// 0980:  00100082  00000000  0010003a  00000000  ._._____:_._____
-// 0990:  00004001  ffffffff  0304001f  0010003a  .@__....._..:_._
-// 09a0:  00000000  8b000045  800000c2  00155543  ____E__..__.CU._
-// 09b0:  00100072  00000008  00101046  00000002  r_._.___F.._.___
-// 09c0:  00107e46  00000001  00106000  00000000  F~._.____`._____
-// 09d0:  01000012  06000036  00100072  00000008  .__.6__.r_._.___
-// 09e0:  00208246  00000001  00000004  01000015  F. _.___.___.__.
-// 09f0:  0b000027  00100082  00000000  00004002  '__.._._____.@__
-// 0a00:  00000000  00000000  00000000  00000000  ________________
-// 0a10:  0020803a  00000001  00000005  07000020  :. _.___.___ __.
-// 0a20:  00100082  00000000  0010003a  00000000  ._._____:_._____
-// 0a30:  00004001  ffffffff  0304001f  0010003a  .@__....._..:_._
-// 0a40:  00000000  0800002b  00100072  00000009  ____+__.r_._.___
-// 0a50:  00004002  00000002  00000002  00000002  .@__.___.___.___
-// 0a60:  00000000  8b000045  800000c2  00155543  ____E__..__.CU._
-// 0a70:  00100072  0000000a  00101046  00000002  r_._.___F.._.___
-// 0a80:  00107e46  00000002  00106000  00000000  F~._.____`._____
-// 0a90:  07000038  00100072  00000009  00100246  8__.r_._.___F.._
-// 0aa0:  00000009  00100246  0000000a  08000036  .___F.._.___6__.
-// 0ab0:  00100072  0000000a  00004002  bf800000  r_._.___.@____..
-// 0ac0:  bf800000  bf800000  80000000  07000000  __..__..___.___.
-// 0ad0:  00100072  00000009  00100246  00000009  r_._.___F.._.___
-// 0ae0:  00100246  0000000a  05000036  00100012  F.._.___6__.._._
-// 0af0:  00000005  0010000a  00000005  05000036  .___._._.___6__.
-// 0b00:  00100022  00000005  0010001a  00000007  "_._.___._._.___
-// 0b10:  05000036  00100042  00000005  0010000a  6__.B_._.___._._
-// 0b20:  00000004  05000036  00100012  00000006  .___6__.._._.___
-// 0b30:  0010000a  00000006  05000036  00100022  ._._.___6__."_._
-// 0b40:  00000006  0010002a  00000007  05000036  .___*_._.___6__.
-// 0b50:  00100042  00000006  0010001a  00000004  B_._.___._._.___
-// 0b60:  05000036  00100032  00000004  001000c6  6__.2_._.___._._
-// 0b70:  00000007  05000036  00100042  00000004  .___6__.B_._.___
-// 0b80:  0010002a  00000004  07000010  00100012  *_._.___.__.._._
-// 0b90:  00000005  00100246  00000009  00100246  .___F.._.___F.._
-// 0ba0:  00000005  07000010  00100022  00000005  .___.__."_._.___
-// 0bb0:  00100246  00000009  00100246  00000006  F.._.___F.._.___
-// 0bc0:  07000010  00100042  00000005  00100246  .__.B_._.___F.._
-// 0bd0:  00000009  00100246  00000004  01000012  .___F.._.___.__.
-// 0be0:  07000010  00100082  00000000  00100246  .__.._._____F.._
-// 0bf0:  00000004  00100246  00000004  05000044  .___F.._.___D__.
-// 0c00:  00100082  00000000  0010003a  00000000  ._._____:_._____
-// 0c10:  07000038  00100072  00000005  00100ff6  8__.r_._.___..._
-// 0c20:  00000000  00100246  00000004  01000015  ____F.._.___.__.
-// 0c30:  05000036  00100072  00000003  00100246  6__.r_._.___F.._
-// 0c40:  00000003  05000036  00100072  00000008  .___6__.r_._.___
-// 0c50:  00100246  00000008  05000036  00100072  F.._.___6__.r_._
-// 0c60:  00000005  00100246  00000005  05000036  .___F.._.___6__.
-// 0c70:  00100072  00000003  00100246  00000003  r_._.___F.._.___
-// 0c80:  05000036  00100072  00000008  00100246  6__.r_._.___F.._
-// 0c90:  00000008  05000036  00100072  00000005  .___6__.r_._.___
-// 0ca0:  00100246  00000005  0100003a  05000036  F.._.___:__.6__.
-// 0cb0:  00100072  00000003  00100246  00000003  r_._.___F.._.___
-// 0cc0:  05000036  00100072  00000000  00100246  6__.r_._____F.._
-// 0cd0:  00000000  05000036  00100072  00000001  ____6__.r_._.___
-// 0ce0:  00100246  00000001  05000036  00100072  F.._.___6__.r_._
-// 0cf0:  00000002  00100246  00000002  09000038  .___F.._.___8__.
-// 0d00:  00100072  00000004  00208ff6  00000002  r_._.___.. _.___
-// 0d10:  00000000  00208246  00000002  00000000  ____F. _._______
-// 0d20:  07000038  00100072  00000004  00100246  8__.r_._.___F.._
-// 0d30:  00000003  00100246  00000004  07000000  .___F.._.______.
-// 0d40:  00100072  00000000  00100246  00000000  r_._____F.._____
-// 0d50:  00100246  00000004  05000036  00100072  F.._.___6__.r_._
-// 0d60:  00000000  00100246  00000000  05000036  ____F.._____6__.
-// 0d70:  00100072  00000001  00100246  00000001  r_._.___F.._.___
-// 0d80:  05000036  00100072  00000002  00100246  6__.r_._.___F.._
-// 0d90:  00000002  05000036  00100072  00000000  .___6__.r_._____
-// 0da0:  00100246  00000000  05000036  00100072  F.._____6__.r_._
-// 0db0:  00000001  00100246  00000001  05000036  .___F.._.___6__.
-// 0dc0:  00100072  00000002  00100246  00000002  r_._.___F.._.___
-// 0dd0:  0100003a  05000036  00100072  00000003  :__.6__.r_._.___
-// 0de0:  00100246  00000003  05000036  00100072  F.._.___6__.r_._
-// 0df0:  00000008  00100246  00000008  05000036  .___F.._.___6__.
-// 0e00:  00100072  00000005  00100246  00000005  r_._.___F.._.___
-// 0e10:  05000036  00100072  00000000  00100246  6__.r_._____F.._
-// 0e20:  00000000  05000036  00100072  00000001  ____6__.r_._.___
-// 0e30:  00100246  00000001  05000036  00100072  F.._.___6__.r_._
-// 0e40:  00000002  00100246  00000002  05000036  .___F.._.___6__.
-// 0e50:  00100072  00000004  00101246  00000003  r_._.___F.._.___
-// 0e60:  05000036  00100072  00000006  00101246  6__.r_._.___F.._
-// 0e70:  00000006  07000036  00100072  00000007  .___6__.r_._.___
-// 0e80:  80208246  00000041  00000002  00000002  F. .A___.___.___
-// 0e90:  07000010  00100082  00000000  00100246  .__.._._____F.._
-// 0ea0:  00000007  00100246  00000007  05000044  .___F.._.___D__.
-// 0eb0:  00100082  00000000  0010003a  00000000  ._._____:_._____
-// 0ec0:  07000038  00100072  00000007  00100ff6  8__.r_._.___..._
-// 0ed0:  00000000  00100246  00000007  07000010  ____F.._.___.__.
-// 0ee0:  00100082  00000000  00100246  00000004  ._._____F.._.___
-// 0ef0:  00100246  00000004  05000044  00100082  F.._.___D__.._._
-// 0f00:  00000000  0010003a  00000000  07000038  ____:_._____8__.
-// 0f10:  00100072  00000004  00100ff6  00000000  r_._.___..._____
-// 0f20:  00100246  00000004  07000010  00100082  F.._.___.__.._._
-// 0f30:  00000000  00100246  00000007  00100246  ____F.._.___F.._
-// 0f40:  00000004  0500002b  00100082  00000001  .___+__.._._.___
-// 0f50:  00004001  00000000  07000031  00100082  .@______1__.._._
-// 0f60:  00000001  0010003a  00000001  0010003a  .___:_._.___:_._
-// 0f70:  00000000  0304001f  0010003a  00000001  ____._..:_._.___
-// 0f80:  07000034  00100082  00000000  0010003a  4__.._._____:_._
-// 0f90:  00000000  00004001  00000000  08000038  ____.@______8__.
-// 0fa0:  00100072  00000004  00100ff6  00000000  r_._.___..._____
-// 0fb0:  00208246  00000002  00000001  08000038  F. _.___.___8__.
-// 0fc0:  00100072  00000004  00100246  00000004  r_._.___F.._.___
-// 0fd0:  00208ff6  00000002  00000001  07000038  .. _.___.___8__.
-// 0fe0:  00100072  00000004  00100246  00000003  r_._.___F.._.___
-// 0ff0:  00100246  00000004  07000000  00100072  F.._.______.r_._
-// 1000:  00000001  00100246  00000001  00100246  .___F.._.___F.._
-// 1010:  00000004  07000010  00100082  00000000  .___.__.._._____
-// 1020:  00100246  00000007  00100246  00000005  F.._.___F.._.___
-// 1030:  07000000  00100082  00000000  0010003a  ___.._._____:_._
-// 1040:  00000000  0010003a  00000000  06000036  ____:_._____6__.
-// 1050:  00100082  00000000  8010003a  00000041  ._._____:_..A___
-// 1060:  00000000  07000038  00100072  00000004  ____8__.r_._.___
-// 1070:  00100ff6  00000000  00100246  00000005  ..._____F.._.___
-// 1080:  07000000  00100072  00000004  00100246  ___.r_._.___F.._
-// 1090:  00000007  00100246  00000004  07000010  .___F.._.___.__.
-// 10a0:  00100082  00000000  00100246  00000004  ._._____F.._.___
-// 10b0:  00100246  00000004  05000044  00100082  F.._.___D__.._._
-// 10c0:  00000000  0010003a  00000000  07000038  ____:_._____8__.
-// 10d0:  00100072  00000004  00100ff6  00000000  r_._.___..._____
-// 10e0:  00100246  00000004  07000010  00100082  F.._.___.__.._._
-// 10f0:  00000000  00100246  00000006  00100246  ____F.._.___F.._
-// 1100:  00000004  0500002b  00100082  00000001  .___+__.._._.___
-// 1110:  00004001  00000000  07000034  00100082  .@______4__.._._
-// 1120:  00000000  0010003a  00000000  0010003a  ____:_._____:_._
-// 1130:  00000001  0500002f  00100082  00000000  .___/__.._._____
-// 1140:  0010003a  00000000  08000038  00100082  :_._____8__.._._
-// 1150:  00000000  0010003a  00000000  0020800a  ____:_._____.. _
-// 1160:  00000001  00000005  05000019  00100082  .___.___.__.._._
-// 1170:  00000000  0010003a  00000000  08000038  ____:_._____8__.
-// 1180:  00100072  00000004  00100ff6  00000000  r_._.___..._____
-// 1190:  00208246  00000001  00000004  07000038  F. _.___.___8__.
-// 11a0:  00100072  00000004  00100246  00000008  r_._.___F.._.___
-// 11b0:  00100246  00000004  07000038  00100072  F.._.___8__.r_._
-// 11c0:  00000003  00100246  00000003  00100246  .___F.._.___F.._
-// 11d0:  00000004  07000000  00100072  00000002  .______.r_._.___
-// 11e0:  00100246  00000002  00100246  00000003  F.._.___F.._.___
-// 11f0:  01000015  05000036  00100072  00000000  .__.6__.r_._____
-// 1200:  00100246  00000000  05000036  00100072  F.._____6__.r_._
-// 1210:  00000001  00100246  00000001  05000036  .___F.._.___6__.
-// 1220:  00100072  00000002  00100246  00000002  r_._.___F.._.___
-// 1230:  05000036  00100072  00000000  00100246  6__.r_._____F.._
-// 1240:  00000000  05000036  00100072  00000001  ____6__.r_._.___
-// 1250:  00100246  00000001  05000036  00100072  F.._.___6__.r_._
-// 1260:  00000002  00100246  00000002  07000000  .___F.._.______.
-// 1270:  00100072  00000000  00100246  00000000  r_._____F.._____
-// 1280:  00100246  00000001  07000000  00100072  F.._.______.r_._
-// 1290:  00000000  00100246  00000002  00100246  ____F.._.___F.._
-// 12a0:  00000000  05000036  00100082  00000000  ____6__.._._____
-// 12b0:  00004001  3f800000  05000036  00102072  .@____.?6__.r ._
-// 12c0:  00000000  00100246  00000000  05000036  ____F.._____6__.
-// 12d0:  00102082  00000000  0010003a  00000000  . ._____:_._____
-// 12e0:  0100003e  54415453  00000094  0000007e  >__.STAT.___~___
-// 12f0:  0000000b  00000000  00000007  0000002d  ._______.___-___
-// 1300:  00000004  00000001  00000004  00000004  .___.___.___.___
-// 1310:  00000000  00000000  00000000  00000000  ________________
-// 1320:  00000000  00000003  00000000  00000000  ____.___________
-// 1330:  00000000  00000000  00000031  00000000  ________1_______
-// 1340:  00000009  00000000  00000000  00000000  ._______________
-// 1350:  00000000  00000000  00000000  00000000  ________________
-// 1360:  00000000  00000000  00000000  00000000  ________________
-// 1370:  00000000  00000000  00000000  00000000  ________________
-// 1380:  42445053  00007e00  7263694d  666f736f  SPDB_~__Microsof
-// 1390:  2f432074  202b2b43  2046534d  30302e37  t C/C++ MSF 7.00
-// 13a0:  441a0a0d  00000053  00000200  00000002  ...DS____.__.___
-// 13b0:  0000003f  00000120  00000000  0000003c  ?___ .______<___
-// 13c0:  00000000  00000000  00000000  00000000  ________________
-// 13d0:  00000000  00000000  00000000  00000000  ________________
-// 13e0:  00000000  00000000  00000000  00000000  ________________
-// 13f0:  00000000  00000000  00000000  00000000  ________________
-// 1400:  00000000  00000000  00000000  00000000  ________________
-// 1410:  00000000  00000000  00000000  00000000  ________________
-// 1420:  00000000  00000000  00000000  00000000  ________________
-// 1430:  00000000  00000000  00000000  00000000  ________________
-// 1440:  00000000  00000000  00000000  00000000  ________________
-// 1450:  00000000  00000000  00000000  00000000  ________________
-// 1460:  00000000  00000000  00000000  00000000  ________________
-// 1470:  00000000  00000000  00000000  00000000  ________________
-// 1480:  00000000  00000000  00000000  00000000  ________________
-// 1490:  00000000  00000000  00000000  00000000  ________________
-// 14a0:  00000000  00000000  00000000  00000000  ________________
-// 14b0:  00000000  00000000  00000000  00000000  ________________
-// 14c0:  00000000  00000000  00000000  00000000  ________________
-// 14d0:  00000000  00000000  00000000  00000000  ________________
-// 14e0:  00000000  00000000  00000000  00000000  ________________
-// 14f0:  00000000  00000000  00000000  00000000  ________________
-// 1500:  00000000  00000000  00000000  00000000  ________________
-// 1510:  00000000  00000000  00000000  00000000  ________________
-// 1520:  00000000  00000000  00000000  00000000  ________________
-// 1530:  00000000  00000000  00000000  00000000  ________________
-// 1540:  00000000  00000000  00000000  00000000  ________________
-// 1550:  00000000  00000000  00000000  00000000  ________________
-// 1560:  00000000  00000000  00000000  00000000  ________________
-// 1570:  00000000  00000000  00000000  00000000  ________________
-// 1580:  00000000  00000000  ffffffc0  ffffffff  ________........
-// 1590:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15a0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15b0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15c0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15d0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15e0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 15f0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1600:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1610:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1620:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1630:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1640:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1650:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1660:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1670:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1680:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1690:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16a0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16b0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16c0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16d0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16e0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 16f0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1700:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1710:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1720:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1730:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1740:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1750:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1760:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1770:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1780:  ffffffff  ffffffff  00000038  e0000000  ........8______.
-// 1790:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17a0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17b0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17c0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17d0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17e0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 17f0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1800:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1810:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1820:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1830:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1840:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1850:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1860:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1870:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1880:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1890:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 18a0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 08c0:  0304001f  0010003a  00000000  8b000045  ._..:_._____E__.
+// 08d0:  800000c2  00155543  001000e2  00000003  .__.CU._._._.___
+// 08e0:  00101046  00000002  00107936  00000000  F.._.___6y._____
+// 08f0:  00106000  00000000  01000012  05000036  _`._____.__.6__.
+// 0900:  001000e2  00000003  00100e56  00000003  ._._.___V.._.___
+// 0910:  01000015  0b000027  00100082  00000000  .__.'__.._._____
+// 0920:  00004002  00000000  00000000  00000000  .@______________
+// 0930:  00000000  0020802a  00000001  00000005  ____*. _.___.___
+// 0940:  07000020  00100082  00000000  0010003a   __.._._____:_._
+// 0950:  00000000  00004001  ffffffff  0304001f  ____.@__....._..
+// 0960:  0010003a  00000000  8b000045  800000c2  :_._____E__..__.
+// 0970:  00155543  00100072  00000008  00101046  CU._r_._.___F.._
+// 0980:  00000002  00107c96  00000001  00106000  .___.|._.____`._
+// 0990:  00000000  05000036  00100012  00000003  ____6__.._._.___
+// 09a0:  0010002a  00000008  01000012  06000036  *_._.___.__.6__.
+// 09b0:  00100072  00000008  00208496  00000001  r_._.___.. _.___
+// 09c0:  00000004  05000036  00100012  00000003  .___6__.._._.___
+// 09d0:  0010002a  00000008  01000015  0b000027  *_._.___.__.'__.
+// 09e0:  00100082  00000000  00004002  00000000  ._._____.@______
+// 09f0:  00000000  00000000  00000000  0020803a  ____________:. _
+// 0a00:  00000001  00000005  07000020  00100082  .___.___ __.._._
+// 0a10:  00000000  0010003a  00000000  00004001  ____:_._____.@__
+// 0a20:  ffffffff  0304001f  0010003a  00000000  ....._..:_._____
+// 0a30:  0800002b  00100072  00000009  00004002  +__.r_._.___.@__
+// 0a40:  00000002  00000002  00000002  00000000  .___.___._______
+// 0a50:  8b000045  800000c2  00155543  00100072  E__..__.CU._r_._
+// 0a60:  0000000a  00101046  00000002  00107e46  .___F.._.___F~._
+// 0a70:  00000002  00106000  00000000  07000038  .____`._____8__.
+// 0a80:  00100072  00000009  00100246  00000009  r_._.___F.._.___
+// 0a90:  00100246  0000000a  08000036  00100072  F.._.___6__.r_._
+// 0aa0:  0000000a  00004002  bf800000  bf800000  .___.@____..__..
+// 0ab0:  bf800000  80000000  07000000  00100072  __..___.___.r_._
+// 0ac0:  00000009  00100246  00000009  00100246  .___F.._.___F.._
+// 0ad0:  0000000a  05000036  00100012  00000005  .___6__.._._.___
+// 0ae0:  0010000a  00000005  05000036  00100022  ._._.___6__."_._
+// 0af0:  00000005  0010001a  00000007  05000036  .___._._.___6__.
+// 0b00:  00100042  00000005  0010000a  00000004  B_._.___._._.___
+// 0b10:  05000036  00100012  00000006  0010000a  6__.._._.___._._
+// 0b20:  00000006  05000036  00100022  00000006  .___6__."_._.___
+// 0b30:  0010002a  00000007  05000036  00100042  *_._.___6__.B_._
+// 0b40:  00000006  0010001a  00000004  05000036  .___._._.___6__.
+// 0b50:  00100032  00000004  001000c6  00000007  2_._.___._._.___
+// 0b60:  05000036  00100042  00000004  0010002a  6__.B_._.___*_._
+// 0b70:  00000004  07000010  00100042  00000008  .___.__.B_._.___
+// 0b80:  00100246  00000009  00100246  00000005  F.._.___F.._.___
+// 0b90:  07000010  00100082  00000008  00100246  .__.._._.___F.._
+// 0ba0:  00000009  00100246  00000006  07000010  .___F.._.___.__.
+// 0bb0:  00100042  00000005  00100246  00000009  B_._.___F.._.___
+// 0bc0:  00100246  00000004  01000012  07000010  F.._.___.__..__.
+// 0bd0:  00100082  00000000  00100246  00000004  ._._____F.._.___
+// 0be0:  00100246  00000004  05000044  00100082  F.._.___D__.._._
+// 0bf0:  00000000  0010003a  00000000  07000038  ____:_._____8__.
+// 0c00:  00100072  00000005  00100ff6  00000000  r_._.___..._____
+// 0c10:  00100246  00000004  05000036  001000c2  F.._.___6__.._._
+// 0c20:  00000008  00100406  00000005  01000015  .___..._.___.__.
+// 0c30:  05000036  001000e2  00000003  00100e56  6__.._._.___V.._
+// 0c40:  00000003  05000036  00100012  00000003  .___6__.._._.___
+// 0c50:  0010000a  00000003  05000036  00100032  ._._.___6__.2_._
+// 0c60:  00000008  00100046  00000008  05000036  .___F_._.___6__.
+// 0c70:  001000c2  00000008  00100ea6  00000008  ._._.___..._.___
+// 0c80:  05000036  00100042  00000005  0010002a  6__.B_._.___*_._
+// 0c90:  00000005  05000036  001000f2  00000003  .___6__.._._.___
+// 0ca0:  00100e46  00000003  05000036  001000f2  F.._.___6__.._._
+// 0cb0:  00000008  00100e46  00000008  05000036  .___F.._.___6__.
+// 0cc0:  00100042  00000005  0010002a  00000005  B_._.___*_._.___
+// 0cd0:  0100003a  05000036  00100072  00000004  :__.6__.r_._.___
+// 0ce0:  00100796  00000003  05000036  00100032  ..._.___6__.2_._
+// 0cf0:  00000006  00100596  00000001  05000036  .___..._.___6__.
+// 0d00:  001000c2  00000006  00100406  00000002  ._._.___..._.___
+// 0d10:  05000036  00100072  00000000  00100246  6__.r_._____F.._
+// 0d20:  00000000  05000036  00100012  00000001  ____6__.._._.___
+// 0d30:  0010000a  00000001  05000036  00100042  ._._.___6__.B_._
+// 0d40:  00000002  0010002a  00000002  09000038  .___*_._.___8__.
+// 0d50:  00100072  00000007  00208ff6  00000002  r_._.___.. _.___
+// 0d60:  00000000  00208246  00000002  00000000  ____F. _._______
+// 0d70:  07000038  00100072  00000007  00100246  8__.r_._.___F.._
+// 0d80:  00000004  00100246  00000007  07000000  .___F.._.______.
+// 0d90:  001000e2  00000001  00100906  00000000  ._._.___..._____
+// 0da0:  00100906  00000007  05000036  001000e2  ..._.___6__.._._
+// 0db0:  00000001  00100e56  00000001  05000036  .___V.._.___6__.
+// 0dc0:  00100012  00000001  0010000a  00000001  ._._.___._._.___
+// 0dd0:  05000036  001000f2  00000006  00100e46  6__.._._.___F.._
+// 0de0:  00000006  05000036  00100042  00000002  .___6__.B_._.___
+// 0df0:  0010002a  00000002  05000036  001000f2  *_._.___6__.._._
+// 0e00:  00000001  00100e46  00000001  05000036  .___F.._.___6__.
+// 0e10:  001000f2  00000006  00100e46  00000006  ._._.___F.._.___
+// 0e20:  05000036  00100042  00000002  0010002a  6__.B_._.___*_._
+// 0e30:  00000002  06000036  00100012  00000000  .___6__.._._____
+// 0e40:  0020800a  00000002  00000004  0300004c  .. _.___.___L__.
+// 0e50:  0010000a  00000000  03000006  00004001  ._._____.__..@__
+// 0e60:  00000000  0100003a  05000036  00100072  ____:__.6__.r_._
+// 0e70:  00000000  00100796  00000001  05000036  ____..._.___6__.
+// 0e80:  00100012  00000001  0010000a  00000001  ._._.___._._.___
+// 0e90:  05000036  00100062  00000001  00100106  6__.b_._.___..._
+// 0ea0:  00000006  05000036  00100032  00000002  .___6__.2_._.___
+// 0eb0:  00100ae6  00000006  05000036  00100042  ..._.___6__.B_._
+// 0ec0:  00000002  0010002a  00000002  05000036  .___*_._.___6__.
+// 0ed0:  00100072  00000000  00100246  00000000  r_._____F.._____
+// 0ee0:  05000036  00100072  00000001  00100246  6__.r_._.___F.._
+// 0ef0:  00000001  05000036  00100072  00000002  .___6__.r_._.___
+// 0f00:  00100246  00000002  05000036  00100072  F.._.___6__.r_._
+// 0f10:  00000000  00100246  00000000  05000036  ____F.._____6__.
+// 0f20:  00100072  00000001  00100246  00000001  r_._.___F.._.___
+// 0f30:  05000036  00100072  00000002  00100246  6__.r_._.___F.._
+// 0f40:  00000002  01000002  03000006  00004001  .___.__..__..@__
+// 0f50:  00000001  0100003a  05000036  00100072  .___:__.6__.r_._
+// 0f60:  00000000  00100796  00000001  05000036  ____..._.___6__.
+// 0f70:  00100012  00000001  0010000a  00000001  ._._.___._._.___
+// 0f80:  05000036  00100062  00000001  00100106  6__.b_._.___..._
+// 0f90:  00000006  05000036  00100032  00000002  .___6__.2_._.___
+// 0fa0:  00100ae6  00000006  05000036  00100042  ..._.___6__.B_._
+// 0fb0:  00000002  0010002a  00000002  05000036  .___*_._.___6__.
+// 0fc0:  00100072  00000000  00100246  00000000  r_._____F.._____
+// 0fd0:  05000036  00100072  00000001  00100246  6__.r_._.___F.._
+// 0fe0:  00000001  05000036  00100072  00000002  .___6__.r_._.___
+// 0ff0:  00100246  00000002  05000036  00100072  F.._.___6__.r_._
+// 1000:  00000000  00100246  00000000  05000036  ____F.._____6__.
+// 1010:  00100072  00000001  00100246  00000001  r_._.___F.._.___
+// 1020:  05000036  00100072  00000002  00100246  6__.r_._.___F.._
+// 1030:  00000002  01000002  03000006  00004001  .___.__..__..@__
+// 1040:  00000002  0100003a  05000036  00100072  .___:__.6__.r_._
+// 1050:  00000004  00100246  00000004  05000036  .___F.._.___6__.
+// 1060:  00100012  00000003  0010000a  00000003  ._._.___._._.___
+// 1070:  05000036  00100062  00000003  00100106  6__.b_._.___..._
+// 1080:  00000008  05000036  00100032  00000005  .___6__.2_._.___
+// 1090:  00100ae6  00000008  05000036  00100042  ..._.___6__.B_._
+// 10a0:  00000005  0010002a  00000005  05000036  .___*_._.___6__.
+// 10b0:  00100072  00000000  00100796  00000001  r_._____..._.___
+// 10c0:  05000036  00100012  00000001  0010000a  6__.._._.___._._
+// 10d0:  00000001  05000036  00100062  00000001  .___6__.b_._.___
+// 10e0:  00100106  00000006  05000036  00100032  ..._.___6__.2_._
+// 10f0:  00000002  00100ae6  00000006  05000036  .___..._.___6__.
+// 1100:  00100042  00000002  0010002a  00000002  B_._.___*_._.___
+// 1110:  05000036  00100072  00000007  00101246  6__.r_._.___F.._
+// 1120:  00000003  05000036  00100072  00000008  .___6__.r_._.___
+// 1130:  00101246  00000006  07000036  00100072  F.._.___6__.r_._
+// 1140:  00000009  80208246  00000041  00000002  .___F. .A___.___
+// 1150:  00000002  07000010  00100082  00000000  .___.__.._._____
+// 1160:  00100246  00000009  00100246  00000009  F.._.___F.._.___
+// 1170:  05000044  00100082  00000000  0010003a  D__.._._____:_._
+// 1180:  00000000  07000038  00100072  00000009  ____8__.r_._.___
+// 1190:  00100ff6  00000000  00100246  00000009  ..._____F.._.___
+// 11a0:  07000010  00100082  00000000  00100246  .__.._._____F.._
+// 11b0:  00000007  00100246  00000007  05000044  .___F.._.___D__.
+// 11c0:  00100082  00000000  0010003a  00000000  ._._____:_._____
+// 11d0:  07000038  00100072  00000007  00100ff6  8__.r_._.___..._
+// 11e0:  00000000  00100246  00000007  07000010  ____F.._.___.__.
+// 11f0:  00100082  00000000  00100246  00000009  ._._____F.._.___
+// 1200:  00100246  00000007  0500002b  00100082  F.._.___+__.._._
+// 1210:  00000002  00004001  00000000  07000031  .___.@______1__.
+// 1220:  00100082  00000002  0010003a  00000002  ._._.___:_._.___
+// 1230:  0010003a  00000000  0304001f  0010003a  :_._____._..:_._
+// 1240:  00000002  07000034  00100082  00000000  .___4__.._._____
+// 1250:  0010003a  00000000  00004001  00000000  :_._____.@______
+// 1260:  08000038  00100072  00000007  00100ff6  8__.r_._.___..._
+// 1270:  00000000  00208246  00000002  00000001  ____F. _.___.___
+// 1280:  08000038  00100072  00000007  00100246  8__.r_._.___F.._
+// 1290:  00000007  00208ff6  00000002  00000001  .___.. _.___.___
+// 12a0:  07000038  00100072  00000007  00100246  8__.r_._.___F.._
+// 12b0:  00000004  00100246  00000007  07000000  .___F.._.______.
+// 12c0:  00100072  00000001  00100246  00000001  r_._.___F.._.___
+// 12d0:  00100246  00000007  07000010  00100082  F.._.___.__.._._
+// 12e0:  00000000  00100246  00000009  00100246  ____F.._.___F.._
+// 12f0:  00000005  07000000  00100082  00000000  .______.._._____
+// 1300:  0010003a  00000000  0010003a  00000000  :_._____:_._____
+// 1310:  06000036  00100082  00000000  8010003a  6__.._._____:_..
+// 1320:  00000041  00000000  07000038  00100072  A_______8__.r_._
+// 1330:  00000005  00100ff6  00000000  00100246  .___..._____F.._
+// 1340:  00000005  07000000  00100072  00000005  .______.r_._.___
+// 1350:  00100246  00000009  00100246  00000005  F.._.___F.._.___
+// 1360:  07000010  00100082  00000000  00100246  .__.._._____F.._
+// 1370:  00000005  00100246  00000005  05000044  .___F.._.___D__.
+// 1380:  00100082  00000000  0010003a  00000000  ._._____:_._____
+// 1390:  07000038  00100072  00000005  00100ff6  8__.r_._.___..._
+// 13a0:  00000000  00100246  00000005  07000010  ____F.._.___.__.
+// 13b0:  00100082  00000000  00100246  00000008  ._._____F.._.___
+// 13c0:  00100246  00000005  0500002b  00100082  F.._.___+__.._._
+// 13d0:  00000002  00004001  00000000  07000034  .___.@______4__.
+// 13e0:  00100082  00000000  0010003a  00000000  ._._____:_._____
+// 13f0:  0010003a  00000002  0500002f  00100082  :_._.___/__.._._
+// 1400:  00000000  0010003a  00000000  08000038  ____:_._____8__.
+// 1410:  00100082  00000000  0010003a  00000000  ._._____:_._____
+// 1420:  0020800a  00000001  00000005  05000019  .. _.___.___.__.
+// 1430:  00100082  00000000  0010003a  00000000  ._._____:_._____
+// 1440:  08000038  00100072  00000005  00100ff6  8__.r_._.___..._
+// 1450:  00000000  00208246  00000001  00000004  ____F. _.___.___
+// 1460:  07000038  00100072  00000003  00100246  8__.r_._.___F.._
+// 1470:  00000003  00100246  00000005  07000038  .___F.._.___8__.
+// 1480:  00100072  00000003  00100246  00000004  r_._.___F.._.___
+// 1490:  00100246  00000003  07000000  00100072  F.._.______.r_._
+// 14a0:  00000002  00100246  00000002  00100246  .___F.._.___F.._
+// 14b0:  00000003  01000015  05000036  00100072  .___.__.6__.r_._
+// 14c0:  00000000  00100246  00000000  05000036  ____F.._____6__.
+// 14d0:  00100072  00000001  00100246  00000001  r_._.___F.._.___
+// 14e0:  05000036  00100072  00000002  00100246  6__.r_._.___F.._
+// 14f0:  00000002  05000036  00100072  00000000  .___6__.r_._____
+// 1500:  00100246  00000000  05000036  00100072  F.._____6__.r_._
+// 1510:  00000001  00100246  00000001  05000036  .___F.._.___6__.
+// 1520:  00100072  00000002  00100246  00000002  r_._.___F.._.___
+// 1530:  01000002  0100000a  05000036  00100072  .__..__.6__.r_._
+// 1540:  00000000  00100796  00000001  05000036  ____..._.___6__.
+// 1550:  00100062  00000001  00100106  00000006  b_._.___..._.___
+// 1560:  05000036  00100032  00000002  00100ae6  6__.2_._.___..._
+// 1570:  00000006  05000036  00100072  00000002  .___6__.r_._.___
+// 1580:  00100246  00000002  01000002  01000017  F.._.___.__..__.
+// 1590:  07000000  00100072  00000000  00100246  ___.r_._____F.._
+// 15a0:  00000000  00100246  00000001  07000000  ____F.._.______.
+// 15b0:  00100072  00000000  00100246  00000002  r_._____F.._.___
+// 15c0:  00100246  00000000  05000036  00100082  F.._____6__.._._
+// 15d0:  00000000  00004001  3f800000  05000036  ____.@____.?6__.
+// 15e0:  00102072  00000000  00100246  00000000  r ._____F.._____
+// 15f0:  05000036  00102082  00000000  0010003a  6__.. ._____:_._
+// 1600:  00000000  0100003e  54415453  00000094  ____>__.STAT.___
+// 1610:  000000af  0000000b  00000000  00000007  .___._______.___
+// 1620:  0000002d  00000003  00000000  00000008  -___._______.___
+// 1630:  00000005  00000000  00000000  00000000  ._______________
+// 1640:  00000000  00000000  00000003  00000000  ________._______
+// 1650:  00000000  00000000  00000000  00000058  ____________X___
+// 1660:  00000000  00000009  00000000  00000000  ____.___________
+// 1670:  00000000  00000000  00000000  00000000  ________________
+// 1680:  00000000  00000000  00000000  00000000  ________________
+// 1690:  00000000  00000000  00000000  00000000  ________________
+// 16a0:  00000000  42445053  00008e00  7263694d  ____SPDB_.__Micr
+// 16b0:  666f736f  2f432074  202b2b43  2046534d  osoft C/C++ MSF 
+// 16c0:  30302e37  441a0a0d  00000053  00000200  7.00...DS____.__
+// 16d0:  00000002  00000047  00000140  00000000  .___G___@.______
+// 16e0:  00000044  00000000  00000000  00000000  D_______________
+// 16f0:  00000000  00000000  00000000  00000000  ________________
+// 1700:  00000000  00000000  00000000  00000000  ________________
+// 1710:  00000000  00000000  00000000  00000000  ________________
+// 1720:  00000000  00000000  00000000  00000000  ________________
+// 1730:  00000000  00000000  00000000  00000000  ________________
+// 1740:  00000000  00000000  00000000  00000000  ________________
+// 1750:  00000000  00000000  00000000  00000000  ________________
+// 1760:  00000000  00000000  00000000  00000000  ________________
+// 1770:  00000000  00000000  00000000  00000000  ________________
+// 1780:  00000000  00000000  00000000  00000000  ________________
+// 1790:  00000000  00000000  00000000  00000000  ________________
+// 17a0:  00000000  00000000  00000000  00000000  ________________
+// 17b0:  00000000  00000000  00000000  00000000  ________________
+// 17c0:  00000000  00000000  00000000  00000000  ________________
+// 17d0:  00000000  00000000  00000000  00000000  ________________
+// 17e0:  00000000  00000000  00000000  00000000  ________________
+// 17f0:  00000000  00000000  00000000  00000000  ________________
+// 1800:  00000000  00000000  00000000  00000000  ________________
+// 1810:  00000000  00000000  00000000  00000000  ________________
+// 1820:  00000000  00000000  00000000  00000000  ________________
+// 1830:  00000000  00000000  00000000  00000000  ________________
+// 1840:  00000000  00000000  00000000  00000000  ________________
+// 1850:  00000000  00000000  00000000  00000000  ________________
+// 1860:  00000000  00000000  00000000  00000000  ________________
+// 1870:  00000000  00000000  00000000  00000000  ________________
+// 1880:  00000000  00000000  00000000  00000000  ________________
+// 1890:  00000000  00000000  00000000  00000000  ________________
+// 18a0:  00000000  00000000  00000000  ffffffc0  ____________....
 // 18b0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
 // 18c0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
 // 18d0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
@@ -708,59 +785,59 @@ ret
 // 1950:  ffffffff  ffffffff  ffffffff  ffffffff  ................
 // 1960:  ffffffff  ffffffff  ffffffff  ffffffff  ................
 // 1970:  ffffffff  ffffffff  ffffffff  ffffffff  ................
-// 1980:  ffffffff  ffffffff  00000005  00000020  .........___ ___
-// 1990:  0000003c  00000000  ffffffff  00000000  <_______....____
-// 19a0:  00000006  00000005  00000000  00000000  .___.___________
-// 19b0:  00000000  00000000  00000000  00000000  ________________
-// 19c0:  00000000  00000000  00000000  00000000  ________________
-// 19d0:  00000000  00000000  00000000  00000000  ________________
-// 19e0:  00000000  00000000  00000000  00000000  ________________
-// 19f0:  00000000  00000000  00000000  00000000  ________________
-// 1a00:  00000000  00000000  00000000  00000000  ________________
-// 1a10:  00000000  00000000  00000000  00000000  ________________
-// 1a20:  00000000  00000000  00000000  00000000  ________________
-// 1a30:  00000000  00000000  00000000  00000000  ________________
-// 1a40:  00000000  00000000  00000000  00000000  ________________
-// 1a50:  00000000  00000000  00000000  00000000  ________________
-// 1a60:  00000000  00000000  00000000  00000000  ________________
-// 1a70:  00000000  00000000  00000000  00000000  ________________
-// 1a80:  00000000  00000000  00000000  00000000  ________________
-// 1a90:  00000000  00000000  00000000  00000000  ________________
-// 1aa0:  00000000  00000000  00000000  00000000  ________________
-// 1ab0:  00000000  00000000  00000000  00000000  ________________
-// 1ac0:  00000000  00000000  00000000  00000000  ________________
-// 1ad0:  00000000  00000000  00000000  00000000  ________________
-// 1ae0:  00000000  00000000  00000000  00000000  ________________
-// 1af0:  00000000  00000000  00000000  00000000  ________________
-// 1b00:  00000000  00000000  00000000  00000000  ________________
-// 1b10:  00000000  00000000  00000000  00000000  ________________
-// 1b20:  00000000  00000000  00000000  00000000  ________________
-// 1b30:  00000000  00000000  00000000  00000000  ________________
-// 1b40:  00000000  00000000  00000000  00000000  ________________
-// 1b50:  00000000  00000000  00000000  00000000  ________________
-// 1b60:  00000000  00000000  00000000  00000000  ________________
-// 1b70:  00000000  00000000  00000000  00000000  ________________
-// 1b80:  00000000  00000000  00000003  00000000  ________._______
-// 1b90:  00000000  00000000  00000000  00000000  ________________
-// 1ba0:  00000000  00000000  00000000  00000000  ________________
-// 1bb0:  00000000  00000000  00000000  00000000  ________________
-// 1bc0:  00000000  00000000  00000000  00000000  ________________
-// 1bd0:  00000000  00000000  00000000  00000000  ________________
-// 1be0:  00000000  00000000  00000000  00000000  ________________
-// 1bf0:  00000000  00000000  00000000  00000000  ________________
-// 1c00:  00000000  00000000  00000000  00000000  ________________
-// 1c10:  00000000  00000000  00000000  00000000  ________________
-// 1c20:  00000000  00000000  00000000  00000000  ________________
-// 1c30:  00000000  00000000  00000000  00000000  ________________
-// 1c40:  00000000  00000000  00000000  00000000  ________________
-// 1c50:  00000000  00000000  00000000  00000000  ________________
-// 1c60:  00000000  00000000  00000000  00000000  ________________
-// 1c70:  00000000  00000000  00000000  00000000  ________________
-// 1c80:  00000000  00000000  00000000  00000000  ________________
-// 1c90:  00000000  00000000  00000000  00000000  ________________
-// 1ca0:  00000000  00000000  00000000  00000000  ________________
-// 1cb0:  00000000  00000000  00000000  00000000  ________________
-// 1cc0:  00000000  00000000  00000000  00000000  ________________
+// 1980:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1990:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19a0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19b0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19c0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19d0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19e0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 19f0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a00:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a10:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a20:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a30:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a40:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a50:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a60:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a70:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a80:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1a90:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1aa0:  ffffffff  ffffffff  ffffffff  00000038  ............8___
+// 1ab0:  00000000  ffffffe0  ffffffff  ffffffff  ____............
+// 1ac0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1ad0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1ae0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1af0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b00:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b10:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b20:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b30:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b40:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b50:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b60:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b70:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b80:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1b90:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1ba0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1bb0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1bc0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1bd0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1be0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1bf0:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c00:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c10:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c20:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c30:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c40:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c50:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c60:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c70:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c80:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1c90:  ffffffff  ffffffff  ffffffff  ffffffff  ................
+// 1ca0:  ffffffff  ffffffff  ffffffff  00000005  .............___
+// 1cb0:  00000020  0000003c  00000000  ffffffff   ___<_______....
+// 1cc0:  00000000  00000006  00000005  00000000  ____.___._______
 // 1cd0:  00000000  00000000  00000000  00000000  ________________
 // 1ce0:  00000000  00000000  00000000  00000000  ________________
 // 1cf0:  00000000  00000000  00000000  00000000  ________________
@@ -772,11 +849,11 @@ ret
 // 1d50:  00000000  00000000  00000000  00000000  ________________
 // 1d60:  00000000  00000000  00000000  00000000  ________________
 // 1d70:  00000000  00000000  00000000  00000000  ________________
-// 1d80:  00000000  00000000  01312e94  5b215374  ________..1.tS![
-// 1d90:  00000001  10ff9fe1  444c4cf1  eb2a1c8e  .___.....LLD..*.
-// 1da0:  0cdecc83  00000000  00000000  00000001  ....________.___
-// 1db0:  00000001  00000000  00000000  00000000  ._______________
-// 1dc0:  013351dc  00000000  00000000  00000000  .Q3.____________
+// 1d80:  00000000  00000000  00000000  00000000  ________________
+// 1d90:  00000000  00000000  00000000  00000000  ________________
+// 1da0:  00000000  00000000  00000000  00000000  ________________
+// 1db0:  00000000  00000000  00000000  00000000  ________________
+// 1dc0:  00000000  00000000  00000000  00000000  ________________
 // 1dd0:  00000000  00000000  00000000  00000000  ________________
 // 1de0:  00000000  00000000  00000000  00000000  ________________
 // 1df0:  00000000  00000000  00000000  00000000  ________________
@@ -790,7 +867,7 @@ ret
 // 1e70:  00000000  00000000  00000000  00000000  ________________
 // 1e80:  00000000  00000000  00000000  00000000  ________________
 // 1e90:  00000000  00000000  00000000  00000000  ________________
-// 1ea0:  00000000  00000000  00000000  00000000  ________________
+// 1ea0:  00000000  00000000  00000000  00000003  ____________.___
 // 1eb0:  00000000  00000000  00000000  00000000  ________________
 // 1ec0:  00000000  00000000  00000000  00000000  ________________
 // 1ed0:  00000000  00000000  00000000  00000000  ________________
@@ -804,47 +881,47 @@ ret
 // 1f50:  00000000  00000000  00000000  00000000  ________________
 // 1f60:  00000000  00000000  00000000  00000000  ________________
 // 1f70:  00000000  00000000  00000000  00000000  ________________
-// 1f80:  00000000  00000000  20200a0d  6c662020  ________..    fl
-// 1f90:  3274616f  78655420  65727574  203a2020  oat2 Texture  : 
-// 1fa0:  43584554  44524f4f  0a0d3b30  20202020  TEXCOORD0;..    
-// 1fb0:  616f6c66  4e203374  616d726f  2020206c  float3 Normal   
-// 1fc0:  4f4e203a  4c414d52  200a0d3b  66202020  : NORMAL;..    f
-// 1fd0:  74616f6c  61542033  6e65676e  3a202074  loat3 Tangent  :
-// 1fe0:  4e415420  544e4547  200a0d3b  66202020   TANGENT;..    f
-// 1ff0:  74616f6c  69422033  6d726f6e  3a206c61  loat3 Binormal :
-// 2000:  4e494220  414d524f  0a0d3b4c  20200a0d   BINORMAL;....  
-// 2010:  6c662020  3374616f  65695620  726f5777    float3 ViewWor
-// 2020:  6944646c  74636572  206e6f69  4f43203a  ldDirection : CO
-// 2030:  31524f4c  0d0a0d3b  2020200a  6f6c6620  LOR1;....    flo
-// 2040:  20347461  6867694c  726f5774  6944646c  at4 LightWorldDi
-// 2050:  74636572  206e6f69  4f43203a  32524f4c  rection : COLOR2
-// 2060:  200a0d3b  66202020  74616f6c  694c2033  ;..    float3 Li
-// 2070:  56746867  44776569  63657269  6e6f6974  ghtViewDirection
-// 2080:  43203a20  524f4c4f  0a0d3b33  0a0d3b7d   : COLOR3;..};..
-// 2090:  6f430a0d  43726f6c  6f706d6f  746e656e  ..ColorComponent
-// 20a0:  6d6f4320  65747570  69626d41  4c746e65   ComputeAmbientL
-// 20b0:  74686769  78695028  6f436c65  6e6f706d  ight(PixelCompon
-// 20c0:  20746e65  65786970  6d6f436c  656e6f70  ent pixelCompone
-// 20d0:  202c746e  6f6c6f43  6d6f4372  656e6f70  nt, ColorCompone
-// 20e0:  6320746e  726f6c6f  706d6f43  6e656e6f  nt colorComponen
-// 20f0:  50202c74  4e495f53  20545550  3b294e49  t, PS_INPUT IN);
-// 2100:  6f430a0d  43726f6c  6f706d6f  746e656e  ..ColorComponent
-// 2110:  6d6f4320  65747570  65726944  6f697463   ComputeDirectio
-// 2120:  4c6c616e  74686769  78695028  6f436c65  nalLight(PixelCo
-// 2130:  6e6f706d  20746e65  65786970  6d6f436c  mponent pixelCom
-// 2140:  656e6f70  202c746e  6f6c6f43  6d6f4372  ponent, ColorCom
-// 2150:  656e6f70  6320746e  726f6c6f  706d6f43  ponent colorComp
-// 2160:  6e656e6f  50202c74  4e495f53  20545550  onent, PS_INPUT 
-// 2170:  3b294e49  6f430a0d  43726f6c  6f706d6f  IN);..ColorCompo
-// 2180:  746e656e  6d6f4320  00005ac6  00018375  nent Com.Z__u.._
-// 2190:  0003e84c  00012ea1  0001caa2  0002131c  L.._..._..._..._
-// 21a0:  00012441  0001b3ec  00008b91  0001d7c0  A$._..._..__..._
-// 21b0:  00035dda  00010ecd  000321c1  0002a696  .]._..._.!._..._
-// 21c0:  0003f22d  00020bda  000037ce  0001cb31  -.._..._.7__1.._
-// 21d0:  0002f109  0003e692  0001c0dc  0000e27d  ..._..._..._}.__
-// 21e0:  00029ad6  000212e5  0003acb8  00011376  ..._..._..._v.._
-// 21f0:  0001b964  00017ddf  000201c0  00019938  d.._.}._..._8.._
-// 2200:  0000ee99  0001ed84  0002c27e  00001000  ..__..._~..__.__
+// 1f80:  00000000  00000000  00000000  00000000  ________________
+// 1f90:  00000000  00000000  00000000  00000000  ________________
+// 1fa0:  00000000  00000000  00000000  00000000  ________________
+// 1fb0:  00000000  00000000  00000000  00000000  ________________
+// 1fc0:  00000000  00000000  00000000  00000000  ________________
+// 1fd0:  00000000  00000000  00000000  00000000  ________________
+// 1fe0:  00000000  00000000  00000000  00000000  ________________
+// 1ff0:  00000000  00000000  00000000  00000000  ________________
+// 2000:  00000000  00000000  00000000  00000000  ________________
+// 2010:  00000000  00000000  00000000  00000000  ________________
+// 2020:  00000000  00000000  00000000  00000000  ________________
+// 2030:  00000000  00000000  00000000  00000000  ________________
+// 2040:  00000000  00000000  00000000  00000000  ________________
+// 2050:  00000000  00000000  00000000  00000000  ________________
+// 2060:  00000000  00000000  00000000  00000000  ________________
+// 2070:  00000000  00000000  00000000  00000000  ________________
+// 2080:  00000000  00000000  00000000  00000000  ________________
+// 2090:  00000000  00000000  00000000  00000000  ________________
+// 20a0:  00000000  00000000  00000000  01312e94  ____________..1.
+// 20b0:  5b21b8c9  00000001  d1a0ea03  4dcfad11  ..![.___.......M
+// 20c0:  b12a7fbe  1d9ca910  00000000  00000000  .*.....________
+// 20d0:  00000001  00000001  00000000  00000000  .___.___________
+// 20e0:  00000000  013351dc  00000000  00000000  ____.Q3.________
+// 20f0:  00000000  00000000  00000000  00000000  ________________
+// 2100:  00000000  00000000  00000000  00000000  ________________
+// 2110:  00000000  00000000  00000000  00000000  ________________
+// 2120:  00000000  00000000  00000000  00000000  ________________
+// 2130:  00000000  00000000  00000000  00000000  ________________
+// 2140:  00000000  00000000  00000000  00000000  ________________
+// 2150:  00000000  00000000  00000000  00000000  ________________
+// 2160:  00000000  00000000  00000000  00000000  ________________
+// 2170:  00000000  00000000  00000000  00000000  ________________
+// 2180:  00000000  00000000  00000000  00000000  ________________
+// 2190:  00000000  00000000  00000000  00000000  ________________
+// 21a0:  00000000  00000000  00000000  00000000  ________________
+// 21b0:  00000000  00000000  00000000  00000000  ________________
+// 21c0:  00000000  00000000  00000000  00000000  ________________
+// 21d0:  00000000  00000000  00000000  00000000  ________________
+// 21e0:  00000000  00000000  00000000  00000000  ________________
+// 21f0:  00000000  00000000  00000000  00000000  ________________
+// 2200:  00000000  00000000  00000000  00000000  ________________
 // 2210:  00000000  00000000  00000000  00000000  ________________
 // 2220:  00000000  00000000  00000000  00000000  ________________
 // 2230:  00000000  00000000  00000000  00000000  ________________
@@ -854,1692 +931,1692 @@ ret
 // 2270:  00000000  00000000  00000000  00000000  ________________
 // 2280:  00000000  00000000  00000000  00000000  ________________
 // 2290:  00000000  00000000  00000000  00000000  ________________
-// 22a0:  00000000  00000000  00000000  00000000  ________________
-// 22b0:  00000000  00000000  00000000  00000000  ________________
-// 22c0:  00000000  00000000  00000000  00000000  ________________
-// 22d0:  00000000  00000000  00000000  00000000  ________________
-// 22e0:  00000000  00000000  00000000  00000000  ________________
-// 22f0:  00000000  00000000  00000000  00000000  ________________
-// 2300:  00000000  00000000  00000000  00000000  ________________
-// 2310:  00000000  00000000  00000000  00000000  ________________
-// 2320:  00000000  00000000  00000000  00000000  ________________
-// 2330:  00000000  00000000  00000000  00000000  ________________
-// 2340:  00000000  00000000  00000000  00000000  ________________
-// 2350:  00000000  00000000  00000000  00000000  ________________
-// 2360:  00000000  00000000  00000000  00000000  ________________
-// 2370:  00000000  00000000  00000000  00000000  ________________
-// 2380:  00000000  00000000  636e6923  6564756c  ________#include
-// 2390:  6e492220  64756c63  6f432f65  6e6f6d6d   "Include/Common
-// 23a0:  736c682e  0d22696c  730a0d0a  63757274  .hlsli"....struc
-// 23b0:  53502074  504e495f  0a0d5455  200a0d7b  t PS_INPUT..{.. 
-// 23c0:  66202020  74616f6c  6f502034  69746973     float4 Positi
-// 23d0:  3a206e6f  5f565320  49534f50  4e4f4954  on : SV_POSITION
-// 23e0:  200a0d3b  66202020  74616f6c  6f432034  ;..    float4 Co
-// 23f0:  20726f6c  3a202020  4c4f4320  3b30524f  lor    : COLOR0;
-// 2400:  20200a0d  6c662020  3274616f  78655420  ..    float2 Tex
-// 2410:  65727574  203a2020  43584554  44524f4f  ture  : TEXCOORD
-// 2420:  0a0d3b30  20202020  616f6c66  4e203374  0;..    float3 N
-// 2430:  616d726f  2020206c  4f4e203a  4c414d52  ormal   : NORMAL
-// 2440:  200a0d3b  66202020  74616f6c  61542033  ;..    float3 Ta
-// 2450:  6e65676e  3a202074  4e415420  544e4547  ngent  : TANGENT
-// 2460:  200a0d3b  66202020  74616f6c  69422033  ;..    float3 Bi
-// 2470:  6d726f6e  3a206c61  4e494220  414d524f  normal : BINORMA
-// 2480:  0a0d3b4c  20200a0d  6c662020  3374616f  L;....    float3
-// 2490:  65695620  726f5777  6944646c  74636572   ViewWorldDirect
-// 24a0:  206e6f69  4f43203a  31524f4c  0d0a0d3b  ion : COLOR1;...
-// 24b0:  2020200a  6f6c6620  20347461  6867694c  .    float4 Ligh
-// 24c0:  726f5774  6944646c  74636572  206e6f69  tWorldDirection 
-// 24d0:  4f43203a  32524f4c  200a0d3b  66202020  : COLOR2;..    f
-// 24e0:  74616f6c  694c2033  56746867  44776569  loat3 LightViewD
-// 24f0:  63657269  6e6f6974  43203a20  524f4c4f  irection : COLOR
-// 2500:  0a0d3b33  0a0d3b7d  6f430a0d  43726f6c  3;..};....ColorC
-// 2510:  6f706d6f  746e656e  6d6f4320  65747570  omponent Compute
-// 2520:  69626d41  4c746e65  74686769  78695028  AmbientLight(Pix
-// 2530:  6f436c65  6e6f706d  20746e65  65786970  elComponent pixe
-// 2540:  6d6f436c  656e6f70  202c746e  6f6c6f43  lComponent, Colo
-// 2550:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
-// 2560:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
-// 2570:  20545550  3b294e49  6f430a0d  43726f6c  PUT IN);..ColorC
-// 2580:  6f706d6f  746e656e  6d6f4320  65747570  omponent Compute
-// 2590:  65726944  6f697463  4c6c616e  74686769  DirectionalLight
-// 25a0:  78695028  6f436c65  6e6f706d  20746e65  (PixelComponent 
-// 25b0:  65786970  6d6f436c  656e6f70  202c746e  pixelComponent, 
-// 25c0:  6f6c6f43  6d6f4372  656e6f70  6320746e  ColorComponent c
-// 25d0:  726f6c6f  706d6f43  6e656e6f  50202c74  olorComponent, P
-// 25e0:  4e495f53  20545550  3b294e49  6f430a0d  S_INPUT IN);..Co
-// 25f0:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
-// 2600:  65747570  6e696f50  67694c74  50287468  putePointLight(P
-// 2610:  6c657869  706d6f43  6e656e6f  69702074  ixelComponent pi
-// 2620:  436c6578  6f706d6f  746e656e  6f43202c  xelComponent, Co
-// 2630:  43726f6c  6f706d6f  746e656e  6c6f6320  lorComponent col
-// 2640:  6f43726f  6e6f706d  2c746e65  5f535020  orComponent, PS_
-// 2650:  55504e49  4e492054  0a0d3b29  6f6c6f43  INPUT IN);..Colo
-// 2660:  6d6f4372  656e6f70  4320746e  75706d6f  rComponent Compu
-// 2670:  70536574  694c746f  28746867  65786950  teSpotLight(Pixe
-// 2680:  6d6f436c  656e6f70  7020746e  6c657869  lComponent pixel
-// 2690:  706d6f43  6e656e6f  43202c74  726f6c6f  Component, Color
-// 26a0:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
-// 26b0:  6f706d6f  746e656e  5350202c  504e495f  omponent, PS_INP
-// 26c0:  49205455  0d3b294e  500a0d0a  6c657869  UT IN);....Pixel
-// 26d0:  706d6f43  6e656e6f  6f432074  7475706d  Component Comput
-// 26e0:  78695065  6f436c65  6e6f706d  28746e65  ePixelComponent(
-// 26f0:  495f5350  5455504e  294e4920  0d0a0d3b  PS_INPUT IN);...
-// 2700:  6f6c660a  20347461  4d5f5350  284e4941  .float4 PS_MAIN(
-// 2710:  5f535020  55504e49  4e492054  3a202920   PS_INPUT IN ) :
-// 2720:  5f565320  67726154  0a0d7465  200a0d7b   SV_Target..{.. 
-// 2730:  43202020  726f6c6f  706d6f43  6e656e6f     ColorComponen
-// 2740:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
-// 2750:  200a0d3b  50202020  6c657869  706d6f43  ;..    PixelComp
-// 2760:  6e656e6f  69702074  436c6578  6f706d6f  onent pixelCompo
-// 2770:  746e656e  200a0d3b  66202020  74616f6c  nent;..    float
-// 2780:  554f2034  20202054  20202020  6628203d  4 OUT       = (f
-// 2790:  74616f6c  30202934  0d0a0d3b  2020200a  loat4) 0;....   
-// 27a0:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
-// 27b0:  69626d41  20746e65  6628203d  74616f6c  Ambient = (float
-// 27c0:  30202933  200a0d3b  63202020  726f6c6f  3) 0;..    color
-// 27d0:  706d6f43  6e656e6f  69442e74  73756666  Component.Diffus
-// 27e0:  203d2065  6f6c6628  29337461  0d3b3020  e = (float3) 0;.
-// 27f0:  2020200a  6c6f6320  6f43726f  6e6f706d  .    colorCompon
-// 2800:  2e746e65  63657053  72616c75  28203d20  ent.Specular = (
-// 2810:  616f6c66  20293374  0a0d3b30  20200a0d  float3) 0;....  
-// 2820:  69702020  436c6578  6f706d6f  746e656e    pixelComponent
-// 2830:  43203d20  75706d6f  69506574  436c6578   = ComputePixelC
-// 2840:  6f706d6f  746e656e  294e4928  0d0a0d3b  omponent(IN);...
-// 2850:  2020200a  6c6f6320  6f43726f  6e6f706d  .    colorCompon
-// 2860:  20746e65  6f43203d  7475706d  626d4165  ent = ComputeAmb
-// 2870:  746e6569  6867694c  69702874  436c6578  ientLight(pixelC
-// 2880:  6f706d6f  746e656e  6f63202c  43726f6c  omponent, colorC
-// 2890:  6f706d6f  746e656e  4e49202c  0a0d3b29  omponent, IN);..
-// 28a0:  20202020  6f6c6f63  6d6f4372  656e6f70      colorCompone
-// 28b0:  3d20746e  6d6f4320  65747570  65726944  nt = ComputeDire
-// 28c0:  6f697463  4c6c616e  74686769  78697028  ctionalLight(pix
-// 28d0:  6f436c65  6e6f706d  2c746e65  6c6f6320  elComponent, col
-// 28e0:  6f43726f  6e6f706d  2c746e65  294e4920  orComponent, IN)
-// 28f0:  0d0a0d3b  2020200a  54554f20  6267722e  ;....    OUT.rgb
-// 2900:  63203d20  726f6c6f  706d6f43  6e656e6f   = colorComponen
-// 2910:  6d412e74  6e656962  202b2074  6f6c6f63  t.Ambient + colo
-// 2920:  6d6f4372  656e6f70  442e746e  75666669  rComponent.Diffu
-// 2930:  2b206573  6c6f6320  6f43726f  6e6f706d  se + colorCompon
-// 2940:  2e746e65  63657053  72616c75  200a0d3b  ent.Specular;.. 
-// 2950:  4f202020  612e5455  3d202020  302e3120     OUT.a   = 1.0
-// 2960:  0a0d3b66  20200a0d  65722020  6e727574  f;....    return
-// 2970:  54554f20  7d0a0d3b  0a0d0a0d  6f6c6f43   OUT;..}....Colo
-// 2980:  6d6f4372  656e6f70  4320746e  75706d6f  rComponent Compu
-// 2990:  6d416574  6e656962  67694c74  50287468  teAmbientLight(P
-// 29a0:  6c657869  706d6f43  6e656e6f  69702074  ixelComponent pi
-// 29b0:  436c6578  6f706d6f  746e656e  6f43202c  xelComponent, Co
-// 29c0:  43726f6c  6f706d6f  746e656e  6c6f6320  lorComponent col
-// 29d0:  6f43726f  6e6f706d  2c746e65  5f535020  orComponent, PS_
-// 29e0:  55504e49  4e492054  7b0a0d29  20200a0d  INPUT IN)..{..  
-// 29f0:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
-// 2a00:  626d412e  746e6569  203d2b20  69626d41  .Ambient += Ambi
-// 2a10:  43746e65  726f6c6f  6267722e  41202a20  entColor.rgb * A
-// 2a20:  6569626d  6f43746e  2e726f6c  202a2061  mbientColor.a * 
-// 2a30:  65786970  6d6f436c  656e6f70  442e746e  pixelComponent.D
-// 2a40:  75666669  722e6573  0d3b6267  2020200a  iffuse.rgb;..   
-// 2a50:  74657220  206e7275  6f6c6f63  6d6f4372   return colorCom
-// 2a60:  656e6f70  0d3b746e  0a0d7d0a  6f430a0d  ponent;..}....Co
-// 2a70:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
-// 2a80:  65747570  65726944  6f697463  4c6c616e  puteDirectionalL
-// 2a90:  74686769  78695028  6f436c65  6e6f706d  ight(PixelCompon
-// 2aa0:  20746e65  65786970  6d6f436c  656e6f70  ent pixelCompone
-// 2ab0:  202c746e  6f6c6f43  6d6f4372  656e6f70  nt, ColorCompone
-// 2ac0:  6320746e  726f6c6f  706d6f43  6e656e6f  nt colorComponen
-// 2ad0:  50202c74  4e495f53  20545550  0d294e49  t, PS_INPUT IN).
-// 2ae0:  0a0d7b0a  20202020  616f6c66  72203374  .{..    float3 r
-// 2af0:  65566665  726f7463  28203d20  616f6c66  efVector = (floa
-// 2b00:  20293374  0a0d3b30  20202020  616f6c66  t3) 0;..    floa
-// 2b10:  6c203374  74686769  65726944  6f697463  t3 lightDirectio
-// 2b20:  203d206e  6d726f6e  7a696c61  4c2d2865  n = normalize(-L
-// 2b30:  74686769  65726944  6f697463  79782e6e  ightDirection.xy
-// 2b40:  0d3b297a  2020200a  6f6c6620  6e207461  z);..    float n
-// 2b50:  746f645f  3d206c5f  746f6420  67696c28  _dot_l = dot(lig
-// 2b60:  69447468  74636572  2c6e6f69  726f6e20  htDirection, nor
-// 2b70:  696c616d  4928657a  6f4e2e4e  6c616d72  malize(IN.Normal
-// 2b80:  0d3b2929  200a0d0a  69202020  6e282066  ));....    if (n
-// 2b90:  746f645f  3e206c5f  0d293020  2020200a  _dot_l > 0)..   
-// 2ba0:  0a0d7b20  2f2f0909  3d204420  20646b20   {....// D = kd 
-// 2bb0:  646c202a  6d202a20  200a0d64  20202020  * ld * md..     
-// 2bc0:  63202020  726f6c6f  706d6f43  6e656e6f     colorComponen
-// 2bd0:  69442e74  73756666  3d2b2065  78616d20  t.Diffuse += max
-// 2be0:  645f6e28  6c5f746f  2e30202c  20296630  (n_dot_l, 0.0f) 
-// 2bf0:  694c202a  43746867  726f6c6f  6267722e  * LightColor.rgb
-// 2c00:  4c202a20  74686769  6f6c6f43  20612e72   * LightColor.a 
-// 2c10:  6970202a  436c6578  6f706d6f  746e656e  * pixelComponent
-// 2c20:  6669442e  65737566  6267722e  0d0a0d3b  .Diffuse.rgb;...
-// 2c30:  2f09090a  2052202f  2049203d  2832202d  ...// R = I - 2(
-// 2c40:  29492e6e  6e202a20  20200a0d  20202020  n.I) * n..      
-// 2c50:  65722020  63655666  20726f74  6f6e203d    refVector = no
-// 2c60:  6c616d72  28657a69  6c666572  28746365  rmalize(reflect(
-// 2c70:  6867696c  72694474  69746365  202c6e6f  lightDirection, 
-// 2c80:  65786970  6d6f436c  656e6f70  4e2e746e  pixelComponent.N
-// 2c90:  616d726f  3b29296c  0a0d0a0d  2f2f0909  ormal));......//
-// 2ca0:  3d205320  78616d20  746f6428  522e5628   S = max(dot(V.R
-// 2cb0:  29302c29  2a20505e  65705320  616c7563  ),0)^P * Specula
-// 2cc0:  6c6f4372  722e726f  2a206267  65705320  rColor.rgb * Spe
-// 2cd0:  616c7563  6c6f4372  612e726f  63202a20  cularColor.a * c
-// 2ce0:  726f6c6f  6267722e  200a0d3b  20202020  olor.rgb;..     
-// 2cf0:  63202020  726f6c6f  706d6f43  6e656e6f     colorComponen
-// 2d00:  70532e74  6c756365  2b207261  6f70203d  t.Specular += po
-// 2d10:  616d2877  6f642878  4e492874  6569562e  w(max(dot(IN.Vie
-// 2d20:  726f5777  6944646c  74636572  2c6e6f69  wWorldDirection,
-// 2d30:  66657220  74636556  2c29726f  2c293020   refVector), 0),
-// 2d40:  65705320  616c7563  776f5072  20297265   SpecularPower) 
-// 2d50:  7053202a  6c756365  6f437261  2e726f6c  * SpecularColor.
-// 2d60:  20626772  6970202a  436c6578  6f706d6f  rgb * pixelCompo
-// 2d70:  746e656e  6570532e  616c7563  67722e72  nent.Specular.rg
-// 2d80:  202a2062  65786970  6d6f436c  656e6f70  b * pixelCompone
-// 2d90:  442e746e  75666669  722e6573  0d3b6267  nt.Diffuse.rgb;.
-// 2da0:  2020200a  0a0d7d20  20200a0d  65722020  .    }....    re
-// 2db0:  6e727574  6c6f6320  6f43726f  6e6f706d  turn colorCompon
-// 2dc0:  3b746e65  0d7d0a0d  430a0d0a  726f6c6f  ent;..}....Color
-// 2dd0:  706d6f43  6e656e6f  6f432074  7475706d  Component Comput
-// 2de0:  696f5065  694c746e  28746867  65786950  ePointLight(Pixe
-// 2df0:  6d6f436c  656e6f70  7020746e  6c657869  lComponent pixel
-// 2e00:  706d6f43  6e656e6f  43202c74  726f6c6f  Component, Color
-// 2e10:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
-// 2e20:  6f706d6f  746e656e  5350202c  504e495f  omponent, PS_INP
-// 2e30:  49205455  0a0d294e  0d0a0d7b  0a0d7d0a  UT IN)..{....}..
-// 2e40:  6f430a0d  43726f6c  6f706d6f  746e656e  ..ColorComponent
-// 2e50:  6d6f4320  65747570  746f7053  6867694c   ComputeSpotLigh
-// 2e60:  69502874  436c6578  6f706d6f  746e656e  t(PixelComponent
-// 2e70:  78697020  6f436c65  6e6f706d  2c746e65   pixelComponent,
-// 2e80:  6c6f4320  6f43726f  6e6f706d  20746e65   ColorComponent 
-// 2e90:  6f6c6f63  6d6f4372  656e6f70  202c746e  colorComponent, 
-// 2ea0:  495f5350  5455504e  294e4920  0d7b0a0d  PS_INPUT IN)..{.
-// 2eb0:  7d0a0d0a  0a0d0a0d  65786950  6d6f436c  ...}....PixelCom
-// 2ec0:  656e6f70  4320746e  75706d6f  69506574  ponent ComputePi
-// 2ed0:  436c6578  6f706d6f  746e656e  5f535028  xelComponent(PS_
-// 2ee0:  55504e49  4e492054  7b0a0d29  20200a0d  INPUT IN)..{..  
-// 2ef0:  69502020  436c6578  6f706d6f  746e656e    PixelComponent
-// 2f00:  78697020  6f436c65  6e6f706d  3b746e65   pixelComponent;
-// 2f10:  0a0d0a0d  20202020  65786970  6d6f436c  ....    pixelCom
-// 2f20:  656e6f70  442e746e  75666669  3d206573  ponent.Diffuse =
-// 2f30:  6c662820  3474616f  3b302029  20200a0d   (float4) 0;..  
-// 2f40:  69702020  436c6578  6f706d6f  746e656e    pixelComponent
-// 2f50:  6570532e  616c7563  203d2072  6f6c6628  .Specular = (flo
-// 2f60:  29337461  0d3b3020  2020200a  78697020  at3) 0;..    pix
-// 2f70:  6f436c65  6e6f706d  2e746e65  6d726f4e  elComponent.Norm
-// 2f80:  3d206c61  6c662820  3374616f  3b302029  al = (float3) 0;
-// 2f90:  0a0d0a0d  20202020  28206669  44736148  ....    if (HasD
-// 2fa0:  75666669  65546573  72757478  3d3d2065  iffuseTexture ==
-// 2fb0:  75727420  26262065  67694c20  79547468   true && LightTy
-// 2fc0:  3d206570  2932203d  20200a0d  0d7b2020  pe == 2)..    {.
-// 2fd0:  2020200a  20202020  78697020  6f436c65  .        pixelCo
-// 2fe0:  6e6f706d  2e746e65  66666944  20657375  mponent.Diffuse 
-// 2ff0:  6944203d  73756666  78655465  65727574  = DiffuseTexture
-// 3000:  6d61532e  28656c70  6f6c6f43  6d615372  .Sample(ColorSam
-// 3010:  72656c70  4e49202c  7865542e  65727574  pler, IN.Texture
-// 3020:  0a0d3b29  20202020  200a0d7d  65202020  );..    }..    e
-// 3030:  0d65736c  2020200a  0a0d7b20  20202020  lse..    {..    
-// 3040:  20202020  65786970  6d6f436c  656e6f70      pixelCompone
-// 3050:  442e746e  75666669  3d206573  2e4e4920  nt.Diffuse = IN.
-// 3060:  6f6c6f43  0a0d3b72  20202020  0d0a0d7d  Color;..    }...
-// 3070:  2020200a  20666920  73614828  63657053  .    if (HasSpec
-// 3080:  72616c75  74786554  20657275  74203d3d  ularTexture == t
-// 3090:  29657572  20200a0d  0d7b2020  2020200a  rue)..    {..   
-// 30a0:  20202020  78697020  6f436c65  6e6f706d       pixelCompon
-// 30b0:  2e746e65  63657053  72616c75  53203d20  ent.Specular = S
-// 30c0:  75636570  5472616c  75747865  532e6572  pecularTexture.S
-// 30d0:  6c706d61  6f432865  53726f6c  6c706d61  ample(ColorSampl
-// 30e0:  202c7265  542e4e49  75747865  2e296572  er, IN.Texture).
-// 30f0:  3b7a7978  20200a0d  0d7d2020  2020200a  xyz;..    }..   
-// 3100:  736c6520  200a0d65  7b202020  20200a0d   else..    {..  
-// 3110:  20202020  69702020  436c6578  6f706d6f        pixelCompo
-// 3120:  746e656e  6570532e  616c7563  203d2072  nent.Specular = 
-// 3130:  63657053  72616c75  6f6c6f43  67722e72  SpecularColor.rg
-// 3140:  0a0d3b62  20202020  0d0a0d7d  2020200a  b;..    }....   
-// 3150:  20666920  73614828  6d726f4e  65546c61   if (HasNormalTe
-// 3160:  72757478  3d3d2065  75727420  0a0d2965  xture == true)..
-// 3170:  20202020  200a0d7b  20202020  66202020      {..        f
-// 3180:  74616f6c  61732033  656c706d  726f4e64  loat3 sampledNor
-// 3190:  206c616d  3228203d  4e202a20  616d726f  mal = (2 * Norma
-// 31a0:  7865546c  65727574  6d61532e  28656c70  lTexture.Sample(
-// 31b0:  6f6c6f43  6d615372  72656c70  4e49202c  ColorSampler, IN
-// 31c0:  7865542e  65727574  79782e29  2d20297a  .Texture).xyz) -
-// 31d0:  302e3120  0a0d3b66  20202020  20202020   1.0f;..        
-// 31e0:  616f6c66  33783374  6e627420  66203d20  float3x3 tbn = f
-// 31f0:  74616f6c  28337833  542e4e49  65676e61  loat3x3(IN.Tange
-// 3200:  202c746e  422e4e49  726f6e69  2c6c616d  nt, IN.Binormal,
-// 3210:  2e4e4920  6d726f4e  3b296c61  20200a0d   IN.Normal);..  
-// 3220:  20202020  69702020  436c6578  6f706d6f        pixelCompo
-// 3230:  746e656e  726f4e2e  206c616d  756d203d  nent.Normal = mu
-// 3240:  6173286c  656c706d  726f4e64  2c6c616d  l(sampledNormal,
-// 3250:  6e627420  0a0d3b29  20202020  200a0d7d   tbn);..    }.. 
-// 3260:  65202020  0d65736c  2020200a  0a0d7b20     else..    {..
-// 3270:  20202020  20202020  65786970  6d6f436c          pixelCom
-// 3280:  656e6f70  4e2e746e  616d726f  203d206c  ponent.Normal = 
-// 3290:  6d726f6e  7a696c61  4e492865  726f4e2e  normalize(IN.Nor
-// 32a0:  296c616d  200a0d3b  7d202020  0a0d0a0d  mal);..    }....
-// 32b0:  20202020  75746572  70206e72  6c657869      return pixel
-// 32c0:  706d6f43  6e656e6f  0a0d3b74  0000007d  Component;..}___
-// 32d0:  00000000  00000000  00000000  00000000  ________________
-// 32e0:  00000000  00000000  00000000  00000000  ________________
-// 32f0:  00000000  00000000  00000000  00000000  ________________
-// 3300:  00000000  00000000  00000000  00000000  ________________
-// 3310:  00000000  00000000  00000000  00000000  ________________
-// 3320:  00000000  00000000  00000000  00000000  ________________
-// 3330:  00000000  00000000  00000000  00000000  ________________
-// 3340:  00000000  00000000  00000000  00000000  ________________
-// 3350:  00000000  00000000  00000000  00000000  ________________
-// 3360:  00000000  00000000  00000000  00000000  ________________
-// 3370:  00000000  00000000  00000000  00000000  ________________
-// 3380:  00000000  00000000  66656423  20656e69  ________#define 
-// 3390:  4e494f50  494c5f54  20544847  66302e30  POINT_LIGHT 0.0f
-// 33a0:  64230a0d  6e696665  50532065  4c5f544f  ..#define SPOT_L
-// 33b0:  54484749  302e3120  230a0d66  69666564  IGHT 1.0f..#defi
-// 33c0:  4420656e  43455249  4e4f4954  4c5f4c41  ne DIRECTIONAL_L
-// 33d0:  54484749  302e3220  0d0a0d66  6564230a  IGHT 2.0f....#de
-// 33e0:  656e6966  494c4620  45545f50  52555458  fine FLIP_TEXTUR
-// 33f0:  20595f45  0d0a0d31  630a0d0a  66667562  E_Y 1......cbuff
-// 3400:  46207265  656d6172  736e6f43  746e6174  er FrameConstant
-// 3410:  66667542  3a207265  67657220  65747369  Buffer : registe
-// 3420:  30622872  7b0a0d29  20200a0d  616d2020  r(b0)..{..    ma
-// 3430:  78697274  65695620  0a0d3b77  20202020  trix View;..    
-// 3440:  7274616d  50207869  656a6f72  6f697463  matrix Projectio
-// 3450:  0a0d3b6e  20200a0d  6c662020  3374616f  n;....    float3
-// 3460:  6d614320  50617265  7469736f  3b6e6f69   CameraPosition;
-// 3470:  0d7d0a0d  630a0d0a  66667562  4f207265  ..}....cbuffer O
-// 3480:  63656a62  6e6f4374  6e617473  66754274  bjectConstantBuf
-// 3490:  20726566  6572203a  74736967  62287265  fer : register(b
-// 34a0:  0a0d2931  200a0d7b  6d202020  69727461  1)..{..    matri
-// 34b0:  6f572078  3b646c72  0a0d0a0d  20202020  x World;....    
-// 34c0:  616f6c66  53203474  75636570  4372616c  float4 SpecularC
-// 34d0:  726f6c6f  200a0d3b  66202020  74616f6c  olor;..    float
-// 34e0:  70532020  6c756365  6f507261  3b726577    SpecularPower;
-// 34f0:  0a0d0a0d  20202020  6c6f6f62  48202020  ....    bool   H
-// 3500:  69447361  73756666  78655465  65727574  asDiffuseTexture
-// 3510:  200a0d3b  62202020  206c6f6f  61482020  ;..    bool   Ha
-// 3520:  65705373  616c7563  78655472  65727574  sSpecularTexture
-// 3530:  200a0d3b  62202020  206c6f6f  61482020  ;..    bool   Ha
-// 3540:  726f4e73  546c616d  75747865  0d3b6572  sNormalTexture;.
-// 3550:  0a0d7d0a  62630a0d  65666675  694c2072  .}....cbuffer Li
-// 3560:  43746867  74736e6f  42746e61  65666675  ghtConstantBuffe
-// 3570:  203a2072  69676572  72657473  29326228  r : register(b2)
-// 3580:  0d7b0a0d  2020200a  6f6c6620  20347461  ..{..    float4 
-// 3590:  69626d41  43746e65  726f6c6f  0d0a0d3b  AmbientColor;...
-// 35a0:  2020200a  6f6c6620  20347461  6867694c  .    float4 Ligh
-// 35b0:  6c6f4374  0d3b726f  2020200a  6f6c6620  tColor;..    flo
-// 35c0:  20337461  6867694c  72694474  69746365  at3 LightDirecti
-// 35d0:  0d3b6e6f  2020200a  6f6c6620  20337461  on;..    float3 
-// 35e0:  6867694c  736f5074  6f697469  0a0d3b6e  LightPosition;..
-// 35f0:  20202020  616f6c66  4c202074  74686769      float  Light
-// 3600:  69646152  0d3b7375  2020200a  746e6920  Radius;..    int
-// 3610:  20202020  6867694c  70795474  0a0d3b65      LightType;..
-// 3620:  0d0a0d7d  7865540a  65727574  44204432  }....Texture2D D
-// 3630:  75666669  65546573  72757478  203a2065  iffuseTexture : 
-// 3640:  69676572  72657473  29307428  540a0d3b  register(t0);..T
-// 3650:  75747865  44326572  65705320  616c7563  exture2D Specula
-// 3660:  78655472  65727574  72203a20  73696765  rTexture : regis
-// 3670:  28726574  3b293174  65540a0d  72757478  ter(t1);..Textur
-// 3680:  20443265  6d726f4e  65546c61  72757478  e2D NormalTextur
-// 3690:  203a2065  69676572  72657473  29327428  e : register(t2)
-// 36a0:  0d0a0d3b  6d61530a  72656c70  74617453  ;....SamplerStat
-// 36b0:  6f432065  53726f6c  6c706d61  3a207265  e ColorSampler :
-// 36c0:  67657220  65747369  30732872  0a0d3b29   register(s0);..
-// 36d0:  74730a0d  74637572  6c6f4320  6f43726f  ..struct ColorCo
-// 36e0:  6e6f706d  0d746e65  0a0d7b0a  20202020  mponent..{..    
-// 36f0:  616f6c66  41203374  6569626d  0d3b746e  float3 Ambient;.
-// 3700:  2020200a  6f6c6620  20337461  66666944  .    float3 Diff
-// 3710:  3b657375  20200a0d  6c662020  3374616f  use;..    float3
-// 3720:  65705320  616c7563  0a0d3b72  0a0d3b7d   Specular;..};..
-// 3730:  74730a0d  74637572  78695020  6f436c65  ..struct PixelCo
-// 3740:  6e6f706d  0d746e65  0a0d7b0a  20202020  mponent..{..    
-// 3750:  616f6c66  44203474  75666669  0d3b6573  float4 Diffuse;.
-// 3760:  2020200a  6f6c6620  20337461  63657053  .    float3 Spec
-// 3770:  72616c75  200a0d3b  66202020  74616f6c  ular;..    float
-// 3780:  6f4e2033  6c616d72  7d0a0d3b  0d0a0d3b  3 Normal;..};...
-// 3790:  6f6c660a  20327461  43746547  6572726f  .float2 GetCorre
-// 37a0:  64657463  74786554  43657275  64726f6f  ctedTextureCoord
-// 37b0:  74616e69  6c662865  3274616f  78657420  inate(float2 tex
-// 37c0:  65727574  726f6f43  616e6964  0d296574  tureCoordinate).
-// 37d0:  0a0d7b0a  20666923  50494c46  5845545f  .{..#if FLIP_TEX
-// 37e0:  45525554  0a0d595f  20202020  75746572  TURE_Y..    retu
-// 37f0:  66206e72  74616f6c  65742832  72757478  rn float2(textur
-// 3800:  6f6f4365  6e696472  2e657461  31202c78  eCoordinate.x, 1
-// 3810:  2d20302e  78657420  65727574  726f6f43  .0 - textureCoor
-// 3820:  616e6964  792e6574  0a0d3b29  736c6523  dinate.y);..#els
-// 3830:  200a0d65  72202020  72757465  6574206e  e..    return te
-// 3840:  72757478  6f6f4365  6e696472  3b657461  xtureCoordinate;
-// 3850:  65230a0d  6669646e  007d0a0d  00000000  ..#endif..}_____
+// 22a0:  00000000  00000000  00000000  20200a0d  ____________..  
+// 22b0:  6c662020  3274616f  78655420  65727574    float2 Texture
+// 22c0:  203a2020  43584554  44524f4f  0a0d3b30    : TEXCOORD0;..
+// 22d0:  20202020  616f6c66  4e203374  616d726f      float3 Norma
+// 22e0:  2020206c  4f4e203a  4c414d52  200a0d3b  l   : NORMAL;.. 
+// 22f0:  66202020  74616f6c  61542033  6e65676e     float3 Tangen
+// 2300:  3a202074  4e415420  544e4547  200a0d3b  t  : TANGENT;.. 
+// 2310:  66202020  74616f6c  69422033  6d726f6e     float3 Binorm
+// 2320:  3a206c61  4e494220  414d524f  0a0d3b4c  al : BINORMAL;..
+// 2330:  20200a0d  6c662020  3374616f  65695620  ..    float3 Vie
+// 2340:  726f5777  6944646c  74636572  206e6f69  wWorldDirection 
+// 2350:  4f43203a  31524f4c  0d0a0d3b  2020200a  : COLOR1;....   
+// 2360:  6f6c6620  20347461  6867694c  726f5774   float4 LightWor
+// 2370:  6944646c  74636572  206e6f69  4f43203a  ldDirection : CO
+// 2380:  32524f4c  200a0d3b  66202020  74616f6c  LOR2;..    float
+// 2390:  694c2033  56746867  44776569  63657269  3 LightViewDirec
+// 23a0:  6e6f6974  43203a20  524f4c4f  0a0d3b33  tion : COLOR3;..
+// 23b0:  0a0d3b7d  6f430a0d  43726f6c  6f706d6f  };....ColorCompo
+// 23c0:  746e656e  6d6f4320  65747570  69626d41  nent ComputeAmbi
+// 23d0:  4c746e65  74686769  78695028  6f436c65  entLight(PixelCo
+// 23e0:  6e6f706d  20746e65  65786970  6d6f436c  mponent pixelCom
+// 23f0:  656e6f70  202c746e  6f6c6f43  6d6f4372  ponent, ColorCom
+// 2400:  656e6f70  6320746e  726f6c6f  706d6f43  ponent colorComp
+// 2410:  6e656e6f  50202c74  4e495f53  20545550  onent, PS_INPUT 
+// 2420:  3b294e49  6f430a0d  43726f6c  6f706d6f  IN);..ColorCompo
+// 2430:  746e656e  6d6f4320  65747570  65726944  nent ComputeDire
+// 2440:  6f697463  4c6c616e  74686769  78695028  ctionalLight(Pix
+// 2450:  6f436c65  6e6f706d  20746e65  65786970  elComponent pixe
+// 2460:  6d6f436c  656e6f70  202c746e  6f6c6f43  lComponent, Colo
+// 2470:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
+// 2480:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
+// 2490:  20545550  3b294e49  6f430a0d  43726f6c  PUT IN);..ColorC
+// 24a0:  6f706d6f  746e656e  6d6f4320  00005ac6  omponent Com.Z__
+// 24b0:  00018375  0003e84c  00012ea1  0001caa2  u.._L.._..._..._
+// 24c0:  0002131c  00012441  0001b3ec  00008b91  ..._A$._..._..__
+// 24d0:  0001d7c0  00035dda  00010ecd  000321c1  ..._.]._..._.!._
+// 24e0:  0002a696  0003f22d  00020bda  000037ce  ..._-.._..._.7__
+// 24f0:  0001cb31  0002f109  0003e692  0001c0dc  1.._..._..._..._
+// 2500:  0000e27d  00029ad6  000212e5  0003acb8  }.__..._..._..._
+// 2510:  00011376  0001b964  00022352  000201c0  v.._d.._R#._..._
+// 2520:  00019938  00004f50  0001ed84  0002c27e  8.._PO__..._~.._
+// 2530:  00001000  00000000  00000000  00000000  _.______________
+// 2540:  00000000  00000000  00000000  00000000  ________________
+// 2550:  00000000  00000000  00000000  00000000  ________________
+// 2560:  00000000  00000000  00000000  00000000  ________________
+// 2570:  00000000  00000000  00000000  00000000  ________________
+// 2580:  00000000  00000000  00000000  00000000  ________________
+// 2590:  00000000  00000000  00000000  00000000  ________________
+// 25a0:  00000000  00000000  00000000  00000000  ________________
+// 25b0:  00000000  00000000  00000000  00000000  ________________
+// 25c0:  00000000  00000000  00000000  00000000  ________________
+// 25d0:  00000000  00000000  00000000  00000000  ________________
+// 25e0:  00000000  00000000  00000000  00000000  ________________
+// 25f0:  00000000  00000000  00000000  00000000  ________________
+// 2600:  00000000  00000000  00000000  00000000  ________________
+// 2610:  00000000  00000000  00000000  00000000  ________________
+// 2620:  00000000  00000000  00000000  00000000  ________________
+// 2630:  00000000  00000000  00000000  00000000  ________________
+// 2640:  00000000  00000000  00000000  00000000  ________________
+// 2650:  00000000  00000000  00000000  00000000  ________________
+// 2660:  00000000  00000000  00000000  00000000  ________________
+// 2670:  00000000  00000000  00000000  00000000  ________________
+// 2680:  00000000  00000000  00000000  00000000  ________________
+// 2690:  00000000  00000000  00000000  00000000  ________________
+// 26a0:  00000000  00000000  00000000  636e6923  ____________#inc
+// 26b0:  6564756c  6e492220  64756c63  6f432f65  lude "Include/Co
+// 26c0:  6e6f6d6d  736c682e  0d22696c  730a0d0a  mmon.hlsli"....s
+// 26d0:  63757274  53502074  504e495f  0a0d5455  truct PS_INPUT..
+// 26e0:  200a0d7b  66202020  74616f6c  6f502034  {..    float4 Po
+// 26f0:  69746973  3a206e6f  5f565320  49534f50  sition : SV_POSI
+// 2700:  4e4f4954  200a0d3b  66202020  74616f6c  TION;..    float
+// 2710:  6f432034  20726f6c  3a202020  4c4f4320  4 Color    : COL
+// 2720:  3b30524f  20200a0d  6c662020  3274616f  OR0;..    float2
+// 2730:  78655420  65727574  203a2020  43584554   Texture  : TEXC
+// 2740:  44524f4f  0a0d3b30  20202020  616f6c66  OORD0;..    floa
+// 2750:  4e203374  616d726f  2020206c  4f4e203a  t3 Normal   : NO
+// 2760:  4c414d52  200a0d3b  66202020  74616f6c  RMAL;..    float
+// 2770:  61542033  6e65676e  3a202074  4e415420  3 Tangent  : TAN
+// 2780:  544e4547  200a0d3b  66202020  74616f6c  GENT;..    float
+// 2790:  69422033  6d726f6e  3a206c61  4e494220  3 Binormal : BIN
+// 27a0:  414d524f  0a0d3b4c  20200a0d  6c662020  ORMAL;....    fl
+// 27b0:  3374616f  65695620  726f5777  6944646c  oat3 ViewWorldDi
+// 27c0:  74636572  206e6f69  4f43203a  31524f4c  rection : COLOR1
+// 27d0:  0d0a0d3b  2020200a  6f6c6620  20347461  ;....    float4 
+// 27e0:  6867694c  726f5774  6944646c  74636572  LightWorldDirect
+// 27f0:  206e6f69  4f43203a  32524f4c  200a0d3b  ion : COLOR2;.. 
+// 2800:  66202020  74616f6c  694c2033  56746867     float3 LightV
+// 2810:  44776569  63657269  6e6f6974  43203a20  iewDirection : C
+// 2820:  524f4c4f  0a0d3b33  0a0d3b7d  6f430a0d  OLOR3;..};....Co
+// 2830:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
+// 2840:  65747570  69626d41  4c746e65  74686769  puteAmbientLight
+// 2850:  78695028  6f436c65  6e6f706d  20746e65  (PixelComponent 
+// 2860:  65786970  6d6f436c  656e6f70  202c746e  pixelComponent, 
+// 2870:  6f6c6f43  6d6f4372  656e6f70  6320746e  ColorComponent c
+// 2880:  726f6c6f  706d6f43  6e656e6f  50202c74  olorComponent, P
+// 2890:  4e495f53  20545550  3b294e49  6f430a0d  S_INPUT IN);..Co
+// 28a0:  43726f6c  6f706d6f  746e656e  6d6f4320  lorComponent Com
+// 28b0:  65747570  65726944  6f697463  4c6c616e  puteDirectionalL
+// 28c0:  74686769  78695028  6f436c65  6e6f706d  ight(PixelCompon
+// 28d0:  20746e65  65786970  6d6f436c  656e6f70  ent pixelCompone
+// 28e0:  202c746e  6f6c6f43  6d6f4372  656e6f70  nt, ColorCompone
+// 28f0:  6320746e  726f6c6f  706d6f43  6e656e6f  nt colorComponen
+// 2900:  50202c74  4e495f53  20545550  3b294e49  t, PS_INPUT IN);
+// 2910:  6f430a0d  43726f6c  6f706d6f  746e656e  ..ColorComponent
+// 2920:  6d6f4320  65747570  6e696f50  67694c74   ComputePointLig
+// 2930:  50287468  6c657869  706d6f43  6e656e6f  ht(PixelComponen
+// 2940:  69702074  436c6578  6f706d6f  746e656e  t pixelComponent
+// 2950:  6f43202c  43726f6c  6f706d6f  746e656e  , ColorComponent
+// 2960:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
+// 2970:  5f535020  55504e49  4e492054  0a0d3b29   PS_INPUT IN);..
+// 2980:  6f6c6f43  6d6f4372  656e6f70  4320746e  ColorComponent C
+// 2990:  75706d6f  70536574  694c746f  28746867  omputeSpotLight(
+// 29a0:  65786950  6d6f436c  656e6f70  7020746e  PixelComponent p
+// 29b0:  6c657869  706d6f43  6e656e6f  43202c74  ixelComponent, C
+// 29c0:  726f6c6f  706d6f43  6e656e6f  6f632074  olorComponent co
+// 29d0:  43726f6c  6f706d6f  746e656e  5350202c  lorComponent, PS
+// 29e0:  504e495f  49205455  0d3b294e  500a0d0a  _INPUT IN);....P
+// 29f0:  6c657869  706d6f43  6e656e6f  6f432074  ixelComponent Co
+// 2a00:  7475706d  78695065  6f436c65  6e6f706d  mputePixelCompon
+// 2a10:  28746e65  495f5350  5455504e  294e4920  ent(PS_INPUT IN)
+// 2a20:  0d0a0d3b  6f6c660a  20347461  4d5f5350  ;....float4 PS_M
+// 2a30:  284e4941  5f535020  55504e49  4e492054  AIN( PS_INPUT IN
+// 2a40:  3a202920  5f565320  67726154  0a0d7465   ) : SV_Target..
+// 2a50:  200a0d7b  43202020  726f6c6f  706d6f43  {..    ColorComp
+// 2a60:  6e656e6f  6f632074  43726f6c  6f706d6f  onent colorCompo
+// 2a70:  746e656e  200a0d3b  50202020  6c657869  nent;..    Pixel
+// 2a80:  706d6f43  6e656e6f  69702074  436c6578  Component pixelC
+// 2a90:  6f706d6f  746e656e  200a0d3b  66202020  omponent;..    f
+// 2aa0:  74616f6c  554f2034  20202054  20202020  loat4 OUT       
+// 2ab0:  6628203d  74616f6c  30202934  0d0a0d3b  = (float4) 0;...
+// 2ac0:  2020200a  6c6f6320  6f43726f  6e6f706d  .    colorCompon
+// 2ad0:  2e746e65  69626d41  20746e65  6628203d  ent.Ambient = (f
+// 2ae0:  74616f6c  30202933  200a0d3b  63202020  loat3) 0;..    c
+// 2af0:  726f6c6f  706d6f43  6e656e6f  69442e74  olorComponent.Di
+// 2b00:  73756666  203d2065  6f6c6628  29337461  ffuse = (float3)
+// 2b10:  0d3b3020  2020200a  6c6f6320  6f43726f   0;..    colorCo
+// 2b20:  6e6f706d  2e746e65  63657053  72616c75  mponent.Specular
+// 2b30:  28203d20  616f6c66  20293374  0a0d3b30   = (float3) 0;..
+// 2b40:  20200a0d  69702020  436c6578  6f706d6f  ..    pixelCompo
+// 2b50:  746e656e  43203d20  75706d6f  69506574  nent = ComputePi
+// 2b60:  436c6578  6f706d6f  746e656e  294e4928  xelComponent(IN)
+// 2b70:  200a0d3b  63202020  726f6c6f  706d6f43  ;..    colorComp
+// 2b80:  6e656e6f  203d2074  706d6f43  41657475  onent = ComputeA
+// 2b90:  6569626d  694c746e  28746867  65786970  mbientLight(pixe
+// 2ba0:  6d6f436c  656e6f70  202c746e  6f6c6f63  lComponent, colo
+// 2bb0:  6d6f4372  656e6f70  202c746e  3b294e49  rComponent, IN);
+// 2bc0:  0a0d0a0d  20202020  74697773  28206863  ....    switch (
+// 2bd0:  6867694c  70795474  0a0d2965  20202020  LightType)..    
+// 2be0:  200a0d7b  63202020  20657361  4e494f50  {..    case POIN
+// 2bf0:  494c5f54  3a544847  20200a0d  20202020  T_LIGHT:..      
+// 2c00:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
+// 2c10:  43203d20  75706d6f  6f506574  4c746e69   = ComputePointL
+// 2c20:  74686769  78697028  6f436c65  6e6f706d  ight(pixelCompon
+// 2c30:  2c746e65  6c6f6320  6f43726f  6e6f706d  ent, colorCompon
+// 2c40:  2c746e65  294e4920  200a0d3b  20202020  ent, IN);..     
+// 2c50:  62202020  6b616572  0d0a0d3b  2020200a     break;....   
+// 2c60:  73616320  50532065  4c5f544f  54484749   case SPOT_LIGHT
+// 2c70:  200a0d3a  20202020  63202020  726f6c6f  :..        color
+// 2c80:  706d6f43  6e656e6f  203d2074  706d6f43  Component = Comp
+// 2c90:  53657475  4c746f70  74686769  78697028  uteSpotLight(pix
+// 2ca0:  6f436c65  6e6f706d  2c746e65  6c6f6320  elComponent, col
+// 2cb0:  6f43726f  6e6f706d  2c746e65  294e4920  orComponent, IN)
+// 2cc0:  200a0d3b  20202020  62202020  6b616572  ;..        break
+// 2cd0:  0d0a0d3b  2020200a  73616320  49442065  ;....    case DI
+// 2ce0:  54434552  414e4f49  494c5f4c  3a544847  RECTIONAL_LIGHT:
+// 2cf0:  20200a0d  20202020  6f632020  43726f6c  ..        colorC
+// 2d00:  6f706d6f  746e656e  43203d20  75706d6f  omponent = Compu
+// 2d10:  69446574  74636572  616e6f69  67694c6c  teDirectionalLig
+// 2d20:  70287468  6c657869  706d6f43  6e656e6f  ht(pixelComponen
+// 2d30:  63202c74  726f6c6f  706d6f43  6e656e6f  t, colorComponen
+// 2d40:  49202c74  0d3b294e  2020200a  20202020  t, IN);..       
+// 2d50:  65726220  0d3b6b61  2020200a  0a0d7d20   break;..    }..
+// 2d60:  20200a0d  554f2020  67722e54  203d2062  ..    OUT.rgb = 
+// 2d70:  6f6c6f63  6d6f4372  656e6f70  412e746e  colorComponent.A
+// 2d80:  6569626d  2b20746e  6c6f6320  6f43726f  mbient + colorCo
+// 2d90:  6e6f706d  2e746e65  66666944  20657375  mponent.Diffuse 
+// 2da0:  6f63202b  43726f6c  6f706d6f  746e656e  + colorComponent
+// 2db0:  6570532e  616c7563  0a0d3b72  20202020  .Specular;..    
+// 2dc0:  2e54554f  20202061  2e31203d  0d3b6630  OUT.a   = 1.0f;.
+// 2dd0:  200a0d0a  72202020  72757465  554f206e  ...    return OU
+// 2de0:  0a0d3b54  0d0a0d7d  6c6f430a  6f43726f  T;..}....ColorCo
+// 2df0:  6e6f706d  20746e65  706d6f43  41657475  mponent ComputeA
+// 2e00:  6569626d  694c746e  28746867  65786950  mbientLight(Pixe
+// 2e10:  6d6f436c  656e6f70  7020746e  6c657869  lComponent pixel
+// 2e20:  706d6f43  6e656e6f  43202c74  726f6c6f  Component, Color
+// 2e30:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
+// 2e40:  6f706d6f  746e656e  5350202c  504e495f  omponent, PS_INP
+// 2e50:  49205455  0a0d294e  200a0d7b  63202020  UT IN)..{..    c
+// 2e60:  726f6c6f  706d6f43  6e656e6f  6d412e74  olorComponent.Am
+// 2e70:  6e656962  3d2b2074  626d4120  746e6569  bient += Ambient
+// 2e80:  6f6c6f43  67722e72  202a2062  69626d41  Color.rgb * Ambi
+// 2e90:  43746e65  726f6c6f  2a20612e  78697020  entColor.a * pix
+// 2ea0:  6f436c65  6e6f706d  2e746e65  66666944  elComponent.Diff
+// 2eb0:  2e657375  3b626772  20200a0d  65722020  use.rgb;..    re
+// 2ec0:  6e727574  6c6f6320  6f43726f  6e6f706d  turn colorCompon
+// 2ed0:  3b746e65  0d7d0a0d  430a0d0a  726f6c6f  ent;..}....Color
+// 2ee0:  706d6f43  6e656e6f  6f432074  7475706d  Component Comput
+// 2ef0:  696f5065  694c746e  28746867  65786950  ePointLight(Pixe
+// 2f00:  6d6f436c  656e6f70  7020746e  6c657869  lComponent pixel
+// 2f10:  706d6f43  6e656e6f  43202c74  726f6c6f  Component, Color
+// 2f20:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
+// 2f30:  6f706d6f  746e656e  5350202c  504e495f  omponent, PS_INP
+// 2f40:  49205455  0a0d294e  200a0d7b  72202020  UT IN)..{..    r
+// 2f50:  72757465  6f63206e  43726f6c  6f706d6f  eturn colorCompo
+// 2f60:  746e656e  7d0a0d3b  0a0d0a0d  6f6c6f43  nent;..}....Colo
+// 2f70:  6d6f4372  656e6f70  4320746e  75706d6f  rComponent Compu
+// 2f80:  70536574  694c746f  28746867  65786950  teSpotLight(Pixe
+// 2f90:  6d6f436c  656e6f70  7020746e  6c657869  lComponent pixel
+// 2fa0:  706d6f43  6e656e6f  43202c74  726f6c6f  Component, Color
+// 2fb0:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
+// 2fc0:  6f706d6f  746e656e  5350202c  504e495f  omponent, PS_INP
+// 2fd0:  49205455  0a0d294e  200a0d7b  72202020  UT IN)..{..    r
+// 2fe0:  72757465  6f63206e  43726f6c  6f706d6f  eturn colorCompo
+// 2ff0:  746e656e  7d0a0d3b  0a0d0a0d  6f6c6f43  nent;..}....Colo
+// 3000:  6d6f4372  656e6f70  4320746e  75706d6f  rComponent Compu
+// 3010:  69446574  74636572  616e6f69  67694c6c  teDirectionalLig
+// 3020:  50287468  6c657869  706d6f43  6e656e6f  ht(PixelComponen
+// 3030:  69702074  436c6578  6f706d6f  746e656e  t pixelComponent
+// 3040:  6f43202c  43726f6c  6f706d6f  746e656e  , ColorComponent
+// 3050:  6c6f6320  6f43726f  6e6f706d  2c746e65   colorComponent,
+// 3060:  5f535020  55504e49  4e492054  7b0a0d29   PS_INPUT IN)..{
+// 3070:  20200a0d  6c662020  3374616f  66657220  ..    float3 ref
+// 3080:  74636556  3d20726f  6c662820  3374616f  Vector = (float3
+// 3090:  3b302029  20200a0d  6c662020  3374616f  ) 0;..    float3
+// 30a0:  67696c20  69447468  74636572  206e6f69   lightDirection 
+// 30b0:  6f6e203d  6c616d72  28657a69  67694c2d  = normalize(-Lig
+// 30c0:  69447468  74636572  2e6e6f69  297a7978  htDirection.xyz)
+// 30d0:  200a0d3b  66202020  74616f6c  645f6e20  ;..    float n_d
+// 30e0:  6c5f746f  64203d20  6c28746f  74686769  ot_l = dot(light
+// 30f0:  65726944  6f697463  6e202c6e  616d726f  Direction, norma
+// 3100:  657a696c  2e4e4928  6d726f4e  29296c61  lize(IN.Normal))
+// 3110:  0d0a0d3b  2020200a  20666920  645f6e28  ;....    if (n_d
+// 3120:  6c5f746f  30203e20  200a0d29  7b202020  ot_l > 0)..    {
+// 3130:  09090a0d  44202f2f  6b203d20  202a2064  ....// D = kd * 
+// 3140:  2a20646c  0d646d20  2020200a  20202020  ld * md..       
+// 3150:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
+// 3160:  66666944  20657375  6d203d2b  6e287861  Diffuse += max(n
+// 3170:  746f645f  202c6c5f  66302e30  202a2029  _dot_l, 0.0f) * 
+// 3180:  6867694c  6c6f4374  722e726f  2a206267  LightColor.rgb *
+// 3190:  67694c20  6f437468  2e726f6c  202a2061   LightColor.a * 
+// 31a0:  65786970  6d6f436c  656e6f70  442e746e  pixelComponent.D
+// 31b0:  75666669  722e6573  0d3b6267  090a0d0a  iffuse.rgb;.....
+// 31c0:  202f2f09  203d2052  202d2049  2e6e2832  .// R = I - 2(n.
+// 31d0:  2a202949  0a0d6e20  20202020  20202020  I) * n..        
+// 31e0:  56666572  6f746365  203d2072  6d726f6e  refVector = norm
+// 31f0:  7a696c61  65722865  63656c66  696c2874  alize(reflect(li
+// 3200:  44746867  63657269  6e6f6974  6970202c  ghtDirection, pi
+// 3210:  436c6578  6f706d6f  746e656e  726f4e2e  xelComponent.Nor
+// 3220:  296c616d  0a0d3b29  09090a0d  53202f2f  mal));......// S
+// 3230:  6d203d20  64287861  5628746f  2c29522e   = max(dot(V.R),
+// 3240:  505e2930  53202a20  75636570  4372616c  0)^P * SpecularC
+// 3250:  726f6c6f  6267722e  53202a20  75636570  olor.rgb * Specu
+// 3260:  4372616c  726f6c6f  2a20612e  6c6f6320  larColor.a * col
+// 3270:  722e726f  0d3b6267  2020200a  20202020  or.rgb;..       
+// 3280:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
+// 3290:  63657053  72616c75  203d2b20  28776f70  Specular += pow(
+// 32a0:  2878616d  28746f64  562e4e49  57776569  max(dot(IN.ViewW
+// 32b0:  646c726f  65726944  6f697463  72202c6e  orldDirection, r
+// 32c0:  65566665  726f7463  30202c29  53202c29  efVector), 0), S
+// 32d0:  75636570  5072616c  7265776f  202a2029  pecularPower) * 
+// 32e0:  63657053  72616c75  6f6c6f43  67722e72  SpecularColor.rg
+// 32f0:  202a2062  65786970  6d6f436c  656e6f70  b * pixelCompone
+// 3300:  532e746e  75636570  2e72616c  20626772  nt.Specular.rgb 
+// 3310:  6970202a  436c6578  6f706d6f  746e656e  * pixelComponent
+// 3320:  6669442e  65737566  6267722e  200a0d3b  .Diffuse.rgb;.. 
+// 3330:  7d202020  0a0d0a0d  20202020  75746572     }....    retu
+// 3340:  63206e72  726f6c6f  706d6f43  6e656e6f  rn colorComponen
+// 3350:  0a0d3b74  0d0a0d7d  7869500a  6f436c65  t;..}....PixelCo
+// 3360:  6e6f706d  20746e65  706d6f43  50657475  mponent ComputeP
+// 3370:  6c657869  706d6f43  6e656e6f  53502874  ixelComponent(PS
+// 3380:  504e495f  49205455  0a0d294e  200a0d7b  _INPUT IN)..{.. 
+// 3390:  50202020  6c657869  706d6f43  6e656e6f     PixelComponen
+// 33a0:  69702074  436c6578  6f706d6f  746e656e  t pixelComponent
+// 33b0:  0d0a0d3b  2020200a  78697020  6f436c65  ;....    pixelCo
+// 33c0:  6e6f706d  2e746e65  66666944  20657375  mponent.Diffuse 
+// 33d0:  6628203d  74616f6c  30202934  200a0d3b  = (float4) 0;.. 
+// 33e0:  70202020  6c657869  706d6f43  6e656e6f     pixelComponen
+// 33f0:  70532e74  6c756365  3d207261  6c662820  t.Specular = (fl
+// 3400:  3374616f  3b302029  20200a0d  69702020  oat3) 0;..    pi
+// 3410:  436c6578  6f706d6f  746e656e  726f4e2e  xelComponent.Nor
+// 3420:  206c616d  6628203d  74616f6c  30202933  mal = (float3) 0
+// 3430:  0d0a0d3b  2020200a  20666920  73614828  ;....    if (Has
+// 3440:  66666944  54657375  75747865  3d206572  DiffuseTexture =
+// 3450:  7274203d  0d296575  2020200a  0a0d7b20  = true)..    {..
+// 3460:  20202020  20202020  65786970  6d6f436c          pixelCom
+// 3470:  656e6f70  442e746e  75666669  3d206573  ponent.Diffuse =
+// 3480:  66694420  65737566  74786554  2e657275   DiffuseTexture.
+// 3490:  706d6153  4328656c  726f6c6f  706d6153  Sample(ColorSamp
+// 34a0:  2c72656c  2e4e4920  74786554  29657275  ler, IN.Texture)
+// 34b0:  200a0d3b  7d202020  20200a0d  6c652020  ;..    }..    el
+// 34c0:  0a0d6573  20202020  200a0d7b  20202020  se..    {..     
+// 34d0:  70202020  6c657869  706d6f43  6e656e6f     pixelComponen
+// 34e0:  69442e74  73756666  203d2065  432e4e49  t.Diffuse = IN.C
+// 34f0:  726f6c6f  200a0d3b  7d202020  0a0d0a0d  olor;..    }....
+// 3500:  20202020  28206669  53736148  75636570      if (HasSpecu
+// 3510:  5472616c  75747865  3d206572  7274203d  larTexture == tr
+// 3520:  0d296575  2020200a  0a0d7b20  20202020  ue)..    {..    
+// 3530:  20202020  65786970  6d6f436c  656e6f70      pixelCompone
+// 3540:  532e746e  75636570  2072616c  7053203d  nt.Specular = Sp
+// 3550:  6c756365  65547261  72757478  61532e65  ecularTexture.Sa
+// 3560:  656c706d  6c6f4328  6153726f  656c706d  mple(ColorSample
+// 3570:  49202c72  65542e4e  72757478  782e2965  r, IN.Texture).x
+// 3580:  0d3b7a79  2020200a  0a0d7d20  20202020  yz;..    }..    
+// 3590:  65736c65  20200a0d  0d7b2020  2020200a  else..    {..   
+// 35a0:  20202020  78697020  6f436c65  6e6f706d       pixelCompon
+// 35b0:  2e746e65  63657053  72616c75  53203d20  ent.Specular = S
+// 35c0:  75636570  4372616c  726f6c6f  6267722e  pecularColor.rgb
+// 35d0:  200a0d3b  7d202020  0a0d0a0d  20202020  ;..    }....    
+// 35e0:  28206669  4e736148  616d726f  7865546c  if (HasNormalTex
+// 35f0:  65727574  203d3d20  65757274  200a0d29  ture == true).. 
+// 3600:  7b202020  20200a0d  20202020  6c662020     {..        fl
+// 3610:  3374616f  6d617320  64656c70  6d726f4e  oat3 sampledNorm
+// 3620:  3d206c61  20322820  6f4e202a  6c616d72  al = (2 * Normal
+// 3630:  74786554  2e657275  706d6153  4328656c  Texture.Sample(C
+// 3640:  726f6c6f  706d6153  2c72656c  2e4e4920  olorSampler, IN.
+// 3650:  74786554  29657275  7a79782e  202d2029  Texture).xyz) - 
+// 3660:  66302e31  200a0d3b  20202020  66202020  1.0f;..        f
+// 3670:  74616f6c  20337833  206e6274  6c66203d  loat3x3 tbn = fl
+// 3680:  3374616f  49283378  61542e4e  6e65676e  oat3x3(IN.Tangen
+// 3690:  49202c74  69422e4e  6d726f6e  202c6c61  t, IN.Binormal, 
+// 36a0:  4e2e4e49  616d726f  0d3b296c  2020200a  IN.Normal);..   
+// 36b0:  20202020  78697020  6f436c65  6e6f706d       pixelCompon
+// 36c0:  2e746e65  6d726f4e  3d206c61  6c756d20  ent.Normal = mul
+// 36d0:  6d617328  64656c70  6d726f4e  202c6c61  (sampledNormal, 
+// 36e0:  296e6274  200a0d3b  7d202020  20200a0d  tbn);..    }..  
+// 36f0:  6c652020  0a0d6573  20202020  200a0d7b    else..    {.. 
+// 3700:  20202020  70202020  6c657869  706d6f43         pixelComp
+// 3710:  6e656e6f  6f4e2e74  6c616d72  6e203d20  onent.Normal = n
+// 3720:  616d726f  657a696c  2e4e4928  6d726f4e  ormalize(IN.Norm
+// 3730:  3b296c61  20200a0d  0d7d2020  200a0d0a  al);..    }.... 
+// 3740:  72202020  72757465  6970206e  436c6578     return pixelC
+// 3750:  6f706d6f  746e656e  7d0a0d3b  00000000  omponent;..}____
+// 3760:  00000000  00000000  00000000  00000000  ________________
+// 3770:  00000000  00000000  00000000  00000000  ________________
+// 3780:  00000000  00000000  00000000  00000000  ________________
+// 3790:  00000000  00000000  00000000  00000000  ________________
+// 37a0:  00000000  00000000  00000000  00000000  ________________
+// 37b0:  00000000  00000000  00000000  00000000  ________________
+// 37c0:  00000000  00000000  00000000  00000000  ________________
+// 37d0:  00000000  00000000  00000000  00000000  ________________
+// 37e0:  00000000  00000000  00000000  00000000  ________________
+// 37f0:  00000000  00000000  00000000  00000000  ________________
+// 3800:  00000000  00000000  00000000  00000000  ________________
+// 3810:  00000000  00000000  00000000  00000000  ________________
+// 3820:  00000000  00000000  00000000  00000000  ________________
+// 3830:  00000000  00000000  00000000  00000000  ________________
+// 3840:  00000000  00000000  00000000  00000000  ________________
+// 3850:  00000000  00000000  00000000  00000000  ________________
 // 3860:  00000000  00000000  00000000  00000000  ________________
 // 3870:  00000000  00000000  00000000  00000000  ________________
 // 3880:  00000000  00000000  00000000  00000000  ________________
 // 3890:  00000000  00000000  00000000  00000000  ________________
-// 38a0:  00000000  00000000  00000000  00000000  ________________
-// 38b0:  00000000  00000000  00000000  00000000  ________________
-// 38c0:  00000000  00000000  00000000  00000000  ________________
-// 38d0:  00000000  00000000  00000000  00000000  ________________
-// 38e0:  00000000  00000000  00000000  00000000  ________________
-// 38f0:  00000000  00000000  00000000  00000000  ________________
-// 3900:  00000000  00000000  00000000  00000000  ________________
-// 3910:  00000000  00000000  00000000  00000000  ________________
-// 3920:  00000000  00000000  00000000  00000000  ________________
-// 3930:  00000000  00000000  00000000  00000000  ________________
-// 3940:  00000000  00000000  00000000  00000000  ________________
-// 3950:  00000000  00000000  00000000  00000000  ________________
-// 3960:  00000000  00000000  00000000  00000000  ________________
-// 3970:  00000000  00000000  00000000  00000000  ________________
-// 3980:  00000000  00000000  effeeffe  00000001  ________.....___
-// 3990:  00001596  5c3a4600  652d4433  6e69676e  ..___F:\3D-engin
-// 39a0:  65455c65  65747372  70617247  45636968  e\EersteGraphicE
-// 39b0:  6e69676e  65455c65  65747372  70617247  ngine\EersteGrap
-// 39c0:  45636968  6e69676e  69625c65  5c34366e  hicEngine\bin64\
-// 39d0:  61746144  6168535c  5c726564  6f6c6f43  Data\Shader\Colo
-// 39e0:  6f435c72  5f726f6c  682e5350  006c736c  r\Color_PS.hlsl_
-// 39f0:  5c3a6600  652d6433  6e69676e  65655c65  _f:\3d-engine\ee
-// 3a00:  65747372  70617267  65636968  6e69676e  rstegraphicengin
-// 3a10:  65655c65  65747372  70617267  65636968  e\eerstegraphice
-// 3a20:  6e69676e  69625c65  5c34366e  61746164  ngine\bin64\data
-// 3a30:  6168735c  5c726564  6f6c6f63  6f635c72  \shader\color\co
-// 3a40:  5f726f6c  682e7370  006c736c  335c3a46  lor_ps.hlsl_F:\3
-// 3a50:  6e652d44  656e6967  7265455c  47657473  D-engine\EersteG
-// 3a60:  68706172  6e456369  656e6967  7265455c  raphicEngine\Eer
-// 3a70:  47657473  68706172  6e456369  656e6967  steGraphicEngine
-// 3a80:  6e69625c  445c3436  5c617461  64616853  \bin64\Data\Shad
-// 3a90:  435c7265  726f6c6f  636e495c  6564756c  er\Color\Include
-// 3aa0:  6d6f435c  2e6e6f6d  6c736c68  3a660069  \Common.hlsli_f:
-// 3ab0:  2d64335c  69676e65  655c656e  74737265  \3d-engine\eerst
-// 3ac0:  61726765  63696870  69676e65  655c656e  egraphicengine\e
-// 3ad0:  74737265  61726765  63696870  69676e65  erstegraphicengi
-// 3ae0:  625c656e  34366e69  7461645c  68735c61  ne\bin64\data\sh
-// 3af0:  72656461  6c6f635c  695c726f  756c636e  ader\color\inclu
-// 3b00:  635c6564  6f6d6d6f  6c682e6e  00696c73  de\common.hlsli_
-// 3b10:  636e6923  6564756c  6e492220  64756c63  #include "Includ
-// 3b20:  6f432f65  6e6f6d6d  736c682e  0d22696c  e/Common.hlsli".
-// 3b30:  730a0d0a  63757274  53502074  504e495f  ...struct PS_INP
-// 3b40:  0a0d5455  200a0d7b  66202020  74616f6c  UT..{..    float
-// 3b50:  6f502034  69746973  3a206e6f  5f565320  4 Position : SV_
-// 3b60:  49534f50  4e4f4954  200a0d3b  66202020  POSITION;..    f
-// 3b70:  74616f6c  6f432034  20726f6c  3a202020  loat4 Color    :
-// 3b80:  4c4f4320  3b30524f  0130e21b  000000ac   COLOR0;..0..___
-// 3b90:  7a185ce1  01d4033b  00000001  00000000  .\.z;...._______
-// 3ba0:  00000000  00000000  00000000  00000000  ________________
-// 3bb0:  00000000  00000000  00000000  00000000  ________________
-// 3bc0:  00000000  00000000  00000002  00000004  ________.___.___
-// 3bd0:  00000001  00000006  00000000  0000005d  .___._______]___
-// 3be0:  00000028  0130e21b  75175c3a  00000f45  (___..0.:\.uE.__
-// 3bf0:  00000001  0000005c  0000005d  00000000  .___\___]_______
-// 3c00:  00000000  00000000  0000011a  00000028  ________..__(___
-// 3c10:  0130e21b  b89b7c8c  000004d3  000000b8  ..0..|....__.___
-// 3c20:  0000005c  0000011a  00000000  00000000  \___..__________
-// 3c30:  00000000  00000000  00000000  00000000  ________________
-// 3c40:  00000000  00000000  00000000  00000000  ________________
-// 3c50:  00000000  00000000  00000000  00000000  ________________
-// 3c60:  00000000  00000000  00000000  00000000  ________________
-// 3c70:  00000000  00000000  00000000  00000000  ________________
-// 3c80:  00000000  00000000  00000000  00000000  ________________
-// 3c90:  00000000  00000000  00000000  00000000  ________________
-// 3ca0:  00000000  00000000  00000000  00000000  ________________
-// 3cb0:  00000000  00000000  00000000  00000000  ________________
-// 3cc0:  00000000  00000000  00000000  00000000  ________________
-// 3cd0:  00000000  00000000  00000000  00000000  ________________
-// 3ce0:  00000000  00000000  00000000  00000000  ________________
-// 3cf0:  00000000  00000000  00000000  00000000  ________________
-// 3d00:  00000000  00000000  00000000  00000000  ________________
-// 3d10:  00000000  00000000  00000000  00000000  ________________
-// 3d20:  00000000  00000000  00000000  00000000  ________________
-// 3d30:  00000000  00000000  00000000  00000000  ________________
-// 3d40:  00000000  00000000  00000000  00000000  ________________
-// 3d50:  00000000  00000000  00000000  00000000  ________________
-// 3d60:  00000000  00000000  00000000  00000000  ________________
-// 3d70:  00000000  00000000  00000000  00000000  ________________
-// 3d80:  00000000  00000000  00000004  113c0042  ________.___B_<.
-// 3d90:  00000110  000a0100  02a20001  000a3ad7  ..___.._._...:._
-// 3da0:  02a20001  694d3ad7  736f7263  2074666f  ._...:Microsoft 
-// 3db0:  20295228  4c534c48  61685320  20726564  (R) HLSL Shader 
-// 3dc0:  706d6f43  72656c69  2e303120  00000031  Compiler 10.1___
-// 3dd0:  113d0036  736c6801  616c466c  30007367  6_=..hlslFlags_0
-// 3de0:  68003578  546c736c  65677261  73700074  x5_hlslTarget_ps
-// 3df0:  305f355f  736c6800  746e456c  50007972  _5_0_hlslEntry_P
-// 3e00:  414d5f53  00004e49  1110002e  00000000  S_MAIN__._..____
-// 3e10:  000016b0  00000000  00000b48  00000000  ..______H.______
-// 3e20:  00000b48  00001007  000000c4  50a00001  H.__..__.___._.P
-// 3e30:  414d5f53  00004e49  113e002a  00001004  S_MAIN__*_>...__
-// 3e40:  4e490009  00000000  00000000  00000000  ._IN____________
+// 38a0:  00000000  00000000  00000000  66656423  ____________#def
+// 38b0:  20656e69  4e494f50  494c5f54  20544847  ine POINT_LIGHT 
+// 38c0:  230a0d30  69666564  5320656e  5f544f50  0..#define SPOT_
+// 38d0:  4847494c  0d312054  6564230a  656e6966  LIGHT 1..#define
+// 38e0:  52494420  49544345  4c414e4f  47494c5f   DIRECTIONAL_LIG
+// 38f0:  32205448  0a0d0a0d  66656423  20656e69  HT 2....#define 
+// 3900:  50494c46  5845545f  45525554  3120595f  FLIP_TEXTURE_Y 1
+// 3910:  0a0d0a0d  66656423  20656e69  5f58414d  ....#define MAX_
+// 3920:  4847494c  0d382054  630a0d0a  66667562  LIGHT 8....cbuff
+// 3930:  46207265  656d6172  736e6f43  746e6174  er FrameConstant
+// 3940:  66667542  3a207265  67657220  65747369  Buffer : registe
+// 3950:  30622872  7b0a0d29  20200a0d  616d2020  r(b0)..{..    ma
+// 3960:  78697274  65695620  0a0d3b77  20202020  trix View;..    
+// 3970:  7274616d  50207869  656a6f72  6f697463  matrix Projectio
+// 3980:  0a0d3b6e  20200a0d  6c662020  3374616f  n;....    float3
+// 3990:  6d614320  50617265  7469736f  3b6e6f69   CameraPosition;
+// 39a0:  0d7d0a0d  630a0d0a  66667562  4f207265  ..}....cbuffer O
+// 39b0:  63656a62  6e6f4374  6e617473  66754274  bjectConstantBuf
+// 39c0:  20726566  6572203a  74736967  62287265  fer : register(b
+// 39d0:  0a0d2931  200a0d7b  6d202020  69727461  1)..{..    matri
+// 39e0:  6f572078  3b646c72  0a0d0a0d  20202020  x World;....    
+// 39f0:  616f6c66  53203474  75636570  4372616c  float4 SpecularC
+// 3a00:  726f6c6f  200a0d3b  66202020  74616f6c  olor;..    float
+// 3a10:  70532020  6c756365  6f507261  3b726577    SpecularPower;
+// 3a20:  0a0d0a0d  20202020  6c6f6f62  48202020  ....    bool   H
+// 3a30:  69447361  73756666  78655465  65727574  asDiffuseTexture
+// 3a40:  200a0d3b  62202020  206c6f6f  61482020  ;..    bool   Ha
+// 3a50:  65705373  616c7563  78655472  65727574  sSpecularTexture
+// 3a60:  200a0d3b  62202020  206c6f6f  61482020  ;..    bool   Ha
+// 3a70:  726f4e73  546c616d  75747865  0d3b6572  sNormalTexture;.
+// 3a80:  0a0d7d0a  62630a0d  65666675  694c2072  .}....cbuffer Li
+// 3a90:  43746867  74736e6f  42746e61  65666675  ghtConstantBuffe
+// 3aa0:  203a2072  69676572  72657473  29326228  r : register(b2)
+// 3ab0:  0d7b0a0d  2020200a  6f6c6620  20347461  ..{..    float4 
+// 3ac0:  69626d41  43746e65  726f6c6f  0d0a0d3b  AmbientColor;...
+// 3ad0:  2020200a  6f6c6620  20347461  6867694c  .    float4 Ligh
+// 3ae0:  6c6f4374  0d3b726f  2020200a  6f6c6620  tColor;..    flo
+// 3af0:  20337461  6867694c  72694474  69746365  at3 LightDirecti
+// 3b00:  0d3b6e6f  2020200a  6f6c6620  20337461  on;..    float3 
+// 3b10:  6867694c  736f5074  6f697469  0a0d3b6e  LightPosition;..
+// 3b20:  20202020  616f6c66  4c202074  74686769      float  Light
+// 3b30:  69646152  0d3b7375  2020200a  746e6920  Radius;..    int
+// 3b40:  20202020  6867694c  70795474  0a0d3b65      LightType;..
+// 3b50:  0d0a0d7d  7865540a  65727574  44204432  }....Texture2D D
+// 3b60:  75666669  65546573  72757478  203a2065  iffuseTexture : 
+// 3b70:  69676572  72657473  29307428  540a0d3b  register(t0);..T
+// 3b80:  75747865  44326572  65705320  616c7563  exture2D Specula
+// 3b90:  78655472  65727574  72203a20  73696765  rTexture : regis
+// 3ba0:  28726574  3b293174  65540a0d  72757478  ter(t1);..Textur
+// 3bb0:  20443265  6d726f4e  65546c61  72757478  e2D NormalTextur
+// 3bc0:  203a2065  69676572  72657473  29327428  e : register(t2)
+// 3bd0:  0d0a0d3b  6d61530a  72656c70  74617453  ;....SamplerStat
+// 3be0:  6f432065  53726f6c  6c706d61  3a207265  e ColorSampler :
+// 3bf0:  67657220  65747369  30732872  0a0d3b29   register(s0);..
+// 3c00:  74730a0d  74637572  6c6f4320  6f43726f  ..struct ColorCo
+// 3c10:  6e6f706d  0d746e65  0a0d7b0a  20202020  mponent..{..    
+// 3c20:  616f6c66  41203374  6569626d  0d3b746e  float3 Ambient;.
+// 3c30:  2020200a  6f6c6620  20337461  66666944  .    float3 Diff
+// 3c40:  3b657375  20200a0d  6c662020  3374616f  use;..    float3
+// 3c50:  65705320  616c7563  0a0d3b72  0a0d3b7d   Specular;..};..
+// 3c60:  74730a0d  74637572  78695020  6f436c65  ..struct PixelCo
+// 3c70:  6e6f706d  0d746e65  0a0d7b0a  20202020  mponent..{..    
+// 3c80:  616f6c66  44203474  75666669  0d3b6573  float4 Diffuse;.
+// 3c90:  2020200a  6f6c6620  20337461  63657053  .    float3 Spec
+// 3ca0:  72616c75  200a0d3b  66202020  74616f6c  ular;..    float
+// 3cb0:  6f4e2033  6c616d72  7d0a0d3b  0d0a0d3b  3 Normal;..};...
+// 3cc0:  6f6c660a  20327461  43746547  6572726f  .float2 GetCorre
+// 3cd0:  64657463  74786554  43657275  64726f6f  ctedTextureCoord
+// 3ce0:  74616e69  6c662865  3274616f  78657420  inate(float2 tex
+// 3cf0:  65727574  726f6f43  616e6964  0d296574  tureCoordinate).
+// 3d00:  0a0d7b0a  20666923  50494c46  5845545f  .{..#if FLIP_TEX
+// 3d10:  45525554  0a0d595f  20202020  75746572  TURE_Y..    retu
+// 3d20:  66206e72  74616f6c  65742832  72757478  rn float2(textur
+// 3d30:  6f6f4365  6e696472  2e657461  31202c78  eCoordinate.x, 1
+// 3d40:  2d20302e  78657420  65727574  726f6f43  .0 - textureCoor
+// 3d50:  616e6964  792e6574  0a0d3b29  736c6523  dinate.y);..#els
+// 3d60:  200a0d65  72202020  72757465  6574206e  e..    return te
+// 3d70:  72757478  6f6f4365  6e696472  3b657461  xtureCoordinate;
+// 3d80:  65230a0d  6669646e  007d0a0d  00000000  ..#endif..}_____
+// 3d90:  00000000  00000000  00000000  00000000  ________________
+// 3da0:  00000000  00000000  00000000  00000000  ________________
+// 3db0:  00000000  00000000  00000000  00000000  ________________
+// 3dc0:  00000000  00000000  00000000  00000000  ________________
+// 3dd0:  00000000  00000000  00000000  00000000  ________________
+// 3de0:  00000000  00000000  00000000  00000000  ________________
+// 3df0:  00000000  00000000  00000000  00000000  ________________
+// 3e00:  00000000  00000000  00000000  00000000  ________________
+// 3e10:  00000000  00000000  00000000  00000000  ________________
+// 3e20:  00000000  00000000  00000000  00000000  ________________
+// 3e30:  00000000  00000000  00000000  00000000  ________________
+// 3e40:  00000000  00000000  00000000  00000000  ________________
 // 3e50:  00000000  00000000  00000000  00000000  ________________
-// 3e60:  00000000  11500016  00050001  00040000  ____._P.._.___._
-// 3e70:  000000c4  0b480001  00000000  11500016  .___._H.____._P.
-// 3e80:  00050001  00040004  000000c4  0b480001  ._._._._.___._H.
-// 3e90:  00000004  11500016  00050001  00040008  .___._P.._._._._
-// 3ea0:  000000c4  0b480001  00000008  11500016  .___._H..___._P.
-// 3eb0:  00050001  0004000c  000000c4  0b480001  ._._._._.___._H.
-// 3ec0:  0000000c  11500016  00050001  00040010  .___._P.._._._._
-// 3ed0:  000000c4  0b480001  00000010  11500016  .___._H..___._P.
-// 3ee0:  00050001  00040014  000000c4  0b480001  ._._._._.___._H.
-// 3ef0:  00000014  11500016  00050001  00040018  .___._P.._._._._
-// 3f00:  000000c4  0b480001  00000018  11500016  .___._H..___._P.
-// 3f10:  00050001  0004001c  000000c4  0b480001  ._._._._.___._H.
-// 3f20:  0000001c  11500016  00050001  00040020  .___._P.._._ _._
-// 3f30:  000000c4  0b480001  00000020  11500016  .___._H. ___._P.
-// 3f40:  00050001  00040024  000000c4  0b480001  ._._$_._.___._H.
-// 3f50:  00000024  11500016  00050001  00040028  $___._P.._._(_._
-// 3f60:  000000c4  0b480001  00000030  11500016  .___._H.0___._P.
-// 3f70:  00050001  0004002c  000000c4  0b480001  ._._,_._.___._H.
-// 3f80:  00000034  11500016  00050001  00040030  4___._P.._._0_._
-// 3f90:  000000c4  0b480001  00000038  11500016  .___._H.8___._P.
-// 3fa0:  00050001  00040034  000000c4  0b480001  ._._4_._.___._H.
-// 3fb0:  00000040  11500016  00050001  00040038  @___._P.._._8_._
-// 3fc0:  000000c4  0b480001  00000044  11500016  .___._H.D___._P.
-// 3fd0:  00050001  0004003c  000000c4  0b480001  ._._<_._.___._H.
-// 3fe0:  00000048  11500016  00050001  00040040  H___._P.._._@_._
-// 3ff0:  000000c4  0b480001  00000050  11500016  .___._H.P___._P.
-// 4000:  00050001  00040044  000000c4  0b480001  ._._D_._.___._H.
-// 4010:  00000054  11500016  00050001  00040048  T___._P.._._H_._
-// 4020:  000000c4  0b480001  00000058  11500016  .___._H.X___._P.
-// 4030:  00050001  0004004c  000000c4  0b480001  ._._L_._.___._H.
-// 4040:  00000060  11500016  00050001  00040050  `___._P.._._P_._
-// 4050:  000000c4  0b480001  00000064  11500016  .___._H.d___._P.
-// 4060:  00050001  00040054  000000c4  0b480001  ._._T_._.___._H.
-// 4070:  00000068  11500016  00050001  00040058  h___._P.._._X_._
-// 4080:  000000c4  0b480001  00000070  11500016  .___._H.p___._P.
-// 4090:  00050001  0004005c  000000c4  0b480001  ._._\_._.___._H.
-// 40a0:  00000074  11500016  00050001  00040060  t___._P.._._`_._
-// 40b0:  000000c4  0b480001  00000078  11500016  .___._H.x___._P.
-// 40c0:  00050001  00040064  000000c4  0b480001  ._._d_._.___._H.
-// 40d0:  0000007c  11500016  00050001  00040068  |___._P.._._h_._
-// 40e0:  000000c4  0b480001  00000080  11500016  .___._H..___._P.
-// 40f0:  00050001  0004006c  000000c4  0b480001  ._._l_._.___._H.
-// 4100:  00000084  11500016  00050001  00040070  .___._P.._._p_._
-// 4110:  000000c4  0b480001  00000088  113e003e  .___._H..___>_>.
-// 4120:  00001006  503c0088  414d5f53  72204e49  ..__._<PS_MAIN r
-// 4130:  72757465  6176206e  3e65756c  00000000  eturn value>____
-// 4140:  00000000  00000000  00000000  00000000  ________________
-// 4150:  00000000  00000000  00000000  11500016  ____________._P.
-// 4160:  00050002  00040000  000000c4  0b480001  ._.___._.___._H.
-// 4170:  00000000  11500016  00050002  00040004  ____._P.._._._._
-// 4180:  000000c4  0b480001  00000004  11500016  .___._H..___._P.
-// 4190:  00050002  00040008  000000c4  0b480001  ._._._._.___._H.
-// 41a0:  00000008  11500016  00050002  0004000c  .___._P.._._._._
-// 41b0:  000000c4  0b480001  0000000c  113e0036  .___._H..___6_>.
-// 41c0:  00001009  6f630008  43726f6c  6f706d6f  ..__._colorCompo
-// 41d0:  746e656e  00000000  00000000  00000000  nent____________
+// 3e60:  00000000  00000000  00000000  00000000  ________________
+// 3e70:  00000000  00000000  00000000  00000000  ________________
+// 3e80:  00000000  00000000  00000000  00000000  ________________
+// 3e90:  00000000  00000000  00000000  00000000  ________________
+// 3ea0:  00000000  00000000  00000000  effeeffe  ____________....
+// 3eb0:  00000001  0000170d  5c3a4600  652d4433  .___..___F:\3D-e
+// 3ec0:  6e69676e  65455c65  65747372  70617247  ngine\EersteGrap
+// 3ed0:  45636968  6e69676e  65455c65  65747372  hicEngine\Eerste
+// 3ee0:  70617247  45636968  6e69676e  69625c65  GraphicEngine\bi
+// 3ef0:  5c34366e  61746144  6168535c  5c726564  n64\Data\Shader\
+// 3f00:  6f6c6f43  6f435c72  5f726f6c  682e5350  Color\Color_PS.h
+// 3f10:  006c736c  5c3a6600  652d6433  6e69676e  lsl__f:\3d-engin
+// 3f20:  65655c65  65747372  70617267  65636968  e\eerstegraphice
+// 3f30:  6e69676e  65655c65  65747372  70617267  ngine\eerstegrap
+// 3f40:  65636968  6e69676e  69625c65  5c34366e  hicengine\bin64\
+// 3f50:  61746164  6168735c  5c726564  6f6c6f63  data\shader\colo
+// 3f60:  6f635c72  5f726f6c  682e7370  006c736c  r\color_ps.hlsl_
+// 3f70:  335c3a46  6e652d44  656e6967  7265455c  F:\3D-engine\Eer
+// 3f80:  47657473  68706172  6e456369  656e6967  steGraphicEngine
+// 3f90:  7265455c  47657473  68706172  6e456369  \EersteGraphicEn
+// 3fa0:  656e6967  6e69625c  445c3436  5c617461  gine\bin64\Data\
+// 3fb0:  64616853  435c7265  726f6c6f  636e495c  Shader\Color\Inc
+// 3fc0:  6564756c  6d6f435c  2e6e6f6d  6c736c68  lude\Common.hlsl
+// 3fd0:  3a660069  2d64335c  69676e65  655c656e  i_f:\3d-engine\e
+// 3fe0:  74737265  61726765  63696870  69676e65  erstegraphicengi
+// 3ff0:  655c656e  74737265  61726765  63696870  ne\eerstegraphic
+// 4000:  69676e65  625c656e  34366e69  7461645c  engine\bin64\dat
+// 4010:  68735c61  72656461  6c6f635c  695c726f  a\shader\color\i
+// 4020:  756c636e  635c6564  6f6d6d6f  6c682e6e  nclude\common.hl
+// 4030:  00696c73  636e6923  6564756c  6e492220  sli_#include "In
+// 4040:  64756c63  6f432f65  6e6f6d6d  736c682e  clude/Common.hls
+// 4050:  0d22696c  730a0d0a  63757274  53502074  li"....struct PS
+// 4060:  504e495f  0a0d5455  200a0d7b  66202020  _INPUT..{..    f
+// 4070:  74616f6c  6f502034  69746973  3a206e6f  loat4 Position :
+// 4080:  5f565320  49534f50  4e4f4954  200a0d3b   SV_POSITION;.. 
+// 4090:  66202020  74616f6c  6f432034  20726f6c     float4 Color 
+// 40a0:  3a202020  4c4f4320  3b30524f  0130e21b     : COLOR0;..0.
+// 40b0:  000000ac  dfc5d76b  01d40377  00000001  .___k...w....___
+// 40c0:  00000000  00000000  00000000  00000000  ________________
+// 40d0:  00000000  00000000  00000000  00000000  ________________
+// 40e0:  00000000  00000000  00000000  00000002  ____________.___
+// 40f0:  00000004  00000001  00000006  00000000  .___.___._______
+// 4100:  0000005d  00000028  0130e21b  b028fb54  ]___(___..0.T.(.
+// 4110:  000010b0  00000001  0000005c  0000005d  ..__.___\___]___
+// 4120:  00000000  00000000  00000000  0000011a  ____________..__
+// 4130:  00000028  0130e21b  bab86cdb  000004df  (___..0..l....__
+// 4140:  000000b8  0000005c  0000011a  00000000  .___\___..______
+// 4150:  00000000  00000000  00000000  00000000  ________________
+// 4160:  00000000  00000000  00000000  00000000  ________________
+// 4170:  00000000  00000000  00000000  00000000  ________________
+// 4180:  00000000  00000000  00000000  00000000  ________________
+// 4190:  00000000  00000000  00000000  00000000  ________________
+// 41a0:  00000000  00000000  00000000  00000000  ________________
+// 41b0:  00000000  00000000  00000000  00000000  ________________
+// 41c0:  00000000  00000000  00000000  00000000  ________________
+// 41d0:  00000000  00000000  00000000  00000000  ________________
 // 41e0:  00000000  00000000  00000000  00000000  ________________
-// 41f0:  00000000  1150001a  00050000  00040000  ____._P.__.___._
-// 4200:  000000e4  0acc0001  0050059c  00000000  .___._....P_____
-// 4210:  1150001a  00050000  00040004  000000e4  ._P.__._._._.___
-// 4220:  0acc0001  0050059c  00000004  1150001a  ._....P_.___._P.
-// 4230:  00050000  00040008  000000e4  0acc0001  __._._._.___._..
-// 4240:  0050059c  00000008  1150001a  00050000  ..P_.___._P.__._
-// 4250:  0004000c  00000104  0b080001  02440838  ._._..__._..8.D.
-// 4260:  00000010  1150001a  00050000  00040010  .___._P.__._._._
-// 4270:  00000104  0b080001  02440838  00000014  ..__._..8.D..___
-// 4280:  1150001a  00050000  00040014  00000104  ._P.__._._._..__
-// 4290:  0b080001  02440838  00000018  1150001a  ._..8.D..___._P.
-// 42a0:  00050000  00040018  00000124  0ae80001  __._._._$.__._..
-// 42b0:  007c09f4  00000020  1150001a  00050000  ..|_ ___._P.__._
-// 42c0:  0004001c  00000124  0ae80001  007c09f4  ._._$.__._....|_
-// 42d0:  00000024  1150001a  00050000  00040020  $___._P.__._ _._
-// 42e0:  00000124  0ae80001  007c09f4  00000028  $.__._....|_(___
-// 42f0:  113e0036  0000100b  69700008  436c6578  6_>...__._pixelC
-// 4300:  6f706d6f  746e656e  00000000  00000000  omponent________
-// 4310:  00000000  00000000  00000000  00000000  ________________
-// 4320:  00000000  00000000  11500016  00050000  ________._P.__._
-// 4330:  00040000  000005a8  05540001  00000030  __._..__._T.0___
-// 4340:  11500016  00050000  00040004  000005a8  ._P.__._._._..__
-// 4350:  05540001  00000034  11500016  00050000  ._T.4___._P.__._
-// 4360:  00040008  000005a8  05540001  00000038  ._._..__._T.8___
-// 4370:  11500016  00050000  00040010  000005bc  ._P.__._._._..__
-// 4380:  06500001  00000080  11500016  00050000  ._P..___._P.__._
-// 4390:  00040014  000005bc  06500001  00000084  ._._..__._P..___
-// 43a0:  11500016  00050000  00040018  000005bc  ._P.__._._._..__
-// 43b0:  06500001  00000088  11500016  00050000  ._P..___._P.__._
-// 43c0:  0004001c  000005d0  063c0001  00000050  ._._..__._<.P___
-// 43d0:  11500016  00050000  00040020  000005d0  ._P.__._ _._..__
-// 43e0:  063c0001  00000054  11500016  00050000  ._<.T___._P.__._
-// 43f0:  00040024  000005d0  063c0001  00000058  $_._..__._<.X___
-// 4400:  113e002a  00001000  554f0008  00000054  *_>._.__._OUT___
-// 4410:  00000000  00000000  00000000  00000000  ________________
-// 4420:  00000000  00000000  00000000  11500016  ____________._P.
-// 4430:  00050000  00040000  00000bcc  00400001  __.___._..__._@_
-// 4440:  00000000  11500016  00050000  00040004  ____._P.__._._._
-// 4450:  00000bcc  00400001  00000004  11500016  ..__._@_.___._P.
-// 4460:  00050000  00040008  00000bcc  00400001  __._._._..__._@_
-// 4470:  00000008  11500016  00050000  0004000c  .___._P.__._._._
-// 4480:  00000be0  002c0001  0000000c  114d014e  ..__._,_.___N.M.
-// 4490:  00000080  00000d94  00001000  05090007  .___..___.__._..
-// 44a0:  0e06340d  09dc8003  06510d09  90800304  .4........Q.....
-// 44b0:  050d0509  2c030206  2a0d0909  0509640b  .......,...*.d..
-// 44c0:  0206050d  230d1403  0909440b  0406570d  .......#.D...W..
-// 44d0:  05095403  0206050d  09092c03  640b340d  .T.......,...4.d
-// 44e0:  050d0509  18030206  440b210d  5f0d0909  .........!.D..._
-// 44f0:  54030406  0206440d  0da48003  03020638  ...T.D......8...
-// 4500:  0509a080  0206050d  09095403  640b350d  .........T...5.d
-// 4510:  050d0509  4c030206  440b1a0d  00083c04  .......L...D.<._
-// 4520:  190d0909  06a08101  0d00033b  092c0321  ........;._.!.,.
-// 4530:  03330d26  0309091c  0d050920  091c0334  &.3..... ...4...
-// 4540:  0b500d22  0d05094c  03020605  0d09092c  ".P.L.......,...
-// 4550:  09640b29  06050d05  09140302  0b1a0d09  ).d.............
-// 4560:  03220d44  0d05092c  091c0323  0b520d23  D.".,...#...#.R.
-// 4570:  0d05094c  03020605  0d09092c  09640b33  L.......,...3.d.
-// 4580:  06050d05  09180302  0b180d09  03200d44  ............D. .
-// 4590:  0d05092c  091c0321  0b560d21  0d25094c  ,...!...!.V.L.%.
-// 45a0:  09200352  03560d21  0d20092c  091c035e  R. .!.V.,. .^...
-// 45b0:  06430d12  093c0302  06370d21  a0800302  ..C...<.!.7.....
-// 45c0:  050d0509  54030206  340d2109  0509640b  .......T.!.4.d..
-// 45d0:  0206050d  1a0d4c03  3c04440b  113e004a  .....L...D.<J_>.
-// 45e0:  0000100c  433c0088  75706d6f  69506574  ..__._<ComputePi
-// 45f0:  436c6578  6f706d6f  746e656e  74657220  xelComponent ret
-// 4600:  206e7275  756c6176  00003e65  00000000  urn value>______
-// 4610:  00000000  00000000  00000000  00000000  ________________
-// 4620:  00000000  00000000  11500016  00050000  ________._P.__._
-// 4630:  00040000  0000056c  003c0001  00000030  __._l.__._<_0___
-// 4640:  11500016  00050000  00040004  0000056c  ._P.__._._._l.__
-// 4650:  003c0001  00000034  11500016  00050000  ._<_4___._P.__._
-// 4660:  00040008  0000056c  003c0001  00000038  ._._l.__._<_8___
-// 4670:  11500016  00050000  00040010  00000580  ._P.__._._._..__
-// 4680:  00280001  00000080  11500016  00050000  ._(_.___._P.__._
-// 4690:  00040014  00000580  00280001  00000084  ._._..__._(_.___
-// 46a0:  11500016  00050000  00040018  00000580  ._P.__._._._..__
-// 46b0:  00280001  00000088  11500016  00050000  ._(_.___._P.__._
-// 46c0:  0004001c  00000594  00140001  00000050  ._._..__._._P___
-// 46d0:  11500016  00050000  00040020  00000594  ._P.__._ _._..__
-// 46e0:  00140001  00000054  11500016  00050000  ._._T___._P.__._
-// 46f0:  00040024  00000594  00140001  00000058  $_._..__._._X___
-// 4700:  113e002a  00001004  4e490009  00000000  *_>...__._IN____
-// 4710:  00000000  00000000  00000000  00000000  ________________
-// 4720:  00000000  00000000  00000000  1150001a  ____________._P.
-// 4730:  00050000  00040010  000001a0  03cc0001  __._._._..__._..
-// 4740:  000400bc  00000030  1150001a  00050000  ._._0___._P.__._
-// 4750:  00040014  000001a0  03cc0001  000400bc  ._._..__._..._._
-// 4760:  00000034  1150001a  00050000  00040018  4___._P.__._._._
-// 4770:  000001a0  03cc0001  000400bc  00000038  ..__._..._._8___
-// 4780:  1150001a  00050000  00040028  000001a0  ._P.__._(_._..__
-// 4790:  03b40001  006c02fc  00000040  1150001a  ._....l_@___._P.
-// 47a0:  00050000  0004002c  000001a0  03b40001  __._,_._..__._..
-// 47b0:  006c02fc  00000044  11500016  00050000  ..l_D___._P.__._
-// 47c0:  00040030  000001a0  03b40001  00000048  0_._..__._..H___
-// 47d0:  1150001a  00050000  00040034  000001a0  ._P.__._4_._..__
-// 47e0:  03b40001  003c032c  00000050  11500016  ._..,.<_P___._P.
-// 47f0:  00050000  00040038  000001a0  03b40001  __._8_._..__._..
-// 4800:  00000060  11500016  00050000  0004003c  `___._P.__._<_._
-// 4810:  000001a0  04080001  00000070  11500016  ..__._..p___._P.
-// 4820:  00050000  00040040  000001a0  04080001  __._@_._..__._..
-// 4830:  00000074  11500016  00050000  00040044  t___._P.__._D_._
-// 4840:  000001a0  04080001  00000078  11500016  ..__._..x___._P.
-// 4850:  00050000  00040048  000001a0  04080001  __._H_._..__._..
-// 4860:  0000007c  113e0036  0000100b  69700008  |___6_>...__._pi
-// 4870:  436c6578  6f706d6f  746e656e  00000000  xelComponent____
-// 4880:  00000000  00000000  00000000  00000000  ________________
-// 4890:  00000000  00000000  00000000  1150001a  ____________._P.
-// 48a0:  00050000  00040000  0000025c  034c0001  __.___._\.__._L.
-// 48b0:  00140004  00000030  1150001a  00050000  ._._0___._P.__._
-// 48c0:  00040004  0000025c  034c0001  00140004  ._._\.__._L.._._
-// 48d0:  00000034  1150001a  00050000  00040008  4___._P.__._._._
-// 48e0:  0000025c  034c0001  00140004  00000038  \.__._L.._._8___
-// 48f0:  1150001a  00050000  00040010  000002f8  ._P.__._._._..__
-// 4900:  02b00001  00180004  00000080  1150001a  ._..._._.___._P.
-// 4910:  00050000  00040014  000002f8  02b00001  __._._._..__._..
-// 4920:  00180004  00000084  1150001a  00050000  ._._.___._P.__._
-// 4930:  00040018  000002f8  02b00001  00180004  ._._..__._..._._
-// 4940:  00000088  1150001a  00050000  0004001c  .___._P.__._._._
-// 4950:  000004cc  00dc0001  004c003c  00000050  ..__._._<_L_P___
-// 4960:  1150001a  00050000  00040020  000004e8  ._P.__._ _._..__
-// 4970:  00c00001  004c0020  00000054  1150001a  ._._ _L_T___._P.
-// 4980:  00050000  00040024  00000504  00a40001  __._$_._..__._._
-// 4990:  004c0004  00000058  113e0036  00001002  ._L_X___6_>...__
-// 49a0:  61730008  656c706d  726f4e64  006c616d  ._sampledNormal_
-// 49b0:  00000000  00000000  00000000  00000000  ________________
+// 41f0:  00000000  00000000  00000000  00000000  ________________
+// 4200:  00000000  00000000  00000000  00000000  ________________
+// 4210:  00000000  00000000  00000000  00000000  ________________
+// 4220:  00000000  00000000  00000000  00000000  ________________
+// 4230:  00000000  00000000  00000000  00000000  ________________
+// 4240:  00000000  00000000  00000000  00000000  ________________
+// 4250:  00000000  00000000  00000000  00000000  ________________
+// 4260:  00000000  00000000  00000000  00000000  ________________
+// 4270:  00000000  00000000  00000000  00000000  ________________
+// 4280:  00000000  00000000  00000000  00000000  ________________
+// 4290:  00000000  00000000  00000000  00000000  ________________
+// 42a0:  00000000  00000000  00000000  00000004  ____________.___
+// 42b0:  113c0042  00000110  000a0100  02a20001  B_<...___.._._..
+// 42c0:  000a3ad7  02a20001  694d3ad7  736f7263  .:._._...:Micros
+// 42d0:  2074666f  20295228  4c534c48  61685320  oft (R) HLSL Sha
+// 42e0:  20726564  706d6f43  72656c69  2e303120  der Compiler 10.
+// 42f0:  00000031  113d0036  736c6801  616c466c  1___6_=..hlslFla
+// 4300:  30007367  68003578  546c736c  65677261  gs_0x5_hlslTarge
+// 4310:  73700074  305f355f  736c6800  746e456c  t_ps_5_0_hlslEnt
+// 4320:  50007972  414d5f53  00004e49  1110002e  ry_PS_MAIN__._..
+// 4330:  00000000  00001d94  00000000  00000e6c  ____..______l.__
+// 4340:  00000000  00000e6c  00001007  000000c4  ____l.__..__.___
+// 4350:  50a00001  414d5f53  00004e49  113e002a  ._.PS_MAIN__*_>.
+// 4360:  00001004  4e490009  00000000  00000000  ..__._IN________
+// 4370:  00000000  00000000  00000000  00000000  ________________
+// 4380:  00000000  00000000  11500016  00050001  ________._P.._._
+// 4390:  00040000  000000c4  0e6c0001  00000000  __._.___._l.____
+// 43a0:  11500016  00050001  00040004  000000c4  ._P.._._._._.___
+// 43b0:  0e6c0001  00000004  11500016  00050001  ._l..___._P.._._
+// 43c0:  00040008  000000c4  0e6c0001  00000008  ._._.___._l..___
+// 43d0:  11500016  00050001  0004000c  000000c4  ._P.._._._._.___
+// 43e0:  0e6c0001  0000000c  11500016  00050001  ._l..___._P.._._
+// 43f0:  00040010  000000c4  0e6c0001  00000010  ._._.___._l..___
+// 4400:  11500016  00050001  00040014  000000c4  ._P.._._._._.___
+// 4410:  0e6c0001  00000014  11500016  00050001  ._l..___._P.._._
+// 4420:  00040018  000000c4  0e6c0001  00000018  ._._.___._l..___
+// 4430:  11500016  00050001  0004001c  000000c4  ._P.._._._._.___
+// 4440:  0e6c0001  0000001c  11500016  00050001  ._l..___._P.._._
+// 4450:  00040020  000000c4  0e6c0001  00000020   _._.___._l. ___
+// 4460:  11500016  00050001  00040024  000000c4  ._P.._._$_._.___
+// 4470:  0e6c0001  00000024  11500016  00050001  ._l.$___._P.._._
+// 4480:  00040028  000000c4  0e6c0001  00000030  (_._.___._l.0___
+// 4490:  11500016  00050001  0004002c  000000c4  ._P.._._,_._.___
+// 44a0:  0e6c0001  00000034  11500016  00050001  ._l.4___._P.._._
+// 44b0:  00040030  000000c4  0e6c0001  00000038  0_._.___._l.8___
+// 44c0:  11500016  00050001  00040034  000000c4  ._P.._._4_._.___
+// 44d0:  0e6c0001  00000040  11500016  00050001  ._l.@___._P.._._
+// 44e0:  00040038  000000c4  0e6c0001  00000044  8_._.___._l.D___
+// 44f0:  11500016  00050001  0004003c  000000c4  ._P.._._<_._.___
+// 4500:  0e6c0001  00000048  11500016  00050001  ._l.H___._P.._._
+// 4510:  00040040  000000c4  0e6c0001  00000050  @_._.___._l.P___
+// 4520:  11500016  00050001  00040044  000000c4  ._P.._._D_._.___
+// 4530:  0e6c0001  00000054  11500016  00050001  ._l.T___._P.._._
+// 4540:  00040048  000000c4  0e6c0001  00000058  H_._.___._l.X___
+// 4550:  11500016  00050001  0004004c  000000c4  ._P.._._L_._.___
+// 4560:  0e6c0001  00000060  11500016  00050001  ._l.`___._P.._._
+// 4570:  00040050  000000c4  0e6c0001  00000064  P_._.___._l.d___
+// 4580:  11500016  00050001  00040054  000000c4  ._P.._._T_._.___
+// 4590:  0e6c0001  00000068  11500016  00050001  ._l.h___._P.._._
+// 45a0:  00040058  000000c4  0e6c0001  00000070  X_._.___._l.p___
+// 45b0:  11500016  00050001  0004005c  000000c4  ._P.._._\_._.___
+// 45c0:  0e6c0001  00000074  11500016  00050001  ._l.t___._P.._._
+// 45d0:  00040060  000000c4  0e6c0001  00000078  `_._.___._l.x___
+// 45e0:  11500016  00050001  00040064  000000c4  ._P.._._d_._.___
+// 45f0:  0e6c0001  0000007c  11500016  00050001  ._l.|___._P.._._
+// 4600:  00040068  000000c4  0e6c0001  00000080  h_._.___._l..___
+// 4610:  11500016  00050001  0004006c  000000c4  ._P.._._l_._.___
+// 4620:  0e6c0001  00000084  11500016  00050001  ._l..___._P.._._
+// 4630:  00040070  000000c4  0e6c0001  00000088  p_._.___._l..___
+// 4640:  113e003e  00001006  503c0088  414d5f53  >_>...__._<PS_MA
+// 4650:  72204e49  72757465  6176206e  3e65756c  IN return value>
+// 4660:  00000000  00000000  00000000  00000000  ________________
+// 4670:  00000000  00000000  00000000  00000000  ________________
+// 4680:  11500016  00050002  00040000  000000c4  ._P.._.___._.___
+// 4690:  0e6c0001  00000000  11500016  00050002  ._l.____._P.._._
+// 46a0:  00040004  000000c4  0e6c0001  00000004  ._._.___._l..___
+// 46b0:  11500016  00050002  00040008  000000c4  ._P.._._._._.___
+// 46c0:  0e6c0001  00000008  11500016  00050002  ._l..___._P.._._
+// 46d0:  0004000c  000000c4  0e6c0001  0000000c  ._._.___._l..___
+// 46e0:  113e0036  00001009  6f630008  43726f6c  6_>...__._colorC
+// 46f0:  6f706d6f  746e656e  00000000  00000000  omponent________
+// 4700:  00000000  00000000  00000000  00000000  ________________
+// 4710:  00000000  00000000  1150002a  00050000  ________*_P.__._
+// 4720:  00040000  000000e4  0df00001  01100650  __._.___._..P...
+// 4730:  00c4078c  04d0087c  00180d78  00040dd0  ..._|...x.._..._
+// 4740:  00000000  1150002a  00050000  00040004  ____*_P.__._._._
+// 4750:  000000e4  0df00001  01100650  00c4078c  .___._..P......_
+// 4760:  04d0087c  00180d78  00040dd0  00000004  |...x.._..._.___
+// 4770:  1150002a  00050000  00040008  000000e4  *_P.__._._._.___
+// 4780:  0df00001  01100650  00c4078c  04d0087c  ._..P......_|...
+// 4790:  00180d78  00040dd0  00000008  1150001a  x.._..._.___._P.
+// 47a0:  00050000  0004000c  00000104  0e2c0001  __._._._..__._,.
+// 47b0:  02440afc  00000010  1150002a  00050000  ..D..___*_P.__._
+// 47c0:  00040010  00000104  0e2c0001  018805cc  ._._..__._,.....
+// 47d0:  00d8076c  04e4085c  002c0d58  00040db0  l.._\...X.,_..._
+// 47e0:  00000014  1150002a  00050000  00040014  .___*_P.__._._._
+// 47f0:  00000104  0e2c0001  018805cc  00d8076c  ..__._,.....l.._
+// 4800:  04e4085c  002c0d58  00040db0  00000018  \...X.,_..._.___
+// 4810:  1150002a  00050000  00040018  00000124  *_P.__._._._$.__
+// 4820:  0e0c0001  01240624  00ec074c  04f8083c  ._..$.$.L.._<...
+// 4830:  00540d38  00040d90  00000020  1150002a  8.T_..._ ___*_P.
+// 4840:  00050000  0004001c  00000124  0e0c0001  __._._._$.__._..
+// 4850:  01240624  00ec074c  04f8083c  00540d38  $.$.L.._<...8.T_
+// 4860:  00040d90  00000024  1150001a  00050000  ..._$___._P.__._
+// 4870:  00040020  00000124  0e0c0001  007c0cb8   _._$.__._....|_
+// 4880:  00000028  11500026  00050000  00040000  (___&_P.__.___._
+// 4890:  00000734  07840001  00a40098  00a40188  4.__._..._._..._
+// 48a0:  044c02dc  00400740  00000014  11500026  ..L.@.@_.___&_P.
+// 48b0:  00050000  00040004  00000734  07840001  __._._._4.__._..
+// 48c0:  00a40098  00a40188  044c02dc  00400740  ._._..._..L.@.@_
+// 48d0:  00000018  11500026  00050000  00040008  .___&_P.__._._._
+// 48e0:  00000734  07840001  002c0110  002c0200  4.__._....,__.,_
+// 48f0:  002c06fc  00400740  0000001c  11500026  ..,_@.@_.___&_P.
+// 4900:  00050000  00040010  00000748  07700001  __._._._H.__._p.
+// 4910:  00180110  00180200  001806fc  002c0740  ...__.._..._@.,_
+// 4920:  00000060  11500026  00050000  00040014  `___&_P.__._._._
+// 4930:  00000748  07700001  00180110  00180200  H.__._p....__.._
+// 4940:  001806fc  002c0740  00000064  11500026  ..._@.,_d___&_P.
+// 4950:  00050000  00040018  00000748  07700001  __._._._H.__._p.
+// 4960:  00040124  00040214  00040710  00040768  $.._..._..._h.._
+// 4970:  00000068  11500026  00050000  0004001c  h___&_P.__._._._
+// 4980:  00000748  07700001  00040124  00040214  H.__._p.$.._..._
+// 4990:  00040710  00040768  0000006c  113e0036  ..._h.._l___6_>.
+// 49a0:  0000100b  69700008  436c6578  6f706d6f  ..__._pixelCompo
+// 49b0:  746e656e  00000000  00000000  00000000  nent____________
 // 49c0:  00000000  00000000  00000000  00000000  ________________
-// 49d0:  11500016  00050000  00040000  00000410  ._P.__.___._..__
-// 49e0:  00f80001  00000090  11500016  00050000  ._._.___._P.__._
-// 49f0:  00040004  00000410  00f80001  00000094  ._._..__._._.___
-// 4a00:  11500016  00050000  00040008  00000410  ._P.__._._._..__
-// 4a10:  00f80001  00000098  113e002a  0000100e  ._._.___*_>...__
-// 4a20:  62740008  0000006e  00000000  00000000  ._tbn___________
-// 4a30:  00000000  00000000  00000000  00000000  ________________
-// 4a40:  00000000  11500016  00050000  00040000  ____._P.__.___._
-// 4a50:  00000424  00a80001  00000050  11500016  $.__._._P___._P.
-// 4a60:  00050000  00040004  00000438  00b00001  __._._._8.__._._
-// 4a70:  00000054  11500016  00050000  00040008  T___._P.__._._._
-// 4a80:  0000044c  00b80001  00000058  11500016  L.__._._X___._P.
-// 4a90:  00050000  0004000c  00000460  00a80001  __._._._`.__._._
-// 4aa0:  00000060  11500016  00050000  00040010  `___._P.__._._._
-// 4ab0:  00000474  00940001  00000064  11500016  t.__._._d___._P.
-// 4ac0:  00050000  00040014  00000488  00800001  __._._._..__._._
-// 4ad0:  00000068  11500016  00050000  00040018  h___._P.__._._._
-// 4ae0:  0000049c  006c0001  00000040  11500016  ..__._l_@___._P.
-// 4af0:  00050000  0004001c  0000049c  006c0001  __._._._..__._l_
-// 4b00:  00000044  11500016  00050000  00040020  D___._P.__._ _._
-// 4b10:  000004b0  00580001  00000048  114e0002  ..__._X_H___._N.
-// 4b20:  114d003a  00000080  00001088  00001001  :_M..___..__..__
-// 4b30:  05090007  02065d0d  0d608503  0c02061a  ._...]....`.....
-// 4b40:  00085c3c  3f0d1f09  0b248601  035c0d30  <\._...?..$.0.\.
-// 4b50:  03050924  061a0d1c  1c3c0c02  113e004a  $.........<.J_>.
-// 4b60:  00001010  433c0088  75706d6f  6d416574  ..__._<ComputeAm
-// 4b70:  6e656962  67694c74  72207468  72757465  bientLight retur
-// 4b80:  6176206e  3e65756c  00000000  00000000  n value>________
-// 4b90:  00000000  00000000  00000000  00000000  ________________
-// 4ba0:  00000000  00000000  11500016  00050000  ________._P.__._
-// 4bb0:  00040000  00000694  003c0001  00000000  __._..__._<_____
-// 4bc0:  11500016  00050000  00040004  00000694  ._P.__._._._..__
-// 4bd0:  003c0001  00000004  11500016  00050000  ._<_.___._P.__._
-// 4be0:  00040008  00000694  003c0001  00000008  ._._..__._<_.___
-// 4bf0:  11500016  00050000  0004000c  000006a8  ._P.__._._._..__
-// 4c00:  00280001  00000010  11500016  00050000  ._(_.___._P.__._
-// 4c10:  00040010  000006a8  00280001  00000014  ._._..__._(_.___
-// 4c20:  11500016  00050000  00040014  000006a8  ._P.__._._._..__
-// 4c30:  00280001  00000018  11500016  00050000  ._(_.___._P.__._
-// 4c40:  00040018  000006bc  00140001  00000020  ._._..__._._ ___
-// 4c50:  11500016  00050000  0004001c  000006bc  ._P.__._._._..__
-// 4c60:  00140001  00000024  11500016  00050000  ._._$___._P.__._
-// 4c70:  00040020  000006bc  00140001  00000028   _._..__._._(___
-// 4c80:  113e0036  0000100b  69700009  436c6578  6_>...__._pixelC
-// 4c90:  6f706d6f  746e656e  00000000  00000000  omponent________
-// 4ca0:  00000000  00000000  00000000  00000000  ________________
-// 4cb0:  00000000  00000000  11500016  00050000  ________._P.__._
-// 4cc0:  00040000  00000624  00ac0001  00000030  __._$.__._._0___
-// 4cd0:  11500016  00050000  00040004  00000624  ._P.__._._._$.__
-// 4ce0:  00ac0001  00000034  11500016  00050000  ._._4___._P.__._
-// 4cf0:  00040008  00000624  00ac0001  00000038  ._._$.__._._8___
-// 4d00:  113e0036  00001009  6f630009  43726f6c  6_>...__._colorC
-// 4d10:  6f706d6f  746e656e  00000000  00000000  omponent________
-// 4d20:  00000000  00000000  00000000  00000000  ________________
-// 4d30:  00000000  00000000  11500016  00050000  ________._P.__._
-// 4d40:  00040000  00000624  00ac0001  00000000  __._$.__._._____
-// 4d50:  11500016  00050000  00040004  00000624  ._P.__._._._$.__
-// 4d60:  00ac0001  00000004  11500016  00050000  ._._.___._P.__._
-// 4d70:  00040008  00000624  00ac0001  00000008  ._._$.__._._.___
-// 4d80:  11500016  00050000  0004000c  00000624  ._P.__._._._$.__
-// 4d90:  00ac0001  00000010  11500016  00050000  ._._.___._P.__._
-// 4da0:  00040010  00000624  00ac0001  00000014  ._._$.__._._.___
-// 4db0:  11500016  00050000  00040014  00000624  ._P.__._._._$.__
-// 4dc0:  00ac0001  00000018  11500016  00050000  ._._.___._P.__._
-// 4dd0:  00040018  00000624  00ac0001  00000020  ._._$.__._._ ___
-// 4de0:  11500016  00050000  0004001c  00000624  ._P.__._._._$.__
-// 4df0:  00ac0001  00000024  11500016  00050000  ._._$___._P.__._
-// 4e00:  00040020  00000624  00ac0001  00000028   _._$.__._._(___
-// 4e10:  114e0002  114d00d6  00000080  000016ac  ._N.._M..___..__
-// 4e20:  00001002  05090007  04063b0d  0dd88603  ..__._...;......
-// 4e30:  0302063e  06140d68  09680304  06720d09  >...h.....h...r.
-// 4e40:  0d3c0306  0306064e  800d9480  030606b4  ..<.N...........
-// 4e50:  0509d480  0206050d  0d088103  04440b1a  ..............D.
-// 4e60:  0900083c  01390d27  1f069c87  1d090003  <._.'.9......_..
-// 4e70:  1c033a0d  3c0d2909  4c030206  3d0d1509  .:...).<...L...=
-// 4e80:  09094c03  0406130d  05091c03  3003140d  .L.............0
-// 4e90:  340d2309  450d6c0b  540d1c03  710d2003  .#.4.l.E...T. .q
-// 4ea0:  09092003  1f091c03  06064c0d  15091c03  . .......L......
-// 4eb0:  80034d0d  0d2c0988  03060650  0d28094c  .M....,.P...L.(.
-// 4ec0:  091c0354  03640d24  03780d30  96800d48  T...$.d.0.x.H...
-// 4ed0:  800d2003  091c03b3  091c0309  06050d05  . ..............
-// 4ee0:  0d1c0302  04440b1a  0000003c  113e004e  ......D.<___N_>.
-// 4ef0:  00001010  433c0088  75706d6f  69446574  ..__._<ComputeDi
-// 4f00:  74636572  616e6f69  67694c6c  72207468  rectionalLight r
-// 4f10:  72757465  6176206e  3e65756c  00000000  eturn value>____
-// 4f20:  00000000  00000000  00000000  00000000  ________________
-// 4f30:  00000000  00000000  00000000  11500016  ____________._P.
-// 4f40:  00050000  00040000  00000b30  003c0001  __.___._0.__._<_
-// 4f50:  00000000  11500016  00050000  00040004  ____._P.__._._._
-// 4f60:  00000b30  003c0001  00000004  11500016  0.__._<_.___._P.
-// 4f70:  00050000  00040008  00000b30  003c0001  __._._._0.__._<_
-// 4f80:  00000008  11500016  00050000  0004000c  .___._P.__._._._
-// 4f90:  00000b44  00280001  00000010  11500016  D.__._(_.___._P.
-// 4fa0:  00050000  00040010  00000b44  00280001  __._._._D.__._(_
-// 4fb0:  00000014  11500016  00050000  00040014  .___._P.__._._._
-// 4fc0:  00000b44  00280001  00000018  11500016  D.__._(_.___._P.
-// 4fd0:  00050000  00040018  00000b58  00140001  __._._._X.__._._
-// 4fe0:  00000020  11500016  00050000  0004001c   ___._P.__._._._
-// 4ff0:  00000b58  00140001  00000024  11500016  X.__._._$___._P.
-// 5000:  00050000  00040020  00000b58  00140001  __._ _._X.__._._
-// 5010:  00000028  113e0036  0000100b  69700009  (___6_>...__._pi
-// 5020:  436c6578  6f706d6f  746e656e  00000000  xelComponent____
-// 5030:  00000000  00000000  00000000  00000000  ________________
-// 5040:  00000000  00000000  00000000  11500016  ____________._P.
-// 5050:  00050000  00040000  0000079c  03600001  __.___._..__._`.
-// 5060:  00000030  11500016  00050000  00040004  0___._P.__._._._
-// 5070:  0000079c  03600001  00000034  11500016  ..__._`.4___._P.
-// 5080:  00050000  00040008  0000079c  03600001  __._._._..__._`.
-// 5090:  00000038  11500016  00050000  00040010  8___._P.__._._._
-// 50a0:  0000079c  03d00001  00000080  11500016  ..__._...___._P.
-// 50b0:  00050000  00040014  0000079c  03d00001  __._._._..__._..
-// 50c0:  00000084  11500016  00050000  00040018  .___._P.__._._._
-// 50d0:  0000079c  03d00001  00000088  11500016  ..__._...___._P.
-// 50e0:  00050000  0004001c  0000079c  03d00001  __._._._..__._..
-// 50f0:  00000050  11500016  00050000  00040020  P___._P.__._ _._
-// 5100:  0000079c  03d00001  00000054  11500016  ..__._..T___._P.
-// 5110:  00050000  00040024  0000079c  03d00001  __._$_._..__._..
-// 5120:  00000058  113e0036  00001009  6f630009  X___6_>...__._co
-// 5130:  43726f6c  6f706d6f  746e656e  00000000  lorComponent____
+// 49d0:  00000000  1150001a  00050000  00040010  ____._P.__._._._
+// 49e0:  000005d0  08e80001  00b807d4  00000030  ..__._....._0___
+// 49f0:  1150001a  00050000  00040000  000005d0  ._P.__.___._..__
+// 4a00:  08e80001  04b003dc  00000034  1150001a  ._......4___._P.
+// 4a10:  00050000  00040004  000005d0  08e80001  __._._._..__._..
+// 4a20:  04b003dc  00000038  11500016  00050000  ....8___._P.__._
+// 4a30:  00040008  000005d0  09600001  0000003c  ._._..__._`.<___
+// 4a40:  1150001a  00050000  00040014  000005e4  ._P.__._._._..__
+// 4a50:  08d40001  03fc047c  00000080  1150001a  ._..|....___._P.
+// 4a60:  00050000  00040018  000005e4  08d40001  __._._._..__._..
+// 4a70:  03fc047c  00000084  1150001a  00050000  |....___._P.__._
+// 4a80:  0004001c  000005e4  08d40001  03fc047c  ._._..__._..|...
+// 4a90:  00000088  11500016  00050000  00040020  .___._P.__._ _._
+// 4aa0:  000005e4  094c0001  0000008c  1150001a  ..__._L..___._P.
+// 4ab0:  00050000  00040024  000005f8  08c00001  __._$_._..__._..
+// 4ac0:  01f00674  00000058  113e002a  00001000  t...X___*_>._.__
+// 4ad0:  554f0008  00000054  00000000  00000000  ._OUT___________
+// 4ae0:  00000000  00000000  00000000  00000000  ________________
+// 4af0:  00000000  11500016  00050000  00040000  ____._P.__.___._
+// 4b00:  00000ef0  00400001  00000000  11500016  ..__._@_____._P.
+// 4b10:  00050000  00040004  00000ef0  00400001  __._._._..__._@_
+// 4b20:  00000004  11500016  00050000  00040008  .___._P.__._._._
+// 4b30:  00000ef0  00400001  00000008  11500016  ..__._@_.___._P.
+// 4b40:  00050000  0004000c  00000f04  002c0001  __._._._..__._,_
+// 4b50:  0000000c  114d014e  00000080  00000f80  .___N.M..___..__
+// 4b60:  00001000  05090007  0e06220d  09dc8003  _.__._..."......
+// 4b70:  06510d09  09540304  06050d05  092c0302  ..Q...T.......,.
+// 4b80:  0b2a0d09  0d050964  03020605  0b230d14  ..*.d.........#.
+// 4b90:  0d090944  03040657  0d050954  03020605  D...W...T.......
+// 4ba0:  0d09092c  03060634  0d050918  03020605  ,...4...........
+// 4bb0:  06210d18  09180304  065f0d09  0d540304  ..!......._...T.
+// 4bc0:  03020644  380da480  80030206  0d0509a0  D......8........
+// 4bd0:  03020605  0d090954  09640b35  06050d05  ....T...5.d.....
+// 4be0:  0d4c0302  0c04061a  00081864  190d0909  ..L.....d.._....
+// 4bf0:  06a08101  0d00033b  092c0321  03220d05  ....;._.!.,...".
+// 4c00:  0d22091c  094c0b50  06050d05  092c0302  ..".P.L.......,.
+// 4c10:  0b290d09  0d050964  03020605  0d090914  ..).d...........
+// 4c20:  0d440b1a  092c0322  03230d05  0d23091c  ..D.".,...#...#.
+// 4c30:  094c0b52  06050d05  092c0302  06330d09  R.L.......,...3.
+// 4c40:  09180306  06050d05  09180302  06180d09  ................
+// 4c50:  0d180304  092c0320  03210d05  0d21091c  .... .,...!...!.
+// 4c60:  094c0b56  03520d25  0d210920  092c0356  V.L.%.R. .!.V.,.
+// 4c70:  035e0d20  0d12091c  03020643  0d21093c   .^.....C...<.!.
+// 4c80:  03020637  0509a080  0206050d  21095403  7............T.!
+// 4c90:  640b340d  050d0509  4c030206  04061a0d  .4.d.......L....
+// 4ca0:  0018640c  113e004a  0000100c  433c0088  .d._J_>...__._<C
+// 4cb0:  75706d6f  69506574  436c6578  6f706d6f  omputePixelCompo
+// 4cc0:  746e656e  74657220  206e7275  756c6176  nent return valu
+// 4cd0:  00003e65  00000000  00000000  00000000  e>______________
+// 4ce0:  00000000  00000000  00000000  00000000  ________________
+// 4cf0:  11500016  00050000  00040000  0000056c  ._P.__.___._l.__
+// 4d00:  00640001  00000034  11500016  00050000  ._d_4___._P.__._
+// 4d10:  00040004  0000056c  00640001  00000038  ._._l.__._d_8___
+// 4d20:  11500016  00050000  00040008  0000056c  ._P.__._._._l.__
+// 4d30:  00640001  0000003c  11500016  00050000  ._d_<___._P.__._
+// 4d40:  00040010  00000580  00500001  00000030  ._._..__._P_0___
+// 4d50:  11500016  00050000  00040014  00000594  ._P.__._._._..__
+// 4d60:  003c0001  00000080  11500016  00050000  ._<_.___._P.__._
+// 4d70:  00040018  00000594  003c0001  00000084  ._._..__._<_.___
+// 4d80:  11500016  00050000  0004001c  000005a8  ._P.__._._._..__
+// 4d90:  00280001  00000088  11500016  00050000  ._(_.___._P.__._
+// 4da0:  00040020  000005a8  00280001  0000008c   _._..__._(_.___
+// 4db0:  11500016  00050000  00040024  000005bc  ._P.__._$_._..__
+// 4dc0:  00140001  00000058  113e002a  00001004  ._._X___*_>...__
+// 4dd0:  4e490009  00000000  00000000  00000000  ._IN____________
+// 4de0:  00000000  00000000  00000000  00000000  ________________
+// 4df0:  00000000  1150001a  00050000  00040010  ____._P.__._._._
+// 4e00:  000001a0  03cc0001  00040080  00000034  ..__._..._._4___
+// 4e10:  1150001a  00050000  00040014  000001a0  ._P.__._._._..__
+// 4e20:  03cc0001  00040080  00000038  1150001a  ._..._._8___._P.
+// 4e30:  00050000  00040018  000001a0  03cc0001  __._._._..__._..
+// 4e40:  00040080  0000003c  1150001a  00050000  ._._<___._P.__._
+// 4e50:  00040028  000001a0  03b40001  006c02e8  (_._..__._....l_
+// 4e60:  00000040  1150001a  00050000  0004002c  @___._P.__._,_._
+// 4e70:  000001a0  03b40001  006c02e8  00000044  ..__._....l_D___
+// 4e80:  11500016  00050000  00040030  000001a0  ._P.__._0_._..__
+// 4e90:  03b40001  00000048  11500016  00050000  ._..H___._P.__._
+// 4ea0:  00040034  000001a0  03a00001  00000050  4_._..__._..P___
+// 4eb0:  11500016  00050000  00040038  000001a0  ._P.__._8_._..__
+// 4ec0:  03b40001  00000060  11500016  00050000  ._..`___._P.__._
+// 4ed0:  0004003c  000001a0  04300001  00000070  <_._..__._0.p___
+// 4ee0:  11500016  00050000  00040040  000001a0  ._P.__._@_._..__
+// 4ef0:  04300001  00000074  11500016  00050000  ._0.t___._P.__._
+// 4f00:  00040044  000001a0  04300001  00000078  D_._..__._0.x___
+// 4f10:  11500016  00050000  00040048  000001a0  ._P.__._H_._..__
+// 4f20:  04300001  0000007c  113e0036  0000100b  ._0.|___6_>...__
+// 4f30:  69700008  436c6578  6f706d6f  746e656e  ._pixelComponent
+// 4f40:  00000000  00000000  00000000  00000000  ________________
+// 4f50:  00000000  00000000  00000000  00000000  ________________
+// 4f60:  1150001a  00050000  00040000  00000220  ._P.__.___._ .__
+// 4f70:  03b00001  00140004  00000034  1150001a  ._..._._4___._P.
+// 4f80:  00050000  00040004  00000220  03b00001  __._._._ .__._..
+// 4f90:  00140004  00000038  1150001a  00050000  ._._8___._P.__._
+// 4fa0:  00040008  00000220  03b00001  00140004  ._._ .__._..._._
+// 4fb0:  0000003c  1150001a  00050000  00040010  <___._P.__._._._
+// 4fc0:  000002bc  00440001  001c0014  00000088  ..__._D_._._.___
+// 4fd0:  1150001a  00050000  00040014  000002bc  ._P.__._._._..__
+// 4fe0:  03140001  00180018  00000080  1150001a  ._..._._.___._P.
+// 4ff0:  00050000  00040018  000002bc  03140001  __._._._..__._..
+// 5000:  00180018  00000084  1150001a  00050000  ._._.___._P.__._
+// 5010:  00040010  000002d0  03000001  002c0004  ._._..__.__.._,_
+// 5020:  00000030  1150001a  00050000  0004001c  0___._P.__._._._
+// 5030:  000004b8  01180001  0060003c  00000088  ..__._..<_`_.___
+// 5040:  1150001a  00050000  00040020  000004d4  ._P.__._ _._..__
+// 5050:  00fc0001  00600020  0000008c  1150001a  ._._ _`_.___._P.
+// 5060:  00050000  00040024  000004f0  00e00001  __._$_._..__._._
+// 5070:  004c0004  00000058  11500016  00050000  ._L_X___._P.__._
+// 5080:  0004001c  00000540  00140001  00000050  ._._@.__._._P___
+// 5090:  11500016  00050000  00040020  00000540  ._P.__._ _._@.__
+// 50a0:  00140001  00000054  113e0036  00001002  ._._T___6_>...__
+// 50b0:  61730008  656c706d  726f4e64  006c616d  ._sampledNormal_
+// 50c0:  00000000  00000000  00000000  00000000  ________________
+// 50d0:  00000000  00000000  00000000  00000000  ________________
+// 50e0:  11500016  00050000  00040000  000003fc  ._P.__.___._..__
+// 50f0:  00f80001  00000090  11500016  00050000  ._._.___._P.__._
+// 5100:  00040004  000003fc  00f80001  00000094  ._._..__._._.___
+// 5110:  11500016  00050000  00040008  000003fc  ._P.__._._._..__
+// 5120:  00f80001  00000098  113e002a  0000100e  ._._.___*_>...__
+// 5130:  62740008  0000006e  00000000  00000000  ._tbn___________
 // 5140:  00000000  00000000  00000000  00000000  ________________
-// 5150:  00000000  00000000  00000000  11500016  ____________._P.
-// 5160:  00050000  00040000  0000079c  03d00001  __.___._..__._..
-// 5170:  00000000  11500016  00050000  00040004  ____._P.__._._._
-// 5180:  0000079c  03d00001  00000004  11500016  ..__._...___._P.
-// 5190:  00050000  00040008  0000079c  03d00001  __._._._..__._..
-// 51a0:  00000008  11500016  00050000  0004000c  .___._P.__._._._
-// 51b0:  0000079c  03d00001  00000010  11500016  ..__._...___._P.
-// 51c0:  00050000  00040010  0000079c  03d00001  __._._._..__._..
-// 51d0:  00000014  11500016  00050000  00040014  .___._P.__._._._
-// 51e0:  0000079c  03d00001  00000018  11500016  ..__._...___._P.
-// 51f0:  00050000  00040018  0000079c  03d00001  __._._._..__._..
-// 5200:  00000020  11500016  00050000  0004001c   ___._P.__._._._
-// 5210:  0000079c  03d00001  00000024  11500016  ..__._..$___._P.
-// 5220:  00050000  00040020  0000079c  03d00001  __._ _._..__._..
-// 5230:  00000028  113e002a  00001004  4e490009  (___*_>...__._IN
-// 5240:  00000000  00000000  00000000  00000000  ________________
-// 5250:  00000000  00000000  00000000  00000000  ________________
-// 5260:  11500016  00050000  00040028  0000079c  ._P.__._(_._..__
-// 5270:  00b40001  00000040  11500016  00050000  ._._@___._P.__._
-// 5280:  0004002c  0000079c  00b40001  00000044  ,_._..__._._D___
-// 5290:  11500016  00050000  00040030  0000079c  ._P.__._0_._..__
-// 52a0:  00b40001  00000048  11500016  00050000  ._._H___._P.__._
-// 52b0:  0004004c  0000079c  03d00001  00000060  L_._..__._..`___
-// 52c0:  11500016  00050000  00040050  0000079c  ._P.__._P_._..__
-// 52d0:  03d00001  00000064  11500016  00050000  ._..d___._P.__._
-// 52e0:  00040054  0000079c  03d00001  00000068  T_._..__._..h___
-// 52f0:  113e0032  00001002  65720008  63655666  2_>...__._refVec
-// 5300:  00726f74  00000000  00000000  00000000  tor_____________
-// 5310:  00000000  00000000  00000000  00000000  ________________
-// 5320:  00000000  11500016  00050000  00040000  ____._P.__.___._
-// 5330:  00000a10  00b40001  00000040  11500016  ..__._._@___._P.
-// 5340:  00050000  00040004  00000a10  00b40001  __._._._..__._._
-// 5350:  00000044  11500016  00050000  00040008  D___._P.__._._._
-// 5360:  00000a10  00b40001  00000048  113e0036  ..__._._H___6_>.
-// 5370:  00001002  696c0008  44746867  63657269  ..__._lightDirec
-// 5380:  6e6f6974  00000000  00000000  00000000  tion____________
-// 5390:  00000000  00000000  00000000  00000000  ________________
-// 53a0:  00000000  11500016  00050000  00040000  ____._P.__.___._
-// 53b0:  00000804  03680001  00000070  11500016  ..__._h.p___._P.
-// 53c0:  00050000  00040004  00000804  03680001  __._._._..__._h.
-// 53d0:  00000074  11500016  00050000  00040008  t___._P.__._._._
-// 53e0:  00000804  03680001  00000078  113e002e  ..__._h.x___._>.
-// 53f0:  00000040  5f6e0000  5f746f64  0000006c  @_____n_dot_l___
-// 5400:  00000000  00000000  00000000  00000000  ________________
-// 5410:  00000000  00000000  00000000  11500016  ____________._P.
-// 5420:  00010000  00040000  0000086c  00580001  __.___._l.__._X_
-// 5430:  0000000c  114e0002  00060002  000000f4  .___._N.._._.___
-// 5440:  00000030  00000001  c6b50110  176518ad  0___.___......e.
-// 5450:  416cc0e7  6ae9dd9b  00000286  000000b8  ..lA...j..__.___
-// 5460:  aa7d0110  d4caa851  dbf5bff5  34fa1934  ..}.Q.......4..4
-// 5470:  0000d332  000000f2  00000be8  00000000  2.__.___..______
-// 5480:  00010001  00000c0c  00000000  000000fc  ._._..______.___
-// 5490:  00000bdc  000000c4  8000001f  000000c4  ..__.___.__..___
-// 54a0:  0000001f  000000e4  80000020  000000e4  .___.___ __..___
-// 54b0:  00000020  00000104  80000021  00000104   ___..__!__...__
-// 54c0:  00000021  00000124  80000023  00000124  !___$.__#__.$.__
-// 54d0:  00000023  00000128  80000023  00000128  #___(.__#__.(.__
-// 54e0:  00000023  0000013c  80000023  0000013c  #___<.__#__.<.__
-// 54f0:  00000023  00000150  80000023  00000150  #___P.__#__.P.__
-// 5500:  00000023  00000164  80000023  00000164  #___d.__#__.d.__
-// 5510:  00000023  00000178  80000023  00000178  #___x.__#__.x.__
-// 5520:  00000023  0000018c  80000023  0000018c  #___..__#__...__
-// 5530:  00000023  000001a0  80000023  000001a0  #___..__#__...__
-// 5540:  00000023  000001cc  80000023  000001cc  #___..__#__...__
-// 5550:  00000023  000001e8  80000023  000001e8  #___..__#__...__
-// 5560:  00000023  00000208  80000023  00000208  #___..__#__...__
-// 5570:  00000023  00000224  80000023  00000224  #___$.__#__.$.__
-// 5580:  00000023  00000230  80000023  00000230  #___0.__#__.0.__
-// 5590:  00000023  0000025c  80000023  0000025c  #___\.__#__.\.__
-// 55a0:  00000023  00000260  80000023  00000260  #___`.__#__.`.__
-// 55b0:  00000023  00000274  80000023  00000274  #___t.__#__.t.__
-// 55c0:  00000023  00000278  80000023  00000278  #___x.__#__.x.__
-// 55d0:  00000023  000002a4  80000023  000002a4  #___..__#__...__
-// 55e0:  00000023  000002c0  80000023  000002c0  #___..__#__...__
-// 55f0:  00000023  000002cc  80000023  000002cc  #___..__#__...__
-// 5600:  00000023  000002f8  80000023  000002f8  #___..__#__...__
-// 5610:  00000023  000002fc  80000023  000002fc  #___..__#__...__
-// 5620:  00000023  00000314  80000023  00000314  #___..__#__...__
-// 5630:  00000023  00000318  80000023  00000318  #___..__#__...__
-// 5640:  00000023  00000344  80000023  00000344  #___D.__#__.D.__
-// 5650:  00000023  00000360  80000023  00000360  #___`.__#__.`.__
-// 5660:  00000023  0000036c  80000023  0000036c  #___l.__#__.l.__
-// 5670:  00000023  0000038c  80000023  0000038c  #___..__#__...__
-// 5680:  00000023  000003b8  80000023  000003b8  #___..__#__...__
-// 5690:  00000023  000003d4  80000023  000003d4  #___..__#__...__
-// 56a0:  00000023  000003f4  80000023  000003f4  #___..__#__...__
-// 56b0:  00000023  00000410  80000023  00000410  #___..__#__...__
-// 56c0:  00000023  00000424  80000023  00000424  #___$.__#__.$.__
-// 56d0:  00000023  00000438  80000023  00000438  #___8.__#__.8.__
-// 56e0:  00000023  0000044c  80000023  0000044c  #___L.__#__.L.__
-// 56f0:  00000023  00000460  80000023  00000460  #___`.__#__.`.__
-// 5700:  00000023  00000474  80000023  00000474  #___t.__#__.t.__
-// 5710:  00000023  00000488  80000023  00000488  #___..__#__...__
-// 5720:  00000023  0000049c  80000023  0000049c  #___..__#__...__
-// 5730:  00000023  000004b0  80000023  000004b0  #___..__#__...__
-// 5740:  00000023  000004cc  80000023  000004cc  #___..__#__...__
-// 5750:  00000023  000004e8  80000023  000004e8  #___..__#__...__
-// 5760:  00000023  00000504  80000023  00000504  #___..__#__...__
-// 5770:  00000023  00000508  80000023  00000508  #___..__#__...__
-// 5780:  00000023  00000524  80000023  00000524  #___$.__#__.$.__
-// 5790:  00000023  00000538  80000023  00000538  #___8.__#__.8.__
-// 57a0:  00000023  00000554  80000023  00000554  #___T.__#__.T.__
-// 57b0:  00000023  00000558  80000023  00000558  #___X.__#__.X.__
-// 57c0:  00000023  0000056c  80000023  0000056c  #___l.__#__.l.__
-// 57d0:  00000023  00000580  80000023  00000580  #___..__#__...__
-// 57e0:  00000023  00000594  80000023  00000594  #___..__#__...__
-// 57f0:  00000023  000005a8  80000023  000005a8  #___..__#__...__
-// 5800:  00000023  000005bc  80000023  000005bc  #___..__#__...__
-// 5810:  00000023  000005d0  80000025  000005d0  #___..__%__...__
-// 5820:  00000025  000005d4  80000025  000005d4  %___..__%__...__
-// 5830:  00000025  000005e8  80000025  000005e8  %___..__%__...__
-// 5840:  00000025  000005fc  80000025  000005fc  %___..__%__...__
-// 5850:  00000025  00000610  80000025  00000610  %___..__%__...__
-// 5860:  00000025  00000624  80000025  00000624  %___$.__%__.$.__
-// 5870:  00000025  00000648  80000025  00000648  %___H.__%__.H.__
-// 5880:  00000025  00000664  80000025  00000664  %___d.__%__.d.__
-// 5890:  00000025  00000680  80000025  00000680  %___..__%__...__
-// 58a0:  00000025  00000694  80000025  00000694  %___..__%__...__
-// 58b0:  00000025  000006a8  80000025  000006a8  %___..__%__...__
-// 58c0:  00000025  000006bc  80000025  000006bc  %___..__%__...__
-// 58d0:  00000025  000006d0  80000025  000006d0  %___..__%__...__
-// 58e0:  00000025  000006e4  80000025  000006e4  %___..__%__...__
-// 58f0:  00000025  000006f8  80000026  000006f8  %___..__&__...__
-// 5900:  00000026  000006fc  80000026  000006fc  &___..__&__...__
-// 5910:  00000026  00000710  80000026  00000710  &___..__&__...__
-// 5920:  00000026  00000724  80000026  00000724  &___$.__&__.$.__
-// 5930:  00000026  00000738  80000026  00000738  &___8.__&__.8.__
-// 5940:  00000026  0000074c  80000026  0000074c  &___L.__&__.L.__
-// 5950:  00000026  00000760  80000026  00000760  &___`.__&__.`.__
-// 5960:  00000026  00000774  80000026  00000774  &___t.__&__.t.__
-// 5970:  00000026  00000788  80000026  00000788  &___..__&__...__
-// 5980:  00000026  0000079c  80000026  0000079c  &___..__&__...__
-// 5990:  00000026  000007b8  80000026  000007b8  &___..__&__...__
-// 59a0:  00000026  000007d4  80000026  000007d4  &___..__&__...__
-// 59b0:  00000026  000007e8  80000026  000007e8  &___..__&__...__
-// 59c0:  00000026  00000804  80000026  00000804  &___..__&__...__
-// 59d0:  00000026  00000820  80000026  00000820  &___ .__&__. .__
-// 59e0:  00000026  00000834  80000026  00000834  &___4.__&__.4.__
-// 59f0:  00000026  00000850  80000026  00000850  &___P.__&__.P.__
-// 5a00:  00000026  0000086c  80000026  0000086c  &___l.__&__.l.__
-// 5a10:  00000026  00000880  80000026  00000880  &___..__&__...__
-// 5a20:  00000026  0000089c  80000026  0000089c  &___..__&__...__
-// 5a30:  00000026  000008a8  80000026  000008a8  &___..__&__...__
-// 5a40:  00000026  000008c4  80000026  000008c4  &___..__&__...__
-// 5a50:  00000026  000008e4  80000026  000008e4  &___..__&__...__
-// 5a60:  00000026  00000904  80000026  00000904  &___..__&__...__
-// 5a70:  00000026  00000920  80000026  00000920  &___ .__&__. .__
-// 5a80:  00000026  0000093c  80000026  0000093c  &___<.__&__.<.__
-// 5a90:  00000026  00000958  80000026  00000958  &___X.__&__.X.__
-// 5aa0:  00000026  00000974  80000026  00000974  &___t.__&__.t.__
-// 5ab0:  00000026  0000098c  80000026  0000098c  &___..__&__...__
-// 5ac0:  00000026  000009a8  80000026  000009a8  &___..__&__...__
-// 5ad0:  00000026  000009c4  80000026  000009c4  &___..__&__...__
-// 5ae0:  00000026  000009e0  80000026  000009e0  &___..__&__...__
-// 5af0:  00000026  000009f4  80000026  000009f4  &___..__&__...__
-// 5b00:  00000026  00000a10  80000026  00000a10  &___..__&__...__
-// 5b10:  00000026  00000a2c  80000026  00000a2c  &___,.__&__.,.__
-// 5b20:  00000026  00000a40  80000026  00000a40  &___@.__&__.@.__
-// 5b30:  00000026  00000a5c  80000026  00000a5c  &___\.__&__.\.__
-// 5b40:  00000026  00000a70  80000026  00000a70  &___p.__&__.p.__
-// 5b50:  00000026  00000a90  80000026  00000a90  &___..__&__...__
-// 5b60:  00000026  00000aa4  80000026  00000aa4  &___..__&__...__
-// 5b70:  00000026  00000ac4  80000026  00000ac4  &___..__&__...__
-// 5b80:  00000026  00000ae0  80000026  00000ae0  &___..__&__...__
-// 5b90:  00000026  00000afc  80000026  00000afc  &___..__&__...__
-// 5ba0:  00000026  00000b18  80000026  00000b18  &___..__&__...__
-// 5bb0:  00000026  00000b1c  80000026  00000b1c  &___..__&__...__
-// 5bc0:  00000026  00000b30  80000026  00000b30  &___0.__&__.0.__
-// 5bd0:  00000026  00000b44  80000026  00000b44  &___D.__&__.D.__
-// 5be0:  00000026  00000b58  80000026  00000b58  &___X.__&__.X.__
-// 5bf0:  00000026  00000b6c  80000026  00000b6c  &___l.__&__.l.__
-// 5c00:  00000026  00000b80  80000026  00000b80  &___..__&__...__
-// 5c10:  00000026  00000b94  80000028  00000b94  &___..__(__...__
-// 5c20:  00000028  00000bb0  80000028  00000bb0  (___..__(__...__
-// 5c30:  00000028  00000bcc  80000029  00000bcc  (___..__)__...__
-// 5c40:  00000029  00000be0  8000002b  00000be0  )___..__+__...__
-// 5c50:  0000002b  00000bf4  8000002b  00000bf4  +___..__+__...__
-// 5c60:  0000002b  00000c08  8000002b  00000c08  +___..__+__...__
-// 5c70:  0000002b  00280005  0027001e  00280005  +___._(_._'_._(_
-// 5c80:  0027001e  00290005  0028001f  002f0005  ._'_._)_._(_._/_
-// 5c90:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5ca0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5cb0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5cc0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5cd0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5ce0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5cf0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d00:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d10:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d20:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d30:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d40:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d50:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d60:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d70:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d80:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5d90:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5da0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5db0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5dc0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5dd0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5de0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5df0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5e00:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5e10:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
-// 5e20:  002e0005  002f0005  002e0005  002f0005  ._._._/_._._._/_
-// 5e30:  002e0005  004d0005  004c0016  004d0005  ._._._M_._L_._M_
-// 5e40:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
-// 5e50:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
-// 5e60:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
-// 5e70:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
-// 5e80:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
-// 5e90:  004c0005  004d0005  004c0005  004d0005  ._L_._M_._L_._M_
-// 5ea0:  004c0005  00510005  00500016  00510005  ._L_._Q_._P_._Q_
-// 5eb0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5ec0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5ed0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5ee0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5ef0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f00:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f10:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f20:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f30:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f40:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f50:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f60:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f70:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f80:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5f90:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5fa0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5fb0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5fc0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5fd0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5fe0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 5ff0:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 6000:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 6010:  00500016  00510005  00500016  00510005  ._P_._Q_._P_._Q_
-// 6020:  00500005  00510005  00500005  00510005  ._P_._Q_._P_._Q_
-// 6030:  00500005  00580005  003d000f  00580005  ._P_._X_._=_._X_
-// 6040:  0057000f  00130005  00120005  000f0005  ._W_._._._._._._
-// 6050:  000f0005  000f0005  000f0005  000f0005  ._._._._._._._._
-// 6060:  000f0005  000000f6  00000028  00000000  ._._.___(_______
-// 6070:  00001000  00000000  00000054  00001001  _.______T___..__
-// 6080:  00000000  0000002f  00001002  00000000  ____/___..______
-// 6090:  00000035  00000038  00000000  00000018  5___8_______.___
-// 60a0:  0000003c  00000060  00000088  000000b0  <___`___.___.___
-// 60b0:  000000d8  000000fc  0000011c  00000140  .___.___..__@.__
-// 60c0:  00000160  00000184  000001a8  000001cc  `.__..__..__..__
-// 60d0:  00000000  00000000  00000000  00000000  ________________
-// 60e0:  00000000  00000000  00000000  00000000  ________________
-// 60f0:  00000000  00000000  00000000  00000000  ________________
-// 6100:  00000000  00000000  00000000  00000000  ________________
-// 6110:  00000000  00000000  00000000  00000000  ________________
-// 6120:  00000000  00000000  00000000  00000000  ________________
-// 6130:  00000000  00000000  00000000  00000000  ________________
-// 6140:  00000000  00000000  00000000  00000000  ________________
-// 6150:  00000000  00000000  00000000  00000000  ________________
-// 6160:  00000000  00000000  00000000  00000000  ________________
-// 6170:  00000000  00000000  00000000  00000000  ________________
-// 6180:  00000000  00000000  746e656e  f1f2f300  ________nent_...
-// 6190:  1203003e  0003150d  00001000  69440000  >_.....__.____Di
-// 61a0:  73756666  f1f20065  0003150d  00001002  ffuse_....._..__
-// 61b0:  70530010  6c756365  f1007261  0003150d  ._Specular_...._
-// 61c0:  00001002  6f4e001c  6c616d72  f1f2f300  ..__._Normal_...
-// 61d0:  15050026  00000003  0000100a  00000000  &_...___..______
-// 61e0:  00000000  69500028  436c6578  6f706d6f  ____(_PixelCompo
-// 61f0:  746e656e  f1f2f300  1518000a  0000100b  nent_...._....__
-// 6200:  00010001  1008000e  0000100c  00010017  ._._._....__._._
-// 6210:  00001005  151c001e  00000040  00000003  ..__._..@___.___
-// 6220:  00000003  0000000c  66002400  74616f6c  .___.____$_float
-// 6230:  00337833  12010012  00000003  0000100b  3x3_._...___..__
-// 6240:  00001009  00001004  1518000a  00001009  ..__..__._....__
-// 6250:  00010001  1008000e  00001010  00030017  ._._._....__._._
-// 6260:  0000100f  1518000a  00001006  02000001  ..__._....__.__.
-// 6270:  1518000a  00000040  00010001  1518000a  ._..@___._._._..
-// 6280:  00001013  02000001  1518000a  00000062  ..__.__.._..b___
-// 6290:  00010001  1518000a  00001015  02000001  ._._._....__.__.
-// 62a0:  1518000a  00001002  00010001  1518000a  ._....__._._._..
-// 62b0:  00001017  02000001  1518000a  00000074  ..__.__.._..t___
-// 62c0:  00010001  1518000a  00001019  02000001  ._._._....__.__.
-// 62d0:  1517000e  00001000  0fd00203  f1f20000  ._.._.__....__..
-// 62e0:  1518000a  0000101b  00010001  1518000a  ._....__._._._..
-// 62f0:  0000101c  02000001  1517000e  00000000  ..__.__.._..____
-// 6300:  0fd0020a  f1f20000  1518000a  0000101e  ....__..._....__
-// 6310:  00010001  1518000a  0000101f  02000001  ._._._....__.__.
-// 6320:  00000000  00000000  00000000  00000000  ________________
-// 6330:  00000000  00000000  00000000  00000000  ________________
-// 6340:  00000000  00000000  00000000  00000000  ________________
-// 6350:  00000000  00000000  00000000  00000000  ________________
-// 6360:  00000000  00000000  00000000  00000000  ________________
-// 6370:  00000000  00000000  00000000  00000000  ________________
-// 6380:  00000000  00000000  0131ca0b  00000038  ________..1.8___
-// 6390:  00001000  00001021  00000360  ffff000b  _.__!.__`.__._..
-// 63a0:  00000004  0003ffff  00000000  00000084  .___..._____.___
-// 63b0:  00000084  00000008  0000008c  00000000  .___.___._______
-// 63c0:  151b0016  00000040  00000004  6c660010  ._..@___.___._fl
-// 63d0:  3474616f  f1f2f300  151b0016  00000040  oat4_...._..@___
-// 63e0:  00000002  6c660008  3274616f  f1f2f300  .___._float2_...
-// 63f0:  151b0016  00000040  00000003  6c66000c  ._..@___.___._fl
-// 6400:  3374616f  f1f2f300  120300d6  0003150d  oat3_...._....._
-// 6410:  00001000  6f500000  69746973  f1006e6f  _.____Position_.
-// 6420:  0003150d  00001000  6f430010  00726f6c  ...__.__._Color_
-// 6430:  0003150d  00001001  65540020  72757478  ..._..__ _Textur
-// 6440:  f1f20065  0003150d  00001002  6f4e0028  e_....._..__(_No
-// 6450:  6c616d72  f1f2f300  0003150d  00001002  rmal_......_..__
-// 6460:  61540034  6e65676e  f1f20074  0003150d  4_Tangent_....._
-// 6470:  00001002  69420040  6d726f6e  f1006c61  ..__@_Binormal_.
-// 6480:  0003150d  00001002  6956004c  6f577765  ..._..__L_ViewWo
-// 6490:  44646c72  63657269  6e6f6974  f1f2f300  rldDirection_...
-// 64a0:  0003150d  00001000  694c0058  57746867  ...__.__X_LightW
-// 64b0:  646c726f  65726944  6f697463  f1f2006e  orldDirection_..
-// 64c0:  0003150d  00001002  694c0068  56746867  ..._..__h_LightV
-// 64d0:  44776569  63657269  6e6f6974  f1f2f300  iewDirection_...
-// 64e0:  1505001e  00000009  00001003  00000000  ._...___..______
-// 64f0:  00000000  53500074  504e495f  f1005455  ____t_PS_INPUT_.
-// 6500:  1201000a  00000001  00001004  1518000a  ._...___..__._..
-// 6510:  00001000  00010001  1008000e  00001006  _.__._._._....__
-// 6520:  00010017  00001005  1203003e  0003150d  ._._..__>_....._
-// 6530:  00001002  6d410000  6e656962  f1f20074  ..____Ambient_..
-// 6540:  0003150d  00001002  6944000c  73756666  ..._..__._Diffus
-// 6550:  f1f20065  0003150d  00001002  70530018  e_....._..__._Sp
-// 6560:  6c756365  f1007261  15050026  00000003  ecular_.&_...___
-// 6570:  00001008  00000000  00000000  6f430024  ..__________$_Co
-// 6580:  43726f6c  6f706d6f  0000216f  000125f8  lorCompoo!__.%._
-// 6590:  0003a706  00001000  00000000  00000000  ...__.__________
-// 65a0:  00000000  00000000  00000000  00000000  ________________
-// 65b0:  00000000  00000000  00000000  00000000  ________________
-// 65c0:  00000000  00000000  00000000  00000000  ________________
-// 65d0:  00000000  00000000  00000000  00000000  ________________
-// 65e0:  00000000  00000000  00000000  00000000  ________________
-// 65f0:  00000000  00000000  00000000  00000000  ________________
-// 6600:  00000000  00000000  00000000  00000000  ________________
-// 6610:  00000000  00000000  00000000  00000000  ________________
-// 6620:  00000000  00000000  00000000  00000000  ________________
-// 6630:  00000000  00000000  00000000  00000000  ________________
-// 6640:  00000000  00000000  00000000  00000000  ________________
-// 6650:  00000000  00000000  00000000  00000000  ________________
-// 6660:  00000000  00000000  00000000  00000000  ________________
-// 6670:  00000000  00000000  00000000  00000000  ________________
-// 6680:  00000000  00000000  00000000  00000000  ________________
-// 6690:  00000000  00000000  00000000  00000000  ________________
-// 66a0:  00000000  00000000  00000000  00000000  ________________
-// 66b0:  00000000  00000000  00000000  00000000  ________________
-// 66c0:  00000000  00000000  00000000  00000000  ________________
-// 66d0:  00000000  00000000  00000000  00000000  ________________
-// 66e0:  00000000  00000000  00000000  00000000  ________________
-// 66f0:  00000000  00000000  00000000  00000000  ________________
-// 6700:  00000000  00000000  00000000  00000000  ________________
-// 6710:  00000000  00000000  00000000  00000000  ________________
-// 6720:  00000000  00000000  00000000  00000000  ________________
-// 6730:  00000000  00000000  00000000  00000000  ________________
-// 6740:  00000000  00000000  00000000  00000000  ________________
-// 6750:  00000000  00000000  00000000  00000000  ________________
-// 6760:  00000000  00000000  00000000  00000000  ________________
-// 6770:  00000000  00000000  00000000  00000000  ________________
-// 6780:  00000000  00000000  65747570  6e696f50  ________putePoin
-// 6790:  67694c74  50287468  6c657869  706d6f43  tLight(PixelComp
-// 67a0:  6e656e6f  69702074  436c6578  6f706d6f  onent pixelCompo
-// 67b0:  746e656e  6f43202c  43726f6c  6f706d6f  nent, ColorCompo
-// 67c0:  746e656e  6c6f6320  6f43726f  6e6f706d  nent colorCompon
-// 67d0:  2c746e65  5f535020  55504e49  4e492054  ent, PS_INPUT IN
-// 67e0:  0a0d3b29  6f6c6f43  6d6f4372  656e6f70  );..ColorCompone
-// 67f0:  4320746e  75706d6f  70536574  694c746f  nt ComputeSpotLi
-// 6800:  28746867  65786950  6d6f436c  656e6f70  ght(PixelCompone
-// 6810:  7020746e  6c657869  706d6f43  6e656e6f  nt pixelComponen
-// 6820:  43202c74  726f6c6f  706d6f43  6e656e6f  t, ColorComponen
-// 6830:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
-// 6840:  5350202c  504e495f  49205455  0d3b294e  , PS_INPUT IN);.
-// 6850:  500a0d0a  6c657869  706d6f43  6e656e6f  ...PixelComponen
-// 6860:  6f432074  7475706d  78695065  6f436c65  t ComputePixelCo
-// 6870:  6e6f706d  28746e65  495f5350  5455504e  mponent(PS_INPUT
-// 6880:  294e4920  0d0a0d3b  6f6c660a  20347461   IN);....float4 
-// 6890:  4d5f5350  284e4941  5f535020  55504e49  PS_MAIN( PS_INPU
-// 68a0:  4e492054  3a202920  5f565320  67726154  T IN ) : SV_Targ
-// 68b0:  0a0d7465  200a0d7b  43202020  726f6c6f  et..{..    Color
-// 68c0:  706d6f43  6e656e6f  6f632074  43726f6c  Component colorC
-// 68d0:  6f706d6f  746e656e  200a0d3b  50202020  omponent;..    P
-// 68e0:  6c657869  706d6f43  6e656e6f  69702074  ixelComponent pi
-// 68f0:  436c6578  6f706d6f  746e656e  200a0d3b  xelComponent;.. 
-// 6900:  66202020  74616f6c  554f2034  20202054     float4 OUT   
-// 6910:  20202020  6628203d  74616f6c  30202934      = (float4) 0
-// 6920:  0d0a0d3b  2020200a  6c6f6320  6f43726f  ;....    colorCo
-// 6930:  6e6f706d  2e746e65  69626d41  20746e65  mponent.Ambient 
-// 6940:  6628203d  74616f6c  30202933  200a0d3b  = (float3) 0;.. 
-// 6950:  63202020  726f6c6f  706d6f43  6e656e6f     colorComponen
-// 6960:  69442e74  73756666  203d2065  6f6c6628  t.Diffuse = (flo
-// 6970:  29337461  0d3b3020  2020200a  6c6f6320  at3) 0;..    col
-// 6980:  6f43726f  6e6f706d  2e746e65  63657053  orComponent.Spec
-// 6990:  72616c75  28203d20  616f6c66  20293374  ular = (float3) 
-// 69a0:  0a0d3b30  20200a0d  69702020  436c6578  0;....    pixelC
-// 69b0:  6f706d6f  746e656e  43203d20  75706d6f  omponent = Compu
-// 69c0:  69506574  436c6578  6f706d6f  746e656e  tePixelComponent
-// 69d0:  294e4928  0d0a0d3b  2020200a  6c6f6320  (IN);....    col
-// 69e0:  6f43726f  6e6f706d  20746e65  6f43203d  orComponent = Co
-// 69f0:  7475706d  626d4165  746e6569  6867694c  mputeAmbientLigh
-// 6a00:  69702874  436c6578  6f706d6f  746e656e  t(pixelComponent
-// 6a10:  6f63202c  43726f6c  6f706d6f  746e656e  , colorComponent
-// 6a20:  4e49202c  0a0d3b29  20202020  6f6c6f63  , IN);..    colo
-// 6a30:  6d6f4372  656e6f70  3d20746e  6d6f4320  rComponent = Com
-// 6a40:  65747570  65726944  6f697463  4c6c616e  puteDirectionalL
-// 6a50:  74686769  78697028  6f436c65  6e6f706d  ight(pixelCompon
-// 6a60:  2c746e65  6c6f6320  6f43726f  6e6f706d  ent, colorCompon
-// 6a70:  2c746e65  294e4920  0d0a0d3b  2020200a  ent, IN);....   
-// 6a80:  54554f20  6267722e  63203d20  726f6c6f   OUT.rgb = color
-// 6a90:  706d6f43  6e656e6f  6d412e74  6e656962  Component.Ambien
-// 6aa0:  202b2074  6f6c6f63  6d6f4372  656e6f70  t + colorCompone
-// 6ab0:  442e746e  75666669  2b206573  6c6f6320  nt.Diffuse + col
-// 6ac0:  6f43726f  6e6f706d  2e746e65  63657053  orComponent.Spec
-// 6ad0:  72616c75  200a0d3b  4f202020  612e5455  ular;..    OUT.a
-// 6ae0:  3d202020  302e3120  0a0d3b66  20200a0d     = 1.0f;....  
-// 6af0:  65722020  6e727574  54554f20  7d0a0d3b    return OUT;..}
-// 6b00:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
-// 6b10:  4320746e  75706d6f  6d416574  6e656962  nt ComputeAmbien
-// 6b20:  67694c74  50287468  6c657869  706d6f43  tLight(PixelComp
-// 6b30:  6e656e6f  69702074  436c6578  6f706d6f  onent pixelCompo
-// 6b40:  746e656e  6f43202c  43726f6c  6f706d6f  nent, ColorCompo
-// 6b50:  746e656e  6c6f6320  6f43726f  6e6f706d  nent colorCompon
-// 6b60:  2c746e65  5f535020  55504e49  4e492054  ent, PS_INPUT IN
-// 6b70:  7b0a0d29  20200a0d  6f632020  43726f6c  )..{..    colorC
-// 6b80:  6f706d6f  746e656e  626d412e  746e6569  omponent.Ambient
-// 6b90:  203d2b20  69626d41  43746e65  726f6c6f   += AmbientColor
-// 6ba0:  6267722e  41202a20  6569626d  6f43746e  .rgb * AmbientCo
-// 6bb0:  2e726f6c  202a2061  65786970  6d6f436c  lor.a * pixelCom
-// 6bc0:  656e6f70  442e746e  75666669  722e6573  ponent.Diffuse.r
-// 6bd0:  0d3b6267  2020200a  74657220  206e7275  gb;..    return 
-// 6be0:  6f6c6f63  6d6f4372  656e6f70  0d3b746e  colorComponent;.
-// 6bf0:  0a0d7d0a  6f430a0d  43726f6c  6f706d6f  .}....ColorCompo
-// 6c00:  746e656e  6d6f4320  65747570  65726944  nent ComputeDire
-// 6c10:  6f697463  4c6c616e  74686769  78695028  ctionalLight(Pix
-// 6c20:  6f436c65  6e6f706d  20746e65  65786970  elComponent pixe
-// 6c30:  6d6f436c  656e6f70  202c746e  6f6c6f43  lComponent, Colo
-// 6c40:  6d6f4372  656e6f70  6320746e  726f6c6f  rComponent color
-// 6c50:  706d6f43  6e656e6f  50202c74  4e495f53  Component, PS_IN
-// 6c60:  20545550  0d294e49  0a0d7b0a  20202020  PUT IN)..{..    
-// 6c70:  616f6c66  72203374  65566665  726f7463  float3 refVector
-// 6c80:  28203d20  616f6c66  20293374  0a0d3b30   = (float3) 0;..
-// 6c90:  20202020  616f6c66  6c203374  74686769      float3 light
-// 6ca0:  65726944  6f697463  203d206e  6d726f6e  Direction = norm
-// 6cb0:  7a696c61  4c2d2865  74686769  65726944  alize(-LightDire
-// 6cc0:  6f697463  79782e6e  0d3b297a  2020200a  ction.xyz);..   
-// 6cd0:  6f6c6620  6e207461  746f645f  3d206c5f   float n_dot_l =
-// 6ce0:  746f6420  67696c28  69447468  74636572   dot(lightDirect
-// 6cf0:  2c6e6f69  726f6e20  696c616d  4928657a  ion, normalize(I
-// 6d00:  6f4e2e4e  6c616d72  0d3b2929  200a0d0a  N.Normal));.... 
-// 6d10:  69202020  6e282066  746f645f  3e206c5f     if (n_dot_l >
-// 6d20:  0d293020  2020200a  0a0d7b20  2f2f0909   0)..    {....//
-// 6d30:  3d204420  20646b20  646c202a  6d202a20   D = kd * ld * m
-// 6d40:  200a0d64  20202020  63202020  726f6c6f  d..        color
-// 6d50:  706d6f43  6e656e6f  69442e74  73756666  Component.Diffus
-// 6d60:  3d2b2065  78616d20  645f6e28  6c5f746f  e += max(n_dot_l
-// 6d70:  2e30202c  20296630  694c202a  43746867  , 0.0f) * LightC
-// 6d80:  726f6c6f  6267722e  4c202a20  74686769  olor.rgb * Light
-// 6d90:  6f6c6f43  20612e72  6970202a  436c6578  Color.a * pixelC
-// 6da0:  6f706d6f  746e656e  6669442e  65737566  omponent.Diffuse
-// 6db0:  6267722e  0d0a0d3b  2f09090a  2052202f  .rgb;......// R 
-// 6dc0:  2049203d  2832202d  29492e6e  6e202a20  = I - 2(n.I) * n
-// 6dd0:  20200a0d  20202020  65722020  63655666  ..        refVec
-// 6de0:  20726f74  6f6e203d  6c616d72  28657a69  tor = normalize(
-// 6df0:  6c666572  28746365  6867696c  72694474  reflect(lightDir
-// 6e00:  69746365  202c6e6f  65786970  6d6f436c  ection, pixelCom
-// 6e10:  656e6f70  4e2e746e  616d726f  3b29296c  ponent.Normal));
-// 6e20:  0a0d0a0d  2f2f0909  3d205320  78616d20  ......// S = max
-// 6e30:  746f6428  522e5628  29302c29  2a20505e  (dot(V.R),0)^P *
-// 6e40:  65705320  616c7563  6c6f4372  722e726f   SpecularColor.r
-// 6e50:  2a206267  65705320  616c7563  6c6f4372  gb * SpecularCol
-// 6e60:  612e726f  63202a20  726f6c6f  6267722e  or.a * color.rgb
-// 6e70:  200a0d3b  20202020  63202020  726f6c6f  ;..        color
-// 6e80:  706d6f43  6e656e6f  70532e74  6c756365  Component.Specul
-// 6e90:  2b207261  6f70203d  616d2877  6f642878  ar += pow(max(do
-// 6ea0:  4e492874  6569562e  726f5777  6944646c  t(IN.ViewWorldDi
-// 6eb0:  74636572  2c6e6f69  66657220  74636556  rection, refVect
-// 6ec0:  2c29726f  2c293020  65705320  616c7563  or), 0), Specula
-// 6ed0:  776f5072  20297265  7053202a  6c756365  rPower) * Specul
-// 6ee0:  6f437261  2e726f6c  20626772  6970202a  arColor.rgb * pi
-// 6ef0:  436c6578  6f706d6f  746e656e  6570532e  xelComponent.Spe
-// 6f00:  616c7563  67722e72  202a2062  65786970  cular.rgb * pixe
-// 6f10:  6d6f436c  656e6f70  442e746e  75666669  lComponent.Diffu
-// 6f20:  722e6573  0d3b6267  2020200a  0a0d7d20  se.rgb;..    }..
-// 6f30:  20200a0d  65722020  6e727574  6c6f6320  ..    return col
-// 6f40:  6f43726f  6e6f706d  3b746e65  0d7d0a0d  orComponent;..}.
-// 6f50:  430a0d0a  726f6c6f  706d6f43  6e656e6f  ...ColorComponen
-// 6f60:  6f432074  7475706d  696f5065  694c746e  t ComputePointLi
-// 6f70:  28746867  65786950  6d6f436c  656e6f70  ght(PixelCompone
-// 6f80:  7020746e  6c657869  706d6f43  6e656e6f  nt pixelComponen
-// 6f90:  43202c74  726f6c6f  706d6f43  6e656e6f  t, ColorComponen
-// 6fa0:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
-// 6fb0:  5350202c  504e495f  49205455  0a0d294e  , PS_INPUT IN)..
-// 6fc0:  0d0a0d7b  0a0d7d0a  6f430a0d  43726f6c  {....}....ColorC
-// 6fd0:  6f706d6f  746e656e  6d6f4320  65747570  omponent Compute
-// 6fe0:  746f7053  6867694c  69502874  436c6578  SpotLight(PixelC
-// 6ff0:  6f706d6f  746e656e  78697020  6f436c65  omponent pixelCo
-// 7000:  6e6f706d  2c746e65  6c6f4320  6f43726f  mponent, ColorCo
-// 7010:  6e6f706d  20746e65  6f6c6f63  6d6f4372  mponent colorCom
-// 7020:  656e6f70  202c746e  495f5350  5455504e  ponent, PS_INPUT
-// 7030:  294e4920  0d7b0a0d  7d0a0d0a  0a0d0a0d   IN)..{....}....
-// 7040:  65786950  6d6f436c  656e6f70  4320746e  PixelComponent C
-// 7050:  75706d6f  69506574  436c6578  6f706d6f  omputePixelCompo
-// 7060:  746e656e  5f535028  55504e49  4e492054  nent(PS_INPUT IN
-// 7070:  7b0a0d29  20200a0d  69502020  436c6578  )..{..    PixelC
-// 7080:  6f706d6f  746e656e  78697020  6f436c65  omponent pixelCo
-// 7090:  6e6f706d  3b746e65  0a0d0a0d  20202020  mponent;....    
-// 70a0:  65786970  6d6f436c  656e6f70  442e746e  pixelComponent.D
-// 70b0:  75666669  3d206573  6c662820  3474616f  iffuse = (float4
-// 70c0:  3b302029  20200a0d  69702020  436c6578  ) 0;..    pixelC
-// 70d0:  6f706d6f  746e656e  6570532e  616c7563  omponent.Specula
-// 70e0:  203d2072  6f6c6628  29337461  0d3b3020  r = (float3) 0;.
-// 70f0:  2020200a  78697020  6f436c65  6e6f706d  .    pixelCompon
-// 7100:  2e746e65  6d726f4e  3d206c61  6c662820  ent.Normal = (fl
-// 7110:  3374616f  3b302029  0a0d0a0d  20202020  oat3) 0;....    
-// 7120:  28206669  44736148  75666669  65546573  if (HasDiffuseTe
-// 7130:  72757478  3d3d2065  75727420  26262065  xture == true &&
-// 7140:  67694c20  79547468  3d206570  2932203d   LightType == 2)
-// 7150:  20200a0d  0d7b2020  2020200a  20202020  ..    {..       
-// 7160:  78697020  6f436c65  6e6f706d  2e746e65   pixelComponent.
-// 7170:  66666944  20657375  6944203d  73756666  Diffuse = Diffus
-// 7180:  78655465  65727574  6d61532e  28656c70  eTexture.Sample(
-// 7190:  6f6c6f43  6d615372  72656c70  4e49202c  ColorSampler, IN
-// 71a0:  7865542e  65727574  0a0d3b29  20202020  .Texture);..    
-// 71b0:  200a0d7d  65202020  0d65736c  2020200a  }..    else..   
-// 71c0:  0a0d7b20  20202020  20202020  65786970   {..        pixe
-// 71d0:  6d6f436c  656e6f70  442e746e  75666669  lComponent.Diffu
-// 71e0:  3d206573  2e4e4920  6f6c6f43  0a0d3b72  se = IN.Color;..
-// 71f0:  20202020  0d0a0d7d  2020200a  20666920      }....    if 
-// 7200:  73614828  63657053  72616c75  74786554  (HasSpecularText
-// 7210:  20657275  74203d3d  29657572  20200a0d  ure == true)..  
-// 7220:  0d7b2020  2020200a  20202020  78697020    {..        pix
-// 7230:  6f436c65  6e6f706d  2e746e65  63657053  elComponent.Spec
-// 7240:  72616c75  53203d20  75636570  5472616c  ular = SpecularT
-// 7250:  75747865  532e6572  6c706d61  6f432865  exture.Sample(Co
-// 7260:  53726f6c  6c706d61  202c7265  542e4e49  lorSampler, IN.T
-// 7270:  75747865  2e296572  3b7a7978  20200a0d  exture).xyz;..  
-// 7280:  0d7d2020  2020200a  736c6520  200a0d65    }..    else.. 
-// 7290:  7b202020  20200a0d  20202020  69702020     {..        pi
-// 72a0:  436c6578  6f706d6f  746e656e  6570532e  xelComponent.Spe
-// 72b0:  616c7563  203d2072  63657053  72616c75  cular = Specular
-// 72c0:  6f6c6f43  67722e72  0a0d3b62  20202020  Color.rgb;..    
-// 72d0:  0d0a0d7d  2020200a  20666920  73614828  }....    if (Has
-// 72e0:  6d726f4e  65546c61  72757478  3d3d2065  NormalTexture ==
-// 72f0:  75727420  0a0d2965  20202020  200a0d7b   true)..    {.. 
-// 7300:  20202020  66202020  74616f6c  61732033         float3 sa
-// 7310:  656c706d  726f4e64  206c616d  3228203d  mpledNormal = (2
-// 7320:  4e202a20  616d726f  7865546c  65727574   * NormalTexture
-// 7330:  6d61532e  28656c70  6f6c6f43  6d615372  .Sample(ColorSam
-// 7340:  72656c70  4e49202c  7865542e  65727574  pler, IN.Texture
-// 7350:  79782e29  2d20297a  302e3120  0a0d3b66  ).xyz) - 1.0f;..
-// 7360:  20202020  20202020  616f6c66  33783374          float3x3
-// 7370:  6e627420  66203d20  74616f6c  28337833   tbn = float3x3(
-// 7380:  542e4e49  65676e61  202c746e  422e4e49  IN.Tangent, IN.B
-// 7390:  726f6e69  2c6c616d  2e4e4920  6d726f4e  inormal, IN.Norm
-// 73a0:  3b296c61  20200a0d  20202020  69702020  al);..        pi
-// 73b0:  436c6578  6f706d6f  746e656e  726f4e2e  xelComponent.Nor
-// 73c0:  206c616d  756d203d  6173286c  656c706d  mal = mul(sample
-// 73d0:  726f4e64  2c6c616d  6e627420  0a0d3b29  dNormal, tbn);..
-// 73e0:  20202020  200a0d7d  65202020  0d65736c      }..    else.
-// 73f0:  2020200a  0a0d7b20  20202020  20202020  .    {..        
-// 7400:  65786970  6d6f436c  656e6f70  4e2e746e  pixelComponent.N
-// 7410:  616d726f  203d206c  6d726f6e  7a696c61  ormal = normaliz
-// 7420:  4e492865  726f4e2e  296c616d  200a0d3b  e(IN.Normal);.. 
-// 7430:  7d202020  0a0d0a0d  20202020  75746572     }....    retu
-// 7440:  70206e72  6c657869  706d6f43  6e656e6f  rn pixelComponen
-// 7450:  0a0d3b74  6423007d  6e696665  4f502065  t;..}_#define PO
-// 7460:  5f544e49  4847494c  2e302054  0a0d6630  INT_LIGHT 0.0f..
-// 7470:  66656423  20656e69  544f5053  47494c5f  #define SPOT_LIG
-// 7480:  31205448  0d66302e  6564230a  656e6966  HT 1.0f..#define
-// 7490:  52494420  49544345  4c414e4f  47494c5f   DIRECTIONAL_LIG
-// 74a0:  32205448  0d66302e  230a0d0a  69666564  HT 2.0f....#defi
-// 74b0:  4620656e  5f50494c  54584554  5f455255  ne FLIP_TEXTURE_
-// 74c0:  0d312059  0d0a0d0a  7562630a  72656666  Y 1......cbuffer
-// 74d0:  61724620  6f43656d  6174736e  7542746e   FrameConstantBu
-// 74e0:  72656666  72203a20  73696765  28726574  ffer : register(
-// 74f0:  0d293062  0a0d7b0a  20202020  7274616d  b0)..{..    matr
-// 7500:  56207869  3b776569  20200a0d  616d2020  ix View;..    ma
-// 7510:  78697274  6f725020  7463656a  3b6e6f69  trix Projection;
-// 7520:  0a0d0a0d  20202020  616f6c66  43203374  ....    float3 C
-// 7530:  72656d61  736f5061  6f697469  0a0d3b6e  ameraPosition;..
-// 7540:  0d0a0d7d  7562630a  72656666  6a624f20  }....cbuffer Obj
-// 7550:  43746365  74736e6f  42746e61  65666675  ectConstantBuffe
-// 7560:  203a2072  69676572  72657473  29316228  r : register(b1)
-// 7570:  0d7b0a0d  2020200a  74616d20  20786972  ..{..    matrix 
-// 7580:  6c726f57  0a0d3b64  20200a0d  6c662020  World;....    fl
-// 7590:  3474616f  65705320  616c7563  6c6f4372  oat4 SpecularCol
-// 75a0:  0d3b726f  2020200a  6f6c6620  20207461  or;..    float  
-// 75b0:  63657053  72616c75  65776f50  0a0d3b72  SpecularPower;..
-// 75c0:  20200a0d  6f622020  20206c6f  73614820  ..    bool   Has
-// 75d0:  66666944  54657375  75747865  0d3b6572  DiffuseTexture;.
-// 75e0:  2020200a  6f6f6220  2020206c  53736148  .    bool   HasS
-// 75f0:  75636570  5472616c  75747865  0d3b6572  pecularTexture;.
-// 7600:  2020200a  6f6f6220  2020206c  4e736148  .    bool   HasN
-// 7610:  616d726f  7865546c  65727574  7d0a0d3b  ormalTexture;..}
-// 7620:  0a0d0a0d  66756263  20726566  6867694c  ....cbuffer Ligh
-// 7630:  6e6f4374  6e617473  66754274  20726566  tConstantBuffer 
-// 7640:  6572203a  74736967  62287265  0a0d2932  : register(b2)..
-// 7650:  200a0d7b  66202020  74616f6c  6d412034  {..    float4 Am
-// 7660:  6e656962  6c6f4374  0d3b726f  200a0d0a  bientColor;.... 
-// 7670:  66202020  74616f6c  694c2034  43746867     float4 LightC
-// 7680:  726f6c6f  200a0d3b  66202020  74616f6c  olor;..    float
-// 7690:  694c2033  44746867  63657269  6e6f6974  3 LightDirection
-// 76a0:  200a0d3b  66202020  74616f6c  694c2033  ;..    float3 Li
-// 76b0:  50746867  7469736f  3b6e6f69  20200a0d  ghtPosition;..  
-// 76c0:  6c662020  2074616f  67694c20  61527468    float  LightRa
-// 76d0:  73756964  200a0d3b  69202020  2020746e  dius;..    int  
-// 76e0:  694c2020  54746867  3b657079  0d7d0a0d    LightType;..}.
-// 76f0:  540a0d0a  75747865  44326572  66694420  ...Texture2D Dif
-// 7700:  65737566  74786554  20657275  6572203a  fuseTexture : re
-// 7710:  74736967  74287265  0d3b2930  7865540a  gister(t0);..Tex
-// 7720:  65727574  53204432  75636570  5472616c  ture2D SpecularT
-// 7730:  75747865  3a206572  67657220  65747369  exture : registe
-// 7740:  31742872  0a0d3b29  74786554  32657275  r(t1);..Texture2
-// 7750:  6f4e2044  6c616d72  74786554  20657275  D NormalTexture 
-// 7760:  6572203a  74736967  74287265  0d3b2932  : register(t2);.
-// 7770:  530a0d0a  6c706d61  74537265  20657461  ...SamplerState 
-// 7780:  6f6c6f43  6d615372  72656c70  72203a20  ColorSampler : r
-// 7790:  73696765  28726574  3b293073  0a0d0a0d  egister(s0);....
-// 77a0:  75727473  43207463  726f6c6f  706d6f43  struct ColorComp
-// 77b0:  6e656e6f  7b0a0d74  20200a0d  6c662020  onent..{..    fl
-// 77c0:  3374616f  626d4120  746e6569  200a0d3b  oat3 Ambient;.. 
-// 77d0:  66202020  74616f6c  69442033  73756666     float3 Diffus
-// 77e0:  0a0d3b65  20202020  616f6c66  53203374  e;..    float3 S
-// 77f0:  75636570  3b72616c  3b7d0a0d  0a0d0a0d  pecular;..};....
-// 7800:  75727473  50207463  6c657869  706d6f43  struct PixelComp
-// 7810:  6e656e6f  7b0a0d74  20200a0d  6c662020  onent..{..    fl
-// 7820:  3474616f  66694420  65737566  200a0d3b  oat4 Diffuse;.. 
-// 7830:  66202020  74616f6c  70532033  6c756365     float3 Specul
-// 7840:  0d3b7261  2020200a  6f6c6620  20337461  ar;..    float3 
-// 7850:  6d726f4e  0d3b6c61  0d3b7d0a  660a0d0a  Normal;..};....f
-// 7860:  74616f6c  65472032  726f4374  74636572  loat2 GetCorrect
-// 7870:  65546465  72757478  6f6f4365  6e696472  edTextureCoordin
-// 7880:  28657461  616f6c66  74203274  75747865  ate(float2 textu
-// 7890:  6f436572  6964726f  6574616e  7b0a0d29  reCoordinate)..{
-// 78a0:  69230a0d  4c462066  545f5049  55545845  ..#if FLIP_TEXTU
-// 78b0:  595f4552  20200a0d  65722020  6e727574  RE_Y..    return
-// 78c0:  6f6c6620  28327461  74786574  43657275   float2(textureC
-// 78d0:  64726f6f  74616e69  2c782e65  302e3120  oordinate.x, 1.0
-// 78e0:  74202d20  75747865  6f436572  6964726f   - textureCoordi
-// 78f0:  6574616e  3b29792e  65230a0d  0d65736c  nate.y);..#else.
-// 7900:  2020200a  74657220  206e7275  74786574  .    return text
-// 7910:  43657275  64726f6f  74616e69  0a0d3b65  ureCoordinate;..
-// 7920:  646e6523  0a0d6669  000b007d  00000000  #endif..}_._____
-// 7930:  005c0000  017c0000  10c20000  011a0000  __\___|.__..__..
-// 7940:  00b80000  00000000  00000000  00000000  __._____________
-// 7950:  005d0000  00010000  00070000  00000000  __]___.___._____
-// 7960:  00000000  00000000  00000000  00000000  ________________
-// 7970:  00000000  00000000  00000000  00000000  ________________
-// 7980:  00000000  00000000  0131ca0b  00000038  ________..1.8___
-// 7990:  00001000  00001003  00000068  ffff000c  _.__..__h___._..
-// 79a0:  00000004  0003ffff  00000000  0000000c  .___..._____.___
-// 79b0:  0000000c  00000008  00000014  00000000  .___.___._______
-// 79c0:  16010022  00000000  0000100d  706d6f43  "_..____..__Comp
-// 79d0:  50657475  6c657869  706d6f43  6e656e6f  utePixelComponen
-// 79e0:  f1f20074  1601001e  00000000  00001011  t_..._..____..__
-// 79f0:  706d6f43  41657475  6569626d  694c746e  ComputeAmbientLi
-// 7a00:  00746867  16010022  00000000  00001011  ght_"_..____..__
-// 7a10:  706d6f43  44657475  63657269  6e6f6974  ComputeDirection
-// 7a20:  694c6c61  00746867  00000000  00000000  alLight_________
-// 7a30:  00000000  00000000  00000000  00000000  ________________
-// 7a40:  00000000  00000000  00000000  00000000  ________________
-// 7a50:  00000000  00000000  00000000  00000000  ________________
-// 7a60:  00000000  00000000  00000000  00000000  ________________
-// 7a70:  00000000  00000000  00000000  00000000  ________________
-// 7a80:  00000000  00000000  00000000  00000000  ________________
-// 7a90:  00000000  00000000  00000000  00000000  ________________
-// 7aa0:  00000000  00000000  00000000  00000000  ________________
-// 7ab0:  00000000  00000000  00000000  00000000  ________________
-// 7ac0:  00000000  00000000  00000000  00000000  ________________
-// 7ad0:  00000000  00000000  00000000  00000000  ________________
-// 7ae0:  00000000  00000000  00000000  00000000  ________________
-// 7af0:  00000000  00000000  00000000  00000000  ________________
-// 7b00:  00000000  00000000  00000000  00000000  ________________
-// 7b10:  00000000  00000000  00000000  00000000  ________________
-// 7b20:  00000000  00000000  00000000  00000000  ________________
-// 7b30:  00000000  00000000  00000000  00000000  ________________
-// 7b40:  00000000  00000000  00000000  00000000  ________________
-// 7b50:  00000000  00000000  00000000  00000000  ________________
-// 7b60:  00000000  00000000  00000000  00000000  ________________
-// 7b70:  00000000  00000000  00000000  00000000  ________________
-// 7b80:  00000000  00000000  53443344  00524448  ________D3DSHDR_
-// 7b90:  00000c0c  00000000  00000000  00000000  ..______________
-// 7ba0:  00000000  00000000  00000000  60000020  ____________ __`
-// 7bb0:  0000000c  00000008  00000014  00000000  .___.___._______
-// 7bc0:  16010022  00000000  0000100d  706d6f43  "_..____..__Comp
-// 7bd0:  50657475  6c657869  706d6f43  6e656e6f  utePixelComponen
-// 7be0:  f1f20074  1601001e  00000000  00001011  t_..._..____..__
-// 7bf0:  706d6f43  41657475  6569626d  694c746e  ComputeAmbientLi
-// 7c00:  00746867  16010022  00000000  00001011  ght_"_..____..__
-// 7c10:  706d6f43  44657475  63657269  6e6f6974  ComputeDirection
-// 7c20:  694c6c61  00746867  00000000  00000000  alLight_________
-// 7c30:  00000000  00000000  00000000  00000000  ________________
-// 7c40:  00000000  00000000  00000000  00000000  ________________
-// 7c50:  00000000  00000000  00000000  00000000  ________________
-// 7c60:  00000000  00000000  00000000  00000000  ________________
-// 7c70:  00000000  00000000  00000000  00000000  ________________
-// 7c80:  00000000  00000000  00000000  00000000  ________________
-// 7c90:  00000000  00000000  00000000  00000000  ________________
-// 7ca0:  00000000  00000000  00000000  00000000  ________________
-// 7cb0:  00000000  00000000  00000000  00000000  ________________
-// 7cc0:  00000000  00000000  00000000  00000000  ________________
-// 7cd0:  00000000  00000000  00000000  00000000  ________________
-// 7ce0:  00000000  00000000  00000000  00000000  ________________
-// 7cf0:  00000000  00000000  00000000  00000000  ________________
-// 7d00:  00000000  00000000  00000000  00000000  ________________
-// 7d10:  00000000  00000000  00000000  00000000  ________________
-// 7d20:  00000000  00000000  00000000  00000000  ________________
-// 7d30:  00000000  00000000  00000000  00000000  ________________
-// 7d40:  00000000  00000000  00000000  00000000  ________________
-// 7d50:  00000000  00000000  00000000  00000000  ________________
-// 7d60:  00000000  00000000  00000000  00000000  ________________
-// 7d70:  00000000  00000000  00000000  00000000  ________________
-// 7d80:  00000000  00000000  ffffffff  f12f091a  ________....../.
-// 7d90:  00000070  0000023c  00000019  00000001  p___<.__.___.___
-// 7da0:  00000185  00000001  00000141  00000001  ..__.___A.__.___
-// 7db0:  000001a9  00000001  000000b1  00000001  ..__.___.___.___
-// 7dc0:  00000061  00000001  000000d9  00000001  a___.___.___.___
-// 7dd0:  00000001  00000001  0000003d  00000001  .___.___=___.___
-// 7de0:  000000fd  00000001  00000089  00000001  .___.___.___.___
-// 7df0:  0000011d  00000001  000001cd  00000001  ..__.___..__.___
-// 7e00:  00000161  00000001  00000000  00000000  a.__.___________
-// 7e10:  40000000  00000000  00000000  00000000  ___@____________
-// 7e20:  00000000  00000000  00000000  00000000  ________________
-// 7e30:  00000000  00000000  00800000  00000000  __________._____
-// 7e40:  00000000  00000000  00000000  00000000  ________________
-// 7e50:  00000000  00000000  00000008  00000000  ________._______
-// 7e60:  00000000  00000000  00000000  00000001  ____________.___
-// 7e70:  00000000  00000000  00000000  00000000  ________________
-// 7e80:  00000000  00000000  00000000  00000000  ________________
-// 7e90:  00000000  00000000  00000000  00000000  ________________
-// 7ea0:  00000000  00000000  00000000  00400000  ______________@_
-// 7eb0:  00000000  00000000  00000000  00000000  ________________
-// 7ec0:  00000000  00000000  00000000  00000000  ________________
-// 7ed0:  00000000  00000000  00000000  00000000  ________________
-// 7ee0:  02000000  00000000  00000000  00000000  ___.____________
-// 7ef0:  00000000  00000000  00000000  00000000  ________________
-// 7f00:  00000000  00000000  00000000  00010000  ______________._
-// 7f10:  00000000  00000000  00000000  00000000  ________________
-// 7f20:  00000000  00000400  00000000  00800000  _____.________._
-// 7f30:  00100000  00000000  40000000  00000000  __.________@____
-// 7f40:  00000000  00000000  00000000  00000000  ________________
-// 7f50:  00000000  00000000  00000000  00000000  ________________
-// 7f60:  00000000  00000000  00000000  00000000  ________________
-// 7f70:  00000000  00000000  00000000  00000000  ________________
-// 7f80:  00000000  00000000  00000004  00000000  ________._______
-// 7f90:  00000000  00000000  00000000  00000000  ________________
-// 7fa0:  00000000  00000000  00000200  00000000  _________.______
-// 7fb0:  00000000  00000000  00000000  00000000  ________________
-// 7fc0:  00000000  00000000  00000000  00000000  ________________
-// 7fd0:  00000000  00000000  00000000  02000000  _______________.
-// 7fe0:  00000000  00000000  00000000  00000000  ________________
-// 7ff0:  00000000  00000000  00000000  00000000  ________________
-// 8000:  00000000  00000000  00000000  00000000  ________________
-// 8010:  0000000c  00000018  00000024  00000030  .___.___$___0___
-// 8020:  0000003c  00000048  00000054  00000060  <___H___T___`___
-// 8030:  0000006c  00000078  00000084  00000090  l___x___.___.___
-// 8040:  0000009c  00000000  00000000  00000000  ._______________
-// 8050:  00000000  00000000  00000000  00000000  ________________
-// 8060:  00000000  00000000  00000000  00000000  ________________
-// 8070:  00000000  00000000  00000000  00000000  ________________
-// 8080:  00000000  00000000  00000000  00000000  ________________
-// 8090:  00000000  00000000  00000000  00000000  ________________
-// 80a0:  00000000  00000000  00000000  00000000  ________________
-// 80b0:  00000000  00000000  00000000  00000000  ________________
-// 80c0:  00000000  00000000  00000000  00000000  ________________
-// 80d0:  00000000  00000000  00000000  00000000  ________________
-// 80e0:  00000000  00000000  00000000  00000000  ________________
-// 80f0:  00000000  00000000  00000000  00000000  ________________
-// 8100:  00000000  00000000  00000000  00000000  ________________
-// 8110:  00000000  00000000  00000000  00000000  ________________
-// 8120:  00000000  00000000  00000000  00000000  ________________
-// 8130:  00000000  00000000  00000000  00000000  ________________
-// 8140:  00000000  00000000  00000000  00000000  ________________
-// 8150:  00000000  00000000  00000000  00000000  ________________
-// 8160:  00000000  00000000  00000000  00000000  ________________
-// 8170:  00000000  00000000  00000000  00000000  ________________
-// 8180:  00000000  00000000  11250016  00000000  ________._%.____
-// 8190:  00000080  53500001  49414d5f  0000004e  .___._PS_MAIN___
-// 81a0:  11510022  00001012  00010008  ffff0040  "_Q...__._._@_..
-// 81b0:  ffffffff  63657053  72616c75  6f6c6f43  ....SpecularColo
-// 81c0:  00000072  11510022  00001014  00010008  r___"_Q...__._._
-// 81d0:  ffff0050  ffffffff  63657053  72616c75  P_......Specular
-// 81e0:  65776f50  00000072  11510026  00001016  Power___&_Q...__
-// 81f0:  00010008  ffff0054  ffffffff  44736148  ._._T_......HasD
-// 8200:  75666669  65546573  72757478  00000065  iffuseTexture___
-// 8210:  11510026  00001016  00010008  ffff0058  &_Q...__._._X_..
-// 8220:  ffffffff  53736148  75636570  5472616c  ....HasSpecularT
-// 8230:  75747865  00006572  11510026  00001016  exture__&_Q...__
-// 8240:  00010008  ffff005c  ffffffff  4e736148  ._._\_......HasN
-// 8250:  616d726f  7865546c  65727574  00000000  ormalTexture____
-// 8260:  11510022  00001012  00020008  ffff0000  "_Q...__._.___..
-// 8270:  ffffffff  69626d41  43746e65  726f6c6f  ....AmbientColor
-// 8280:  00000000  1151001e  00001012  00020008  ____._Q...__._._
-// 8290:  ffff0010  ffffffff  6867694c  6c6f4374  ._......LightCol
-// 82a0:  0000726f  11510022  00001018  00020008  or__"_Q...__._._
-// 82b0:  ffff0020  ffffffff  6867694c  72694474   _......LightDir
-// 82c0:  69746365  00006e6f  1151001e  0000101a  ection__._Q...__
-// 82d0:  00020008  ffff0040  ffffffff  6867694c  ._._@_......Ligh
-// 82e0:  70795474  00000065  11510022  0000101d  tType___"_Q...__
-// 82f0:  ffff0007  0000ffff  ffffffff  66666944  ._....__....Diff
-// 8300:  54657375  75747865  00006572  11510022  useTexture__"_Q.
-// 8310:  0000101d  ffff0007  0001ffff  ffffffff  ..__._....._....
-// 8320:  63657053  72616c75  74786554  00657275  SpecularTexture_
-// 8330:  11510022  0000101d  ffff0007  0002ffff  "_Q...__._....._
-// 8340:  ffffffff  6d726f4e  65546c61  72757478  ....NormalTextur
-// 8350:  00000065  11510022  00001020  ffff0006  e___"_Q. .__._..
-// 8360:  ffffffff  ffff0000  6f6c6f43  6d615372  ....__..ColorSam
-// 8370:  72656c70  00000000  00000000  00000000  pler____________
-// 8380:  00000000  00000000  00000010  00000000  ________._______
-// 8390:  00000000  00000000  00000000  00000000  ________________
-// 83a0:  00000000  ffffffff  f12f091a  00000000  ____....../.____
-// 83b0:  00000000  00000000  00000000  00000000  ________________
-// 83c0:  00000000  00000000  00000000  00000000  ________________
-// 83d0:  00000000  00000000  00000000  00000000  ________________
-// 83e0:  00000000  00000000  00000000  00000000  ________________
-// 83f0:  00000000  00000000  00000000  00000000  ________________
-// 8400:  00000000  00000000  00000000  00000000  ________________
-// 8410:  00000000  00000000  00000000  00000000  ________________
-// 8420:  00000000  00000000  00000000  00000000  ________________
-// 8430:  00000000  00000000  00000000  00000000  ________________
-// 8440:  00000000  00000000  00000000  00000000  ________________
-// 8450:  00000000  00000000  00000000  00000000  ________________
-// 8460:  00000000  00000000  00000000  00000000  ________________
-// 8470:  00000000  00000000  00000000  00000000  ________________
-// 8480:  00000000  00000000  00000000  00000000  ________________
-// 8490:  00000000  00000000  00000000  00000000  ________________
-// 84a0:  00000000  00000000  00000000  00000000  ________________
-// 84b0:  00000000  00000000  00000000  00000000  ________________
-// 84c0:  00000000  00000000  00000000  00000000  ________________
-// 84d0:  00000000  00000000  00000000  00000000  ________________
-// 84e0:  00000000  00000000  00000000  00000000  ________________
-// 84f0:  00000000  00000000  00000000  00000000  ________________
-// 8500:  00000000  00000000  00000000  00000000  ________________
-// 8510:  00000000  00000000  00000000  00000000  ________________
-// 8520:  00000000  00000000  00000000  00000000  ________________
-// 8530:  00000000  00000000  00000000  00000000  ________________
-// 8540:  00000000  00000000  00000000  00000000  ________________
-// 8550:  00000000  00000000  00000000  00000000  ________________
-// 8560:  00000000  00000000  00000000  00000000  ________________
-// 8570:  00000000  00000000  00000000  00000000  ________________
-// 8580:  00000000  00000000  ffffffff  01310977  ________....w.1.
-// 8590:  00000001  8c0a000e  9cb4000f  000b0010  .___._..._..._._
-// 85a0:  00000050  00000020  0000002c  000000d0  P___ ___,___.___
-// 85b0:  00000000  00000000  00000016  00000019  ________.___.___
-// 85c0:  00000000  00000000  00000000  00000001  ____________.___
-// 85d0:  00000000  00000c0c  60000020  00000000  ____..__ __`____
-// 85e0:  00000000  00000000  000a0002  000016b4  ________._._..__
-// 85f0:  00000000  00000c58  00000002  004dbbd0  ____X.__.___..M_
-// 8600:  00000000  00000000  4d5f5350  004e4941  ________PS_MAIN_
-// 8610:  656e6f6e  00000000  f12eba2d  00000001  none____-....___
-// 8620:  00000000  00000c0c  60000020  00000000  ____..__ __`____
-// 8630:  00000000  00000000  00020002  00000007  ________._._.___
-// 8640:  00010000  ffffffff  00000000  00000c0c  __._....____..__
-// 8650:  00000208  00000000  ffffffff  00000000  ..______....____
-// 8660:  ffffffff  00020001  00020000  00000000  ....._.___._____
-// 8670:  0000005b  335c3a46  6e652d44  656e6967  [___F:\3D-engine
-// 8680:  7265455c  47657473  68706172  6e456369  \EersteGraphicEn
-// 8690:  656e6967  7265455c  47657473  68706172  gine\EersteGraph
-// 86a0:  6e456369  656e6967  6e69625c  445c3436  icEngine\bin64\D
-// 86b0:  5c617461  64616853  435c7265  726f6c6f  ata\Shader\Color
-// 86c0:  6c6f435c  505f726f  6c682e53  46006c73  \Color_PS.hlsl_F
-// 86d0:  44335c3a  676e652d  5c656e69  73726545  :\3D-engine\Eers
-// 86e0:  72476574  69687061  676e4563  5c656e69  teGraphicEngine\
-// 86f0:  73726545  72476574  69687061  676e4563  EersteGraphicEng
-// 8700:  5c656e69  366e6962  61445c34  535c6174  ine\bin64\Data\S
-// 8710:  65646168  6f435c72  5c726f6c  6c636e49  hader\Color\Incl
-// 8720:  5c656475  6d6d6f43  682e6e6f  696c736c  ude\Common.hlsli
-// 8730:  00000000  effeeffe  00000001  00000001  ____.....___.___
-// 8740:  00000100  00000000  00000000  ffffff00  _.___________...
-// 8750:  ffffffff  0dffffff  ffffff00  ffffffff  ........_.......
-// 8760:  00ffffff  00000000  00000000  00000000  ..._____________
-// 8770:  00000000  00000000  00000000  00000000  ________________
-// 8780:  00000000  00000000  01312e94  5b215374  ________..1.tS![
-// 8790:  00000001  10ff9fe1  444c4cf1  eb2a1c8e  .___.....LLD..*.
-// 87a0:  0cdecc83  000000f5  6e694c2f  666e496b  .....___/LinkInf
-// 87b0:  6e2f006f  73656d61  72732f00  65682f63  o_/names_/src/he
-// 87c0:  72656461  636f6c62  732f006b  662f6372  aderblock_/src/f
-// 87d0:  73656c69  5c3a662f  652d6433  6e69676e  iles/f:\3d-engin
-// 87e0:  65655c65  65747372  70617267  65636968  e\eerstegraphice
-// 87f0:  6e69676e  65655c65  65747372  70617267  ngine\eerstegrap
-// 8800:  65636968  6e69676e  69625c65  5c34366e  hicengine\bin64\
-// 8810:  61746164  6168735c  5c726564  6f6c6f63  data\shader\colo
-// 8820:  6f635c72  5f726f6c  682e7370  006c736c  r\color_ps.hlsl_
-// 8830:  6372732f  6c69662f  662f7365  64335c3a  /src/files/f:\3d
-// 8840:  676e652d  5c656e69  73726565  72676574  -engine\eerstegr
-// 8850:  69687061  676e6563  5c656e69  73726565  aphicengine\eers
-// 8860:  72676574  69687061  676e6563  5c656e69  tegraphicengine\
-// 8870:  366e6962  61645c34  735c6174  65646168  bin64\data\shade
-// 8880:  6f635c72  5c726f6c  6c636e69  5c656475  r\color\include\
-// 8890:  6d6d6f63  682e6e6f  696c736c  00000500  common.hlsli_.__
-// 88a0:  00000a00  00000100  00022e00  00000000  _.___.___.._____
-// 88b0:  00001100  00000700  00000000  00000500  _.___._______.__
-// 88c0:  00008800  00000900  00000a00  00000600  _.___.___.___.__
-// 88d0:  00002200  00000800  00000000  3351dc00  _"___._______.Q3
-// 88e0:  00000001  00000000  00000000  00000000  ._______________
-// 88f0:  00000000  00000000  00000000  00000000  ________________
-// 8900:  00000000  00000000  00000000  00000000  ________________
-// 8910:  00000000  00000000  00000000  00000000  ________________
-// 8920:  00000000  00000000  00000000  00000000  ________________
-// 8930:  00000000  00000000  00000000  00000000  ________________
-// 8940:  00000000  00000000  00000000  00000000  ________________
-// 8950:  00000000  00000000  00000000  00000000  ________________
-// 8960:  00000000  00000000  00000000  00000000  ________________
-// 8970:  00000000  00000000  00000000  00000000  ________________
-// 8980:  00000000  00000000  00000011  00000020  ________.___ ___
-// 8990:  00000159  00000398  000001db  000000a0  Y.__..__..__.___
-// 89a0:  00000000  000015d6  000000ac  00000f45  ____..__.___E.__
-// 89b0:  000004d3  00002348  0000008c  00000014  ..__H#__.___.___
-// 89c0:  00000028  000002bc  0000002c  000001f0  (___..__,___..__
-// 89d0:  00000003  0000003a  00000028  00000027  .___:___(___'___
-// 89e0:  00000039  00000033  00000013  00000006  9___3___.___.___
-// 89f0:  0000002a  0000002b  0000002c  0000002d  *___+___,___-___
-// 8a00:  0000002e  0000002f  00000030  00000031  .___/___0___1___
-// 8a10:  00000032  00000014  00000008  00000009  2___.___.___.___
-// 8a20:  0000000a  0000000b  0000000c  0000000d  .___.___.___.___
-// 8a30:  0000000e  0000000f  00000010  00000011  .___.___.___.___
-// 8a40:  00000012  00000015  00000016  00000017  .___.___.___.___
-// 8a50:  00000018  00000019  0000001a  0000001b  .___.___.___.___
-// 8a60:  0000001c  0000001d  0000001e  0000001f  .___.___.___.___
-// 8a70:  00000020  00000021  00000022  00000023   ___!___"___#___
-// 8a80:  00000024  00000025  00000026  00000007  $___%___&___.___
-// 8a90:  00000029  00000034  00000035  00000036  )___4___5___6___
-// 8aa0:  00000038  00000037  00000000  00000000  8___7___________
-// 8ab0:  00000000  00000000  00000000  00000000  ________________
-// 8ac0:  00000000  00000000  00000000  00000000  ________________
-// 8ad0:  00000000  00000000  00000000  00000000  ________________
-// 8ae0:  00000000  00000000  00000000  00000000  ________________
-// 8af0:  00000000  00000000  00000000  00000000  ________________
-// 8b00:  00000000  00000000  00000000  00000000  ________________
-// 8b10:  00000000  00000000  00000000  00000000  ________________
-// 8b20:  00000000  00000000  00000000  00000000  ________________
-// 8b30:  00000000  00000000  00000000  00000000  ________________
-// 8b40:  00000000  00000000  00000000  00000000  ________________
-// 8b50:  00000000  00000000  00000000  00000000  ________________
-// 8b60:  00000000  00000000  00000000  00000000  ________________
-// 8b70:  00000000  00000000  00000000  00000000  ________________
-// 8b80:  00000000  00000000  0000003b  00000000  ________;_______
-// 8b90:  00000000  00000000  00000000  00000000  ________________
-// 8ba0:  00000000  00000000  00000000  00000000  ________________
-// 8bb0:  00000000  00000000  00000000  00000000  ________________
-// 8bc0:  00000000  00000000  00000000  00000000  ________________
-// 8bd0:  00000000  00000000  00000000  00000000  ________________
-// 8be0:  00000000  00000000  00000000  00000000  ________________
-// 8bf0:  00000000  00000000  00000000  00000000  ________________
+// 5150:  00000000  11500016  00050000  00040000  ____._P.__.___._
+// 5160:  00000410  00e40001  00000050  11500016  ..__._._P___._P.
+// 5170:  00050000  00040004  00000424  00d00001  __._._._$.__._._
+// 5180:  00000054  11500016  00050000  00040008  T___._P.__._._._
+// 5190:  00000438  00b80001  00000058  11500016  8.__._._X___._P.
+// 51a0:  00050000  0004000c  0000044c  00a80001  __._._._L.__._._
+// 51b0:  00000060  11500016  00050000  00040010  `___._P.__._._._
+// 51c0:  00000460  00940001  00000064  11500016  `.__._._d___._P.
+// 51d0:  00050000  00040014  00000474  00800001  __._._._t.__._._
+// 51e0:  00000068  11500016  00050000  00040018  h___._P.__._._._
+// 51f0:  00000488  006c0001  00000040  11500016  ..__._l_@___._P.
+// 5200:  00050000  0004001c  00000488  006c0001  __._._._..__._l_
+// 5210:  00000044  11500016  00050000  00040020  D___._P.__._ _._
+// 5220:  0000049c  00580001  00000048  114e0002  ..__._X_H___._N.
+// 5230:  114d003a  00000080  000012bc  00001001  :_M..___..__..__
+// 5240:  05090007  02065d0d  0db08503  0c02061a  ._...]..........
+// 5250:  00085c50  3f0d1f09  0b748601  035c0d30  P\._...?..t.0.\.
+// 5260:  03050924  061a0d1c  1c500c02  113e004a  $.........P.J_>.
+// 5270:  00001010  433c0088  75706d6f  6d416574  ..__._<ComputeAm
+// 5280:  6e656962  67694c74  72207468  72757465  bientLight retur
+// 5290:  6176206e  3e65756c  00000000  00000000  n value>________
+// 52a0:  00000000  00000000  00000000  00000000  ________________
+// 52b0:  00000000  00000000  11500016  00050000  ________._P.__._
+// 52c0:  00040000  000006e4  00500001  00000014  __._..__._P_.___
+// 52d0:  11500016  00050000  00040004  000006e4  ._P.__._._._..__
+// 52e0:  00500001  00000018  11500016  00050000  ._P_.___._P.__._
+// 52f0:  00040008  000006e4  00500001  0000001c  ._._..__._P_.___
+// 5300:  11500016  00050000  0004000c  000006f8  ._P.__._._._..__
+// 5310:  003c0001  00000010  11500016  00050000  ._<_.___._P.__._
+// 5320:  00040010  0000070c  00280001  00000060  ._._..__._(_`___
+// 5330:  11500016  00050000  00040014  0000070c  ._P.__._._._..__
+// 5340:  00280001  00000064  11500016  00050000  ._(_d___._P.__._
+// 5350:  00040018  0000070c  00280001  00000068  ._._..__._(_h___
+// 5360:  11500016  00050000  0004001c  0000070c  ._P.__._._._..__
+// 5370:  00280001  0000006c  11500016  00050000  ._(_l___._P.__._
+// 5380:  00040020  00000720  00140001  00000028   _._ .__._._(___
+// 5390:  113e0036  0000100b  69700009  436c6578  6_>...__._pixelC
+// 53a0:  6f706d6f  746e656e  00000000  00000000  omponent________
+// 53b0:  00000000  00000000  00000000  00000000  ________________
+// 53c0:  00000000  00000000  11500016  00050000  ________._P.__._
+// 53d0:  00040000  00000674  00c00001  00000040  __._t.__._._@___
+// 53e0:  11500016  00050000  00040004  00000674  ._P.__._._._t.__
+// 53f0:  00c00001  00000044  11500016  00050000  ._._D___._P.__._
+// 5400:  00040008  00000674  00c00001  00000048  ._._t.__._._H___
+// 5410:  113e0036  00001009  6f630009  43726f6c  6_>...__._colorC
+// 5420:  6f706d6f  746e656e  00000000  00000000  omponent________
+// 5430:  00000000  00000000  00000000  00000000  ________________
+// 5440:  00000000  00000000  11500016  00050000  ________._P.__._
+// 5450:  00040010  00000674  00c00001  00000060  ._._t.__._._`___
+// 5460:  11500016  00050000  00040014  00000674  ._P.__._._._t.__
+// 5470:  00c00001  00000064  11500016  00050000  ._._d___._P.__._
+// 5480:  00040018  00000674  00c00001  00000068  ._._t.__._._h___
+// 5490:  11500016  00050000  0004001c  00000674  ._P.__._._._t.__
+// 54a0:  00c00001  0000006c  11500016  00050000  ._._l___._P.__._
+// 54b0:  00040000  00000674  005c0001  00000000  __._t.__._\_____
+// 54c0:  11500016  00050000  00040004  00000674  ._P.__._._._t.__
+// 54d0:  005c0001  00000004  11500016  00050000  ._\_.___._P.__._
+// 54e0:  00040008  00000674  005c0001  00000008  ._._t.__._\_.___
+// 54f0:  11500016  00050000  0004000c  00000674  ._P.__._._._t.__
+// 5500:  00c00001  00000010  11500016  00050000  ._._.___._P.__._
+// 5510:  00040020  00000674  00c00001  00000028   _._t.__._._(___
+// 5520:  11500016  00050000  00040000  000006d0  ._P.__.___._..__
+// 5530:  00640001  00000014  11500016  00050000  ._d_.___._P.__._
+// 5540:  00040004  000006d0  00640001  00000018  ._._..__._d_.___
+// 5550:  11500016  00050000  00040008  000006d0  ._P.__._._._..__
+// 5560:  00640001  0000001c  114e0002  114d0022  ._d_.___._N."_M.
+// 5570:  00000080  00001514  00001002  05090007  .___..__..__._..
+// 5580:  02061a0d  30873c0c  87010008  003c0cf4  .....<.0._....<_
+// 5590:  113e0046  00001010  433c0088  75706d6f  F_>...__._<Compu
+// 55a0:  6f506574  4c746e69  74686769  74657220  tePointLight ret
+// 55b0:  206e7275  756c6176  00003e65  00000000  urn value>______
+// 55c0:  00000000  00000000  00000000  00000000  ________________
+// 55d0:  00000000  00000000  11500016  00050000  ________._P.__._
+// 55e0:  00040000  00000808  003c0001  00000000  __._..__._<_____
+// 55f0:  11500016  00050000  00040004  00000808  ._P.__._._._..__
+// 5600:  003c0001  00000004  11500016  00050000  ._<_.___._P.__._
+// 5610:  00040008  00000808  003c0001  00000008  ._._..__._<_.___
+// 5620:  11500016  00050000  0004000c  0000081c  ._P.__._._._..__
+// 5630:  00280001  00000010  11500016  00050000  ._(_.___._P.__._
+// 5640:  00040010  0000081c  00280001  00000014  ._._..__._(_.___
+// 5650:  11500016  00050000  00040014  0000081c  ._P.__._._._..__
+// 5660:  00280001  00000018  11500016  00050000  ._(_.___._P.__._
+// 5670:  00040018  00000830  00140001  00000020  ._._0.__._._ ___
+// 5680:  11500016  00050000  0004001c  00000830  ._P.__._._._0.__
+// 5690:  00140001  00000024  11500016  00050000  ._._$___._P.__._
+// 56a0:  00040020  00000830  00140001  00000028   _._0.__._._(___
+// 56b0:  113e0036  00001009  6f630009  43726f6c  6_>...__._colorC
+// 56c0:  6f706d6f  746e656e  00000000  00000000  omponent________
+// 56d0:  00000000  00000000  00000000  00000000  ________________
+// 56e0:  00000000  00000000  11500016  00050000  ________._P.__._
+// 56f0:  00040000  000007f4  00500001  00000000  __._..__._P_____
+// 5700:  11500016  00050000  00040004  000007f4  ._P.__._._._..__
+// 5710:  00500001  00000004  11500016  00050000  ._P_.___._P.__._
+// 5720:  00040008  000007f4  00500001  00000008  ._._..__._P_.___
+// 5730:  11500016  00050000  0004000c  000007f4  ._P.__._._._..__
+// 5740:  00500001  00000010  11500016  00050000  ._P_.___._P.__._
+// 5750:  00040010  000007f4  00500001  00000014  ._._..__._P_.___
+// 5760:  11500016  00050000  00040014  000007f4  ._P.__._._._..__
+// 5770:  00500001  00000018  11500016  00050000  ._P_.___._P.__._
+// 5780:  00040018  000007f4  00500001  00000020  ._._..__._P_ ___
+// 5790:  11500016  00050000  0004001c  000007f4  ._P.__._._._..__
+// 57a0:  00500001  00000024  11500016  00050000  ._P_$___._P.__._
+// 57b0:  00040020  000007f4  00500001  00000028   _._..__._P_(___
+// 57c0:  114e0002  114d0022  00000080  0000176c  ._N."_M..___l.__
+// 57d0:  00001003  05090007  02061a0d  20883c0c  ..__._.......<. 
+// 57e0:  88010008  003c0ce4  113e0046  00001010  ._....<_F_>...__
+// 57f0:  433c0088  75706d6f  70536574  694c746f  ._<ComputeSpotLi
+// 5800:  20746867  75746572  76206e72  65756c61  ght return value
+// 5810:  0000003e  00000000  00000000  00000000  >_______________
+// 5820:  00000000  00000000  00000000  00000000  ________________
+// 5830:  11500016  00050000  00040000  000008f8  ._P.__.___._..__
+// 5840:  003c0001  00000000  11500016  00050000  ._<_____._P.__._
+// 5850:  00040004  000008f8  003c0001  00000004  ._._..__._<_.___
+// 5860:  11500016  00050000  00040008  000008f8  ._P.__._._._..__
+// 5870:  003c0001  00000008  11500016  00050000  ._<_.___._P.__._
+// 5880:  0004000c  0000090c  00280001  00000010  ._._..__._(_.___
+// 5890:  11500016  00050000  00040010  0000090c  ._P.__._._._..__
+// 58a0:  00280001  00000014  11500016  00050000  ._(_.___._P.__._
+// 58b0:  00040014  0000090c  00280001  00000018  ._._..__._(_.___
+// 58c0:  11500016  00050000  00040018  00000920  ._P.__._._._ .__
+// 58d0:  00140001  00000020  11500016  00050000  ._._ ___._P.__._
+// 58e0:  0004001c  00000920  00140001  00000024  ._._ .__._._$___
+// 58f0:  11500016  00050000  00040020  00000920  ._P.__._ _._ .__
+// 5900:  00140001  00000028  113e0036  00001009  ._._(___6_>...__
+// 5910:  6f630009  43726f6c  6f706d6f  746e656e  ._colorComponent
+// 5920:  00000000  00000000  00000000  00000000  ________________
+// 5930:  00000000  00000000  00000000  00000000  ________________
+// 5940:  11500016  00050000  00040000  000008e4  ._P.__.___._..__
+// 5950:  00500001  00000000  11500016  00050000  ._P_____._P.__._
+// 5960:  00040004  000008e4  00500001  00000004  ._._..__._P_.___
+// 5970:  11500016  00050000  00040008  000008e4  ._P.__._._._..__
+// 5980:  00500001  00000008  11500016  00050000  ._P_.___._P.__._
+// 5990:  0004000c  000008e4  00500001  00000010  ._._..__._P_.___
+// 59a0:  11500016  00050000  00040010  000008e4  ._P.__._._._..__
+// 59b0:  00500001  00000014  11500016  00050000  ._P_.___._P.__._
+// 59c0:  00040014  000008e4  00500001  00000018  ._._..__._P_.___
+// 59d0:  11500016  00050000  00040018  000008e4  ._P.__._._._..__
+// 59e0:  00500001  00000020  11500016  00050000  ._P_ ___._P.__._
+// 59f0:  0004001c  000008e4  00500001  00000024  ._._..__._P_$___
+// 5a00:  11500016  00050000  00040020  000008e4  ._P.__._ _._..__
+// 5a10:  00500001  00000028  114e0002  114d00d6  ._P_(___._N.._M.
+// 5a20:  00000080  00001d90  00001004  05090007  .___..__..__._..
+// 5a30:  04063b0d  0d9c8903  0302063e  06140d68  .;......>...h...
+// 5a40:  09680304  06720d09  0d3c0306  0306064e  ..h...r...<.N...
+// 5a50:  800d9480  030606b4  0509d480  0206050d  ................
+// 5a60:  0d088103  04440b1a  0900083c  01390d27  ......D.<._.'.9.
+// 5a70:  1f06608a  1d090003  1c033a0d  3c0d2909  .`..._...:...).<
+// 5a80:  4c030206  3d0d1509  09094c03  0406130d  ...L...=.L......
+// 5a90:  05091c03  3003140d  340d2309  450d6c0b  .......0.#.4.l.E
+// 5aa0:  540d1c03  710d2003  09092003  1f091c03  ...T. .q. ......
+// 5ab0:  06064c0d  15091c03  80034d0d  0d2c0988  .L.......M....,.
+// 5ac0:  03060650  0d28094c  091c0354  03640d24  P...L.(.T...$.d.
+// 5ad0:  03780d30  96800d48  800d2003  091c03b3  0.x.H.... ......
+// 5ae0:  091c0309  06050d05  0d1c0302  04440b1a  ..............D.
+// 5af0:  0000003c  113e004e  00001010  433c0088  <___N_>...__._<C
+// 5b00:  75706d6f  69446574  74636572  616e6f69  omputeDirectiona
+// 5b10:  67694c6c  72207468  72757465  6176206e  lLight return va
+// 5b20:  3e65756c  00000000  00000000  00000000  lue>____________
+// 5b30:  00000000  00000000  00000000  00000000  ________________
+// 5b40:  00000000  11500016  00050000  00040000  ____._P.__.___._
+// 5b50:  00000df4  003c0001  00000000  11500016  ..__._<_____._P.
+// 5b60:  00050000  00040004  00000df4  003c0001  __._._._..__._<_
+// 5b70:  00000004  11500016  00050000  00040008  .___._P.__._._._
+// 5b80:  00000df4  003c0001  00000008  11500016  ..__._<_.___._P.
+// 5b90:  00050000  0004000c  00000e08  00280001  __._._._..__._(_
+// 5ba0:  00000010  11500016  00050000  00040010  .___._P.__._._._
+// 5bb0:  00000e08  00280001  00000014  11500016  ..__._(_.___._P.
+// 5bc0:  00050000  00040014  00000e08  00280001  __._._._..__._(_
+// 5bd0:  00000018  11500016  00050000  00040018  .___._P.__._._._
+// 5be0:  00000e1c  00140001  00000020  11500016  ..__._._ ___._P.
+// 5bf0:  00050000  0004001c  00000e1c  00140001  __._._._..__._._
+// 5c00:  00000024  11500016  00050000  00040020  $___._P.__._ _._
+// 5c10:  00000e1c  00140001  00000028  113e0036  ..__._._(___6_>.
+// 5c20:  0000100b  69700009  436c6578  6f706d6f  ..__._pixelCompo
+// 5c30:  746e656e  00000000  00000000  00000000  nent____________
+// 5c40:  00000000  00000000  00000000  00000000  ________________
+// 5c50:  00000000  11500016  00050000  00040000  ____._P.__.___._
+// 5c60:  00000a60  03d00001  00000040  11500016  `.__._..@___._P.
+// 5c70:  00050000  00040004  00000a60  03d00001  __._._._`.__._..
+// 5c80:  00000044  11500016  00050000  00040008  D___._P.__._._._
+// 5c90:  00000a60  03d00001  00000048  11500016  `.__._..H___._P.
+// 5ca0:  00050000  00040010  00000a60  03440001  __._._._`.__._D.
+// 5cb0:  00000030  11500016  00050000  00040014  0___._P.__._._._
+// 5cc0:  00000a60  03440001  00000034  11500016  `.__._D.4___._P.
+// 5cd0:  00050000  00040018  00000a60  03440001  __._._._`.__._D.
+// 5ce0:  00000038  11500016  00050000  0004001c  8___._P.__._._._
+// 5cf0:  00000a60  020c0001  00000050  11500016  `.__._..P___._P.
+// 5d00:  00050000  00040020  00000a60  020c0001  __._ _._`.__._..
+// 5d10:  00000054  11500016  00050000  00040024  T___._P.__._$_._
+// 5d20:  00000a60  020c0001  00000058  113e0036  `.__._..X___6_>.
+// 5d30:  00001009  6f630009  43726f6c  6f706d6f  ..__._colorCompo
+// 5d40:  746e656e  00000000  00000000  00000000  nent____________
+// 5d50:  00000000  00000000  00000000  00000000  ________________
+// 5d60:  00000000  11500016  00050000  00040000  ____._P.__.___._
+// 5d70:  00000a60  03d00001  00000000  11500016  `.__._..____._P.
+// 5d80:  00050000  00040004  00000a60  03d00001  __._._._`.__._..
+// 5d90:  00000004  11500016  00050000  00040008  .___._P.__._._._
+// 5da0:  00000a60  03d00001  00000008  11500016  `.__._...___._P.
+// 5db0:  00050000  0004000c  00000a60  03d00001  __._._._`.__._..
+// 5dc0:  00000010  11500016  00050000  00040010  .___._P.__._._._
+// 5dd0:  00000a60  03d00001  00000014  11500016  `.__._...___._P.
+// 5de0:  00050000  00040014  00000a60  03d00001  __._._._`.__._..
+// 5df0:  00000018  11500016  00050000  00040018  .___._P.__._._._
+// 5e00:  00000a60  03d00001  00000020  11500016  `.__._.. ___._P.
+// 5e10:  00050000  0004001c  00000a60  03d00001  __._._._`.__._..
+// 5e20:  00000024  11500016  00050000  00040020  $___._P.__._ _._
+// 5e30:  00000a60  03d00001  00000028  113e002a  `.__._..(___*_>.
+// 5e40:  00001004  4e490009  00000000  00000000  ..__._IN________
+// 5e50:  00000000  00000000  00000000  00000000  ________________
+// 5e60:  00000000  00000000  11500016  00050000  ________._P.__._
+// 5e70:  00040028  00000a60  00b40001  00000070  (_._`.__._._p___
+// 5e80:  11500016  00050000  0004002c  00000a60  ._P.__._,_._`.__
+// 5e90:  00b40001  00000074  11500016  00050000  ._._t___._P.__._
+// 5ea0:  00040030  00000a60  00b40001  00000078  0_._`.__._._x___
+// 5eb0:  11500016  00050000  0004004c  00000a60  ._P.__._L_._`.__
+// 5ec0:  03d00001  00000080  11500016  00050000  ._...___._P.__._
+// 5ed0:  00040050  00000a60  03d00001  00000084  P_._`.__._...___
+// 5ee0:  11500016  00050000  00040054  00000a60  ._P.__._T_._`.__
+// 5ef0:  03d00001  00000088  113e0032  00001002  ._...___2_>...__
+// 5f00:  65720008  63655666  00726f74  00000000  ._refVector_____
+// 5f10:  00000000  00000000  00000000  00000000  ________________
+// 5f20:  00000000  00000000  00000000  11500016  ____________._P.
+// 5f30:  00050000  00040000  00000cd4  00b40001  __.___._..__._._
+// 5f40:  00000050  11500016  00050000  00040004  P___._P.__._._._
+// 5f50:  00000cd4  00b40001  00000054  11500016  ..__._._T___._P.
+// 5f60:  00050000  00040008  00000cd4  00b40001  __._._._..__._._
+// 5f70:  00000058  113e0036  00001002  696c0008  X___6_>...__._li
+// 5f80:  44746867  63657269  6e6f6974  00000000  ghtDirection____
+// 5f90:  00000000  00000000  00000000  00000000  ________________
+// 5fa0:  00000000  00000000  00000000  11500016  ____________._P.
+// 5fb0:  00050000  00040000  00000ac8  03680001  __.___._..__._h.
+// 5fc0:  00000090  11500016  00050000  00040004  .___._P.__._._._
+// 5fd0:  00000ac8  03680001  00000094  11500016  ..__._h..___._P.
+// 5fe0:  00050000  00040008  00000ac8  03680001  __._._._..__._h.
+// 5ff0:  00000098  113e002e  00000040  5f6e0000  .___._>.@_____n_
+// 6000:  5f746f64  0000006c  00000000  00000000  dot_l___________
+// 6010:  00000000  00000000  00000000  00000000  ________________
+// 6020:  00000000  11500016  00010000  00040000  ____._P.__.___._
+// 6030:  00000b30  00580001  0000000c  114e0002  0.__._X_.___._N.
+// 6040:  00060002  000000f4  00000030  00000001  ._._.___0___.___
+// 6050:  627a0110  0062f9d8  8b965213  4c30bf66  ..zb..b_.R..f.0L
+// 6060:  000058fb  000000b8  df450110  d3466ecb  .X__.___..E..nF.
+// 6070:  d95cc239  9af62774  00009c80  000000f2  9.\.t'....__.___
+// 6080:  00001080  00000000  00010001  00000f30  ..______._._0.__
+// 6090:  00000000  0000015e  00001074  000000c4  ____^.__t.__.___
+// 60a0:  8000001f  000000c4  0000001f  000000e4  .__..___.___.___
+// 60b0:  80000020  000000e4  00000020  00000104   __..___ ___..__
+// 60c0:  80000021  00000104  00000021  00000124  !__...__!___$.__
+// 60d0:  80000023  00000124  00000023  00000128  #__.$.__#___(.__
+// 60e0:  80000023  00000128  00000023  0000013c  #__.(.__#___<.__
+// 60f0:  80000023  0000013c  00000023  00000150  #__.<.__#___P.__
+// 6100:  80000023  00000150  00000023  00000164  #__.P.__#___d.__
+// 6110:  80000023  00000164  00000023  00000178  #__.d.__#___x.__
+// 6120:  80000023  00000178  00000023  0000018c  #__.x.__#___..__
+// 6130:  80000023  0000018c  00000023  000001a0  #__...__#___..__
+// 6140:  80000023  000001a0  00000023  000001cc  #__...__#___..__
+// 6150:  80000023  000001cc  00000023  000001e8  #__...__#___..__
+// 6160:  80000023  000001e8  00000023  000001f4  #__...__#___..__
+// 6170:  80000023  000001f4  00000023  00000220  #__...__#___ .__
+// 6180:  80000023  00000220  00000023  00000224  #__. .__#___$.__
+// 6190:  80000023  00000224  00000023  00000238  #__.$.__#___8.__
+// 61a0:  80000023  00000238  00000023  0000023c  #__.8.__#___<.__
+// 61b0:  80000023  0000023c  00000023  00000268  #__.<.__#___h.__
+// 61c0:  80000023  00000268  00000023  00000284  #__.h.__#___..__
+// 61d0:  80000023  00000284  00000023  00000290  #__...__#___..__
+// 61e0:  80000023  00000290  00000023  000002bc  #__...__#___..__
+// 61f0:  80000023  000002bc  00000023  000002d0  #__...__#___..__
+// 6200:  80000023  000002d0  00000023  000002d4  #__...__#___..__
+// 6210:  80000023  000002d4  00000023  000002ec  #__...__#___..__
+// 6220:  80000023  000002ec  00000023  00000300  #__...__#____.__
+// 6230:  80000023  00000300  00000023  00000304  #__._.__#___..__
+// 6240:  80000023  00000304  00000023  00000330  #__...__#___0.__
+// 6250:  80000023  00000330  00000023  0000034c  #__.0.__#___L.__
+// 6260:  80000023  0000034c  00000023  00000358  #__.L.__#___X.__
+// 6270:  80000023  00000358  00000023  00000378  #__.X.__#___x.__
+// 6280:  80000023  00000378  00000023  000003a4  #__.x.__#___..__
+// 6290:  80000023  000003a4  00000023  000003c0  #__...__#___..__
+// 62a0:  80000023  000003c0  00000023  000003e0  #__...__#___..__
+// 62b0:  80000023  000003e0  00000023  000003fc  #__...__#___..__
+// 62c0:  80000023  000003fc  00000023  00000410  #__...__#___..__
+// 62d0:  80000023  00000410  00000023  00000424  #__...__#___$.__
+// 62e0:  80000023  00000424  00000023  00000438  #__.$.__#___8.__
+// 62f0:  80000023  00000438  00000023  0000044c  #__.8.__#___L.__
+// 6300:  80000023  0000044c  00000023  00000460  #__.L.__#___`.__
+// 6310:  80000023  00000460  00000023  00000474  #__.`.__#___t.__
+// 6320:  80000023  00000474  00000023  00000488  #__.t.__#___..__
+// 6330:  80000023  00000488  00000023  0000049c  #__...__#___..__
+// 6340:  80000023  0000049c  00000023  000004b8  #__...__#___..__
+// 6350:  80000023  000004b8  00000023  000004d4  #__...__#___..__
+// 6360:  80000023  000004d4  00000023  000004f0  #__...__#___..__
+// 6370:  80000023  000004f0  00000023  000004f4  #__...__#___..__
+// 6380:  80000023  000004f4  00000023  00000510  #__...__#___..__
+// 6390:  80000023  00000510  00000023  00000524  #__...__#___$.__
+// 63a0:  80000023  00000524  00000023  00000540  #__.$.__#___@.__
+// 63b0:  80000023  00000540  00000023  00000554  #__.@.__#___T.__
+// 63c0:  80000023  00000554  00000023  00000558  #__.T.__#___X.__
+// 63d0:  80000023  00000558  00000023  0000056c  #__.X.__#___l.__
+// 63e0:  80000023  0000056c  00000023  00000580  #__.l.__#___..__
+// 63f0:  80000023  00000580  00000023  00000594  #__...__#___..__
+// 6400:  80000023  00000594  00000023  000005a8  #__...__#___..__
+// 6410:  80000023  000005a8  00000023  000005bc  #__...__#___..__
+// 6420:  80000023  000005bc  00000023  000005d0  #__...__#___..__
+// 6430:  80000023  000005d0  00000023  000005e4  #__...__#___..__
+// 6440:  80000023  000005e4  00000023  000005f8  #__...__#___..__
+// 6450:  80000024  000005f8  00000024  000005fc  $__...__$___..__
+// 6460:  80000024  000005fc  00000024  00000610  $__...__$___..__
+// 6470:  80000024  00000610  00000024  00000624  $__...__$___$.__
+// 6480:  80000024  00000624  00000024  00000638  $__.$.__$___8.__
+// 6490:  80000024  00000638  00000024  0000064c  $__.8.__$___L.__
+// 64a0:  80000024  0000064c  00000024  00000660  $__.L.__$___`.__
+// 64b0:  80000024  00000660  00000024  00000674  $__.`.__$___t.__
+// 64c0:  80000024  00000674  00000024  00000698  $__.t.__$___..__
+// 64d0:  80000024  00000698  00000024  000006b4  $__...__$___..__
+// 64e0:  80000024  000006b4  00000024  000006d0  $__...__$___..__
+// 64f0:  80000024  000006d0  00000024  000006e4  $__...__$___..__
+// 6500:  80000024  000006e4  00000024  000006f8  $__...__$___..__
+// 6510:  80000024  000006f8  00000024  0000070c  $__...__$___..__
+// 6520:  80000024  0000070c  00000024  00000720  $__...__$___ .__
+// 6530:  80000024  00000720  00000024  00000734  $__. .__$___4.__
+// 6540:  80000024  00000734  00000024  00000748  $__.4.__$___H.__
+// 6550:  80000024  00000748  00000024  0000075c  $__.H.__$___\.__
+// 6560:  80000026  0000075c  00000026  00000774  &__.\.__&___t.__
+// 6570:  80000026  00000774  00000026  00000780  &__.t.__&___..__
+// 6580:  80000028  00000780  00000028  0000078c  (__...__(___..__
+// 6590:  80000029  0000078c  00000029  00000790  )__...__)___..__
+// 65a0:  80000029  00000790  00000029  000007a4  )__...__)___..__
+// 65b0:  80000029  000007a4  00000029  000007b8  )__...__)___..__
+// 65c0:  80000029  000007b8  00000029  000007cc  )__...__)___..__
+// 65d0:  80000029  000007cc  00000029  000007e0  )__...__)___..__
+// 65e0:  80000029  000007e0  00000029  000007f4  )__...__)___..__
+// 65f0:  80000029  000007f4  00000029  00000808  )__...__)___..__
+// 6600:  80000029  00000808  00000029  0000081c  )__...__)___..__
+// 6610:  80000029  0000081c  00000029  00000830  )__...__)___0.__
+// 6620:  80000029  00000830  00000029  00000844  )__.0.__)___D.__
+// 6630:  80000029  00000844  00000029  00000858  )__.D.__)___X.__
+// 6640:  80000029  00000858  00000029  0000086c  )__.X.__)___l.__
+// 6650:  8000002a  0000086c  0000002a  00000870  *__.l.__*___p.__
+// 6660:  8000002c  00000870  0000002c  0000087c  ,__.p.__,___|.__
+// 6670:  8000002d  0000087c  0000002d  00000880  -__.|.__-___..__
+// 6680:  8000002d  00000880  0000002d  00000894  -__...__-___..__
+// 6690:  8000002d  00000894  0000002d  000008a8  -__...__-___..__
+// 66a0:  8000002d  000008a8  0000002d  000008bc  -__...__-___..__
+// 66b0:  8000002d  000008bc  0000002d  000008d0  -__...__-___..__
+// 66c0:  8000002d  000008d0  0000002d  000008e4  -__...__-___..__
+// 66d0:  8000002d  000008e4  0000002d  000008f8  -__...__-___..__
+// 66e0:  8000002d  000008f8  0000002d  0000090c  -__...__-___..__
+// 66f0:  8000002d  0000090c  0000002d  00000920  -__...__-___ .__
+// 6700:  8000002d  00000920  0000002d  00000934  -__. .__-___4.__
+// 6710:  8000002d  00000934  0000002d  00000948  -__.4.__-___H.__
+// 6720:  8000002d  00000948  0000002d  0000095c  -__.H.__-___\.__
+// 6730:  8000002e  0000095c  0000002e  00000960  .__.\.__.___`.__
+// 6740:  80000030  00000960  00000030  0000096c  0__.`.__0___l.__
+// 6750:  80000031  0000096c  00000031  00000970  1__.l.__1___p.__
+// 6760:  80000031  00000970  00000031  00000984  1__.p.__1___..__
+// 6770:  80000031  00000984  00000031  00000998  1__...__1___..__
+// 6780:  80000031  00000998  00000031  000009ac  1__...__1___..__
+// 6790:  80000031  000009ac  00000031  000009c0  1__...__1___..__
+// 67a0:  80000031  000009c0  00000031  000009d4  1__...__1___..__
+// 67b0:  80000031  000009d4  00000031  000009e8  1__...__1___..__
+// 67c0:  80000031  000009e8  00000031  000009fc  1__...__1___..__
+// 67d0:  80000031  000009fc  00000031  00000a10  1__...__1___..__
+// 67e0:  80000031  00000a10  00000031  00000a24  1__...__1___$.__
+// 67f0:  80000031  00000a24  00000031  00000a38  1__.$.__1___8.__
+// 6800:  80000031  00000a38  00000031  00000a4c  1__.8.__1___L.__
+// 6810:  80000031  00000a4c  00000031  00000a60  1__.L.__1___`.__
+// 6820:  80000031  00000a60  00000031  00000a7c  1__.`.__1___|.__
+// 6830:  80000031  00000a7c  00000031  00000a98  1__.|.__1___..__
+// 6840:  80000031  00000a98  00000031  00000aac  1__...__1___..__
+// 6850:  80000031  00000aac  00000031  00000ac8  1__...__1___..__
+// 6860:  80000031  00000ac8  00000031  00000ae4  1__...__1___..__
+// 6870:  80000031  00000ae4  00000031  00000af8  1__...__1___..__
+// 6880:  80000031  00000af8  00000031  00000b14  1__...__1___..__
+// 6890:  80000031  00000b14  00000031  00000b30  1__...__1___0.__
+// 68a0:  80000031  00000b30  00000031  00000b44  1__.0.__1___D.__
+// 68b0:  80000031  00000b44  00000031  00000b60  1__.D.__1___`.__
+// 68c0:  80000031  00000b60  00000031  00000b6c  1__.`.__1___l.__
+// 68d0:  80000031  00000b6c  00000031  00000b88  1__.l.__1___..__
+// 68e0:  80000031  00000b88  00000031  00000ba8  1__...__1___..__
+// 68f0:  80000031  00000ba8  00000031  00000bc8  1__...__1___..__
+// 6900:  80000031  00000bc8  00000031  00000be4  1__...__1___..__
+// 6910:  80000031  00000be4  00000031  00000c00  1__...__1____.__
+// 6920:  80000031  00000c00  00000031  00000c1c  1__._.__1___..__
+// 6930:  80000031  00000c1c  00000031  00000c38  1__...__1___8.__
+// 6940:  80000031  00000c38  00000031  00000c50  1__.8.__1___P.__
+// 6950:  80000031  00000c50  00000031  00000c6c  1__.P.__1___l.__
+// 6960:  80000031  00000c6c  00000031  00000c88  1__.l.__1___..__
+// 6970:  80000031  00000c88  00000031  00000ca4  1__...__1___..__
+// 6980:  80000031  00000ca4  00000031  00000cb8  1__...__1___..__
+// 6990:  80000031  00000cb8  00000031  00000cd4  1__...__1___..__
+// 69a0:  80000031  00000cd4  00000031  00000cf0  1__...__1___..__
+// 69b0:  80000031  00000cf0  00000031  00000d04  1__...__1___..__
+// 69c0:  80000031  00000d04  00000031  00000d20  1__...__1___ .__
+// 69d0:  80000031  00000d20  00000031  00000d34  1__. .__1___4.__
+// 69e0:  80000031  00000d34  00000031  00000d54  1__.4.__1___T.__
+// 69f0:  80000031  00000d54  00000031  00000d68  1__.T.__1___h.__
+// 6a00:  80000031  00000d68  00000031  00000d88  1__.h.__1___..__
+// 6a10:  80000031  00000d88  00000031  00000da4  1__...__1___..__
+// 6a20:  80000031  00000da4  00000031  00000dc0  1__...__1___..__
+// 6a30:  80000031  00000dc0  00000031  00000ddc  1__...__1___..__
+// 6a40:  80000031  00000ddc  00000031  00000de0  1__...__1___..__
+// 6a50:  80000031  00000de0  00000031  00000df4  1__...__1___..__
+// 6a60:  80000031  00000df4  00000031  00000e08  1__...__1___..__
+// 6a70:  80000031  00000e08  00000031  00000e1c  1__...__1___..__
+// 6a80:  80000031  00000e1c  00000031  00000e30  1__...__1___0.__
+// 6a90:  80000031  00000e30  00000031  00000e44  1__.0.__1___D.__
+// 6aa0:  80000031  00000e44  00000031  00000e58  1__.D.__1___X.__
+// 6ab0:  80000032  00000e58  00000032  00000e5c  2__.X.__2___\.__
+// 6ac0:  80000033  00000e5c  00000033  00000e60  3__.\.__3___`.__
+// 6ad0:  80000033  00000e60  00000033  00000e74  3__.`.__3___t.__
+// 6ae0:  80000033  00000e74  00000033  00000e88  3__.t.__3___..__
+// 6af0:  80000033  00000e88  00000033  00000e9c  3__...__3___..__
+// 6b00:  80000033  00000e9c  00000033  00000eb0  3__...__3___..__
+// 6b10:  80000033  00000eb0  00000033  00000eb4  3__...__3___..__
+// 6b20:  80000033  00000eb4  00000033  00000eb8  3__...__3___..__
+// 6b30:  80000035  00000eb8  00000035  00000ed4  5__...__5___..__
+// 6b40:  80000035  00000ed4  00000035  00000ef0  5__...__5___..__
+// 6b50:  80000036  00000ef0  00000036  00000f04  6__...__6___..__
+// 6b60:  80000038  00000f04  00000038  00000f18  8__...__8___..__
+// 6b70:  80000038  00000f18  00000038  00000f2c  8__...__8___,.__
+// 6b80:  80000038  00000f2c  00000038  00280005  8__.,.__8___._(_
+// 6b90:  0027001e  00280005  0027001e  00290005  ._'_._(_._'_._)_
+// 6ba0:  0028001f  002f0005  002e0016  002f0005  ._(_._/_._._._/_
+// 6bb0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6bc0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6bd0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6be0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6bf0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c00:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c10:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c20:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c30:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c40:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c50:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c60:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c70:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c80:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6c90:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6ca0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6cb0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6cc0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6cd0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6ce0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6cf0:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d00:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d10:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d20:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d30:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d40:  002e0016  002f0005  002e0016  002f0005  ._._._/_._._._/_
+// 6d50:  002e0005  002f0005  002e0005  002f0005  ._._._/_._._._/_
+// 6d60:  002e0005  004d0005  004c0016  004d0005  ._._._M_._L_._M_
+// 6d70:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6d80:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6d90:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6da0:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6db0:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6dc0:  004c0016  004d0005  004c0016  004d0005  ._L_._M_._L_._M_
+// 6dd0:  004c0016  004d0005  004c0005  004d0005  ._L_._M_._L_._M_
+// 6de0:  004c0005  004d0005  004c0005  00160005  ._L_._M_._L_._._
+// 6df0:  00160005  00160005  00160005  00150005  ._._._._._._._._
+// 6e00:  00150005  004f0009  004e001a  004f0009  ._._._O_._N_._O_
+// 6e10:  004e001a  004f0009  004e001a  004f0009  ._N_._O_._N_._O_
+// 6e20:  004e001a  004f0009  004e001a  004f0009  ._N_._O_._N_._O_
+// 6e30:  004e001a  004f0009  004e001a  004f0009  ._N_._O_._N_._O_
+// 6e40:  004e001a  004f0009  004e001a  004f0009  ._N_._O_._N_._O_
+// 6e50:  004e0009  004f0009  004e0009  004f0009  ._N_._O_._N_._O_
+// 6e60:  004e0009  000e0009  000e0009  00140005  ._N_._._._._._._
+// 6e70:  00140005  004e0009  004d001a  004e0009  ._._._N_._M_._N_
+// 6e80:  004d001a  004e0009  004d001a  004e0009  ._M_._N_._M_._N_
+// 6e90:  004d001a  004e0009  004d001a  004e0009  ._M_._N_._M_._N_
+// 6ea0:  004d001a  004e0009  004d001a  004e0009  ._M_._N_._M_._N_
+// 6eb0:  004d001a  004e0009  004d001a  004e0009  ._M_._N_._M_._N_
+// 6ec0:  004d0009  004e0009  004d0009  004e0009  ._M_._N_._M_._N_
+// 6ed0:  004d0009  000e0009  000e0009  001b0005  ._M_._._._._._._
+// 6ee0:  001b0005  00550009  0054001a  00550009  ._._._U_._T_._U_
+// 6ef0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f00:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f10:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f20:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f30:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f40:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f50:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f60:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f70:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f80:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6f90:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6fa0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6fb0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6fc0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6fd0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6fe0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 6ff0:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7000:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7010:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7020:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7030:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7040:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7050:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7060:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7070:  0054001a  00550009  0054001a  00550009  ._T_._U_._T_._U_
+// 7080:  00540009  00550009  00540009  00550009  ._T_._U_._T_._U_
+// 7090:  00540009  000e0009  000e0009  00050005  ._T_._._._._._._
+// 70a0:  00050005  00050005  00050005  00050005  ._._._._._._._._
+// 70b0:  00050005  00050005  00050005  00050005  ._._._._._._._._
+// 70c0:  00050005  00050005  00050005  00050005  ._._._._._._._._
+// 70d0:  00050005  00580005  003d000f  00580005  ._._._X_._=_._X_
+// 70e0:  0057000f  00130005  00120005  000f0005  ._W_._._._._._._
+// 70f0:  000f0005  000f0005  000f0005  000f0005  ._._._._._._._._
+// 7100:  000f0005  000000f6  00000040  00000000  ._._.___@_______
+// 7110:  00001000  00000000  00000061  00001001  _.______a___..__
+// 7120:  00000000  0000003c  00001002  00000000  ____<___..______
+// 7130:  00000042  00001003  00000000  00000047  B___..______G___
+// 7140:  00001004  00000000  0000004c  00000038  ..______L___8___
+// 7150:  00000000  00000018  0000003c  00000060  ____.___<___`___
+// 7160:  00000088  000000b0  000000d8  000000fc  .___.___.___.___
+// 7170:  0000011c  00000140  00000160  00000184  ..__@.__`.__..__
+// 7180:  000001a8  000001cc  00000000  00000000  ..__..__________
+// 7190:  00000000  00000000  00000000  00000000  ________________
+// 71a0:  00000000  00000000  00000000  00000000  ________________
+// 71b0:  00000000  00000000  00000000  00000000  ________________
+// 71c0:  00000000  00000000  00000000  00000000  ________________
+// 71d0:  00000000  00000000  00000000  00000000  ________________
+// 71e0:  00000000  00000000  00000000  00000000  ________________
+// 71f0:  00000000  00000000  00000000  00000000  ________________
+// 7200:  00000000  00000000  00000000  00000000  ________________
+// 7210:  00000000  00000000  00000000  00000000  ________________
+// 7220:  00000000  00000000  00000000  00000000  ________________
+// 7230:  00000000  00000000  00000000  00000000  ________________
+// 7240:  00000000  00000000  00000000  00000000  ________________
+// 7250:  00000000  00000000  00000000  00000000  ________________
+// 7260:  00000000  00000000  00000000  00000000  ________________
+// 7270:  00000000  00000000  00000000  00000000  ________________
+// 7280:  00000000  00000000  00000000  00000000  ________________
+// 7290:  00000000  00000000  00000000  00000000  ________________
+// 72a0:  00000000  00000000  00000000  746e656e  ____________nent
+// 72b0:  f1f2f300  1203003e  0003150d  00001000  _...>_.....__.__
+// 72c0:  69440000  73756666  f1f20065  0003150d  __Diffuse_....._
+// 72d0:  00001002  70530010  6c756365  f1007261  ..__._Specular_.
+// 72e0:  0003150d  00001002  6f4e001c  6c616d72  ..._..__._Normal
+// 72f0:  f1f2f300  15050026  00000003  0000100a  _...&_...___..__
+// 7300:  00000000  00000000  69500028  436c6578  ________(_PixelC
+// 7310:  6f706d6f  746e656e  f1f2f300  1518000a  omponent_...._..
+// 7320:  0000100b  00010001  1008000e  0000100c  ..__._._._....__
+// 7330:  00010017  00001005  151c001e  00000040  ._._..__._..@___
+// 7340:  00000003  00000003  0000000c  66002400  .___.___.____$_f
+// 7350:  74616f6c  00337833  12010012  00000003  loat3x3_._...___
+// 7360:  0000100b  00001009  00001004  1518000a  ..__..__..__._..
+// 7370:  00001009  00010001  1008000e  00001010  ..__._._._....__
+// 7380:  00030017  0000100f  1518000a  00001006  ._._..__._....__
+// 7390:  02000001  1518000a  00000040  00010001  .__.._..@___._._
+// 73a0:  1518000a  00001013  02000001  1518000a  ._....__.__.._..
+// 73b0:  00000062  00010001  1518000a  00001015  b___._._._....__
+// 73c0:  02000001  1518000a  00001002  00010001  .__.._....__._._
+// 73d0:  1518000a  00001017  02000001  1518000a  ._....__.__.._..
+// 73e0:  00000074  00010001  1518000a  00001019  t___._._._....__
+// 73f0:  02000001  1517000e  00001000  00900203  .__.._.._.__..._
+// 7400:  f1f20000  1518000a  0000101b  00010001  __..._....__._._
+// 7410:  1518000a  0000101c  02000001  1517000e  ._....__.__.._..
+// 7420:  00000000  0090020a  f1f20000  1518000a  ____...___..._..
+// 7430:  0000101e  00010001  1518000a  0000101f  ..__._._._....__
+// 7440:  02000001  00000000  00000000  00000000  .__.____________
+// 7450:  00000000  00000000  00000000  00000000  ________________
+// 7460:  00000000  00000000  00000000  00000000  ________________
+// 7470:  00000000  00000000  00000000  00000000  ________________
+// 7480:  00000000  00000000  00000000  00000000  ________________
+// 7490:  00000000  00000000  00000000  00000000  ________________
+// 74a0:  00000000  00000000  00000000  0131ca0b  ____________..1.
+// 74b0:  00000038  00001000  00001021  00000360  8____.__!.__`.__
+// 74c0:  ffff000b  00000004  0003ffff  00000000  ._...___..._____
+// 74d0:  00000084  00000084  00000008  0000008c  .___.___.___.___
+// 74e0:  00000000  151b0016  00000040  00000004  ____._..@___.___
+// 74f0:  6c660010  3474616f  f1f2f300  151b0016  ._float4_...._..
+// 7500:  00000040  00000002  6c660008  3274616f  @___.___._float2
+// 7510:  f1f2f300  151b0016  00000040  00000003  _...._..@___.___
+// 7520:  6c66000c  3374616f  f1f2f300  120300d6  ._float3_...._..
+// 7530:  0003150d  00001000  6f500000  69746973  ...__.____Positi
+// 7540:  f1006e6f  0003150d  00001000  6f430010  on_....__.__._Co
+// 7550:  00726f6c  0003150d  00001001  65540020  lor_..._..__ _Te
+// 7560:  72757478  f1f20065  0003150d  00001002  xture_....._..__
+// 7570:  6f4e0028  6c616d72  f1f2f300  0003150d  (_Normal_......_
+// 7580:  00001002  61540034  6e65676e  f1f20074  ..__4_Tangent_..
+// 7590:  0003150d  00001002  69420040  6d726f6e  ..._..__@_Binorm
+// 75a0:  f1006c61  0003150d  00001002  6956004c  al_...._..__L_Vi
+// 75b0:  6f577765  44646c72  63657269  6e6f6974  ewWorldDirection
+// 75c0:  f1f2f300  0003150d  00001000  694c0058  _......__.__X_Li
+// 75d0:  57746867  646c726f  65726944  6f697463  ghtWorldDirectio
+// 75e0:  f1f2006e  0003150d  00001002  694c0068  n_....._..__h_Li
+// 75f0:  56746867  44776569  63657269  6e6f6974  ghtViewDirection
+// 7600:  f1f2f300  1505001e  00000009  00001003  _...._...___..__
+// 7610:  00000000  00000000  53500074  504e495f  ________t_PS_INP
+// 7620:  f1005455  1201000a  00000001  00001004  UT_.._...___..__
+// 7630:  1518000a  00001000  00010001  1008000e  ._.._.__._._._..
+// 7640:  00001006  00010017  00001005  1203003e  ..__._._..__>_..
+// 7650:  0003150d  00001002  6d410000  6e656962  ..._..____Ambien
+// 7660:  f1f20074  0003150d  00001002  6944000c  t_....._..__._Di
+// 7670:  73756666  f1f20065  0003150d  00001002  ffuse_....._..__
+// 7680:  70530018  6c756365  f1007261  15050026  ._Specular_.&_..
+// 7690:  00000003  00001008  00000000  00000000  .___..__________
+// 76a0:  6f430024  43726f6c  6f706d6f  0000216f  $_ColorCompoo!__
+// 76b0:  000125f8  000229a6  00009e4d  0003a706  .%._.)._M.__..._
+// 76c0:  00001000  00000000  00000000  00000000  _.______________
+// 76d0:  00000000  00000000  00000000  00000000  ________________
+// 76e0:  00000000  00000000  00000000  00000000  ________________
+// 76f0:  00000000  00000000  00000000  00000000  ________________
+// 7700:  00000000  00000000  00000000  00000000  ________________
+// 7710:  00000000  00000000  00000000  00000000  ________________
+// 7720:  00000000  00000000  00000000  00000000  ________________
+// 7730:  00000000  00000000  00000000  00000000  ________________
+// 7740:  00000000  00000000  00000000  00000000  ________________
+// 7750:  00000000  00000000  00000000  00000000  ________________
+// 7760:  00000000  00000000  00000000  00000000  ________________
+// 7770:  00000000  00000000  00000000  00000000  ________________
+// 7780:  00000000  00000000  00000000  00000000  ________________
+// 7790:  00000000  00000000  00000000  00000000  ________________
+// 77a0:  00000000  00000000  00000000  00000000  ________________
+// 77b0:  00000000  00000000  00000000  00000000  ________________
+// 77c0:  00000000  00000000  00000000  00000000  ________________
+// 77d0:  00000000  00000000  00000000  00000000  ________________
+// 77e0:  00000000  00000000  00000000  00000000  ________________
+// 77f0:  00000000  00000000  00000000  00000000  ________________
+// 7800:  00000000  00000000  00000000  00000000  ________________
+// 7810:  00000000  00000000  00000000  00000000  ________________
+// 7820:  00000000  00000000  00000000  00000000  ________________
+// 7830:  00000000  00000000  00000000  00000000  ________________
+// 7840:  00000000  00000000  00000000  00000000  ________________
+// 7850:  00000000  00000000  00000000  00000000  ________________
+// 7860:  00000000  00000000  00000000  00000000  ________________
+// 7870:  00000000  00000000  00000000  00000000  ________________
+// 7880:  00000000  00000000  00000000  00000000  ________________
+// 7890:  00000000  00000000  00000000  00000000  ________________
+// 78a0:  00000000  00000000  00000000  65747570  ____________pute
+// 78b0:  6e696f50  67694c74  50287468  6c657869  PointLight(Pixel
+// 78c0:  706d6f43  6e656e6f  69702074  436c6578  Component pixelC
+// 78d0:  6f706d6f  746e656e  6f43202c  43726f6c  omponent, ColorC
+// 78e0:  6f706d6f  746e656e  6c6f6320  6f43726f  omponent colorCo
+// 78f0:  6e6f706d  2c746e65  5f535020  55504e49  mponent, PS_INPU
+// 7900:  4e492054  0a0d3b29  6f6c6f43  6d6f4372  T IN);..ColorCom
+// 7910:  656e6f70  4320746e  75706d6f  70536574  ponent ComputeSp
+// 7920:  694c746f  28746867  65786950  6d6f436c  otLight(PixelCom
+// 7930:  656e6f70  7020746e  6c657869  706d6f43  ponent pixelComp
+// 7940:  6e656e6f  43202c74  726f6c6f  706d6f43  onent, ColorComp
+// 7950:  6e656e6f  6f632074  43726f6c  6f706d6f  onent colorCompo
+// 7960:  746e656e  5350202c  504e495f  49205455  nent, PS_INPUT I
+// 7970:  0d3b294e  500a0d0a  6c657869  706d6f43  N);....PixelComp
+// 7980:  6e656e6f  6f432074  7475706d  78695065  onent ComputePix
+// 7990:  6f436c65  6e6f706d  28746e65  495f5350  elComponent(PS_I
+// 79a0:  5455504e  294e4920  0d0a0d3b  6f6c660a  NPUT IN);....flo
+// 79b0:  20347461  4d5f5350  284e4941  5f535020  at4 PS_MAIN( PS_
+// 79c0:  55504e49  4e492054  3a202920  5f565320  INPUT IN ) : SV_
+// 79d0:  67726154  0a0d7465  200a0d7b  43202020  Target..{..    C
+// 79e0:  726f6c6f  706d6f43  6e656e6f  6f632074  olorComponent co
+// 79f0:  43726f6c  6f706d6f  746e656e  200a0d3b  lorComponent;.. 
+// 7a00:  50202020  6c657869  706d6f43  6e656e6f     PixelComponen
+// 7a10:  69702074  436c6578  6f706d6f  746e656e  t pixelComponent
+// 7a20:  200a0d3b  66202020  74616f6c  554f2034  ;..    float4 OU
+// 7a30:  20202054  20202020  6628203d  74616f6c  T       = (float
+// 7a40:  30202934  0d0a0d3b  2020200a  6c6f6320  4) 0;....    col
+// 7a50:  6f43726f  6e6f706d  2e746e65  69626d41  orComponent.Ambi
+// 7a60:  20746e65  6628203d  74616f6c  30202933  ent = (float3) 0
+// 7a70:  200a0d3b  63202020  726f6c6f  706d6f43  ;..    colorComp
+// 7a80:  6e656e6f  69442e74  73756666  203d2065  onent.Diffuse = 
+// 7a90:  6f6c6628  29337461  0d3b3020  2020200a  (float3) 0;..   
+// 7aa0:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
+// 7ab0:  63657053  72616c75  28203d20  616f6c66  Specular = (floa
+// 7ac0:  20293374  0a0d3b30  20200a0d  69702020  t3) 0;....    pi
+// 7ad0:  436c6578  6f706d6f  746e656e  43203d20  xelComponent = C
+// 7ae0:  75706d6f  69506574  436c6578  6f706d6f  omputePixelCompo
+// 7af0:  746e656e  294e4928  200a0d3b  63202020  nent(IN);..    c
+// 7b00:  726f6c6f  706d6f43  6e656e6f  203d2074  olorComponent = 
+// 7b10:  706d6f43  41657475  6569626d  694c746e  ComputeAmbientLi
+// 7b20:  28746867  65786970  6d6f436c  656e6f70  ght(pixelCompone
+// 7b30:  202c746e  6f6c6f63  6d6f4372  656e6f70  nt, colorCompone
+// 7b40:  202c746e  3b294e49  0a0d0a0d  20202020  nt, IN);....    
+// 7b50:  74697773  28206863  6867694c  70795474  switch (LightTyp
+// 7b60:  0a0d2965  20202020  200a0d7b  63202020  e)..    {..    c
+// 7b70:  20657361  4e494f50  494c5f54  3a544847  ase POINT_LIGHT:
+// 7b80:  20200a0d  20202020  6f632020  43726f6c  ..        colorC
+// 7b90:  6f706d6f  746e656e  43203d20  75706d6f  omponent = Compu
+// 7ba0:  6f506574  4c746e69  74686769  78697028  tePointLight(pix
+// 7bb0:  6f436c65  6e6f706d  2c746e65  6c6f6320  elComponent, col
+// 7bc0:  6f43726f  6e6f706d  2c746e65  294e4920  orComponent, IN)
+// 7bd0:  200a0d3b  20202020  62202020  6b616572  ;..        break
+// 7be0:  0d0a0d3b  2020200a  73616320  50532065  ;....    case SP
+// 7bf0:  4c5f544f  54484749  200a0d3a  20202020  OT_LIGHT:..     
+// 7c00:  63202020  726f6c6f  706d6f43  6e656e6f     colorComponen
+// 7c10:  203d2074  706d6f43  53657475  4c746f70  t = ComputeSpotL
+// 7c20:  74686769  78697028  6f436c65  6e6f706d  ight(pixelCompon
+// 7c30:  2c746e65  6c6f6320  6f43726f  6e6f706d  ent, colorCompon
+// 7c40:  2c746e65  294e4920  200a0d3b  20202020  ent, IN);..     
+// 7c50:  62202020  6b616572  0d0a0d3b  2020200a     break;....   
+// 7c60:  73616320  49442065  54434552  414e4f49   case DIRECTIONA
+// 7c70:  494c5f4c  3a544847  20200a0d  20202020  L_LIGHT:..      
+// 7c80:  6f632020  43726f6c  6f706d6f  746e656e    colorComponent
+// 7c90:  43203d20  75706d6f  69446574  74636572   = ComputeDirect
+// 7ca0:  616e6f69  67694c6c  70287468  6c657869  ionalLight(pixel
+// 7cb0:  706d6f43  6e656e6f  63202c74  726f6c6f  Component, color
+// 7cc0:  706d6f43  6e656e6f  49202c74  0d3b294e  Component, IN);.
+// 7cd0:  2020200a  20202020  65726220  0d3b6b61  .        break;.
+// 7ce0:  2020200a  0a0d7d20  20200a0d  554f2020  .    }....    OU
+// 7cf0:  67722e54  203d2062  6f6c6f63  6d6f4372  T.rgb = colorCom
+// 7d00:  656e6f70  412e746e  6569626d  2b20746e  ponent.Ambient +
+// 7d10:  6c6f6320  6f43726f  6e6f706d  2e746e65   colorComponent.
+// 7d20:  66666944  20657375  6f63202b  43726f6c  Diffuse + colorC
+// 7d30:  6f706d6f  746e656e  6570532e  616c7563  omponent.Specula
+// 7d40:  0a0d3b72  20202020  2e54554f  20202061  r;..    OUT.a   
+// 7d50:  2e31203d  0d3b6630  200a0d0a  72202020  = 1.0f;....    r
+// 7d60:  72757465  554f206e  0a0d3b54  0d0a0d7d  eturn OUT;..}...
+// 7d70:  6c6f430a  6f43726f  6e6f706d  20746e65  .ColorComponent 
+// 7d80:  706d6f43  41657475  6569626d  694c746e  ComputeAmbientLi
+// 7d90:  28746867  65786950  6d6f436c  656e6f70  ght(PixelCompone
+// 7da0:  7020746e  6c657869  706d6f43  6e656e6f  nt pixelComponen
+// 7db0:  43202c74  726f6c6f  706d6f43  6e656e6f  t, ColorComponen
+// 7dc0:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
+// 7dd0:  5350202c  504e495f  49205455  0a0d294e  , PS_INPUT IN)..
+// 7de0:  200a0d7b  63202020  726f6c6f  706d6f43  {..    colorComp
+// 7df0:  6e656e6f  6d412e74  6e656962  3d2b2074  onent.Ambient +=
+// 7e00:  626d4120  746e6569  6f6c6f43  67722e72   AmbientColor.rg
+// 7e10:  202a2062  69626d41  43746e65  726f6c6f  b * AmbientColor
+// 7e20:  2a20612e  78697020  6f436c65  6e6f706d  .a * pixelCompon
+// 7e30:  2e746e65  66666944  2e657375  3b626772  ent.Diffuse.rgb;
+// 7e40:  20200a0d  65722020  6e727574  6c6f6320  ..    return col
+// 7e50:  6f43726f  6e6f706d  3b746e65  0d7d0a0d  orComponent;..}.
+// 7e60:  430a0d0a  726f6c6f  706d6f43  6e656e6f  ...ColorComponen
+// 7e70:  6f432074  7475706d  696f5065  694c746e  t ComputePointLi
+// 7e80:  28746867  65786950  6d6f436c  656e6f70  ght(PixelCompone
+// 7e90:  7020746e  6c657869  706d6f43  6e656e6f  nt pixelComponen
+// 7ea0:  43202c74  726f6c6f  706d6f43  6e656e6f  t, ColorComponen
+// 7eb0:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
+// 7ec0:  5350202c  504e495f  49205455  0a0d294e  , PS_INPUT IN)..
+// 7ed0:  200a0d7b  72202020  72757465  6f63206e  {..    return co
+// 7ee0:  43726f6c  6f706d6f  746e656e  7d0a0d3b  lorComponent;..}
+// 7ef0:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
+// 7f00:  4320746e  75706d6f  70536574  694c746f  nt ComputeSpotLi
+// 7f10:  28746867  65786950  6d6f436c  656e6f70  ght(PixelCompone
+// 7f20:  7020746e  6c657869  706d6f43  6e656e6f  nt pixelComponen
+// 7f30:  43202c74  726f6c6f  706d6f43  6e656e6f  t, ColorComponen
+// 7f40:  6f632074  43726f6c  6f706d6f  746e656e  t colorComponent
+// 7f50:  5350202c  504e495f  49205455  0a0d294e  , PS_INPUT IN)..
+// 7f60:  200a0d7b  72202020  72757465  6f63206e  {..    return co
+// 7f70:  43726f6c  6f706d6f  746e656e  7d0a0d3b  lorComponent;..}
+// 7f80:  0a0d0a0d  6f6c6f43  6d6f4372  656e6f70  ....ColorCompone
+// 7f90:  4320746e  75706d6f  69446574  74636572  nt ComputeDirect
+// 7fa0:  616e6f69  67694c6c  50287468  6c657869  ionalLight(Pixel
+// 7fb0:  706d6f43  6e656e6f  69702074  436c6578  Component pixelC
+// 7fc0:  6f706d6f  746e656e  6f43202c  43726f6c  omponent, ColorC
+// 7fd0:  6f706d6f  746e656e  6c6f6320  6f43726f  omponent colorCo
+// 7fe0:  6e6f706d  2c746e65  5f535020  55504e49  mponent, PS_INPU
+// 7ff0:  4e492054  7b0a0d29  20200a0d  6c662020  T IN)..{..    fl
+// 8000:  3374616f  66657220  74636556  3d20726f  oat3 refVector =
+// 8010:  6c662820  3374616f  3b302029  20200a0d   (float3) 0;..  
+// 8020:  6c662020  3374616f  67696c20  69447468    float3 lightDi
+// 8030:  74636572  206e6f69  6f6e203d  6c616d72  rection = normal
+// 8040:  28657a69  67694c2d  69447468  74636572  ize(-LightDirect
+// 8050:  2e6e6f69  297a7978  200a0d3b  66202020  ion.xyz);..    f
+// 8060:  74616f6c  645f6e20  6c5f746f  64203d20  loat n_dot_l = d
+// 8070:  6c28746f  74686769  65726944  6f697463  ot(lightDirectio
+// 8080:  6e202c6e  616d726f  657a696c  2e4e4928  n, normalize(IN.
+// 8090:  6d726f4e  29296c61  0d0a0d3b  2020200a  Normal));....   
+// 80a0:  20666920  645f6e28  6c5f746f  30203e20   if (n_dot_l > 0
+// 80b0:  200a0d29  7b202020  09090a0d  44202f2f  )..    {....// D
+// 80c0:  6b203d20  202a2064  2a20646c  0d646d20   = kd * ld * md.
+// 80d0:  2020200a  20202020  6c6f6320  6f43726f  .        colorCo
+// 80e0:  6e6f706d  2e746e65  66666944  20657375  mponent.Diffuse 
+// 80f0:  6d203d2b  6e287861  746f645f  202c6c5f  += max(n_dot_l, 
+// 8100:  66302e30  202a2029  6867694c  6c6f4374  0.0f) * LightCol
+// 8110:  722e726f  2a206267  67694c20  6f437468  or.rgb * LightCo
+// 8120:  2e726f6c  202a2061  65786970  6d6f436c  lor.a * pixelCom
+// 8130:  656e6f70  442e746e  75666669  722e6573  ponent.Diffuse.r
+// 8140:  0d3b6267  090a0d0a  202f2f09  203d2052  gb;......// R = 
+// 8150:  202d2049  2e6e2832  2a202949  0a0d6e20  I - 2(n.I) * n..
+// 8160:  20202020  20202020  56666572  6f746365          refVecto
+// 8170:  203d2072  6d726f6e  7a696c61  65722865  r = normalize(re
+// 8180:  63656c66  696c2874  44746867  63657269  flect(lightDirec
+// 8190:  6e6f6974  6970202c  436c6578  6f706d6f  tion, pixelCompo
+// 81a0:  746e656e  726f4e2e  296c616d  0a0d3b29  nent.Normal));..
+// 81b0:  09090a0d  53202f2f  6d203d20  64287861  ....// S = max(d
+// 81c0:  5628746f  2c29522e  505e2930  53202a20  ot(V.R),0)^P * S
+// 81d0:  75636570  4372616c  726f6c6f  6267722e  pecularColor.rgb
+// 81e0:  53202a20  75636570  4372616c  726f6c6f   * SpecularColor
+// 81f0:  2a20612e  6c6f6320  722e726f  0d3b6267  .a * color.rgb;.
+// 8200:  2020200a  20202020  6c6f6320  6f43726f  .        colorCo
+// 8210:  6e6f706d  2e746e65  63657053  72616c75  mponent.Specular
+// 8220:  203d2b20  28776f70  2878616d  28746f64   += pow(max(dot(
+// 8230:  562e4e49  57776569  646c726f  65726944  IN.ViewWorldDire
+// 8240:  6f697463  72202c6e  65566665  726f7463  ction, refVector
+// 8250:  30202c29  53202c29  75636570  5072616c  ), 0), SpecularP
+// 8260:  7265776f  202a2029  63657053  72616c75  ower) * Specular
+// 8270:  6f6c6f43  67722e72  202a2062  65786970  Color.rgb * pixe
+// 8280:  6d6f436c  656e6f70  532e746e  75636570  lComponent.Specu
+// 8290:  2e72616c  20626772  6970202a  436c6578  lar.rgb * pixelC
+// 82a0:  6f706d6f  746e656e  6669442e  65737566  omponent.Diffuse
+// 82b0:  6267722e  200a0d3b  7d202020  0a0d0a0d  .rgb;..    }....
+// 82c0:  20202020  75746572  63206e72  726f6c6f      return color
+// 82d0:  706d6f43  6e656e6f  0a0d3b74  0d0a0d7d  Component;..}...
+// 82e0:  7869500a  6f436c65  6e6f706d  20746e65  .PixelComponent 
+// 82f0:  706d6f43  50657475  6c657869  706d6f43  ComputePixelComp
+// 8300:  6e656e6f  53502874  504e495f  49205455  onent(PS_INPUT I
+// 8310:  0a0d294e  200a0d7b  50202020  6c657869  N)..{..    Pixel
+// 8320:  706d6f43  6e656e6f  69702074  436c6578  Component pixelC
+// 8330:  6f706d6f  746e656e  0d0a0d3b  2020200a  omponent;....   
+// 8340:  78697020  6f436c65  6e6f706d  2e746e65   pixelComponent.
+// 8350:  66666944  20657375  6628203d  74616f6c  Diffuse = (float
+// 8360:  30202934  200a0d3b  70202020  6c657869  4) 0;..    pixel
+// 8370:  706d6f43  6e656e6f  70532e74  6c756365  Component.Specul
+// 8380:  3d207261  6c662820  3374616f  3b302029  ar = (float3) 0;
+// 8390:  20200a0d  69702020  436c6578  6f706d6f  ..    pixelCompo
+// 83a0:  746e656e  726f4e2e  206c616d  6628203d  nent.Normal = (f
+// 83b0:  74616f6c  30202933  0d0a0d3b  2020200a  loat3) 0;....   
+// 83c0:  20666920  73614828  66666944  54657375   if (HasDiffuseT
+// 83d0:  75747865  3d206572  7274203d  0d296575  exture == true).
+// 83e0:  2020200a  0a0d7b20  20202020  20202020  .    {..        
+// 83f0:  65786970  6d6f436c  656e6f70  442e746e  pixelComponent.D
+// 8400:  75666669  3d206573  66694420  65737566  iffuse = Diffuse
+// 8410:  74786554  2e657275  706d6153  4328656c  Texture.Sample(C
+// 8420:  726f6c6f  706d6153  2c72656c  2e4e4920  olorSampler, IN.
+// 8430:  74786554  29657275  200a0d3b  7d202020  Texture);..    }
+// 8440:  20200a0d  6c652020  0a0d6573  20202020  ..    else..    
+// 8450:  200a0d7b  20202020  70202020  6c657869  {..        pixel
+// 8460:  706d6f43  6e656e6f  69442e74  73756666  Component.Diffus
+// 8470:  203d2065  432e4e49  726f6c6f  200a0d3b  e = IN.Color;.. 
+// 8480:  7d202020  0a0d0a0d  20202020  28206669     }....    if (
+// 8490:  53736148  75636570  5472616c  75747865  HasSpecularTextu
+// 84a0:  3d206572  7274203d  0d296575  2020200a  re == true)..   
+// 84b0:  0a0d7b20  20202020  20202020  65786970   {..        pixe
+// 84c0:  6d6f436c  656e6f70  532e746e  75636570  lComponent.Specu
+// 84d0:  2072616c  7053203d  6c756365  65547261  lar = SpecularTe
+// 84e0:  72757478  61532e65  656c706d  6c6f4328  xture.Sample(Col
+// 84f0:  6153726f  656c706d  49202c72  65542e4e  orSampler, IN.Te
+// 8500:  72757478  782e2965  0d3b7a79  2020200a  xture).xyz;..   
+// 8510:  0a0d7d20  20202020  65736c65  20200a0d   }..    else..  
+// 8520:  0d7b2020  2020200a  20202020  78697020    {..        pix
+// 8530:  6f436c65  6e6f706d  2e746e65  63657053  elComponent.Spec
+// 8540:  72616c75  53203d20  75636570  4372616c  ular = SpecularC
+// 8550:  726f6c6f  6267722e  200a0d3b  7d202020  olor.rgb;..    }
+// 8560:  0a0d0a0d  20202020  28206669  4e736148  ....    if (HasN
+// 8570:  616d726f  7865546c  65727574  203d3d20  ormalTexture == 
+// 8580:  65757274  200a0d29  7b202020  20200a0d  true)..    {..  
+// 8590:  20202020  6c662020  3374616f  6d617320        float3 sam
+// 85a0:  64656c70  6d726f4e  3d206c61  20322820  pledNormal = (2 
+// 85b0:  6f4e202a  6c616d72  74786554  2e657275  * NormalTexture.
+// 85c0:  706d6153  4328656c  726f6c6f  706d6153  Sample(ColorSamp
+// 85d0:  2c72656c  2e4e4920  74786554  29657275  ler, IN.Texture)
+// 85e0:  7a79782e  202d2029  66302e31  200a0d3b  .xyz) - 1.0f;.. 
+// 85f0:  20202020  66202020  74616f6c  20337833         float3x3 
+// 8600:  206e6274  6c66203d  3374616f  49283378  tbn = float3x3(I
+// 8610:  61542e4e  6e65676e  49202c74  69422e4e  N.Tangent, IN.Bi
+// 8620:  6d726f6e  202c6c61  4e2e4e49  616d726f  normal, IN.Norma
+// 8630:  0d3b296c  2020200a  20202020  78697020  l);..        pix
+// 8640:  6f436c65  6e6f706d  2e746e65  6d726f4e  elComponent.Norm
+// 8650:  3d206c61  6c756d20  6d617328  64656c70  al = mul(sampled
+// 8660:  6d726f4e  202c6c61  296e6274  200a0d3b  Normal, tbn);.. 
+// 8670:  7d202020  20200a0d  6c652020  0a0d6573     }..    else..
+// 8680:  20202020  200a0d7b  20202020  70202020      {..        p
+// 8690:  6c657869  706d6f43  6e656e6f  6f4e2e74  ixelComponent.No
+// 86a0:  6c616d72  6e203d20  616d726f  657a696c  rmal = normalize
+// 86b0:  2e4e4928  6d726f4e  3b296c61  20200a0d  (IN.Normal);..  
+// 86c0:  0d7d2020  200a0d0a  72202020  72757465    }....    retur
+// 86d0:  6970206e  436c6578  6f706d6f  746e656e  n pixelComponent
+// 86e0:  7d0a0d3b  65642300  656e6966  494f5020  ;..}_#define POI
+// 86f0:  4c5f544e  54484749  0a0d3020  66656423  NT_LIGHT 0..#def
+// 8700:  20656e69  544f5053  47494c5f  31205448  ine SPOT_LIGHT 1
+// 8710:  64230a0d  6e696665  49442065  54434552  ..#define DIRECT
+// 8720:  414e4f49  494c5f4c  20544847  0d0a0d32  IONAL_LIGHT 2...
+// 8730:  6564230a  656e6966  494c4620  45545f50  .#define FLIP_TE
+// 8740:  52555458  20595f45  0d0a0d31  6564230a  XTURE_Y 1....#de
+// 8750:  656e6966  58414d20  47494c5f  38205448  fine MAX_LIGHT 8
+// 8760:  0a0d0a0d  66756263  20726566  6d617246  ....cbuffer Fram
+// 8770:  6e6f4365  6e617473  66754274  20726566  eConstantBuffer 
+// 8780:  6572203a  74736967  62287265  0a0d2930  : register(b0)..
+// 8790:  200a0d7b  6d202020  69727461  69562078  {..    matrix Vi
+// 87a0:  0d3b7765  2020200a  74616d20  20786972  ew;..    matrix 
+// 87b0:  6a6f7250  69746365  0d3b6e6f  200a0d0a  Projection;.... 
+// 87c0:  66202020  74616f6c  61432033  6172656d     float3 Camera
+// 87d0:  69736f50  6e6f6974  7d0a0d3b  0a0d0a0d  Position;..}....
+// 87e0:  66756263  20726566  656a624f  6f437463  cbuffer ObjectCo
+// 87f0:  6174736e  7542746e  72656666  72203a20  nstantBuffer : r
+// 8800:  73696765  28726574  0d293162  0a0d7b0a  egister(b1)..{..
+// 8810:  20202020  7274616d  57207869  646c726f      matrix World
+// 8820:  0d0a0d3b  2020200a  6f6c6620  20347461  ;....    float4 
+// 8830:  63657053  72616c75  6f6c6f43  0a0d3b72  SpecularColor;..
+// 8840:  20202020  616f6c66  53202074  75636570      float  Specu
+// 8850:  5072616c  7265776f  0d0a0d3b  2020200a  larPower;....   
+// 8860:  6f6f6220  2020206c  44736148  75666669   bool   HasDiffu
+// 8870:  65546573  72757478  0a0d3b65  20202020  seTexture;..    
+// 8880:  6c6f6f62  48202020  70537361  6c756365  bool   HasSpecul
+// 8890:  65547261  72757478  0a0d3b65  20202020  arTexture;..    
+// 88a0:  6c6f6f62  48202020  6f4e7361  6c616d72  bool   HasNormal
+// 88b0:  74786554  3b657275  0d7d0a0d  630a0d0a  Texture;..}....c
+// 88c0:  66667562  4c207265  74686769  736e6f43  buffer LightCons
+// 88d0:  746e6174  66667542  3a207265  67657220  tantBuffer : reg
+// 88e0:  65747369  32622872  7b0a0d29  20200a0d  ister(b2)..{..  
+// 88f0:  6c662020  3474616f  626d4120  746e6569    float4 Ambient
+// 8900:  6f6c6f43  0a0d3b72  20200a0d  6c662020  Color;....    fl
+// 8910:  3474616f  67694c20  6f437468  3b726f6c  oat4 LightColor;
+// 8920:  20200a0d  6c662020  3374616f  67694c20  ..    float3 Lig
+// 8930:  69447468  74636572  3b6e6f69  20200a0d  htDirection;..  
+// 8940:  6c662020  3374616f  67694c20  6f507468    float3 LightPo
+// 8950:  69746973  0d3b6e6f  2020200a  6f6c6620  sition;..    flo
+// 8960:  20207461  6867694c  64615274  3b737569  at  LightRadius;
+// 8970:  20200a0d  6e692020  20202074  67694c20  ..    int    Lig
+// 8980:  79547468  0d3b6570  0a0d7d0a  65540a0d  htType;..}....Te
+// 8990:  72757478  20443265  66666944  54657375  xture2D DiffuseT
+// 89a0:  75747865  3a206572  67657220  65747369  exture : registe
+// 89b0:  30742872  0a0d3b29  74786554  32657275  r(t0);..Texture2
+// 89c0:  70532044  6c756365  65547261  72757478  D SpecularTextur
+// 89d0:  203a2065  69676572  72657473  29317428  e : register(t1)
+// 89e0:  540a0d3b  75747865  44326572  726f4e20  ;..Texture2D Nor
+// 89f0:  546c616d  75747865  3a206572  67657220  malTexture : reg
+// 8a00:  65747369  32742872  0a0d3b29  61530a0d  ister(t2);....Sa
+// 8a10:  656c706d  61745372  43206574  726f6c6f  mplerState Color
+// 8a20:  706d6153  2072656c  6572203a  74736967  Sampler : regist
+// 8a30:  73287265  0d3b2930  730a0d0a  63757274  er(s0);....struc
+// 8a40:  6f432074  43726f6c  6f706d6f  746e656e  t ColorComponent
+// 8a50:  0d7b0a0d  2020200a  6f6c6620  20337461  ..{..    float3 
+// 8a60:  69626d41  3b746e65  20200a0d  6c662020  Ambient;..    fl
+// 8a70:  3374616f  66694420  65737566  200a0d3b  oat3 Diffuse;.. 
+// 8a80:  66202020  74616f6c  70532033  6c756365     float3 Specul
+// 8a90:  0d3b7261  0d3b7d0a  730a0d0a  63757274  ar;..};....struc
+// 8aa0:  69502074  436c6578  6f706d6f  746e656e  t PixelComponent
+// 8ab0:  0d7b0a0d  2020200a  6f6c6620  20347461  ..{..    float4 
+// 8ac0:  66666944  3b657375  20200a0d  6c662020  Diffuse;..    fl
+// 8ad0:  3374616f  65705320  616c7563  0a0d3b72  oat3 Specular;..
+// 8ae0:  20202020  616f6c66  4e203374  616d726f      float3 Norma
+// 8af0:  0a0d3b6c  0a0d3b7d  6c660a0d  3274616f  l;..};....float2
+// 8b00:  74654720  72726f43  65746365  78655464   GetCorrectedTex
+// 8b10:  65727574  726f6f43  616e6964  66286574  tureCoordinate(f
+// 8b20:  74616f6c  65742032  72757478  6f6f4365  loat2 textureCoo
+// 8b30:  6e696472  29657461  0d7b0a0d  6669230a  rdinate)..{..#if
+// 8b40:  494c4620  45545f50  52555458  0d595f45   FLIP_TEXTURE_Y.
+// 8b50:  2020200a  74657220  206e7275  616f6c66  .    return floa
+// 8b60:  74283274  75747865  6f436572  6964726f  t2(textureCoordi
+// 8b70:  6574616e  202c782e  20302e31  6574202d  nate.x, 1.0 - te
+// 8b80:  72757478  6f6f4365  6e696472  2e657461  xtureCoordinate.
+// 8b90:  0d3b2979  6c65230a  0a0d6573  20202020  y);..#else..    
+// 8ba0:  75746572  74206e72  75747865  6f436572  return textureCo
+// 8bb0:  6964726f  6574616e  230a0d3b  69646e65  ordinate;..#endi
+// 8bc0:  7d0a0d66  00000b00  00000000  00005c00  f..}_._______\__
+// 8bd0:  00000000  00122d00  00011a00  0000b800  _____-.__..__.__
+// 8be0:  00000000  00017c00  00000000  00005d00  _____|.______]__
+// 8bf0:  00000100  00000700  00000000  00000000  _.___.__________
 // 8c00:  00000000  00000000  00000000  00000000  ________________
 // 8c10:  00000000  00000000  00000000  00000000  ________________
 // 8c20:  00000000  00000000  00000000  00000000  ________________
@@ -2550,21 +2627,21 @@ ret
 // 8c70:  00000000  00000000  00000000  00000000  ________________
 // 8c80:  00000000  00000000  00000000  00000000  ________________
 // 8c90:  00000000  00000000  00000000  00000000  ________________
-// 8ca0:  00000000  00000000  00000000  00000000  ________________
-// 8cb0:  00000000  00000000  00000000  00000000  ________________
-// 8cc0:  00000000  00000000  00000000  00000000  ________________
-// 8cd0:  00000000  00000000  00000000  00000000  ________________
-// 8ce0:  00000000  00000000  00000000  00000000  ________________
-// 8cf0:  00000000  00000000  00000000  00000000  ________________
-// 8d00:  00000000  00000000  00000000  00000000  ________________
-// 8d10:  00000000  00000000  00000000  00000000  ________________
-// 8d20:  00000000  00000000  00000000  00000000  ________________
-// 8d30:  00000000  00000000  00000000  00000000  ________________
-// 8d40:  00000000  00000000  00000000  00000000  ________________
-// 8d50:  00000000  00000000  00000000  00000000  ________________
-// 8d60:  00000000  00000000  00000000  00000000  ________________
-// 8d70:  00000000  00000000  00000000  00000000  ________________
-// 8d80:  00000000  00000000  00000000  00000000  ________________
+// 8ca0:  00000000  00000000  00000000  0131ca0b  ____________..1.
+// 8cb0:  00000038  00001000  00001005  000000a8  8____.__..__.___
+// 8cc0:  ffff000c  00000004  0003ffff  00000000  ._...___..._____
+// 8cd0:  00000014  00000014  00000008  0000001c  .___.___.___.___
+// 8ce0:  00000000  16010022  00000000  0000100d  ____"_..____..__
+// 8cf0:  706d6f43  50657475  6c657869  706d6f43  ComputePixelComp
+// 8d00:  6e656e6f  f1f20074  1601001e  00000000  onent_..._..____
+// 8d10:  00001011  706d6f43  41657475  6569626d  ..__ComputeAmbie
+// 8d20:  694c746e  00746867  1601001e  00000000  ntLight_._..____
+// 8d30:  00001011  706d6f43  50657475  746e696f  ..__ComputePoint
+// 8d40:  6867694c  f1f20074  1601001e  00000000  Light_..._..____
+// 8d50:  00001011  706d6f43  53657475  4c746f70  ..__ComputeSpotL
+// 8d60:  74686769  f1f2f300  16010022  00000000  ight_..."_..____
+// 8d70:  00001011  706d6f43  44657475  63657269  ..__ComputeDirec
+// 8d80:  6e6f6974  694c6c61  00746867  00000000  tionalLight_____
 // 8d90:  00000000  00000000  00000000  00000000  ________________
 // 8da0:  00000000  00000000  00000000  00000000  ________________
 // 8db0:  00000000  00000000  00000000  00000000  ________________
@@ -2582,21 +2659,21 @@ ret
 // 8e70:  00000000  00000000  00000000  00000000  ________________
 // 8e80:  00000000  00000000  00000000  00000000  ________________
 // 8e90:  00000000  00000000  00000000  00000000  ________________
-// 8ea0:  00000000  00000000  00000000  00000000  ________________
-// 8eb0:  00000000  00000000  00000000  00000000  ________________
+// 8ea0:  00000000  00000000  00000000  53443344  ____________D3DS
+// 8eb0:  00524448  00000f30  00000000  00000000  HDR_0.__________
 // 8ec0:  00000000  00000000  00000000  00000000  ________________
-// 8ed0:  00000000  00000000  00000000  00000000  ________________
-// 8ee0:  00000000  00000000  00000000  00000000  ________________
-// 8ef0:  00000000  00000000  00000000  00000000  ________________
-// 8f00:  00000000  00000000  00000000  00000000  ________________
-// 8f10:  00000000  00000000  00000000  00000000  ________________
-// 8f20:  00000000  00000000  00000000  00000000  ________________
-// 8f30:  00000000  00000000  00000000  00000000  ________________
-// 8f40:  00000000  00000000  00000000  00000000  ________________
-// 8f50:  00000000  00000000  00000000  00000000  ________________
-// 8f60:  00000000  00000000  00000000  00000000  ________________
-// 8f70:  00000000  00000000  00000000  00000000  ________________
-// 8f80:  00000000  00000000  00000000  00000000  ________________
+// 8ed0:  60000020  00000014  00000008  0000001c   __`.___.___.___
+// 8ee0:  00000000  16010022  00000000  0000100d  ____"_..____..__
+// 8ef0:  706d6f43  50657475  6c657869  706d6f43  ComputePixelComp
+// 8f00:  6e656e6f  f1f20074  1601001e  00000000  onent_..._..____
+// 8f10:  00001011  706d6f43  41657475  6569626d  ..__ComputeAmbie
+// 8f20:  694c746e  00746867  1601001e  00000000  ntLight_._..____
+// 8f30:  00001011  706d6f43  50657475  746e696f  ..__ComputePoint
+// 8f40:  6867694c  f1f20074  1601001e  00000000  Light_..._..____
+// 8f50:  00001011  706d6f43  53657475  4c746f70  ..__ComputeSpotL
+// 8f60:  74686769  f1f2f300  16010022  00000000  ight_..."_..____
+// 8f70:  00001011  706d6f43  44657475  63657269  ..__ComputeDirec
+// 8f80:  6e6f6974  694c6c61  00746867  00000000  tionalLight_____
 // 8f90:  00000000  00000000  00000000  00000000  ________________
 // 8fa0:  00000000  00000000  00000000  00000000  ________________
 // 8fb0:  00000000  00000000  00000000  00000000  ________________
@@ -2614,18 +2691,324 @@ ret
 // 9070:  00000000  00000000  00000000  00000000  ________________
 // 9080:  00000000  00000000  00000000  00000000  ________________
 // 9090:  00000000  00000000  00000000  00000000  ________________
-// 90a0:  00000000  00000000  00000000  00000000  ________________
-// 90b0:  00000000  00000000  00000000  00000000  ________________
-// 90c0:  00000000  00000000  00000000  00000000  ________________
-// 90d0:  00000000  00000000  00000000  00000000  ________________
-// 90e0:  00000000  00000000  00000000  00000000  ________________
-// 90f0:  00000000  00000000  00000000  00000000  ________________
-// 9100:  00000000  00000000  00000000  00000000  ________________
-// 9110:  00000000  00000000  00000000  00000000  ________________
-// 9120:  00000000  00000000  00000000  00000000  ________________
-// 9130:  00000000  00000000  00000000  00000000  ________________
+// 90a0:  00000000  00000000  00000000  ffffffff  ____________....
+// 90b0:  f12f091a  00000070  0000023c  00000019  ../.p___<.__.___
+// 90c0:  00000001  00000185  00000001  00000141  .___..__.___A.__
+// 90d0:  00000001  000001a9  00000001  000000b1  .___..__.___.___
+// 90e0:  00000001  00000061  00000001  000000d9  .___a___.___.___
+// 90f0:  00000001  00000001  00000001  0000003d  .___.___.___=___
+// 9100:  00000001  000000fd  00000001  00000089  .___.___.___.___
+// 9110:  00000001  0000011d  00000001  000001cd  .___..__.___..__
+// 9120:  00000001  00000161  00000001  00000000  .___a.__._______
+// 9130:  00000000  40000000  00000000  00000000  _______@________
 // 9140:  00000000  00000000  00000000  00000000  ________________
-// 9150:  00000000  00000000  00000000  00000000  ________________
+// 9150:  00000000  00000000  00000000  00800000  ______________._
 // 9160:  00000000  00000000  00000000  00000000  ________________
-// 9170:  00000000  00000000  00000000  00000000  ________________
-// 9180:  00000000  00000000                      ________
+// 9170:  00000000  00000000  00000000  00000008  ____________.___
+// 9180:  00000000  00000000  00000000  00000000  ________________
+// 9190:  00000001  00000000  00000000  00000000  ._______________
+// 91a0:  00000000  00000000  00000000  00000000  ________________
+// 91b0:  00000000  00000000  00000000  00000000  ________________
+// 91c0:  00000000  00000000  00000000  00000000  ________________
+// 91d0:  00400000  00000000  00000000  00000000  __@_____________
+// 91e0:  00000000  00000000  00000000  00000000  ________________
+// 91f0:  00000000  00000000  00000000  00000000  ________________
+// 9200:  00000000  02000000  00000000  00000000  _______.________
+// 9210:  00000000  00000000  00000000  00000000  ________________
+// 9220:  00000000  00000000  00000000  00000000  ________________
+// 9230:  00010000  00000000  00000000  00000000  __._____________
+// 9240:  00000000  00000000  00000400  00000000  _________.______
+// 9250:  00800000  00100000  00000000  40000000  __.___.________@
+// 9260:  00000000  00000000  00000000  00000000  ________________
+// 9270:  00000000  00000000  00000000  00000000  ________________
+// 9280:  00000000  00000000  00000000  00000000  ________________
+// 9290:  00000000  00000000  00000000  00000000  ________________
+// 92a0:  00000000  00000000  00000000  00000004  ____________.___
+// 92b0:  00000000  00000000  00000000  00000000  ________________
+// 92c0:  00000000  00000000  00000000  00000200  _____________.__
+// 92d0:  00000000  00000000  00000000  00000000  ________________
+// 92e0:  00000000  00000000  00000000  00000000  ________________
+// 92f0:  00000000  00000000  00000000  00000000  ________________
+// 9300:  02000000  00000000  00000000  00000000  ___.____________
+// 9310:  00000000  00000000  00000000  00000000  ________________
+// 9320:  00000000  00000000  00000000  00000000  ________________
+// 9330:  00000000  0000000c  00000018  00000024  ____.___.___$___
+// 9340:  00000030  0000003c  00000048  00000054  0___<___H___T___
+// 9350:  00000060  0000006c  00000078  00000084  `___l___x___.___
+// 9360:  00000090  0000009c  00000000  00000000  .___.___________
+// 9370:  00000000  00000000  00000000  00000000  ________________
+// 9380:  00000000  00000000  00000000  00000000  ________________
+// 9390:  00000000  00000000  00000000  00000000  ________________
+// 93a0:  00000000  00000000  00000000  00000000  ________________
+// 93b0:  00000000  00000000  00000000  00000000  ________________
+// 93c0:  00000000  00000000  00000000  00000000  ________________
+// 93d0:  00000000  00000000  00000000  00000000  ________________
+// 93e0:  00000000  00000000  00000000  00000000  ________________
+// 93f0:  00000000  00000000  00000000  00000000  ________________
+// 9400:  00000000  00000000  00000000  00000000  ________________
+// 9410:  00000000  00000000  00000000  00000000  ________________
+// 9420:  00000000  00000000  00000000  00000000  ________________
+// 9430:  00000000  00000000  00000000  00000000  ________________
+// 9440:  00000000  00000000  00000000  00000000  ________________
+// 9450:  00000000  00000000  00000000  00000000  ________________
+// 9460:  00000000  00000000  00000000  00000000  ________________
+// 9470:  00000000  00000000  00000000  00000000  ________________
+// 9480:  00000000  00000000  00000000  00000000  ________________
+// 9490:  00000000  00000000  00000000  00000000  ________________
+// 94a0:  00000000  00000000  00000000  11250016  ____________._%.
+// 94b0:  00000000  00000080  53500001  49414d5f  ____.___._PS_MAI
+// 94c0:  0000004e  11510022  00001012  00010008  N___"_Q...__._._
+// 94d0:  ffff0040  ffffffff  63657053  72616c75  @_......Specular
+// 94e0:  6f6c6f43  00000072  11510022  00001014  Color___"_Q...__
+// 94f0:  00010008  ffff0050  ffffffff  63657053  ._._P_......Spec
+// 9500:  72616c75  65776f50  00000072  11510026  ularPower___&_Q.
+// 9510:  00001016  00010008  ffff0054  ffffffff  ..__._._T_......
+// 9520:  44736148  75666669  65546573  72757478  HasDiffuseTextur
+// 9530:  00000065  11510026  00001016  00010008  e___&_Q...__._._
+// 9540:  ffff0058  ffffffff  53736148  75636570  X_......HasSpecu
+// 9550:  5472616c  75747865  00006572  11510026  larTexture__&_Q.
+// 9560:  00001016  00010008  ffff005c  ffffffff  ..__._._\_......
+// 9570:  4e736148  616d726f  7865546c  65727574  HasNormalTexture
+// 9580:  00000000  11510022  00001012  00020008  ____"_Q...__._._
+// 9590:  ffff0000  ffffffff  69626d41  43746e65  __......AmbientC
+// 95a0:  726f6c6f  00000000  1151001e  00001012  olor____._Q...__
+// 95b0:  00020008  ffff0010  ffffffff  6867694c  ._._._......Ligh
+// 95c0:  6c6f4374  0000726f  11510022  00001018  tColor__"_Q...__
+// 95d0:  00020008  ffff0020  ffffffff  6867694c  ._._ _......Ligh
+// 95e0:  72694474  69746365  00006e6f  1151001e  tDirection__._Q.
+// 95f0:  0000101a  00020008  ffff0040  ffffffff  ..__._._@_......
+// 9600:  6867694c  70795474  00000065  11510022  LightType___"_Q.
+// 9610:  0000101d  ffff0007  0000ffff  ffffffff  ..__._....__....
+// 9620:  66666944  54657375  75747865  00006572  DiffuseTexture__
+// 9630:  11510022  0000101d  ffff0007  0001ffff  "_Q...__._....._
+// 9640:  ffffffff  63657053  72616c75  74786554  ....SpecularText
+// 9650:  00657275  11510022  0000101d  ffff0007  ure_"_Q...__._..
+// 9660:  0002ffff  ffffffff  6d726f4e  65546c61  ..._....NormalTe
+// 9670:  72757478  00000065  11510022  00001020  xture___"_Q. .__
+// 9680:  ffff0006  ffffffff  ffff0000  6f6c6f43  ._......__..Colo
+// 9690:  6d615372  72656c70  00000000  00000000  rSampler________
+// 96a0:  00000000  00000000  00000000  00000010  ____________.___
+// 96b0:  00000000  00000000  00000000  00000000  ________________
+// 96c0:  00000000  00000000  ffffffff  f12f091a  ________....../.
+// 96d0:  00000000  00000000  00000000  00000000  ________________
+// 96e0:  00000000  00000000  00000000  00000000  ________________
+// 96f0:  00000000  00000000  00000000  00000000  ________________
+// 9700:  00000000  00000000  00000000  00000000  ________________
+// 9710:  00000000  00000000  00000000  00000000  ________________
+// 9720:  00000000  00000000  00000000  00000000  ________________
+// 9730:  00000000  00000000  00000000  00000000  ________________
+// 9740:  00000000  00000000  00000000  00000000  ________________
+// 9750:  00000000  00000000  00000000  00000000  ________________
+// 9760:  00000000  00000000  00000000  00000000  ________________
+// 9770:  00000000  00000000  00000000  00000000  ________________
+// 9780:  00000000  00000000  00000000  00000000  ________________
+// 9790:  00000000  00000000  00000000  00000000  ________________
+// 97a0:  00000000  00000000  00000000  00000000  ________________
+// 97b0:  00000000  00000000  00000000  00000000  ________________
+// 97c0:  00000000  00000000  00000000  00000000  ________________
+// 97d0:  00000000  00000000  00000000  00000000  ________________
+// 97e0:  00000000  00000000  00000000  00000000  ________________
+// 97f0:  00000000  00000000  00000000  00000000  ________________
+// 9800:  00000000  00000000  00000000  00000000  ________________
+// 9810:  00000000  00000000  00000000  00000000  ________________
+// 9820:  00000000  00000000  00000000  00000000  ________________
+// 9830:  00000000  00000000  00000000  00000000  ________________
+// 9840:  00000000  00000000  00000000  00000000  ________________
+// 9850:  00000000  00000000  00000000  00000000  ________________
+// 9860:  00000000  00000000  00000000  00000000  ________________
+// 9870:  00000000  00000000  00000000  00000000  ________________
+// 9880:  00000000  00000000  00000000  00000000  ________________
+// 9890:  00000000  00000000  00000000  00000000  ________________
+// 98a0:  00000000  00000000  00000000  ffffffff  ____________....
+// 98b0:  01310977  00000001  8c0a000e  9cb4000f  w.1..___._..._..
+// 98c0:  000b0010  00000050  00000020  0000002c  ._._P___ ___,___
+// 98d0:  000000d0  00000000  00000000  00000016  .___________.___
+// 98e0:  00000019  00000000  00000000  00000000  ._______________
+// 98f0:  00000001  00000000  00000f30  60000020  ._______0.__ __`
+// 9900:  00000000  00000000  00000000  000a0002  ____________._._
+// 9910:  00001d98  00000000  00001108  00000002  ..______..__.___
+// 9920:  002ccf08  00000000  00000000  4d5f5350  ..,_________PS_M
+// 9930:  004e4941  656e6f6e  00000000  f12eba2d  AIN_none____-...
+// 9940:  00000001  00000000  00000f30  60000020  ._______0.__ __`
+// 9950:  00000000  00000000  00000000  00020002  ____________._._
+// 9960:  00000007  00010000  ffffffff  00000000  ._____._....____
+// 9970:  00000f30  00000208  00000000  ffffffff  0.__..______....
+// 9980:  00000000  ffffffff  00020001  00020000  ____....._.___._
+// 9990:  00000000  0000005b  335c3a46  6e652d44  ____[___F:\3D-en
+// 99a0:  656e6967  7265455c  47657473  68706172  gine\EersteGraph
+// 99b0:  6e456369  656e6967  7265455c  47657473  icEngine\EersteG
+// 99c0:  68706172  6e456369  656e6967  6e69625c  raphicEngine\bin
+// 99d0:  445c3436  5c617461  64616853  435c7265  64\Data\Shader\C
+// 99e0:  726f6c6f  6c6f435c  505f726f  6c682e53  olor\Color_PS.hl
+// 99f0:  46006c73  44335c3a  676e652d  5c656e69  sl_F:\3D-engine\
+// 9a00:  73726545  72476574  69687061  676e4563  EersteGraphicEng
+// 9a10:  5c656e69  73726545  72476574  69687061  ine\EersteGraphi
+// 9a20:  676e4563  5c656e69  366e6962  61445c34  cEngine\bin64\Da
+// 9a30:  535c6174  65646168  6f435c72  5c726f6c  ta\Shader\Color\
+// 9a40:  6c636e49  5c656475  6d6d6f43  682e6e6f  Include\Common.h
+// 9a50:  696c736c  00000000  effeeffe  00000001  lsli____.....___
+// 9a60:  00000001  00000100  00000000  00000000  .____.__________
+// 9a70:  ffffff00  ffffffff  0dffffff  ffffff00  _..........._...
+// 9a80:  ffffffff  00ffffff  00000000  00000000  ......._________
+// 9a90:  00000000  00000000  00000000  00000000  ________________
+// 9aa0:  00000000  00000000  00000000  01312e94  ____________..1.
+// 9ab0:  5b21b8c9  00000001  d1a0ea03  4dcfad11  ..![.___.......M
+// 9ac0:  b12a7fbe  1d9ca910  000000f5  6e694c2f  .*......___/Lin
+// 9ad0:  666e496b  6e2f006f  73656d61  72732f00  kInfo_/names_/sr
+// 9ae0:  65682f63  72656461  636f6c62  732f006b  c/headerblock_/s
+// 9af0:  662f6372  73656c69  5c3a662f  652d6433  rc/files/f:\3d-e
+// 9b00:  6e69676e  65655c65  65747372  70617267  ngine\eerstegrap
+// 9b10:  65636968  6e69676e  65655c65  65747372  hicengine\eerste
+// 9b20:  70617267  65636968  6e69676e  69625c65  graphicengine\bi
+// 9b30:  5c34366e  61746164  6168735c  5c726564  n64\data\shader\
+// 9b40:  6f6c6f63  6f635c72  5f726f6c  682e7370  color\color_ps.h
+// 9b50:  006c736c  6372732f  6c69662f  662f7365  lsl_/src/files/f
+// 9b60:  64335c3a  676e652d  5c656e69  73726565  :\3d-engine\eers
+// 9b70:  72676574  69687061  676e6563  5c656e69  tegraphicengine\
+// 9b80:  73726565  72676574  69687061  676e6563  eerstegraphiceng
+// 9b90:  5c656e69  366e6962  61645c34  735c6174  ine\bin64\data\s
+// 9ba0:  65646168  6f635c72  5c726f6c  6c636e69  hader\color\incl
+// 9bb0:  5c656475  6d6d6f63  682e6e6f  696c736c  ude\common.hlsli
+// 9bc0:  00000500  00000a00  00000100  00022e00  _.___.___.___.._
+// 9bd0:  00000000  00001100  00000700  00000000  _____.___.______
+// 9be0:  00000500  00008800  00000900  00000a00  _.___.___.___.__
+// 9bf0:  00000600  00002200  00000800  00000000  _.___"___.______
+// 9c00:  3351dc00  00000001  00000000  00000000  _.Q3.___________
+// 9c10:  00000000  00000000  00000000  00000000  ________________
+// 9c20:  00000000  00000000  00000000  00000000  ________________
+// 9c30:  00000000  00000000  00000000  00000000  ________________
+// 9c40:  00000000  00000000  00000000  00000000  ________________
+// 9c50:  00000000  00000000  00000000  00000000  ________________
+// 9c60:  00000000  00000000  00000000  00000000  ________________
+// 9c70:  00000000  00000000  00000000  00000000  ________________
+// 9c80:  00000000  00000000  00000000  00000000  ________________
+// 9c90:  00000000  00000000  00000000  00000000  ________________
+// 9ca0:  00000000  00000000  00000000  00000011  ____________.___
+// 9cb0:  00000020  00000159  00000398  000001db   ___Y.__..__..__
+// 9cc0:  000000e0  00000000  0000174d  000000ac  ._______M.__.___
+// 9cd0:  000010b0  000004df  00002edc  0000008c  ..__..__..__.___
+// 9ce0:  0000001c  00000028  000002bc  0000002c  .___(___..__,___
+// 9cf0:  000001f0  00000003  00000042  0000002f  ..__.___B___/___
+// 9d00:  0000002e  00000041  0000003b  00000014  .___A___;___.___
+// 9d10:  00000006  00000031  00000032  00000033  .___1___2___3___
+// 9d20:  00000034  00000035  00000036  00000037  4___5___6___7___
+// 9d30:  00000038  00000039  0000003a  00000015  8___9___:___.___
+// 9d40:  00000008  00000009  0000000a  0000000b  .___.___.___.___
+// 9d50:  0000000c  0000000d  0000000e  0000000f  .___.___.___.___
+// 9d60:  00000010  00000011  00000012  00000013  .___.___.___.___
+// 9d70:  00000016  00000017  00000018  00000019  .___.___.___.___
+// 9d80:  0000001a  0000001b  0000001c  0000001d  .___.___.___.___
+// 9d90:  0000001e  0000001f  00000020  00000021  .___.___ ___!___
+// 9da0:  00000022  00000023  00000024  00000025  "___#___$___%___
+// 9db0:  00000026  00000027  00000028  00000029  &___'___(___)___
+// 9dc0:  0000002a  0000002b  0000002c  0000002d  *___+___,___-___
+// 9dd0:  00000007  00000030  0000003c  0000003d  .___0___<___=___
+// 9de0:  0000003e  00000040  0000003f  00000000  >___@___?_______
+// 9df0:  00000000  00000000  00000000  00000000  ________________
+// 9e00:  00000000  00000000  00000000  00000000  ________________
+// 9e10:  00000000  00000000  00000000  00000000  ________________
+// 9e20:  00000000  00000000  00000000  00000000  ________________
+// 9e30:  00000000  00000000  00000000  00000000  ________________
+// 9e40:  00000000  00000000  00000000  00000000  ________________
+// 9e50:  00000000  00000000  00000000  00000000  ________________
+// 9e60:  00000000  00000000  00000000  00000000  ________________
+// 9e70:  00000000  00000000  00000000  00000000  ________________
+// 9e80:  00000000  00000000  00000000  00000000  ________________
+// 9e90:  00000000  00000000  00000000  00000000  ________________
+// 9ea0:  00000000  00000000  00000000  00000043  ____________C___
+// 9eb0:  00000000  00000000  00000000  00000000  ________________
+// 9ec0:  00000000  00000000  00000000  00000000  ________________
+// 9ed0:  00000000  00000000  00000000  00000000  ________________
+// 9ee0:  00000000  00000000  00000000  00000000  ________________
+// 9ef0:  00000000  00000000  00000000  00000000  ________________
+// 9f00:  00000000  00000000  00000000  00000000  ________________
+// 9f10:  00000000  00000000  00000000  00000000  ________________
+// 9f20:  00000000  00000000  00000000  00000000  ________________
+// 9f30:  00000000  00000000  00000000  00000000  ________________
+// 9f40:  00000000  00000000  00000000  00000000  ________________
+// 9f50:  00000000  00000000  00000000  00000000  ________________
+// 9f60:  00000000  00000000  00000000  00000000  ________________
+// 9f70:  00000000  00000000  00000000  00000000  ________________
+// 9f80:  00000000  00000000  00000000  00000000  ________________
+// 9f90:  00000000  00000000  00000000  00000000  ________________
+// 9fa0:  00000000  00000000  00000000  00000000  ________________
+// 9fb0:  00000000  00000000  00000000  00000000  ________________
+// 9fc0:  00000000  00000000  00000000  00000000  ________________
+// 9fd0:  00000000  00000000  00000000  00000000  ________________
+// 9fe0:  00000000  00000000  00000000  00000000  ________________
+// 9ff0:  00000000  00000000  00000000  00000000  ________________
+// a000:  00000000  00000000  00000000  00000000  ________________
+// a010:  00000000  00000000  00000000  00000000  ________________
+// a020:  00000000  00000000  00000000  00000000  ________________
+// a030:  00000000  00000000  00000000  00000000  ________________
+// a040:  00000000  00000000  00000000  00000000  ________________
+// a050:  00000000  00000000  00000000  00000000  ________________
+// a060:  00000000  00000000  00000000  00000000  ________________
+// a070:  00000000  00000000  00000000  00000000  ________________
+// a080:  00000000  00000000  00000000  00000000  ________________
+// a090:  00000000  00000000  00000000  00000000  ________________
+// a0a0:  00000000  00000000  00000000  00000000  ________________
+// a0b0:  00000000  00000000  00000000  00000000  ________________
+// a0c0:  00000000  00000000  00000000  00000000  ________________
+// a0d0:  00000000  00000000  00000000  00000000  ________________
+// a0e0:  00000000  00000000  00000000  00000000  ________________
+// a0f0:  00000000  00000000  00000000  00000000  ________________
+// a100:  00000000  00000000  00000000  00000000  ________________
+// a110:  00000000  00000000  00000000  00000000  ________________
+// a120:  00000000  00000000  00000000  00000000  ________________
+// a130:  00000000  00000000  00000000  00000000  ________________
+// a140:  00000000  00000000  00000000  00000000  ________________
+// a150:  00000000  00000000  00000000  00000000  ________________
+// a160:  00000000  00000000  00000000  00000000  ________________
+// a170:  00000000  00000000  00000000  00000000  ________________
+// a180:  00000000  00000000  00000000  00000000  ________________
+// a190:  00000000  00000000  00000000  00000000  ________________
+// a1a0:  00000000  00000000  00000000  00000000  ________________
+// a1b0:  00000000  00000000  00000000  00000000  ________________
+// a1c0:  00000000  00000000  00000000  00000000  ________________
+// a1d0:  00000000  00000000  00000000  00000000  ________________
+// a1e0:  00000000  00000000  00000000  00000000  ________________
+// a1f0:  00000000  00000000  00000000  00000000  ________________
+// a200:  00000000  00000000  00000000  00000000  ________________
+// a210:  00000000  00000000  00000000  00000000  ________________
+// a220:  00000000  00000000  00000000  00000000  ________________
+// a230:  00000000  00000000  00000000  00000000  ________________
+// a240:  00000000  00000000  00000000  00000000  ________________
+// a250:  00000000  00000000  00000000  00000000  ________________
+// a260:  00000000  00000000  00000000  00000000  ________________
+// a270:  00000000  00000000  00000000  00000000  ________________
+// a280:  00000000  00000000  00000000  00000000  ________________
+// a290:  00000000  00000000  00000000  00000000  ________________
+// a2a0:  00000000  00000000  00000000  00000000  ________________
+// a2b0:  00000000  00000000  00000000  00000000  ________________
+// a2c0:  00000000  00000000  00000000  00000000  ________________
+// a2d0:  00000000  00000000  00000000  00000000  ________________
+// a2e0:  00000000  00000000  00000000  00000000  ________________
+// a2f0:  00000000  00000000  00000000  00000000  ________________
+// a300:  00000000  00000000  00000000  00000000  ________________
+// a310:  00000000  00000000  00000000  00000000  ________________
+// a320:  00000000  00000000  00000000  00000000  ________________
+// a330:  00000000  00000000  00000000  00000000  ________________
+// a340:  00000000  00000000  00000000  00000000  ________________
+// a350:  00000000  00000000  00000000  00000000  ________________
+// a360:  00000000  00000000  00000000  00000000  ________________
+// a370:  00000000  00000000  00000000  00000000  ________________
+// a380:  00000000  00000000  00000000  00000000  ________________
+// a390:  00000000  00000000  00000000  00000000  ________________
+// a3a0:  00000000  00000000  00000000  00000000  ________________
+// a3b0:  00000000  00000000  00000000  00000000  ________________
+// a3c0:  00000000  00000000  00000000  00000000  ________________
+// a3d0:  00000000  00000000  00000000  00000000  ________________
+// a3e0:  00000000  00000000  00000000  00000000  ________________
+// a3f0:  00000000  00000000  00000000  00000000  ________________
+// a400:  00000000  00000000  00000000  00000000  ________________
+// a410:  00000000  00000000  00000000  00000000  ________________
+// a420:  00000000  00000000  00000000  00000000  ________________
+// a430:  00000000  00000000  00000000  00000000  ________________
+// a440:  00000000  00000000  00000000  00000000  ________________
+// a450:  00000000  00000000  00000000  00000000  ________________
+// a460:  00000000  00000000  00000000  00000000  ________________
+// a470:  00000000  00000000  00000000  00000000  ________________
+// a480:  00000000  00000000  00000000  00000000  ________________
+// a490:  00000000  00000000  00000000  00000000  ________________
+// a4a0:  00000000  00000000  00000000            ____________

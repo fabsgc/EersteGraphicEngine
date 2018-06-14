@@ -517,10 +517,10 @@ namespace ege
         grass5_5->GoTo(XMFLOAT3(0.0f, 0.0f, -40.0f));
         grass5_6->GoTo(XMFLOAT3(20.0f, 0.0f, -40.0f));
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.7f));
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.5f));
 
-        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.8f));
-        sun->SetDirection(XMFLOAT3(-0.5f, -1.0f, 1.0f));
+        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.85f));
+        sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, 1.0f));
 
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);

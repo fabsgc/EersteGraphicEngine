@@ -75,7 +75,7 @@ namespace ege
 
     void Scene::Update()
     {
-        if (_ambientLight != nullptr)
+        if (_ambientLight != nullptr && _ambientLight->IsEnabled())
         {
             _ambientLight->Update();
         }
@@ -93,14 +93,17 @@ namespace ege
             _camera->Draw();
         }
 
-        if (_ambientLight != nullptr)
+        if (_ambientLight != nullptr && _ambientLight->IsEnabled())
         {
             _ambientLight->Draw();
         }
 
         for (auto light : _lights)
         {
-            light.second->Draw();
+            if (light.second->IsEnabled())
+            {
+                light.second->Draw();
+            }
         }
        
         for (auto node : _nodes)

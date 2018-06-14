@@ -1,9 +1,10 @@
-#define POINT_LIGHT 0.0f
-#define SPOT_LIGHT 1.0f
-#define DIRECTIONAL_LIGHT 2.0f
+#define POINT_LIGHT 0
+#define SPOT_LIGHT 1
+#define DIRECTIONAL_LIGHT 2
 
 #define FLIP_TEXTURE_Y 1
 
+#define MAX_LIGHT 8
 
 cbuffer FrameConstantBuffer : register(b0)
 {

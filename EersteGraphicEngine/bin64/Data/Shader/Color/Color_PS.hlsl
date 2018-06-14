@@ -33,9 +33,22 @@ float4 PS_MAIN( PS_INPUT IN ) : SV_Target
     colorComponent.Specular = (float3) 0;
 
     pixelComponent = ComputePixelComponent(IN);
-
     colorComponent = ComputeAmbientLight(pixelComponent, colorComponent, IN);
-    colorComponent = ComputeDirectionalLight(pixelComponent, colorComponent, IN);
+
+    switch (LightType)
+    {
+    case POINT_LIGHT:
+        colorComponent = ComputePointLight(pixelComponent, colorComponent, IN);
+        break;
+
+    case SPOT_LIGHT:
+        colorComponent = ComputeSpotLight(pixelComponent, colorComponent, IN);
+        break;
+
+    case DIRECTIONAL_LIGHT:
+        colorComponent = ComputeDirectionalLight(pixelComponent, colorComponent, IN);
+        break;
+    }
 
     OUT.rgb = colorComponent.Ambient + colorComponent.Diffuse + colorComponent.Specular;
     OUT.a   = 1.0f;
@@ -46,6 +59,16 @@ float4 PS_MAIN( PS_INPUT IN ) : SV_Target
 ColorComponent ComputeAmbientLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
 {
     colorComponent.Ambient += AmbientColor.rgb * AmbientColor.a * pixelComponent.Diffuse.rgb;
+    return colorComponent;
+}
+
+ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
+{
+    return colorComponent;
+}
+
+ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
+{
     return colorComponent;
 }
 
@@ -70,16 +93,6 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
     return colorComponent;
 }
 
-ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
-{
-
-}
-
-ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
-{
-
-}
-
 PixelComponent ComputePixelComponent(PS_INPUT IN)
 {
     PixelComponent pixelComponent;
@@ -88,7 +101,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
     pixelComponent.Specular = (float3) 0;
     pixelComponent.Normal = (float3) 0;
 
-    if (HasDiffuseTexture == true && LightType == 2)
+    if (HasDiffuseTexture == true)
     {
         pixelComponent.Diffuse = DiffuseTexture.Sample(ColorSampler, IN.Texture);
     }
