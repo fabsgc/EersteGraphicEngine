@@ -293,3 +293,24 @@ Time: 17:03:34
 Error: Can't create light constant buffer
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 13 2018
+Time: 19:27:02
+Error: Can't load texture from file : Data/Texture/City/Road/Road-7-diffuse.dds
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 13 2018
+Time: 19:27:02
+Error: Can't load texture from file : Data/Texture/City/Building/House-1-diffuse.dds
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 13 2018
+Time: 19:27:02
+Error: Can't load texture from file : Data/Texture/City/Building/House-1-diffuse.dds
+Condition: 0
+############################################: 

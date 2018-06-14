@@ -10,6 +10,10 @@
   <texture name="building-2-specular" file="City/Building/Building-2-specular.dds"/>
   <texture name="building-3-diffuse" file="City/Building/Building-3-diffuse.dds"/>
   <texture name="building-3-specular" file="City/Building/Building-3-specular.dds"/>
+  <texture name="shop-1-diffuse" file="City/Building/Shop-1-diffuse.dds"/>
+  <texture name="shop-1-specular" file="City/Building/Shop-1-specular.dds"/>
+  <texture name="house-1-diffuse" file="City/Building/House-1-diffuse.dds"/>
+  <texture name="house-1-specular" file="City/Building/House-1-specular.dds"/>
 
   <texture name="grass-diffuse" file="City/Nature/Grass-diffuse.dds"/>
   <texture name="grass-specular" file="City/Nature/Grass-specular.dds"/>
@@ -28,4 +32,6 @@
   <texture name="road-5-specular" file="City/Road/Road-5-specular.dds"/>
   <texture name="road-6-diffuse" file="City/Road/Road-6-diffuse.dds"/>
   <texture name="road-6-specular" file="City/Road/Road-6-specular.dds"/>
+  <texture name="road-7-diffuse" file="City/Road/Road-7-diffuse.dds"/>
+  <texture name="road-7-specular" file="City/Road/Road-7-specular.dds"/>
 </textures>
