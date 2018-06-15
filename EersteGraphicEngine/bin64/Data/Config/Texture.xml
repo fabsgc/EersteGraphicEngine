@@ -42,4 +42,7 @@
   <texture name="road-10-specular" file="City/Road/Road-10-specular.dds"/>
   <texture name="road-11-diffuse" file="City/Road/Road-11-diffuse.dds"/>
   <texture name="road-11-specular" file="City/Road/Road-11-specular.dds"/>
+
+  <texture name="wind-turbine-diffuse" file="City/Stuff/WindTurbine-diffuse.dds"/>
+  <texture name="wind-turbine-specular" file="City/Stuff/WindTurbine-specular.dds"/>
 </textures>

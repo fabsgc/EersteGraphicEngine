@@ -29,4 +29,6 @@
   <model name="building-3" file="City/Building/Building-3.obj"/>
   <model name="shop-1" file="City/Building/Shop-1.obj"/>
   <model name="house-1" file="City/Building/House-1.obj"/>
+
+  <model name="wind-turbine" file="City/Stuff/WindTurbine.obj"/>
 </models>
