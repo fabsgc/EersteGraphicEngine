@@ -217,56 +217,20 @@
     <Filter Include="Header Files\App\Material\City">
       <UniqueIdentifier>{e3ff6b89-2703-44de-a167-e92acb4f7735}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\App\Material\City\Building">
-      <UniqueIdentifier>{2cd33245-3335-4f57-896d-f6dba06e5802}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\App\Material\City\Road">
-      <UniqueIdentifier>{91cfd07b-1f86-4070-b7ea-eda2b7be415d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\App\Model\Primitive">
       <UniqueIdentifier>{12f5beaf-f937-4b6c-b0c5-f11c5a20b35d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\App\Model\City">
       <UniqueIdentifier>{ccf62daf-4b05-4729-9f85-0d70787aa46a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\App\Model\City\Building">
-      <UniqueIdentifier>{761e028e-effd-47f7-96ad-29d330648d35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\App\Model\City\Road">
-      <UniqueIdentifier>{4c8710fd-4718-4872-a39d-e14e994d8123}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\App\Material\City">
       <UniqueIdentifier>{06d996b7-b6a8-487c-96fc-338299cae5d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Material\City\Building">
-      <UniqueIdentifier>{3babd610-6694-481c-85e9-8a8b00901fe2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Material\City\Road">
-      <UniqueIdentifier>{683e75c1-e5ff-4768-a019-3e3f41a2d663}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\App\Model\Primitive">
       <UniqueIdentifier>{8ea7f938-37da-4cbf-979e-4b81fe18e972}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\App\Model\City">
       <UniqueIdentifier>{b4bdf2cf-d88f-459c-b9c1-f5ec5bb1ed67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Model\City\Building">
-      <UniqueIdentifier>{18dae243-655c-4915-b3e7-2c6adda8c4a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Model\City\Road">
-      <UniqueIdentifier>{7175b2bc-ac00-4606-a6bf-c57a53ba90aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\App\Material\City\Nature">
-      <UniqueIdentifier>{d479d0c8-245a-4fca-a71a-0842107835a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\App\Model\City\Nature">
-      <UniqueIdentifier>{740df430-0409-431a-9c92-e93599d543df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Material\City\Nature">
-      <UniqueIdentifier>{becdaf7e-dbcb-40ae-a8b4-8d25843e9107}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\App\Model\City\Nature">
-      <UniqueIdentifier>{9d5765d5-9c74-4352-81c9-1f3b5780c09a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -468,83 +432,11 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
     </ClCompile>
-    <ClCompile Include="Road6.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
+    <ClCompile Include="CityMaterial.cpp">
+      <Filter>Source Files\App\Material\City</Filter>
     </ClCompile>
-    <ClCompile Include="Building1.cpp">
-      <Filter>Source Files\App\Model\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Building1Material.cpp">
-      <Filter>Source Files\App\Material\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Road6Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Building2Material.cpp">
-      <Filter>Source Files\App\Material\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Building3Material.cpp">
-      <Filter>Source Files\App\Material\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="House1Material.cpp">
-      <Filter>Source Files\App\Material\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop1Material.cpp">
-      <Filter>Source Files\App\Material\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="GrassMaterial.cpp">
-      <Filter>Source Files\App\Material\City\Nature</Filter>
-    </ClCompile>
-    <ClCompile Include="Road1Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road2Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road3Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road4Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road5Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road7Material.cpp">
-      <Filter>Source Files\App\Material\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Building2.cpp">
-      <Filter>Source Files\App\Model\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Building3.cpp">
-      <Filter>Source Files\App\Model\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="House1.cpp">
-      <Filter>Source Files\App\Model\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop1.cpp">
-      <Filter>Source Files\App\Model\City\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Grass.cpp">
-      <Filter>Source Files\App\Model\City\Nature</Filter>
-    </ClCompile>
-    <ClCompile Include="Road1.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road2.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road3.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road4.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road5.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
-    </ClCompile>
-    <ClCompile Include="Road7.cpp">
-      <Filter>Source Files\App\Model\City\Road</Filter>
+    <ClCompile Include="CityModel.cpp">
+      <Filter>Source Files\App\Model\City</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -776,51 +668,6 @@
     <ClInclude Include="PerspectiveCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Building1Material.h">
-      <Filter>Header Files\App\Material\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Road6Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Building1.h">
-      <Filter>Header Files\App\Model\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Road6.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Building2Material.h">
-      <Filter>Header Files\App\Material\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Building3Material.h">
-      <Filter>Header Files\App\Material\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="House1Material.h">
-      <Filter>Header Files\App\Material\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Shop1Material.h">
-      <Filter>Header Files\App\Material\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Road1Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road2Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road3Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road4Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road5Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road7Material.h">
-      <Filter>Header Files\App\Material\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="GrassMaterial.h">
-      <Filter>Header Files\App\Material\City\Nature</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files\App\Model\Primitive</Filter>
     </ClInclude>
@@ -833,38 +680,11 @@
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\App\Model\Primitive</Filter>
     </ClInclude>
-    <ClInclude Include="Building2.h">
-      <Filter>Header Files\App\Model\City\Building</Filter>
+    <ClInclude Include="CityMaterial.h">
+      <Filter>Header Files\App\Material\City</Filter>
     </ClInclude>
-    <ClInclude Include="Building3.h">
-      <Filter>Header Files\App\Model\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="House1.h">
-      <Filter>Header Files\App\Model\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Shop1.h">
-      <Filter>Header Files\App\Model\City\Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Grass.h">
-      <Filter>Header Files\App\Model\City\Nature</Filter>
-    </ClInclude>
-    <ClInclude Include="Road1.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road2.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road3.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road4.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road5.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
-    </ClInclude>
-    <ClInclude Include="Road7.h">
-      <Filter>Header Files\App\Model\City\Road</Filter>
+    <ClInclude Include="CityModel.h">
+      <Filter>Header Files\App\Model\City</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
