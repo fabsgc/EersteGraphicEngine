@@ -14,7 +14,7 @@ namespace ege
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
-        , _alpha(-0.9f)
+        , _alpha(0.0f)
         , _beta(0.4f)
         , _radius(64.0f)
         , _target(XMFLOAT3(0.0f, 8.0f, 0.0f))
