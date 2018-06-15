@@ -31,4 +31,5 @@
   <model name="house-1" file="City/Building/House-1.obj"/>
 
   <model name="wind-turbine" file="City/Stuff/WindTurbine.obj"/>
+  <model name="traffic-light" file="City/Stuff/TrafficLight.obj"/>
 </models>
