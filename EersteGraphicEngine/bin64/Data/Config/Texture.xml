@@ -34,4 +34,12 @@
   <texture name="road-6-specular" file="City/Road/Road-6-specular.dds"/>
   <texture name="road-7-diffuse" file="City/Road/Road-7-diffuse.dds"/>
   <texture name="road-7-specular" file="City/Road/Road-7-specular.dds"/>
+  <texture name="road-8-diffuse" file="City/Road/Road-8-diffuse.dds"/>
+  <texture name="road-8-specular" file="City/Road/Road-8-specular.dds"/>
+  <texture name="road-9-diffuse" file="City/Road/Road-9-diffuse.dds"/>
+  <texture name="road-9-specular" file="City/Road/Road-9-specular.dds"/>
+  <texture name="road-10-diffuse" file="City/Road/Road-10-diffuse.dds"/>
+  <texture name="road-10-specular" file="City/Road/Road-10-specular.dds"/>
+  <texture name="road-11-diffuse" file="City/Road/Road-11-diffuse.dds"/>
+  <texture name="road-11-specular" file="City/Road/Road-11-specular.dds"/>
 </textures>

@@ -16,6 +16,10 @@
   <model name="road-5" file="City/Road/Road-5.obj"/>
   <model name="road-6" file="City/Road/Road-6.obj"/>
   <model name="road-7" file="City/Road/Road-7.obj"/>
+  <model name="road-8" file="City/Road/Road-8.obj"/>
+  <model name="road-9" file="City/Road/Road-9.obj"/>
+  <model name="road-10" file="City/Road/Road-10.obj"/>
+  <model name="road-11" file="City/Road/Road-11.obj"/>
 
   <model name="map" file="City/Nature/Map.obj"/>
   <model name="grass" file="City/Nature/Grass.obj"/>
