@@ -3,11 +3,11 @@
 namespace ege
 {
     const float OrthographicCamera::DefaultMinZoom = 0.001f;
-    const float OrthographicCamera::DefaultMaxZoom = 128.0f;
+    const float OrthographicCamera::DefaultMaxZoom = 256.0f;
 
     OrthographicCamera::OrthographicCamera()
         : Camera(CameraType::OrthographicCamera)
-        , _zoom(0.01f)
+        , _zoom(0.5f)
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
         _position = XMFLOAT3(0.0f, 1.0f, 0.0f);
@@ -20,26 +20,27 @@ namespace ege
     void OrthographicCamera::Update()
     {
         float deltaTime = _time.GetFrameDelta();
+        float speedModulation = (10 * _zoom) > 2.0f ? 10 * _zoom : 2.0f;
 
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            MoveX(-_translationSpeed * deltaTime * 3.0f);
+            MoveX(-_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            MoveX(_translationSpeed * deltaTime * 3.0f);
+            MoveX(_translationSpeed * deltaTime * speedModulation);
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            MoveY(_translationSpeed * deltaTime * 3.0f);
+            MoveY(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            MoveY(-_translationSpeed * deltaTime * 3.0f);
+            MoveY(-_translationSpeed * deltaTime * speedModulation);
 
         MouseWheelState mouseWheelState = _mouse.GetWheelState();
 
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * 0.05f);
+            Zoom(deltaTime * speedModulation);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * 0.05f);
+            Zoom(-deltaTime * speedModulation);
             break;
         }
 
@@ -51,8 +52,8 @@ namespace ege
             if (mousePosition.x != _lastMousePosition.x || mousePosition.y != _lastMousePosition.y)
             {
                 XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
-                MoveX(-distance.x * _zoom);
-                MoveY(distance.y * _zoom);
+                MoveX(-distance.x * _translationSpeed * deltaTime * 0.75f);
+                MoveY(distance.y * _translationSpeed * deltaTime * 0.75f);
 
                 _lastMousePosition = mousePosition;
             }
@@ -67,9 +68,9 @@ namespace ege
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
             if (abs(joypadLY) > 0.0f)
-                MoveY(joypadLY * _translationSpeed * deltaTime * 3.0f);
+                MoveY(- joypadLY * _translationSpeed * deltaTime * speedModulation * 3.0f);
             if (abs(joypadLX) > 0.0f)
-                MoveX(joypadLX * _translationSpeed * deltaTime * 3.0f);
+                MoveX(- joypadLX * _translationSpeed * deltaTime * speedModulation * 3.0f);
         }
 
         Camera::Update();
@@ -88,9 +89,9 @@ namespace ege
             -512.0f + _position.y,
             512.0f + _position.y);
 
-        XMVECTOR Right = XMVectorSet(_position.x + 1.0f, _position.y, 0.0f, 0.0f);
+        XMVECTOR Right = XMVectorSet(_position.x, _position.y, 0.0f, 0.0f);
         XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-        XMVECTOR Look = XMVectorSet(_position.x, _position.y -0.67f, 1.0f, 0.0f);
+        XMVECTOR Look = XMVectorSet(_position.x, _position.y -1.0f, 1.0f, 0.0f);
 
         XMMATRIX View = XMMatrixLookAtLH(Right, Look, Up);
 
@@ -98,12 +99,16 @@ namespace ege
         XMStoreFloat4x4(&_view, View);
     }
 
-    void OrthographicCamera::Move(XMFLOAT3 distance)
+    void OrthographicCamera::Strafe(float x, float y, float z)
+    {
+        Strafe(XMFLOAT3(x, y, z));
+    }
+
+    void OrthographicCamera::Strafe(XMFLOAT3 distance)
     {
         if (distance.x != 0.0f)
         {
             _position.x += distance.x;
-            _position.y += distance.x * 0.333333333f;
         }
         else
         {
@@ -121,5 +126,20 @@ namespace ege
         _zoom = MathUtility::Clamp(_zoom, DefaultMinZoom, DefaultMaxZoom);
 
         _needUpdate = true;
+    }
+
+    void OrthographicCamera::Move(XMVECTOR movement)
+    {
+
+    }
+
+    void OrthographicCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {
+
+    }
+
+    void OrthographicCamera::Rotate(XMVECTOR eulerAngles)
+    {
+
     }
 }

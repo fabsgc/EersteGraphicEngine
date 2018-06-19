@@ -13,6 +13,11 @@ namespace ege
 
         void Update() override;
         void Walk(float distance) override;
-        void Move(XMFLOAT3 distance) override;
+        void Strafe(float x, float y, float z) override;
+        void Strafe(XMFLOAT3 distance) override;
+
+        virtual void Move(XMVECTOR movement) override;
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void Rotate(XMVECTOR eulerAngles) override;
     };
 }

@@ -9,7 +9,7 @@
   <model name="point-light" file="LightSchema/PointLight.obj"/>
   <model name="directional-light" file="LightSchema/DirectionalLight.obj"/>
 
-  <model name="road-1" file="City/Road/Road-1.obj"/>
+  <!--<model name="road-1" file="City/Road/Road-1.obj"/>
   <model name="road-2" file="City/Road/Road-2.obj"/>
   <model name="road-3" file="City/Road/Road-3.obj"/>
   <model name="road-4" file="City/Road/Road-4.obj"/>
@@ -19,16 +19,16 @@
   <model name="road-8" file="City/Road/Road-8.obj"/>
   <model name="road-9" file="City/Road/Road-9.obj"/>
   <model name="road-10" file="City/Road/Road-10.obj"/>
-  <model name="road-11" file="City/Road/Road-11.obj"/>
+  <model name="road-11" file="City/Road/Road-11.obj"/>-->
 
-  <model name="map" file="City/Nature/Map.obj"/>
-  <model name="grass" file="City/Nature/Grass.obj"/>
+  <!--<model name="map" file="City/Nature/Map.obj"/>
+  <model name="grass" file="City/Nature/Grass.obj"/>-->
 
   <model name="building-1" file="City/Building/Building-1.obj"/>
-  <model name="building-2" file="City/Building/Building-2.obj"/>
+  <!--<model name="building-2" file="City/Building/Building-2.obj"/>
   <model name="building-3" file="City/Building/Building-3.obj"/>
   <model name="shop-1" file="City/Building/Shop-1.obj"/>
-  <model name="house-1" file="City/Building/House-1.obj"/>
+  <model name="house-1" file="City/Building/House-1.obj"/>-->
 
   <model name="wind-turbine" file="City/Stuff/WindTurbine.obj"/>
 </models>

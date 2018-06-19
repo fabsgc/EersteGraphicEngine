@@ -2,6 +2,7 @@
 
 #include "OrthographicCamera.h"
 #include "ThirdPersonCamera.h"
+#include "FirstPersonCamera.h"
 #include "DirectionalLight.h"
 #include "EventManager.h"
 #include "AmbientLight.h"
@@ -54,7 +55,7 @@ namespace ege
         SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
         SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
 
         _scene->Initialise();
         camera->Initialise();
@@ -64,10 +65,10 @@ namespace ege
 
         wind->RotatePitch(XM_PIDIV4);
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.5f));
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.6f));
 
-        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.85f));
-        sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, 1.0f));
+        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
+        sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);

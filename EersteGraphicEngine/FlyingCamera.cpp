@@ -23,19 +23,20 @@ namespace ege
     void FlyingCamera::Update()
     {
         float deltaTime = _time.GetFrameDelta();
+        float speedModulation = 2.0f;
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Walk(_translationSpeed * deltaTime);
+            Walk(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Walk(-_translationSpeed * deltaTime);
+            Walk(-_translationSpeed * deltaTime * speedModulation);
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            MoveX(-_translationSpeed * deltaTime);
+            Strafe(-_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            MoveX(_translationSpeed * deltaTime);
+            Strafe(_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            MoveY(1.0f * deltaTime * _translationSpeed);
+            Strafe(0.0f, deltaTime * _translationSpeed * speedModulation, 0.0f);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            MoveY(-1.0f * deltaTime * _translationSpeed);
+            Strafe(0.0f, -deltaTime * _translationSpeed * speedModulation, 0.0f);
         
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -61,9 +62,9 @@ namespace ege
             float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
 
             if(abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime);
+                Walk(joypadLY * _translationSpeed * deltaTime * speedModulation);
             if(abs(joypadLX) > 0.0f)
-                MoveX(joypadLX * _translationSpeed * deltaTime);
+                Strafe(joypadLX * _translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
 
             if (abs(angleY) > 0.0f)
                 Pitch(angleY);
@@ -71,9 +72,9 @@ namespace ege
                 Yaw(angleX);
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                MoveY(_translationSpeed * deltaTime);
+                Strafe(0.0f, -_translationSpeed * deltaTime * speedModulation, 0.0f);
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                MoveY(_translationSpeed * deltaTime);
+                Strafe(0.0f, _translationSpeed * deltaTime * speedModulation, 0.0f);
         }
 
         PerspectiveCamera::Update();
@@ -138,7 +139,12 @@ namespace ege
         _needUpdate = true;
     }
 
-    void FlyingCamera::Move(XMFLOAT3 distance)
+    void FlyingCamera::Strafe(float x, float y, float z)
+    {
+        Strafe(XMFLOAT3(x, y, z));
+    }
+
+    void FlyingCamera::Strafe(XMFLOAT3 distance)
     {
         XMVECTOR right = XMLoadFloat3(&_right);
         XMVECTOR look = XMLoadFloat3(&_look);
@@ -197,5 +203,20 @@ namespace ege
         XMStoreFloat3(&_look, look);
 
         _needUpdate = true;
+    }
+
+    void FlyingCamera::Move(XMVECTOR movement)
+    {
+
+    }
+
+    void FlyingCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {
+
+    }
+
+    void FlyingCamera::Rotate(XMVECTOR eulerAngles)
+    {
+
     }
 }

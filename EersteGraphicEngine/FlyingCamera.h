@@ -16,9 +16,14 @@ namespace ege
         void         ComputeProjectionMatrix() override;
 
         virtual void Walk(float distance);
-        virtual void Move(XMFLOAT3 distance) override;
+        virtual void Strafe(float x, float y, float z);
+        virtual void Strafe(XMFLOAT3 distance);
         void         Pitch(float angle) override;
         void         Roll(float angle) override;
         void         Yaw(float angle) override;
+
+        virtual void Move(XMVECTOR movement) override;
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void Rotate(XMVECTOR eulerAngles) override;
     };
 }

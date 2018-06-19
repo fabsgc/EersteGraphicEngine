@@ -13,8 +13,13 @@ namespace ege
 
         void         Update();
         virtual void ComputeProjectionMatrix() override;
-        virtual void Move(XMFLOAT3 distance) override;
+        virtual void Strafe(float x, float y, float z);
+        virtual void Strafe(XMFLOAT3 distance);
         void         Zoom(float zoom);
+
+        virtual void Move(XMVECTOR movement) override;
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void Rotate(XMVECTOR eulerAngles) override;
 
     public:
         static const float DefaultMinZoom;

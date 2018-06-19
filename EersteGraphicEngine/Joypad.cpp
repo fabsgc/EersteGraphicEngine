@@ -51,6 +51,49 @@ namespace ege
                             }
                         }
                     }
+
+                    UpdateThumbStick();
+                }
+            }
+        }
+    }
+
+    void Joypad::UpdateThumbStick()
+    {
+        if (_thumbSticks[0].Position > 0) {
+            for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
+            {
+                if (itButtons->Name == JoypadButtonName::LT) {
+                    itButtons->State = JoypadButtonState::TRIGGERED;
+                    break;
+                }
+            }
+        }
+        else {
+            for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
+            {
+                if (itButtons->Name == JoypadButtonName::LT) {
+                    itButtons->State = JoypadButtonState::RELEASED;
+                    break;
+                }
+            }
+        }
+
+        if (_thumbSticks[1].Position > 0) {
+            for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
+            {
+                if (itButtons->Name == JoypadButtonName::RT) {
+                    itButtons->State = JoypadButtonState::TRIGGERED;
+                    break;
+                }
+            }
+        }
+        else {
+            for (auto itButtons = _joypadButtons.begin(); itButtons != _joypadButtons.end(); itButtons++)
+            {
+                if (itButtons->Name == JoypadButtonName::RT) {
+                    itButtons->State = JoypadButtonState::RELEASED;
+                    break;
                 }
             }
         }
@@ -208,9 +251,9 @@ namespace ege
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::START, "START", XINPUT_GAMEPAD_START));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::BACK, "BACK", XINPUT_GAMEPAD_BACK));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::LB, "LB", XINPUT_GAMEPAD_LEFT_SHOULDER));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LS, "LT", XINPUT_GAMEPAD_LEFT_THUMB));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::LT, "LT", XINPUT_GAMEPAD_LEFT_THUMB));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::RB, "RB", XINPUT_GAMEPAD_RIGHT_SHOULDER));
-        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RS, "RT", XINPUT_GAMEPAD_RIGHT_THUMB));
+        _joypadButtons.push_back(JoypadButton(JoypadButtonName::RT, "RT", XINPUT_GAMEPAD_RIGHT_THUMB));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_LEFT, "ARROW_LEFT", XINPUT_GAMEPAD_DPAD_LEFT));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_RIGHT, "ARROW_RIGHT", XINPUT_GAMEPAD_DPAD_RIGHT));
         _joypadButtons.push_back(JoypadButton(JoypadButtonName::ARROW_UP, "ARROW_UP", XINPUT_GAMEPAD_DPAD_UP));

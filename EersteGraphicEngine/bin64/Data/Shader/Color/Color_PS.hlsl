@@ -119,7 +119,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
         pixelComponent.Specular = SpecularColor.rgb;
     }
 
-    if (HasNormalTexture == true)
+    if (HasNormalTexture == true) 
     {
         float3 sampledNormal = (2 * NormalTexture.Sample(ColorSampler, IN.Texture).xyz) - 1.0f;
         float3x3 tbn = float3x3(IN.Tangent, IN.Binormal, IN.Normal);
