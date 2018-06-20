@@ -208,12 +208,6 @@
     <Filter Include="Data\Shader\Include">
       <UniqueIdentifier>{22191525-7d9f-4f98-a80c-9715f4224702}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Renderer\Light\Schema">
-      <UniqueIdentifier>{d4c4f48b-dbb5-4129-abcf-4d4c46b11898}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Renderer\Light\Schema">
-      <UniqueIdentifier>{1c432b12-3465-47b0-87a2-f7553d5f4fb9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\App\Material\City">
       <UniqueIdentifier>{e3ff6b89-2703-44de-a167-e92acb4f7735}</UniqueIdentifier>
     </Filter>
@@ -231,6 +225,18 @@
     </Filter>
     <Filter Include="Source Files\App\Model\City">
       <UniqueIdentifier>{b4bdf2cf-d88f-459c-b9c1-f5ec5bb1ed67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Light\Model">
+      <UniqueIdentifier>{1c432b12-3465-47b0-87a2-f7553d5f4fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Light\Model">
+      <UniqueIdentifier>{d4c4f48b-dbb5-4129-abcf-4d4c46b11898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Util">
+      <UniqueIdentifier>{c403cd66-6afa-49f7-b8ae-3101b4a1d4a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Util">
+      <UniqueIdentifier>{f005c566-3238-4429-8392-8b7a8d2d76bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -411,9 +417,6 @@
     <ClCompile Include="IMoveable.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="LightSchema.cpp">
-      <Filter>Source Files\Core\Renderer\Light\Schema</Filter>
-    </ClCompile>
     <ClCompile Include="OrthographicCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
@@ -437,6 +440,12 @@
     </ClCompile>
     <ClCompile Include="CityModel.cpp">
       <Filter>Source Files\App\Model\City</Filter>
+    </ClCompile>
+    <ClCompile Include="LightModel.cpp">
+      <Filter>Source Files\Core\Renderer\Light\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\Core\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -659,9 +668,6 @@
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
     </ClInclude>
-    <ClInclude Include="LightSchema.h">
-      <Filter>Header Files\Core\Renderer\Light\Schema</Filter>
-    </ClInclude>
     <ClInclude Include="OrthographicCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
@@ -685,6 +691,12 @@
     </ClInclude>
     <ClInclude Include="CityModel.h">
       <Filter>Header Files\App\Model\City</Filter>
+    </ClInclude>
+    <ClInclude Include="LightModel.h">
+      <Filter>Header Files\Core\Renderer\Light\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Core\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
