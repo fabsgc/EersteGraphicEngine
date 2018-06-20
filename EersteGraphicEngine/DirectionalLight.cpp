@@ -10,8 +10,8 @@ namespace ege
     {
         _lightModel = ege_shared_ptr_new<LightModel>("directional-light");
         _lightModel->Initialise();
-
         _lightModel->GoTo(20.0f, 20.0f, 20.0f);
+        _lightModel->SetColor(Color(Colors::Yellow));
     }
 
     DirectionalLight::~DirectionalLight()

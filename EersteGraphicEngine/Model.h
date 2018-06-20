@@ -21,6 +21,7 @@ namespace ege
         void           Draw() override;
         void           Build(SPtr<ModelDesc> modelDesc);
         void           SetMaterial(SPtr<Material> shader);
+        void           SetColor(const Color color);
         Geometry&      GetGeometry();
         SPtr<Material> GetMaterial();
 
@@ -31,5 +32,7 @@ namespace ege
 
         SPtr<Material> _material;
         Geometry       _geometry;
+
+        SPtr<ModelDesc> _modelDesc;
     };
 }

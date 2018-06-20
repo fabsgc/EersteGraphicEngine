@@ -187,4 +187,6 @@ namespace ege
     class  FlyingCamera;
     class  FirstPersonCamera;
     class  ThirdPersonCamera;
+
+    class  Color;
 }

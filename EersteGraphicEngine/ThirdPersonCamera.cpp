@@ -98,11 +98,11 @@ namespace ege
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * _translationSpeed * speedModulation * 10.0f);
+            Zoom(deltaTime * _translationSpeed * speedModulation * 3.0f);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * _translationSpeed * speedModulation * 10.0f);
+            Zoom(-deltaTime * _translationSpeed * speedModulation * 3.0f);
             break;
         }
 

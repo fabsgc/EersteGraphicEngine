@@ -3,15 +3,18 @@
 namespace ege
 {
     const XMFLOAT4 Light::DefaultLightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f);
+    const bool Light::DefaultCastShadow     = true;
+    const bool Light::DefaultDrawLightModel = false;
+    const bool Light::DefaultIsEnabled      = true;
 
     Light::Light(LightType type)
         : IEntity(EntityType::Light)
         , _renderAPI(gRenderAPI())
         , _type(type)
         , _color(DefaultLightColor)
-        , _drawLightModel(false)
-        , _isEnabled(true)
-        , _castShadow(true)
+        , _drawLightModel(DefaultDrawLightModel)
+        , _isEnabled(DefaultIsEnabled)
+        , _castShadow(DefaultCastShadow)
     {
     }
 

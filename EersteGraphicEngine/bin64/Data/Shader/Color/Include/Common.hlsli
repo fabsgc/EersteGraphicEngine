@@ -65,3 +65,15 @@ float2 GetCorrectedTextureCoordinate(float2 textureCoordinate)
     return textureCoordinate;
 #endif
 }
+
+float3 GetVectorColorContribution(float4 light, float3 color)
+{
+    // Color (.rgb) * Intensity (.a)
+    return light.rgb * light.a * color;
+}
+
+float3 GetScalarColorContribution(float4 light, float color)
+{
+    // Color (.rgb) * Intensity (.a)
+    return light.rgb * light.a * color;
+}

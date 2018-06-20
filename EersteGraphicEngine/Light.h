@@ -45,6 +45,9 @@ namespace ege
         
     public:
         static const XMFLOAT4 DefaultLightColor;
+        static const bool     DefaultCastShadow;
+        static const bool     DefaultDrawLightModel;
+        static const bool     DefaultIsEnabled;
 
     protected:
         RenderAPI&        _renderAPI;

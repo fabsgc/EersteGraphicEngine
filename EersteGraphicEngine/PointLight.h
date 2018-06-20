@@ -11,9 +11,12 @@ namespace ege
         PointLight();
         ~PointLight();
 
-        void Initialise() override;
-        void Update()  override;
-        void Draw()  override;
+        void         Initialise() override;
+        void         Update()  override;
+        void         Draw()  override;
+
+        void         SetRadius(float radius);
+        const float& GetRadius() const;
 
     protected:
         //TODO : remove when rotate method implemented

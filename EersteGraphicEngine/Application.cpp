@@ -4,6 +4,8 @@
 #include "ThirdPersonCamera.h"
 #include "FirstPersonCamera.h"
 #include "DirectionalLight.h"
+#include "PointLight.h"
+#include "SpotLight.h"
 #include "EventManager.h"
 #include "AmbientLight.h"
 #include "Node.h"
@@ -53,30 +55,60 @@ namespace ege
 
         SPtr<Node> node                = ege_shared_ptr_new<Node>();
         SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
+
         SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
+
+        SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        SPtr<CityModel> wind2 = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        //SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+
+        sun->SetDrawLightModel(true);
+        lamp->SetDrawLightModel(true);
 
         _scene->Initialise();
         camera->Initialise();
         ambient->Initialise();
         sun->Initialise();
+        lamp->Initialise();
+
         wind->Initialise();
-
+        wind2->Initialise();
         wind->RotatePitch(XM_PIDIV4);
+        wind2->RotatePitch(XM_PIDIV4);
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.6f));
+        wind->GoTo(5.0f, 0.0, 0.0f);
+        wind2->GoTo(25.0f, 0.0, 0.0f);
 
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.2f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
         sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
+        lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
+        lamp->SetRadius(35.0f);
+
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);
-        node->InsertEntity("sun", sun);
+        //node->InsertEntity("sun", sun);
+        node->InsertEntity("lamp", lamp);
         node->InsertEntity("wind", wind);
+        node->InsertEntity("wind-2", wind2);
+
+        for (INT8 i = -2; i <= 2; i++)
+        {
+            for (INT8 j = -2; j <= 2; j++)
+            {
+                SPtr<CityModel> model = ege_shared_ptr_new<CityModel>("grass", "grass-diffuse", "grass-specular");
+                model->Initialise();
+                model->GoTo(i * 20.0f, 0.0f, j * 20.0f);
+                node->InsertEntity("grass-" + ToString(i) + "-" + ToString(j), model);
+            }
+        }
 
         _scene->InsertCamera("camera", camera);
-        _scene->InsertLight("sun", sun);
+        //_scene->InsertLight("sun", sun);
+        _scene->InsertLight("lamp", lamp);
         _scene->InsertNode("root", node);
 
         _scene->SetActiveCamera(camera);

@@ -12,9 +12,11 @@ namespace ege
         , _radius(DefaultRadius)
     {
         _position    = DefaultPosition;
+
         _lightModel = ege_shared_ptr_new<LightModel>("spot-light");
         _lightModel->Initialise();
         _lightModel->GoTo(_position);
+        _lightModel->SetColor(Color(Colors::Yellow));
     }
 
     SpotLight::~SpotLight()
@@ -44,6 +46,7 @@ namespace ege
         constantBufferUpdate->LightColor     = _color;
         constantBufferUpdate->LightDirection = _direction;
         constantBufferUpdate->LightPosition  = _position;
+        constantBufferUpdate->LightRadius    = _radius;
         constantBufferUpdate->LightType      = static_cast<UINT>(_type);
     }
 
@@ -55,5 +58,15 @@ namespace ege
     void SpotLight::SetDirection(XMFLOAT3 direction)
     {
         _direction = direction;
+    }
+
+    void SpotLight::SetRadius(float radius)
+    {
+        _radius = radius;
+    }
+
+    const float& SpotLight::GetRadius() const
+    {
+        return _radius;
     }
 }

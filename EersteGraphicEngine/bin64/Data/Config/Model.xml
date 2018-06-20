@@ -21,8 +21,8 @@
   <model name="road-10" file="City/Road/Road-10.obj"/>
   <model name="road-11" file="City/Road/Road-11.obj"/>-->
 
-  <!--<model name="map" file="City/Nature/Map.obj"/>
-  <model name="grass" file="City/Nature/Grass.obj"/>-->
+  <!--<model name="map" file="City/Nature/Map.obj"/>-->
+  <model name="grass" file="City/Nature/Grass.obj"/>
 
   <model name="building-1" file="City/Building/Building-1.obj"/>
   <!--<model name="building-2" file="City/Building/Building-2.obj"/>
