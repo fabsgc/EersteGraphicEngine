@@ -103,13 +103,13 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
 
     if (n_dot_l > 0)
     {
-		// D = kd * ld * md
+        // D = kd * ld * md
         colorComponent.Diffuse += max(n_dot_l, 0.0f) * LightColor.rgb * LightColor.a * pixelComponent.Diffuse.rgb;
 
-		// R = I - 2(n.I) * n
+        // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightDirection, pixelComponent.Normal));
 
-		// S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
+        // S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
         colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a;
     }
 
