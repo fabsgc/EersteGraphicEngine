@@ -6,6 +6,8 @@
 *.VC.db
 *.iobj
 *.ipdb
+*.asm
+*.cso
 Debug/
 Release/
 x64/

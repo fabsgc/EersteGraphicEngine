@@ -10,8 +10,8 @@
         <input handler="QUIT" key="ESCAPE" button="BACK"/>
         <input handler="ZOOM_UP" key="ADD" button="RB"/>
         <input handler="ZOOM_DOWN" key="SUBTRACT" button="LB"/>
-        <input handler="GO_UP" key="SPACE" button=""/>
-        <input handler="GO_DOWN" key="SHIFT" button=""/>
+        <input handler="GO_UP" key="SPACE" button="RT"/>
+        <input handler="GO_DOWN" key="SHIFT" button="LT"/>
         <input handler="GO_FORWARD" key="Z" button=""/>
         <input handler="GO_BACKWARD" key="S" button=""/>
         <input handler="GO_LEFT" key="Q" button=""/>

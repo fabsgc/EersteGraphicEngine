@@ -23,7 +23,7 @@ namespace ege
         _hasSpecularTexture = true;
         _hasNormalTexture = false;
 
-        _specularPower = 1024.0f;
+        _specularPower = 16.0f;
 
         InsertTexture(0, gTextureManager().GetPtr(_diffuseName));
         InsertTexture(1, gTextureManager().GetPtr(_specularName));

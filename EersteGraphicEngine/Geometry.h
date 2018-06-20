@@ -5,6 +5,7 @@
 #include "IDrawable.h"
 #include "RenderAPI.h"
 #include "VertexDesc.h"
+#include "Color.h"
 
 namespace ege
 {
@@ -14,9 +15,10 @@ namespace ege
         Geometry();
         ~Geometry();
 
-        void Build(SPtr<ModelDesc> modelDesc);
+        void Build(SPtr<ModelDesc> modelDesc = nullptr);
         void Update() override;
         void Draw() override;
+        void SetColor(const Color color);
 
     private:
         friend Model;

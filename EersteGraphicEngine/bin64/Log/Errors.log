@@ -321,3 +321,52 @@ Time: 14:38:03
 Error: Resource  not found
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 19 2018
+Time: 20:48:01
+Error: Resource house-1 not found
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: Jun 20 2018
+Time: 19:57:27
+Error: Can't load scene : Data/Model/LightModel/SpotLight.obj
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 20 2018
+Time: 19:56:42
+Error: Resource wind-turbine-1 not found
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 20 2018
+Time: 19:56:42
+Error: Resource wind-turbine-1 not found
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 20 2018
+Time: 19:56:42
+Error: Resource grass-1 not found
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<struct ege::ModelDesc>::GetPtr
+Date: Jun 20 2018
+Time: 19:56:42
+Error: Resource grass-1 not found
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\texture.cpp:24
+Inside ege::Texture::Initialise
+Date: Jun 20 2018
+Time: 22:12:05
+Error: Can't load texture from file : Data/Texture/City/Nature/Building-1-diffuse.dds
+Condition: 0
+############################################: 

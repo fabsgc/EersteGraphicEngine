@@ -10,19 +10,20 @@ namespace ege
     {
     public:
         PerspectiveCamera(CameraType type);
-        virtual ~PerspectiveCamera();
+        virtual ~PerspectiveCamera() = 0;
 
-        void              Update();
-        virtual void      ComputeProjectionMatrix() override {};
+        void             Update();
+        virtual void     ComputeProjectionMatrix() override {};
 
-        const float&      GetRotationSpeed() const;
-        virtual void      Pitch(float angle);
-        virtual void      Roll(float angle);
-        virtual void      Yaw(float angle);
-        const XMFLOAT3&   GetRight() const;
-        const XMFLOAT3&   GetLook() const;
-        const XMFLOAT3&   GetUp() const;
-        const float&      GetFov() const;
+        virtual void     Pitch(float angle);
+        virtual void     Roll(float angle);
+        virtual void     Yaw(float angle);
+
+        const float&     GetRotationSpeed() const;
+        const XMFLOAT3&  GetRight() const;
+        const XMFLOAT3&  GetLook() const;
+        const XMFLOAT3&  GetUp() const;
+        const float&     GetFov() const;
 
     public:
         static const float DefaultFov;

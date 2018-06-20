@@ -9,8 +9,8 @@
 
 namespace ege
 {
-    const float ThirdPersonCamera::DefaultMinZoom = 0.5f;
-    const float ThirdPersonCamera::DefaultMaxZoom = 512.0f;
+    const float ThirdPersonCamera::DefaultMinZoom = 0.25f;
+    const float ThirdPersonCamera::DefaultMaxZoom = 1024.0f;
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
@@ -40,19 +40,21 @@ namespace ege
             Walk(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
             Walk(-_translationSpeed * deltaTime * speedModulation);
+
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
             Strafe(-_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
             Strafe(_translationSpeed * deltaTime * speedModulation);
+
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
             Up(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
             Up(-_translationSpeed * deltaTime * speedModulation);
 
         if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(_translationSpeed * deltaTime * 3.0f);
+            Zoom(_translationSpeed * deltaTime * speedModulation);
         else if (_inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
-            Zoom(-_translationSpeed * deltaTime * 3.0f);
+            Zoom(-_translationSpeed * deltaTime * speedModulation);
 
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -96,11 +98,11 @@ namespace ege
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * _translationSpeed * 64.0f);
+            Zoom(deltaTime * _translationSpeed * speedModulation * 3.0f);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * _translationSpeed * 64.0f);
+            Zoom(-deltaTime * _translationSpeed * speedModulation * 3.0f);
             break;
         }
 
@@ -112,8 +114,8 @@ namespace ege
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float angleX = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f ;
+            float angleX = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
+            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
 
             if (abs(joypadLY) > 0.0f)
                 Walk(joypadLY * _translationSpeed * deltaTime *  speedModulation);
@@ -124,11 +126,6 @@ namespace ege
                 Pitch(angleY);
             if (abs(angleX) > 0.0f)
                 Yaw(angleX);
-
-            if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                Up(-_translationSpeed * deltaTime * speedModulation);
-            else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                Up(_translationSpeed * deltaTime * speedModulation);
         }
 
         PerspectiveCamera::Update();
@@ -241,5 +238,20 @@ namespace ege
         _radius = MathUtility::Clamp(_radius, DefaultMinZoom, DefaultMaxZoom);
 
         _needUpdate = true;
+    }
+
+    void ThirdPersonCamera::Move(XMVECTOR movement)
+    {
+
+    }
+
+    void ThirdPersonCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {
+
+    }
+
+    void ThirdPersonCamera::Rotate(XMVECTOR eulerAngles)
+    {
+
     }
 }

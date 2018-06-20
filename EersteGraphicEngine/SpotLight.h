@@ -20,6 +20,9 @@ namespace ege
         //TODO : remove when rotate method implemented
         void            SetDirection(XMFLOAT3 direction);
 
+        void            SetRadius(float radius);
+        const float&    GetRadius() const;
+
     protected:
         //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultDirection;

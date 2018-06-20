@@ -50,6 +50,11 @@ float4 PS_MAIN( PS_INPUT IN ) : SV_Target
         break;
     }
 
+    if (HasSpecularTexture == true)
+    {
+        colorComponent.Specular.xyz *= SpecularTexture.Sample(ColorSampler, IN.Texture).xyz;
+    }
+
     OUT.rgb = colorComponent.Ambient + colorComponent.Diffuse + colorComponent.Specular;
     OUT.a   = 1.0f;
 
@@ -64,6 +69,24 @@ ColorComponent ComputeAmbientLight(PixelComponent pixelComponent, ColorComponent
 
 ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
 {
+    float3 refVector = (float3) 0;
+    float3 lightWorlDdirection = normalize(-IN.LightWorldDirection.xyz);
+    float n_dot_l = dot(lightWorlDdirection, normalize(IN.Normal));
+
+    if (n_dot_l > 0)
+    {
+        float  intensity = IN.LightWorldDirection.w;
+        float  light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
+
+        colorComponent.Diffuse += GetVectorColorContribution(max(n_dot_l, 0.0f) * LightColor, LightColor.rgb) * intensity;
+
+        // R = I - 2(n.I) * n
+        refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
+
+        // S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
+        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * intensity;
+    }
+
     return colorComponent;
 }
 
@@ -80,14 +103,14 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
 
     if (n_dot_l > 0)
     {
-		// D = kd * ld * md
+        // D = kd * ld * md
         colorComponent.Diffuse += max(n_dot_l, 0.0f) * LightColor.rgb * LightColor.a * pixelComponent.Diffuse.rgb;
 
-		// R = I - 2(n.I) * n
+        // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightDirection, pixelComponent.Normal));
 
-		// S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
-        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * pixelComponent.Specular.rgb * pixelComponent.Diffuse.rgb;
+        // S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
+        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a;
     }
 
     return colorComponent;
@@ -110,16 +133,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
         pixelComponent.Diffuse = IN.Color;
     }
 
-    if (HasSpecularTexture == true)
-    {
-        pixelComponent.Specular = SpecularTexture.Sample(ColorSampler, IN.Texture).xyz;
-    }
-    else
-    {
-        pixelComponent.Specular = SpecularColor.rgb;
-    }
-
-    if (HasNormalTexture == true)
+    if (HasNormalTexture == true) 
     {
         float3 sampledNormal = (2 * NormalTexture.Sample(ColorSampler, IN.Texture).xyz) - 1.0f;
         float3x3 tbn = float3x3(IN.Tangent, IN.Binormal, IN.Normal);

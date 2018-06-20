@@ -65,6 +65,26 @@ namespace ege
         GoTo(XMLoadFloat3(&position));
     }
 
+    void IMoveable::GoTo(float x, float y, float z)
+    {
+        GoTo(XMFLOAT3(x, y, z));
+    }
+
+    void IMoveable::GoToX(float x)
+    {
+        GoTo(x, 0.0f, 0.0f);
+    }
+
+    void IMoveable::GoToY(float y)
+    {
+        GoTo(0.0f, y, 0.0f);
+    }
+
+    void IMoveable::GoToZ(float z)
+    {
+        GoTo(0.0f, 0.0f, z);
+    }
+
     void IMoveable::Scale(XMVECTOR origin, XMVECTOR scale)
     {
         XMFLOAT3 C = XMFLOAT3(0.0f, 0.0f, 0.0f);

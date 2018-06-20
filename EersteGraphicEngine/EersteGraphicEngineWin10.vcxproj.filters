@@ -414,9 +414,6 @@
     <ClCompile Include="SpotLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
     </ClCompile>
-    <ClCompile Include="LightSchema.cpp">
-      <Filter>Source Files\Core\Renderer\Light\Light</Filter>
-    </ClCompile>
     <ClCompile Include="OrthographicCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
@@ -440,6 +437,9 @@
     </ClCompile>
     <ClCompile Include="CityModel.cpp">
       <Filter>Source Files\App\Model\City</Filter>
+    </ClCompile>
+    <ClCompile Include="LightModel.cpp">
+      <Filter>Source Files\Core\Renderer\Light\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -680,9 +680,6 @@
     <ClInclude Include="SpotLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
-    <ClInclude Include="LightSchema.h">
-      <Filter>Header Files\Core\Renderer\Light\Light</Filter>
-    </ClInclude>
     <ClInclude Include="OrthographicCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
@@ -694,6 +691,9 @@
     </ClInclude>
     <ClInclude Include="CityModel.h">
       <Filter>Header Files\App\Model\City</Filter>
+    </ClInclude>
+    <ClInclude Include="LightModel.h">
+      <Filter>Header Files\Core\Renderer\Light\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

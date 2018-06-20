@@ -1,21 +1,21 @@
-#include "LightSchema.h"
+#include "LightModel.h"
 
 #include "ModelManager.h"
 #include "DefaultMaterial.h"
 
 namespace ege
 {
-    LightSchema::LightSchema(String name)
+    LightModel::LightModel(String name)
         : Model()
         , _name(name)
     {
     }
 
-    LightSchema::~LightSchema()
+    LightModel::~LightModel()
     {
     }
 
-    void LightSchema::Initialise()
+    void LightModel::Initialise()
     {
         Build(gModelManager().GetPtr(_name));
 

@@ -9,7 +9,7 @@ namespace ege
     {
         A, B, X, Y,
         START, BACK,
-        LB, LS, RB, RS,
+        LB, LT, RB, RT,
         ARROW_LEFT, ARROW_RIGHT, ARROW_UP, ARROW_DOWN
     };
 
@@ -133,6 +133,7 @@ namespace ege
         ThumbStick&              GetThumbStick(const String& label);
 
     private:
+        void                     UpdateThumbStick();
         void                     OnStartUp() override;
         void                     OnShutDown() override {};
         void                     CheckJoypadConnected();

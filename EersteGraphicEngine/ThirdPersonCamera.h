@@ -23,6 +23,10 @@ namespace ege
         void Up(float distance);
         void Zoom(float zoom);
 
+        virtual void Move(XMVECTOR movement) override;
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void Rotate(XMVECTOR eulerAngles) override;
+
     protected:
         static const float DefaultMinZoom;
         static const float DefaultMaxZoom;

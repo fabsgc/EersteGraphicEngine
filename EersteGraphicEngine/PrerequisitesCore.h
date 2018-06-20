@@ -178,7 +178,7 @@ namespace ege
     class  PointLight;
     class  AmbientLight;
     class  DirectionalLight;
-    class  LightSchema;
+    class  LightModel;
 
     class  Camera;
     class  Frustum;
@@ -187,4 +187,6 @@ namespace ege
     class  FlyingCamera;
     class  FirstPersonCamera;
     class  ThirdPersonCamera;
+
+    class  Color;
 }

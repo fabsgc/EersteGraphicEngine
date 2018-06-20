@@ -48,6 +48,7 @@ namespace ege
 
     void Model::Build(SPtr<ModelDesc> modelDesc)
     {
+        _modelDesc = modelDesc;
         _geometry.Build(modelDesc);
     }
 
@@ -64,6 +65,12 @@ namespace ege
     SPtr<Material> Model::GetMaterial()
     {
         return _material;
+    }
+
+    void Model::SetColor(const Color color)
+    {
+        _geometry.SetColor(color);
+        _geometry.Build(nullptr);
     }
 
     void Model::UpdateLocalPosition()

@@ -5,11 +5,11 @@
 
 namespace ege
 {
-    class LightSchema : public Model
+    class LightModel : public Model
     {
     public:
-        LightSchema(String name);
-        ~LightSchema();
+        LightModel(String name);
+        ~LightModel();
         void Initialise() override;
 
     protected:

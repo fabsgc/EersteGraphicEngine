@@ -18,8 +18,11 @@ namespace ege
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         ID3D11Device* device = _renderAPI.GetDevice()->GetD3D11Device();
 
-        _vertices = modelDesc->Vertices;
-        _indices = modelDesc->Indices;
+        if (modelDesc != nullptr)
+        {
+            _vertices = modelDesc->Vertices;
+            _indices = modelDesc->Indices;
+        }
 
         //############# Set vertex buffer
         D3D11_BUFFER_DESC vbd;
@@ -68,5 +71,15 @@ namespace ege
 
         context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
         context->DrawIndexed((UINT)_indices.size(), 0, 0);
+    }
+
+    void Geometry::SetColor(const Color color)
+    {
+        XMFLOAT4 c = color.ToXMFLOAT4();
+
+        for (auto it = _vertices.begin(); it != _vertices.end(); it++)
+        {
+            (*it).Color = c;
+        }
     }
 }
