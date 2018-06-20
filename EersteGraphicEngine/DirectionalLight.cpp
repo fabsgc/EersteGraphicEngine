@@ -8,10 +8,10 @@ namespace ege
         : Light(LightType::DirectionalLight)
         , _direction(DefaultDirection)
     {
-        _lightSchema = ege_shared_ptr_new<LightSchema>("directional-light");
-        _lightSchema->Initialise();
+        _lightModel = ege_shared_ptr_new<LightModel>("directional-light");
+        _lightModel->Initialise();
 
-        _lightSchema->MoveY(8.0f);
+        _lightModel->GoTo(20.0f, 20.0f, 20.0f);
     }
 
     DirectionalLight::~DirectionalLight()
@@ -24,14 +24,14 @@ namespace ege
 
     void DirectionalLight::Update()
     {
-        _lightSchema->Update();
+        _lightModel->Update();
     }
 
     void DirectionalLight::Draw()
     {
-        if (_drawLightSchema)
+        if (_drawLightModel)
         {
-            _lightSchema->Draw();
+            _lightModel->Draw();
         }
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();

@@ -180,7 +180,7 @@
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp" />
     <ClCompile Include="Light.cpp" />
-    <ClCompile Include="LightSchema.cpp" />
+    <ClCompile Include="LightModel.cpp" />
     <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -259,7 +259,7 @@
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h" />
     <ClInclude Include="Light.h" />
-    <ClInclude Include="LightSchema.h" />
+    <ClInclude Include="LightModel.h" />
     <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Material.h" />

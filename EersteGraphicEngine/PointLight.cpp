@@ -10,8 +10,9 @@ namespace ege
         , _radius(DefaultRadius)
     {
         _position = DefaultPosition;
-        _lightSchema = ege_shared_ptr_new<LightSchema>("point-light");
-        _lightSchema->Initialise();
+        _lightModel = ege_shared_ptr_new<LightModel>("point-light");
+        _lightModel->Initialise();
+        _lightModel->GoTo(_position);
     }
 
     PointLight::~PointLight()
@@ -24,14 +25,14 @@ namespace ege
 
     void PointLight::Update()
     {
-        _lightSchema->Update();
+        _lightModel->Update();
     }
 
     void PointLight::Draw()
     {
-        if (_drawLightSchema)
+        if (_drawLightModel)
         {
-            _lightSchema->Draw();
+            _lightModel->Draw();
         }
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();

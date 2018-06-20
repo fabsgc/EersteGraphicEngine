@@ -9,7 +9,7 @@ namespace ege
         , _renderAPI(gRenderAPI())
         , _type(type)
         , _color(DefaultLightColor)
-        , _drawLightSchema(false)
+        , _drawLightModel(false)
         , _isEnabled(true)
         , _castShadow(true)
     {
@@ -31,21 +31,6 @@ namespace ege
     {
     }
 
-    LightType Light::GetType()
-    {
-        return _type;
-    }
-
-    void Light::SetColor(XMFLOAT4 color)
-    {
-        _color = color;
-    }
-
-    const XMFLOAT4& Light::GetColor() const
-    {
-        return _color;
-    }
-
     void Light::UpdateLocalPosition()
     {
         XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
@@ -53,9 +38,24 @@ namespace ege
         XMStoreFloat3(&_position, position);
     }
 
-    void Light::SetDrawLightSchema(bool drawLightSchema)
+    const LightType& Light::GetType() const
     {
-        _drawLightSchema = drawLightSchema;
+        return _type;
+    }
+
+    const XMFLOAT4& Light::GetColor() const
+    {
+        return _color;
+    }
+
+    void Light::SetColor(XMFLOAT4 color)
+    {
+        _color = color;
+    }
+
+    void Light::SetDrawLightModel(bool drawLightModel)
+    {
+        _drawLightModel = drawLightModel;
     }
 
     void Light::SetCastShadow(bool castShadow)
@@ -68,12 +68,12 @@ namespace ege
         _isEnabled = enabled;
     }
 
-    bool Light::GetCastShadow()
+    const bool Light::GetCastShadow() const
     {
         return _castShadow;
     }
 
-    bool Light::IsEnabled()
+    const bool Light::IsEnabled() const
     {
         return _isEnabled;
     }

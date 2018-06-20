@@ -23,6 +23,10 @@ namespace ege
 
         virtual void GoTo(XMVECTOR position);
         virtual void GoTo(XMFLOAT3 position);
+        virtual void GoTo(float x, float y, float z);
+        virtual void GoToX(float x);
+        virtual void GoToY(float y);
+        virtual void GoToZ(float z);
 
         virtual void Scale(XMVECTOR origin, XMVECTOR scale);
         virtual void Scale(XMVECTOR scale);

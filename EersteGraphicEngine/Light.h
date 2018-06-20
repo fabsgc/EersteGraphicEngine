@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "LightSchema.h"
+#include "LightModel.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
 
@@ -26,22 +26,22 @@ namespace ege
         virtual void    Update() = 0;
         virtual void    Draw() = 0;
 
-        LightType       GetType();
-        const XMFLOAT4& GetColor() const;
-        void            SetColor(XMFLOAT4 color);
+        const LightType& GetType() const;
+        const XMFLOAT4&  GetColor() const;
+        void             SetColor(XMFLOAT4 color);
 
-        virtual void    UpdateLocalPosition() override;
-        virtual void    Move(XMVECTOR movement) override {};
-        virtual void    Scale(XMVECTOR origin, XMVECTOR scale) override {};
-        virtual void    Scale(XMVECTOR scale) override {};
-        virtual void    Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
-        virtual void    Rotate(XMVECTOR eulerAngles) override {};
+        virtual void     UpdateLocalPosition() override;
+        virtual void     Move(XMVECTOR movement) override {};
+        virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
+        virtual void     Scale(XMVECTOR scale) override {};
+        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void     Rotate(XMVECTOR eulerAngles) override {};
 
-        void            SetDrawLightSchema(bool drawLightSchema);
-        void            SetCastShadow(bool castShadow);
-        void            SetEnabled(bool enabled);
-        bool            GetCastShadow();
-        bool            IsEnabled();
+        void             SetDrawLightModel(bool drawLightModel);
+        void             SetCastShadow(bool castShadow);
+        void             SetEnabled(bool enabled);
+        const bool       GetCastShadow() const;
+        const bool       IsEnabled() const;
         
     public:
         static const XMFLOAT4 DefaultLightColor;
@@ -51,9 +51,10 @@ namespace ege
 
         LightType         _type;
         XMFLOAT4          _color;
+        SPtr<LightModel> _lightModel;
+
         bool              _isEnabled;
         bool              _castShadow;
-        bool              _drawLightSchema;
-        SPtr<LightSchema> _lightSchema;
+        bool              _drawLightModel;
     };
 }

@@ -5,9 +5,9 @@
   <model name="sphere" file="Primitive/Sphere.obj"/>
   <!--<model name="landscape" file="Primitive/Landscape.obj"/>-->
   
-  <model name="spot-light" file="LightSchema/SpotLight.obj"/>
-  <model name="point-light" file="LightSchema/PointLight.obj"/>
-  <model name="directional-light" file="LightSchema/DirectionalLight.obj"/>
+  <model name="spot-light" file="LightModel/SpotLight.obj"/>
+  <model name="point-light" file="LightModel/PointLight.obj"/>
+  <model name="directional-light" file="LightModel/DirectionalLight.obj"/>
 
   <!--<model name="road-1" file="City/Road/Road-1.obj"/>
   <model name="road-2" file="City/Road/Road-2.obj"/>
