@@ -13,6 +13,8 @@ struct PS_INPUT
 
     float4 LightWorldDirection : COLOR2;
     float3 LightViewDirection : COLOR3;
+
+    float3 LightDirection : COLOR4;
 };
 
 ColorComponent ComputeAmbientLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN);
@@ -78,7 +80,8 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
         float  intensity = IN.LightWorldDirection.w;
         float  light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
 
-        colorComponent.Diffuse += GetVectorColorContribution(max(n_dot_l, 0.0f) * LightColor, LightColor.rgb) * intensity;
+        // D = kd * ld * md
+        colorComponent.Diffuse += max(n_dot_l, 0.0f) * LightColor.rgb * LightColor.a * intensity;
 
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
@@ -92,6 +95,31 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
 
 ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN)
 {
+    float3 refVector = (float3) 0;
+    float3 lightWorlDdirection = normalize(-IN.LightWorldDirection.xyz);
+    float n_dot_l = dot(lightWorlDdirection, normalize(IN.Normal));
+
+    if (n_dot_l > 0)
+    {
+        float intensity = IN.LightWorldDirection.w;
+        float light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
+        float lightAngle = dot(IN.LightDirection, lightWorlDdirection);
+
+        if(lightAngle > 0)
+        {
+            float spotFactor = smoothstep(LightOuterAngle, LightInnerAngle, lightAngle);
+
+            // D = kd * ld * md
+            colorComponent.Diffuse += max(n_dot_l, 0.0f) * LightColor.rgb * LightColor.a *  intensity * spotFactor;
+
+            // R = I - 2(n.I) * n
+            refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
+
+            // S = max(dot(V.R),0)^P;
+            colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * intensity * spotFactor;
+        }
+    }
+
     return colorComponent;
 }
 
@@ -109,7 +137,7 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightDirection, pixelComponent.Normal));
 
-        // S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
+        // S = max(dot(V.R),0)^P;
         colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a;
     }
 
@@ -133,7 +161,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
         pixelComponent.Diffuse = IN.Color;
     }
 
-    if (HasNormalTexture == true) 
+    if (HasNormalTexture == true)
     {
         float3 sampledNormal = (2 * NormalTexture.Sample(ColorSampler, IN.Texture).xyz) - 1.0f;
         float3x3 tbn = float3x3(IN.Tangent, IN.Binormal, IN.Normal);

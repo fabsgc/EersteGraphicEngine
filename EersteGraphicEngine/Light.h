@@ -5,7 +5,6 @@
 #include "RenderAPI.h"
 #include "IEntity.h"
 
-
 namespace ege
 {
     enum class LightType
@@ -28,7 +27,8 @@ namespace ege
 
         const LightType& GetType() const;
         const XMFLOAT4&  GetColor() const;
-        void             SetColor(XMFLOAT4 color);
+        void             SetColor(const XMFLOAT4 color);
+        void             SetColor(const Color color);
 
         virtual void     UpdateLocalPosition() override;
         virtual void     Move(XMVECTOR movement) override {};

@@ -232,6 +232,12 @@
     <Filter Include="Source Files\App\Model\Primitive">
       <UniqueIdentifier>{344c9ee2-e877-46aa-8582-cb1ab408dda3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Util">
+      <UniqueIdentifier>{8e5d78d0-28ce-4bf6-a776-5a357e2a3845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Util">
+      <UniqueIdentifier>{86ae2680-5c01-4942-957b-9bc25b681113}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -440,6 +446,9 @@
     </ClCompile>
     <ClCompile Include="LightModel.cpp">
       <Filter>Source Files\Core\Renderer\Light\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\Core\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -694,6 +703,9 @@
     </ClInclude>
     <ClInclude Include="LightModel.h">
       <Filter>Header Files\Core\Renderer\Light\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Core\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

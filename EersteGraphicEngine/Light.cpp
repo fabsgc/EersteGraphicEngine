@@ -56,6 +56,11 @@ namespace ege
         _color = color;
     }
 
+    void Light::SetColor(const Color color)
+    {
+        _color = color.ToXMFLOAT4();
+    }
+
     void Light::SetDrawLightModel(bool drawLightModel)
     {
         _drawLightModel = drawLightModel;

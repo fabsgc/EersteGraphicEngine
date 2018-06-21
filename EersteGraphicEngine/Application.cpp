@@ -58,7 +58,8 @@ namespace ege
 
         SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
+        SPtr<PointLight> lamp = ege_shared_ptr_new<PointLight>();
+        SPtr<SpotLight> spot           = ege_shared_ptr_new<SpotLight>();
 
         SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         SPtr<CityModel> wind2 = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
@@ -85,13 +86,18 @@ namespace ege
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
         sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
-        lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
-        lamp->SetRadius(35.0f);
+        lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.5f));
+        lamp->SetRadius(40.0f);
+
+        spot->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.5f));
+        spot->SetDirection(XMFLOAT3(-5.0f, -1.0f, -1.0f));
+        spot->SetRadius(35.0f);
 
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);
         //node->InsertEntity("sun", sun);
-        node->InsertEntity("lamp", lamp);
+        //node->InsertEntity("lamp", lamp);
+        node->InsertEntity("spot", spot);
         node->InsertEntity("wind", wind);
         node->InsertEntity("wind-2", wind2);
 
@@ -108,7 +114,8 @@ namespace ege
 
         _scene->InsertCamera("camera", camera);
         //_scene->InsertLight("sun", sun);
-        _scene->InsertLight("lamp", lamp);
+        //_scene->InsertLight("lamp", lamp);
+        _scene->InsertLight("spot", spot);
         _scene->InsertNode("root", node);
 
         _scene->SetActiveCamera(camera);

@@ -70,8 +70,10 @@ namespace ege
         /* PADDING */ float    Padding1;
         XMFLOAT3 LightPosition;
         float    LightRadius;
+        float    LightInnerAngle;
+        float    LightOuterAngle;
         UINT     LightType;
-        /* PADDING */ float    Padding3[3];
+        /* PADDING */ float    Padding2[1];
 
         LightConstantBuffer()
             : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))

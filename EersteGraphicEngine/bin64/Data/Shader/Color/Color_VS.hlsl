@@ -23,6 +23,8 @@ struct VS_OUTPUT
     
     float4 LightWorldDirection : COLOR2;
     float3 LightViewDirection : COLOR3;
+
+    float3 LightDirection : COLOR4;
 };
 
 VS_OUTPUT VS_MAIN( VS_INPUT IN )
@@ -50,6 +52,9 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
 
     //Compute vector between light and camera
     output.LightViewDirection = normalize(CameraPosition - worldPosition);
+
+    //Normalize light direction (light look at)
+    output.LightDirection = normalize(LightDirection);
 
     return output;
 }

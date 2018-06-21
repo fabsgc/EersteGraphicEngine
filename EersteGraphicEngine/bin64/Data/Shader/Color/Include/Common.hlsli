@@ -34,6 +34,8 @@ cbuffer LightConstantBuffer : register(b2)
     float3 LightDirection;
     float3 LightPosition;
     float  LightRadius;
+    float  LightInnerAngle;
+    float  LightOuterAngle;
     int    LightType;
 }
 

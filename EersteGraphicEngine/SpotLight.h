@@ -22,6 +22,10 @@ namespace ege
 
         void            SetRadius(float radius);
         const float&    GetRadius() const;
+        void            SetInnerAngle(float innerAngle);
+        const float&    GetInnerAngle() const;
+        void            SetOuterAngle(float outerAngle);
+        const float&    GetOuterAngle() const;
 
     protected:
         //TODO : remove when rotate method implemented
@@ -29,9 +33,13 @@ namespace ege
         //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultPosition;
         static const float    DefaultRadius;
+        static const float    DefaultInnerAngle;
+        static const float    DefaultOuterAngle;
 
     protected:
         XMFLOAT3 _direction;
         float    _radius;
+        float    _innerAngle;
+        float    _outerAngle;
     };
 }

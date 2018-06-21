@@ -156,6 +156,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CityMaterial.cpp" />
     <ClCompile Include="CityModel.cpp" />
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Cube.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CityMaterial.h" />
     <ClInclude Include="CityModel.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CoreApplication.h" />
