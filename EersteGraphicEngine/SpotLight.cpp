@@ -5,7 +5,7 @@ namespace ege
     const XMFLOAT3 SpotLight::DefaultPosition   = XMFLOAT3(-2.0f, 2.0f, -2.0f);
     const XMFLOAT3 SpotLight::DefaultDirection  = XMFLOAT3(0.5f, -0.5f, 0.5f);
     const float    SpotLight::DefaultRadius     = 5.0f;
-    const float    SpotLight::DefaultInnerAngle = 0.4f;
+    const float    SpotLight::DefaultInnerAngle = 0.5f;
     const float    SpotLight::DefaultOuterAngle = 0.1f;
 
     SpotLight::SpotLight()
@@ -47,13 +47,18 @@ namespace ege
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
 
-        constantBufferUpdate->LightColor      = _color;
-        constantBufferUpdate->LightDirection  = _direction;
-        constantBufferUpdate->LightPosition   = _position;
-        constantBufferUpdate->LightRadius     = _radius;
-        constantBufferUpdate->LightInnerAngle = _innerAngle;
-        constantBufferUpdate->LightOuterAngle = _outerAngle;
-        constantBufferUpdate->LightType       = static_cast<UINT>(_type);
+        UINT lightIndex = constantBufferUpdate->LightIndex;
+
+        constantBufferUpdate->Lights[lightIndex].LightColor = _color;
+        constantBufferUpdate->Lights[lightIndex].LightDirection  = _direction;
+        constantBufferUpdate->Lights[lightIndex].LightPosition   = _position;
+        constantBufferUpdate->Lights[lightIndex].LightRadius     = _radius;
+        constantBufferUpdate->Lights[lightIndex].LightInnerAngle = _innerAngle;
+        constantBufferUpdate->Lights[lightIndex].LightOuterAngle = _outerAngle;
+        constantBufferUpdate->Lights[lightIndex].LightType       = static_cast<UINT>(_type);
+
+        
+        constantBufferUpdate->LightIndex = lightIndex + 1;
     }
 
     const XMFLOAT3& SpotLight::GetDirection() const

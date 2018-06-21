@@ -67,6 +67,7 @@ namespace ege
 
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
+        spot->SetDrawLightModel(true);
 
         _scene->Initialise();
         camera->Initialise();
@@ -82,21 +83,21 @@ namespace ege
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 0.0f);
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.2f));
-        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 0.9f));
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.0f));
+        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.8f));
         sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
-        lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.5f));
+        lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 1.0f));
         lamp->SetRadius(40.0f);
 
-        spot->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.5f));
+        spot->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.0f));
         spot->SetDirection(XMFLOAT3(-5.0f, -1.0f, -1.0f));
         spot->SetRadius(35.0f);
 
         node->SetScene(_scene);
         node->InsertEntity("camera", camera);
-        //node->InsertEntity("sun", sun);
-        //node->InsertEntity("lamp", lamp);
+        node->InsertEntity("sun", sun);
+        node->InsertEntity("lamp", lamp);
         node->InsertEntity("spot", spot);
         node->InsertEntity("wind", wind);
         node->InsertEntity("wind-2", wind2);
@@ -113,8 +114,8 @@ namespace ege
         }
 
         _scene->InsertCamera("camera", camera);
-        //_scene->InsertLight("sun", sun);
-        //_scene->InsertLight("lamp", lamp);
+        _scene->InsertLight("sun", sun);
+        _scene->InsertLight("lamp", lamp);
         _scene->InsertLight("spot", spot);
         _scene->InsertNode("root", node);
 

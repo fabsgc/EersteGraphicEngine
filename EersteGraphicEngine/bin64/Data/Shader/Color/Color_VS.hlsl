@@ -12,6 +12,7 @@ struct VS_INPUT
 
 struct VS_OUTPUT
 {
+    float4 Localposition : POSITION;
     float4 Position : SV_POSITION;
     float4 Color : COLOR0;
     float2 Texture : TEXCOORD0;
@@ -20,17 +21,13 @@ struct VS_OUTPUT
     float3 Binormal : BINORMAL;
 
     float3 ViewWorldDirection : COLOR1;
-    
-    float4 LightWorldDirection : COLOR2;
-    float3 LightViewDirection : COLOR3;
-
-    float3 LightDirection : COLOR4;
 };
 
 VS_OUTPUT VS_MAIN( VS_INPUT IN )
 {
     VS_OUTPUT output = (VS_OUTPUT)0;
     
+    output.Localposition = IN.Position;
     output.Position = mul( IN.Position, World );
     output.Position = mul( output.Position, View );
     output.Position = mul( output.Position, Projection );
@@ -44,17 +41,6 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
 
     //Compute Camera vector from model
     output.ViewWorldDirection = normalize(worldPosition - CameraPosition);
-
-    //Compute vector between light and model
-    float3 lightWorldDirection = (LightPosition) - worldPosition;
-    output.LightWorldDirection.xyz = normalize(-(lightWorldDirection));
-    output.LightWorldDirection.w = saturate(1.0f - (length(lightWorldDirection) / LightRadius));
-
-    //Compute vector between light and camera
-    output.LightViewDirection = normalize(CameraPosition - worldPosition);
-
-    //Normalize light direction (light look at)
-    output.LightDirection = normalize(LightDirection);
 
     return output;
 }

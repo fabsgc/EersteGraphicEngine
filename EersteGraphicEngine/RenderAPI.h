@@ -13,6 +13,29 @@ namespace ege
         FRAME, OBJECT, LIGHT
     };
 
+    struct LightDesc
+    {
+        XMFLOAT4 LightColor;
+        XMFLOAT3 LightDirection;
+        /* PADDING */ float    Padding1;
+        XMFLOAT3 LightPosition;
+        float    LightRadius;
+        float    LightInnerAngle;
+        float    LightOuterAngle;
+        UINT     LightType;
+        /* PADDING */ float    Padding2;
+
+        LightDesc()
+            : LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , LightDirection(XMFLOAT3(1.0f, 1.0f, 1.0f))
+            , LightPosition(XMFLOAT3(1.0f, 1.0f, 1.0f))
+            , LightRadius(5.0f)
+            , LightInnerAngle(0.5f)
+            , LightOuterAngle(0.1f)
+            , LightType(0)
+        {}
+    };
+
     struct RenderDesc
     {
         UINT Msaa;
@@ -48,13 +71,16 @@ namespace ege
 
         XMFLOAT4 SpecularColor;
         float    SpecularPower;
+        float    EmitPower;
         BOOL     HasDiffuseTexture;
         BOOL     HasSpecularTexture;
         BOOL     HasNormalTexture;
+        /* PADDING */ float    Padding1[3];
 
         ObjectConstantBuffer()
             : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
             , SpecularPower(8.0f)
+            , EmitPower(0.0f)
             , HasDiffuseTexture(true)
             , HasSpecularTexture(true)
             , HasNormalTexture(true)
@@ -63,24 +89,13 @@ namespace ege
 
     struct LightConstantBuffer : public ConstantBuffer
     {
-        XMFLOAT4 AmbientColor;
-
-        XMFLOAT4 LightColor;
-        XMFLOAT3 LightDirection;
-        /* PADDING */ float    Padding1;
-        XMFLOAT3 LightPosition;
-        float    LightRadius;
-        float    LightInnerAngle;
-        float    LightOuterAngle;
-        UINT     LightType;
-        /* PADDING */ float    Padding2[1];
+        XMFLOAT4  AmbientColor;
+        UINT      LightIndex;
+        /* PADDING */ float    Padding1[3];
+        LightDesc Lights[8];
 
         LightConstantBuffer()
             : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
-            , LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
-            , LightDirection(XMFLOAT3(0.5f, -0.5f, 0.5f))
-            , LightPosition(XMFLOAT3(-2.0f, 2.0f, -2.0f))
-            , LightRadius(5.0f)
         {}
     };
 

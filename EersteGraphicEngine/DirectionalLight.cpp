@@ -38,9 +38,13 @@ namespace ege
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
 
-        constantBufferUpdate->LightColor     = _color;
-        constantBufferUpdate->LightDirection = _direction;
-        constantBufferUpdate->LightType      = static_cast<UINT>(_type);
+        UINT lightIndex = constantBufferUpdate->LightIndex;
+
+        constantBufferUpdate->Lights[lightIndex].LightColor     = _color;
+        constantBufferUpdate->Lights[lightIndex].LightDirection = _direction;
+        constantBufferUpdate->Lights[lightIndex].LightType      = static_cast<UINT>(_type);
+
+        constantBufferUpdate->LightIndex = lightIndex + 1;
     }
 
     const XMFLOAT3& DirectionalLight::GetDirection() const

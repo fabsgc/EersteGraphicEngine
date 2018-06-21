@@ -20,14 +20,17 @@ namespace ege
 
         const XMFLOAT4& GetSpecularColor() const;
         const float&    GetSpecularPower() const;
+        const float&    GetEmitPower() const;
         void            SetSpecularColor(XMFLOAT4& specularColor);
         void            SetSpecularPower(float specularPower);
+        void            SetEmitPower(float emitPower);
 
         void            InsertTexture(UINT slot, SPtr<Texture> texture);
 
     protected:
         static const XMFLOAT4 DefaultSpecularColor;
         static const float    DefaultSpecularPower;
+        static const float    DefaultEmitPower;
 
     protected:
         RenderAPI&               _renderAPI;
@@ -37,6 +40,8 @@ namespace ege
 
         XMFLOAT4                 _specularColor;
         float                    _specularPower;
+
+        float                    _emitPower;
 
         bool                     _hasDiffuseTexture;
         bool                     _hasSpecularTexture;

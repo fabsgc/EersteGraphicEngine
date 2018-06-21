@@ -4,12 +4,14 @@ namespace ege
 {
     const XMFLOAT4 Material::DefaultSpecularColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     const float    Material::DefaultSpecularPower = 8.0f;
+    const float    Material::DefaultEmitPower     = 0.0f;
 
     Material::Material()
         : _renderAPI(gRenderAPI())
         , _shader(nullptr)
         , _specularColor(DefaultSpecularColor)
         , _specularPower(DefaultSpecularPower)
+        , _emitPower(DefaultEmitPower)
         , _hasDiffuseTexture(false)
         , _hasSpecularTexture(false)
         , _hasNormalTexture(false)
@@ -46,6 +48,7 @@ namespace ege
 
         constantBufferUpdate->SpecularColor = _specularColor;
         constantBufferUpdate->SpecularPower = _specularPower;
+        constantBufferUpdate->EmitPower     = _emitPower;
         constantBufferUpdate->HasDiffuseTexture = _hasDiffuseTexture;
         constantBufferUpdate->HasSpecularTexture = _hasSpecularTexture;
         constantBufferUpdate->HasNormalTexture = _hasNormalTexture;
@@ -61,6 +64,11 @@ namespace ege
         return _specularPower;
     }
 
+    const float& Material::GetEmitPower() const
+    {
+        return _emitPower;
+    }
+
     void Material::SetSpecularColor(XMFLOAT4& specularColor)
     {
         _specularColor = specularColor;
@@ -69,6 +77,11 @@ namespace ege
     void Material::SetSpecularPower(float specularPower)
     {
         _specularPower = specularPower;
+    }
+
+    void Material::SetEmitPower(float emitPower)
+    {
+        _emitPower = emitPower;
     }
 
     void Material::InsertTexture(UINT slot, SPtr<Texture> texture)

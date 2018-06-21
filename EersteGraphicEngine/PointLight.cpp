@@ -2,7 +2,7 @@
 
 namespace ege
 {
-    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-4.0f, 4.0f, -2.0f);
+    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-12.0f, 6.0f, -2.0f);
     const float    PointLight::DefaultRadius   = 5.0f;
 
     PointLight::PointLight()
@@ -40,10 +40,14 @@ namespace ege
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
 
-        constantBufferUpdate->LightColor     = _color;
-        constantBufferUpdate->LightPosition  = _position;
-        constantBufferUpdate->LightRadius    = _radius;
-        constantBufferUpdate->LightType      = static_cast<UINT>(_type);
+        UINT lightIndex = constantBufferUpdate->LightIndex;
+        
+        constantBufferUpdate->Lights[lightIndex].LightColor    = _color;
+        constantBufferUpdate->Lights[lightIndex].LightPosition = _position;
+        constantBufferUpdate->Lights[lightIndex].LightRadius   = _radius;
+        constantBufferUpdate->Lights[lightIndex].LightType     = static_cast<UINT>(_type);
+
+        constantBufferUpdate->LightIndex = lightIndex + 1;
     }
 
     void PointLight::SetRadius(float radius)

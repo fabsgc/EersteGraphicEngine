@@ -88,6 +88,12 @@ namespace ege
 
     void Scene::Draw()
     {
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
+        ID3D11Buffer* constantBuffer = gRenderAPI().GetConstantBuffer(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
+
+        constantBufferUpdate->LightIndex = 0;
+
         if (_camera != nullptr)
         {
             _camera->Draw();
@@ -100,6 +106,7 @@ namespace ege
 
         for (auto light : _lights)
         {
+
             if (light.second->IsEnabled())
             {
                 light.second->Draw();

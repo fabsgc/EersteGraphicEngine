@@ -238,6 +238,12 @@
     <Filter Include="Source Files\Core\Util">
       <UniqueIdentifier>{86ae2680-5c01-4942-957b-9bc25b681113}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{d6981462-181d-4786-8967-825a1f7ce40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{79a94ef9-93b4-4a82-92a0-bb13d80c052b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">

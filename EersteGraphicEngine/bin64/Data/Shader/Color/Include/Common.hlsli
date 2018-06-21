@@ -6,6 +6,24 @@
 
 #define MAX_LIGHT 8
 
+struct LightDesc
+{
+    float4 LightColor;
+    float3 LightDirection;
+    float3 LightPosition;
+    float  LightRadius;
+    float  LightInnerAngle;
+    float  LightOuterAngle;
+    int    LightType;
+};
+
+struct LightInformation
+{
+    float4 LightWorldDirection;
+    float3 LightViewDirection;
+    float3 LightDirection;
+};
+
 cbuffer FrameConstantBuffer : register(b0)
 {
     matrix View;
@@ -21,6 +39,8 @@ cbuffer ObjectConstantBuffer : register(b1)
     float4 SpecularColor;
     float  SpecularPower;
 
+    float  EmitPower;
+
     bool   HasDiffuseTexture;
     bool   HasSpecularTexture;
     bool   HasNormalTexture;
@@ -28,20 +48,15 @@ cbuffer ObjectConstantBuffer : register(b1)
 
 cbuffer LightConstantBuffer : register(b2)
 {
-    float4 AmbientColor;
+    float4    AmbientColor;
 
-    float4 LightColor;
-    float3 LightDirection;
-    float3 LightPosition;
-    float  LightRadius;
-    float  LightInnerAngle;
-    float  LightOuterAngle;
-    int    LightType;
+    int       LightIndex;
+    LightDesc Lights[MAX_LIGHT];
 }
 
-Texture2D DiffuseTexture : register(t0);
+Texture2D DiffuseTexture  : register(t0);
 Texture2D SpecularTexture : register(t1);
-Texture2D NormalTexture : register(t2);
+Texture2D NormalTexture   : register(t2);
 
 SamplerState ColorSampler : register(s0);
 
@@ -66,16 +81,4 @@ float2 GetCorrectedTextureCoordinate(float2 textureCoordinate)
 #else
     return textureCoordinate;
 #endif
-}
-
-float3 GetVectorColorContribution(float4 light, float3 color)
-{
-    // Color (.rgb) * Intensity (.a)
-    return light.rgb * light.a * color;
-}
-
-float3 GetScalarColorContribution(float4 light, float color)
-{
-    // Color (.rgb) * Intensity (.a)
-    return light.rgb * light.a * color;
 }
