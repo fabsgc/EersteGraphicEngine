@@ -456,6 +456,15 @@
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\Core\Util</Filter>
     </ClCompile>
+    <ClCompile Include="RenderPipeline.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -712,6 +721,15 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\Core\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipeline.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

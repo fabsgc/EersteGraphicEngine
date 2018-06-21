@@ -1,4 +1,5 @@
 #include "Light.h"
+#include "LightModel.h"
 
 namespace ege
 {

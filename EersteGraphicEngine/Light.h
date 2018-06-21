@@ -1,7 +1,6 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "LightModel.h"
 #include "RenderAPI.h"
 #include "IEntity.h"
 

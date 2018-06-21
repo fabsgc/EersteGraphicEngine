@@ -3,12 +3,19 @@
 #include "ShaderManager.h"
 #include "ModelLoader.h"
 #include "VertexDesc.h"
+#include "Material.h"
+#include "Light.h"
 
 namespace ege
 {
+    const bool Model::DefaultCastShadow     = true;
+    const LightMode Model::DefaultLightMode = LightMode::All;
+
     Model::Model()
         : IEntity(EntityType::Model)
         , _renderAPI(gRenderAPI())
+        , _castShadow(DefaultCastShadow)
+        , _lightMode(DefaultLightMode)
     {
         XMStoreFloat4x4(&_world, XMMatrixIdentity());
     }
@@ -52,9 +59,30 @@ namespace ege
         _geometry.Build(modelDesc);
     }
 
+    void Model::SetColor(const Color color)
+    {
+        _geometry.SetColor(color);
+        _geometry.Build(nullptr);
+    }
+
     void Model::SetMaterial(SPtr<Material> material)
     {
         _material = material;
+    }
+
+    void Model::SetCastShadow(bool castShadow)
+    {
+        _castShadow = castShadow;
+    }
+
+    void Model::SetLightMode(LightMode lightMode)
+    {
+        lightMode = _lightMode;
+    }
+
+    void Model::AddLights(SPtr<Light> light)
+    {
+        _lights.push_back(light);
     }
 
     Geometry& Model::GetGeometry()
@@ -67,10 +95,19 @@ namespace ege
         return _material;
     }
 
-    void Model::SetColor(const Color color)
+    bool Model::GetCastShadow() const
     {
-        _geometry.SetColor(color);
-        _geometry.Build(nullptr);
+        return _castShadow;
+    }
+
+    const LightMode& Model::GetLightMode() const
+    {
+        return _lightMode;
+    }
+
+    Vector<SPtr<Light>>& Model::GetLights()
+    {
+        return _lights;
     }
 
     void Model::UpdateLocalPosition()

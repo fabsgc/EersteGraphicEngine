@@ -1,38 +1,53 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "IMoveable.h"
 #include "RenderAPI.h"
-#include "Material.h"
 #include "Geometry.h"
 #include "IEntity.h"
-#include "Shader.h"
 
 namespace ege
 {
+    enum class LightMode
+    {
+        All, None, Selected
+    };
+
     class Model: public IEntity
     {
     public:
         Model();
         ~Model();
 
-        void           Initialise() override;
-        void           Update() override;
-        void           Draw() override;
-        void           Build(SPtr<ModelDesc> modelDesc);
-        void           SetMaterial(SPtr<Material> shader);
-        void           SetColor(const Color color);
-        Geometry&      GetGeometry();
-        SPtr<Material> GetMaterial();
+        void                 Initialise() override;
+        void                 Update() override;
+        void                 Draw() override;
+        void                 Build(SPtr<ModelDesc> modelDesc);
+        void                 SetMaterial(SPtr<Material> material);
+        void                 SetColor(const Color color);
+        void                 SetCastShadow(bool castShadow);
+        void                 SetLightMode(LightMode lightMode);
+        void                 AddLights(SPtr<Light> light);
+        Geometry&            GetGeometry();
+        SPtr<Material>       GetMaterial();
+        bool                 GetCastShadow() const;
+        const LightMode&     GetLightMode() const;
+        Vector<SPtr<Light>>& GetLights();
 
-        void           UpdateLocalPosition();
+        void                 UpdateLocalPosition();
+
+    private:
+        static const bool      DefaultCastShadow;
+        static const LightMode DefaultLightMode;
         
     private:
-        RenderAPI&     _renderAPI;
+        RenderAPI&          _renderAPI;
 
-        SPtr<Material> _material;
-        Geometry       _geometry;
+        SPtr<ModelDesc>     _modelDesc;
+        SPtr<Material>      _material;
+        Geometry            _geometry;
 
-        SPtr<ModelDesc> _modelDesc;
+        bool                _castShadow;
+        LightMode           _lightMode;
+        Vector<SPtr<Light>> _lights;
     };
 }

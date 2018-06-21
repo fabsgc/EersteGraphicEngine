@@ -188,5 +188,9 @@ namespace ege
     class  FirstPersonCamera;
     class  ThirdPersonCamera;
 
+    class  RenderPipeline;
+    class  ForwardRendering;
+    class  DeferredRendering;
+
     class  Color;
 }

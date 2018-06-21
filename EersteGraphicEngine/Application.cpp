@@ -83,7 +83,7 @@ namespace ege
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 0.0f);
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.0f));
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.2f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.8f));
         sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 

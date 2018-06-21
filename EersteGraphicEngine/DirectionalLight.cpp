@@ -1,4 +1,5 @@
 #include "DirectionalLight.h"
+#include "LightModel.h"
 
 namespace ege
 {

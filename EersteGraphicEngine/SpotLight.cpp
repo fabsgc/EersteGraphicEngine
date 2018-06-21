@@ -1,4 +1,5 @@
 #include "SpotLight.h"
+#include "LightModel.h"
 
 namespace ege
 {

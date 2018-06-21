@@ -5,6 +5,8 @@
 
 namespace ege
 {
+    class Model;
+
     class LightModel : public Model
     {
     public:
