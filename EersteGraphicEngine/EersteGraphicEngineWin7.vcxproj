@@ -162,6 +162,7 @@
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DefaultMaterial.cpp" />
+    <ClCompile Include="DeferredRendering.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DynamicLib.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
+    <ClCompile Include="ForwardRendering.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="IComponent.cpp" />
@@ -201,6 +203,7 @@
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderPipeline.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -234,6 +237,7 @@
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DefaultMaterial.h" />
+    <ClInclude Include="DeferredRendering.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="DynamicLib.h" />
     <ClInclude Include="DynamicLibManager.h" />
@@ -243,6 +247,7 @@
     <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
+    <ClInclude Include="ForwardRendering.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="IComponent.h" />
@@ -281,6 +286,7 @@
     <ClInclude Include="PrerequisitesUtil.h" />
     <ClInclude Include="RenderAPI.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderPipeline.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="MemoryAllocator.h" />
     <ClInclude Include="Scene.h" />

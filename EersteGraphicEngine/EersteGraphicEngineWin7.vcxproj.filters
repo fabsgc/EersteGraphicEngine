@@ -250,6 +250,12 @@
     <Filter Include="Source Files\Core\Color">
       <UniqueIdentifier>{02080b27-8314-4f96-9048-9f8d362fa269}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{5e0027e8-0964-4a75-b22c-cdfd43065b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{44ef2757-10d5-4b21-b1e6-9e63a09d38c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -461,6 +467,15 @@
     </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\Core\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPipeline.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -715,6 +730,15 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\Core\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipeline.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
