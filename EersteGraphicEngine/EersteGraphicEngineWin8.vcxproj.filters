@@ -238,6 +238,12 @@
     <Filter Include="Source Files\Core\Util">
       <UniqueIdentifier>{f005c566-3238-4429-8392-8b7a8d2d76bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{9c46dd22-db9a-44ce-91cc-608e1db0a1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\RenderPipeline">
+      <UniqueIdentifier>{13562aa8-ebcf-4de1-9555-e57f34795f90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -446,6 +452,18 @@
     </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\Core\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardRendering.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderPipeline.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Source Files\Core\Renderer\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -697,6 +715,18 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\Core\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPipeline.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardRendering.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
