@@ -153,6 +153,10 @@
     <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BasicAllocator.cpp" />
+    <ClCompile Include="Bounding.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="BoundingComplex.cpp" />
+    <ClCompile Include="BoundingSphere.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CityMaterial.cpp" />
     <ClCompile Include="CityModel.cpp" />
@@ -169,10 +173,12 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
+    <ClCompile Include="FirstPersonCameraHandler.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
     <ClCompile Include="ForwardRendering.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="ICameraHandler.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="IMoveable.cpp" />
@@ -196,8 +202,10 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="OrthographicCamera.cpp" />
+    <ClCompile Include="OrthographicCameraHandler.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
@@ -219,6 +227,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThirdPersonCamera.cpp" />
+    <ClCompile Include="ThirdPersonCameraHandler.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -228,6 +237,10 @@
     <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="BasicAllocator.h" />
+    <ClInclude Include="Bounding.h" />
+    <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="BoundingComplex.h" />
+    <ClInclude Include="BoundingSphere.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CityMaterial.h" />
     <ClInclude Include="CityModel.h" />
@@ -245,11 +258,13 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FirstPersonCamera.h" />
+    <ClInclude Include="FirstPersonCameraHandler.h" />
     <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="ForwardRendering.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ICameraHandler.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />
@@ -277,8 +292,10 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="OrthographicCamera.h" />
+    <ClInclude Include="OrthographicCameraHandler.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
@@ -305,6 +322,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThirdPersonCamera.h" />
+    <ClInclude Include="ThirdPersonCameraHandler.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />

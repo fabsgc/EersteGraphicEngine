@@ -244,6 +244,36 @@
     <Filter Include="Source Files\Core\Renderer\RenderPipeline">
       <UniqueIdentifier>{13562aa8-ebcf-4de1-9555-e57f34795f90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Texture">
+      <UniqueIdentifier>{812a1797-6c0d-4927-8050-9d01e843ad37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Shader">
+      <UniqueIdentifier>{0b3550c4-60f7-47f6-b93d-9329259fb822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Perspective">
+      <UniqueIdentifier>{c62725ef-621b-4629-ae5a-5a22ae9d3ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{245aaa20-09a7-4583-82ab-8d5aecd4b139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Handler">
+      <UniqueIdentifier>{9df67ab1-df4c-405a-86c6-55a67fa252fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Perspective">
+      <UniqueIdentifier>{b6654e74-d70d-415d-996d-5896a5ab7a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{b42f45d5-1e0b-452e-b906-f131d7e4a910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Handler">
+      <UniqueIdentifier>{faf795df-af08-4186-b984-a21806347380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Bounding">
+      <UniqueIdentifier>{034b1f4e-b10c-40e6-85c0-32ce7a41e2e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Bounding">
+      <UniqueIdentifier>{f9bfdf5a-d468-453c-98e2-85a20a8ec773}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -390,16 +420,7 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Core\Renderer\Material</Filter>
     </ClCompile>
-    <ClCompile Include="FirstPersonCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdPersonCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="AmbientLight.cpp">
@@ -422,12 +443,6 @@
     </ClCompile>
     <ClCompile Include="IMoveable.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="OrthographicCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="PerspectiveCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
@@ -464,6 +479,48 @@
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\App\Model\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="ICameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="Bounding.cpp">
+      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingComplex.cpp">
+      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingSphere.cpp">
+      <Filter>Source Files\Core\Renderer\Bounding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -587,12 +644,6 @@
     <ClInclude Include="IResourceManager.h">
       <Filter>Header Files\Core\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
@@ -647,25 +698,10 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
     </ClInclude>
-    <ClInclude Include="FirstPersonCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Frustum.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdPersonCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="AmbientLight.h">
@@ -680,17 +716,8 @@
     <ClInclude Include="MathUtility.h">
       <Filter>Header Files\Utility\Math</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderInclude.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="OrthographicCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="PerspectiveCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files\App\Model\Primitive</Filter>
@@ -727,6 +754,63 @@
     </ClInclude>
     <ClInclude Include="SpotLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderInclude.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="ICameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Bounding.h">
+      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingComplex.h">
+      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingSphere.h">
+      <Filter>Header Files\Core\Renderer\Bounding</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

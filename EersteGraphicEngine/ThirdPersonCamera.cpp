@@ -192,7 +192,7 @@ namespace ege
 
     void ThirdPersonCamera::Pitch(float angle)
     {
-        _alpha = fmodf(_alpha + angle, XM_PI * 2.0f + 0.01);
+        _alpha = fmodf(_alpha + angle, XM_PI * 2.0f + 0.01f);
 
         _needUpdate = true;
     }
