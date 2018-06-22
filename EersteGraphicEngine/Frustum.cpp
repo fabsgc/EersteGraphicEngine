@@ -1,4 +1,5 @@
 #include "Frustum.h"
+#include "Model.h"
 #include "PerspectiveCamera.h"
 
 namespace ege
@@ -77,10 +78,10 @@ namespace ege
         _planes[5] = XMVector3Normalize(XMLoadFloat4(&planeFloat));
     }
 
-    bool Frustum::CheckSphere(PerspectiveCamera* camera, const float radius)
+    bool Frustum::CheckSphere(PerspectiveCamera* camera, Model* model, const float radius)
     {
         const XMFLOAT4X4 projection = camera->GetProjection();
-        const XMFLOAT3& position    = camera->GetPosition();
+        const XMFLOAT3& position    = model->GetPosition();
         const XMFLOAT4X4& view      = camera->GetView();
 
         // Check if the radius of the sphere is inside the view frustum.
@@ -101,5 +102,10 @@ namespace ege
         }
 
         return true;
+    }
+
+    const XMVECTOR* Frustum::GetPlanes() const
+    {
+        return _planes;
     }
 }
