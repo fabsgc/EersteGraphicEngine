@@ -11,6 +11,7 @@
 #include "Node.h"
 
 #include "CityModel.h"
+#include "Player.h"
 
 namespace ege
 {
@@ -61,6 +62,8 @@ namespace ege
         SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
         SPtr<SpotLight> spot           = ege_shared_ptr_new<SpotLight>();
 
+        SPtr<Player> player = ege_shared_ptr_new<Player>(camera);
+
         SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         SPtr<CityModel> wind2 = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         //SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
@@ -75,6 +78,8 @@ namespace ege
         sun->Initialise();
         lamp->Initialise();
 
+        player->Initialise();
+
         wind->Initialise();
         wind2->Initialise();
         wind->RotatePitch(XM_PIDIV4);
@@ -82,6 +87,8 @@ namespace ege
 
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 0.0f);
+
+        player->GoTo(10.0f, 1.0f, 0.0f);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -102,6 +109,7 @@ namespace ege
         node->InsertEntity("spot", spot);
         node->InsertEntity("wind", wind);
         node->InsertEntity("wind-2", wind2);
+        node->InsertEntity("player", player);
 
         for (INT8 i = -2; i <= 2; i++)
         {

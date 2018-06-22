@@ -489,6 +489,9 @@
     <ClCompile Include="BoundingComplex.cpp">
       <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\App\Model\Primitive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -671,9 +674,6 @@
     <ClInclude Include="FlyingCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files\App\Model</Filter>
-    </ClInclude>
     <ClInclude Include="FirstPersonCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
@@ -695,17 +695,8 @@
     <ClInclude Include="DirectionalLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Header Files\App\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\App\Model</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Landscape.h">
-      <Filter>Header Files\App\Model</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
@@ -766,6 +757,21 @@
     </ClInclude>
     <ClInclude Include="BoundingComplex.h">
       <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Landscape.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
