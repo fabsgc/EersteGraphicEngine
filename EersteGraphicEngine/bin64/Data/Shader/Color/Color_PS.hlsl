@@ -80,9 +80,7 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
     if (n_dot_l > 0)
     {
         float intensity = information.LightWorldDirection.w;
-        float  light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
 
-        // D = kd * ld * md
         colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * intensity;
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
@@ -96,18 +94,18 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
 ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN, int index)
 {
     LightInformation information = ComputeLightInformation(index, IN);
+
+    float spotFactor             = 0;
     float3 refVector             = (float3) 0;
     float3 lightWorlDdirection   = normalize(information.LightWorldDirection.xyz);
-    float n_dot_l                = dot(normalize(IN.Normal), lightWorlDdirection);
+    float n_dot_l                = dot(IN.Normal, lightWorlDdirection);
     float3 halfVector            = normalize(lightWorlDdirection + IN.ViewWorldDirection);
     float n_dot_h                = dot(IN.Normal, halfVector);
     float4 lightCoefficients     = lit(n_dot_l, n_dot_h, SpecularPower);
 
-    float intensity = information.LightWorldDirection.w;
-    float light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
-    float lightAngle = dot(-lightWorlDdirection, information.LightDirection);
+    float intensity              = information.LightWorldDirection.w;
+    float lightAngle             = dot(-lightWorlDdirection, information.LightDirection);
 
-    float spotFactor = 0;
     if (lightAngle > 0)
     {
         spotFactor = smoothstep(Lights[index].LightOuterAngle, Lights[index].LightInnerAngle, lightAngle);
@@ -115,7 +113,6 @@ ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent co
 
     if (n_dot_l > 0)
     {
-        // D = kd * ld * md
         colorComponent.Diffuse += Lights[index].LightColor.rgb * intensity * lightCoefficients.y * spotFactor;
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
@@ -214,4 +211,3 @@ LightInformation ComputeLightInformation(int index, PS_INPUT IN)
 
     return information;
 }
-
