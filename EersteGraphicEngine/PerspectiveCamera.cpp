@@ -19,7 +19,6 @@ namespace ege
     void PerspectiveCamera::Update()
     {
         _frustum.Build(this);
-
         Camera::Update();
     }
 

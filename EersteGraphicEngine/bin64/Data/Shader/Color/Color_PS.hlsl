@@ -2,14 +2,13 @@
 
 struct PS_INPUT
 {
-    float4 LocalPosition : POSITION;
-    float4 Position : SV_POSITION;
-    float4 Color    : COLOR0;
-    float2 Texture  : TEXCOORD0;
-    float3 Normal   : NORMAL;
-    float3 Tangent  : TANGENT;
-    float3 Binormal : BINORMAL;
-
+    float4 LocalPosition      : POSITION;
+    float4 Position           : SV_POSITION;
+    float4 Color              : COLOR0;
+    float2 Texture            : TEXCOORD0;
+    float3 Normal             : NORMAL;
+    float3 Tangent            : TANGENT;
+    float3 Binormal           : BINORMAL;
     float3 ViewWorldDirection : COLOR1;
 };
 
@@ -77,7 +76,7 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
     float3 lightWorlDdirection   = normalize(information.LightWorldDirection.xyz);
     float n_dot_l                = dot(lightWorlDdirection, normalize(IN.Normal));
 
-    if (n_dot_l > 0)
+    if (n_dot_l >= 0)
     {
         float intensity = information.LightWorldDirection.w;
 
@@ -106,12 +105,12 @@ ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent co
     float intensity              = information.LightWorldDirection.w;
     float lightAngle             = dot(-lightWorlDdirection, information.LightDirection);
 
-    if (lightAngle > 0)
+    if (lightAngle >= 0)
     {
         spotFactor = smoothstep(Lights[index].LightOuterAngle, Lights[index].LightInnerAngle, lightAngle);
     }
 
-    if (n_dot_l > 0)
+    if (n_dot_l >= 0)
     {
         colorComponent.Diffuse += Lights[index].LightColor.rgb * intensity * lightCoefficients.y * spotFactor;
         // R = I - 2(n.I) * n
@@ -129,7 +128,7 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
     float3 lightDirection = normalize(-Lights[index].LightDirection.xyz);
     float n_dot_l         = dot(lightDirection, normalize(IN.Normal));
 
-    if (n_dot_l > 0)
+    if (n_dot_l >= 0)
     {
         // D = kd * ld * md
         colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * pixelComponent.Diffuse.rgb;

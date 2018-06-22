@@ -21,6 +21,13 @@ namespace ege
         virtual void MoveY(float y = 0.0f);
         virtual void MoveZ(float z = 0.0f);
 
+        virtual void MoveStrafe(XMVECTOR movement);
+        virtual void MoveStrafe(XMFLOAT3 movement);
+        virtual void MoveStrafe(float x = 0.0f, float y = 0.0f, float z = 0.0f);
+        virtual void MoveStrafeX(float x = 0.0f);
+        virtual void MoveStrafeY(float y = 0.0f);
+        virtual void MoveStrafeZ(float z = 0.0f);
+
         virtual void GoTo(XMVECTOR position);
         virtual void GoTo(XMFLOAT3 position);
         virtual void GoTo(float x, float y, float z);

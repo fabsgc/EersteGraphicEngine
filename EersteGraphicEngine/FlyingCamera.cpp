@@ -22,7 +22,7 @@ namespace ege
 
     void FlyingCamera::Update()
     {
-        float deltaTime = _time.GetFrameDelta();
+        /*float deltaTime = _time.GetFrameDelta();
         float speedModulation = 2.0f;
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
@@ -75,7 +75,7 @@ namespace ege
                 Strafe(0.0f, -_translationSpeed * deltaTime * speedModulation, 0.0f);
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
                 Strafe(0.0f, _translationSpeed * deltaTime * speedModulation, 0.0f);
-        }
+        }*/
 
         PerspectiveCamera::Update();
     }

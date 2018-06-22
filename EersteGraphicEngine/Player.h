@@ -1,18 +1,16 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "ThirdPersonCameraHandler.h"
 #include "Cube.h"
 
 namespace ege
 {
-    class Player : public Cube
+    class Player : public Cube, public ThirdPersonCameraHandler
     {
     public:
-        Player(SPtr<Camera> camera);
+        Player();
         ~Player();
         void Update();
-
-    protected:
-        SPtr<Camera> _camera;
     };
 }

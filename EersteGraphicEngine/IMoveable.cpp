@@ -60,6 +60,40 @@ namespace ege
         Move(0.0f, 0.0f, z);
     }
 
+    void IMoveable::MoveStrafe(XMVECTOR movement)
+    {
+        XMMATRIX W = XMLoadFloat4x4(&_world);
+        W = XMMatrixTranslationFromVector(movement) * W;
+        XMStoreFloat4x4(&_world, W);
+
+        UpdateLocalPosition();
+    }
+
+    void IMoveable::MoveStrafe(XMFLOAT3 movement)
+    {
+        MoveStrafe(XMLoadFloat3(&movement));
+    }
+
+    void IMoveable::MoveStrafe(float x, float y, float z)
+    {
+        MoveStrafe(XMFLOAT3(x, y, z));
+    }
+
+    void IMoveable::MoveStrafeX(float x)
+    {
+        MoveStrafe(x, 0.0f, 0.0f);
+    }
+
+    void IMoveable::MoveStrafeY(float y)
+    {
+        MoveStrafe(0.0f, y, 0.0f);
+    }
+
+    void IMoveable::MoveStrafeZ(float z)
+    {
+        MoveStrafe(0.0f, 0.0f, z);
+    }
+
     void IMoveable::GoTo(XMVECTOR position)
     {
         XMFLOAT3 P;

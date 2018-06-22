@@ -192,6 +192,12 @@ namespace ege
     class  FirstPersonCamera;
     class  ThirdPersonCamera;
 
+    template<typename Camera>
+    class  ICameraHandler;
+    class  ThirdPersonCameraHandler;
+    class  FirstPersonCameraHandler;
+    class  OrthographicCameraHandler;
+
     class  RenderPipeline;
     class  ForwardRendering;
     class  DeferredRendering;

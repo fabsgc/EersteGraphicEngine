@@ -18,7 +18,7 @@ namespace ege
 
     void FirstPersonCamera::Update()
     {
-        float deltaTime = _time.GetFrameDelta();
+        /*float deltaTime = _time.GetFrameDelta();
         float speedModulation = 2.0f;
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
@@ -68,7 +68,7 @@ namespace ege
         if (abs(angleY) > 0.001f)
             Pitch(angleY);
         if (abs(angleX) > 0.001f)
-            Yaw(angleX);
+            Yaw(angleX);*/
 
         PerspectiveCamera::Update();
     }

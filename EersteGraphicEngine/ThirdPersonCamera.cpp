@@ -9,13 +9,13 @@
 
 namespace ege
 {
-    const float ThirdPersonCamera::DefaultMinZoom = 0.25f;
+    const float ThirdPersonCamera::DefaultMinZoom = 1.25f;
     const float ThirdPersonCamera::DefaultMaxZoom = 1024.0f;
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
         , _alpha(0.0f)
-        , _beta(0.4f)
+        , _beta(0.5f)
         , _radius(64.0f)
         , _target(XMFLOAT3(0.0f, 8.0f, 0.0f))
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
@@ -33,7 +33,7 @@ namespace ege
 
     void ThirdPersonCamera::Update()
     {
-        float deltaTime = _time.GetFrameDelta();
+        /*float deltaTime = _time.GetFrameDelta();
         float speedModulation = (_radius / 10.0f > 2.0f) ? _radius / 10.0f : 2.0f;
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
@@ -68,8 +68,8 @@ namespace ege
                 float angleX = -distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
                 float angleY = distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
                 
-                Pitch(angleY);
-                Yaw(angleX);
+                Pitch(angleX);
+                Yaw(angleY);
                     
                 _lastMousePosition = mousePosition;
             }
@@ -122,11 +122,11 @@ namespace ege
             if (abs(joypadLX) > 0.0f)
                 Strafe(joypadLX * _translationSpeed * deltaTime * speedModulation);
 
-            if (abs(angleY) > 0.0f)
-                Pitch(angleY);
             if (abs(angleX) > 0.0f)
-                Yaw(angleX);
-        }
+                Pitch(angleX);
+            if (abs(angleY) > 0.0f)
+                Yaw(angleY);
+        }*/
 
         PerspectiveCamera::Update();
     }
@@ -192,15 +192,15 @@ namespace ege
 
     void ThirdPersonCamera::Pitch(float angle)
     {
-        _beta += angle;
-        _beta = MathUtility::Clamp(_beta, - XM_PI / 2.0f + 0.01f, XM_PI / 2.0f - 0.01f);
+        _alpha = fmodf(_alpha + angle, XM_PI * 2.0f + 0.01);
 
         _needUpdate = true;
     }
 
     void ThirdPersonCamera::Yaw(float angle)
     {
-        _alpha = fmodf(_alpha + angle, XM_PI * 2.0f);
+        _beta += angle;
+        _beta = MathUtility::Clamp(_beta, -XM_PI / 2.0f + 0.01f, XM_PI / 2.0f - 0.01f);
 
         _needUpdate = true;
     }
@@ -253,5 +253,25 @@ namespace ege
     void ThirdPersonCamera::Rotate(XMVECTOR eulerAngles)
     {
 
+    }
+
+    void ThirdPersonCamera::SetTarget(XMFLOAT3 target)
+    {
+        _target = target;
+    }
+
+    void ThirdPersonCamera::SetRadius(float radius)
+    {
+        _radius = radius;
+    }
+
+    void ThirdPersonCamera::SetAlpha(float alpha)
+    {
+        _alpha = alpha;
+    }
+
+    void ThirdPersonCamera::SetBeta(float beta)
+    {
+        _beta = beta;
     }
 }

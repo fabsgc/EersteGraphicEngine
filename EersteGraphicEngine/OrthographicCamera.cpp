@@ -19,7 +19,7 @@ namespace ege
 
     void OrthographicCamera::Update()
     {
-        float deltaTime = _time.GetFrameDelta();
+        /*float deltaTime = _time.GetFrameDelta();
         float speedModulation = (10 * _zoom) > 2.0f ? 10 * _zoom : 2.0f;
 
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
@@ -71,7 +71,7 @@ namespace ege
                 MoveY(- joypadLY * _translationSpeed * deltaTime * speedModulation * 3.0f);
             if (abs(joypadLX) > 0.0f)
                 MoveX(- joypadLX * _translationSpeed * deltaTime * speedModulation * 3.0f);
-        }
+        }*/
 
         Camera::Update();
     }

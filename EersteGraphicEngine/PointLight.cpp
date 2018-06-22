@@ -6,7 +6,7 @@
 
 namespace ege
 {
-    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-12.0f, 6.0f, 0.0f);
+    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-12.0f, 8.0f, 0.0f);
     const float    PointLight::DefaultRadius   = 5.0f;
 
     PointLight::PointLight()
@@ -42,7 +42,7 @@ namespace ege
 
         Rotate(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 2.5f * deltaTime, 0.0f));
 
-        if (gKeyboard().GetKey(KeyName::ARROW_UP).State == KeyState::TRIGGERED)
+        /*if (gKeyboard().GetKey(KeyName::ARROW_UP).State == KeyState::TRIGGERED)
         {
             MoveY(5.0f * deltaTime);
         }
@@ -60,7 +60,7 @@ namespace ege
         if (gKeyboard().GetKey(KeyName::ARROW_RIGHT).State == KeyState::TRIGGERED)
         {
             MoveX(25.0f * deltaTime);
-        }
+        }*/
     }
 
     void PointLight::Draw()

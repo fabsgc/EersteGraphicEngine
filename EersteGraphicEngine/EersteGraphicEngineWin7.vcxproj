@@ -170,10 +170,12 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
+    <ClCompile Include="FirstPersonCameraHandler.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
     <ClCompile Include="ForwardRendering.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="ICameraHandler.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="IMoveable.cpp" />
@@ -196,9 +198,11 @@
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="OrthographicCameraHandler.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="OrthographicCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
@@ -220,6 +224,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThirdPersonCamera.cpp" />
+    <ClCompile Include="ThirdPersonCameraHandler.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -245,11 +250,13 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FirstPersonCamera.h" />
+    <ClInclude Include="FirstPersonCameraHandler.h" />
     <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="ForwardRendering.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ICameraHandler.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="Device.h" />
@@ -277,9 +284,11 @@
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="OrthographicCameraHandler.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="OrthographicCamera.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />
     <ClInclude Include="PrerequisitesCore.h" />
@@ -306,6 +315,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThirdPersonCamera.h" />
+    <ClInclude Include="ThirdPersonCameraHandler.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />

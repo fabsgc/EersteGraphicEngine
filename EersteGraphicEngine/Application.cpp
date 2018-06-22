@@ -62,11 +62,11 @@ namespace ege
         SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
         SPtr<SpotLight> spot           = ege_shared_ptr_new<SpotLight>();
 
-        SPtr<Player> player = ege_shared_ptr_new<Player>(camera);
+        SPtr<Player> player            = ege_shared_ptr_new<Player>();
 
-        SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        SPtr<CityModel> wind2 = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        //SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<CityModel> wind           = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        SPtr<CityModel> wind2          = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        //SPtr<CityModel> wind         = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
 
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
@@ -88,7 +88,12 @@ namespace ege
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 5.0f);
 
-        player->GoTo(10.0f, 1.0f, 0.0f);
+        player->GoTo(12.0f, 1.0f, 0.0f);
+        player->AttachCamera(camera);
+
+        camera->SetTarget(player->GetPosition());
+        camera->SetRadius(32.0f);
+        camera->SetAlpha(-XM_PIDIV2);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -122,7 +127,7 @@ namespace ege
             }
         }
 
-        _scene->InsertCamera("camera", camera);
+        //_scene->InsertCamera("camera", camera);
         _scene->InsertLight("sun", sun);
         _scene->InsertLight("lamp", lamp);
         _scene->InsertLight("spot", spot);

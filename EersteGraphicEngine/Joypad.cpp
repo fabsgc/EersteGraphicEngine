@@ -17,7 +17,7 @@ namespace ege
         {
             _lastUpdateState += gTime().GetFrameDelta();
 
-            if (_lastUpdateState > 0.1f)
+            if (_lastUpdateState > 0.02f)
             {
                 _lastUpdateState = 0;
                 CheckJoypadConnected();
