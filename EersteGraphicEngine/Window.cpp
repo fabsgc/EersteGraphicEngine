@@ -145,7 +145,7 @@ namespace ege
             SetWindowLongPtr(_hWnd, GWL_EXSTYLE, 0);
 
             ShowWindow(_hWnd, SW_SHOWNORMAL);
-            SetWindowPos(_hWnd, HWND_TOP, 0, 0, _windowDesc.LastWidth, _windowDesc.LastHeight, SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+            SetWindowPos(_hWnd, HWND_TOP, 25, 25, _windowDesc.LastWidth, _windowDesc.LastHeight, SWP_NOZORDER | SWP_FRAMECHANGED);
         }
         else
         {
@@ -179,6 +179,7 @@ namespace ege
 
         case WM_DESTROY:
             PostQuitMessage(0);
+            gEventManager().Execute("STOP_REQUESTED");
             break;
 
         case WM_ACTIVATE:
