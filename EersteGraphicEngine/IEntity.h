@@ -9,6 +9,7 @@ namespace ege
 {
     enum class EntityType
     {
+        Node,
         Model,
         Light,
         Camera,

@@ -11,18 +11,20 @@ namespace ege
         ThirdPersonCamera();
         ~ThirdPersonCamera();
 
-        void Initialise() override;
-        void Update();
-        void ComputeProjectionMatrix() override;
+        void         Initialise() override;
+        void         Update();
+        void         ComputeProjectionMatrix() override;
 
-        void LookAt(XMFLOAT3 position, XMFLOAT3 target, XMFLOAT3 up);
-        void Pitch(float angle) override;
-        void Yaw(float angle) override;
-        void Strafe(float distance);
-        void Walk(float distance);
-        void Up(float distance);
-        void Zoom(float zoom);
+        void         LookAt(XMFLOAT3 position, XMFLOAT3 target, XMFLOAT3 up);
+        void         Pitch(float angle) override;
+        void         Yaw(float angle) override;
+        void         Strafe(float distance);
+        void         Walk(float distance);
+        void         Up(float distance);
+        void         Zoom(float zoom);
 
+        using        PerspectiveCamera::Move;
+        using        PerspectiveCamera::Rotate;
         virtual void Move(XMVECTOR movement) override;
         virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void Rotate(XMVECTOR eulerAngles) override;

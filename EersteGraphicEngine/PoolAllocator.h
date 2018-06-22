@@ -120,7 +120,7 @@ namespace ege
             EGE_ASSERT_ERROR(false, "Can't deallocate memory pool");
         }
 
-    private:
+    protected:
         PoolAllocator(PoolAllocator const&) = delete;
         PoolAllocator& operator=(PoolAllocator const&) = delete;
 
@@ -174,7 +174,7 @@ namespace ege
             _numberBlocks--;
         }
 
-    private:
+    protected:
         static constexpr int ActualElementSize = ((ElementSize + Alignment - 1) / Alignment) * Alignment;
 
         PoolBlock* _freePoolBlock;

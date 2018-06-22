@@ -132,17 +132,17 @@ namespace ege
         ThumbStick&              GetThumbStick(const JoypadThumbStickName& name);
         ThumbStick&              GetThumbStick(const String& label);
 
-    private:
+    protected:
         void                     UpdateThumbStick();
         void                     OnStartUp() override;
         void                     OnShutDown() override {};
         void                     CheckJoypadConnected();
 
-    private:
+    protected:
         static float DEAD_ZONE_X;
         static float DEAD_ZONE_Y;
 
-    private:
+    protected:
         bool                 _isConnected;
         Vector<JoypadButton> _joypadButtons;
         Vector<JoyStick>     _joysticks;

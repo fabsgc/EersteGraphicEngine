@@ -73,14 +73,14 @@ namespace ege
         const XMFLOAT2&        GetRelativeMovement() const;
         void                   SetRelativeMovement(const XMFLOAT2& relativeMovement);
 
-    private:
-        void UpdatePosition(MSG* message);
-        void UpdateState(const MouseButtonName& name, const MouseButtonState& state);
-        void UpdateSwitched(MouseButton* button);
-        void OnStartUp() override;
-        void OnShutDown() override {};
+    protected:
+        void                   UpdatePosition(MSG* message);
+        void                   UpdateState(const MouseButtonName& name, const MouseButtonState& state);
+        void                   UpdateSwitched(MouseButton* button);
+        void                   OnStartUp() override;
+        void                   OnShutDown() override {};
 
-    private:
+    protected:
         Window&             _window;
         XMFLOAT2            _position;
         Vector<MouseButton> _mouseButtons;

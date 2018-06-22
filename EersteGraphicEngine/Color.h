@@ -20,13 +20,13 @@ namespace ege
         const float& B() const;
         const float& A() const;
 
-    private:
+    protected:
         static const float DefaultColorR;
         static const float DefaultColorG;
         static const float DefaultColorB;
         static const float DefaultColorA;
 
-    private:
+    protected:
         float _r;
         float _g;
         float _b;

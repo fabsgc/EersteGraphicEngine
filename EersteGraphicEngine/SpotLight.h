@@ -11,16 +11,13 @@ namespace ege
         SpotLight();
         ~SpotLight();
 
-        void Initialise() override;
-        void Update()  override;
-        void Draw()  override;
+        void            Initialise() override;
+        void            Update()  override;
+        void            Draw()  override;
 
-        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles);
-        virtual void     Rotate(XMVECTOR eulerAngles);
-        virtual void     Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles);
-        virtual void     Rotate(XMFLOAT3 eulerAngles);
-        virtual void     Rotate(XMFLOAT3 origin, float yaw, float pitch, float roll);
-        virtual void     Rotate(float yaw, float pitch, float roll);
+        using           Light::Rotate;
+        virtual void    Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void    Rotate(XMVECTOR eulerAngles) override;
 
         const XMFLOAT3& GetDirection() const;
         void            SetDirection(XMFLOAT3 direction);

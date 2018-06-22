@@ -12,7 +12,7 @@ namespace ege
         void Build(PerspectiveCamera* camera);
         bool CheckSphere(PerspectiveCamera* camera, const float radius = 1.0f);
 
-    private:
+    protected:
         XMVECTOR _planes[6];
     };
 }

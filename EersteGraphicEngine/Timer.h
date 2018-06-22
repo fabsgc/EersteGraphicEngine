@@ -4,6 +4,9 @@
 
 namespace ege
 {
+    using TimePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
+    using Clock = std::chrono::high_resolution_clock;
+
     class Timer
     {
     public:
@@ -13,8 +16,8 @@ namespace ege
         UINT64 GetMicroseconds() const;
         UINT64 GetStartMs() const;
 
-    private:
-        std::chrono::high_resolution_clock                          _HRClock;
-        std::chrono::time_point<std::chrono::high_resolution_clock> _startTime;
+    protected:
+        Clock     _HRClock;
+        TimePoint _startTime;
     };
 }

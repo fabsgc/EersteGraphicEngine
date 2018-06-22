@@ -28,7 +28,7 @@ namespace ege
             free(data);
         }
 
-    private:
+    protected:
         BasicAllocator(BasicAllocator const&) = delete;
         BasicAllocator& operator=(BasicAllocator const&) = delete;
     };

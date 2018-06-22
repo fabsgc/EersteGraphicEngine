@@ -100,7 +100,7 @@ namespace ege
     *  ################################################################ */
 
     /**
-    * Create a new shared pointer using a custom allocator instance.
+    * \brief Create a new shared pointer using a custom allocator instance.
     */
     template<class Type, class Allocator>
     decltype(auto) ege_shared_ptr_allocator_new(Allocator* allocator)
@@ -115,7 +115,7 @@ namespace ege
     }
 
     /** 
-    * Create a new shared pointer using a custom allocator category. 
+    * \brief Create a new shared pointer using a custom allocator category. 
     */
     template<class Type, class Allocator, class... Args>
     SPtr<Type> ege_shared_ptr_new(Args &&... args)
@@ -124,7 +124,7 @@ namespace ege
     }
 
     /**
-    * Create a new shared pointer using the default allocator category
+    * \brief Create a new shared pointer using the default allocator category
     */
     template<class Type, class... Args>
     SPtr<Type> ege_shared_ptr_new(Args &&... args)
@@ -133,8 +133,8 @@ namespace ege
     }
 
     /**
-    * Create a new shared pointer from a previously constructed object.
-    * Pointer specific data will be allocated using the provided allocator category.
+    * \brief Create a new shared pointer from a previously constructed object.
+    *        Pointer specific data will be allocated using the provided allocator category.
     */
     template<class Type, class MainAllocator = BasicAllocator, class PtrDataAllocator = BasicAllocator>
     SPtr<Type> ege_shared_ptr(Type* data, PtrDataAllocator* allocator = nullptr)
@@ -150,8 +150,8 @@ namespace ege
     }
 
     /**
-    * Create a new unique pointer from a previously constructed object.
-    * Pointer specific data will be allocated using the provided allocator instance
+    * \brief Create a new unique pointer from a previously constructed object.
+    *        Pointer specific data will be allocated using the provided allocator instance
     */
     template<class Type, class Allocator>
     decltype(auto) ege_shared_ptr_allocator(Type* data, Allocator* allocator)
@@ -168,7 +168,7 @@ namespace ege
     *  ################################################################ */
 
     /**
-    * Create a new unique pointer using a custom allocator instance.
+    * \brief Create a new unique pointer using a custom allocator instance.
     */
     template<class Type, class Allocator>
     decltype(auto) ege_unique_ptr_allocator_new(Allocator* allocator)
@@ -183,7 +183,7 @@ namespace ege
     }
 
     /**
-    * Create a new unique pointer using a custom allocator category.
+    * \brief Create a new unique pointer using a custom allocator category.
     */
     template<class Type, class Allocator = GeneralAllocator, class... Args>
     UPtr<Type> ege_unique_ptr_new(Args &&... args)
@@ -193,8 +193,8 @@ namespace ege
     }
 
     /**
-    * Create a new unique pointer from a previously constructed object.
-    * Pointer specific data will be allocated using the provided allocator category.
+    * \brief Create a new unique pointer from a previously constructed object.
+    *        Pointer specific data will be allocated using the provided allocator category.
     */
     template<class Type, class Allocator = GeneralAllocator>
     UPtr<Type, Allocator> ege_unique_ptr(Type* data)
@@ -203,8 +203,8 @@ namespace ege
     }
 
     /**
-    * Create a new unique pointer from a previously constructed object.
-    * Pointer specific data will be allocated using the provided allocator instance
+    * \brief Create a new unique pointer from a previously constructed object.
+    *        Pointer specific data will be allocated using the provided allocator instance
     */
     template<class Type, class Allocator>
     decltype(auto) ege_unique_ptr_allocator(Type* data, Allocator* allocator)

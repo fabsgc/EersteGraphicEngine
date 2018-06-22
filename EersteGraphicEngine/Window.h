@@ -77,19 +77,18 @@ namespace ege
         void       SetWindowWidth(UINT height);
         void       SetFullScreen(bool fullscreen);
 
-    private:
+    protected:
         HRESULT InitWindow();
 
-    private:
+    protected:
         HINSTANCE _hInst;
         HWND      _hWnd;
 
-        bool      _showCursor;
-        bool      _clipCursor;
-
-    protected:
         CoreApplication& _application;
         WINDOW_DESC      _windowDesc;
+
+        bool      _showCursor;
+        bool      _clipCursor;  
     };
 
     Window& gWindow();

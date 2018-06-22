@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RenderPipeline.h"
+#include "Bounding.h"
 
 namespace ege
 {

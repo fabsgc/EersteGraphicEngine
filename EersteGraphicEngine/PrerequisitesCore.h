@@ -149,8 +149,12 @@ namespace ege
     struct StartUpDescription;
     class  CoreApplication;
 
+    struct LightDesc;
     struct RenderDesc;
     struct ConstantBuffer;
+    struct FrameConstantBuffer;
+    struct ObjectConstantBuffer;
+    struct LightConstantBuffer;
     class  RenderAPI;
     class  Device;
     class  Geometry;

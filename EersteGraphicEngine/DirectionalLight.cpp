@@ -114,24 +114,4 @@ namespace ege
             _lightModel->Rotate(eulerAngles);
         }
     }
-
-    void DirectionalLight::Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles)
-    {
-        Light::Rotate(origin, eulerAngles);
-    }
-
-    void DirectionalLight::Rotate(XMFLOAT3 eulerAngles)
-    {
-        Light::Rotate(eulerAngles);
-    }
-
-    void DirectionalLight::Rotate(XMFLOAT3 origin, float roll, float pitch, float yaw)
-    {
-        Light::Rotate(origin, roll, pitch, yaw);
-    }
-
-    void DirectionalLight::Rotate(float roll, float pitch, float yaw)
-    {
-        Light::Rotate(roll, pitch, yaw);
-    }
 }

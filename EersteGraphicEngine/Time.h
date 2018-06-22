@@ -25,7 +25,7 @@ namespace ege
     public:
         static const double MICROSEC_TO_SEC;
 
-    private:
+    protected:
         bool   _run;
         float  _frameDelta;
         float  _timeSinceStart;

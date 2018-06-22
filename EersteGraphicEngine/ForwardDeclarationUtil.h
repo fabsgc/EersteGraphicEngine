@@ -31,4 +31,6 @@ namespace ege
     class TaskQueue;
     class TaskScheduler;
     class Worker;
+
+    class MathUtility;
 }

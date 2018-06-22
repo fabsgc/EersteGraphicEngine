@@ -20,27 +20,18 @@ namespace ege
         Light(LightType type);
         virtual ~Light() = 0;
 
-        virtual void    Initialise() = 0;
-        virtual void    Update() = 0;
-        virtual void    Draw() = 0;
+        virtual void     Initialise() = 0;
+        virtual void     Update() = 0;
+        virtual void     Draw() = 0;
 
-        virtual void     Move(XMVECTOR movement);
-        virtual void     Move(XMFLOAT3 movement);
-        virtual void     Move(float x, float y, float z);
-
+        using            IMoveable::Move;
+        using            IMoveable::Scale;
+        using            IMoveable::Rotate;
+        virtual void     Move(XMVECTOR movement) override;
         virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
         virtual void     Scale(XMVECTOR scale) override {};
-        virtual void     Scale(XMFLOAT3 origin, XMFLOAT3 scale) override {};
-        virtual void     Scale(XMFLOAT3 scale) override {};
-        virtual void     Scale(XMFLOAT3 origin, float x, float y, float z) override {};
-        virtual void     Scale(float x, float y, float z) override {};
-
         virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void     Rotate(XMVECTOR eulerAngles) override;
-        virtual void     Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles) override;
-        virtual void     Rotate(XMFLOAT3 eulerAngles) override;
-        virtual void     Rotate(XMFLOAT3 origin, float yaw, float pitch, float roll) override;
-        virtual void     Rotate(float yaw, float pitch, float roll) override;
 
         const LightType& GetType() const;
         const XMFLOAT4&  GetColor() const;
@@ -53,7 +44,7 @@ namespace ege
         const bool       GetCastShadow() const;
         const bool       IsEnabled() const;
         
-    public:
+    protected:
         static const XMFLOAT4 DefaultLightColor;
         static const bool     DefaultCastShadow;
         static const bool     DefaultDrawLightModel;

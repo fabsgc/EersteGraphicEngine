@@ -27,7 +27,7 @@ namespace ege {
             return Frees;
         }
 
-    private:
+    protected:
         friend class MemoryAllocatorBase;
 
         static void AddNewCount() { News++; }

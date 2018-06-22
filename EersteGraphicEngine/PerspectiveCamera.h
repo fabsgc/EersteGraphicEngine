@@ -25,7 +25,16 @@ namespace ege
         const XMFLOAT3&  GetUp() const;
         const float&     GetFov() const;
 
-    public:
+        using            Camera::Move;
+        using            Camera::Rotate;
+        virtual void     Move(XMVECTOR movement) override {};
+        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void     Rotate(XMVECTOR eulerAngles) override {};
+
+        const Frustum&   GetFrustum() const;
+        const Frustum*   GetFrustumPtr() const;
+
+    protected:
         static const float DefaultFov;
         static const float DefaultRotationSpeed;
 

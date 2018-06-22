@@ -40,14 +40,17 @@ namespace ege
         const XMFLOAT3&   GetPosition() const;
         const float&      GetTranslationSpeed() const;
 
-        virtual void      UpdateLocalPosition() override {};
+        using             IMoveable::Move;
+        using             IMoveable::Rotate;
         virtual void      Move(XMVECTOR movement) override {};
         virtual void      Scale(XMVECTOR origin, XMVECTOR scale) override {};
         virtual void      Scale(XMVECTOR scale) override {};
         virtual void      Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
         virtual void      Rotate(XMVECTOR eulerAngles) override {};
 
-    public:
+        virtual void      UpdateLocalPosition() override {};
+
+    protected:
         static const float DefaultNearZ;
         static const float DefaultFarZ;
         static const float DefaultTranslationSpeed;

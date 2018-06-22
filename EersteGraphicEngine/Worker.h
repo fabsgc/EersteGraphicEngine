@@ -24,11 +24,11 @@ namespace ege
         bool Running();
         std::thread::id GetThreadId();
 
-    private:
+    protected:
         void            Join();
         SPtr<Task>      GetTask();
 
-    private:
+    protected:
         std::thread              _thread;
         std::thread::id          _threadId;
         std::atomic<WorkerState> _state;

@@ -14,10 +14,10 @@ namespace ege
         void Reset(std::function<void()> workerMethod, Task* parent = nullptr);
         void Initialise(std::function<void()> workerMethod, Task* parent = nullptr);
 
-    private:
+    protected:
         void Finish();
 
-    private:
+    protected:
         Task*                 _parent;
         std::atomic_size_t    _tasksToRun;
         std::function<void()> _workerMethod;

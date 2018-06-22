@@ -244,6 +244,18 @@
     <Filter Include="Header Files\Core\Renderer\RenderPipeline">
       <UniqueIdentifier>{79a94ef9-93b4-4a82-92a0-bb13d80c052b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Shader">
+      <UniqueIdentifier>{97d54d22-8c86-4a99-8cf0-f1f5d1aa7f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Texture">
+      <UniqueIdentifier>{0c40d045-ec53-4da6-8c91-91b20a145fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Model\Bounding">
+      <UniqueIdentifier>{5e4710c5-56a3-46df-8a91-0ef5bb8a81c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Model\Bounding">
+      <UniqueIdentifier>{62688534-49d9-47d5-8a94-3395b7078fc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -465,6 +477,18 @@
     <ClCompile Include="DeferredRendering.cpp">
       <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="Bounding.cpp">
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingSphere.cpp">
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingComplex.cpp">
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -587,12 +611,6 @@
     <ClInclude Include="IResourceManager.h">
       <Filter>Header Files\Core\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
@@ -650,12 +668,6 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="FlyingCamera.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
@@ -688,9 +700,6 @@
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\App\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderInclude.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
@@ -730,6 +739,33 @@
     </ClInclude>
     <ClInclude Include="DeferredRendering.h">
       <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderInclude.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Bounding.h">
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingSphere.h">
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingComplex.h">
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

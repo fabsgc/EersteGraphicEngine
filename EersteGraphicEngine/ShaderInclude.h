@@ -19,10 +19,10 @@ namespace ege
 
         HRESULT __stdcall Close(LPCVOID pData);
 
-    private:
+    protected:
         String GetFullPath(String relativePath);
 
-    private:
+    protected:
         String _shaderDir;
         String _systemDir;
     };

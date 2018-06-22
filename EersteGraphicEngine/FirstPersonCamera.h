@@ -11,11 +11,13 @@ namespace ege
         FirstPersonCamera();
         ~FirstPersonCamera();
 
-        void Update() override;
-        void Walk(float distance) override;
-        void Strafe(float x, float y, float z) override;
-        void Strafe(XMFLOAT3 distance) override;
+        void         Update() override;
+        void         Walk(float distance) override;
+        void         Strafe(float x, float y, float z) override;
+        void         Strafe(XMFLOAT3 distance) override;
 
+        using        FlyingCamera::Move;
+        using        FlyingCamera::Rotate;
         virtual void Move(XMVECTOR movement) override;
         virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void Rotate(XMVECTOR eulerAngles) override;

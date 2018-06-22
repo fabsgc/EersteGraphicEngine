@@ -12,7 +12,7 @@ namespace ege
 
         void Load(String filePath, SPtr<Scene> scene);
     
-    private:
+    protected:
         void LoadNode(SPtr<Scene> scene, SPtr<Node> parent, tinyxml2::XMLElement* element);
         void LoadEntityModel(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element);
         void LoadEntityLight(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element);

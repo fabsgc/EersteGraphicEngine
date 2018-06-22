@@ -18,7 +18,7 @@ namespace ege
         void OnShutDown() override;
         void Initialise() override;
 
-    private:
+    protected:
         SceneLoader _sceneLoader;
     };
 

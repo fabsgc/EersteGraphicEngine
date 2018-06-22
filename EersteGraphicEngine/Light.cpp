@@ -45,16 +45,6 @@ namespace ege
         }
     }
 
-    void Light::Move(XMFLOAT3 movement)
-    {
-        Move(XMLoadFloat3(&movement));
-    }
-
-    void Light::Move(float x, float y, float z)
-    {
-        Move(XMFLOAT3(x, y, z));
-    }
-
     void Light::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
     {
         IMoveable::Rotate(point, eulerAngles);
@@ -73,26 +63,6 @@ namespace ege
         {
             _lightModel->Rotate(eulerAngles);
         }
-    }
-
-    void Light::Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles)
-    {
-        IMoveable::Rotate(origin, eulerAngles);
-    }
-
-    void Light::Rotate(XMFLOAT3 eulerAngles)
-    {
-        IMoveable::Rotate(eulerAngles);
-    }
-
-    void Light::Rotate(XMFLOAT3 origin, float roll, float pitch, float yaw)
-    {
-        IMoveable::Rotate(origin, roll, pitch, yaw);
-    }
-
-    void Light::Rotate(float roll, float pitch, float yaw)
-    {
-        IMoveable::Rotate(roll, pitch, yaw);
     }
 
     const LightType& Light::GetType() const

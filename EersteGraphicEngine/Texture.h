@@ -13,7 +13,7 @@ namespace ege
         void Initialise();
         void Apply(UINT slot);
 
-    private:
+    protected:
         RenderAPI &               _renderAPI;
         String                    _filePath;
         ID3D11ShaderResourceView* _texture;

@@ -29,12 +29,12 @@ namespace ege
             IModule::StartUp<T>(tasksPerThread);
         }
 
-    private:
+    protected:
         void OnStartUp();
         void OnShutDown() override {};
         SPtr<Worker> FindThreadWorker(const std::thread::id threadId);
 
-    private:
+    protected:
         Vector<SPtr<Worker>>         _workers;
         UINT8                        _numberThreads;
         UINT8                        _tasksPerThread;

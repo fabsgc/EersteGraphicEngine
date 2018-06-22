@@ -48,11 +48,11 @@ namespace ege
             _offset = 0;
         }
 
-    private:
+    protected:
         LinearAllocator(LinearAllocator const&) = delete;
         LinearAllocator& operator=(LinearAllocator const&) = delete;
 
-    private:
+    protected:
         size_t _offset;
         size_t _totalSize;
         void * _startPtr;

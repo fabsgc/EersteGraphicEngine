@@ -20,7 +20,7 @@ namespace ege
         void Load(String filePath, String name);
         void Get(String name, Model& model);
 
-    private:
+    protected:
         ModelLoader _modelLoader;
     };
 

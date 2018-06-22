@@ -30,13 +30,16 @@ namespace ege
         void          SetScene(SPtr<Scene> scene);
         void          SetParent(SPtr<Node> parent);
 
+        using         IMoveable::Move;
+        using         IMoveable::Scale;
+        using         IMoveable::Rotate;
         virtual void  Move(XMVECTOR movement) override;
         virtual void  Scale(XMVECTOR origin, XMVECTOR scale) override;
         virtual void  Scale(XMVECTOR scale) override;
         virtual void  Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void  Rotate(XMVECTOR eulerAngles) override;
 
-    private:
+    protected:
         SPtr<Scene>                _scene;
         SPtr<Node>                 _parent;
         Map<String, SPtr<Node>>    _child;

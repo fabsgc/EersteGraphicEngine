@@ -14,7 +14,7 @@ namespace ege
         void          Execute();
         bool          operator==(const String& name) const;
 
-    private:
+    protected:
         String _name;
         std::vector<std::function<void()>> _callbacks;
     };

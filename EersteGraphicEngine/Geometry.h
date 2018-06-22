@@ -20,9 +20,7 @@ namespace ege
         void Draw() override;
         void SetColor(const Color color);
 
-    private:
-        friend Model;
-
+    protected:
         RenderAPI&         _renderAPI;
 
         Vector<VertexDesc> _vertices;

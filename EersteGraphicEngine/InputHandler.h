@@ -72,14 +72,14 @@ namespace ege
         ~InputHandler() {}
         const InputState GetState(const String& handler);
 
-    private:
+    protected:
         void Update(InputMap* inputMap);
         void OnStartUp() override;
         void OnShutDown() override {};
 
-    private:
+    protected:
         Map<Context, Vector<Vector<InputMap>>> _handlers;
-        CoreApplication&               _coreApplication;
+        CoreApplication&                       _coreApplication;
     };
 
     InputHandler&      gInputHandler();

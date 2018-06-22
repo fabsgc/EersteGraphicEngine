@@ -11,11 +11,11 @@ namespace ege
         Console() {}
         ~Console() {}
 
-    private:
+    protected:
         void OnStartUp() override;
         void OnShutDown() override;
 
-    private:
+    protected:
         int _hCrtIn;
         int _hCrtOut;
     };

@@ -33,11 +33,11 @@ namespace ege
         const LightMode&     GetLightMode() const;
         Vector<SPtr<Light>>& GetLights();
 
-    private:
+    protected:
         static const bool      DefaultCastShadow;
         static const LightMode DefaultLightMode;
         
-    private:
+    protected:
         RenderAPI&          _renderAPI;
 
         SPtr<ModelDesc>     _modelDesc;

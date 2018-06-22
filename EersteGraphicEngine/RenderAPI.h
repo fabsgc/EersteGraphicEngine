@@ -121,13 +121,13 @@ namespace ege
         ID3D11Buffer*   GetConstantBuffer(ConstantBufferType type);
         ConstantBuffer* GetConstantBufferUpdate(ConstantBufferType type);
 
-    private:
+    protected:
         RenderAPI(RenderAPI const&) = delete;
         RenderAPI& operator=(RenderAPI const&) = delete;
 
         void LoadRenderConfig();
 
-    private:
+    protected:
         RenderDesc                _renderDesc;
 
         IDXGIDevice*              _dxgiDevice;

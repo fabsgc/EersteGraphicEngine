@@ -29,7 +29,7 @@ namespace ege
         void                Update() override;
         void                Draw() override;
 
-    private:
+    protected:
         Map<String, SPtr<Node>>   _nodes;
         Map<String, SPtr<Light>>  _lights;
         Map<String, SPtr<Camera>> _cameras;

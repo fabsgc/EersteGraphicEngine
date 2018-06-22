@@ -18,7 +18,7 @@ namespace ege
         void Update() override {};
         void Draw() override {};
 
-    private:
+    protected:
         Renderer(Renderer const&) = delete;
         Renderer& operator=(Renderer const&) = delete;
     };

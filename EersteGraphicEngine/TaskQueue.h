@@ -17,7 +17,7 @@ namespace ege
         std::size_t Size() const;
         bool        Empty() const;
 
-    private:
+    protected:
         std::vector<SPtr<Task>> _tasks;
         std::atomic<int> _top, _bottom;
     };

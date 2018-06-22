@@ -62,13 +62,13 @@ namespace ege
         const KeyState& GetState(const KeyName& name) const;
         const KeyState& GetState(const String& label) const;        
 
-    private:
+    protected:
         void UpdateState(Key* key, MSG* message);
 
         void OnStartUp() override;
         void OnShutDown() override {};
 
-    private:
+    protected:
         Vector<Key> _keys;
     };
 

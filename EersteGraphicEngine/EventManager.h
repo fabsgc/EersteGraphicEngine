@@ -19,10 +19,10 @@ namespace ege
         void OnStartUp() override {};
         void OnShutDown() override {};
 
-    private:
+    protected:
         const bool Exist(const String& name) const;
 
-    private:
+    protected:
         std::vector<SPtr<Event>> _events;
     };
 

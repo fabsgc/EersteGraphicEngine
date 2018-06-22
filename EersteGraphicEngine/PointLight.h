@@ -23,6 +23,6 @@ namespace ege
         static const float    DefaultRadius;
 
     protected:
-        float    _radius;
+        float _radius;
     };
 }

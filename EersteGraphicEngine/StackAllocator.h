@@ -94,11 +94,11 @@ namespace ege
             _peak = 0;
         }
 
-    private:
+    protected:
         StackAllocator(StackAllocator const&) = delete;
         StackAllocator& operator=(StackAllocator const&) = delete;
 
-    private:
+    protected:
         size_t _offset;
         size_t _totalSize;
         size_t _used;

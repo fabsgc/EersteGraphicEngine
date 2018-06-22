@@ -14,9 +14,9 @@ namespace ege
         static const float G_INFINITY;
 
     public:
-        static float RandF();
-        static float RandF(float a, float b);
-        static float AngleFromXY(float x, float y);
+        static float    RandF();
+        static float    RandF(float a, float b);
+        static float    AngleFromXY(float x, float y);
         static XMVECTOR RandUnitVec3();
         static XMVECTOR RandHemisphereUnitVec3(XMVECTOR n);
 

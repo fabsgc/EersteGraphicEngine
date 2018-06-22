@@ -59,4 +59,14 @@ namespace ege
     {
         return _fov;
     }
+
+    const Frustum& PerspectiveCamera::GetFrustum() const
+    {
+        return _frustum;
+    }
+
+    const Frustum* PerspectiveCamera::GetFrustumPtr() const
+    {
+        return &_frustum;
+    }
 }
