@@ -8,7 +8,7 @@ namespace ege
     class BoundingBox : public Bounding
     {
     public:
-        BoundingBox() {};
+        BoundingBox(SPtr<Model> parent);
         ~BoundingBox() {};
 
         virtual void Initialise() override;

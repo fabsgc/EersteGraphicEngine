@@ -2,6 +2,10 @@
 
 namespace ege
 {
+    BoundingBox::BoundingBox(SPtr<Model> parent)
+        : Bounding(parent)
+    {}
+
     void BoundingBox::Initialise()
     {
     }

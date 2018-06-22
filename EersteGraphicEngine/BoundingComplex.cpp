@@ -2,6 +2,10 @@
 
 namespace ege
 {
+    BoundingComplex::BoundingComplex(SPtr<Model> parent)
+        : Bounding(parent)
+    {}
+
     void BoundingComplex::Initialise()
     {
     }

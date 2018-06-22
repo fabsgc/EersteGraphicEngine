@@ -8,7 +8,7 @@ namespace ege
     class BoundingComplex : public Bounding
     {
     public:
-        BoundingComplex() {};
+        BoundingComplex(SPtr<Model> parent);
         ~BoundingComplex() {};
 
         virtual void Initialise() override;
