@@ -54,12 +54,12 @@ namespace ege
 
         if (gKeyboard().GetKey(KeyName::ARROW_LEFT).State == KeyState::TRIGGERED)
         {
-            MoveX(-5.0f * deltaTime);
+            MoveX(-25.0f * deltaTime);
         }
 
         if (gKeyboard().GetKey(KeyName::ARROW_RIGHT).State == KeyState::TRIGGERED)
         {
-            MoveX(5.0f * deltaTime);
+            MoveX(25.0f * deltaTime);
         }
     }
 

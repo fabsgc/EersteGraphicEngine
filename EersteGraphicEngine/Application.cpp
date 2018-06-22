@@ -86,7 +86,7 @@ namespace ege
         wind2->RotatePitch(XM_PIDIV4);
 
         wind->GoTo(5.0f, 0.0, 0.0f);
-        wind2->GoTo(25.0f, 0.0, 0.0f);
+        wind2->GoTo(25.0f, 0.0, 5.0f);
 
         player->GoTo(10.0f, 1.0f, 0.0f);
 

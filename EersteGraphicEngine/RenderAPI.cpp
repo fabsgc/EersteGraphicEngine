@@ -160,12 +160,12 @@ namespace ege
 
         DXGI_SWAP_CHAIN_DESC sd;
         ZeroMemory(&sd, sizeof(sd));
-        sd.BufferCount = 1;
+        sd.BufferCount = 2;
         sd.BufferDesc.Width = window.GetWindowWidth();
         sd.BufferDesc.Height = window.GetWindowHeight();
         sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
         sd.BufferDesc.RefreshRate.Numerator = 0;
-        sd.BufferDesc.RefreshRate.Denominator = 0;
+        sd.BufferDesc.RefreshRate.Denominator = 1;
         sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
         sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
         sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;

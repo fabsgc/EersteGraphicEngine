@@ -256,6 +256,12 @@
     <Filter Include="Source Files\Core\Renderer\Model\Bounding">
       <UniqueIdentifier>{62688534-49d9-47d5-8a94-3395b7078fc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\RenderAPI\Shader">
+      <UniqueIdentifier>{87308f1b-3a51-4c43-8297-0265c01093fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI\Texture">
+      <UniqueIdentifier>{4e06116e-19df-499f-a7d1-d47c94186c0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -339,12 +345,6 @@
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
       <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Core\Renderer\Model</Filter>
     </ClCompile>
@@ -399,9 +399,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="FlyingCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
@@ -425,9 +422,6 @@
     </ClCompile>
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderInclude.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="DefaultMaterial.cpp">
       <Filter>Source Files\App\Material</Filter>
@@ -491,6 +485,18 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Core\RenderAPI\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderInclude.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
