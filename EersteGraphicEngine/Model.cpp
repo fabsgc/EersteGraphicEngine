@@ -109,11 +109,4 @@ namespace ege
     {
         return _lights;
     }
-
-    void Model::UpdateLocalPosition()
-    {
-        XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
-        XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
-        XMStoreFloat3(&_position, position);
-    }
 }

@@ -1,16 +1,21 @@
 #include "PointLight.h"
 #include "LightModel.h"
 
+#include "Time.h"
+#include "Keyboard.h"
+
 namespace ege
 {
-    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-12.0f, 6.0f, -2.0f);
+    const XMFLOAT3 PointLight::DefaultPosition = XMFLOAT3(-12.0f, 6.0f, 0.0f);
     const float    PointLight::DefaultRadius   = 5.0f;
 
     PointLight::PointLight()
         : Light(LightType::PointLight)
         , _radius(DefaultRadius)
     {
+        GoTo(DefaultPosition);
         _position = DefaultPosition;
+
         _lightModel = ege_shared_ptr_new<LightModel>("point-light");
         _lightModel->Initialise();
         _lightModel->GoTo(_position);
@@ -27,12 +32,40 @@ namespace ege
 
     void PointLight::Update()
     {
-        _lightModel->Update();
+        float deltaTime = gTime().GetFrameDelta();
+        Light::Update();
+
+        if (_lightModel != nullptr)
+        {
+            _lightModel->Update();
+        }
+
+        Rotate(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 2.5f * deltaTime, 0.0f));
+
+        if (gKeyboard().GetKey(KeyName::ARROW_UP).State == KeyState::TRIGGERED)
+        {
+            MoveY(5.0f * deltaTime);
+        }
+
+        if (gKeyboard().GetKey(KeyName::ARROW_DOWN).State == KeyState::TRIGGERED)
+        {
+            MoveY(-5.0f * deltaTime);
+        }
+
+        if (gKeyboard().GetKey(KeyName::ARROW_LEFT).State == KeyState::TRIGGERED)
+        {
+            MoveX(-5.0f * deltaTime);
+        }
+
+        if (gKeyboard().GetKey(KeyName::ARROW_RIGHT).State == KeyState::TRIGGERED)
+        {
+            MoveX(5.0f * deltaTime);
+        }
     }
 
     void PointLight::Draw()
     {
-        if (_drawLightModel)
+        if (_drawLightModel && _lightModel != nullptr)
         {
             _lightModel->Draw();
         }

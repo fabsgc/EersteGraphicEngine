@@ -35,11 +35,64 @@ namespace ege
     {
     }
 
-    void Light::UpdateLocalPosition()
+    void Light::Move(XMVECTOR movement)
     {
-        XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
-        XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
-        XMStoreFloat3(&_position, position);
+        IMoveable::Move(movement);
+
+        if (_lightModel != nullptr)
+        {
+            _lightModel->Move(movement);
+        }
+    }
+
+    void Light::Move(XMFLOAT3 movement)
+    {
+        Move(XMLoadFloat3(&movement));
+    }
+
+    void Light::Move(float x, float y, float z)
+    {
+        Move(XMFLOAT3(x, y, z));
+    }
+
+    void Light::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
+    {
+        IMoveable::Rotate(point, eulerAngles);
+
+        if (_lightModel != nullptr)
+        {
+            _lightModel->Rotate(point, eulerAngles);
+        }
+    }
+
+    void Light::Rotate(XMVECTOR eulerAngles)
+    {
+        IMoveable::Rotate(eulerAngles);
+
+        if (_lightModel != nullptr)
+        {
+            _lightModel->Rotate(eulerAngles);
+        }
+    }
+
+    void Light::Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles)
+    {
+        IMoveable::Rotate(origin, eulerAngles);
+    }
+
+    void Light::Rotate(XMFLOAT3 eulerAngles)
+    {
+        IMoveable::Rotate(eulerAngles);
+    }
+
+    void Light::Rotate(XMFLOAT3 origin, float roll, float pitch, float yaw)
+    {
+        IMoveable::Rotate(origin, roll, pitch, yaw);
+    }
+
+    void Light::Rotate(float roll, float pitch, float yaw)
+    {
+        IMoveable::Rotate(roll, pitch, yaw);
     }
 
     const LightType& Light::GetType() const

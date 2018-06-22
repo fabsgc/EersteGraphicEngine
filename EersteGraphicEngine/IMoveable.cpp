@@ -2,12 +2,26 @@
 
 namespace ege
 {
+    IMoveable::IMoveable()
+    {
+        XMStoreFloat4x4(&_world, XMMatrixIdentity());
+        UpdateLocalPosition();
+    }
+
+    void IMoveable::UpdateLocalPosition()
+    {
+        XMFLOAT3 p = XMFLOAT3(0.0f, 0.0f, 0.0f);
+        XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
+        XMVECTOR position = XMVector3Transform(XMLoadFloat3(&p), XMLoadFloat4x4(&_world));
+        XMStoreFloat3(&_position, position);
+    }
+
     XMFLOAT3 IMoveable::GetPosition()
     {
         return _position;
     }
 
-    XMFLOAT4X4 IMoveable::GetWrodl()
+    XMFLOAT4X4 IMoveable::GetWorld()
     {
         return _world;
     }

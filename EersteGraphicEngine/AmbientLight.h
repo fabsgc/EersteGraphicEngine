@@ -14,7 +14,5 @@ namespace ege
         void Initialise() override;
         void Update()  override;
         void Draw()  override;
-
-        void UpdateLocalPosition() override {}
     };
 }

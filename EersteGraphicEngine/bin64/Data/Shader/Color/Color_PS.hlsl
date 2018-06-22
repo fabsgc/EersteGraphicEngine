@@ -74,7 +74,7 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
 {
     LightInformation information = ComputeLightInformation(index, IN);
     float3 refVector             = (float3) 0;
-    float3 lightWorlDdirection   = normalize(-information.LightWorldDirection.xyz);
+    float3 lightWorlDdirection   = normalize(information.LightWorldDirection.xyz);
     float n_dot_l                = dot(lightWorlDdirection, normalize(IN.Normal));
 
     if (n_dot_l > 0)
@@ -83,11 +83,9 @@ ColorComponent ComputePointLight(PixelComponent pixelComponent, ColorComponent c
         float  light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
 
         // D = kd * ld * md
-        colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * Lights[index].LightColor.a * intensity;
-
+        colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * intensity;
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
-
         // S = max(dot(V.R),0)^P * SpecularColor.rgb * SpecularColor.a * color.rgb;
         colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * intensity;
     }
@@ -99,26 +97,30 @@ ColorComponent ComputeSpotLight(PixelComponent pixelComponent, ColorComponent co
 {
     LightInformation information = ComputeLightInformation(index, IN);
     float3 refVector             = (float3) 0;
-    float3 lightWorlDdirection   = normalize(-information.LightWorldDirection.xyz);
-    float n_dot_l                = dot(lightWorlDdirection, normalize(IN.Normal));
+    float3 lightWorlDdirection   = normalize(information.LightWorldDirection.xyz);
+    float n_dot_l                = dot(normalize(IN.Normal), lightWorlDdirection);
+    float3 halfVector            = normalize(lightWorlDdirection + IN.ViewWorldDirection);
+    float n_dot_h                = dot(IN.Normal, halfVector);
+    float4 lightCoefficients     = lit(n_dot_l, n_dot_h, SpecularPower);
+
+    float intensity = information.LightWorldDirection.w;
+    float light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
+    float lightAngle = dot(-lightWorlDdirection, information.LightDirection);
+
+    float spotFactor = 0;
+    if (lightAngle > 0)
+    {
+        spotFactor = smoothstep(Lights[index].LightOuterAngle, Lights[index].LightInnerAngle, lightAngle);
+    }
 
     if (n_dot_l > 0)
     {
-        float intensity = information.LightWorldDirection.w;
-        float light_n_dot_l = dot(lightWorlDdirection, IN.Normal);
-        float lightAngle = dot(information.LightDirection, lightWorlDdirection);
-
-        if(lightAngle > 0)
-        {
-            float spotFactor = smoothstep(Lights[index].LightOuterAngle, Lights[index].LightInnerAngle, lightAngle);
-
-            // D = kd * ld * md
-            colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * Lights[index].LightColor.a * intensity * spotFactor;
-            // R = I - 2(n.I) * n
-            refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
-            // S = max(dot(V.R),0)^P;
-            colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * intensity * spotFactor;
-        }
+        // D = kd * ld * md
+        colorComponent.Diffuse += Lights[index].LightColor.rgb * intensity * lightCoefficients.y * spotFactor;
+        // R = I - 2(n.I) * n
+        refVector = normalize(reflect(lightWorlDdirection, pixelComponent.Normal));
+        // S = max(dot(V.R),0)^P;
+        colorComponent.Specular += pow(max(dot(IN.ViewWorldDirection, refVector), 0), SpecularPower) * SpecularColor.rgb * SpecularColor.a * intensity;
     }
 
     return colorComponent;
@@ -133,7 +135,7 @@ ColorComponent ComputeDirectionalLight(PixelComponent pixelComponent, ColorCompo
     if (n_dot_l > 0)
     {
         // D = kd * ld * md
-        colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * Lights[index].LightColor.a * pixelComponent.Diffuse.rgb;
+        colorComponent.Diffuse += max(n_dot_l, 0.0f) * Lights[index].LightColor.rgb * pixelComponent.Diffuse.rgb;
         // R = I - 2(n.I) * n
         refVector = normalize(reflect(lightDirection, pixelComponent.Normal));
         // S = max(dot(V.R),0)^P;
@@ -157,7 +159,7 @@ ColorComponent ComputeSpecular(ColorComponent colorComponent, PS_INPUT IN)
 {
     if (HasSpecularTexture == true)
     {
-        colorComponent.Specular.xyz *= SpecularTexture.Sample(ColorSampler, IN.Texture).xyz;
+        colorComponent.Specular.xyz *= SpecularTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz;
     }
 
     return colorComponent;
@@ -173,7 +175,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
 
     if (HasDiffuseTexture == true)
     {
-        pixelComponent.Diffuse = DiffuseTexture.Sample(ColorSampler, IN.Texture);
+        pixelComponent.Diffuse = DiffuseTexture.Sample(AnisotropicColorSampler, IN.Texture);
     }
     else
     {
@@ -182,7 +184,7 @@ PixelComponent ComputePixelComponent(PS_INPUT IN)
 
     if (HasNormalTexture == true)
     {
-        float3 sampledNormal = (2 * NormalTexture.Sample(ColorSampler, IN.Texture).xyz) - 1.0f;
+        float3 sampledNormal = (2 * NormalTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz) - 1.0f;
         float3x3 tbn = float3x3(IN.Tangent, IN.Binormal, IN.Normal);
         pixelComponent.Normal = mul(sampledNormal, tbn);
     }
@@ -201,7 +203,7 @@ LightInformation ComputeLightInformation(int index, PS_INPUT IN)
 
     //Compute vector between light and model
     float3 lightWorldDirection = (Lights[index].LightPosition) - worldPosition;
-    information.LightWorldDirection.xyz = normalize(-(lightWorldDirection));
+    information.LightWorldDirection.xyz = normalize((lightWorldDirection));
     information.LightWorldDirection.w = saturate(1.0f - (length(lightWorldDirection) / Lights[index].LightRadius));
 
     //Compute vector between light and camera

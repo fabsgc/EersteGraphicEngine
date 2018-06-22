@@ -19,11 +19,21 @@ namespace ege
         YES, NO
     };
 
-    struct InputMap
+    struct KeyCombination
     {
         Vector<Key*> KeyPtrs;
-        String Handler;
+    };
+
+    struct JoypadButtonCombination
+    {
         Vector<JoypadButton*> ButtonPtrs;
+    };
+
+    struct InputMap
+    {
+        String Handler;
+        Vector<KeyCombination> Keys;
+        Vector<JoypadButtonCombination> Buttons;
         InputHandlerState State;
         InputHandlerSwitchedState Switched;
 
@@ -68,7 +78,7 @@ namespace ege
         void OnShutDown() override {};
 
     private:
-        Map<Context, Vector<InputMap>> _handlers;
+        Map<Context, Vector<Vector<InputMap>>> _handlers;
         CoreApplication&               _coreApplication;
     };
 

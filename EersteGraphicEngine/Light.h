@@ -24,17 +24,28 @@ namespace ege
         virtual void    Update() = 0;
         virtual void    Draw() = 0;
 
+        virtual void     Move(XMVECTOR movement);
+        virtual void     Move(XMFLOAT3 movement);
+        virtual void     Move(float x, float y, float z);
+
+        virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
+        virtual void     Scale(XMVECTOR scale) override {};
+        virtual void     Scale(XMFLOAT3 origin, XMFLOAT3 scale) override {};
+        virtual void     Scale(XMFLOAT3 scale) override {};
+        virtual void     Scale(XMFLOAT3 origin, float x, float y, float z) override {};
+        virtual void     Scale(float x, float y, float z) override {};
+
+        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void     Rotate(XMVECTOR eulerAngles) override;
+        virtual void     Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles) override;
+        virtual void     Rotate(XMFLOAT3 eulerAngles) override;
+        virtual void     Rotate(XMFLOAT3 origin, float yaw, float pitch, float roll) override;
+        virtual void     Rotate(float yaw, float pitch, float roll) override;
+
         const LightType& GetType() const;
         const XMFLOAT4&  GetColor() const;
         void             SetColor(const XMFLOAT4 color);
         void             SetColor(const Color color);
-
-        virtual void     UpdateLocalPosition() override;
-        virtual void     Move(XMVECTOR movement) override {};
-        virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
-        virtual void     Scale(XMVECTOR scale) override {};
-        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
-        virtual void     Rotate(XMVECTOR eulerAngles) override {};
 
         void             SetDrawLightModel(bool drawLightModel);
         void             SetCastShadow(bool castShadow);

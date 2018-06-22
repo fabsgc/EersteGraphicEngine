@@ -117,13 +117,6 @@ namespace ege
         _parent = parent;
     }
 
-    void Node::UpdateLocalPosition()
-    {
-        XMMATRIX worldInverse = XMMatrixInverse(nullptr, XMLoadFloat4x4(&_world));
-        XMVECTOR position = XMVector3Transform(XMLoadFloat3(&_position), XMLoadFloat4x4(&_world));
-        XMStoreFloat3(&_position, position);
-    }
-
     void Node::Move(XMVECTOR movement)
     {
         for (auto child : _child)

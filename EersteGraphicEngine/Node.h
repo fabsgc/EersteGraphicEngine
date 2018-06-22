@@ -30,7 +30,6 @@ namespace ege
         void          SetScene(SPtr<Scene> scene);
         void          SetParent(SPtr<Node> parent);
 
-        virtual void  UpdateLocalPosition() override;
         virtual void  Move(XMVECTOR movement) override;
         virtual void  Scale(XMVECTOR origin, XMVECTOR scale) override;
         virtual void  Scale(XMVECTOR scale) override;

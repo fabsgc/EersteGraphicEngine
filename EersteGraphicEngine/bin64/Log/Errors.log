@@ -370,3 +370,31 @@ Time: 22:12:05
 Error: Can't load texture from file : Data/Texture/City/Nature/Building-1-diffuse.dds
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:36
+Inside ege::InputHandler::GetState
+Date: Jun 21 2018
+Time: 21:41:43
+Error: This handler does not exist (GO_FORWARD)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:36
+Inside ege::InputHandler::GetState
+Date: Jun 21 2018
+Time: 21:41:43
+Error: This handler does not exist (GO_FORWARD)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:36
+Inside ege::InputHandler::GetState
+Date: Jun 21 2018
+Time: 21:41:43
+Error: This handler does not exist (GO_FORWARD)
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\inputhandler.cpp:36
+Inside ege::InputHandler::GetState
+Date: Jun 21 2018
+Time: 21:41:43
+Error: This handler does not exist (GO_FORWARD)
+Condition: 0
+############################################: 

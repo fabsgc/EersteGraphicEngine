@@ -58,7 +58,7 @@ namespace ege
 
         SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<PointLight> lamp = ege_shared_ptr_new<PointLight>();
+        SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
         SPtr<SpotLight> spot           = ege_shared_ptr_new<SpotLight>();
 
         SPtr<CityModel> wind = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
@@ -83,15 +83,16 @@ namespace ege
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 0.0f);
 
-        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.2f));
-        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.8f));
+        ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
+        sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
         sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
         lamp->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 1.0f));
+        lamp->Move(XMFLOAT3(0.0f, -4.0f, 0.0f));
         lamp->SetRadius(40.0f);
 
         spot->SetColor(XMFLOAT4(0.95f, 0.90f, 0.6f, 1.0f));
-        spot->SetDirection(XMFLOAT3(-5.0f, -1.0f, -1.0f));
+        spot->SetDirection(XMFLOAT3(1.0f, -1.0f, 0.0f));
         spot->SetRadius(35.0f);
 
         node->SetScene(_scene);

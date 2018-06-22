@@ -7,12 +7,12 @@ namespace ege
     class IMoveable
     {
     public:
-        IMoveable() {}
+        IMoveable();
         virtual ~IMoveable() = 0 {}
-        virtual void UpdateLocalPosition() = 0;
+        virtual void UpdateLocalPosition();
 
         virtual XMFLOAT3   GetPosition();
-        virtual XMFLOAT4X4 GetWrodl();
+        virtual XMFLOAT4X4 GetWorld();
 
         virtual void Move(XMVECTOR movement);
         virtual void Move(XMFLOAT3 movement);

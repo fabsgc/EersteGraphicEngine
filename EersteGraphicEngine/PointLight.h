@@ -19,7 +19,6 @@ namespace ege
         const float& GetRadius() const;
 
     protected:
-        //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultPosition;
         static const float    DefaultRadius;
 

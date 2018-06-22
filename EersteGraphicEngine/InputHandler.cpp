@@ -17,14 +17,17 @@ namespace ege
 
             if (context.Name == _coreApplication.GetCurrentContext()->Name)
             {
-                Vector<InputMap>& inputMaps = itHandler->second;
-
-                for (auto itMap = inputMaps.begin(); itMap != inputMaps.end(); itMap++)
+                for (auto itInputHandler = itHandler->second.begin(); itInputHandler != itHandler->second.end(); itInputHandler++)
                 {
-                    if (itMap->Handler == handler)
+                    Vector<InputMap>& inputMaps = *itInputHandler;
+
+                    for (auto itMap = inputMaps.begin(); itMap != inputMaps.end(); itMap++)
                     {
-                        Update(&*itMap);
-                        return InputState(*itMap);
+                        if (itMap->Handler == handler)
+                        {
+                            Update(&*itMap);
+                            return InputState(*itMap);
+                        }
                     }
                 }
             }
@@ -41,36 +44,51 @@ namespace ege
         bool triggered = true;
         bool switched  = false;
 
-        if (inputMap->KeyPtrs.size() > 0)
+        if (inputMap->Keys.size() > 0)
         {
-            for (auto key : inputMap->KeyPtrs)
+            for (auto combination : inputMap->Keys)
             {
-                if (key->State == KeyState::RELEASED)
+                triggered = true;
+
+                for (auto key : combination.KeyPtrs)
                 {
-                    triggered = false;
+                    if (key->State == KeyState::RELEASED)
+                    {
+                        triggered = false;
+                        break;
+                    }
+                }
+
+                if (triggered)
+                {
+                    break;
                 }
             }
         }
 
-        if (joypad.IsConnected() && inputMap->ButtonPtrs.size() > 0 && triggered == false)
+        if (joypad.IsConnected() && inputMap->Buttons.size() > 0 && triggered == false)
         {
             triggered = true;
 
-            for (auto button : inputMap->ButtonPtrs)
+            for (auto combination : inputMap->Buttons)
             {
-                if (button->State == JoypadButtonState::RELEASED)
+                for (auto button : combination.ButtonPtrs)
                 {
-                    triggered = false;
+                    if (button->State == JoypadButtonState::RELEASED)
+                    {
+                        triggered = false;
+                    }
                 }
             }
         }
 
-        if ((inputMap->State == InputHandlerState::RELEASED && triggered) || (inputMap->State == InputHandlerState::TRIGGERED && !triggered))
+        if ((inputMap->State == InputHandlerState::RELEASED && triggered) || 
+            (inputMap->State == InputHandlerState::TRIGGERED && !triggered))
         {
             switched = true;
         }
 
-        inputMap->State    = (triggered) ? InputHandlerState::TRIGGERED : InputHandlerState::RELEASED;
+        inputMap->State = (triggered) ? InputHandlerState::TRIGGERED : InputHandlerState::RELEASED;
         inputMap->Switched = (switched) ? InputHandlerSwitchedState::YES : InputHandlerSwitchedState::NO;
     }
 
@@ -104,28 +122,42 @@ namespace ege
 
                 if (keyLabel != "")
                 {
-                    Vector<String> keys = Split(keyLabel, '+');
-
-                    for (auto key : keys)
+                    Vector<String> combinations = Split(keyLabel, ',');
+                    for (auto combination : combinations)
                     {
-                        inputMap.KeyPtrs.push_back(&keyboard.GetKey(key));
+                        Vector<String> keys = Split(combination, '+');
+                        KeyCombination keyCombination;
+
+                        for (auto key : keys)
+                        {
+                            keyCombination.KeyPtrs.push_back(&keyboard.GetKey(key));
+                        }
+
+                        inputMap.Keys.push_back(keyCombination);
                     }
                 }
 
                 if (buttonLabel != "")
                 {
-                    Vector<String> buttons = Split(buttonLabel, '+');
-                    
-                    for (auto button : buttons)
+                    Vector<String> combinations = Split(buttonLabel, ',');
+                    for (auto combination : combinations)
                     {
-                        inputMap.ButtonPtrs.push_back(&joypad.GetJoypadButton(button));
-                    }
+                        Vector<String> buttons = Split(combination, '+');
+                        JoypadButtonCombination buttonCombination;
+
+                        for (auto button : buttons)
+                        {
+                            buttonCombination.ButtonPtrs.push_back(&joypad.GetJoypadButton(button));
+                        }
+
+                        inputMap.Buttons.push_back(buttonCombination);
+                    }                 
                 }
 
                 inputMaps.push_back(inputMap);
             }
 
-            _handlers[context] = inputMaps;
+            _handlers[context].push_back(inputMaps);
         }
 #else
         EGE_ASSERT_ERROR_SHORT("Keymap file path not found");

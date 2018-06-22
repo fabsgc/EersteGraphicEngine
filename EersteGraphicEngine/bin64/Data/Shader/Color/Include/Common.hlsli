@@ -58,7 +58,16 @@ Texture2D DiffuseTexture  : register(t0);
 Texture2D SpecularTexture : register(t1);
 Texture2D NormalTexture   : register(t2);
 
-SamplerState ColorSampler : register(s0);
+SamplerState AnisotropicColorSampler : register(s0)
+{
+    Filter = COMPARISON_ANISOTROPIC;
+    MaxAnisotropy = 8;
+    AddressU = Wrap;
+    AddressV = Wrap;
+    AddressW = Wrap;
+    MinLOD = 0;
+    MaxLOD = FLOAT32_MAX;
+};
 
 struct ColorComponent
 {

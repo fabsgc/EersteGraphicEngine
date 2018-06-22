@@ -15,9 +15,14 @@ namespace ege
         void Update()  override;
         void Draw()  override;
 
-        //TODO : remove when rotate method implemented
+        virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles);
+        virtual void     Rotate(XMVECTOR eulerAngles);
+        virtual void     Rotate(XMFLOAT3 origin, XMFLOAT3 eulerAngles);
+        virtual void     Rotate(XMFLOAT3 eulerAngles);
+        virtual void     Rotate(XMFLOAT3 origin, float yaw, float pitch, float roll);
+        virtual void     Rotate(float yaw, float pitch, float roll);
+
         const XMFLOAT3& GetDirection() const;
-        //TODO : remove when rotate method implemented
         void            SetDirection(XMFLOAT3 direction);
 
         void            SetRadius(float radius);
@@ -28,10 +33,9 @@ namespace ege
         const float&    GetOuterAngle() const;
 
     protected:
-        //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultDirection;
-        //TODO : remove when rotate method implemented
         static const XMFLOAT3 DefaultPosition;
+
         static const float    DefaultRadius;
         static const float    DefaultInnerAngle;
         static const float    DefaultOuterAngle;

@@ -33,8 +33,6 @@ namespace ege
         const LightMode&     GetLightMode() const;
         Vector<SPtr<Light>>& GetLights();
 
-        void                 UpdateLocalPosition();
-
     private:
         static const bool      DefaultCastShadow;
         static const LightMode DefaultLightMode;
