@@ -9,8 +9,12 @@ namespace ege
     class Player : public Cube, public ThirdPersonCameraHandler
     {
     public:
-        Player();
+        Player(float translationSpeed = DefaultTranslationSpeed, float rotationSpeed = DefaultRotationSpeed);
         ~Player();
         void Update();
+
+    protected:
+        const static float DefaultTranslationSpeed;
+        const static float DefaultRotationSpeed;
     };
 }

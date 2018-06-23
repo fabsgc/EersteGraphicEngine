@@ -5,18 +5,20 @@
 
 namespace ege
 {
-    template<typename Camera>
+    template<typename T>
     class ICameraHandler
     {
     public:
         ICameraHandler()
             : _camera(nullptr)
-        {}
+        {
+            static_assert(std::is_base_of<Camera, T>::value,"T must be a descendant of ege::Camera");
+        }
 
         ~ICameraHandler()
         {}
 
-        void AttachCamera(SPtr<Camera> camera)
+        void AttachCamera(SPtr<T> camera)
         {
             _camera = camera;
         }
@@ -32,6 +34,6 @@ namespace ege
         }
         
     protected:
-        SPtr<Camera> _camera;
+        SPtr<T> _camera;
     };
 }

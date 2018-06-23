@@ -7,7 +7,10 @@
 
 namespace ege
 {
-    Player::Player()
+    const float Player::DefaultTranslationSpeed = 5.0f;
+    const float Player::DefaultRotationSpeed    = 5.0f;
+
+    Player::Player(float translationSpeed, float rotationSpeed)
         : Cube()
     {
     }

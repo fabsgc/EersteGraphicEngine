@@ -3,9 +3,18 @@
 
 namespace ege
 {
-    const float MathUtility::G_PI = 3.14159f;
-    const float MathUtility::G_PIDIV3 = 1.0471975512f;
-    const float MathUtility::G_INFINITY = FLT_MAX;
+    const float MathUtility::G_PI        = 3.14159f;
+    const float MathUtility::G_PIDIV3    = 1.0471975512f;
+    const float MathUtility::G_INFINITY  = FLT_MAX;
+
+    const XMFLOAT3 MathUtility::Zero     = XMFLOAT3(0.0f, 0.0f, 0.0f);
+    const XMFLOAT3 MathUtility::One      = XMFLOAT3(1.0f, 1.0f, 1.0f);
+    const XMFLOAT3 MathUtility::Forward  = XMFLOAT3(0.0f, 0.0f, -1.0f);
+    const XMFLOAT3 MathUtility::Backward = XMFLOAT3(0.0f, 0.0f, 1.0f);
+    const XMFLOAT3 MathUtility::Up       = XMFLOAT3(0.0f, 1.0f, 0.0f);
+    const XMFLOAT3 MathUtility::Down     = XMFLOAT3(0.0f, -1.0f, 0.0f);
+    const XMFLOAT3 MathUtility::Right    = XMFLOAT3(1.0f, 0.0f, 0.0f);
+    const XMFLOAT3 MathUtility::Left     = XMFLOAT3(-1.0f, 0.0f, 0.0f);
 
     float MathUtility::RandF()
     {
@@ -88,5 +97,51 @@ namespace ege
 
             return XMVector3Normalize(v);
         }
+    }
+
+    float MathUtility::cosInterpolate(float a, float b, float blend)
+    {
+        float ft = blend * G_PI;
+        float f = (1.0f - cos(ft)) * 0.5f;
+
+        return a * (1.0f - f) + b * f;
+    }
+
+    XMFLOAT3 MathUtility::Normalize(XMFLOAT3& vector)
+    {
+        XMVECTOR V = XMLoadFloat3(&vector);
+        V = XMVector3Normalize(V);
+        XMStoreFloat3(&vector, V);
+
+        return vector;
+    }
+
+    XMFLOAT4 MathUtility::Normalize(XMFLOAT4& vector)
+    {
+        XMVECTOR V = XMLoadFloat4(&vector);
+        V = XMVector4Normalize(V);
+        XMStoreFloat4(&vector, V);
+
+        return vector;
+    }
+
+    float MathUtility::RadiansToDegrees(float radians)
+    {
+        return (radians * 180.0f) / G_PI;
+    }
+
+    float MathUtility::DegreesToRadians(float degrees)
+    {
+        return (degrees * G_PI) / 180.0f;
+    }
+
+    XMFLOAT3 MathUtility::ConvertToScreenSpace(XMFLOAT3& position, XMFLOAT4& view, XMFLOAT4& projection)
+    {
+        return MathUtility::One;
+    }
+
+    XMFLOAT3 MathUtility::ClipSpaceToScreenSpace(XMFLOAT4& coords)
+    {
+        return MathUtility::One;
     }
 }

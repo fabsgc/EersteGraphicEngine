@@ -6,30 +6,37 @@
 
 namespace ege
 {
+    const float ThirdPersonCameraHandler::DefaultZoomSpeed        = 64.0f;
+
+    ThirdPersonCameraHandler::ThirdPersonCameraHandler(float zoomSpeed)
+        : _zoomSpeed(zoomSpeed)
+        , _keyboard(gKeyboard())
+        , _joypad(gJoypad())
+        , _mouse(gMouse())
+        , _time(gTime())
+    {
+    }
+
     void ThirdPersonCameraHandler::UpdateCamera(XMFLOAT3 position, float pitch, float yaw)
     {
-        Keyboard& keyboard = gKeyboard();
-        Joypad& joypad = gJoypad();
-        Mouse& mouse = gMouse();
-        Time& time = gTime();
-        float deltaTime = time.GetFrameDelta();
+        float deltaTime = _time.GetFrameDelta();
 
-        MouseWheelState mouseWheelState = mouse.GetWheelState();
+        MouseWheelState mouseWheelState = _mouse.GetWheelState();
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            _camera->Zoom(deltaTime * 64.0f);
+            _camera->Zoom(deltaTime * DefaultZoomSpeed);
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            _camera->Zoom(-deltaTime * 64.0f);
+            _camera->Zoom(-deltaTime * DefaultZoomSpeed);
             break;
         }
 
         if (gInputHandler().GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
-            _camera->Zoom(deltaTime * 64.0f);
+            _camera->Zoom(deltaTime * DefaultZoomSpeed);
         else if (gInputHandler().GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
-            _camera->Zoom(-deltaTime * 64.0f);
+            _camera->Zoom(-deltaTime * DefaultZoomSpeed);
 
         _camera->SetTarget(position);
         _camera->Yaw(yaw);

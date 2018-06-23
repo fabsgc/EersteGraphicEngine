@@ -240,38 +240,36 @@ namespace ege
         _needUpdate = true;
     }
 
-    void ThirdPersonCamera::Move(XMVECTOR movement)
-    {
-
-    }
-
-    void ThirdPersonCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {
-
-    }
-
-    void ThirdPersonCamera::Rotate(XMVECTOR eulerAngles)
-    {
-
-    }
-
     void ThirdPersonCamera::SetTarget(XMFLOAT3 target)
     {
         _target = target;
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::SetRadius(float radius)
     {
         _radius = radius;
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::SetAlpha(float alpha)
     {
         _alpha = alpha;
+        _needUpdate = true;
     }
 
     void ThirdPersonCamera::SetBeta(float beta)
     {
         _beta = beta;
+        _needUpdate = true;
     }
+
+    void ThirdPersonCamera::Move(XMVECTOR movement)
+    {}
+
+    void ThirdPersonCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {}
+
+    void ThirdPersonCamera::Rotate(XMVECTOR eulerAngles)
+    {}
 }
