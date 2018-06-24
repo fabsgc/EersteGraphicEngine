@@ -6,7 +6,7 @@
 
 namespace ege
 {
-    const float ThirdPersonCameraHandler::DefaultZoomSpeed        = 64.0f;
+    const float ThirdPersonCameraHandler::DefaultZoomSpeed = 64.0f;
 
     ThirdPersonCameraHandler::ThirdPersonCameraHandler(float zoomSpeed)
         : _zoomSpeed(zoomSpeed)

@@ -107,6 +107,15 @@ namespace ege
         return a * (1.0f - f) + b * f;
     }
 
+    XMFLOAT2 MathUtility::Normalize(XMFLOAT2& vector)
+    {
+        XMVECTOR V = XMLoadFloat2(&vector);
+        V = XMVector2Normalize(V);
+        XMStoreFloat2(&vector, V);
+
+        return vector;
+    }
+
     XMFLOAT3 MathUtility::Normalize(XMFLOAT3& vector)
     {
         XMVECTOR V = XMLoadFloat3(&vector);
@@ -143,5 +152,10 @@ namespace ege
     XMFLOAT3 MathUtility::ClipSpaceToScreenSpace(XMFLOAT4& coords)
     {
         return MathUtility::One;
+    }
+
+    float MathUtility::FloatPrecision(float value, float precision)
+    {
+        return (floor((value * (float) pow(10, precision) + 0.5)) / (float) pow(10, precision));
     }
 }

@@ -31,6 +31,7 @@ namespace ege
 
         static float    cosInterpolate(float a, float b, float blend);
 
+        static XMFLOAT2 Normalize(XMFLOAT2& vector);
         static XMFLOAT3 Normalize(XMFLOAT3& vector);
         static XMFLOAT4 Normalize(XMFLOAT4& vector);
 
@@ -39,6 +40,8 @@ namespace ege
 
         static XMFLOAT3 ConvertToScreenSpace(XMFLOAT3& position, XMFLOAT4& view, XMFLOAT4& projection);
         static XMFLOAT3 ClipSpaceToScreenSpace(XMFLOAT4& coords);
+
+        static float FloatPrecision(float value, float precision);
 
         template<typename T>
         static T Min(const T& a, const T& b)

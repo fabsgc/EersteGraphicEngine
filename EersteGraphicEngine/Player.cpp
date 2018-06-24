@@ -3,15 +3,19 @@
 #include "Time.h"
 #include "Mouse.h"
 #include "Joypad.h"
-#include "Keyboard.h"
 
 namespace ege
 {
-    const float Player::DefaultTranslationSpeed = 5.0f;
+    const float Player::DefaultTranslationSpeed = 20.0f;
     const float Player::DefaultRotationSpeed    = 5.0f;
 
     Player::Player(float translationSpeed, float rotationSpeed)
         : Cube()
+        , _inputHandler(gInputHandler())
+        , _keyboard(gKeyboard())
+        , _joypad(gJoypad())
+        , _mouse(gMouse())
+        , _time(gTime())
     {
     }
 
@@ -21,68 +25,96 @@ namespace ege
 
     void Player::Update()
     {
-        float deltaTime = gTime().GetFrameDelta();
-        float angleX = 0.0f;
-        float angleY = 0.0f;
+        float deltaTime   = _time.GetFrameDelta();
+        float translation = MathUtility::FloatPrecision(DefaultTranslationSpeed * deltaTime, 2.0f);
+        float rotation    = MathUtility::FloatPrecision(DefaultRotationSpeed * deltaTime, 2.0f);
+        XMFLOAT2 angles   = XMFLOAT2(0.0f, 0.0f);
+        XMFLOAT3 movement = XMFLOAT3(0.0f, 0.0f, 0.0f);
+        bool hasMoved     = false;
 
-        if (gKeyboard().GetState(KeyName::ARROW_UP) == KeyState::TRIGGERED)
+        if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
         {
-            MoveStrafeZ(10.0f * deltaTime);
-        }
-        if (gKeyboard().GetState(KeyName::ARROW_DOWN) == KeyState::TRIGGERED)
+            MoveStrafeZ(translation);
+            movement.y = translation;
+            hasMoved = true;
+        } 
+        else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
         {
-            MoveStrafeZ(-10.0f * deltaTime);
+            MoveStrafeZ(-translation);
+            movement.y = -translation;
+            hasMoved = true;
         }
-        if (gKeyboard().GetState(KeyName::ARROW_LEFT) == KeyState::TRIGGERED)
+        if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
         {
-            MoveStrafeX(-10.0f * deltaTime);
+            MoveStrafeX(-translation);
+            movement.x = -translation;
+            hasMoved = true;
         }
-        if (gKeyboard().GetState(KeyName::ARROW_RIGHT) == KeyState::TRIGGERED)
+        else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
         {
-            MoveStrafeX(10.0f * deltaTime);
+            MoveStrafeX(translation);
+            movement.x = translation;
+            hasMoved = true;
         }
-
+        
         XMFLOAT2 relativeMovement = gMouse().GetRelativeMovement();
-        angleX = relativeMovement.x * deltaTime;
-        angleY = relativeMovement.y * deltaTime;
+        angles.x = MathUtility::FloatPrecision(relativeMovement.x * deltaTime, 2.0f);
+        angles.y = MathUtility::FloatPrecision(relativeMovement.y * deltaTime, 2.0f);
 
-        if (abs(angleX) < 0.01f)
-            angleX = 0.0f;
+        if (abs(angles.x) < 0.01f)
+            angles.x = 0.0f;
+        if (abs(angles.y) < 0.01f)
+            angles.y = 0.0f;
 
-        if (abs(angleY) < 0.01f)
-            angleY = 0.0f;
-
-        if (gJoypad().IsConnected())
+        if (_joypad.IsConnected())
         {
-            float joypadRX = (float)gJoypad().GetJoyStick(JoypadStickName::RIGHT).AxisX * 300.0f;
-            float joypadRY = (float)gJoypad().GetJoyStick(JoypadStickName::RIGHT).AxisY * 300.0f;
+            float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
+            float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float joypadLX = (float)gJoypad().GetJoyStick(JoypadStickName::LEFT).AxisX;
-            float joypadLY = (float)gJoypad().GetJoyStick(JoypadStickName::LEFT).AxisY;
+            if (angles.x == 0.0f && angles.y == 0.0f)
+            {
+                float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX;
+                float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY;
 
-            if(angleX == 0.0f)
-                angleX = joypadRX * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
-            if(angleY == 0.0f)
-            angleY = -joypadRY * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
+                if (angles.x == 0.0f)
+                    angles.x = MathUtility::FloatPrecision(joypadRX * rotation, 2.0f);
+                if (angles.y == 0.0f)
+                    angles.y = MathUtility::FloatPrecision(-joypadRY * rotation, 2.0f);
+            }
 
             if (abs(joypadLY) > 0.0f)
-                MoveStrafeZ(joypadLY * deltaTime *  10.0f);
+            {
+                MoveStrafeZ(joypadLY * translation);
+                movement.y = joypadLY * translation;
+                hasMoved = true;
+            }
             if (abs(joypadLX) > 0.0f)
-                MoveStrafeX(joypadLX * deltaTime *  10.0f);
+            {
+                MoveStrafeX(joypadLX * translation);
+                movement.x = joypadLX * translation;
+                hasMoved = true;
+            }
         }
 
-        if (abs(angleX) < 0.01f)
-            angleX = 0;
+        if (abs(angles.x) < 0.01f)
+            angles.x = 0;
+        if (abs(angles.y) < 0.01f)
+            angles.y = 0;
 
-        if (abs(angleY) < 0.01f)
-            angleY = 0;
+        if (angles.x != 0.0f || angles.y != 0.0f)
+        {
+            RotatePitch(angles.x);
+            hasMoved = true;
+        }
 
-        RotatePitch(angleX);
-        UpdateLocalPosition();
+        if (hasMoved)
+        {
+            UpdateLocalPosition();
+        }
 
         if (HasCamera())
         {
-            UpdateCamera(_position, angleX, angleY);
+            UpdateCamera(_position, angles.x, angles.y);
         }
 
         Model::Update();

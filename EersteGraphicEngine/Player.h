@@ -2,6 +2,10 @@
 
 #include "PrerequisitesCore.h"
 #include "ThirdPersonCameraHandler.h"
+#include "InputHandler.h"
+#include "Joypad.h"
+#include "Mouse.h"
+#include "Time.h"
 #include "Cube.h"
 
 namespace ege
@@ -16,5 +20,12 @@ namespace ege
     protected:
         const static float DefaultTranslationSpeed;
         const static float DefaultRotationSpeed;
+
+    protected:
+        InputHandler&  _inputHandler;
+        Keyboard&      _keyboard;
+        Joypad&        _joypad;
+        Mouse&         _mouse;
+        Time&          _time;
     };
 }
