@@ -23,6 +23,8 @@ namespace ege
         virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void Rotate(XMVECTOR eulerAngles) override;
 
+        void         SetPosition(XMFLOAT3 position);
+
     public:
         static const float DefaultMinZoom;
         static const float DefaultMaxZoom;

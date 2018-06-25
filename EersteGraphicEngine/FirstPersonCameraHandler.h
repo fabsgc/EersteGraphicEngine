@@ -6,9 +6,21 @@
 
 namespace ege
 {
+    struct FirstPersonCameraHandlerConfig
+    {
+        XMFLOAT3 StartPosition;
+    };
+
     class FirstPersonCameraHandler : public ICameraHandler<FirstPersonCamera>
     {
     public:
-        void UpdateCamera();
+        FirstPersonCameraHandler(XMFLOAT3 position);
+        ~FirstPersonCameraHandler() {};
+
+        virtual void InitialiseCameraHandler() override;
+        void         UpdateCamera(XMFLOAT3 translation, XMFLOAT2 rotation);
+
+    protected:
+        FirstPersonCameraHandlerConfig _cameraConfig;
     };
 }

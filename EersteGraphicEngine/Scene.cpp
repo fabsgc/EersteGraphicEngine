@@ -4,16 +4,13 @@ namespace ege
 {
     Scene::Scene()
         : _renderAPI(gRenderAPI())
-    {
-    }
+    {}
 
     Scene::~Scene() 
-    {
-    }
+    {}
 
     void Scene::Initialise()
-    {
-    }
+    {}
 
     void Scene::InsertNode(String name, SPtr<Node> node)
     {

@@ -6,23 +6,36 @@
 
 namespace ege
 {
+    struct ThirdPersonCameraHandlerConfig
+    {
+        XMFLOAT3 StartPosition;
+        float    StartAlpha;
+        float    StartBeta;
+        float    ZoomSpeed;
+        float    Radius;
+    };
+
     class ThirdPersonCameraHandler: public ICameraHandler<ThirdPersonCamera>
     {
     public:
-        ThirdPersonCameraHandler(float zoomSpeed = DefaultZoomSpeed);
-        void UpdateCamera(XMFLOAT3 position, float pitch, float yaw);
+        ThirdPersonCameraHandler(
+            XMFLOAT3 position = MathUtility::Zero,
+            float zoomSpeed = DefaultZoomSpeed, 
+            float radius = DefaultRadius, 
+            float alpha = DefaultStartAlpha, 
+            float beta = DefaultStartBeta
+        );
+
+        virtual void InitialiseCameraHandler() override;
+        void         UpdateCamera(XMFLOAT3 position, XMFLOAT2 rotation);
 
     protected:
         const static float DefaultZoomSpeed;
+        const static float DefaultRadius;
+        const static float DefaultStartAlpha;
+        const static float DefaultStartBeta;
 
     protected:
-        Keyboard & _keyboard;
-        Joypad&    _joypad;
-        Mouse&     _mouse;
-        Time&      _time;
-
-        float      _translationSpeed;
-        float      _rotationSpeed;
-        float      _zoomSpeed;
+        ThirdPersonCameraHandlerConfig _cameraConfig;
     };
 }

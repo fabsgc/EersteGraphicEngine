@@ -52,7 +52,7 @@ namespace ege
 
     void Application::SceneLoader()
     {
-        _scene = ege_shared_ptr_new<Scene>();
+        _scene                         = ege_shared_ptr_new<Scene>();
 
         SPtr<Node> node                = ege_shared_ptr_new<Node>();
         SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
@@ -66,13 +66,14 @@ namespace ege
 
         SPtr<CityModel> wind           = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         SPtr<CityModel> wind2          = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        //SPtr<CityModel> wind         = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<CityModel> building       = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
 
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
         spot->SetDrawLightModel(true);
 
         _scene->Initialise();
+
         camera->Initialise();
         ambient->Initialise();
         sun->Initialise();
@@ -82,18 +83,17 @@ namespace ege
 
         wind->Initialise();
         wind2->Initialise();
+        building->Initialise();
         wind->RotatePitch(XM_PIDIV4);
         wind2->RotatePitch(XM_PIDIV4);
+        building->RotatePitch(XM_PI);
 
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 5.0f);
+        building->GoTo(-30.0f, 0.0, 20.0f);
 
         player->GoTo(12.0f, 1.0f, 0.0f);
         player->AttachCamera(camera);
-
-        camera->SetTarget(player->GetPosition());
-        camera->SetRadius(32.0f);
-        camera->SetAlpha(-XM_PIDIV2);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -114,11 +114,12 @@ namespace ege
         node->InsertEntity("spot", spot);
         node->InsertEntity("wind", wind);
         node->InsertEntity("wind-2", wind2);
+        node->InsertEntity("building", building);
         node->InsertEntity("player", player);
 
-        for (INT8 i = -2; i <= 2; i++)
+        for (INT8 i = -3; i <= 3; i++)
         {
-            for (INT8 j = -2; j <= 2; j++)
+            for (INT8 j = -3; j <= 3; j++)
             {
                 SPtr<CityModel> model = ege_shared_ptr_new<CityModel>("grass", "grass-diffuse", "grass-specular");
                 model->Initialise();

@@ -128,18 +128,18 @@ namespace ege
         _needUpdate = true;
     }
 
-    void OrthographicCamera::Move(XMVECTOR movement)
+    void OrthographicCamera::SetPosition(XMFLOAT3 position)
     {
-
+        _position = position;
+        _needUpdate = true;
     }
+
+    void OrthographicCamera::Move(XMVECTOR movement)
+    {}
 
     void OrthographicCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 
     void OrthographicCamera::Rotate(XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 }

@@ -205,6 +205,12 @@ namespace ege
         _needUpdate = true;
     }
 
+    void FlyingCamera::SetPosition(XMFLOAT3 position)
+    {
+        _position = position;
+        _needUpdate = true;
+    }
+
     void FlyingCamera::Move(XMVECTOR movement)
     {}
 

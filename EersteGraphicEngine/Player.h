@@ -22,10 +22,10 @@ namespace ege
         const static float DefaultRotationSpeed;
 
     protected:
-        InputHandler&  _inputHandler;
-        Keyboard&      _keyboard;
-        Joypad&        _joypad;
-        Mouse&         _mouse;
-        Time&          _time;
+        InputHandler& _inputHandler;
+        Keyboard&     _keyboard;
+        Joypad&       _joypad;
+        Mouse&        _mouse;
+        Time&         _time;
     };
 }

@@ -11,6 +11,7 @@ namespace ege
 
     Player::Player(float translationSpeed, float rotationSpeed)
         : Cube()
+        , ThirdPersonCameraHandler(_position)
         , _inputHandler(gInputHandler())
         , _keyboard(gKeyboard())
         , _joypad(gJoypad())
@@ -109,7 +110,7 @@ namespace ege
 
         if (HasCamera())
         {
-            UpdateCamera(_position, angles.x, angles.y);
+            UpdateCamera(_position, angles);
         }
 
         Model::Update();
