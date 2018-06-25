@@ -11,7 +11,7 @@ namespace ege
 
     Player::Player(float translationSpeed, float rotationSpeed)
         : Cube()
-        , OrthographicCameraHandler(_position)
+        , ThirdPersonCameraHandler(_position)
         , _inputHandler(gInputHandler())
         , _keyboard(gKeyboard())
         , _joypad(gJoypad())
@@ -26,7 +26,7 @@ namespace ege
 
     void Player::Update()
     {
-        /*float deltaTime   = _time.GetFrameDelta();
+        float deltaTime   = _time.GetFrameDelta();
         float translation = MathUtility::FloatPrecision(DefaultTranslationSpeed * deltaTime, 2.0f);
         float rotation    = MathUtility::FloatPrecision(DefaultRotationSpeed * deltaTime, 2.0f);
         XMFLOAT2 angles   = XMFLOAT2(0.0f, 0.0f);
@@ -113,9 +113,9 @@ namespace ege
             UpdateCamera(_position, angles);
         }
 
-        Model::Update();*/
+        Model::Update();
 
-        float deltaTime = _time.GetFrameDelta();
+        /*float deltaTime = _time.GetFrameDelta();
         float translation = MathUtility::FloatPrecision(DefaultTranslationSpeed * deltaTime, 2.0f);
         float rotation = MathUtility::FloatPrecision(DefaultRotationSpeed * deltaTime, 2.0f);
         XMFLOAT2 angles = XMFLOAT2(0.0f, 0.0f);
@@ -175,6 +175,6 @@ namespace ege
             UpdateCamera(movement);
         }
 
-        Model::Update();
+        Model::Update();*/
     }
 }

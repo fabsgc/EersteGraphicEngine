@@ -95,7 +95,7 @@ namespace ege
         building->GoTo(-30.0f, 0.0, 20.0f);
 
         player->GoTo(0.0f, 1.0f, 0.0f);
-        player->AttachCamera(camera3);
+        player->AttachCamera(camera);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -110,7 +110,7 @@ namespace ege
         spot->SetRadius(35.0f);
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera3);
+        node->InsertEntity("camera", camera);
         node->InsertEntity("sun", sun);
         node->InsertEntity("lamp", lamp);
         node->InsertEntity("spot", spot);
@@ -136,7 +136,7 @@ namespace ege
         _scene->InsertLight("spot", spot);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera3);
+        _scene->SetActiveCamera(camera);
         _scene->SetAmbientLight(ambient);
     }
 

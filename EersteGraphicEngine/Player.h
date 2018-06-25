@@ -11,7 +11,7 @@
 
 namespace ege
 {
-    class Player : public Cube, public OrthographicCameraHandler
+    class Player : public Cube, public ThirdPersonCameraHandler
     {
     public:
         Player(float translationSpeed = DefaultTranslationSpeed, float rotationSpeed = DefaultRotationSpeed);

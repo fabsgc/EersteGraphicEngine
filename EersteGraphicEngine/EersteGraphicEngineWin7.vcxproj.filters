@@ -262,6 +262,24 @@
     <Filter Include="Source Files\Core\Renderer\Camera\Perspective">
       <UniqueIdentifier>{3d0e6062-76cd-4038-ab36-35e07a5a45f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility\Lib\DDSTextureLoader">
+      <UniqueIdentifier>{77c4796c-2dbd-4187-a49e-800eafdc4435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib\TinyXml2">
+      <UniqueIdentifier>{ca499798-47d0-4afc-a637-05e141efda0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib\JsonCpp">
+      <UniqueIdentifier>{32cc161c-84d5-452a-be5e-b073b0a70e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib\DDsTextureLoader">
+      <UniqueIdentifier>{d2833d3e-81ee-4293-a6f0-84b89373c867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib\TinyXml2">
+      <UniqueIdentifier>{a2d8975c-a428-4714-a4d9-9951e0b09dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib\JsonCpp">
+      <UniqueIdentifier>{c4b55170-5d6c-48ff-9522-b3137b1d4839}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -342,9 +360,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
-      <Filter>Source Files\Utility\Lib</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
@@ -389,9 +404,6 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\Core\Renderer\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
-      <Filter>Source Files\Utility\Lib</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Core\Renderer\Material</Filter>
@@ -497,6 +509,15 @@
     </ClCompile>
     <ClCompile Include="OrthographicCameraHandler.cpp">
       <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
+      <Filter>Source Files\Utility\Lib\DDSTextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
+      <Filter>Source Files\Utility\Lib\TinyXml2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\jsoncpp\jsoncpp.cpp">
+      <Filter>Source Files\Utility\Lib\JsonCpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -614,9 +635,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Core\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
-      <Filter>Header Files\Utility\Lib</Filter>
-    </ClInclude>
     <ClInclude Include="Device.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
@@ -673,9 +691,6 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\Core\Renderer\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
-      <Filter>Header Files\Utility\Lib</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
@@ -775,6 +790,18 @@
     </ClInclude>
     <ClInclude Include="OrthographicCameraHandler.h">
       <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
+      <Filter>Header Files\Utility\Lib\DDsTextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
+      <Filter>Header Files\Utility\Lib\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jsoncpp\json\json.h">
+      <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jsoncpp\json\json-forwards.h">
+      <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
