@@ -206,17 +206,11 @@ namespace ege
     }
 
     void FlyingCamera::Move(XMVECTOR movement)
-    {
-
-    }
+    {}
 
     void FlyingCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 
     void FlyingCamera::Rotate(XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 }

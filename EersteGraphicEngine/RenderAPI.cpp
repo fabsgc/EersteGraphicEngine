@@ -87,9 +87,6 @@ namespace ege
 
         context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::LightSteelBlue));
         context->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-        context->UpdateSubresource(_frameConstantBuffer, 0, nullptr, &_frameConstantBufferUpdate, 0, 0);
-        context->UpdateSubresource(_lightConstantBuffer, 0, nullptr, &_lightConstantBufferUpdate, 0, 0);
     }
 
     void RenderAPI::SwapBuffers()

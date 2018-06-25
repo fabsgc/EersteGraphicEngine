@@ -83,7 +83,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>bin64\</OutDir>
     <TargetName>$(ProjectName)d</TargetName>
-    <IncludePath>lib\tinyxml2\include;lib\assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>lib\tinyxml2\include;lib\assimp\include;lib\jsoncpp\json;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
     <LibraryPath>lib\assimp\lib\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -110,7 +110,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;lib\jsoncpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/DEGE_DEBUG /DEGE_WIN_SDK_10 /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_CONFIG_MATERIAL_FILE=\"Data/Config/Material.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" /DEGE_MATERIAL_FOLDER=\"Data/Material/\" /DEGE_SHADERS_INCLUDE_FOLDER=\"Data/Shader/Include/\" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -173,10 +173,12 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
+    <ClCompile Include="FirstPersonCameraHandler.cpp" />
     <ClCompile Include="FlyingCamera.cpp" />
     <ClCompile Include="ForwardRendering.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="ICameraHandler.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="IMoveable.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Landscape.cpp" />
     <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp" />
+    <ClCompile Include="lib\jsoncpp\jsoncpp.cpp" />
     <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightModel.cpp" />
@@ -200,6 +203,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="OrthographicCamera.cpp" />
+    <ClCompile Include="OrthographicCameraHandler.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -224,6 +228,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThirdPersonCamera.cpp" />
+    <ClCompile Include="ThirdPersonCameraHandler.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -255,11 +260,13 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FirstPersonCamera.h" />
+    <ClInclude Include="FirstPersonCameraHandler.h" />
     <ClInclude Include="FlyingCamera.h" />
     <ClInclude Include="ForwardDeclarationUtil.h" />
     <ClInclude Include="ForwardRendering.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ICameraHandler.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />
@@ -273,6 +280,8 @@
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Landscape.h" />
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h" />
+    <ClInclude Include="lib\jsoncpp\json\json-forwards.h" />
+    <ClInclude Include="lib\jsoncpp\json\json.h" />
     <ClInclude Include="lib\tinyxml2\include\tinyxml2.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightModel.h" />
@@ -287,6 +296,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="OrthographicCamera.h" />
+    <ClInclude Include="OrthographicCameraHandler.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
@@ -316,6 +326,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="ThirdPersonCamera.h" />
+    <ClInclude Include="ThirdPersonCameraHandler.h" />
     <ClInclude Include="ThreadDefines.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />

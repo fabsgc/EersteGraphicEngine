@@ -23,16 +23,13 @@ namespace ege
     }
 
     void PerspectiveCamera::Pitch(float angle)
-    {
-    }
+    {}
 
     void PerspectiveCamera::Roll(float angle)
-    {
-    }
+    {}
 
     void PerspectiveCamera::Yaw(float angle)
-    {
-    }
+    {}
 
     const float& PerspectiveCamera::GetRotationSpeed() const
     {

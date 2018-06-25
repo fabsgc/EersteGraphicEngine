@@ -264,6 +264,11 @@ namespace ege
         _needUpdate = true;
     }
 
+    XMFLOAT3 ThirdPersonCamera::GetTarget()
+    {
+        return _target;
+    }
+
     void ThirdPersonCamera::Move(XMVECTOR movement)
     {}
 

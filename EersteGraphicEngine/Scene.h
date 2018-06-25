@@ -4,6 +4,7 @@
 #include "AmbientLight.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
+#include "RenderAPI.h"
 #include "Camera.h"
 #include "Node.h"
 
@@ -28,8 +29,13 @@ namespace ege
         void                SetAmbientLight(SPtr<AmbientLight> ambientLight);
         void                Update() override;
         void                Draw() override;
+        void                DrawCamera();
+        void                DrawLights();
+        void                DrawNodes();
 
     protected:
+        RenderAPI&                _renderAPI;
+
         Map<String, SPtr<Node>>   _nodes;
         Map<String, SPtr<Light>>  _lights;
         Map<String, SPtr<Camera>> _cameras;

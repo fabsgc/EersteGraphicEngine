@@ -118,17 +118,11 @@ namespace ege
     }
 
     void FirstPersonCamera::Move(XMVECTOR movement)
-    {
-
-    }
+    {}
 
     void FirstPersonCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 
     void FirstPersonCamera::Rotate(XMVECTOR eulerAngles)
-    {
-
-    }
+    {}
 }

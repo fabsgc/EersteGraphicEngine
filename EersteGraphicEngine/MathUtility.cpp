@@ -156,6 +156,6 @@ namespace ege
 
     float MathUtility::FloatPrecision(float value, float precision)
     {
-        return (floor((value * (float) pow(10, precision) + 0.5)) / (float) pow(10, precision));
+        return ((float) floor((value * (float) pow(10, precision) + 0.5)) / (float) pow(10, precision));
     }
 }

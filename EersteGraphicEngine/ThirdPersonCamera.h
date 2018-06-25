@@ -29,11 +29,13 @@ namespace ege
         virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void Rotate(XMVECTOR eulerAngles) override;
 
-        void        SetTarget(XMFLOAT3 target);
-        void        SetRadius(float radius);
+        void         SetTarget(XMFLOAT3 target);
+        void         SetRadius(float radius);
 
-        void        SetAlpha(float alpha);
-        void        SetBeta(float beta);
+        void         SetAlpha(float alpha);
+        void         SetBeta(float beta);
+
+        XMFLOAT3     GetTarget();
 
     protected:
         static const float DefaultMinZoom;

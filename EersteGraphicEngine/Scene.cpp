@@ -3,6 +3,7 @@
 namespace ege
 {
     Scene::Scene()
+        : _renderAPI(gRenderAPI())
     {
     }
 
@@ -88,16 +89,31 @@ namespace ege
 
     void Scene::Draw()
     {
-        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = gRenderAPI().GetConstantBuffer(ConstantBufferType::LIGHT);
-        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
+        DrawCamera();
+        DrawLights();
+        DrawNodes();
+    }
 
-        constantBufferUpdate->LightIndex = 0;
-
+    void Scene::DrawCamera()
+    {
         if (_camera != nullptr)
         {
             _camera->Draw();
+
+            ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+            ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+            FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
+            context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
         }
+    }
+
+    void Scene::DrawLights()
+    {
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
+
+        constantBufferUpdate->LightIndex = 0;
 
         if (_ambientLight != nullptr && _ambientLight->IsEnabled())
         {
@@ -106,13 +122,17 @@ namespace ege
 
         for (auto light : _lights)
         {
-
             if (light.second->IsEnabled())
             {
                 light.second->Draw();
             }
         }
-       
+
+        context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);        
+    }
+
+    void Scene::DrawNodes()
+    {
         for (auto node : _nodes)
         {
             node.second->Draw();

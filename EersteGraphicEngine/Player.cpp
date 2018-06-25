@@ -6,7 +6,7 @@
 
 namespace ege
 {
-    const float Player::DefaultTranslationSpeed = 20.0f;
+    const float Player::DefaultTranslationSpeed = 30.0f;
     const float Player::DefaultRotationSpeed    = 5.0f;
 
     Player::Player(float translationSpeed, float rotationSpeed)
@@ -105,11 +105,6 @@ namespace ege
         {
             RotatePitch(angles.x);
             hasMoved = true;
-        }
-
-        if (hasMoved)
-        {
-            UpdateLocalPosition();
         }
 
         if (HasCamera())

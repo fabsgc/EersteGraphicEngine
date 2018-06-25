@@ -38,9 +38,9 @@ namespace ege
         else if (gInputHandler().GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
             _camera->Zoom(-deltaTime * DefaultZoomSpeed);
 
-        _camera->SetTarget(position);
         _camera->Yaw(yaw);
         _camera->Pitch(-pitch);
+        _camera->SetTarget(position);
 
         _camera->ComputeProjectionMatrix();
     }

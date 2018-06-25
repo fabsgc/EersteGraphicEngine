@@ -262,6 +262,42 @@
     <Filter Include="Source Files\Core\RenderAPI\Texture">
       <UniqueIdentifier>{4e06116e-19df-499f-a7d1-d47c94186c0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\Lib\DDSTextureLoader">
+      <UniqueIdentifier>{009ad08b-db2e-4a19-8fe4-d0b0ac682c52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib\JsonCpp">
+      <UniqueIdentifier>{4d6864ed-60d6-4fcc-b548-4bb8fd7d999b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Lib\TinyXml2">
+      <UniqueIdentifier>{fd081022-fb2b-4174-a916-4bf376892071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib\DDSTextureLoader">
+      <UniqueIdentifier>{ab04e073-fc54-4ed0-883f-2b9699e7c324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib\TinyXml2">
+      <UniqueIdentifier>{bfb8350c-7a08-4f2e-b325-d09f58c2b933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\Lib\JsonCpp">
+      <UniqueIdentifier>{8d5a9714-cb53-44b7-89bd-e3ffae423121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{f1e3f0f9-315a-4bb1-a30e-f963991b61b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Perspective">
+      <UniqueIdentifier>{4ecf2dcf-0165-4d4b-aead-186283638560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Camera\Handler">
+      <UniqueIdentifier>{31423da5-557e-4e0b-81e1-9f3d50ce89a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Perspective">
+      <UniqueIdentifier>{05ca83b0-9627-403d-9f65-29a8e3c07e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Orthographic">
+      <UniqueIdentifier>{4c999e15-3222-4753-b330-25e7727ef83e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Camera\Handler">
+      <UniqueIdentifier>{e8859122-40fe-467e-b635-b7f9dd91e198}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -342,9 +378,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
-      <Filter>Source Files\Utility\Lib</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Core\Renderer\Model</Filter>
     </ClCompile>
@@ -384,9 +417,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files\Core\Renderer\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
-      <Filter>Source Files\Utility\Lib</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
@@ -398,15 +428,6 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyingCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstPersonCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdPersonCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
@@ -431,12 +452,6 @@
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="OrthographicCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="PerspectiveCamera.cpp">
-      <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
@@ -497,6 +512,42 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\ddstextureloader\DDSTextureLoader.cpp">
+      <Filter>Source Files\Utility\Lib\DDSTextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\tinyxml2\src\tinyxml2.cpp">
+      <Filter>Source Files\Utility\Lib\TinyXml2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\jsoncpp\jsoncpp.cpp">
+      <Filter>Source Files\Utility\Lib\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyingCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClCompile>
+    <ClCompile Include="ICameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPersonCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCameraHandler.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -614,9 +665,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files\Core\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
-      <Filter>Header Files\Utility\Lib</Filter>
-    </ClInclude>
     <ClInclude Include="IResourceManager.h">
       <Filter>Header Files\Core\Resources</Filter>
     </ClInclude>
@@ -668,23 +716,11 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
-      <Filter>Header Files\Utility\Lib</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\Core\Renderer\Material</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files\App</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyingCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstPersonCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdPersonCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Frustum.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
@@ -709,12 +745,6 @@
     </ClInclude>
     <ClInclude Include="SpotLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="OrthographicCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="PerspectiveCamera.h">
-      <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CityMaterial.h">
       <Filter>Header Files\App\Material\City</Filter>
@@ -778,6 +808,45 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
+      <Filter>Header Files\Utility\Lib\DDSTextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jsoncpp\json\json.h">
+      <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\jsoncpp\json\json-forwards.h">
+      <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2\include\tinyxml2.h">
+      <Filter>Header Files\Utility\Lib\TinyXml2</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyingCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Perspective</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="ICameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPersonCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicCameraHandler.h">
+      <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
