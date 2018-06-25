@@ -9,7 +9,7 @@ namespace ege
     const float ThirdPersonCameraHandler::DefaultZoomSpeed  = 64.0f;
     const float ThirdPersonCameraHandler::DefaultRadius     = 32.0f;
     const float ThirdPersonCameraHandler::DefaultStartAlpha = -XM_PIDIV2;
-    const float ThirdPersonCameraHandler::DefaultStartBeta  = 0.0f;
+    const float ThirdPersonCameraHandler::DefaultStartBeta  = MathUtility::G_PIDIV6;
 
     ThirdPersonCameraHandler::ThirdPersonCameraHandler(XMFLOAT3 position, float zoomSpeed, float radius, float alpha, float beta)
     {
@@ -27,7 +27,7 @@ namespace ege
         _camera->SetBeta(_cameraConfig.StartBeta);
         _camera->SetRadius(_cameraConfig.Radius);
 
-        _camera->ComputeProjectionMatrix();
+        ICameraHandler::InitialiseCameraHandler();
     }
 
     void ThirdPersonCameraHandler::UpdateCamera(XMFLOAT3 position, XMFLOAT2 rotation)

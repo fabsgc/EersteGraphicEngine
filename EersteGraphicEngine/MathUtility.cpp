@@ -4,7 +4,10 @@
 namespace ege
 {
     const float MathUtility::G_PI        = 3.14159f;
+    const float MathUtility::G_PIDIV2    = 1.57079633f;
     const float MathUtility::G_PIDIV3    = 1.0471975512f;
+    const float MathUtility::G_PIDIV4    = 0.785398163f;
+    const float MathUtility::G_PIDIV6    = 0.523598776f;
     const float MathUtility::G_INFINITY  = FLT_MAX;
 
     const XMFLOAT3 MathUtility::Zero     = XMFLOAT3(0.0f, 0.0f, 0.0f);

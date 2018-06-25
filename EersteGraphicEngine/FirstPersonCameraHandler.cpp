@@ -11,7 +11,7 @@ namespace ege
     void FirstPersonCameraHandler::InitialiseCameraHandler()
     {
         _camera->SetPosition(_cameraConfig.StartPosition);
-        _camera->ComputeProjectionMatrix();
+        ICameraHandler::InitialiseCameraHandler();
     }
 
     void FirstPersonCameraHandler::UpdateCamera(XMFLOAT3 translation, XMFLOAT2 rotation)

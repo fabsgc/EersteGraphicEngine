@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "ThirdPersonCameraHandler.h"
+#include "OrthographicCameraHandler.h"
 #include "InputHandler.h"
 #include "Joypad.h"
 #include "Mouse.h"
@@ -10,7 +11,7 @@
 
 namespace ege
 {
-    class Player : public Cube, public ThirdPersonCameraHandler
+    class Player : public Cube, public OrthographicCameraHandler
     {
     public:
         Player(float translationSpeed = DefaultTranslationSpeed, float rotationSpeed = DefaultRotationSpeed);

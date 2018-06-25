@@ -52,21 +52,23 @@ namespace ege
 
     void Application::SceneLoader()
     {
-        _scene                         = ege_shared_ptr_new<Scene>();
+        _scene                           = ege_shared_ptr_new<Scene>();
 
-        SPtr<Node> node                = ege_shared_ptr_new<Node>();
-        SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<Node> node                  = ege_shared_ptr_new<Node>();
+        SPtr<ThirdPersonCamera> camera   = ege_shared_ptr_new<ThirdPersonCamera>();
+        SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
+        SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
 
-        SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
-        SPtr<DirectionalLight> sun     = ege_shared_ptr_new<DirectionalLight>();
-        SPtr<PointLight> lamp          = ege_shared_ptr_new<PointLight>();
-        SPtr<SpotLight> spot           = ege_shared_ptr_new<SpotLight>();
+        SPtr<AmbientLight> ambient       = ege_shared_ptr_new<AmbientLight>();
+        SPtr<DirectionalLight> sun       = ege_shared_ptr_new<DirectionalLight>();
+        SPtr<PointLight> lamp            = ege_shared_ptr_new<PointLight>();
+        SPtr<SpotLight> spot             = ege_shared_ptr_new<SpotLight>();
 
-        SPtr<Player> player            = ege_shared_ptr_new<Player>();
+        SPtr<Player> player              = ege_shared_ptr_new<Player>();
 
-        SPtr<CityModel> wind           = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        SPtr<CityModel> wind2          = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        SPtr<CityModel> building       = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<CityModel> wind             = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        SPtr<CityModel> wind2            = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
+        SPtr<CityModel> building         = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
 
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
@@ -92,8 +94,8 @@ namespace ege
         wind2->GoTo(25.0f, 0.0, 5.0f);
         building->GoTo(-30.0f, 0.0, 20.0f);
 
-        player->GoTo(12.0f, 1.0f, 0.0f);
-        player->AttachCamera(camera);
+        player->GoTo(0.0f, 1.0f, 0.0f);
+        player->AttachCamera(camera3);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -108,7 +110,7 @@ namespace ege
         spot->SetRadius(35.0f);
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera);
+        node->InsertEntity("camera", camera3);
         node->InsertEntity("sun", sun);
         node->InsertEntity("lamp", lamp);
         node->InsertEntity("spot", spot);
@@ -134,7 +136,7 @@ namespace ege
         _scene->InsertLight("spot", spot);
         _scene->InsertNode("root", node);
 
-        _scene->SetActiveCamera(camera);
+        _scene->SetActiveCamera(camera3);
         _scene->SetAmbientLight(ambient);
     }
 

@@ -23,13 +23,13 @@ namespace ege
         float speedModulation = (10 * _zoom) > 2.0f ? 10 * _zoom : 2.0f;
 
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            MoveX(-_translationSpeed * deltaTime * speedModulation);
+            Strafe(-_translationSpeed * deltaTime * speedModulation, 0.0, 0.0f);
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            MoveX(_translationSpeed * deltaTime * speedModulation);
+            Strafe(_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            MoveY(_translationSpeed * deltaTime * speedModulation);
+            Strafe(0.0f, _translationSpeed * deltaTime * speedModulation, 0.0f);
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            MoveY(-_translationSpeed * deltaTime * speedModulation);
+            Strafe(0.0f, -_translationSpeed * deltaTime * speedModulation, 0.0f);
 
         MouseWheelState mouseWheelState = _mouse.GetWheelState();
 
@@ -71,9 +71,9 @@ namespace ege
                 MoveY(- joypadLY * _translationSpeed * deltaTime * speedModulation * 3.0f);
             if (abs(joypadLX) > 0.0f)
                 MoveX(- joypadLX * _translationSpeed * deltaTime * speedModulation * 3.0f);
-        }*/
+        }
 
-        Camera::Update();
+        Camera::Update();*/
     }
 
     void OrthographicCamera::ComputeProjectionMatrix()
@@ -82,16 +82,16 @@ namespace ege
         UINT windowHeight = gWindow().GetWindowHeight();
 
         XMMATRIX Projection = XMMatrixOrthographicOffCenterLH(
-            (((-(INT)windowWidth) / 2.0f) + _position.x) * _zoom,
-            ((windowWidth / 2.0f) + _position.x) * _zoom,
+            (((-(INT)windowWidth) / 2.0f) + _position.x - 1.0f) * _zoom,
+            ((windowWidth / 2.0f) + _position.x - 1.0f) * _zoom,
             (((-(INT)windowHeight) / 2.0f) + _position.y) * _zoom,
             ((windowHeight / 2.0f) + _position.y) * _zoom,
             -512.0f + _position.y,
             512.0f + _position.y);
 
-        XMVECTOR Right = XMVectorSet(_position.x, _position.y, 0.0f, 0.0f);
-        XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-        XMVECTOR Look = XMVectorSet(_position.x, _position.y -1.0f, 1.0f, 0.0f);
+        XMVECTOR Right = XMVectorSet(_position.x + 1.0f, _position.y, 0.0f, 0.0f);
+        XMVECTOR Up    = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+        XMVECTOR Look  = XMVectorSet(_position.x, _position.y -0.67f, 1.0f, 0.0f);
 
         XMMATRIX View = XMMatrixLookAtLH(Right, Look, Up);
 
@@ -109,14 +109,15 @@ namespace ege
         if (distance.x != 0.0f)
         {
             _position.x += distance.x;
+            _position.y += distance.x * 0.3f;
         }
-        else
+        
+        if(distance.y != 0.0f)
         {
             _position.y += distance.y;
         }
         
         _position.z += distance.z;
-
         _needUpdate = true;
     }
 
@@ -131,6 +132,14 @@ namespace ege
     void OrthographicCamera::SetPosition(XMFLOAT3 position)
     {
         _position = position;
+        _needUpdate = true;
+    }
+
+    void OrthographicCamera::SetZoom(float zoom)
+    {
+        _zoom -= zoom;
+        _zoom = MathUtility::Clamp(_zoom, DefaultMinZoom, DefaultMaxZoom);
+
         _needUpdate = true;
     }
 

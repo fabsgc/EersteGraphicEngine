@@ -10,7 +10,10 @@ namespace ege
     {
     public:
         static const float G_PI;
+        static const float G_PIDIV2;
         static const float G_PIDIV3;
+        static const float G_PIDIV4;
+        static const float G_PIDIV6;
         static const float G_INFINITY;
 
         static const XMFLOAT3 Zero;
@@ -41,7 +44,7 @@ namespace ege
         static XMFLOAT3 ConvertToScreenSpace(XMFLOAT3& position, XMFLOAT4& view, XMFLOAT4& projection);
         static XMFLOAT3 ClipSpaceToScreenSpace(XMFLOAT4& coords);
 
-        static float FloatPrecision(float value, float precision);
+        static float    FloatPrecision(float value, float precision);
 
         template<typename T>
         static T Min(const T& a, const T& b)

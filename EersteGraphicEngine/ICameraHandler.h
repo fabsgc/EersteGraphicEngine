@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "InputHandler.h"
 #include "Keyboard.h"
 #include "Joypad.h"
 #include "Mouse.h"
@@ -15,6 +16,7 @@ namespace ege
     public:
         ICameraHandler()
             : _camera(nullptr)
+            , _inputHandler(gInputHandler())
             , _keyboard(gKeyboard())
             , _joypad(gJoypad())
             , _mouse(gMouse())
@@ -26,6 +28,10 @@ namespace ege
 
         virtual void InitialiseCameraHandler()
         {
+            if (_camera != nullptr)
+            {
+                _camera->ComputeProjectionMatrix();
+            }
         }
 
         void AttachCamera(SPtr<T> camera)
@@ -45,11 +51,12 @@ namespace ege
         }
         
     protected:
-        Keyboard&  _keyboard;
-        Joypad&    _joypad;
-        Mouse&     _mouse;
-        Time&      _time;
+        InputHandler& _inputHandler;
+        Keyboard&     _keyboard;
+        Joypad&       _joypad;
+        Mouse&        _mouse;
+        Time&         _time;
 
-        SPtr<T>    _camera;
+        SPtr<T>       _camera;
     };
 }
