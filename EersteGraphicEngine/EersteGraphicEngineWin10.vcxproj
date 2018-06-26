@@ -270,7 +270,6 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IComponentHandler.h" />
     <ClInclude Include="IDrawable.h" />
-    <ClInclude Include="IEntity.h" />
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IMoveable.h" />
     <ClInclude Include="InputHandler.h" />

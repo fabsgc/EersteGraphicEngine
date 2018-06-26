@@ -9,11 +9,11 @@
 
 namespace ege
 {
-    const float ThirdPersonCamera::DefaultZoomSpeed  = 64.0f;
+    const float ThirdPersonCamera::DefaultZoomSpeed  = 12.0f;
     const float ThirdPersonCamera::DefaultRadius     = 64.0f;
     const float ThirdPersonCamera::DefaultStartAlpha = -XM_PIDIV2;
     const float ThirdPersonCamera::DefaultStartBeta  = MathUtility::G_PIDIV6;
-    const float ThirdPersonCamera::DefaultMinZoom    = 1.25f;
+    const float ThirdPersonCamera::DefaultMinZoom    = 1.00f;
     const float ThirdPersonCamera::DefaultMaxZoom    = 1024.0f;
     const XMFLOAT3 ThirdPersonCamera::DefaultTarget  = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
@@ -41,7 +41,9 @@ namespace ege
     void ThirdPersonCamera::Update()
     {
         float deltaTime       = _time.GetFrameDelta();
-        float speedModulation = (_radius / 10.0f > 2.0f) ? _radius / 10.0f : 2.0f;
+        float speedModulation = (_radius > 16.0f) ? 1.0f : 0.5f;
+
+        std::cout << _radius << std::endl;
 
         float walk   = 0.0f;
         float strafe = 0.0f;
@@ -147,7 +149,7 @@ namespace ege
             Up(up * _translationSpeed * deltaTime);
 
         if (abs(zoom) > 0.0f)
-            Zoom(zoom * _zoomSpeed * deltaTime);
+            Zoom(zoom * _zoomSpeed * deltaTime * speedModulation);
 
         PerspectiveCamera::Update();
     }

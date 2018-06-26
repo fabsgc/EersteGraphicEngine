@@ -3,7 +3,7 @@
 #include "PrerequisitesCore.h"
 #include "RenderAPI.h"
 #include "Geometry.h"
-#include "IEntity.h"
+#include "Node.h"
 
 namespace ege
 {
@@ -12,7 +12,7 @@ namespace ege
         All, None, Selected
     };
 
-    class Model: public IEntity
+    class Model: public Node
     {
     public:
         Model();

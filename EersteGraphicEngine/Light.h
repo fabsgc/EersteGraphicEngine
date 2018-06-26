@@ -2,19 +2,19 @@
 
 #include "PrerequisitesCore.h"
 #include "RenderAPI.h"
-#include "IEntity.h"
+#include "Node.h"
 
 namespace ege
 {
     enum class LightType
     {
-        PointLight = 0,
-        SpotLight = 1,
+        PointLight       = 0,
+        SpotLight        = 1,
         DirectionalLight = 2,
-        AmbientLight = 3
+        AmbientLight     = 3
     };
 
-    class Light: public IEntity
+    class Light: public Node
     {
     public:
         Light(LightType type);
@@ -30,8 +30,8 @@ namespace ege
         using            IMoveable::Rotate;
         virtual void     Move(XMVECTOR movement) override;
         virtual void     MoveStrafe(XMVECTOR movement) override;
-        virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
-        virtual void     Scale(XMVECTOR scale) override {};
+        virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override;
+        virtual void     Scale(XMVECTOR scale) override;
         virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void     Rotate(XMVECTOR eulerAngles) override;
 

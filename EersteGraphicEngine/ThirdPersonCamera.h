@@ -11,35 +11,27 @@ namespace ege
         ThirdPersonCamera();
         ~ThirdPersonCamera();
 
-        void         Initialise() override;
-        void         Update();
-        void         ComputeProjectionMatrix() override;
+        void     Initialise() override;
+        void     Update();
+        void     ComputeProjectionMatrix() override;
 
-        void         LookAt(XMFLOAT3 position, XMFLOAT3 target, XMFLOAT3 up);
-        void         Pitch(float angle) override;
-        void         Yaw(float angle) override;
-        void         Strafe(float distance);
-        void         Walk(float distance);
-        void         Up(float distance);
-        void         Zoom(float zoom);
+        void     LookAt(XMFLOAT3 position, XMFLOAT3 target, XMFLOAT3 up);
+        void     Pitch(float angle) override;
+        void     Yaw(float angle) override;
+        void     Strafe(float distance);
+        void     Walk(float distance);
+        void     Up(float distance);
+        void     Zoom(float zoom);
 
-        using        PerspectiveCamera::Move;
-        using        PerspectiveCamera::MoveStrafe;
-        using        PerspectiveCamera::Rotate;
-        virtual void Move(XMVECTOR movement) override {};
-        virtual void MoveStrafe(XMVECTOR movement) override {};
-        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
-        virtual void Rotate(XMVECTOR eulerAngles) override {};
+        void     SetTarget(XMFLOAT3 target);
+        void     SetRadius(float radius);
 
-        void         SetTarget(XMFLOAT3 target);
-        void         SetRadius(float radius);
+        void     SetAlpha(float alpha);
+        void     SetBeta(float beta);
 
-        void         SetAlpha(float alpha);
-        void         SetBeta(float beta);
+        void     SetZoomSpeed(float zoomSpeed);
 
-        void         SetZoomSpeed(float zoomSpeed);
-
-        XMFLOAT3     GetTarget();
+        XMFLOAT3 GetTarget();
 
     protected:
         static const float    DefaultZoomSpeed;

@@ -22,14 +22,6 @@ namespace ege
         void         Roll(float angle) override;
         void         Yaw(float angle) override;
 
-        using        PerspectiveCamera::Move;
-        using        PerspectiveCamera::MoveStrafe;
-        using        PerspectiveCamera::Rotate;
-        virtual void Move(XMVECTOR movement) override {};
-        virtual void MoveStrafe(XMVECTOR movement) override {};
-        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
-        virtual void Rotate(XMVECTOR eulerAngles) override {};
-
         void         SetPosition(XMFLOAT3 position);
     };
 }

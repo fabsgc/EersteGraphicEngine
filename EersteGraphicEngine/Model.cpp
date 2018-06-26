@@ -12,7 +12,7 @@ namespace ege
     const LightMode Model::DefaultLightMode = LightMode::All;
 
     Model::Model()
-        : IEntity(EntityType::Model)
+        : Node(NodeType::Model)
         , _renderAPI(gRenderAPI())
         , _castShadow(DefaultCastShadow)
         , _lightMode(DefaultLightMode)
@@ -30,6 +30,8 @@ namespace ege
 
     void Model::Update()
     {
+        Node::Update();
+
         if (_material != nullptr)
         {
             _material->Update();
@@ -38,6 +40,8 @@ namespace ege
 
     void Model::Draw()
     {
+        Node::Draw();
+
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);

@@ -112,14 +112,14 @@ namespace ege
         spot->SetRadius(35.0f);
 
         node->SetScene(_scene);
-        node->InsertEntity("camera", camera);
-        node->InsertEntity("sun", sun);
-        node->InsertEntity("lamp", lamp);
-        node->InsertEntity("spot", spot);
-        node->InsertEntity("wind", wind);
-        node->InsertEntity("wind-2", wind2);
-        node->InsertEntity("building", building);
-        node->InsertEntity("player", player);
+        node->InsertNode("camera", camera);
+        node->InsertNode("sun", sun);
+        node->InsertNode("lamp", lamp);
+        node->InsertNode("spot", spot);
+        node->InsertNode("wind", wind);
+        node->InsertNode("wind-2", wind2);
+        node->InsertNode("building", building);
+        node->InsertNode("player", player);
 
         for (INT8 i = -3; i <= 3; i++)
         {
@@ -128,7 +128,7 @@ namespace ege
                 SPtr<CityModel> model = ege_shared_ptr_new<CityModel>("grass", "grass-diffuse", "grass-specular");
                 model->Initialise();
                 model->GoTo(i * 20.0f, 0.0f, j * 20.0f);
-                node->InsertEntity("grass-" + ToString(i) + "-" + ToString(j), model);
+                node->InsertNode("grass-" + ToString(i) + "-" + ToString(j), model);
             }
         }
 

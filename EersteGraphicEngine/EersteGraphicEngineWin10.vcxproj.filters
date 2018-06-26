@@ -698,9 +698,6 @@
     <ClInclude Include="Node.h">
       <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="IEntity.h">
-      <Filter>Header Files\Core\Renderer\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>

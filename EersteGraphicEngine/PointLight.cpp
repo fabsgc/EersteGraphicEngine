@@ -32,8 +32,8 @@ namespace ege
 
     void PointLight::Update()
     {
-        float deltaTime = gTime().GetFrameDelta();
         Light::Update();
+        float deltaTime = gTime().GetFrameDelta();
 
         if (_lightModel != nullptr)
         {
@@ -41,30 +41,12 @@ namespace ege
         }
 
         Rotate(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 2.5f * deltaTime, 0.0f));
-
-        /*if (gKeyboard().GetKey(KeyName::ARROW_UP).State == KeyState::TRIGGERED)
-        {
-            MoveY(5.0f * deltaTime);
-        }
-
-        if (gKeyboard().GetKey(KeyName::ARROW_DOWN).State == KeyState::TRIGGERED)
-        {
-            MoveY(-5.0f * deltaTime);
-        }
-
-        if (gKeyboard().GetKey(KeyName::ARROW_LEFT).State == KeyState::TRIGGERED)
-        {
-            MoveX(-25.0f * deltaTime);
-        }
-
-        if (gKeyboard().GetKey(KeyName::ARROW_RIGHT).State == KeyState::TRIGGERED)
-        {
-            MoveX(25.0f * deltaTime);
-        }*/
     }
 
     void PointLight::Draw()
     {
+        Light::Draw();
+
         if (_drawLightModel && _lightModel != nullptr)
         {
             _lightModel->Draw();

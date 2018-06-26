@@ -4,29 +4,33 @@
 #include "IMoveable.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
-#include "IEntity.h"
 
 namespace ege
 {
+    enum class NodeType
+    {
+        Node   = 1,
+        Model  = 2,
+        Light  = 3,
+        Camera = 4
+    };
+
     class Node : public IUpdatable, public IDrawable, public IMoveable
     {
     public:
-        Node();
+        Node(NodeType type = NodeType::Node);
         ~Node();
 
-        void          Initialise();
+        virtual void  Initialise();
         void          InsertNode(String name, SPtr<Node> node);
-        void          InsertEntity(String name, SPtr<IEntity> entity);
         void          DeleteNode(String name);
         void          DeleteNode(SPtr<Node> node);
-        void          DeleteEntity(String name);
-        void          DeleteEntity(SPtr<IEntity> entity);
         void          Update() override;
         void          Draw() override;
 
+        NodeType      GetType();
         SPtr<Scene>   GetScene();
         SPtr<Node>    GetParent();
-        SPtr<IEntity> GetEntity(String name);
         void          SetScene(SPtr<Scene> scene);
         void          SetParent(SPtr<Node> parent);
 
@@ -44,6 +48,7 @@ namespace ege
         SPtr<Scene>                _scene;
         SPtr<Node>                 _parent;
         Map<String, SPtr<Node>>    _child;
-        Map<String, SPtr<IEntity>> _entities;
+
+        NodeType                   _type;
     };
 }

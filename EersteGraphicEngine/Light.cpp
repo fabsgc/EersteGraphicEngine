@@ -9,7 +9,7 @@ namespace ege
     const bool Light::DefaultIsEnabled      = true;
 
     Light::Light(LightType type)
-        : IEntity(EntityType::Light)
+        : Node(NodeType::Light)
         , _renderAPI(gRenderAPI())
         , _type(type)
         , _color(DefaultLightColor)
@@ -29,15 +29,17 @@ namespace ege
 
     void Light::Update()
     {
+        Node::Update();
     }
 
     void Light::Draw()
     {
+        Node::Draw();
     }
 
     void Light::Move(XMVECTOR movement)
     {
-        IMoveable::Move(movement);
+        Node::Move(movement);
 
         if (_lightModel != nullptr)
         {
@@ -47,7 +49,7 @@ namespace ege
 
     void Light::MoveStrafe(XMVECTOR movement)
     {
-        IMoveable::MoveStrafe(movement);
+        Node::MoveStrafe(movement);
 
         if (_lightModel != nullptr)
         {
@@ -57,7 +59,7 @@ namespace ege
 
     void Light::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
     {
-        IMoveable::Rotate(point, eulerAngles);
+        Node::Rotate(point, eulerAngles);
 
         if (_lightModel != nullptr)
         {
@@ -65,9 +67,19 @@ namespace ege
         }
     }
 
+    void Light::Scale(XMVECTOR origin, XMVECTOR scale)
+    {
+        Node::Scale(origin, scale);
+    }
+
+    void Light::Scale(XMVECTOR scale)
+    {
+        Node::Scale(scale);
+    }
+
     void Light::Rotate(XMVECTOR eulerAngles)
     {
-        IMoveable::Rotate(eulerAngles);
+        Node::Rotate(eulerAngles);
 
         if (_lightModel != nullptr)
         {

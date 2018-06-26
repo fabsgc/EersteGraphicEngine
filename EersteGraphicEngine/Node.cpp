@@ -2,9 +2,10 @@
 
 namespace ege
 {
-    Node::Node()
+    Node::Node(NodeType nodeType)
         : _scene(nullptr)
         , _parent(nullptr)
+        , _type(nodeType)
     {
     }
     
@@ -19,11 +20,6 @@ namespace ege
     void Node::InsertNode(String name, SPtr<Node> node)
     {
         _child.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
-    }
-
-    void Node::InsertEntity(String name, SPtr<IEntity> entity)
-    {
-        _entities.insert(Pair<String, SPtr<IEntity>>(name, std::move(entity)));
     }
 
     void Node::DeleteNode(String name)
@@ -43,48 +39,21 @@ namespace ege
         }
     }
 
-    void Node::DeleteEntity(String name)
-    {
-        _entities.erase(name);
-    }
-
-    void Node::DeleteEntity(SPtr<IEntity> entity)
-    {
-        for (auto it = _entities.begin(); it != _entities.end(); it++)
-        {
-            if (it->second == entity)
-            {
-                _entities.erase(it);
-                break;
-            }
-        }
-    }
-
     void Node::Update()
     {
         for (auto child : _child)
         {
             child.second->Update();
         }
-
-        for (auto entity : _entities)
-        {
-            entity.second->Update();
-        }
     }
 
     void Node::Draw()
     {
-        for (auto child : _child)
+        for (auto child : _child )
         {
-            child.second->Draw();
-        }
-
-        for (auto entity : _entities)
-        {
-            if (entity.second->GetType() != EntityType::Camera && entity.second->GetType() != EntityType::Light)
+            if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
             {
-                entity.second->Draw();
+                child.second->Draw();
             }
         }
     }
@@ -99,12 +68,9 @@ namespace ege
         return _parent;
     }
 
-    SPtr<IEntity> Node::GetEntity(String name)
+    NodeType Node::GetType()
     {
-        auto found = _entities.find(name);
-        EGE_ASSERT_ERROR((found != _entities.end()), ("Entity " + name + " not found"));
-
-        return found->second;
+        return _type;
     }
 
     void Node::SetScene(SPtr<Scene> scene)
@@ -121,66 +87,69 @@ namespace ege
     {
         for (auto child : _child)
         {
-            child.second->Move(movement);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->Move(movement);
+            case NodeType::Node:
+                child.second->Move(movement);
                 break;
 
-            case EntityType::Model:
-                entity.second->Move(movement);
+            case NodeType::Light:
+                child.second->Move(movement);
+                break;
+
+            case NodeType::Model:
+                child.second->Move(movement);
                 break;
             }
         }
+
+        IMoveable::Move(movement);
     }
 
     void Node::MoveStrafe(XMVECTOR movement)
     {
         for (auto child : _child)
         {
-            child.second->MoveStrafe(movement);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->MoveStrafe(movement);
+            case NodeType::Node:
+                child.second->MoveStrafe(movement);
                 break;
 
-            case EntityType::Model:
-                entity.second->MoveStrafe(movement);
+            case NodeType::Light:
+                child.second->MoveStrafe(movement);
+                break;
+
+            case NodeType::Model:
+                child.second->MoveStrafe(movement);
                 break;
             }
         }
+
+        IMoveable::MoveStrafe(movement);
     }
 
     void Node::Scale(XMVECTOR origin, XMVECTOR scale)
     {
         for (auto child : _child)
         {
-            child.second->Scale(origin, scale);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->Scale(origin, scale);
+            case NodeType::Node:
+                child.second->Scale(origin, scale);
                 break;
 
-            case EntityType::Model:
-                entity.second->Scale(origin, scale);
+            case NodeType::Light:
+                child.second->Scale(origin, scale);
+                break;
+
+            case NodeType::Model:
+                child.second->Scale(origin, scale);
                 break;
             }
         }
+
+        IMoveable::Scale(origin, scale);
     }
 
     void Node::Scale(XMVECTOR scale)
@@ -190,44 +159,46 @@ namespace ege
 
         for (auto child : _child)
         {
-            child.second->Scale(P, scale);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->Scale(P, scale);
+            case NodeType::Node:
+                child.second->Scale(P, scale);
                 break;
 
-            case EntityType::Model:
-                entity.second->Scale(P, scale);
+            case NodeType::Light:
+                child.second->Scale(P, scale);
+                break;
+
+            case NodeType::Model:
+                child.second->Scale(P, scale);
                 break;
             }
         }
+
+        IMoveable::Scale(scale);
     }
 
     void Node::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
     {
         for (auto child : _child)
         {
-            child.second->Rotate(origin, eulerAngles);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->Rotate(origin, eulerAngles);
+            case NodeType::Node:
+                child.second->Rotate(origin, eulerAngles);
                 break;
 
-            case EntityType::Model:
-                entity.second->Rotate(origin, eulerAngles);
+            case NodeType::Light:
+                child.second->Rotate(origin, eulerAngles);
+                break;
+
+            case NodeType::Model:
+                child.second->Rotate(origin, eulerAngles);
                 break;
             }
         }
+
+        IMoveable::Rotate(origin, eulerAngles);
     }
 
     void Node::Rotate(XMVECTOR eulerAngles)
@@ -237,21 +208,22 @@ namespace ege
 
         for (auto child : _child)
         {
-            child.second->Rotate(P, eulerAngles);
-        }
-
-        for (auto entity : _entities)
-        {
-            switch (entity.second->GetType())
+            switch (child.second->GetType())
             {
-            case EntityType::Light:
-                entity.second->Rotate(P, eulerAngles);
+            case NodeType::Node:
+                child.second->Rotate(P, eulerAngles);
                 break;
 
-            case EntityType::Model:
-                entity.second->Rotate(P, eulerAngles);
+            case NodeType::Light:
+                child.second->Rotate(P, eulerAngles);
+                break;
+
+            case NodeType::Model:
+                child.second->Rotate(P, eulerAngles);
                 break;
             }
         }
+
+        IMoveable::Rotate(eulerAngles);
     }
 }

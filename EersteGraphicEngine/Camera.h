@@ -3,10 +3,10 @@
 #include "PrerequisitesCore.h"
 #include "InputHandler.h"
 #include "RenderAPI.h"
-#include "IEntity.h"
 #include "Joypad.h"
 #include "Mouse.h"
 #include "Time.h"
+#include "Node.h"
 
 namespace ege
 {
@@ -19,7 +19,7 @@ namespace ege
         GenericCamera
     };
 
-    class Camera: public IEntity
+    class Camera: public Node
     {
     public:
         Camera();
@@ -48,12 +48,12 @@ namespace ege
         using             IMoveable::Move;
         using             IMoveable::MoveStrafe;
         using             IMoveable::Rotate;
-        virtual void      Move(XMVECTOR movement) override {};
-        virtual void      MoveStrafe(XMVECTOR movement) override {};
-        virtual void      Scale(XMVECTOR origin, XMVECTOR scale) override {};
-        virtual void      Scale(XMVECTOR scale) override {};
-        virtual void      Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
-        virtual void      Rotate(XMVECTOR eulerAngles) override {};
+        virtual void      Move(XMVECTOR movement) override;
+        virtual void      MoveStrafe(XMVECTOR movement) override;
+        virtual void      Scale(XMVECTOR origin, XMVECTOR scale) override;
+        virtual void      Scale(XMVECTOR scale) override;
+        virtual void      Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void      Rotate(XMVECTOR eulerAngles) override;
 
         virtual void      UpdateLocalPosition() override {};
 

@@ -14,7 +14,7 @@ namespace ege
     }
 
     Camera::Camera(CameraType type)
-        : IEntity(EntityType::Camera)
+        : Node(NodeType::Camera)
         , _cameraType(type)
         , _renderAPI(gRenderAPI())
         , _inputHandler(gInputHandler())
@@ -46,6 +46,8 @@ namespace ege
 
     void Camera::Update()
     {
+        Node::Update();
+
         if (_needUpdate)
         {
             ComputeProjectionMatrix();
@@ -55,6 +57,8 @@ namespace ege
 
     void Camera::Draw()
     {
+        Node::Draw();
+
         FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
@@ -124,5 +128,35 @@ namespace ege
     void Camera::SetRotationSpeed(float rotationSpeed)
     {
         _rotationSpeed = rotationSpeed;
+    }
+
+    void Camera::Move(XMVECTOR movement)
+    {
+        Node::Move(movement);
+    }
+    
+    void Camera::MoveStrafe(XMVECTOR movement)
+    {
+        Node::MoveStrafe(movement);
+    }
+    
+    void Camera::Scale(XMVECTOR origin, XMVECTOR scale)
+    {
+        Node::Scale(origin, scale);
+    }
+    
+    void Camera::Scale(XMVECTOR scale)
+    {
+        Node::Scale(scale);
+    }
+    
+    void Camera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
+    {
+        Node::Rotate(origin, eulerAngles);
+    }
+    
+    void Camera::Rotate(XMVECTOR eulerAngles)
+    {
+        Node::Rotate(eulerAngles);
     }
 }

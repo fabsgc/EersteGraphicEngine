@@ -32,8 +32,8 @@ namespace ege
 
     void DirectionalLight::Update()
     {
-        float deltaTime = gTime().GetFrameDelta();
         Light::Update();
+        float deltaTime = gTime().GetFrameDelta();
 
         if (_lightModel != nullptr)
         {
@@ -45,6 +45,8 @@ namespace ege
 
     void DirectionalLight::Draw()
     {
+        Light::Draw();
+
         if (_drawLightModel)
         {
             _lightModel->Draw();
@@ -75,6 +77,8 @@ namespace ege
 
     void DirectionalLight::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
     {
+        Light::Rotate(point, eulerAngles);
+
         XMFLOAT3 O = XMFLOAT3(0.0f, 0.0f, 0.0f);
         XMVECTOR origin = XMLoadFloat3(&O);
         XMMATRIX pointToOrigin = XMMatrixTranslationFromVector(origin - point);
@@ -89,15 +93,12 @@ namespace ege
         XMStoreFloat3(&_direction, look);
 
         UpdateLocalPosition();
-
-        if (_lightModel != nullptr)
-        {
-            _lightModel->Rotate(point, eulerAngles);
-        }
     }
 
     void DirectionalLight::Rotate(XMVECTOR eulerAngles)
     {
+        Light::Rotate(eulerAngles);
+
         XMMATRIX W = XMLoadFloat4x4(&_world);
         XMMATRIX rotation = XMMatrixRotationQuaternion(XMQuaternionRotationRollPitchYawFromVector(eulerAngles));
 
@@ -108,10 +109,5 @@ namespace ege
         XMStoreFloat3(&_direction, look);
 
         UpdateLocalPosition();
-
-        if (_lightModel != nullptr)
-        {
-            _lightModel->Rotate(eulerAngles);
-        }
     }
 }

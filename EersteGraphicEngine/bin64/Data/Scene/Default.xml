@@ -2,64 +2,8 @@
 <scene>
     <nodes>
         <node name="node-1">
-            <properties>
-            </properties>
-            <entities>
-                <entity type="model" name="model-1">
-                    <properties>
-                        <property key="shader" value="default"/>
-                        <property key="model" value="cube"/>
-                    </properties>
-                </entity>
-                <entity type="light" name="light-1" sort="point">
-                    <properties>
-                    </properties>
-                </entity>
-                <entity type="camera" name="camera-1">
-                    <properties>
-                        <property key="default-camera" value="true"/>
-                    </properties>
-                </entity>
-                <entity type="model" name="model-6">
-                    <properties>
-                        <property key="shader" value="default"/>
-                    </properties>
-                </entity>
-            </entities>
-            <nodes>
-                <node name="node-1-1">
-                    <properties>
-                    </properties>
-                    <entities>
-                        <entity type="model" name="model-1-1">
-                            <properties>
-                                <property key="shader" value="default"/>
-                                <property key="model" value="cube"/>
-                            </properties>
-                        </entity>
-                        <entity type="light" name="light-1-1" sort="point">
-                            <properties>
-                            </properties>
-                        </entity>
-                    </entities>
-                </node>
-            </nodes>
         </node>
         <node name="node-2">
-            <properties>
-            </properties>
-            <entities>
-                <entity type="model" name="model-2">
-                    <properties>
-                        <property key="shader" value="default"/>
-                        <property key="model" value="cube"/>
-                    </properties>
-                </entity>
-                <entity type="light" name="light-2" sort="point">
-                    <properties>
-                    </properties>
-                </entity>
-            </entities>
         </node>
     </nodes>
 </scene>

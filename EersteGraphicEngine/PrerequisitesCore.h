@@ -167,7 +167,6 @@ namespace ege
 
     class  Scene;
     class  Node;
-    class  IEntity;
     class  SceneLoader;
     class  SceneManager;
 
