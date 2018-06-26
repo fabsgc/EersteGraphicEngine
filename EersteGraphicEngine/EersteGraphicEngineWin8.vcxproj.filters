@@ -677,9 +677,6 @@
     <ClInclude Include="ModelManager.h">
       <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
-    <ClInclude Include="IEntity.h">
-      <Filter>Header Files\Core\Renderer\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
