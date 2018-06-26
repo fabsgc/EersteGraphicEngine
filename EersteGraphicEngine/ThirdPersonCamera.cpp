@@ -43,8 +43,6 @@ namespace ege
         float deltaTime       = _time.GetFrameDelta();
         float speedModulation = (_radius > 16.0f) ? 1.0f : 0.5f;
 
-        std::cout << _radius << std::endl;
-
         float walk   = 0.0f;
         float strafe = 0.0f;
         float up     = 0.0f;

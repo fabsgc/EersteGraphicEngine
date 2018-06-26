@@ -292,6 +292,7 @@ namespace ege
             ZeroMemory(&wfdescBackFaceCulling, sizeof(D3D11_RASTERIZER_DESC));
             wfdescBackFaceCulling.FillMode = D3D11_FILL_SOLID;
             wfdescBackFaceCulling.CullMode = D3D11_CULL_BACK;
+            wfdescBackFaceCulling.MultisampleEnable = true;
             hr = device->CreateRasterizerState(&wfdescBackFaceCulling, &_backFaceCulling);
 
             context->RSSetState(_backFaceCulling);
