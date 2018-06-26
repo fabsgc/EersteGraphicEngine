@@ -337,8 +337,15 @@ namespace ege
             WStringStream outs;
             outs.precision(6);
 
+            float fps = 1.0f / gTime().GetFrameDelta();
+
+            if (fps < 40.0f)
+            {
+                std::cout << fps << std::endl;
+            }
+
             outs << ToWString(_windowDesc.Title).c_str() << L"    "
-                << L"FPS: " << (1.0f / gTime().GetFrameDelta()) << L"    "
+                << L"FPS: " << (fps) << L"    "
                 << L"Frame Time: " << (gTime().GetFrameDelta()) << L" (ms)";
             SetWindowText(_hWnd, outs.str().c_str());
 

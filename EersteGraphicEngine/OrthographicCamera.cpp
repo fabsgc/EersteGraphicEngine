@@ -24,8 +24,6 @@ namespace ege
         float deltaTime       = _time.GetFrameDelta();
         float speedModulation = (_zoom) > 1.0f ? 2.0f : 0.5f;
 
-        std::cout << _zoom << std::endl;
-
         XMFLOAT2 movement = XMFLOAT2(0.0f, 0.0f);
         float zoom        = 0.0f;
 
@@ -106,7 +104,7 @@ namespace ege
             -512.0f + _position.y,
             512.0f + _position.y);
 
-        XMVECTOR Right = XMVectorSet(_position.x + 1.0f, _position.y, 0.0f, 0.0f);
+        XMVECTOR Right = XMVectorSet(_position.x, _position.y, 0.0f, 0.0f);
         XMVECTOR Up    = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
         XMVECTOR Look  = XMVectorSet(_position.x, _position.y -0.67f, 1.0f, 0.0f);
 

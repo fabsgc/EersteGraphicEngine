@@ -79,6 +79,9 @@ namespace ege
         _scene->Initialise();
 
         camera->Initialise();
+        camera2->Initialise();
+        camera3->Initialise();
+        camera4->Initialise();
         ambient->Initialise();
         sun->Initialise();
         lamp->Initialise();

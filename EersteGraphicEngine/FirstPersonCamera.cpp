@@ -51,13 +51,15 @@ namespace ege
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            rotation.x = joypadRX;
-            rotation.y = -joypadRY;
+            if(fabs(joypadRX) > 0.0f)
+                rotation.y = joypadRX * 2.0f;
+            if (fabs(joypadRY) > 0.0f)
+                rotation.x = -joypadRY * 2.0f;
 
             if (fabs(joypadLY) > 0.0f)
-                walk = joypadLY;
+                walk = joypadLY * 5.0f;
             if (fabs(joypadLX) > 0.0f)
-                strafe = joypadLX;
+                strafe = joypadLX * 5.0f;
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
                 up = -_translationSpeed;
@@ -65,9 +67,12 @@ namespace ege
                 up = _translationSpeed;
         }
 
-        XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
-        rotation.y = relativeMovement.x;
-        rotation.x = relativeMovement.y;
+        if (rotation.x == 0.0f && rotation.y == 0.0f)
+        {
+            XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
+            rotation.y = relativeMovement.x;
+            rotation.x = relativeMovement.y;
+        }
 
         if (fabs(rotation.x) > 0.0f)
             Pitch(rotation.x * _rotationSpeed * deltaTime);

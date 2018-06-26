@@ -48,7 +48,6 @@ namespace ege
 
             if (!_paused)
             {
-                LimitFps();
                 _window->ComputeFrameRate();
                 Draw();
             }
@@ -67,7 +66,6 @@ namespace ege
         }
 
         gTime().Update();
-        gJoypad().Update();
         _window->Update();
 
         if (_scene != nullptr)

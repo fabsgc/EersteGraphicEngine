@@ -11,7 +11,6 @@ namespace ege
         ThirdPersonCamera();
         ~ThirdPersonCamera();
 
-        void     Initialise() override;
         void     Update();
         void     ComputeProjectionMatrix() override;
 

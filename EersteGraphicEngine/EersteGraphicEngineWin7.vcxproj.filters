@@ -280,6 +280,12 @@
     <Filter Include="Header Files\Utility\Lib\JsonCpp">
       <UniqueIdentifier>{c4b55170-5d6c-48ff-9522-b3137b1d4839}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Config">
+      <UniqueIdentifier>{18c26303-a26a-4817-a47a-119ad4005868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Config">
+      <UniqueIdentifier>{25c208ef-8e92-4db3-91d2-d56959dc1a13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -658,9 +664,6 @@
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Header Files\Core\Renderer\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="IEntity.h">
-      <Filter>Header Files\Core\Renderer\Scene</Filter>
     </ClInclude>
     <ClInclude Include="IMoveable.h">
       <Filter>Header Files\Core\Renderer</Filter>

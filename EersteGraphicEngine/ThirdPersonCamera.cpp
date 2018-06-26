@@ -33,11 +33,6 @@ namespace ege
     {
     }
 
-    void ThirdPersonCamera::Initialise()
-    {
-        ComputeProjectionMatrix();
-    }
-
     void ThirdPersonCamera::Update()
     {
         float deltaTime       = _time.GetFrameDelta();
@@ -125,12 +120,14 @@ namespace ege
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
             if (fabs(joypadLY) > 0.0f)
-                walk = joypadLY;
+                walk = joypadLY * 10.0f;
             if (fabs(joypadLX) > 0.0f)
-                strafe = joypadLX;
+                strafe = joypadLX * 10.0f;
 
-            rotation.x = -joypadRX;
-            rotation.y = -joypadRY;
+            if(fabs(joypadRX) > 0.0f)
+                rotation.x = -joypadRX * 5.0f;
+            if (fabs(joypadRY) > 0.0f)
+                rotation.y = -joypadRY * 5.0f;
         }
 
         if (fabs(rotation.x) > 0.0f)
