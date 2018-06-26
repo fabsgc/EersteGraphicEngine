@@ -97,6 +97,10 @@ namespace ege
                 child.second->Move(movement);
                 break;
 
+            case NodeType::Camera:
+                child.second->Move(movement);
+                break;
+
             case NodeType::Model:
                 child.second->Move(movement);
                 break;
@@ -120,6 +124,10 @@ namespace ege
                 child.second->MoveStrafe(movement);
                 break;
 
+            case NodeType::Camera:
+                child.second->MoveStrafe(movement);
+                break;
+
             case NodeType::Model:
                 child.second->MoveStrafe(movement);
                 break;
@@ -140,6 +148,10 @@ namespace ege
                 break;
 
             case NodeType::Light:
+                child.second->Scale(origin, scale);
+                break;
+
+            case NodeType::Camera:
                 child.second->Scale(origin, scale);
                 break;
 
@@ -169,6 +181,10 @@ namespace ege
                 child.second->Scale(P, scale);
                 break;
 
+            case NodeType::Camera:
+                child.second->Scale(P, scale);
+                break;
+
             case NodeType::Model:
                 child.second->Scale(P, scale);
                 break;
@@ -189,6 +205,10 @@ namespace ege
                 break;
 
             case NodeType::Light:
+                child.second->Rotate(origin, eulerAngles);
+                break;
+
+            case NodeType::Camera:
                 child.second->Rotate(origin, eulerAngles);
                 break;
 
@@ -215,6 +235,10 @@ namespace ege
                 break;
 
             case NodeType::Light:
+                child.second->Rotate(P, eulerAngles);
+                break;
+
+            case NodeType::Camera:
                 child.second->Rotate(P, eulerAngles);
                 break;
 
