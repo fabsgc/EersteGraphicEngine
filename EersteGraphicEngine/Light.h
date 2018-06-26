@@ -25,9 +25,11 @@ namespace ege
         virtual void     Draw() = 0;
 
         using            IMoveable::Move;
+        using            IMoveable::MoveStrafe;
         using            IMoveable::Scale;
         using            IMoveable::Rotate;
         virtual void     Move(XMVECTOR movement) override;
+        virtual void     MoveStrafe(XMVECTOR movement) override;
         virtual void     Scale(XMVECTOR origin, XMVECTOR scale) override {};
         virtual void     Scale(XMVECTOR scale) override {};
         virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;

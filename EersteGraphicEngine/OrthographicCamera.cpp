@@ -2,15 +2,17 @@
 
 namespace ege
 {
-    const float OrthographicCamera::DefaultMinZoom = 0.001f;
-    const float OrthographicCamera::DefaultMaxZoom = 256.0f;
+    const float OrthographicCamera::DefaultMinZoom   = 0.001f;
+    const float OrthographicCamera::DefaultMaxZoom   = 256.0f;
 
     OrthographicCamera::OrthographicCamera()
         : Camera(CameraType::OrthographicCamera)
         , _zoom(0.5f)
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
-        _position = XMFLOAT3(0.0f, 1.0f, 0.0f);
+        _zoomSpeed = 1.0f;
+        _position = XMFLOAT3(0.0f, 0.0f, 0.0f);
+        ComputeProjectionMatrix();
     }
 
     OrthographicCamera::~OrthographicCamera()
@@ -19,28 +21,34 @@ namespace ege
 
     void OrthographicCamera::Update()
     {
-        /*float deltaTime = _time.GetFrameDelta();
-        float speedModulation = (10 * _zoom) > 2.0f ? 10 * _zoom : 2.0f;
+        float deltaTime       = _time.GetFrameDelta();
+        float speedModulation = (_zoom) > 1.0f ? 2.0f : 0.5f;
+
+        std::cout << _zoom << std::endl;
+
+        XMFLOAT2 movement = XMFLOAT2(0.0f, 0.0f);
+        float zoom        = 0.0f;
 
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            Strafe(-_translationSpeed * deltaTime * speedModulation, 0.0, 0.0f);
+            movement.x = -_translationSpeed;
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            Strafe(_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
+            movement.x = _translationSpeed;
+
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Strafe(0.0f, _translationSpeed * deltaTime * speedModulation, 0.0f);
+            movement.y = _translationSpeed;
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Strafe(0.0f, -_translationSpeed * deltaTime * speedModulation, 0.0f);
+            movement.y = -_translationSpeed;
 
         MouseWheelState mouseWheelState = _mouse.GetWheelState();
 
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * speedModulation);
+            zoom = _zoomSpeed;
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * speedModulation);
+            zoom = -_zoomSpeed;
             break;
         }
 
@@ -52,8 +60,9 @@ namespace ege
             if (mousePosition.x != _lastMousePosition.x || mousePosition.y != _lastMousePosition.y)
             {
                 XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
-                MoveX(-distance.x * _translationSpeed * deltaTime * 0.75f);
-                MoveY(distance.y * _translationSpeed * deltaTime * 0.75f);
+                
+                movement.x = -distance.x;
+                movement.y = distance.y;
 
                 _lastMousePosition = mousePosition;
             }
@@ -67,13 +76,21 @@ namespace ege
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            if (abs(joypadLY) > 0.0f)
-                MoveY(- joypadLY * _translationSpeed * deltaTime * speedModulation * 3.0f);
-            if (abs(joypadLX) > 0.0f)
-                MoveX(- joypadLX * _translationSpeed * deltaTime * speedModulation * 3.0f);
+            if (fabs(joypadLX) > 0.0f)
+                movement.x = -joypadLX;
+            if (fabs(joypadLY) > 0.0f)
+                movement.y = -joypadLY;
         }
 
-        Camera::Update();*/
+        if (fabs(movement.x) > 0.0f)
+            Strafe(movement.x * _translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
+        if(fabs(movement.y) > 0.0f)
+            Strafe(0.0f, movement.y * _translationSpeed * deltaTime * speedModulation, 0.0f);
+
+        if (fabs(zoom) > 0.0f)
+            Zoom(zoom * deltaTime);
+
+        Camera::Update();
     }
 
     void OrthographicCamera::ComputeProjectionMatrix()
@@ -109,7 +126,6 @@ namespace ege
         if (distance.x != 0.0f)
         {
             _position.x += distance.x;
-            _position.y += distance.x * 0.3f;
         }
         
         if(distance.y != 0.0f)
@@ -142,13 +158,4 @@ namespace ege
 
         _needUpdate = true;
     }
-
-    void OrthographicCamera::Move(XMVECTOR movement)
-    {}
-
-    void OrthographicCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {}
-
-    void OrthographicCamera::Rotate(XMVECTOR eulerAngles)
-    {}
 }

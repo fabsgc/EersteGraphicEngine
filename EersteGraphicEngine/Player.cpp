@@ -26,7 +26,7 @@ namespace ege
 
     void Player::Update()
     {
-        float deltaTime   = _time.GetFrameDelta();
+        /*float deltaTime   = _time.GetFrameDelta();
         float translation = MathUtility::FloatPrecision(DefaultTranslationSpeed * deltaTime, 2.0f);
         float rotation    = MathUtility::FloatPrecision(DefaultRotationSpeed * deltaTime, 2.0f);
         XMFLOAT2 angles   = XMFLOAT2(0.0f, 0.0f);
@@ -111,70 +111,8 @@ namespace ege
         if (HasCamera())
         {
             UpdateCamera(_position, angles);
-        }
+        }*/
 
         Model::Update();
-
-        /*float deltaTime = _time.GetFrameDelta();
-        float translation = MathUtility::FloatPrecision(DefaultTranslationSpeed * deltaTime, 2.0f);
-        float rotation = MathUtility::FloatPrecision(DefaultRotationSpeed * deltaTime, 2.0f);
-        XMFLOAT2 angles = XMFLOAT2(0.0f, 0.0f);
-        XMFLOAT3 movement = XMFLOAT3(0.0f, 0.0f, 0.0f);
-        bool hasMoved = false;
-
-        if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-        {
-            MoveZ(translation);
-            MoveX(-translation);
-            //movement.y = translation;
-            hasMoved = true;
-        }
-        else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-        {
-            MoveZ(-translation);
-            MoveX(translation);
-            //movement.y = -translation;
-            hasMoved = true;
-        }
-        if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-        {
-            MoveZ(-translation * 0.5f);
-            MoveX(-translation * 0.5f);
-            //movement.x = -translation;
-            hasMoved = true;
-        }
-        else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-        {
-            MoveZ(translation * 0.5f);
-            MoveX(translation * 0.5f);
-            //movement.x = translation;
-            hasMoved = true;
-        }
-
-        if (_joypad.IsConnected())
-        {
-            float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
-            float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
-
-            if (abs(joypadLY) > 0.0f)
-            {
-                MoveStrafeZ(joypadLY * translation);
-                //movement.y = joypadLY * translation;
-                hasMoved = true;
-            }
-            if (abs(joypadLX) > 0.0f)
-            {
-                MoveStrafeX(joypadLX * translation);
-                //movement.x = joypadLX * translation;
-                hasMoved = true;
-            }
-        }
-
-        if (HasCamera())
-        {
-            UpdateCamera(movement);
-        }
-
-        Model::Update();*/
     }
 }

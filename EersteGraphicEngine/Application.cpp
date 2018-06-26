@@ -3,6 +3,7 @@
 #include "OrthographicCamera.h"
 #include "ThirdPersonCamera.h"
 #include "FirstPersonCamera.h"
+#include "FlyingCamera.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "SpotLight.h"
@@ -58,6 +59,7 @@ namespace ege
         SPtr<ThirdPersonCamera> camera   = ege_shared_ptr_new<ThirdPersonCamera>();
         SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
         SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
+        SPtr<FlyingCamera> camera4       = ege_shared_ptr_new<FlyingCamera>();
 
         SPtr<AmbientLight> ambient       = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun       = ege_shared_ptr_new<DirectionalLight>();
@@ -95,7 +97,7 @@ namespace ege
         building->GoTo(-30.0f, 0.0, 20.0f);
 
         player->GoTo(0.0f, 1.0f, 0.0f);
-        player->AttachCamera(camera);
+        //player->AttachCamera(camera);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));

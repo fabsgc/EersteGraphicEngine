@@ -9,6 +9,8 @@ namespace ege
     FlyingCamera::FlyingCamera()
         : PerspectiveCamera(CameraType::FlyingCamera)
     {
+        _translationSpeed = 5.0f;
+        _rotationSpeed = 1.0f;
     }
 
     FlyingCamera::FlyingCamera(CameraType type)
@@ -22,60 +24,67 @@ namespace ege
 
     void FlyingCamera::Update()
     {
-        /*float deltaTime = _time.GetFrameDelta();
-        float speedModulation = 2.0f;
+        float deltaTime = _time.GetFrameDelta();
+
+        float walk = 0.0f;
+        float strafe = 0.0f;
+        float up = 0.0f;
+        float zoom = 0.0f;
+        XMFLOAT2 rotation = XMFLOAT2(0.0f, 0.0f);
 
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Walk(_translationSpeed * deltaTime * speedModulation);
+            walk = _translationSpeed;
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Walk(-_translationSpeed * deltaTime * speedModulation);
+            walk = -_translationSpeed;
+
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            Strafe(-_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
+            strafe = -_translationSpeed;
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            Strafe(_translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
+            strafe = _translationSpeed;
+
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Strafe(0.0f, deltaTime * _translationSpeed * speedModulation, 0.0f);
+            up = _translationSpeed;
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            Strafe(0.0f, -deltaTime * _translationSpeed * speedModulation, 0.0f);
-        
-        if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
-        {
-            XMFLOAT2 cursorDistanceFromCenter = _mouse.GetCursorDistanceFromCenter();
-            float angleX = cursorDistanceFromCenter.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            float angleY = cursorDistanceFromCenter.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            
-            if (abs(angleY) > 0)
-                Pitch(angleY);
-            if (abs(angleX) > 0)
-                Yaw(angleX);
-        }
+            up = -_translationSpeed;
 
         if (_joypad.IsConnected())
         {
-            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 200.0f;
-            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 200.0f;
+            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX;
+            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY;
 
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float angleX = joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
-            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f;
+            rotation.x = joypadRX;
+            rotation.y = -joypadRY;
 
-            if(abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime * speedModulation);
-            if(abs(joypadLX) > 0.0f)
-                Strafe(joypadLX * _translationSpeed * deltaTime * speedModulation, 0.0f, 0.0f);
-
-            if (abs(angleY) > 0.0f)
-                Pitch(angleY);
-            if (abs(angleX) > 0.0f)
-                Yaw(angleX);
+            if (fabs(joypadLY) > 0.0f)
+                walk = joypadLY;
+            if (fabs(joypadLX) > 0.0f)
+                strafe = joypadLX;
 
             if (_joypad.GetThumbStick(JoypadThumbStickName::LEFT).Position > 0.0f)
-                Strafe(0.0f, -_translationSpeed * deltaTime * speedModulation, 0.0f);
+                up = -_translationSpeed;
             else if (_joypad.GetThumbStick(JoypadThumbStickName::RIGHT).Position > 0.0f)
-                Strafe(0.0f, _translationSpeed * deltaTime * speedModulation, 0.0f);
-        }*/
+                up = _translationSpeed;
+        }
+
+        XMFLOAT2 relativeMovement = _mouse.GetRelativeMovement();
+        rotation.y = relativeMovement.x;
+        rotation.x = relativeMovement.y;
+
+        if (fabs(rotation.x) > 0.0f)
+            Pitch(rotation.x * _rotationSpeed * deltaTime);
+        if (fabs(rotation.y) > 0.0f)
+            Yaw(rotation.y * _rotationSpeed * deltaTime);
+
+        if (fabs(walk) > 0.0f)
+            Walk(walk * _translationSpeed * deltaTime);
+        if (fabs(strafe) > 0.0f)
+            Strafe(strafe * _translationSpeed * deltaTime, 0.0f, 0.0f);
+
+        if (fabs(up) > 0.0f)
+            Strafe(0.0, up * _translationSpeed * deltaTime, 0.0f);
 
         PerspectiveCamera::Update();
     }
@@ -210,13 +219,4 @@ namespace ege
         _position = position;
         _needUpdate = true;
     }
-
-    void FlyingCamera::Move(XMVECTOR movement)
-    {}
-
-    void FlyingCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {}
-
-    void FlyingCamera::Rotate(XMVECTOR eulerAngles)
-    {}
 }

@@ -9,17 +9,24 @@
 
 namespace ege
 {
-    const float ThirdPersonCamera::DefaultMinZoom = 1.25f;
-    const float ThirdPersonCamera::DefaultMaxZoom = 1024.0f;
+    const float ThirdPersonCamera::DefaultZoomSpeed  = 64.0f;
+    const float ThirdPersonCamera::DefaultRadius     = 64.0f;
+    const float ThirdPersonCamera::DefaultStartAlpha = -XM_PIDIV2;
+    const float ThirdPersonCamera::DefaultStartBeta  = MathUtility::G_PIDIV6;
+    const float ThirdPersonCamera::DefaultMinZoom    = 1.25f;
+    const float ThirdPersonCamera::DefaultMaxZoom    = 1024.0f;
+    const XMFLOAT3 ThirdPersonCamera::DefaultTarget  = XMFLOAT3(0.0f, 0.0f, 0.0f);
 
     ThirdPersonCamera::ThirdPersonCamera()
         : PerspectiveCamera(CameraType::ThirdPersonCamera)
-        , _alpha(0.0f)
-        , _beta(0.5f)
-        , _radius(64.0f)
+        , _zoomSpeed(DefaultZoomSpeed)
+        , _radius(DefaultRadius)
+        , _alpha(DefaultStartAlpha)
+        , _beta(DefaultStartBeta)
         , _target(XMFLOAT3(0.0f, 8.0f, 0.0f))
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
+        _rotationSpeed = 1.0f;
     }
 
     ThirdPersonCamera::~ThirdPersonCamera()
@@ -33,28 +40,34 @@ namespace ege
 
     void ThirdPersonCamera::Update()
     {
-        /*float deltaTime = _time.GetFrameDelta();
+        float deltaTime       = _time.GetFrameDelta();
         float speedModulation = (_radius / 10.0f > 2.0f) ? _radius / 10.0f : 2.0f;
 
+        float walk   = 0.0f;
+        float strafe = 0.0f;
+        float up     = 0.0f;
+        float zoom   = 0.0f;
+        XMFLOAT2 rotation = XMFLOAT2(0.0f, 0.0f);
+
         if (_inputHandler.GetState("GO_FORWARD").State == InputHandlerState::TRIGGERED)
-            Walk(_translationSpeed * deltaTime * speedModulation);
+            walk = _translationSpeed;
         else if (_inputHandler.GetState("GO_BACKWARD").State == InputHandlerState::TRIGGERED)
-            Walk(-_translationSpeed * deltaTime * speedModulation);
+            walk = -_translationSpeed;
 
         if (_inputHandler.GetState("GO_LEFT").State == InputHandlerState::TRIGGERED)
-            Strafe(-_translationSpeed * deltaTime * speedModulation);
+            strafe = -_translationSpeed;
         else if (_inputHandler.GetState("GO_RIGHT").State == InputHandlerState::TRIGGERED)
-            Strafe(_translationSpeed * deltaTime * speedModulation);
+            strafe = _translationSpeed;
 
         if (_inputHandler.GetState("GO_UP").State == InputHandlerState::TRIGGERED)
-            Up(_translationSpeed * deltaTime * speedModulation);
+            up = _translationSpeed;
         else if (_inputHandler.GetState("GO_DOWN").State == InputHandlerState::TRIGGERED)
-            Up(-_translationSpeed * deltaTime * speedModulation);
+            up = -_translationSpeed;
 
         if (_inputHandler.GetState("ZOOM_UP").State == InputHandlerState::TRIGGERED)
-            Zoom(_translationSpeed * deltaTime * speedModulation);
+            zoom = _zoomSpeed;
         else if (_inputHandler.GetState("ZOOM_DOWN").State == InputHandlerState::TRIGGERED)
-            Zoom(-_translationSpeed * deltaTime * speedModulation);
+            zoom = -_zoomSpeed;
 
         if (_mouse.GetState(MouseButtonName::LEFT) == MouseButtonState::TRIGGERED)
         {
@@ -65,12 +78,9 @@ namespace ege
             {
                 XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
-                float angleX = -distance.x * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
-                float angleY = distance.y * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 75.0f;
-                
-                Pitch(angleX);
-                Yaw(angleY);
-                    
+                rotation.x = -distance.x;
+                rotation.y = distance.y;
+
                 _lastMousePosition = mousePosition;
             }
         }
@@ -85,9 +95,9 @@ namespace ege
 				XMFLOAT2 distance = XMFLOAT2(mousePosition.x - mouseOldPosition.x, mousePosition.y - mouseOldPosition.y);
 
 				if (abs(distance.y) > 0.0f)
-					Walk(distance.y * deltaTime * speedModulation);
+					walk = distance.y;
 				if (abs(distance.x) > 0.0f)
-					Strafe(-distance.x * deltaTime * speedModulation);
+					strafe = -distance.x;
 
 				_lastMousePosition = mousePosition;
 			}
@@ -98,35 +108,46 @@ namespace ege
         switch (mouseWheelState)
         {
         case MouseWheelState::ROLL_UP:
-            Zoom(deltaTime * _translationSpeed * speedModulation * 3.0f);
+            zoom = _zoomSpeed;
             break;
 
         case MouseWheelState::ROLL_DOWN:
-            Zoom(-deltaTime * _translationSpeed * speedModulation * 3.0f);
+            zoom = -_zoomSpeed;
             break;
         }
 
         if (_joypad.IsConnected())
         {
-            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX * 300.0f;
-            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY * 300.0f;
+            float joypadRX = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisX;
+            float joypadRY = (float)_joypad.GetJoyStick(JoypadStickName::RIGHT).AxisY;
 
             float joypadLX = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisX;
             float joypadLY = (float)_joypad.GetJoyStick(JoypadStickName::LEFT).AxisY;
 
-            float angleX = -joypadRX * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
-            float angleY = -joypadRY * _rotationSpeed * deltaTime * MathUtility::G_PI / 180.0f * 2.0f;
+            if (fabs(joypadLY) > 0.0f)
+                walk = joypadLY;
+            if (fabs(joypadLX) > 0.0f)
+                strafe = joypadLX;
 
-            if (abs(joypadLY) > 0.0f)
-                Walk(joypadLY * _translationSpeed * deltaTime *  speedModulation);
-            if (abs(joypadLX) > 0.0f)
-                Strafe(joypadLX * _translationSpeed * deltaTime * speedModulation);
+            rotation.x = -joypadRX;
+            rotation.y = -joypadRY;
+        }
 
-            if (abs(angleX) > 0.0f)
-                Pitch(angleX);
-            if (abs(angleY) > 0.0f)
-                Yaw(angleY);
-        }*/
+        if (fabs(rotation.x) > 0.0f)
+            Pitch(rotation.x * _rotationSpeed * deltaTime);
+        if (fabs(rotation.y) > 0.0f)
+            Yaw(rotation.y * _rotationSpeed * deltaTime);
+
+        if (fabs(walk) > 0.0f)
+            Walk(walk * _translationSpeed * deltaTime);
+        if (fabs(strafe) > 0.0f)
+            Strafe(strafe * _translationSpeed * deltaTime);
+
+        if (fabs(up) > 0.0f)
+            Up(up * _translationSpeed * deltaTime);
+
+        if (abs(zoom) > 0.0f)
+            Zoom(zoom * _zoomSpeed * deltaTime);
 
         PerspectiveCamera::Update();
     }
@@ -264,17 +285,13 @@ namespace ege
         _needUpdate = true;
     }
 
+    void ThirdPersonCamera::SetZoomSpeed(float zoomSpeed)
+    {
+        _zoomSpeed = zoomSpeed;
+    }
+
     XMFLOAT3 ThirdPersonCamera::GetTarget()
     {
         return _target;
     }
-
-    void ThirdPersonCamera::Move(XMVECTOR movement)
-    {}
-
-    void ThirdPersonCamera::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
-    {}
-
-    void ThirdPersonCamera::Rotate(XMVECTOR eulerAngles)
-    {}
 }

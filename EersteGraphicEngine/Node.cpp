@@ -139,6 +139,28 @@ namespace ege
         }
     }
 
+    void Node::MoveStrafe(XMVECTOR movement)
+    {
+        for (auto child : _child)
+        {
+            child.second->MoveStrafe(movement);
+        }
+
+        for (auto entity : _entities)
+        {
+            switch (entity.second->GetType())
+            {
+            case EntityType::Light:
+                entity.second->MoveStrafe(movement);
+                break;
+
+            case EntityType::Model:
+                entity.second->MoveStrafe(movement);
+                break;
+            }
+        }
+    }
+
     void Node::Scale(XMVECTOR origin, XMVECTOR scale)
     {
         for (auto child : _child)

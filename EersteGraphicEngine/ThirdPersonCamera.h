@@ -24,10 +24,12 @@ namespace ege
         void         Zoom(float zoom);
 
         using        PerspectiveCamera::Move;
+        using        PerspectiveCamera::MoveStrafe;
         using        PerspectiveCamera::Rotate;
-        virtual void Move(XMVECTOR movement) override;
-        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
-        virtual void Rotate(XMVECTOR eulerAngles) override;
+        virtual void Move(XMVECTOR movement) override {};
+        virtual void MoveStrafe(XMVECTOR movement) override {};
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void Rotate(XMVECTOR eulerAngles) override {};
 
         void         SetTarget(XMFLOAT3 target);
         void         SetRadius(float radius);
@@ -35,17 +37,25 @@ namespace ege
         void         SetAlpha(float alpha);
         void         SetBeta(float beta);
 
+        void         SetZoomSpeed(float zoomSpeed);
+
         XMFLOAT3     GetTarget();
 
     protected:
-        static const float DefaultMinZoom;
-        static const float DefaultMaxZoom;
+        static const float    DefaultZoomSpeed;
+        const static float    DefaultRadius;
+        const static float    DefaultStartAlpha;
+        const static float    DefaultStartBeta;
+        static const float    DefaultMinZoom;
+        static const float    DefaultMaxZoom;
+        static const XMFLOAT3 DefaultTarget;
 
     protected:
         XMFLOAT3 _target;
         float    _radius;
         float    _alpha;
         float    _beta;
+        float    _zoomSpeed;
         float    _minZoom;
         float    _maxZoom;
 

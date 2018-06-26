@@ -3,9 +3,10 @@
 
 namespace ege
 {
-    const float Camera::DefaultNearZ = 0.01f;
-    const float Camera::DefaultFarZ = 1024.0f;
+    const float Camera::DefaultNearZ            = 0.01f;
+    const float Camera::DefaultFarZ             = 1024.0f;
     const float Camera::DefaultTranslationSpeed = 10.0f;
+    const float Camera::DefaultRotationSpeed    = 5.0f;
 
     Camera::Camera()
         : Camera(CameraType::GenericCamera)
@@ -24,6 +25,7 @@ namespace ege
         , _nearZ(DefaultNearZ)
         , _farZ(DefaultFarZ)
         , _translationSpeed(DefaultTranslationSpeed)
+        , _rotationSpeed(DefaultTranslationSpeed)
         , _position(XMFLOAT3(0.0f, 1.0f, -10.0f))
         , _right(XMFLOAT3(1.0f, 0.0f, 0.0f))
         , _up(XMFLOAT3(0.0f, 1.0f, 0.0f))
@@ -90,6 +92,11 @@ namespace ege
         return _translationSpeed;
     }
 
+    const float& Camera::GetRotationSpeed() const
+    {
+        return _rotationSpeed;
+    }
+
     const float& Camera::GetNearZ() const
     {
         return _nearZ;
@@ -98,5 +105,24 @@ namespace ege
     const float& Camera::GetFarZ() const
     {
         return _farZ;
+    }
+
+    void Camera::SetNearZ(float nearZ)
+    {
+        _nearZ = nearZ;
+    }
+
+    void Camera::SetFarZ(float farZ)
+    {
+        _farZ = farZ;
+    }
+    void Camera::SetTranslationSpeed(float translationSpeed)
+    {
+        _translationSpeed = translationSpeed;
+    }
+
+    void Camera::SetRotationSpeed(float rotationSpeed)
+    {
+        _rotationSpeed = rotationSpeed;
     }
 }

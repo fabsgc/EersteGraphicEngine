@@ -2,7 +2,6 @@
 
 #include "PrerequisitesCore.h"
 #include "ThirdPersonCameraHandler.h"
-#include "OrthographicCameraHandler.h"
 #include "InputHandler.h"
 #include "Joypad.h"
 #include "Mouse.h"

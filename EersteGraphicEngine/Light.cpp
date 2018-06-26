@@ -45,6 +45,16 @@ namespace ege
         }
     }
 
+    void Light::MoveStrafe(XMVECTOR movement)
+    {
+        IMoveable::MoveStrafe(movement);
+
+        if (_lightModel != nullptr)
+        {
+            _lightModel->MoveStrafe(movement);
+        }
+    }
+
     void Light::Rotate(XMVECTOR point, XMVECTOR eulerAngles)
     {
         IMoveable::Rotate(point, eulerAngles);

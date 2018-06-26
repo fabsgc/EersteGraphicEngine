@@ -36,13 +36,20 @@ namespace ege
         const XMFLOAT4X4& GetProjection() const;
         const float&      GetNearZ() const;
         const float&      GetFarZ() const;
-
         const XMFLOAT3&   GetPosition() const;
         const float&      GetTranslationSpeed() const;
+        const float&      GetRotationSpeed() const;
+
+        void              SetNearZ(float nearZ);
+        void              SetFarZ(float farZ);
+        void              SetTranslationSpeed(float translationSpeed);
+        void              SetRotationSpeed(float rotationSpeed);
 
         using             IMoveable::Move;
+        using             IMoveable::MoveStrafe;
         using             IMoveable::Rotate;
         virtual void      Move(XMVECTOR movement) override {};
+        virtual void      MoveStrafe(XMVECTOR movement) override {};
         virtual void      Scale(XMVECTOR origin, XMVECTOR scale) override {};
         virtual void      Scale(XMVECTOR scale) override {};
         virtual void      Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
@@ -54,6 +61,7 @@ namespace ege
         static const float DefaultNearZ;
         static const float DefaultFarZ;
         static const float DefaultTranslationSpeed;
+        static const float DefaultRotationSpeed;
 
     protected:
         RenderAPI&         _renderAPI;
@@ -74,6 +82,8 @@ namespace ege
         float              _nearZ;
         float              _farZ;
         float              _translationSpeed;
+        float              _rotationSpeed;
+        float              _zoomSpeed;
 
         bool               _needUpdate;
     };

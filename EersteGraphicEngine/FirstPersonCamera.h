@@ -17,9 +17,11 @@ namespace ege
         void         Strafe(XMFLOAT3 distance) override;
 
         using        FlyingCamera::Move;
+        using        FlyingCamera::MoveStrafe;
         using        FlyingCamera::Rotate;
-        virtual void Move(XMVECTOR movement) override;
-        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
-        virtual void Rotate(XMVECTOR eulerAngles) override;
+        virtual void Move(XMVECTOR movement) override {};
+        virtual void MoveStrafe(XMVECTOR movement) override {};
+        virtual void Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
+        virtual void Rotate(XMVECTOR eulerAngles) override {};
     };
 }

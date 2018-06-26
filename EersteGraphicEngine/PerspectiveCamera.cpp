@@ -3,7 +3,6 @@
 namespace ege
 {
     const float PerspectiveCamera::DefaultFov   = XM_PIDIV4;
-    const float PerspectiveCamera::DefaultRotationSpeed = 0.25f;
 
     PerspectiveCamera::PerspectiveCamera(CameraType type)
         : Camera(type)
@@ -30,11 +29,6 @@ namespace ege
 
     void PerspectiveCamera::Yaw(float angle)
     {}
-
-    const float& PerspectiveCamera::GetRotationSpeed() const
-    {
-        return _rotationSpeed;
-    }
 
     const XMFLOAT3& PerspectiveCamera::GetRight() const
     {

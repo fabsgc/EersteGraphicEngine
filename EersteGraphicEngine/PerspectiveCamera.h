@@ -19,15 +19,16 @@ namespace ege
         virtual void     Roll(float angle);
         virtual void     Yaw(float angle);
 
-        const float&     GetRotationSpeed() const;
         const XMFLOAT3&  GetRight() const;
         const XMFLOAT3&  GetLook() const;
         const XMFLOAT3&  GetUp() const;
         const float&     GetFov() const;
 
         using            Camera::Move;
+        using            Camera::MoveStrafe;
         using            Camera::Rotate;
         virtual void     Move(XMVECTOR movement) override {};
+        virtual void     MoveStrafe(XMVECTOR movement) override {};
         virtual void     Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override {};
         virtual void     Rotate(XMVECTOR eulerAngles) override {};
 
@@ -36,7 +37,6 @@ namespace ege
 
     protected:
         static const float DefaultFov;
-        static const float DefaultRotationSpeed;
 
     protected:
         float              _fov;
