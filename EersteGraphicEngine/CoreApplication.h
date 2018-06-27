@@ -2,6 +2,7 @@
 
 #include "PrerequisitesCore.h"
 #include "IComponentHandler.h"
+#include "RenderPipeline.h"
 #include "IComponent.h"
 #include "IUpdatable.h"
 #include "IDrawable.h"
@@ -101,6 +102,7 @@ namespace ege
         void StartUpTextureManager();
         void StartUpModelManager();
         void StartUpSceneManager();
+        void StartUpRenderPipeline();
 
         void SetContexts();
         void SetApplicationConfig();
@@ -109,21 +111,26 @@ namespace ege
 
         void SetContext(const String& name);
 
+        virtual void SceneLoader() {};
+        void         RenderPipelineLoader();
+
     protected:
-        volatile bool      _runMainLoop;
-        volatile bool      _paused;
-        volatile bool      _minimized;
-        volatile bool      _maximized;
-        volatile bool      _resizing;
+        volatile bool        _runMainLoop;
+        volatile bool        _paused;
+        volatile bool        _minimized;
+        volatile bool        _maximized;
+        volatile bool        _resizing;
 
-        StartUpDescription _startUpDesc;
+        StartUpDescription   _startUpDesc;
 
-        Window*	           _window;
+        Window*	             _window;
+        RenderAPI*           _renderAPI;
 
-        Vector<Context>    _contexts;
-        Context*           _currentContext;
+        Vector<Context>      _contexts;
+        Context*             _currentContext;
 
-        SPtr<Scene>        _scene;
+        SPtr<Scene>          _scene;
+        SPtr<RenderPipeline> _renderPipeline;
     };
 
     CoreApplication& gCoreApplication();

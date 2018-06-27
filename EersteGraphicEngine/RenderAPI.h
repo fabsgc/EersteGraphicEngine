@@ -13,6 +13,30 @@ namespace ege
         FRAME, OBJECT, LIGHT
     };
 
+    enum class RenderPipelineType
+    {
+        FORWARD, DEFERRED
+    };
+
+    struct RenderDesc
+    {
+        UINT Msaa;
+        bool BackfaceCulling;
+        bool FrustumCulling;
+        bool FullScreen;
+        bool VSync;
+        RenderPipelineType Pipeline;
+
+        RenderDesc()
+            : Msaa(4)
+            , BackfaceCulling(true)
+            , FrustumCulling(true)
+            , FullScreen(false)
+            , VSync(false)
+            , Pipeline(RenderPipelineType::FORWARD)
+        {}
+    };
+
     struct LightDesc
     {
         XMFLOAT4 LightColor;
@@ -33,23 +57,6 @@ namespace ege
             , LightInnerAngle(0.5f)
             , LightOuterAngle(0.1f)
             , LightType(0)
-        {}
-    };
-
-    struct RenderDesc
-    {
-        UINT Msaa;
-        bool BackfaceCulling;
-        bool FrustumCulling;
-        bool FullScreen;
-        bool VSync;
-
-        RenderDesc()
-            : Msaa(4)
-            , BackfaceCulling(true)
-            , FrustumCulling(true)
-            , FullScreen(false)
-            , VSync(false)
         {}
     };
 
@@ -120,6 +127,7 @@ namespace ege
         Device*         GetDevice();
         ID3D11Buffer*   GetConstantBuffer(ConstantBufferType type);
         ConstantBuffer* GetConstantBufferUpdate(ConstantBufferType type);
+        RenderDesc&     GetRenderDesc();
 
     protected:
         RenderAPI(RenderAPI const&) = delete;

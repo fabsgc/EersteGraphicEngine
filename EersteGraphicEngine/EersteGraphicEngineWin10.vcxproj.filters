@@ -916,9 +916,7 @@
     <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">
       <Filter>Data\Shader\Forward\Include</Filter>
     </None>
-    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsl">
-      <Filter>Data\Shader\Forward\Include</Filter>
-    </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_PS.hlsl">

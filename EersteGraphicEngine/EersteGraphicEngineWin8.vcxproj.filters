@@ -181,9 +181,6 @@
     <Filter Include="Data\Scene">
       <UniqueIdentifier>{e75ff315-6183-49c8-a895-74d17c0d5929}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Color">
-      <UniqueIdentifier>{9754ada3-3755-4cf5-8d1a-b74c0223afa5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\App\Material">
       <UniqueIdentifier>{83b88573-0240-4c5c-80b0-1b10927f0efc}</UniqueIdentifier>
     </Filter>
@@ -201,12 +198,6 @@
     </Filter>
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{46bfe031-b777-49d9-8c87-0d7320315793}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Color\Include">
-      <UniqueIdentifier>{d672f14f-df21-4483-821a-949871e8aeba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Include">
-      <UniqueIdentifier>{22191525-7d9f-4f98-a80c-9715f4224702}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\App\Material\City">
       <UniqueIdentifier>{e3ff6b89-2703-44de-a167-e92acb4f7735}</UniqueIdentifier>
@@ -297,6 +288,27 @@
     </Filter>
     <Filter Include="Header Files\Utility\Lib\JsonCpp">
       <UniqueIdentifier>{0f3f16e9-c495-4671-b9a2-768185e1cae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Effect">
+      <UniqueIdentifier>{1c781de0-84ac-463c-a35e-bdad11df5082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Effect">
+      <UniqueIdentifier>{580278c0-e6d9-4cc1-8649-266b9d64650a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common">
+      <UniqueIdentifier>{13885f1d-fced-441b-a1c4-b39ce8e0e618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward">
+      <UniqueIdentifier>{59329958-e99e-451f-b2e0-055d0a33faad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Deferred">
+      <UniqueIdentifier>{a3370874-3bdb-41c6-b589-18102745c83c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Include">
+      <UniqueIdentifier>{9d987c4a-6e9f-44ec-a47a-89742b690b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Color">
+      <UniqueIdentifier>{e7174069-cb8a-418d-b91f-2110f7edfdb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -548,6 +560,9 @@
     </ClCompile>
     <ClCompile Include="lib\jsoncpp\jsoncpp.cpp">
       <Filter>Source Files\Utility\Lib\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -842,6 +857,12 @@
     <ClInclude Include="lib\jsoncpp\json\json-forwards.h">
       <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Core\Renderer\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -852,14 +873,6 @@
     <Image Include="..\directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
-    </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
-    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="bin64\Data\Config\Application.xml">
@@ -894,8 +907,19 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli">
-      <Filter>Data\Shader\Color\Include</Filter>
+    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_PS.hlsl">
+      <Filter>Data\Shader\Forward\Color</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_VS.hlsl">
+      <Filter>Data\Shader\Forward\Color</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
+    </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -267,7 +267,7 @@ template <typename Iter> Iter fixZerosInTheEnd(Iter begin, Iter end) {
 #include <stdio.h>
 
 #if defined(_MSC_VER)
-#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
+//#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
 #if !defined(snprintf)
 #define snprintf _snprintf
 #endif
@@ -4216,7 +4216,7 @@ Value& Path::make(Value& root) const {
 #define isfinite _finite
 #endif
 
-#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
+//#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
 #if !defined(snprintf)
 #define snprintf _snprintf
 #endif

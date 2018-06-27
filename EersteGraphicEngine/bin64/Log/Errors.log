@@ -657,3 +657,45 @@ Time: 15:33:36
 Error: Trying to access a module but it hasn't been started up yet.
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\shader.cpp:227
+Inside ege::Shader::OpenShader
+Date: Jun 27 2018
+Time: 21:31:01
+Error: Can't open compile shader
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\shader.cpp:351
+Inside ege::Shader::CompileShader
+Date: Jun 27 2018
+Time: 23:29:48
+Error: Can't compie shader file : Data/Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 23:29:19
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 23:29:19
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 23:29:19
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\shader.cpp:351
+Inside ege::Shader::CompileShader
+Date: Jun 27 2018
+Time: 23:29:48
+Error: Can't compie shader file : Data/Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 

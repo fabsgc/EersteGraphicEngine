@@ -24,6 +24,9 @@
 
 #include "Console.h"
 
+#include "ForwardRendering.h"
+#include "DeferredRendering.h"
+
 namespace ege
 {
     CoreApplication::CoreApplication(const StartUpDescription& desc)
@@ -174,10 +177,15 @@ namespace ege
         StartUpTextureManager();
         StartUpModelManager();
         StartUpSceneManager();
+        StartUpRenderPipeline();
 
         SetComponents();
 
         SetContext("Game");
+
+        SceneLoader();
+
+        RenderPipelineLoader();
 
         return;
     }
@@ -204,6 +212,7 @@ namespace ege
     void CoreApplication::StartUpRenderAPI()
     {
         RenderAPI::StartUp();
+        _renderAPI = gRenderAPIPtr();
     }
 
     void CoreApplication::StartUpRenderer()
@@ -271,6 +280,22 @@ namespace ege
         SceneManager::StartUp();
     }
 
+    void CoreApplication::StartUpRenderPipeline()
+    {
+        RenderDesc& renderDesc = _renderAPI->GetRenderDesc();
+
+        switch (renderDesc.Pipeline)
+        {
+        case RenderPipelineType::FORWARD:
+            _renderPipeline = ege_shared_ptr_new<ForwardRendering>();
+            break;
+
+        case RenderPipelineType::DEFERRED:
+            _renderPipeline = ege_shared_ptr_new<DeferredRendering>();
+            break;
+        }
+    }
+
     void CoreApplication::SetContexts()
     {
 #ifdef EGE_CONFIG_CONTEXT_FILE
@@ -294,6 +319,11 @@ namespace ege
         }
 
         _currentContext = &_contexts[0];
+    }
+
+    void CoreApplication::RenderPipelineLoader()
+    {
+        _renderPipeline->Initialise(_scene);
     }
 
     void CoreApplication::SetApplicationConfig()

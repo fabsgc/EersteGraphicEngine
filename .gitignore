@@ -8,6 +8,7 @@
 *.ipdb
 *.asm
 *.cso
+*.log
 Debug/
 Release/
 x64/

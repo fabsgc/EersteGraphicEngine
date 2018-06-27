@@ -1,5 +1,6 @@
 #include "../Include/Common.hlsli"
-#include "../Include/Texture.hlsli"
+#include "../Include/Light.hlsli"
+#include "../../Common/Include/Texture.hlsli"
 
 struct PS_INPUT
 {

@@ -43,7 +43,6 @@ namespace ege
     void Application::OnStartUp()
     {
         CoreApplication::OnStartUp();
-        SceneLoader();
     }
 
     void Application::OnShutDown()

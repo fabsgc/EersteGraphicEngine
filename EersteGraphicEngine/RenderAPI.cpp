@@ -383,6 +383,10 @@ namespace ege
             {
                 _renderDesc.VSync = (value == "true") ? true : false;
             }
+            else if (type == "pipeline")
+            {
+                _renderDesc.Pipeline = (value == "foward") ? RenderPipelineType::FORWARD : RenderPipelineType::DEFERRED;
+            }
         }
 #endif
     }
@@ -430,6 +434,11 @@ namespace ege
         }
 
         return &_frameConstantBufferUpdate;
+    }
+
+    RenderDesc& RenderAPI::GetRenderDesc()
+    {
+        return _renderDesc;
     }
 
     RenderAPI& gRenderAPI()

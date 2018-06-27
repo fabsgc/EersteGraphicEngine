@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shaders>
-    <shader-program name="default" compiled="true" include-path="">
-        <shader type="vertex-shader" file="Forward/Color/Color_VS.cso"/>
-        <shader type="pixel-shader" file="Forward/Color/Color_PS.cso"/>
+    <shader-program name="default" function="forward" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Forward/Default/Default_VS.cso"/>
+        <shader type="pixel-shader" file="Forward/Default/Default_PS.cso"/>
     </shader-program>
-    <shader-program name="default-2" compiled="false" include-path="Data/Shader/Forward/Color">
-        <shader type="vertex-shader" file="Forward/Color/Color_VS.hlsl"/>
-        <shader type="pixel-shader" file="Forward/Color/Color_PS.hlsl"/>
+    <!--<shader-program name="diffuse-default" function="diffuse" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Common/Diffuse_VS.cso"/>
+        <shader type="pixel-shader" file="Common/Diffuse_PS.cso"/>
+    </shader-program>
+    <shader-program name="specular-default" function="specular" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Common/Specular_VS.cso"/>
+        <shader type="pixel-shader" file="Common/Specular_PS.cso"/>
+    </shader-program>
+    <shader-program name="normal-default" function="normal" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Common/Normal_VS.cso"/>
+        <shader type="pixel-shader" file="Common/Normal_PS.cso"/>
+    </shader-program>
+    <shader-program name="depth-default" function="depth" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Common/Depth_VS.cso"/>
+        <shader type="pixel-shader" file="Common/Depth_PS.cso"/>
+    </shader-program>
+    <shader-program name="light-default" function="light" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Deferred/Light/Light_VS.cso"/>
+        <shader type="pixel-shader" file="Deferred/Light/Light_PS.cso"/>
+    </shader-program>-->
+  
+    <shader-program name="default-2" function="forward" compiled="false" include-path="Data/Shader/Forward/Color">
+        <shader type="vertex-shader" file="Forward/Default/Default_VS.hlsl"/>
+        <shader type="pixel-shader" file="Forward/Default/Default_PS.hlsl"/>
     </shader-program>
 </shaders>

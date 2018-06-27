@@ -25,7 +25,7 @@ namespace ege
         void OnStartUp() override;
         void OnShutDown() override;
 
-        void SceneLoader();
+        void SceneLoader() override;
     };
 
     Application& gApplication();

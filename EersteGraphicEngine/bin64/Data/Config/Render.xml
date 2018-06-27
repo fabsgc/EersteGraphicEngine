@@ -5,4 +5,5 @@
     <option type="frustum-culling" value="true"/>
     <option type="fullscreen" value="false"/>
     <option type="vsync" value="true" />
+    <option type="pipeline" value="forward" />
 </render>

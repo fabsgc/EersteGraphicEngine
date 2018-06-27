@@ -181,9 +181,6 @@
     <Filter Include="Data\Shader">
       <UniqueIdentifier>{6a3e0b8e-3c6e-4b94-a9e6-caf6dbde680c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Color">
-      <UniqueIdentifier>{2985c837-d99f-48e0-ac58-7300e4ed38e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\App\Material">
       <UniqueIdentifier>{37fc9ebc-bcb6-4067-bd7a-ac71fea17158}</UniqueIdentifier>
     </Filter>
@@ -201,12 +198,6 @@
     </Filter>
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{16f66005-21e7-45b7-9c4e-b7dbcdec84b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Color\Include">
-      <UniqueIdentifier>{bd4689cd-70b6-4e44-be8a-3490e99a30ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Include">
-      <UniqueIdentifier>{35098237-1e46-4c0b-8e72-96cb6e1dc6c8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core\Renderer\Camera\Orthographic">
       <UniqueIdentifier>{c882a51c-0c13-4477-86c4-72eb5e2fbe74}</UniqueIdentifier>
@@ -285,6 +276,36 @@
     </Filter>
     <Filter Include="Source Files\Core\Config">
       <UniqueIdentifier>{25c208ef-8e92-4db3-91d2-d56959dc1a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Effect">
+      <UniqueIdentifier>{e54dc99d-ded9-4f39-be47-20b0cc9858d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Shader">
+      <UniqueIdentifier>{1663bf0d-bb5a-4dc1-871b-8671c8310e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Texture">
+      <UniqueIdentifier>{1278c58b-be98-4288-9f61-93c5cdfa0d05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI\Texture">
+      <UniqueIdentifier>{494f593e-4541-4a52-96ad-495c66b7a351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\RenderAPI\Shader">
+      <UniqueIdentifier>{272ba6a2-3588-408e-a164-e9b959c1b6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward">
+      <UniqueIdentifier>{37348083-bf39-40d1-9d3d-2a75226bcb05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Default">
+      <UniqueIdentifier>{74b85ff3-430b-4add-a3a3-0d8c27448ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Default\Include">
+      <UniqueIdentifier>{76b34a89-fb78-4d89-a498-4664e242f25c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Common">
+      <UniqueIdentifier>{c091e8bc-fd78-40d0-8d30-2e1346e1e646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Common\Include">
+      <UniqueIdentifier>{3c29d737-3f87-437c-abf8-945d36b9e060}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -366,12 +387,6 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Core\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Device.cpp">
       <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
@@ -420,12 +435,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
@@ -440,9 +449,6 @@
     </ClCompile>
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Source Files\Core\Renderer\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderInclude.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="DefaultMaterial.cpp">
       <Filter>Source Files\App\Material</Filter>
@@ -524,6 +530,27 @@
     </ClCompile>
     <ClCompile Include="lib\jsoncpp\jsoncpp.cpp">
       <Filter>Source Files\Utility\Lib\JsonCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Core\Renderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Core\RenderAPI\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Core\RenderAPI\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderInclude.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Core\RenderAPI\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -647,12 +674,6 @@
     <ClInclude Include="RenderAPI.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="VertexDesc.h">
       <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
@@ -701,12 +722,6 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Frustum.h">
       <Filter>Header Files\Core\Renderer\Camera</Filter>
     </ClInclude>
@@ -721,9 +736,6 @@
     </ClInclude>
     <ClInclude Include="AmbientLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderInclude.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
@@ -806,6 +818,24 @@
     <ClInclude Include="lib\jsoncpp\json\json-forwards.h">
       <Filter>Header Files\Utility\Lib\JsonCpp</Filter>
     </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Core\RenderAPI\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderInclude.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -850,16 +880,22 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_PS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_VS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli">
-      <Filter>Data\Shader\Color\Include</Filter>
+    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli">
+      <Filter>Data\Shader\Forward\Default\Include</Filter>
+    </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Light.hlsli">
+      <Filter>Data\Shader\Forward\Default\Include</Filter>
+    </None>
+    <None Include="bin64\Data\Shader\Common\Include\Texture.hlsli">
+      <Filter>Data\Shader\Forward\Common\Include</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -344,11 +344,11 @@ namespace ege
                 OutputDebugStringA((char*)errorBlob->GetBufferPointer());
                 errorBlob->Release();
 
-                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't compie shader file : " + ToString(srcFile)));
+                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't compile shader file : " + ToString(srcFile)));
             }
             else
             {
-                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't compie shader file : " + ToString(srcFile)));
+                EGE_ASSERT_ERROR(SUCCEEDED(hr), ("Can't file shader file : " + ToString(srcFile)));
             }
         }
 

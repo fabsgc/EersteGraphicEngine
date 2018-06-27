@@ -5,6 +5,17 @@
 
 namespace ege
 {
+    enum class ShaderFunction
+    {
+        FORWARD,
+        DIFFUSE,
+        DEPTH,
+        SPECULAR,
+        NORMAL,
+        LIGHT,
+        EFFECT
+    };
+
     enum class ShaderType
     {
         VERTEX_SHADER,

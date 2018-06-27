@@ -1,5 +1,5 @@
 #include "../Include/Common.hlsli"
-#include "../Include/Texture.hlsli"
+#include "../../Common/Include/Texture.hlsli"
 
 struct VS_INPUT
 {
@@ -38,8 +38,6 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
     output.Binormal      = cross(output.Normal, output.Tangent);
 
     float3 worldPosition = mul(IN.Position, World).xyz;
-
-    //Compute Camera vector from model
     output.ViewWorldDirection = normalize(worldPosition - CameraPosition);
 
     return output;
