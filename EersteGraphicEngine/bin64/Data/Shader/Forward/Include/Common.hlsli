@@ -2,8 +2,6 @@
 #define SPOT_LIGHT 1
 #define DIRECTIONAL_LIGHT 2
 
-#define FLIP_TEXTURE_Y 1
-
 #define MAX_LIGHT 8
 
 struct LightDesc
@@ -11,10 +9,10 @@ struct LightDesc
     float4 LightColor;
     float3 LightDirection;
     float3 LightPosition;
-    float  LightRadius;
-    float  LightInnerAngle;
-    float  LightOuterAngle;
-    int    LightType;
+    float LightRadius;
+    float LightInnerAngle;
+    float LightOuterAngle;
+    int LightType;
 };
 
 struct LightInformation
@@ -54,21 +52,6 @@ cbuffer LightConstantBuffer : register(b2)
     LightDesc Lights[MAX_LIGHT];
 }
 
-Texture2D DiffuseTexture  : register(t0);
-Texture2D SpecularTexture : register(t1);
-Texture2D NormalTexture   : register(t2);
-
-SamplerState AnisotropicColorSampler : register(s0)
-{
-    Filter        = COMPARISON_ANISOTROPIC;
-    MaxAnisotropy = 8;
-    AddressU      = Wrap;
-    AddressV      = Wrap;
-    AddressW      = Wrap;
-    MinLOD        = 0;
-    MaxLOD        = FLOAT32_MAX;
-};
-
 struct ColorComponent
 {
     float3 Ambient;
@@ -83,11 +66,3 @@ struct PixelComponent
     float3 Normal;
 };
 
-float2 GetCorrectedTextureCoordinate(float2 textureCoordinate)
-{
-#if FLIP_TEXTURE_Y
-    return float2(textureCoordinate.x, 1.0 - textureCoordinate.y);
-#else
-    return textureCoordinate;
-#endif
-}

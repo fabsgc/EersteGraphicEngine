@@ -1,4 +1,5 @@
-#include "Include/Common.hlsli"
+#include "../Include/Common.hlsli"
+#include "../Include/Texture.hlsli"
 
 struct PS_INPUT
 {
@@ -11,6 +12,10 @@ struct PS_INPUT
     float3 Binormal           : BINORMAL;
     float3 ViewWorldDirection : COLOR1;
 };
+
+Texture2D DiffuseTexture : register(t0);
+Texture2D SpecularTexture : register(t1);
+Texture2D NormalTexture : register(t2);
 
 ColorComponent   ComputeAmbientLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN);
 ColorComponent   ComputeDirectionalLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN, int index);

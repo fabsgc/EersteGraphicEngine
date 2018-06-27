@@ -25,34 +25,45 @@ namespace ege
         {
             ShaderConfig config;
             config.Name = shaderProgramElement->Attribute("name");
+            config.Compiled = shaderProgramElement->Attribute("compiled");
             config.IncludeDirectory = shaderProgramElement->Attribute("include-path");
             
             for (tinyxml2::XMLElement* shaderElement = shaderProgramElement->FirstChildElement("shader"); shaderElement != nullptr; shaderElement = shaderElement->NextSiblingElement())
             {
-                String type = shaderElement->Attribute("type");
-                String file = shaderElement->Attribute("file");
+                String type   = shaderElement->Attribute("type");
+                String file   = shaderElement->Attribute("file");
+                String folder = "";
+
+                if (strcmp(config.Compiled.c_str(), "true") == 0)
+                {
+                    folder = EGE_COMPILED_SHADERS_FOLDER;
+                }
+                else
+                {
+                    folder = EGE_SHADERS_FOLDER;
+                }
 
                 if (file != "")
                 {
                     if (type == "vertex-shader")
                     {
-                        config.VertexShaderPath = EGE_SHADERS_FOLDER + file;
+                        config.VertexShaderPath = folder + file;
                     }
                     else if (type == "hull-shader")
                     {
-                        config.HullShaderPath = EGE_SHADERS_FOLDER + file;
+                        config.HullShaderPath = folder + file;
                     }
                     else if (type == "domain-shader")
                     {
-                        config.DomainShaderPath = EGE_SHADERS_FOLDER + file;
+                        config.DomainShaderPath = folder + file;
                     }
                     else if (type == "geometry-shader")
                     {
-                        config.GeometryShaderPath = EGE_SHADERS_FOLDER + file;
+                        config.GeometryShaderPath = folder + file;
                     }
                     else if (type == "pixel-shader")
                     {
-                        config.PixelShaderPath = EGE_SHADERS_FOLDER + file;
+                        config.PixelShaderPath = folder + file;
                     }
                 }
             }

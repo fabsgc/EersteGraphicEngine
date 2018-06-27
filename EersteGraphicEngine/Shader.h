@@ -18,6 +18,7 @@ namespace ege
     struct ShaderConfig
     {
         String Name;
+        String Compiled;
         String VertexShaderPath;
         String HullShaderPath;
         String DomainShaderPath;
@@ -27,7 +28,8 @@ namespace ege
         String IncludeDirectory;
 
         ShaderConfig()
-            : VertexShaderPath("")
+            : Compiled("false")
+            , VertexShaderPath("")
             , HullShaderPath("")
             , DomainShaderPath("")
             , GeometryShaderPath("")
@@ -37,17 +39,25 @@ namespace ege
         {}
     };
 
+    struct CompiledShader
+    {
+        size_t Size;
+        char*  Data;
+    };
+
     template <typename D3D11Shader>
     struct ShaderData
     {
-        ShaderType   Type;
+        ShaderType     Type;
+        D3D11Shader*   Shader;
+        WString        Path;
+        CompiledShader CompiledShader;
+
 #if defined(EGE_WIN_SDK_8) || defined(EGE_WIN_SDK_10)
-        ID3DBlob*    Blob;
+        ID3DBlob*      Blob;
 #elif defined(EGE_WIN_SDK_7)
-        ID3D10Blob*  Blob;
+        ID3D10Blob*    Blob;
 #endif
-        D3D11Shader* Shader;
-        WString      Path;
 
         ShaderData(ShaderType type)
             : Type(type)
@@ -71,6 +81,15 @@ namespace ege
         static Vector<D3D11_INPUT_ELEMENT_DESC> VertexElementDesc;
 
     protected:
+        HRESULT Open();
+        HRESULT OpenVertexShader();
+        HRESULT OpenHullShader();
+        HRESULT OpenDomainShader();
+        HRESULT OpenGeometryShader();
+        HRESULT OpenPixelShader();
+        HRESULT OpenComputeShader();
+        HRESULT OpenShader(_In_ LPCWSTR srcFile, CompiledShader& compiledShader);
+
         HRESULT Compile();
         HRESULT CompileVertexShader();
         HRESULT CompileHullShader();

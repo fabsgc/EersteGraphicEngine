@@ -398,3 +398,262 @@ Time: 21:41:43
 Error: This handler does not exist (GO_FORWARD)
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:223
+Inside ege::Shader::CompileShader
+Date: Jun 26 2018
+Time: 15:18:35
+Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:223
+Inside ege::Shader::CompileShader
+Date: Jun 26 2018
+Time: 15:18:35
+Error: Can't compie shader file : Data/Shader/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:219
+Inside ege::Shader::CompileShader
+Date: Jun 26 2018
+Time: 15:18:35
+Error: Can't compie shader file : Data/Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:344
+Inside ege::Shader::CompileShader
+Date: Jun 27 2018
+Time: 16:05:05
+Error: Can't compie shader file : Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:344
+Inside ege::Shader::CompileShader
+Date: Jun 27 2018
+Time: 16:05:05
+Error: Can't compie shader file : Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:344
+Inside ege::Shader::CompileShader
+Date: Jun 27 2018
+Time: 16:05:05
+Error: Can't compie shader file : Shader/Forward/Color/Color_VS.hlsl
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::Mouse>::Instance
+Date: Jun 27 2018
+Time: 15:33:36
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 

@@ -202,6 +202,9 @@ namespace ege
     class  RenderPipeline;
     class  ForwardRendering;
     class  DeferredRendering;
+    class  RenderTexture;
+
+    class  Effect;
 
     class  Color;
 }

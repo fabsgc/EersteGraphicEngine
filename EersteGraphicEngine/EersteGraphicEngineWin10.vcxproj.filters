@@ -181,9 +181,6 @@
     <Filter Include="Data\Shader">
       <UniqueIdentifier>{c1b756b1-abdd-4f37-af4e-0666e2a0be40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Color">
-      <UniqueIdentifier>{8602ca61-593a-4d17-8b53-2e75f7bc33ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\App\Model">
       <UniqueIdentifier>{f6277936-68ef-407d-b362-891f6da4397f}</UniqueIdentifier>
     </Filter>
@@ -201,12 +198,6 @@
     </Filter>
     <Filter Include="Source Files\Utility\Math">
       <UniqueIdentifier>{a21d5cf0-5cd8-4ecb-b3bf-c5f6be77fdc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Include">
-      <UniqueIdentifier>{a046630f-4b21-49f1-a63e-605fc74cef2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Color\Include">
-      <UniqueIdentifier>{7b0f8667-47f5-4514-b69d-0cd9070ed8ef}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core\Renderer\Light\Light">
       <UniqueIdentifier>{649fdc9e-1b02-4be9-ad32-b6b948b456d8}</UniqueIdentifier>
@@ -297,6 +288,27 @@
     </Filter>
     <Filter Include="Header Files\Core\Renderer\Camera\Handler">
       <UniqueIdentifier>{e8859122-40fe-467e-b635-b7f9dd91e198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward">
+      <UniqueIdentifier>{08f034a5-a8c5-4888-b6b7-0179c37c4ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Deferred">
+      <UniqueIdentifier>{226f1aeb-90ce-4459-8397-2336013cbd32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common">
+      <UniqueIdentifier>{6c2bb5d4-408d-499b-9a92-8bb5999275c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Color">
+      <UniqueIdentifier>{1b319976-c960-4f52-bc22-c93d9ca239f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Include">
+      <UniqueIdentifier>{dc802feb-f39d-4ca9-b52f-11f7cc44052e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Effect">
+      <UniqueIdentifier>{f9f20d3e-6cd1-4e68-9527-775ceae793a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Effect">
+      <UniqueIdentifier>{f9415cca-3d25-4e91-8fd4-d371d5069dda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -426,9 +438,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Core\RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>Source Files\Core\Renderer\Camera</Filter>
     </ClCompile>
@@ -548,6 +557,15 @@
     </ClCompile>
     <ClCompile Include="ThirdPersonCameraHandler.cpp">
       <Filter>Source Files\Core\Renderer\Camera\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Core\RenderAPI\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Core\Renderer\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -845,6 +863,12 @@
     <ClInclude Include="OrthographicCameraHandler.h">
       <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
     </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Core\Renderer\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -855,14 +879,6 @@
     <Image Include="..\directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_PS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
-    </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Color\Color_VS.hlsl">
-      <Filter>Data\Shader\Color</Filter>
-    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="bin64\Data\Config\Application.xml">
@@ -897,8 +913,19 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin64\Data\Shader\Color\Include\Common.hlsli">
-      <Filter>Data\Shader\Color\Include</Filter>
+    <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
     </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsl">
+      <Filter>Data\Shader\Forward\Include</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_PS.hlsl">
+      <Filter>Data\Shader\Forward\Color</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_VS.hlsl">
+      <Filter>Data\Shader\Forward\Color</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

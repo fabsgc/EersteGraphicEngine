@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shaders>
-    <shader-program name="default" include-path="Data/Shader/Color">
-        <shader type="vertex-shader" file="Color/Color_VS.hlsl"/>
-        <shader type="pixel-shader" file="Color/Color_PS.hlsl"/>
+    <shader-program name="default" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Forward/Color/Color_VS.cso"/>
+        <shader type="pixel-shader" file="Forward/Color/Color_PS.cso"/>
+    </shader-program>
+    <shader-program name="default-2" compiled="false" include-path="Data/Shader/Forward/Color">
+        <shader type="vertex-shader" file="Forward/Color/Color_VS.hlsl"/>
+        <shader type="pixel-shader" file="Forward/Color/Color_PS.hlsl"/>
     </shader-program>
 </shaders>

@@ -32,6 +32,13 @@ namespace ege
 
     Shader::~Shader()
     {
+        SafeRelease(_vertexShader.CompiledShader.Data);
+        SafeRelease(_hullShader.CompiledShader.Data);
+        SafeRelease(_domainShader.CompiledShader.Data);
+        SafeRelease(_geometryShader.CompiledShader.Data);
+        SafeRelease(_pixelShader.CompiledShader.Data);
+        SafeRelease(_computeShader.CompiledShader.Data);
+
         SafeReleaseCom(_vertexShader.Shader);
         SafeReleaseCom(_hullShader.Shader);
         SafeReleaseCom(_domainShader.Shader);
@@ -43,6 +50,8 @@ namespace ege
 
     void Shader::Initialise()
     {
+        HRESULT hr = S_OK;
+
         _vertexShader.Path   = ToWString(_config.VertexShaderPath);
         _hullShader.Path     = ToWString(_config.HullShaderPath);
         _domainShader.Path   = ToWString(_config.DomainShaderPath);
@@ -55,8 +64,16 @@ namespace ege
             EGE_ASSERT_ERROR(false, "Shader object must have at least one vertex shader and one pixel shader");
         }
 
-        HRESULT hr = Compile();
-        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't compile shader");
+        if (_config.Compiled == "false")
+        {
+            hr = Compile();
+        }
+        else
+        {
+            hr = Open();
+        }
+        
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't compile shader(s)");
     }
 
     void Shader::Apply()
@@ -101,6 +118,117 @@ namespace ege
         }
 
         return false;
+    }
+
+    HRESULT Shader::Open()
+    {
+        HRESULT hr = S_OK;
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
+        ID3D11Device* device = gRenderAPI().GetDevice()->GetD3D11Device();
+
+        if (HasShader(ShaderType::VERTEX_SHADER))
+        {
+            hr = OpenVertexShader();
+            hr = device->CreateVertexShader(_vertexShader.CompiledShader.Data, _vertexShader.CompiledShader.Size, nullptr, &_vertexShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        if (HasShader(ShaderType::HULL_SHADER))
+        {
+            hr = OpenHullShader();
+            hr = device->CreateHullShader(_hullShader.CompiledShader.Data, _hullShader.CompiledShader.Size, nullptr, &_hullShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        if (HasShader(ShaderType::DOMAIN_SHADER))
+        {
+            hr = OpenDomainShader();
+            hr = device->CreateDomainShader(_domainShader.CompiledShader.Data, _domainShader.CompiledShader.Size, nullptr, &_domainShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        if (HasShader(ShaderType::GEOMETRY_SHADER))
+        {
+            hr = OpenGeometryShader();
+            hr = device->CreateGeometryShader(_geometryShader.CompiledShader.Data, _geometryShader.CompiledShader.Size, nullptr, &_geometryShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        if (HasShader(ShaderType::PIXEL_SHADER))
+        {
+            hr = OpenPixelShader();
+            hr = device->CreatePixelShader(_pixelShader.CompiledShader.Data, _pixelShader.CompiledShader.Size, nullptr, &_pixelShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        if (HasShader(ShaderType::COMPUTE_SHADER))
+        {
+            hr = OpenComputeShader();
+            hr = device->CreateComputeShader(_computeShader.CompiledShader.Data, _computeShader.CompiledShader.Size, nullptr, &_computeShader.Shader);
+            if (FAILED(hr)) return hr;
+        }
+
+        hr = device->CreateInputLayout(
+            _inputElementsDesc,
+            _numberElementsDesc,
+            _vertexShader.CompiledShader.Data,
+            _vertexShader.CompiledShader.Size,
+            &_inputLayout);
+
+        return hr;
+    }
+
+    HRESULT Shader::OpenVertexShader()
+    {
+        return OpenShader(_vertexShader.Path.c_str(), _vertexShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenHullShader()
+    {
+        return OpenShader(_hullShader.Path.c_str(), _hullShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenDomainShader()
+    {
+        return OpenShader(_domainShader.Path.c_str(), _domainShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenGeometryShader()
+    {
+        return OpenShader(_geometryShader.Path.c_str(), _geometryShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenPixelShader()
+    {
+        return OpenShader(_pixelShader.Path.c_str(), _pixelShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenComputeShader()
+    {
+        return OpenShader(_computeShader.Path.c_str(), _computeShader.CompiledShader);
+    }
+
+    HRESULT Shader::OpenShader(_In_ LPCWSTR srcFile, CompiledShader& compiledShader)
+    {
+        std::ifstream shaderStream;
+
+        shaderStream.open(srcFile, std::ifstream::in | std::ifstream::binary);
+        if (shaderStream.good())
+        {
+            shaderStream.seekg(0, std::ios::end);
+            compiledShader.Size = size_t(shaderStream.tellg());
+            compiledShader.Data = new char[compiledShader.Size];
+            shaderStream.seekg(0, std::ios::beg);
+            shaderStream.read(&compiledShader.Data[0], compiledShader.Size);
+            shaderStream.close();
+        }
+        else
+        {
+            EGE_ASSERT_ERROR(false, ("Can't open compile shader"));
+            return E_FAIL;
+        }
+
+        return S_OK;
     }
 
     HRESULT Shader::Compile()
