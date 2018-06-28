@@ -84,9 +84,9 @@ namespace ege
         gRenderAPI().Draw();
         gRenderer().Draw();
 
-        if (_scene != nullptr)
+        if (_renderPipeline != nullptr)
         {
-            _scene->Draw();
+            _renderPipeline->Draw();
         }
 
         gRenderAPI().SwapBuffers();

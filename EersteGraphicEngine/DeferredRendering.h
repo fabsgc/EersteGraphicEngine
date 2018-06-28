@@ -18,13 +18,6 @@ namespace ege
         virtual void Update() override;
         virtual void OnResize() override;
 
-    protected:
-        SPtr<RenderTexture> _diffuseTexture;
-        SPtr<RenderTexture> _depthTexture;
-        SPtr<RenderTexture> _SpecularTexture;
-        SPtr<RenderTexture> _normalTexture;
-        SPtr<RenderTexture> _lightTexture;
-        SPtr<RenderTexture> _renderTexture;
-        
+    protected:        
     };
 }

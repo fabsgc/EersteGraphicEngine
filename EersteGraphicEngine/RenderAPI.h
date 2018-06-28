@@ -60,52 +60,6 @@ namespace ege
         {}
     };
 
-    struct FrameConstantBuffer: public ConstantBuffer
-    {
-        XMMATRIX View;
-        XMMATRIX Projection;
-        
-        XMFLOAT3 CameraPosition;
-        /* PADDING */ float    Padding1;
-
-        FrameConstantBuffer()
-        {}
-    };
-
-    struct ObjectConstantBuffer: public ConstantBuffer
-    {
-        XMMATRIX World;
-
-        XMFLOAT4 SpecularColor;
-        float    SpecularPower;
-        float    EmitPower;
-        BOOL     HasDiffuseTexture;
-        BOOL     HasSpecularTexture;
-        BOOL     HasNormalTexture;
-        /* PADDING */ float    Padding1[3];
-
-        ObjectConstantBuffer()
-            : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
-            , SpecularPower(8.0f)
-            , EmitPower(0.0f)
-            , HasDiffuseTexture(true)
-            , HasSpecularTexture(true)
-            , HasNormalTexture(true)
-        {}
-    };
-
-    struct LightConstantBuffer : public ConstantBuffer
-    {
-        XMFLOAT4  AmbientColor;
-        UINT      LightIndex;
-        /* PADDING */ float    Padding1[3];
-        LightDesc Lights[8];
-
-        LightConstantBuffer()
-            : AmbientColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 0.2f))
-        {}
-    };
-
     class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable
     {
     public:
@@ -120,6 +74,8 @@ namespace ege
 
         void Draw() override;
         void SwapBuffers();
+        void ClearRenderTargetView();
+        void ClearDepthStencilView();
 
         void Initialise();
         void Resize();
@@ -128,6 +84,8 @@ namespace ege
         ID3D11Buffer*   GetConstantBuffer(ConstantBufferType type);
         ConstantBuffer* GetConstantBufferUpdate(ConstantBufferType type);
         RenderDesc&     GetRenderDesc();
+        ID3D11RenderTargetView* GetRenderTargetView();
+        ID3D11DepthStencilView* GetDepthStencilView();
 
     protected:
         RenderAPI(RenderAPI const&) = delete;

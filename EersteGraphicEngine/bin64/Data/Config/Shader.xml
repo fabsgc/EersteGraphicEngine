@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shaders>
-    <shader-program name="default" function="forward" compiled="true" include-path="">
+    <shader-program name="forward-default" vertex="full" compiled="true" include-path="">
         <shader type="vertex-shader" file="Forward/Default/Default_VS.cso"/>
         <shader type="pixel-shader" file="Forward/Default/Default_PS.cso"/>
     </shader-program>
+
+    <shader-program name="forward-data" vertex="full" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Forward/Data/Data_VS.cso"/>
+        <shader type="pixel-shader" file="Forward/Data/Data_PS.cso"/>
+    </shader-program>
+
+    <shader-program name="quad" vertex="short" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Common/Quad/Quad_VS.cso"/>
+        <shader type="pixel-shader" file="Common/Quad/Quad_PS.cso"/>
+    </shader-program>
+
+    <!--<shader-program name="deferred-default" function="forward" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Deferred/Default/Default_VS.cso"/>
+        <shader type="pixel-shader" file="Deferred/Default/Default_PS.cso"/>
+    </shader-program>-->
+
+    <!--<shader-program name="deferred-data" function="forward" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Deferred/Data/Data_VS.cso"/>
+        <shader type="pixel-shader" file="Deferred/Data/Data_PS.cso"/>
+    </shader-program>-->
+  
     <!--<shader-program name="diffuse-default" function="diffuse" compiled="true" include-path="">
         <shader type="vertex-shader" file="Common/Diffuse_VS.cso"/>
         <shader type="pixel-shader" file="Common/Diffuse_PS.cso"/>
@@ -25,7 +46,7 @@
         <shader type="pixel-shader" file="Deferred/Light/Light_PS.cso"/>
     </shader-program>-->
   
-    <shader-program name="default-2" function="forward" compiled="false" include-path="Data/Shader/Forward/Color">
+    <shader-program name="default-2" function="forward" compiled="false" include-path="Data/Shader/Forward/Default">
         <shader type="vertex-shader" file="Forward/Default/Default_VS.hlsl"/>
         <shader type="pixel-shader" file="Forward/Default/Default_PS.hlsl"/>
     </shader-program>

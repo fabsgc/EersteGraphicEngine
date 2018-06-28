@@ -17,8 +17,10 @@ namespace ege
 
     void CityMaterial::Initialise()
     {
-        _shader = gShaderManager().GetPtr("default");
+        _shader = gShaderManager().GetPtr("forward-default");
 
+        _hasSpecular = true;
+        _hasEmit = false;
         _hasDiffuseTexture = true;
         _hasSpecularTexture = true;
         _hasNormalTexture = false;

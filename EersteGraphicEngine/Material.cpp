@@ -12,6 +12,8 @@ namespace ege
         , _specularColor(DefaultSpecularColor)
         , _specularPower(DefaultSpecularPower)
         , _emitPower(DefaultEmitPower)
+        , _hasSpecular(false)
+        , _hasEmit(false)
         , _hasDiffuseTexture(false)
         , _hasSpecularTexture(false)
         , _hasNormalTexture(false)
@@ -46,12 +48,14 @@ namespace ege
         ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);
 
-        constantBufferUpdate->SpecularColor = _specularColor;
-        constantBufferUpdate->SpecularPower = _specularPower;
-        constantBufferUpdate->EmitPower     = _emitPower;
-        constantBufferUpdate->HasDiffuseTexture = _hasDiffuseTexture;
+        constantBufferUpdate->SpecularColor      = _specularColor;
+        constantBufferUpdate->SpecularPower      = _specularPower;
+        constantBufferUpdate->EmitPower          = _emitPower;
+        constantBufferUpdate->HasSpecular        = _hasSpecular;
+        constantBufferUpdate->HasEmit            = _hasEmit;
+        constantBufferUpdate->HasDiffuseTexture  = _hasDiffuseTexture;
         constantBufferUpdate->HasSpecularTexture = _hasSpecularTexture;
-        constantBufferUpdate->HasNormalTexture = _hasNormalTexture;
+        constantBufferUpdate->HasNormalTexture   = _hasNormalTexture;
     }
 
     const XMFLOAT4& Material::GetSpecularColor() const

@@ -1,6 +1,6 @@
 #include "../Include/Common.hlsli"
 #include "../Include/Light.hlsli"
-#include "../../Common/Include/Texture.hlsli"
+#include "../Include/Texture.hlsli"
 
 struct PS_INPUT
 {
@@ -14,9 +14,9 @@ struct PS_INPUT
     float3 ViewWorldDirection : COLOR1;
 };
 
-Texture2D DiffuseTexture : register(t0);
+Texture2D DiffuseTexture  : register(t0);
 Texture2D SpecularTexture : register(t1);
-Texture2D NormalTexture : register(t2);
+Texture2D NormalTexture   : register(t2);
 
 ColorComponent   ComputeAmbientLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN);
 ColorComponent   ComputeDirectionalLight(PixelComponent pixelComponent, ColorComponent colorComponent, PS_INPUT IN, int index);
@@ -159,10 +159,17 @@ ColorComponent ComputeEmitter(ColorComponent colorComponent)
 
 ColorComponent ComputeSpecular(ColorComponent colorComponent, PS_INPUT IN)
 {
-    if (HasSpecularTexture == true)
+    if (HasSpecular == true)
     {
-        colorComponent.Specular.xyz *= SpecularTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz;
+        if (HasSpecularTexture == true)
+        {
+            colorComponent.Specular.xyz *= SpecularTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz;
+        }
     }
+    else
+    {
+        colorComponent.Specular = (float3) 0;
+    }   
 
     return colorComponent;
 }

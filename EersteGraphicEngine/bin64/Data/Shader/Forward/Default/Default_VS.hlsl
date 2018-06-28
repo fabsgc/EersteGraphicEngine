@@ -1,5 +1,5 @@
 #include "../Include/Common.hlsli"
-#include "../../Common/Include/Texture.hlsli"
+#include "../Include/Texture.hlsli"
 
 struct VS_INPUT
 {

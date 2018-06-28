@@ -289,26 +289,32 @@
     <Filter Include="Header Files\Core\Renderer\Camera\Handler">
       <UniqueIdentifier>{e8859122-40fe-467e-b635-b7f9dd91e198}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Forward">
-      <UniqueIdentifier>{08f034a5-a8c5-4888-b6b7-0179c37c4ea1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Deferred">
-      <UniqueIdentifier>{226f1aeb-90ce-4459-8397-2336013cbd32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Common">
-      <UniqueIdentifier>{6c2bb5d4-408d-499b-9a92-8bb5999275c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Forward\Color">
-      <UniqueIdentifier>{1b319976-c960-4f52-bc22-c93d9ca239f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Forward\Include">
-      <UniqueIdentifier>{dc802feb-f39d-4ca9-b52f-11f7cc44052e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Renderer\Effect">
       <UniqueIdentifier>{f9f20d3e-6cd1-4e68-9527-775ceae793a8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Core\Renderer\Effect">
       <UniqueIdentifier>{f9415cca-3d25-4e91-8fd4-d371d5069dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Buffer">
+      <UniqueIdentifier>{41e79f30-7ce4-474b-bcc3-d2fe813e7b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward">
+      <UniqueIdentifier>{e0c0f9eb-92a4-43a7-a938-b4b693203a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Data">
+      <UniqueIdentifier>{8e329610-afc2-4cf7-99a7-df8da1b9ac2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Default">
+      <UniqueIdentifier>{f00ac82c-94b9-416b-a3f1-4df1dc46a4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Include">
+      <UniqueIdentifier>{ae8f6719-c7fb-4114-b724-f1b7bf7bd524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common">
+      <UniqueIdentifier>{47fa70fc-b1f2-4e27-80bb-ec37864c5873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common\Quad">
+      <UniqueIdentifier>{2f97141c-11b2-4514-866d-834bbe76a8fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -567,6 +573,9 @@
     <ClCompile Include="Effect.cpp">
       <Filter>Source Files\Core\Renderer\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Source Files\App\Model\Primitive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -755,9 +764,6 @@
     <ClInclude Include="DefaultMaterial.h">
       <Filter>Header Files\App\Material</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Header Files\Core\RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="SpotLight.h">
       <Filter>Header Files\Core\Renderer\Light</Filter>
     </ClInclude>
@@ -781,9 +787,6 @@
     </ClInclude>
     <ClInclude Include="DeferredRendering.h">
       <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
     </ClInclude>
     <ClInclude Include="ShaderInclude.h">
       <Filter>Header Files\Core\RenderAPI\Shader</Filter>
@@ -869,6 +872,18 @@
     <ClInclude Include="Effect.h">
       <Filter>Header Files\Core\Renderer\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Header Files\Core\RenderAPI\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderObject.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -913,17 +928,34 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin64\Data\Shader\Forward\Include\Light.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
+    </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
+    </None>
     <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">
       <Filter>Data\Shader\Forward\Include</Filter>
     </None>
-    <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_PS.hlsl">
-      <Filter>Data\Shader\Forward\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_PS.hlsl">
+      <Filter>Data\Shader\Forward\Data</Filter>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_VS.hlsl">
-      <Filter>Data\Shader\Forward\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_VS.hlsl">
+      <Filter>Data\Shader\Forward\Data</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_PS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_VS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_VS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_PS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

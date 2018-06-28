@@ -88,9 +88,6 @@ namespace ege
         void Apply();
         bool HasShader(ShaderType type);
 
-    public:
-        static Vector<D3D11_INPUT_ELEMENT_DESC> VertexElementDesc;
-
     protected:
         HRESULT Open();
         HRESULT OpenVertexShader();

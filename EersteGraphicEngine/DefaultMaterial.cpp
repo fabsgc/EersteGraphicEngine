@@ -14,7 +14,7 @@ namespace ege
 
     void DefaultMaterial::Initialise()
     {
-        _shader = gShaderManager().GetPtr("default");
+        _shader = gShaderManager().GetPtr("forward-default");
     }
 
     void DefaultMaterial::Update()

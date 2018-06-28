@@ -15,6 +15,8 @@ cbuffer ObjectConstantBuffer : register(b1)
 
     float  EmitPower;
 
+    bool   HasSpecular;
+    bool   HasEmit;
     bool   HasDiffuseTexture;
     bool   HasSpecularTexture;
     bool   HasNormalTexture;

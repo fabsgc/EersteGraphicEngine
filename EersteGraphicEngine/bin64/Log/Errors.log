@@ -699,3 +699,24 @@ Time: 23:29:48
 Error: Can't compie shader file : Data/Shader/Forward/Color/Color_VS.hlsl
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:227
+Inside ege::Shader::OpenShader
+Date: Jun 28 2018
+Time: 10:44:06
+Error: Can't open compile shader
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:227
+Inside ege::Shader::OpenShader
+Date: Jun 28 2018
+Time: 10:44:06
+Error: Can't open compile shader
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\shader.cpp:227
+Inside ege::Shader::OpenShader
+Date: Jun 28 2018
+Time: 10:46:29
+Error: Can't open compiled shader
+Condition: 0
+############################################: 

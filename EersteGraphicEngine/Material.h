@@ -43,6 +43,8 @@ namespace ege
 
         float                    _emitPower;
 
+        bool                     _hasSpecular;
+        bool                     _hasEmit;
         bool                     _hasDiffuseTexture;
         bool                     _hasSpecularTexture;
         bool                     _hasNormalTexture;

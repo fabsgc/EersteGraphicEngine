@@ -83,9 +83,19 @@ namespace ege
 
     void RenderAPI::Draw()
     {
-        ID3D11DeviceContext* context = _device->GetImmediateContext();
+        ClearRenderTargetView();
+        ClearDepthStencilView();
+    }
 
+    void RenderAPI::ClearRenderTargetView()
+    {
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
         context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+    }
+
+    void RenderAPI::ClearDepthStencilView()
+    {
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
         context->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     }
 
@@ -385,7 +395,7 @@ namespace ege
             }
             else if (type == "pipeline")
             {
-                _renderDesc.Pipeline = (value == "foward") ? RenderPipelineType::FORWARD : RenderPipelineType::DEFERRED;
+                _renderDesc.Pipeline = (value == "forward") ? RenderPipelineType::FORWARD : RenderPipelineType::DEFERRED;
             }
         }
 #endif
@@ -396,7 +406,7 @@ namespace ege
         return _device;
     }
 
-    ID3D11Buffer*   RenderAPI::GetConstantBuffer(ConstantBufferType type)
+    ID3D11Buffer* RenderAPI::GetConstantBuffer(ConstantBufferType type)
     {
         switch (type)
         {
@@ -439,6 +449,16 @@ namespace ege
     RenderDesc& RenderAPI::GetRenderDesc()
     {
         return _renderDesc;
+    }
+
+    ID3D11RenderTargetView* RenderAPI::GetRenderTargetView()
+    {
+        return _renderTargetView;
+    }
+
+    ID3D11DepthStencilView* RenderAPI::GetDepthStencilView()
+    {
+        return _depthStencilView;
     }
 
     RenderAPI& gRenderAPI()
