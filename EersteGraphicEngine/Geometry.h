@@ -19,6 +19,10 @@ namespace ege
         void Update() override;
         void Draw() override;
         void SetColor(const Color color);
+        
+        ID3D11Buffer* GetVertexBuffer();
+        ID3D11Buffer* GetIndexBuffer();
+        Vector<WORD>& GetIndices();
 
     protected:
         RenderAPI&         _renderAPI;

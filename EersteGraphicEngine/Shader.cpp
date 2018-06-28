@@ -79,6 +79,16 @@ namespace ege
         if (HasShader(ShaderType::GEOMETRY_SHADER)) context->GSSetShader(_geometryShader.Shader, nullptr, 0);
         if (HasShader(ShaderType::PIXEL_SHADER)) context->PSSetShader(_pixelShader.Shader, nullptr, 0);
         if (HasShader(ShaderType::COMPUTE_SHADER)) context->CSSetShader(_computeShader.Shader, nullptr, 0);
+
+        for (auto it = _constantBufferElements.begin(); it != _constantBufferElements.end(); it++)
+        {
+            if (HasShader(ShaderType::VERTEX_SHADER)) context->VSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+            if (HasShader(ShaderType::HULL_SHADER)) context->HSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+            if (HasShader(ShaderType::DOMAIN_SHADER)) context->DSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+            if (HasShader(ShaderType::GEOMETRY_SHADER)) context->GSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+            if (HasShader(ShaderType::PIXEL_SHADER)) context->PSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+            if (HasShader(ShaderType::COMPUTE_SHADER)) context->CSSetConstantBuffers(it->first, 1, &(*it).second->Buffer);
+        }
     }
 
     bool Shader::HasShader(ShaderType type)
@@ -344,5 +354,10 @@ namespace ege
         }
 
         return hr;
+    }
+
+    void Shader::InsertConstantBuffer(UINT slot, ConstantBufferElement* constantBuffer)
+    {
+        _constantBufferElements.insert(Pair<UINT, ConstantBufferElement*>(slot, constantBuffer));
     }
 }

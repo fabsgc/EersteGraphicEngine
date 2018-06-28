@@ -59,8 +59,8 @@ namespace ege
     {
         Node::Draw();
 
-        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 
         XMMATRIX view = XMLoadFloat4x4(&_view);

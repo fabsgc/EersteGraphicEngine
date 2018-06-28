@@ -4,6 +4,29 @@
 
 namespace ege
 {
+    struct LightDesc
+    {
+        XMFLOAT4 LightColor;
+        XMFLOAT3 LightDirection;
+        /* PADDING */ float    Padding1;
+        XMFLOAT3 LightPosition;
+        float    LightRadius;
+        float    LightInnerAngle;
+        float    LightOuterAngle;
+        UINT     LightType;
+        /* PADDING */ float    Padding2;
+
+        LightDesc()
+            : LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
+            , LightDirection(XMFLOAT3(1.0f, 1.0f, 1.0f))
+            , LightPosition(XMFLOAT3(1.0f, 1.0f, 1.0f))
+            , LightRadius(5.0f)
+            , LightInnerAngle(0.5f)
+            , LightOuterAngle(0.1f)
+            , LightType(0)
+        {}
+    };
+
     struct ConstantBuffer
     {
     };
@@ -58,14 +81,21 @@ namespace ege
         {}
     };
 
+    struct QuadConstantBuffer : public ConstantBuffer
+    {
+        XMMATRIX View;
+        XMMATRIX Projection;
+        XMMATRIX World;
+    };
+
     struct ConstantBufferElement
     {
-        ID3D11Buffer*   _constantBuffer;
-        ConstantBuffer* _updateConstantBuffer;
+        ID3D11Buffer*   Buffer;
+        SPtr<ConstantBuffer> UpdateBuffer;
 
         ConstantBufferElement()
-            : _constantBuffer(nullptr)
-            , _updateConstantBuffer(nullptr)
+            : Buffer(nullptr)
+            , UpdateBuffer(nullptr)
         {}
     };
 }

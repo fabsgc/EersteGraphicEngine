@@ -61,15 +61,15 @@ namespace ege
     void Geometry::Draw()
     {
         ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
-        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::OBJECT);
+        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         UINT stride = sizeof(VertexDesc);
         UINT offset = 0;
         context->IASetVertexBuffers(0, 1, &_vertexBuffer, &stride, &offset);
         context->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
-        context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
+        context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
         context->DrawIndexed((UINT)_indices.size(), 0, 0);
     }
 
@@ -81,5 +81,20 @@ namespace ege
         {
             (*it).Color = c;
         }
+    }
+
+    ID3D11Buffer* Geometry::GetVertexBuffer()
+    {
+        return _vertexBuffer;
+    }
+
+    ID3D11Buffer* Geometry::GetIndexBuffer()
+    {
+        return _indexBuffer;
+    }
+
+    Vector<WORD>& Geometry::GetIndices()
+    {
+        return _indices;
     }
 }

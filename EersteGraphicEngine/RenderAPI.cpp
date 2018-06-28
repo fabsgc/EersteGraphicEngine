@@ -21,10 +21,6 @@ namespace ege
 
         _colorSampler         = nullptr;
         _backFaceCulling      = nullptr;
-
-        _frameConstantBuffer  = nullptr;
-        _objectConstantBuffer = nullptr;
-        _lightConstantBuffer  = nullptr;
     }
 
     RenderAPI::~RenderAPI()
@@ -60,10 +56,6 @@ namespace ege
 
         SafeReleaseCom(_colorSampler);
         SafeReleaseCom(_backFaceCulling);
-
-        SafeReleaseCom(_frameConstantBuffer);
-        SafeReleaseCom(_objectConstantBuffer);
-        SafeReleaseCom(_lightConstantBuffer);
 
         SafeReleaseCom(_dxgiDevice);
         SafeReleaseCom(_dxgiAdapter);
@@ -119,6 +111,17 @@ namespace ege
                 EGE_ASSERT_ERROR(false, "Error Presenting surfaces");
             }   
         }
+    }
+
+    void RenderAPI::TurnZBufferOn()
+    {
+        _device->GetImmediateContext()->OMSetDepthStencilState(_depthStencilState, 1);
+    }
+
+
+    void RenderAPI::TurnZBufferOff()
+    {
+        _device->GetImmediateContext()->OMSetDepthStencilState(_depthDisabledStencilState, 1);
     }
 
     void RenderAPI::Initialise()
@@ -221,8 +224,7 @@ namespace ege
 
         device->CreateTexture2D(&depthStencilDesc, nullptr, &_depthStencilBuffer);
         device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);
-
-        context->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);
+        context->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);        
 
         // Setup the viewport
         _screenViewport.Width = (FLOAT)window.GetWindowWidth();
@@ -244,38 +246,28 @@ namespace ege
         bdFrame.CPUAccessFlags = 0;
 
         bdFrame.ByteWidth = sizeof(FrameConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer.Buffer);
+        _frameConstantBuffer.UpdateBuffer = ege_shared_ptr_new<FrameConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create frame constant buffer");
 
         bdFrame.ByteWidth = sizeof(ObjectConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer.Buffer);
+        _objectConstantBuffer.UpdateBuffer = ege_shared_ptr_new<ObjectConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create object constant buffer");
 
         bdFrame.ByteWidth = sizeof(LightConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer.Buffer);
+        _lightConstantBuffer.UpdateBuffer = ege_shared_ptr_new<LightConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create light constant buffer");
 
-        //Set constant buffers for each type of shader
-        context->VSSetConstantBuffers(0, 1, &_frameConstantBuffer);
-        context->HSSetConstantBuffers(0, 1, &_frameConstantBuffer);
-        context->DSSetConstantBuffers(0, 1, &_frameConstantBuffer);
-        context->GSSetConstantBuffers(0, 1, &_frameConstantBuffer);
-        context->PSSetConstantBuffers(0, 1, &_frameConstantBuffer);
+        bdFrame.ByteWidth = sizeof(QuadConstantBuffer);
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_quadConstantBuffer.Buffer);
+        _quadConstantBuffer.UpdateBuffer = ege_shared_ptr_new<QuadConstantBuffer>();
 
-        context->VSSetConstantBuffers(1, 1, &_objectConstantBuffer);
-        context->HSSetConstantBuffers(1, 1, &_objectConstantBuffer);
-        context->DSSetConstantBuffers(1, 1, &_objectConstantBuffer);
-        context->GSSetConstantBuffers(1, 1, &_objectConstantBuffer);
-        context->PSSetConstantBuffers(1, 1, &_objectConstantBuffer);
-
-        context->VSSetConstantBuffers(2, 1, &_lightConstantBuffer);
-        context->HSSetConstantBuffers(2, 1, &_lightConstantBuffer);
-        context->DSSetConstantBuffers(2, 1, &_lightConstantBuffer);
-        context->GSSetConstantBuffers(2, 1, &_lightConstantBuffer);
-        context->PSSetConstantBuffers(2, 1, &_lightConstantBuffer);
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create quad constant buffer");
         
         //Create Anisotropic Color Sampler
         D3D11_SAMPLER_DESC sampDesc;
@@ -307,6 +299,49 @@ namespace ege
 
             context->RSSetState(_backFaceCulling);
         }
+
+
+        //Create a depth stencil state with depth enabled
+        D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc;
+
+        ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
+
+        depthStencilStateDesc.DepthEnable = true;
+        depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+        depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
+        depthStencilStateDesc.StencilEnable = true;
+        depthStencilStateDesc.StencilReadMask = 0xFF;
+        depthStencilStateDesc.StencilWriteMask = 0xFF;
+        depthStencilStateDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+        depthStencilStateDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+        depthStencilStateDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+        depthStencilStateDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+        device->CreateDepthStencilState(&depthStencilStateDesc, &_depthStencilState);
+
+        //Create a depth stencil state with depth enabled
+        ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
+
+        depthStencilStateDesc.DepthEnable = false;
+        depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+        depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
+        depthStencilStateDesc.StencilEnable = true;
+        depthStencilStateDesc.StencilReadMask = 0xFF;
+        depthStencilStateDesc.StencilWriteMask = 0xFF;
+        depthStencilStateDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+        depthStencilStateDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+        depthStencilStateDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+        depthStencilStateDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+        device->CreateDepthStencilState(&depthStencilStateDesc, &_depthDisabledStencilState);
     }
 
     void RenderAPI::Resize()
@@ -406,44 +441,24 @@ namespace ege
         return _device;
     }
 
-    ID3D11Buffer* RenderAPI::GetConstantBuffer(ConstantBufferType type)
+    ConstantBufferElement* RenderAPI::GetConstantBuffer(ConstantBufferType type)
     {
         switch (type)
         {
         case ConstantBufferType::FRAME:
-            return _frameConstantBuffer;
+            return &_frameConstantBuffer;
             break;
 
         case ConstantBufferType::OBJECT:
-            return _objectConstantBuffer;
+            return &_objectConstantBuffer;
             break;
 
         case ConstantBufferType::LIGHT:
-            return _lightConstantBuffer;
+            return &_lightConstantBuffer;
             break;
         }
 
-        return _frameConstantBuffer;
-    }
-
-    ConstantBuffer* RenderAPI::GetConstantBufferUpdate(ConstantBufferType type)
-    {
-        switch (type)
-        {
-        case ConstantBufferType::FRAME:
-            return &_frameConstantBufferUpdate;
-            break;
-
-        case ConstantBufferType::OBJECT:
-            return &_objectConstantBufferUpdate;
-            break;
-
-        case ConstantBufferType::LIGHT:
-            return &_lightConstantBufferUpdate;
-            break;
-        }
-
-        return &_frameConstantBufferUpdate;
+        return &_frameConstantBuffer;
     }
 
     RenderDesc& RenderAPI::GetRenderDesc()

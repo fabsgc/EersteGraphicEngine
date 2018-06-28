@@ -720,3 +720,18 @@ Time: 10:46:29
 Error: Can't open compiled shader
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\modelmanager.cpp:55 inside ege::ModelManager::Get
+Date: Jun 28 2018
+Time: 15:44:16
+Condition: 0############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\modelloader.cpp:15
+Inside ege::ModelLoader::Load
+Date: Jun 28 2018
+Time: 14:01:22
+Error: Can't load scene : Data/Model/Primitive/Quad.obj
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\modelmanager.cpp:55 inside ege::ModelManager::Get
+Date: Jun 28 2018
+Time: 15:44:16
+Condition: 0############################################: 

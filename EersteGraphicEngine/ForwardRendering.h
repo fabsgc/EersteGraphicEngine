@@ -7,6 +7,8 @@
 #include "Shader.h"
 #include "Scene.h"
 
+#include "Geometry.h"
+
 #define FORWARD_DATA_RENDER_TARGET 3
 
 namespace ege
@@ -47,5 +49,11 @@ namespace ege
         SPtr<Shader>            _quadShader;
 
         ID3D11RenderTargetView* _dataTargets[FORWARD_DATA_RENDER_TARGET];
+
+        Geometry                _quad;
+
+        XMMATRIX _world;
+        XMMATRIX _view;
+        XMMATRIX _projection;
     };
 }

@@ -44,9 +44,17 @@ namespace ege
     void ModelManager::Get(String name, Model& model)
     {
         auto found = _resources.find(name);
-        assert(found != _resources.end());
+        EGE_ASSERT_ERROR_SHORT(found != _resources.end());
 
         model.Build(found->second);
+    }
+
+    void ModelManager::Get(String name, Geometry& geometry)
+    {
+        auto found = _resources.find(name);
+        EGE_ASSERT_ERROR_SHORT(found != _resources.end());
+
+        geometry.Build(found->second);
     }
 
     ModelManager& gModelManager()

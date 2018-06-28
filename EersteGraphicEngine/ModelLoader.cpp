@@ -12,7 +12,7 @@ namespace ege
             aiProcess_JoinIdenticalVertices |
             aiProcess_SortByPType);
 
-        EGE_ASSERT_ERROR((scene != nullptr), "Can't load scene : " + filePath);
+        EGE_ASSERT_ERROR((scene != nullptr), "Can't load file : " + filePath);
 
         if (scene->HasMaterials())
         {

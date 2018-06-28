@@ -98,17 +98,17 @@ namespace ege
             _camera->Draw();
 
             ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-            ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
-            FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::FRAME);
-            context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);
+            ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+            FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
+            context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
         }
     }
 
     void Scene::DrawLights()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11Buffer* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
-        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)gRenderAPI().GetConstantBufferUpdate(ConstantBufferType::LIGHT);
+        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         constantBufferUpdate->LightIndex = 0;
 
@@ -125,7 +125,7 @@ namespace ege
             }
         }
 
-        context->UpdateSubresource(constantBuffer, 0, nullptr, constantBufferUpdate, 0, 0);        
+        context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);        
     }
 
     void Scene::DrawNodes()

@@ -87,6 +87,7 @@ namespace ege
         void Initialise();
         void Apply();
         bool HasShader(ShaderType type);
+        void InsertConstantBuffer(UINT slot, ConstantBufferElement* constantBuffer);
 
     protected:
         HRESULT Open();
@@ -108,18 +109,20 @@ namespace ege
         HRESULT CompileShader(_In_ LPCWSTR srcFile, _In_ LPCSTR entryPoint, _In_ LPCSTR profile, _Outptr_ ID3DBlob** blob);
 
     protected:
-        ShaderConfig                     _config;
+        ShaderConfig                      _config;
 
-        ShaderData<ID3D11VertexShader>   _vertexShader;
-        ShaderData<ID3D11HullShader>     _hullShader;
-        ShaderData<ID3D11DomainShader>   _domainShader;
-        ShaderData<ID3D11GeometryShader> _geometryShader;
-        ShaderData<ID3D11PixelShader>    _pixelShader;
-        ShaderData<ID3D11ComputeShader>  _computeShader;
+        ShaderData<ID3D11VertexShader>    _vertexShader;
+        ShaderData<ID3D11HullShader>      _hullShader;
+        ShaderData<ID3D11DomainShader>    _domainShader;
+        ShaderData<ID3D11GeometryShader>  _geometryShader;
+        ShaderData<ID3D11PixelShader>     _pixelShader;
+        ShaderData<ID3D11ComputeShader>   _computeShader;
 
-        D3D11_INPUT_ELEMENT_DESC*        _inputElementsDesc;
-        UINT32                           _numberElementsDesc;
+        D3D11_INPUT_ELEMENT_DESC*         _inputElementsDesc;
+        UINT32                            _numberElementsDesc;
 
-        ID3D11InputLayout*               _inputLayout;
+        ID3D11InputLayout*                _inputLayout;
+
+        Map<UINT, ConstantBufferElement*> _constantBufferElements;
     };
 }

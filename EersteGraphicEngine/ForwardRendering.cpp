@@ -2,6 +2,7 @@
 
 #include "ForwardRendering.h"
 #include "ShaderManager.h"
+#include "ModelManager.h"
 
 namespace ege
 {
@@ -37,6 +38,19 @@ namespace ege
 
         _dataShader = gShaderManager().GetPtr("forward-data");
         _quadShader = gShaderManager().GetPtr("quad");
+
+        ConstantBufferElement* frameConstantBuffer  = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+        ConstantBufferElement* objectConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        ConstantBufferElement* lightConstantBuffer  = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        ConstantBufferElement* quadConstantBuffer   = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
+
+        _dataShader->InsertConstantBuffer(0, frameConstantBuffer);
+        _dataShader->InsertConstantBuffer(1, objectConstantBuffer);
+        _dataShader->InsertConstantBuffer(2, lightConstantBuffer);
+
+        _quadShader->InsertConstantBuffer(0, quadConstantBuffer);
+
+        gModelManager().Get("quad", _quad);
     }
 
     void ForwardRendering::Draw()
@@ -131,6 +145,49 @@ namespace ege
         SetFinalTarget();
         ClearRenderTarget();
 
-        _scene->Draw();
+        _renderAPI.TurnZBufferOff();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+
+        _projection = XMMatrixOrthographicOffCenterLH(- (float)(_width / 2), (float)(_width / 2), -(float)(_height / 2), (float)(_height / 2), 0.1f, 10.0f);
+
+        XMVECTOR Eye = XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
+        XMVECTOR LookAt = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+        XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+        _view = XMMatrixLookAtLH(Eye, LookAt, Up);
+
+        _world = XMMatrixIdentity();
+
+        ConstantBufferElement* quadConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
+        QuadConstantBuffer* bufferUpdate = (QuadConstantBuffer*)&*quadConstantBuffer->UpdateBuffer;
+
+        bufferUpdate->Projection = XMMatrixTranspose(_projection);
+        bufferUpdate->View = XMMatrixTranspose(_view);
+        //bufferUpdate->World = XMMatrixTranspose(_world);
+
+        //context->UpdateSubresource(quadConstantBuffer->Buffer, 0, nullptr, bufferUpdate, 0, 0);
+
+        //_quadShader->Apply();
+
+        //_quad.Draw();
+
+        /*ConstantBufferElement* quadConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
+
+        UINT stride = sizeof(VertexDesc);
+        UINT offset = 0;
+        context->IASetVertexBuffers(0, 1, &_vertexBuffer, &stride, &offset);
+        context->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
+
+        context->UpdateSubresource(quadConstantBuffer->Buffer, 0, nullptr, quadConstantBuffer->UpdateBuffer, 0, 0);
+        context->DrawIndexed((UINT)_indices.size(), 0, 0);
+
+
+        _quad.Draw();*/
+
+        //_scene->Draw();
     }
 }

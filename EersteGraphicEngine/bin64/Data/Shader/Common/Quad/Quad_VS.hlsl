@@ -1,4 +1,4 @@
-cbuffer FrameConstantBuffer : register(b0)
+cbuffer QuadConstantBuffer : register(b0)
 {
     matrix View;
     matrix Projection;

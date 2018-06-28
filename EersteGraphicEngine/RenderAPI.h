@@ -10,7 +10,7 @@ namespace ege
 {
     enum class ConstantBufferType
     {
-        FRAME, OBJECT, LIGHT
+        FRAME, OBJECT, LIGHT, QUAD
     };
 
     enum class RenderPipelineType
@@ -37,29 +37,6 @@ namespace ege
         {}
     };
 
-    struct LightDesc
-    {
-        XMFLOAT4 LightColor;
-        XMFLOAT3 LightDirection;
-        /* PADDING */ float    Padding1;
-        XMFLOAT3 LightPosition;
-        float    LightRadius;
-        float    LightInnerAngle;
-        float    LightOuterAngle;
-        UINT     LightType;
-        /* PADDING */ float    Padding2;
-
-        LightDesc()
-            : LightColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))
-            , LightDirection(XMFLOAT3(1.0f, 1.0f, 1.0f))
-            , LightPosition(XMFLOAT3(1.0f, 1.0f, 1.0f))
-            , LightRadius(5.0f)
-            , LightInnerAngle(0.5f)
-            , LightOuterAngle(0.1f)
-            , LightType(0)
-        {}
-    };
-
     class RenderAPI : public IModule<RenderAPI>, public IComponentHandler, public IDrawable
     {
     public:
@@ -80,10 +57,12 @@ namespace ege
         void Initialise();
         void Resize();
 
-        Device*         GetDevice();
-        ID3D11Buffer*   GetConstantBuffer(ConstantBufferType type);
-        ConstantBuffer* GetConstantBufferUpdate(ConstantBufferType type);
-        RenderDesc&     GetRenderDesc();
+        void TurnZBufferOn();
+        void TurnZBufferOff();
+
+        Device*                 GetDevice();
+        ConstantBufferElement*  GetConstantBuffer(ConstantBufferType type);
+        RenderDesc&             GetRenderDesc();
         ID3D11RenderTargetView* GetRenderTargetView();
         ID3D11DepthStencilView* GetDepthStencilView();
 
@@ -110,6 +89,7 @@ namespace ege
         ID3D11DepthStencilView*   _depthStencilView;
         ID3D11Texture2D*          _depthStencilBuffer;
         ID3D11DepthStencilState*  _depthStencilState;
+        ID3D11DepthStencilState*  _depthDisabledStencilState;
         ID3D11RasterizerState*    _rasterizerState;
         D3D11_VIEWPORT            _screenViewport;
 
@@ -117,12 +97,10 @@ namespace ege
         ID3D11SamplerState*       _colorSampler;
         ID3D11RasterizerState*    _backFaceCulling;
 
-        ID3D11Buffer*             _frameConstantBuffer;
-        ID3D11Buffer*             _objectConstantBuffer;
-        ID3D11Buffer*             _lightConstantBuffer;
-        FrameConstantBuffer       _frameConstantBufferUpdate;
-        ObjectConstantBuffer      _objectConstantBufferUpdate;
-        LightConstantBuffer       _lightConstantBufferUpdate;
+        ConstantBufferElement     _frameConstantBuffer;
+        ConstantBufferElement     _objectConstantBuffer;
+        ConstantBufferElement     _lightConstantBuffer;
+        ConstantBufferElement     _quadConstantBuffer;
     };
 
     RenderAPI& gRenderAPI();
