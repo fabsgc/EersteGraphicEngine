@@ -3,13 +3,13 @@
 
 struct PS_INPUT
 {
-    float4 DepthPosition      : POSITION;
-    float4 Position           : SV_POSITION;
-    float4 Color              : COLOR0;
-    float2 Texture            : TEXCOORD0;
-    float3 Normal             : NORMAL;
-    float3 Tangent            : TANGENT;
-    float3 Binormal           : BINORMAL;
+    float4 DepthPosition : TEXTURE0;
+    float4 Position : SV_POSITION;
+    float4 Color : COLOR0;
+    float2 Texture : TEXCOORD0;
+    float3 Normal : NORMAL;
+    float3 Tangent : TANGENT;
+    float3 Binormal : BINORMAL;
     float3 ViewWorldDirection : COLOR1;
 };
 
@@ -28,7 +28,7 @@ PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 PS_OUTPUT ComputeNormalBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 PS_OUTPUT ComputeDepthBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 
-float4 PS_MAIN(PS_INPUT IN) : SV_Target
+PS_OUTPUT PS_MAIN(PS_INPUT IN)
 {
     PS_OUTPUT OUT;
 
@@ -36,9 +36,7 @@ float4 PS_MAIN(PS_INPUT IN) : SV_Target
     OUT = ComputeNormalBuffer(IN, OUT);
     OUT = ComputeDepthBuffer(IN, OUT);
 
-    //return OUT;
-
-    return float4(0.5, 0.5, 0.5, 1.0);
+    return OUT;
 }
 
 PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT)

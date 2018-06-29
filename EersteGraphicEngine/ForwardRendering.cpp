@@ -58,6 +58,7 @@ namespace ege
         HRESULT hr = S_OK;
         ID3D11Device* device = _renderAPI.GetDevice()->GetD3D11Device();
         D3D11_TEXTURE2D_DESC depthStencilDesc;
+        ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
 
         depthStencilDesc.Width = _width;
         depthStencilDesc.Height = _height;
@@ -65,13 +66,15 @@ namespace ege
         depthStencilDesc.ArraySize = 1;
         depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
         depthStencilDesc.SampleDesc.Count = 1;
-        depthStencilDesc.SampleDesc.Quality = 0;
+        //depthStencilDesc.SampleDesc.Quality = 0;
         depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
         depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
         depthStencilDesc.CPUAccessFlags = 0;
         depthStencilDesc.MiscFlags = 0;
 
         D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
+        ZeroMemory(&depthStencilViewDesc, sizeof(depthStencilViewDesc));
+
         depthStencilViewDesc.Format = depthStencilDesc.Format;
         depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
         depthStencilViewDesc.Flags = 0;
@@ -207,11 +210,15 @@ namespace ege
 
     void ForwardRendering::DrawMetaData()
     {
-        _renderAPI.ClearDepthStencilView();
+        ClearDepthStencil();
         SetMetaDataTargets();
         ClearMetaDataTargets();
 
-        _scene->Draw();
+        _scene->DrawMetaData();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11RenderTargetView* nullViews[FORWARD_DATA_RENDER_TARGET] = { nullptr, nullptr, nullptr };
+        context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawRender()
@@ -221,6 +228,10 @@ namespace ege
         ClearRenderTarget();
 
         _scene->Draw();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11RenderTargetView* nullViews[1] = { nullptr };
+        context->OMSetRenderTargets(1, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawEffects()
@@ -242,12 +253,15 @@ namespace ege
 
         _renderTexture->BoundNonMsTexture();
 
-        ID3D11ShaderResourceView* resourceView = _specularTexture->GetShaderResourceView();
+        ID3D11ShaderResourceView* resourceView = _renderTexture->GetShaderResourceView();
         context->PSSetShaderResources(0, 1, &resourceView);
 
         _quadShader->Apply();
         _quad->Draw();
 
         _renderAPI.TurnZBufferOn();
+
+        ID3D11ShaderResourceView* null[] = { nullptr, nullptr, nullptr };
+        context->PSSetShaderResources(0, 3, null);
     }
 }

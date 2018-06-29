@@ -292,20 +292,26 @@
     <Filter Include="Source Files\Core\RenderAPI\Shader">
       <UniqueIdentifier>{272ba6a2-3588-408e-a164-e9b959c1b6b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Shader\Common">
+      <UniqueIdentifier>{3ae02ef7-0333-45c6-917b-f10ec3758c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Deferred">
+      <UniqueIdentifier>{92e7c82e-afba-4349-bf12-304b24c459fc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Data\Shader\Forward">
-      <UniqueIdentifier>{37348083-bf39-40d1-9d3d-2a75226bcb05}</UniqueIdentifier>
+      <UniqueIdentifier>{a29e3531-849e-48b2-8632-a8d9651f4fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common\Quad">
+      <UniqueIdentifier>{282b457a-85a1-4419-b902-70bd903302fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\MetaData">
+      <UniqueIdentifier>{1cc779cf-1fb4-4836-b088-6a6518d406cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\Include">
+      <UniqueIdentifier>{69d07717-2c48-4c76-abb5-0135bff78a27}</UniqueIdentifier>
     </Filter>
     <Filter Include="Data\Shader\Forward\Default">
-      <UniqueIdentifier>{74b85ff3-430b-4add-a3a3-0d8c27448ae6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Forward\Default\Include">
-      <UniqueIdentifier>{76b34a89-fb78-4d89-a498-4664e242f25c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Forward\Common">
-      <UniqueIdentifier>{c091e8bc-fd78-40d0-8d30-2e1346e1e646}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Data\Shader\Forward\Common\Include">
-      <UniqueIdentifier>{3c29d737-3f87-437c-abf8-945d36b9e060}</UniqueIdentifier>
+      <UniqueIdentifier>{189946cc-a5dc-4ffb-9d9e-ce7baf88b862}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -551,6 +557,9 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Core\RenderAPI\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Source Files\App\Model\Primitive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,6 +845,9 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Core\RenderAPI\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EersteGraphicEngine.rc">
@@ -880,22 +892,34 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_PS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_VS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
+    </FxCompile>
     <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_PS.hlsl">
       <Filter>Data\Shader\Forward\Default</Filter>
     </FxCompile>
     <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_VS.hlsl">
       <Filter>Data\Shader\Forward\Default</Filter>
     </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_PS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_VS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli">
-      <Filter>Data\Shader\Forward\Default\Include</Filter>
+      <Filter>Data\Shader\Forward\Include</Filter>
     </None>
     <None Include="bin64\Data\Shader\Forward\Include\Light.hlsli">
-      <Filter>Data\Shader\Forward\Default\Include</Filter>
+      <Filter>Data\Shader\Forward\Include</Filter>
     </None>
-    <None Include="bin64\Data\Shader\Common\Include\Texture.hlsli">
-      <Filter>Data\Shader\Forward\Common\Include</Filter>
+    <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
     </None>
   </ItemGroup>
 </Project>

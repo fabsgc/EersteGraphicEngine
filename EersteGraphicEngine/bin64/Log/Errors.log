@@ -795,3 +795,31 @@ Time: 18:16:27
 Error: Can't create depth stencil view
 Condition: 0
 ############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:212
+Inside ege::RenderAPI::CreateSwapChain
+Date: Jun 29 2018
+Time: 21:09:10
+Error: Can't create swap chain
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:212
+Inside ege::RenderAPI::CreateSwapChain
+Date: Jun 29 2018
+Time: 21:09:42
+Error: Can't create swap chain
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\forwardrendering.cpp:84
+Inside ege::ForwardRendering::CreateDepthStencil
+Date: Jun 29 2018
+Time: 21:29:16
+Error: Can't create depth stencil buffer
+Condition: 0
+############################################: 
+Assertion failed at f:\3d-engine\eerstegraphicengine\eerstegraphicengine\forwardrendering.cpp:84
+Inside ege::ForwardRendering::CreateDepthStencil
+Date: Jun 29 2018
+Time: 21:29:45
+Error: Can't create depth stencil buffer
+Condition: 0
+############################################: 

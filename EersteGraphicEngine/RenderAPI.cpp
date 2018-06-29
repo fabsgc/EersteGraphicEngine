@@ -173,10 +173,10 @@ namespace ege
 
     void RenderAPI::CheckMSAASupport()
     {
-        _device->GetD3D11Device()->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 8, &_4xMsaaQuality);
+        _device->GetD3D11Device()->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &_4xMsaaQuality);
         assert(_4xMsaaQuality > 0);
 
-        _MSAASampleCount = 8;
+        _MSAASampleCount = 4;
         _MSAASampleQuality = _4xMsaaQuality - 1;
     }
 

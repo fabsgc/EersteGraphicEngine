@@ -6,8 +6,8 @@
     </shader-program>
 
     <shader-program name="forward-meta-data" vertex="full" compiled="true" include-path="">
-        <shader type="vertex-shader" file="Forward/Data/MetaData_VS.cso"/>
-        <shader type="pixel-shader" file="Forward/Data/MetaData_PS.cso"/>
+        <shader type="vertex-shader" file="Forward/MetaData/MetaData_VS.cso"/>
+        <shader type="pixel-shader" file="Forward/MetaData/MetaData_PS.cso"/>
     </shader-program>
 
     <shader-program name="quad" vertex="short" compiled="true" include-path="">
