@@ -81,9 +81,6 @@ namespace ege
 
     void CoreApplication::Draw()
     {
-        gRenderAPI().Draw();
-        gRenderer().Draw();
-
         if (_renderPipeline != nullptr)
         {
             _renderPipeline->Draw();

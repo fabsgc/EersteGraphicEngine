@@ -29,6 +29,7 @@ namespace ege
         void              Initialise() override;
         void              Update() override;
         void              Draw() override;
+        void              DrawMetaData() override;
         virtual void      ComputeProjectionMatrix() {};
 
         const CameraType& GetType() const;

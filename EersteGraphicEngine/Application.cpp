@@ -58,7 +58,7 @@ namespace ege
         SPtr<Node> node                  = ege_shared_ptr_new<Node>();
         SPtr<ThirdPersonCamera> camera   = ege_shared_ptr_new<ThirdPersonCamera>();
         SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
-        SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
+        //SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
         SPtr<FlyingCamera> camera4       = ege_shared_ptr_new<FlyingCamera>();
 
         SPtr<AmbientLight> ambient       = ege_shared_ptr_new<AmbientLight>();
@@ -82,7 +82,7 @@ namespace ege
 
         camera->Initialise();
         camera2->Initialise();
-        camera3->Initialise();
+        //camera3->Initialise();
         camera4->Initialise();
         ambient->Initialise();
         sun->Initialise();

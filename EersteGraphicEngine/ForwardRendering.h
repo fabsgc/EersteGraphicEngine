@@ -17,7 +17,7 @@ namespace ege
     {
     public:
         ForwardRendering();
-        ~ForwardRendering() {};
+        ~ForwardRendering();
 
         virtual void Initialise(SPtr<Scene> scene) override;
         virtual void Draw() override;
@@ -25,33 +25,41 @@ namespace ege
         virtual void OnResize() override;
 
     protected:
+        void CreateTextures();
+        void CreateDepthStencil();
+        void ClearDepthStencil();
+        void CreateCamera();
+        void CreateQuad();
+
         void SetMetaDataTargets();
         void SetRenderTarget();
+        void SetEffectTarget();
         void SetFinalTarget();
 
         void ClearMetaDataTargets();
         void ClearRenderTarget();
+        void ClearEffectTarget();
         void ClearFinalTarget();
 
         void DrawMetaData();
         void DrawRender();
+        void DrawEffects();
         void DrawFinal();
 
     protected:
-        SPtr<RenderTexture>     _finalTexture;
-        SPtr<RenderTexture>     _renderTexture;
-        SPtr<RenderTexture>     _specularTexture;
-        SPtr<RenderTexture>     _normalTexture;
-        SPtr<RenderTexture>     _depthTexture;
+        SPtr<RenderTexture>      _finalTexture;
+        SPtr<RenderTexture>      _renderTexture;
+        SPtr<RenderTexture>      _specularTexture;
+        SPtr<RenderTexture>      _normalTexture;
+        SPtr<RenderTexture>      _depthTexture;
 
-        SPtr<Shader>            _quadShader;
+        ID3D11RenderTargetView*  _metaDataTargets[FORWARD_DATA_RENDER_TARGET];
 
-        ID3D11RenderTargetView* _metaDataTargets[FORWARD_DATA_RENDER_TARGET];
+        SPtr<Shader>             _quadShader;
+        SPtr<OrthographicCamera> _camera;
+        SPtr<Geometry>           _quad;
 
-        Geometry                _quad;
-
-        XMMATRIX _world;
-        XMMATRIX _view;
-        XMMATRIX _projection;
+        ID3D11DepthStencilView*  _depthStencilView;
+        ID3D11Texture2D*         _depthStencilBuffer;
     };
 }

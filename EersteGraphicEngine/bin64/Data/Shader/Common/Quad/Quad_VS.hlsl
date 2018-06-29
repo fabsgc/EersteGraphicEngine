@@ -26,7 +26,7 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
     VS_OUTPUT OUT = (VS_OUTPUT)0;
 
     OUT.Texture = IN.Texture;
-    OUT.Position = float4((OUT.Texture.x - 0.5f) * 1, -(OUT.Texture.y - 0.5f) * 1, 0, 1);
+    OUT.Position = float4((OUT.Texture.x - 0.5f) * 2.0f, -(OUT.Texture.y - 0.5f) * 2.0f, 0, 1);
 
     return OUT;
 }

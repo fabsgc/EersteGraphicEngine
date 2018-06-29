@@ -16,8 +16,8 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
     float4 Specular : SV_Target0;
-    float4 Normal : SV_Target1;
-    float4 Depth : SV_Target2;
+    float4 Normal   : SV_Target1;
+    float4 Depth    : SV_Target2;
 };
 
 Texture2D DiffuseTexture  : register(t0);
@@ -28,7 +28,7 @@ PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 PS_OUTPUT ComputeNormalBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 PS_OUTPUT ComputeDepthBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 
-PS_OUTPUT PS_MAIN(PS_INPUT IN)
+float4 PS_MAIN(PS_INPUT IN) : SV_Target
 {
     PS_OUTPUT OUT;
 
@@ -36,7 +36,9 @@ PS_OUTPUT PS_MAIN(PS_INPUT IN)
     OUT = ComputeNormalBuffer(IN, OUT);
     OUT = ComputeDepthBuffer(IN, OUT);
 
-    return OUT;
+    //return OUT;
+
+    return float4(0.5, 0.5, 0.5, 1.0);
 }
 
 PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT)

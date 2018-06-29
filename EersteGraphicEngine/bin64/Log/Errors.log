@@ -742,3 +742,56 @@ Time: 09:36:12
 Error: Resource forward-data not found
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\rendertexture.cpp:26
+Inside ege::RenderTexture::Initialise
+Date: Jun 29 2018
+Time: 14:53:57
+Error: Can't create render target view
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\rendertexture.cpp:29
+Inside ege::RenderTexture::Initialise
+Date: Jun 29 2018
+Time: 14:55:04
+Error: Can't create render target view
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\rendertexture.cpp:29
+Inside ege::RenderTexture::Initialise
+Date: Jun 29 2018
+Time: 14:56:40
+Error: Can't create render target view
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\device.cpp:17 inside ege::Device::Device
+Date: Jun 27 2018
+Time: 18:01:32
+Condition: 0############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:212
+Inside ege::RenderAPI::CreateSwapChain
+Date: Jun 29 2018
+Time: 17:17:23
+Error: Can't create swap chain
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\forwardrendering.cpp:74
+Inside ege::ForwardRendering::CreateDepthStencil
+Date: Jun 29 2018
+Time: 18:12:34
+Error: Can't create depth stencil buffer
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\forwardrendering.cpp:75
+Inside ege::ForwardRendering::CreateDepthStencil
+Date: Jun 29 2018
+Time: 18:13:41
+Error: Can't create depth stencil buffer
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\forwardrendering.cpp:83
+Inside ege::ForwardRendering::CreateDepthStencil
+Date: Jun 29 2018
+Time: 18:16:27
+Error: Can't create depth stencil view
+Condition: 0
+############################################: 

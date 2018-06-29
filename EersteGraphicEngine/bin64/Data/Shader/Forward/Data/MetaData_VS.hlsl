@@ -27,7 +27,7 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
 {
     VS_OUTPUT output     = (VS_OUTPUT)0;
 
-    IN.Position.w = 1.0f;
+    IN.Position.w        = 1.0f;
     
     output.Position      = mul( IN.Position, World );
     output.Position      = mul( output.Position, View );

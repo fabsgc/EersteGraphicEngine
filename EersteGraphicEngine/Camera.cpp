@@ -3,7 +3,7 @@
 
 namespace ege
 {
-    const float Camera::DefaultNearZ            = 0.01f;
+    const float Camera::DefaultNearZ            = 0.001f;
     const float Camera::DefaultFarZ             = 2048.0f;
     const float Camera::DefaultTranslationSpeed = 10.0f;
     const float Camera::DefaultRotationSpeed    = 5.0f;
@@ -56,6 +56,22 @@ namespace ege
     }
 
     void Camera::Draw()
+    {
+        Node::Draw();
+
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
+        FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+
+        XMMATRIX view = XMLoadFloat4x4(&_view);
+        XMMATRIX projection = XMLoadFloat4x4(&_projection);
+
+        constantBufferUpdate->View = XMMatrixTranspose(view);
+        constantBufferUpdate->Projection = XMMatrixTranspose(projection);
+        constantBufferUpdate->CameraPosition = _position;
+    }
+
+    void Camera::DrawMetaData()
     {
         Node::Draw();
 

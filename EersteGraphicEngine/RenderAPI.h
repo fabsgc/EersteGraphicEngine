@@ -55,23 +55,36 @@ namespace ege
         void ClearDepthStencilView();
 
         void Initialise();
-        void Resize();
 
         void TurnZBufferOn();
         void TurnZBufferOff();
 
         Device*                     GetDevice();
-        ConstantBufferElement&      GetConstantBuffer(ConstantBufferType type);
         SPtr<ConstantBufferElement> GetConstantBufferPtr(ConstantBufferType type);
         RenderDesc&                 GetRenderDesc();
         ID3D11RenderTargetView*     GetRenderTargetView();
         ID3D11DepthStencilView*     GetDepthStencilView();
+        UINT                        GetMSAASampleCount();
+        UINT                        GetMSAASampleQuality();
 
     protected:
         RenderAPI(RenderAPI const&) = delete;
         RenderAPI& operator=(RenderAPI const&) = delete;
 
         void LoadRenderConfig();
+
+        void Resize();
+
+        void CreateDevice();
+        void CheckMSAASupport();
+        void CreateSwapChain();
+        void CreateDepthStencilBuffer();
+        void CreateViewport();
+        void CreateConstantBuffers();
+        void CreateColorSampler();
+        void CreateDepthStencilState();
+        void SetPrimitiveTopology();
+        void SetBackfaceCulling();
 
     protected:
         RenderDesc                  _renderDesc;
@@ -95,6 +108,8 @@ namespace ege
         D3D11_VIEWPORT              _screenViewport;
 
         UINT                        _4xMsaaQuality;
+        UINT                        _MSAASampleCount;
+        UINT                        _MSAASampleQuality;
         ID3D11SamplerState*         _colorSampler;
         ID3D11RasterizerState*      _backFaceCulling;
 

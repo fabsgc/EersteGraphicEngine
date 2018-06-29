@@ -29,6 +29,9 @@ namespace ege
         _objectConstantBuffer      = nullptr;
         _lightConstantBuffer       = nullptr;
         _quadConstantBuffer        = nullptr;
+
+        _MSAASampleCount          = 1;
+        _MSAASampleQuality        = 0;
     }
 
     RenderAPI::~RenderAPI()
@@ -90,7 +93,7 @@ namespace ege
     void RenderAPI::ClearRenderTargetView()
     {
         ID3D11DeviceContext* context = _device->GetImmediateContext();
-        context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::Blue));
+        context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::Black));
     }
 
     void RenderAPI::ClearDepthStencilView()
@@ -107,7 +110,7 @@ namespace ege
 
             if (_renderDesc.VSync)
             {
-                hr = _swapChain->Present(1, 0);
+                hr = _swapChain->Present(0, 0);
             }
             else
             {
@@ -117,7 +120,7 @@ namespace ege
             if (FAILED(hr))
             {
                 EGE_ASSERT_ERROR(false, "Error Presenting surfaces");
-            }   
+            }
         }
     }
 
@@ -126,17 +129,15 @@ namespace ege
         _device->GetImmediateContext()->OMSetDepthStencilState(_depthStencilState, 1);
     }
 
-
     void RenderAPI::TurnZBufferOff()
     {
         _device->GetImmediateContext()->OMSetDepthStencilState(_depthDisabledStencilState, 1);
     }
 
-    void RenderAPI::Initialise()
+    void RenderAPI::CreateDevice()
     {
         HRESULT hr = S_OK;
         UINT createDeviceFlags = 0;
-        Window& window = gWindow();
 
 #if defined(EGE_DEBUG) && defined(EGE_GRAPHIC_DEBUG) 
         createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -166,20 +167,28 @@ namespace ege
             numFeatureLevels, D3D11_SDK_VERSION, &device, &_featureLevel, nullptr);
 
         _device = new Device(device);
-        ID3D11DeviceContext* context = _device->GetImmediateContext();
 
-        if (FAILED(hr))
-        {
-            EGE_ASSERT_ERROR(SUCCEEDED(hr), "Failed to initialie device");
-        }
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create device");
+    }
 
-        //Check multisampling support
-        device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &_4xMsaaQuality);
+    void RenderAPI::CheckMSAASupport()
+    {
+        _device->GetD3D11Device()->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 8, &_4xMsaaQuality);
         assert(_4xMsaaQuality > 0);
 
-        //Create Swap chain
+        _MSAASampleCount = 8;
+        _MSAASampleQuality = _4xMsaaQuality - 1;
+    }
+
+    void RenderAPI::CreateSwapChain()
+    {
+        HRESULT hr = S_OK;
+        Window& window = gWindow();
+        ID3D11Device* device = _device->GetD3D11Device();
         DXGI_SWAP_CHAIN_DESC sd;
+
         ZeroMemory(&sd, sizeof(sd));
+
         sd.BufferCount = 2;
         sd.BufferDesc.Width = window.GetWindowWidth();
         sd.BufferDesc.Height = window.GetWindowHeight();
@@ -191,8 +200,8 @@ namespace ege
         sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
         sd.OutputWindow = window.GetHWnd();
         sd.Windowed = TRUE;
-        sd.SampleDesc.Count = 1;
-        sd.SampleDesc.Quality = 0;
+        sd.SampleDesc.Count = _MSAASampleCount;
+        sd.SampleDesc.Quality = _MSAASampleQuality;
         sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
         hr = device->QueryInterface(__uuidof(IDXGIDevice), (void**)&_dxgiDevice);
@@ -200,40 +209,49 @@ namespace ege
         hr = _dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&_dxgiFactory);
         hr = _dxgiFactory->CreateSwapChain(device, &sd, &_swapChain);
 
-        // Create a render target view
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create swap chain");
+
         ID3D11Texture2D* pBackBuffer = nullptr;
         hr = _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
-
-        if (FAILED(hr))
-        {
-            EGE_ASSERT_ERROR(SUCCEEDED(hr), "Failed to initialie swap chain");
-        }
 
         hr = device->CreateRenderTargetView(pBackBuffer, nullptr, &_renderTargetView);
         pBackBuffer->Release();
 
-        if (FAILED(hr))
-        {
-            EGE_ASSERT_ERROR(SUCCEEDED(hr), "Failed to initialie render target view");
-        }
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create back buffer");
+    }
 
-        //Init depth stencil and buffer
+    void RenderAPI::CreateDepthStencilBuffer()
+    {
+        HRESULT hr = S_OK;
+        Window& window = gWindow();
         D3D11_TEXTURE2D_DESC depthStencilDesc;
+        ID3D11Device* device = _device->GetD3D11Device();
 
         depthStencilDesc.Width = window.GetWindowWidth();
         depthStencilDesc.Height = window.GetWindowHeight();
         depthStencilDesc.MipLevels = 1;
         depthStencilDesc.ArraySize = 1;
         depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-        depthStencilDesc.SampleDesc.Count = 1;
-        depthStencilDesc.SampleDesc.Quality = 0;
+        depthStencilDesc.SampleDesc.Count = _MSAASampleCount;
+        depthStencilDesc.SampleDesc.Quality = _MSAASampleQuality;
         depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
         depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
         depthStencilDesc.CPUAccessFlags = 0;
         depthStencilDesc.MiscFlags = 0;
 
-        device->CreateTexture2D(&depthStencilDesc, nullptr, &_depthStencilBuffer);
-        device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);  
+        hr = device->CreateTexture2D(&depthStencilDesc, nullptr, &_depthStencilBuffer);
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create depth stencil buffer");
+
+        device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create depth stencil view");
+    }
+
+    void RenderAPI::CreateViewport()
+    {
+        HRESULT hr = S_OK;
+        Window& window = gWindow();
+        ID3D11Device* device = _device->GetD3D11Device();
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
 
         // Setup the viewport
         _screenViewport.Width = (FLOAT)window.GetWindowWidth();
@@ -243,15 +261,19 @@ namespace ege
         _screenViewport.TopLeftX = 0;
         _screenViewport.TopLeftY = 0;
         context->RSSetViewports(1, &_screenViewport);
+    }
 
-        // Set primitive topology
-        context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    void RenderAPI::CreateConstantBuffers()
+    {
+        HRESULT hr = S_OK;
+        Window& window = gWindow();
+        ID3D11Device* device = _device->GetD3D11Device();
 
         // Create constant buffers
-        _frameConstantBuffer  = ege_shared_ptr_new<ConstantBufferElement>();
+        _frameConstantBuffer = ege_shared_ptr_new<ConstantBufferElement>();
         _objectConstantBuffer = ege_shared_ptr_new<ConstantBufferElement>();
-        _lightConstantBuffer  = ege_shared_ptr_new<ConstantBufferElement>();
-        _quadConstantBuffer   = ege_shared_ptr_new<ConstantBufferElement>();
+        _lightConstantBuffer = ege_shared_ptr_new<ConstantBufferElement>();
+        _quadConstantBuffer = ege_shared_ptr_new<ConstantBufferElement>();
 
         D3D11_BUFFER_DESC bdFrame;
         ZeroMemory(&bdFrame, sizeof(bdFrame));
@@ -282,10 +304,15 @@ namespace ege
         _quadConstantBuffer->UpdateBuffer = ege_shared_ptr_new<QuadConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create quad constant buffer");
-        
-        //Create Anisotropic Color Sampler
+    }
+
+    void RenderAPI::CreateColorSampler()
+    {
+        HRESULT hr = S_OK;
         D3D11_SAMPLER_DESC sampDesc;
-        
+        ID3D11Device* device = _device->GetD3D11Device();
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
+
         ZeroMemory(&sampDesc, sizeof(sampDesc));
         sampDesc.Filter = D3D11_FILTER_ANISOTROPIC;
         sampDesc.MaxAnisotropy = 8;
@@ -296,48 +323,24 @@ namespace ege
         sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
         hr = device->CreateSamplerState(&sampDesc, &_colorSampler);
+
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create color sampler");
+
         context->VSSetSamplers(0, 1, &_colorSampler);
         context->HSSetSamplers(0, 1, &_colorSampler);
         context->DSSetSamplers(0, 1, &_colorSampler);
         context->GSSetSamplers(0, 1, &_colorSampler);
         context->PSSetSamplers(0, 1, &_colorSampler);
+    }
 
-        if (_renderDesc.BackfaceCulling)
-        {
-            D3D11_RASTERIZER_DESC wfdescBackFaceCulling;
-            ZeroMemory(&wfdescBackFaceCulling, sizeof(D3D11_RASTERIZER_DESC));
-            wfdescBackFaceCulling.FillMode = D3D11_FILL_SOLID;
-            wfdescBackFaceCulling.CullMode = D3D11_CULL_BACK;
-            wfdescBackFaceCulling.MultisampleEnable = true;
-            hr = device->CreateRasterizerState(&wfdescBackFaceCulling, &_backFaceCulling);
-
-            context->RSSetState(_backFaceCulling);
-        }
-
-        //Create a depth stencil state with depth enabled
-        D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc;
-
-        ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
-
-        depthStencilStateDesc.DepthEnable = true;
-        depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-        depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
-        depthStencilStateDesc.StencilEnable = true;
-        depthStencilStateDesc.StencilReadMask = 0xFF;
-        depthStencilStateDesc.StencilWriteMask = 0xFF;
-        depthStencilStateDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-        depthStencilStateDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-        depthStencilStateDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-        depthStencilStateDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-        depthStencilStateDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-        depthStencilStateDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-        depthStencilStateDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-        depthStencilStateDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-        device->CreateDepthStencilState(&depthStencilStateDesc, &_depthStencilState);
+    void RenderAPI::CreateDepthStencilState()
+    {
+        HRESULT hr = S_OK;
+        ID3D11Device* device = _device->GetD3D11Device();
+        D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc;        
 
         //Create a depth stencil state with depth disabled
-        ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
+        ZeroMemory(&depthStencilStateDesc, sizeof(depthStencilStateDesc));
 
         depthStencilStateDesc.DepthEnable = false;
         depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -354,7 +357,75 @@ namespace ege
         depthStencilStateDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
         depthStencilStateDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-        device->CreateDepthStencilState(&depthStencilStateDesc, &_depthDisabledStencilState);
+        hr = device->CreateDepthStencilState(&depthStencilStateDesc, &_depthDisabledStencilState);
+
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create depth stencil state with disabled depth");
+
+        //Create a depth stencil state with depth enabled
+        ZeroMemory(&depthStencilStateDesc, sizeof(depthStencilStateDesc));
+
+        depthStencilStateDesc.DepthEnable = true;
+        depthStencilStateDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+        depthStencilStateDesc.DepthFunc = D3D11_COMPARISON_LESS;
+        depthStencilStateDesc.StencilEnable = true;
+        depthStencilStateDesc.StencilReadMask = 0xFF;
+        depthStencilStateDesc.StencilWriteMask = 0xFF;
+        depthStencilStateDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
+        depthStencilStateDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+        depthStencilStateDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
+        depthStencilStateDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+        depthStencilStateDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+        hr = device->CreateDepthStencilState(&depthStencilStateDesc, &_depthStencilState);
+
+        EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create depth stencil state with enabled depth");
+
+    }
+
+    void RenderAPI::SetPrimitiveTopology()
+    {
+        ID3D11Device* device = _device->GetD3D11Device();
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
+
+        context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    }
+
+    void RenderAPI::SetBackfaceCulling()
+    {
+        HRESULT hr = S_OK;
+        ID3D11Device* device = _device->GetD3D11Device();
+        ID3D11DeviceContext* context = _device->GetImmediateContext();
+
+        if (_renderDesc.BackfaceCulling)
+        {
+            D3D11_RASTERIZER_DESC wfdescBackFaceCulling;
+            ZeroMemory(&wfdescBackFaceCulling, sizeof(D3D11_RASTERIZER_DESC));
+            wfdescBackFaceCulling.FillMode = D3D11_FILL_SOLID;
+            wfdescBackFaceCulling.CullMode = D3D11_CULL_BACK;
+            wfdescBackFaceCulling.MultisampleEnable = true;
+            hr = device->CreateRasterizerState(&wfdescBackFaceCulling, &_backFaceCulling);
+
+            EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create back face culling rasterizer state");
+
+            context->RSSetState(_backFaceCulling);
+        }
+    }
+
+    void RenderAPI::Initialise()
+    {
+        CreateDevice();
+        CheckMSAASupport();
+        CreateSwapChain();
+        CreateDepthStencilBuffer();
+        CreateViewport();
+        CreateConstantBuffers();
+        CreateColorSampler();
+        CreateDepthStencilState();
+        SetPrimitiveTopology();
+        SetBackfaceCulling();  
     }
 
     void RenderAPI::Resize()
@@ -377,34 +448,8 @@ namespace ege
         HR(device->CreateRenderTargetView(pBackBuffer, 0, &_renderTargetView), "Can't create render target view");
         SafeReleaseCom(pBackBuffer);
 
-        //Init depth stencil and buffer
-        D3D11_TEXTURE2D_DESC depthStencilDesc;
-
-        depthStencilDesc.Width = gWindow().GetWindowWidth();
-        depthStencilDesc.Height = gWindow().GetWindowHeight();
-        depthStencilDesc.MipLevels = 1;
-        depthStencilDesc.ArraySize = 1;
-        depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-        depthStencilDesc.SampleDesc.Count = 1;
-        depthStencilDesc.SampleDesc.Quality = 0;
-        depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-        depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-        depthStencilDesc.CPUAccessFlags = 0;
-        depthStencilDesc.MiscFlags = 0;
-
-        device->CreateTexture2D(&depthStencilDesc, nullptr, &_depthStencilBuffer);
-        device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);
-
-        context->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);
-
-        // Setup the viewport
-        _screenViewport.TopLeftX = 0;
-        _screenViewport.TopLeftY = 0;
-        _screenViewport.Width = static_cast<float>(gWindow().GetWindowWidth());
-        _screenViewport.Height = static_cast<float>(gWindow().GetWindowHeight());
-        _screenViewport.MinDepth = 0.0f;
-        _screenViewport.MaxDepth = 1.0f;
-        context->RSSetViewports(1, &_screenViewport);
+        CreateDepthStencilBuffer();
+        CreateViewport();
     }
 
     void RenderAPI::LoadRenderConfig()
@@ -454,30 +499,6 @@ namespace ege
         return _device;
     }
 
-    ConstantBufferElement& RenderAPI::GetConstantBuffer(ConstantBufferType type)
-    {
-        switch (type)
-        {
-        case ConstantBufferType::FRAME:
-            return *_frameConstantBuffer;
-            break;
-
-        case ConstantBufferType::OBJECT:
-            return *_objectConstantBuffer;
-            break;
-
-        case ConstantBufferType::LIGHT:
-            return *_lightConstantBuffer;
-            break;
-
-        case ConstantBufferType::QUAD:
-            return *_quadConstantBuffer;
-            break;
-        }
-
-        return *_frameConstantBuffer;
-    }
-
     SPtr<ConstantBufferElement> RenderAPI::GetConstantBufferPtr(ConstantBufferType type)
     {
         switch (type)
@@ -515,6 +536,16 @@ namespace ege
     ID3D11DepthStencilView* RenderAPI::GetDepthStencilView()
     {
         return _depthStencilView;
+    }
+
+    UINT RenderAPI::GetMSAASampleCount()
+    {
+        return _MSAASampleCount;
+    }
+
+    UINT RenderAPI::GetMSAASampleQuality()
+    {
+        return _MSAASampleQuality;
     }
 
     RenderAPI& gRenderAPI()

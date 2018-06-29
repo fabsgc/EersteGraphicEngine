@@ -86,6 +86,12 @@ namespace ege
         XMMATRIX View;
         XMMATRIX Projection;
         XMMATRIX World;
+
+        QuadConstantBuffer()
+            : View(XMMatrixIdentity())
+            , Projection(XMMatrixIdentity())
+            , World(XMMatrixIdentity())
+        {}
     };
 
     struct ConstantBufferElement
