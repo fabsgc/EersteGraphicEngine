@@ -29,9 +29,12 @@ namespace ege
         void                SetAmbientLight(SPtr<AmbientLight> ambientLight);
         void                Update() override;
         void                Draw() override;
+        void                DrawMetaData();
         void                DrawCamera();
         void                DrawLights();
         void                DrawNodes();
+        void                DrawMetaDataLights();
+        void                DrawMetaDataNodes();
 
     protected:
         RenderAPI&                _renderAPI;

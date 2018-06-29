@@ -735,3 +735,10 @@ Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerst
 Date: Jun 28 2018
 Time: 15:44:16
 Condition: 0############################################: 
+Assertion failed at c:\users\fbeaujean\documents\other\eerstegraphicengine\eerstegraphicengine\iresourcemanager.h:36
+Inside ege::IResourceManager<class ege::Shader>::GetPtr
+Date: Jun 29 2018
+Time: 09:36:12
+Error: Resource forward-data not found
+Condition: 0
+############################################: 

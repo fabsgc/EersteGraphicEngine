@@ -14,5 +14,6 @@ namespace ege
         void Initialise() override;
         void Update()  override;
         void Draw()  override;
+        void DrawMetaData()  override;
     };
 }

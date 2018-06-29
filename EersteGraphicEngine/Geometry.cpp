@@ -61,7 +61,7 @@ namespace ege
     void Geometry::Draw()
     {
         ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         UINT stride = sizeof(VertexDesc);

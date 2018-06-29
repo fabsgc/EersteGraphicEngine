@@ -5,9 +5,9 @@
         <shader type="pixel-shader" file="Forward/Default/Default_PS.cso"/>
     </shader-program>
 
-    <shader-program name="forward-data" vertex="full" compiled="true" include-path="">
-        <shader type="vertex-shader" file="Forward/Data/Data_VS.cso"/>
-        <shader type="pixel-shader" file="Forward/Data/Data_PS.cso"/>
+    <shader-program name="forward-meta-data" vertex="full" compiled="true" include-path="">
+        <shader type="vertex-shader" file="Forward/Data/MetaData_VS.cso"/>
+        <shader type="pixel-shader" file="Forward/Data/MetaData_PS.cso"/>
     </shader-program>
 
     <shader-program name="quad" vertex="short" compiled="true" include-path="">

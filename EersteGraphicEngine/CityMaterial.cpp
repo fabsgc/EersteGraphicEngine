@@ -18,10 +18,11 @@ namespace ege
     void CityMaterial::Initialise()
     {
         _shader = gShaderManager().GetPtr("forward-default");
+        _shaderMetaData = gShaderManager().GetPtr("forward-meta-data");
 
-        ConstantBufferElement* frameConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
-        ConstantBufferElement* objectConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
-        ConstantBufferElement* lightConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        SPtr<ConstantBufferElement> frameConstantBuffer  = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
+        SPtr<ConstantBufferElement> objectConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+        SPtr<ConstantBufferElement> lightConstantBuffer  = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
 
         _shader->InsertConstantBuffer(0, frameConstantBuffer);
         _shader->InsertConstantBuffer(1, objectConstantBuffer);

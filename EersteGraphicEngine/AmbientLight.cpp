@@ -26,9 +26,14 @@ namespace ege
         Light::Draw();
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         constantBufferUpdate->AmbientColor = _color;
+    }
+
+    void AmbientLight::DrawMetaData()
+    {
+        Draw();
     }
 }

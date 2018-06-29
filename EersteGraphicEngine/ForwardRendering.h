@@ -25,15 +25,15 @@ namespace ege
         virtual void OnResize() override;
 
     protected:
-        void SetDataTargets();
+        void SetMetaDataTargets();
         void SetRenderTarget();
         void SetFinalTarget();
 
-        void ClearDataTargets();
+        void ClearMetaDataTargets();
         void ClearRenderTarget();
         void ClearFinalTarget();
 
-        void DrawData();
+        void DrawMetaData();
         void DrawRender();
         void DrawFinal();
 
@@ -44,11 +44,9 @@ namespace ege
         SPtr<RenderTexture>     _normalTexture;
         SPtr<RenderTexture>     _depthTexture;
 
-        SPtr<Shader>            _dataShader;
-        SPtr<Shader>            _renderShader;
         SPtr<Shader>            _quadShader;
 
-        ID3D11RenderTargetView* _dataTargets[FORWARD_DATA_RENDER_TARGET];
+        ID3D11RenderTargetView* _metaDataTargets[FORWARD_DATA_RENDER_TARGET];
 
         Geometry                _quad;
 

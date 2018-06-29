@@ -43,7 +43,7 @@ namespace ege
         Node::Draw();
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         XMMATRIX world = XMLoadFloat4x4(&_world);
@@ -54,6 +54,25 @@ namespace ege
             _material->Apply();
         }
         
+        _geometry.Draw();
+    }
+
+    void Model::DrawMetaData()
+    {
+        Node::DrawMetaData();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
+
+        XMMATRIX world = XMLoadFloat4x4(&_world);
+        constantBufferUpdate->World = XMMatrixTranspose(world);
+
+        if (_material != nullptr)
+        {
+            _material->Apply(true);
+        }
+
         _geometry.Draw();
     }
 

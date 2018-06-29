@@ -37,6 +37,11 @@ namespace ege
         Node::Draw();
     }
 
+    void Light::DrawMetaData()
+    {
+        Node::DrawMetaData();
+    }
+
     void Light::Move(XMVECTOR movement)
     {
         Node::Move(movement);

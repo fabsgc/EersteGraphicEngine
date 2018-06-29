@@ -23,15 +23,10 @@ struct VS_OUTPUT
 
 VS_OUTPUT VS_MAIN( VS_INPUT IN )
 {
-    VS_OUTPUT OUT     = (VS_OUTPUT)0;
-
-    IN.Position.w = 1.0f;
-    
-    OUT.Position = mul(IN.Position, World);
-    OUT.Position = mul(OUT.Position, View);
-    OUT.Position = mul(OUT.Position, Projection);
+    VS_OUTPUT OUT = (VS_OUTPUT)0;
 
     OUT.Texture = IN.Texture;
+    OUT.Position = float4((OUT.Texture.x - 0.5f) * 1, -(OUT.Texture.y - 0.5f) * 1, 0, 1);
 
     return OUT;
 }

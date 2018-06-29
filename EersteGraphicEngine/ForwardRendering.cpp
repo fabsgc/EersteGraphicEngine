@@ -4,6 +4,8 @@
 #include "ShaderManager.h"
 #include "ModelManager.h"
 
+#include "OrthographicCamera.h"
+
 namespace ege
 {
     ForwardRendering::ForwardRendering()
@@ -13,8 +15,6 @@ namespace ege
         , _specularTexture(nullptr)
         , _normalTexture(nullptr)
         , _depthTexture(nullptr)
-        , _dataShader(nullptr)
-        , _renderShader(nullptr)
     {}
 
     void ForwardRendering::Initialise(SPtr<Scene> scene)
@@ -32,22 +32,12 @@ namespace ege
         _normalTexture->Initialise();
         _depthTexture->Initialise();
 
-        _dataTargets[0] = _specularTexture->GetRenderTargetView();
-        _dataTargets[1] = _normalTexture->GetRenderTargetView();
-        _dataTargets[2] = _depthTexture->GetRenderTargetView();
+        _metaDataTargets[0] = _specularTexture->GetRenderTargetView();
+        _metaDataTargets[1] = _normalTexture->GetRenderTargetView();
+        _metaDataTargets[2] = _depthTexture->GetRenderTargetView();
 
-        _dataShader = gShaderManager().GetPtr("forward-data");
         _quadShader = gShaderManager().GetPtr("quad");
-
-        ConstantBufferElement* frameConstantBuffer  = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
-        ConstantBufferElement* objectConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
-        ConstantBufferElement* lightConstantBuffer  = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
-        ConstantBufferElement* quadConstantBuffer   = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
-
-        _dataShader->InsertConstantBuffer(0, frameConstantBuffer);
-        _dataShader->InsertConstantBuffer(1, objectConstantBuffer);
-        _dataShader->InsertConstantBuffer(2, lightConstantBuffer);
-
+        SPtr<ConstantBufferElement> quadConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::QUAD);
         _quadShader->InsertConstantBuffer(0, quadConstantBuffer);
 
         gModelManager().Get("quad", _quad);
@@ -55,8 +45,8 @@ namespace ege
 
     void ForwardRendering::Draw()
     {
-        //DrawData();
-        //DrawRender();
+        DrawMetaData();
+        DrawRender();
         DrawFinal();
     }
 
@@ -74,15 +64,15 @@ namespace ege
         _normalTexture->Resize(_width, _height);
         _depthTexture->Resize(_width, _height);
 
-        _dataTargets[0] = _specularTexture->GetRenderTargetView();
-        _dataTargets[1] = _normalTexture->GetRenderTargetView();
-        _dataTargets[2] = _depthTexture->GetRenderTargetView();
+        _metaDataTargets[0] = _specularTexture->GetRenderTargetView();
+        _metaDataTargets[1] = _normalTexture->GetRenderTargetView();
+        _metaDataTargets[2] = _depthTexture->GetRenderTargetView();
     }
 
-    void ForwardRendering::SetDataTargets()
+    void ForwardRendering::SetMetaDataTargets()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, _dataTargets, _renderAPI.GetDepthStencilView());
+        context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, _metaDataTargets, _renderAPI.GetDepthStencilView());
     }
 
     void ForwardRendering::SetRenderTarget()
@@ -100,94 +90,82 @@ namespace ege
         context->OMSetRenderTargets(1, &renderTargetView, _renderAPI.GetDepthStencilView());
     }
 
-    void ForwardRendering::ClearDataTargets()
+    void ForwardRendering::ClearMetaDataTargets()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 
         for (int i = 0; i < FORWARD_DATA_RENDER_TARGET; i++)
         {
-            context->ClearRenderTargetView(_dataTargets[i], reinterpret_cast<const float*>(&Colors::Magenta));
+            context->ClearRenderTargetView(_metaDataTargets[i], reinterpret_cast<const float*>(&Colors::Black));
         }
     }
 
     void ForwardRendering::ClearRenderTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::Magenta));
+        context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::Yellow));
     }
 
     void ForwardRendering::ClearFinalTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //context->ClearRenderTargetView(&*_finalTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::Magenta));
-        context->ClearRenderTargetView(&*_renderAPI.GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::Magenta));
+        //context->ClearRenderTargetView(&*_finalTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        context->ClearRenderTargetView(&*_renderAPI.GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
     }
 
-    void ForwardRendering::DrawData()
+    void ForwardRendering::DrawMetaData()
     {
         _renderAPI.ClearDepthStencilView();
-        SetDataTargets();
-        ClearDataTargets();
-        
-        _dataShader->Apply();
+        SetMetaDataTargets();
+        ClearMetaDataTargets();
+
+        _scene->DrawMetaData();
     }
 
     void ForwardRendering::DrawRender()
     {
         _renderAPI.ClearDepthStencilView();
+        _renderAPI.ClearRenderTargetView();
         SetRenderTarget();
         ClearRenderTarget();
+
+        _scene->Draw();
     }
 
     void ForwardRendering::DrawFinal()
     {
         _renderAPI.ClearDepthStencilView();
         SetFinalTarget();
-        ClearRenderTarget();
+        ClearFinalTarget();
 
         _renderAPI.TurnZBufferOff();
 
+        OrthographicCamera camera;
+
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 
-        _projection = XMMatrixOrthographicOffCenterLH(- (float)(_width / 2), (float)(_width / 2), -(float)(_height / 2), (float)(_height / 2), 0.1f, 10.0f);
+        XMFLOAT4X4 projection = camera.GetProjection();
+        XMFLOAT4X4 view = camera.GetView();
+        XMFLOAT4X4 world; XMStoreFloat4x4(&world, XMMatrixIdentity());
 
-        XMVECTOR Eye = XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
-        XMVECTOR LookAt = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-        XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-        _view = XMMatrixLookAtLH(Eye, LookAt, Up);
-
-        _world = XMMatrixIdentity();
-
-        ConstantBufferElement* quadConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
+        SPtr<ConstantBufferElement> quadConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::QUAD);
         QuadConstantBuffer* bufferUpdate = (QuadConstantBuffer*)&*quadConstantBuffer->UpdateBuffer;
 
-        bufferUpdate->Projection = XMMatrixTranspose(_projection);
-        bufferUpdate->View = XMMatrixTranspose(_view);
-        //bufferUpdate->World = XMMatrixTranspose(_world);
+        XMMATRIX V = XMLoadFloat4x4(&view);
+        XMMATRIX P = XMLoadFloat4x4(&projection);
+        XMMATRIX W = XMLoadFloat4x4(&world);
 
-        //context->UpdateSubresource(quadConstantBuffer->Buffer, 0, nullptr, bufferUpdate, 0, 0);
+        bufferUpdate->View = XMMatrixTranspose(V);
+        bufferUpdate->Projection = XMMatrixTranspose(P);
+        bufferUpdate->World = XMMatrixTranspose(W);
 
-        //_quadShader->Apply();
+        context->UpdateSubresource(quadConstantBuffer->Buffer, 0, nullptr, bufferUpdate, 0, 0);
+        ID3D11ShaderResourceView* resourceView = _renderTexture->GetShaderResourceView();
+        context->PSSetShaderResources(0, 1, &resourceView);
 
-        //_quad.Draw();
+        _quadShader->Apply();
+        _quad.Draw();
 
-        /*ConstantBufferElement* quadConstantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::QUAD);
-        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-
-        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
-
-        UINT stride = sizeof(VertexDesc);
-        UINT offset = 0;
-        context->IASetVertexBuffers(0, 1, &_vertexBuffer, &stride, &offset);
-        context->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
-
-        context->UpdateSubresource(quadConstantBuffer->Buffer, 0, nullptr, quadConstantBuffer->UpdateBuffer, 0, 0);
-        context->DrawIndexed((UINT)_indices.size(), 0, 0);
-
-
-        _quad.Draw();*/
-
-        //_scene->Draw();
+        _renderAPI.TurnZBufferOn();
     }
 }

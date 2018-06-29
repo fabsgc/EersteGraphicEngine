@@ -58,6 +58,17 @@ namespace ege
         }
     }
 
+    void Node::DrawMetaData()
+    {
+        for (auto child : _child)
+        {
+            if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
+            {
+                child.second->DrawMetaData();
+            }
+        }
+    }
+
     SPtr<Scene> Node::GetScene()
     {
         return _scene;

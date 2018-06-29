@@ -106,7 +106,8 @@ namespace ege
 
         XMVECTOR Right = XMVectorSet(_position.x, _position.y, 0.0f, 0.0f);
         XMVECTOR Up    = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-        XMVECTOR Look  = XMVectorSet(_position.x, _position.y -0.67f, 1.0f, 0.0f);
+        //XMVECTOR Look = XMVectorSet(_position.x, _position.y - 0.67f, 1.0f, 0.0f);
+        XMVECTOR Look  = XMVectorSet(_position.x, _position.y, 1.0f, 0.0f);
 
         XMMATRIX View = XMMatrixLookAtLH(Right, Look, Up);
 

@@ -59,7 +59,7 @@ namespace ege
     {
         Node::Draw();
 
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
         FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 

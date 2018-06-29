@@ -23,6 +23,7 @@ namespace ege
         virtual void     Initialise() = 0;
         virtual void     Update() = 0;
         virtual void     Draw() = 0;
+        virtual void     DrawMetaData() = 0;
 
         using            IMoveable::Move;
         using            IMoveable::MoveStrafe;

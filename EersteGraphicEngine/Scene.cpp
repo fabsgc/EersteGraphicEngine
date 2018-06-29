@@ -91,6 +91,13 @@ namespace ege
         DrawNodes();
     }
 
+    void Scene::DrawMetaData()
+    {
+        DrawCamera();
+        DrawMetaDataLights();
+        DrawMetaDataNodes();
+    }
+
     void Scene::DrawCamera()
     {
         if (_camera != nullptr)
@@ -98,7 +105,7 @@ namespace ege
             _camera->Draw();
 
             ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-            ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::FRAME);
+            SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
             FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
             context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
         }
@@ -107,7 +114,7 @@ namespace ege
     void Scene::DrawLights()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         constantBufferUpdate->LightIndex = 0;
@@ -128,11 +135,43 @@ namespace ege
         context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);        
     }
 
+    void Scene::DrawMetaDataLights()
+    {
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
+
+        constantBufferUpdate->LightIndex = 0;
+
+        if (_ambientLight != nullptr && _ambientLight->IsEnabled())
+        {
+            _ambientLight->DrawMetaData();
+        }
+
+        for (auto light : _lights)
+        {
+            if (light.second->IsEnabled())
+            {
+                light.second->DrawMetaData();
+            }
+        }
+
+        context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
+    }
+
     void Scene::DrawNodes()
     {
         for (auto node : _nodes)
         {
             node.second->Draw();
+        }
+    }
+
+    void Scene::DrawMetaDataNodes()
+    {
+        for (auto node : _nodes)
+        {
+            node.second->DrawMetaData();
         }
     }
 }

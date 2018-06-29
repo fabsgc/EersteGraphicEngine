@@ -13,6 +13,7 @@
 
 #include "CityModel.h"
 #include "Player.h"
+#include "Quad.h"
 
 namespace ege
 {
@@ -69,7 +70,9 @@ namespace ege
 
         SPtr<CityModel> wind             = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         SPtr<CityModel> wind2            = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        SPtr<CityModel> building         = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<CityModel> building = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+
+        SPtr<Quad> quad         = ege_shared_ptr_new<Quad>();
 
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
@@ -94,12 +97,16 @@ namespace ege
         wind2->RotatePitch(XM_PIDIV4);
         building->RotatePitch(XM_PI);
 
+        quad->Initialise();
+
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 5.0f);
         building->GoTo(-30.0f, 0.0, 20.0f);
 
         player->GoTo(0.0f, 1.0f, 0.0f);
         //player->AttachCamera(camera);
+
+        quad->GoTo(-3.0f, 1.0f, 0.0f);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -122,6 +129,7 @@ namespace ege
         node->InsertNode("wind-2", wind2);
         node->InsertNode("building", building);
         node->InsertNode("player", player);
+        node->InsertNode("quad", quad);
 
         for (INT8 i = -3; i <= 3; i++)
         {

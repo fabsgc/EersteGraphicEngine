@@ -94,7 +94,7 @@ namespace ege
         return _renderTargetView;
     }
 
-    ID3D11ShaderResourceView* RenderTexture::GetResourceView()
+    ID3D11ShaderResourceView* RenderTexture::GetShaderResourceView()
     {
         return _shaderResourceView;
     }

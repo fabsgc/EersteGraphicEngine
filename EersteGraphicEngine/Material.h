@@ -16,7 +16,7 @@ namespace ege
         virtual ~Material() = 0 {};
         virtual void    Initialise();
         virtual void    Update() override;
-        virtual void    Apply();
+        virtual void    Apply(bool shaderMetaData = false);
 
         const XMFLOAT4& GetSpecularColor() const;
         const float&    GetSpecularPower() const;
@@ -37,6 +37,7 @@ namespace ege
 
         Map<UINT, SPtr<Texture>> _textures;
         SPtr<Shader>             _shader;
+        SPtr<Shader>             _shaderMetaData;
 
         XMFLOAT4                 _specularColor;
         float                    _specularPower;

@@ -27,6 +27,7 @@ namespace ege
         void          DeleteNode(SPtr<Node> node);
         void          Update() override;
         void          Draw() override;
+        virtual void  DrawMetaData();
 
         NodeType      GetType();
         SPtr<Scene>   GetScene();

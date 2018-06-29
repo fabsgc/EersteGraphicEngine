@@ -87,7 +87,7 @@ namespace ege
         void Initialise();
         void Apply();
         bool HasShader(ShaderType type);
-        void InsertConstantBuffer(UINT slot, ConstantBufferElement* constantBuffer);
+        void InsertConstantBuffer(UINT slot, SPtr<ConstantBufferElement> constantBuffer);
 
     protected:
         HRESULT Open();
@@ -123,6 +123,6 @@ namespace ege
 
         ID3D11InputLayout*                _inputLayout;
 
-        Map<UINT, ConstantBufferElement*> _constantBufferElements;
+        Map<UINT, SPtr<ConstantBufferElement>> _constantBufferElements;
     };
 }

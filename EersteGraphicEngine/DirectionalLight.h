@@ -14,6 +14,7 @@ namespace ege
         void            Initialise() override;
         void            Update()  override;
         void            Draw()  override;
+        void            DrawMetaData()  override;
 
         using           Light::Rotate;
         virtual void    Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;

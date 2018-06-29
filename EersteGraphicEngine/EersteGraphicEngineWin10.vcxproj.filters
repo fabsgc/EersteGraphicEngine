@@ -301,9 +301,6 @@
     <Filter Include="Data\Shader\Forward">
       <UniqueIdentifier>{e0c0f9eb-92a4-43a7-a938-b4b693203a6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Forward\Data">
-      <UniqueIdentifier>{8e329610-afc2-4cf7-99a7-df8da1b9ac2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data\Shader\Forward\Default">
       <UniqueIdentifier>{f00ac82c-94b9-416b-a3f1-4df1dc46a4ab}</UniqueIdentifier>
     </Filter>
@@ -315,6 +312,9 @@
     </Filter>
     <Filter Include="Data\Shader\Common\Quad">
       <UniqueIdentifier>{2f97141c-11b2-4514-866d-834bbe76a8fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Forward\MetaData">
+      <UniqueIdentifier>{8e329610-afc2-4cf7-99a7-df8da1b9ac2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -939,12 +939,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_PS.hlsl">
-      <Filter>Data\Shader\Forward\Data</Filter>
-    </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_VS.hlsl">
-      <Filter>Data\Shader\Forward\Data</Filter>
-    </FxCompile>
     <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_PS.hlsl">
       <Filter>Data\Shader\Forward\Default</Filter>
     </FxCompile>
@@ -956,6 +950,12 @@
     </FxCompile>
     <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_PS.hlsl">
       <Filter>Data\Shader\Common\Quad</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_PS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_VS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

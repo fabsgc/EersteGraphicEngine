@@ -16,8 +16,8 @@ struct PS_INPUT
 struct PS_OUTPUT
 {
     float4 Specular : SV_Target0;
-    float4 Normal   : SV_Target1;
-    float4 Depth    : SV_Target2;
+    float4 Normal : SV_Target1;
+    float4 Depth : SV_Target2;
 };
 
 Texture2D DiffuseTexture  : register(t0);
@@ -49,12 +49,12 @@ PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT)
         }
         else
         {
-            OUT.Specular = float4(SpecularTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz, 1.0f);
+            OUT.Specular = float4(SpecularColor.xyz, (SpecularPower) / 255.0f);
         }
     }
     else
     {
-        OUT.Specular = float4(SpecularColor.xyz, (SpecularPower) / 255.0f);
+        OUT.Specular = float4(0.0f, 0.0f, 0.0f, 1.0f);
     }
     
 
@@ -63,17 +63,23 @@ PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT)
 
 PS_OUTPUT ComputeNormalBuffer(PS_INPUT IN, PS_OUTPUT OUT)
 {
-    if (HasNormalTexture == true)
+    if (HasNormalTexture)
     {
         float3 sampledNormal = (2 * NormalTexture.Sample(AnisotropicColorSampler, IN.Texture).xyz) - 1.0f;
         float3x3 tbn = float3x3(IN.Tangent, IN.Binormal, IN.Normal);
         float3 normal = mul(sampledNormal, tbn);
 
-        OUT.Normal = float4(normal, 1.0f);
+        OUT.Normal.x = (normal.x + 1.0) / 2.0f;
+        OUT.Normal.y = (normal.y + 1.0) / 2.0f;
+        OUT.Normal.z = (normal.z + 1.0) / 2.0f;
+        OUT.Normal.w = 1.0f;
     }
     else
     {
-        OUT.Normal = float4(IN.Normal, 1.0f);
+        OUT.Normal.x = (IN.Normal.x + 1.0) / 2.0f;
+        OUT.Normal.y = (IN.Normal.y + 1.0) / 2.0f;
+        OUT.Normal.z = (IN.Normal.z + 1.0) / 2.0f;
+        OUT.Normal.w = 1.0f;
     }
 
     return OUT;
@@ -81,7 +87,7 @@ PS_OUTPUT ComputeNormalBuffer(PS_INPUT IN, PS_OUTPUT OUT)
 
 PS_OUTPUT ComputeDepthBuffer(PS_INPUT IN, PS_OUTPUT OUT)
 {
-    float depthValue = IN.DepthPosition.z / IN.DepthPosition.w;
+    float depthValue = 1.0 - (IN.DepthPosition.z / 256.0f);
 
     OUT.Depth.r = depthValue;
     OUT.Depth.g = depthValue;

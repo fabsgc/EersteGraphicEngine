@@ -356,8 +356,8 @@ namespace ege
         return hr;
     }
 
-    void Shader::InsertConstantBuffer(UINT slot, ConstantBufferElement* constantBuffer)
+    void Shader::InsertConstantBuffer(UINT slot, SPtr<ConstantBufferElement> constantBuffer)
     {
-        _constantBufferElements.insert(Pair<UINT, ConstantBufferElement*>(slot, constantBuffer));
+        _constantBufferElements.insert(Pair<UINT, SPtr<ConstantBufferElement>>(slot, constantBuffer));
     }
 }

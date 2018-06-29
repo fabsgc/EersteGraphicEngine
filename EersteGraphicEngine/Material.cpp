@@ -9,6 +9,7 @@ namespace ege
     Material::Material()
         : _renderAPI(gRenderAPI())
         , _shader(nullptr)
+        , _shaderMetaData(nullptr)
         , _specularColor(DefaultSpecularColor)
         , _specularPower(DefaultSpecularPower)
         , _emitPower(DefaultEmitPower)
@@ -21,7 +22,7 @@ namespace ege
 
     Material::Material(SPtr<Shader> shader)
         : _renderAPI(gRenderAPI())
-        ,_shader(shader) 
+        , _shader(shader) 
     {}
 
     void Material::Initialise()
@@ -32,11 +33,15 @@ namespace ege
     {
     }
 
-    void Material::Apply()
+    void Material::Apply(bool shaderMetaData)
     {
-        if (_shader != nullptr)
+        if (_shader != nullptr && shaderMetaData == false)
         {
             _shader->Apply();
+        }
+        else if(_shaderMetaData != nullptr)
+        {
+            _shaderMetaData->Apply();
         }
         
         for (auto texture : _textures)
@@ -45,7 +50,7 @@ namespace ege
         }
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::OBJECT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         constantBufferUpdate->SpecularColor      = _specularColor;

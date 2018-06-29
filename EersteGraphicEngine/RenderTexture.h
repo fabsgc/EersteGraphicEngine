@@ -16,7 +16,7 @@ namespace ege
         void                      Resize(UINT Width, UINT Height);
         ID3D11Texture2D*          GetRenderTargetTexture();
         ID3D11RenderTargetView*   GetRenderTargetView();
-        ID3D11ShaderResourceView* GetResourceView();
+        ID3D11ShaderResourceView* GetShaderResourceView();
 
     protected:
         void                      Clean();
@@ -32,6 +32,7 @@ namespace ege
         UINT                            _height;
 
         ID3D11Texture2D*                _renderTargetTexture;
+        ID3D11Texture2D*                _renderMSTargetTexture;
         ID3D11RenderTargetView*         _renderTargetView;
         ID3D11ShaderResourceView*       _shaderResourceView;
 

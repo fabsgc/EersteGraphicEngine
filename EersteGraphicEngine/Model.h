@@ -21,6 +21,7 @@ namespace ege
         void                 Initialise() override;
         void                 Update() override;
         void                 Draw() override;
+        void                 DrawMetaData()  override;
         void                 Build(SPtr<ModelDesc> modelDesc);
         void                 SetMaterial(SPtr<Material> material);
         void                 SetColor(const Color color);

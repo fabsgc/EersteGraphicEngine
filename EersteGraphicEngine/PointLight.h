@@ -14,6 +14,7 @@ namespace ege
         void         Initialise() override;
         void         Update()  override;
         void         Draw()  override;
+        void         DrawMetaData()  override;
 
         void         SetRadius(float radius);
         const float& GetRadius() const;

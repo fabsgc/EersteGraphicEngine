@@ -13,7 +13,7 @@ struct VS_INPUT
 
 struct VS_OUTPUT
 {
-    float4 DepthPosition : POSITION;
+    float4 DepthPosition : TEXTURE0;
     float4 Position : SV_POSITION;
     float4 Color : COLOR0;
     float2 Texture : TEXCOORD0;
@@ -32,7 +32,16 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
     output.Position      = mul( IN.Position, World );
     output.Position      = mul( output.Position, View );
     output.Position      = mul( output.Position, Projection );
-    output.DepthPosition = output.Position;
+    output.Color         = IN.Color;
+    output.Texture       = GetCorrectedTextureCoordinate(IN.Texture);
+    output.Normal        = normalize(mul(float4(IN.Normal, 0.0f), World)).xyz;
+    output.Tangent       = normalize(mul(float4(IN.Tangent, 0.0f), World)).xyz;
+    output.Binormal      = cross(output.Normal, output.Tangent);
+
+    float4 distance      = mul(IN.Position, World);
+    distance             = mul(distance, View);
+
+    output.DepthPosition = distance;
 
     return output;
 }

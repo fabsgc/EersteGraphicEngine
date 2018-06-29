@@ -60,11 +60,12 @@ namespace ege
         void TurnZBufferOn();
         void TurnZBufferOff();
 
-        Device*                 GetDevice();
-        ConstantBufferElement*  GetConstantBuffer(ConstantBufferType type);
-        RenderDesc&             GetRenderDesc();
-        ID3D11RenderTargetView* GetRenderTargetView();
-        ID3D11DepthStencilView* GetDepthStencilView();
+        Device*                     GetDevice();
+        ConstantBufferElement&      GetConstantBuffer(ConstantBufferType type);
+        SPtr<ConstantBufferElement> GetConstantBufferPtr(ConstantBufferType type);
+        RenderDesc&                 GetRenderDesc();
+        ID3D11RenderTargetView*     GetRenderTargetView();
+        ID3D11DepthStencilView*     GetDepthStencilView();
 
     protected:
         RenderAPI(RenderAPI const&) = delete;
@@ -73,34 +74,34 @@ namespace ege
         void LoadRenderConfig();
 
     protected:
-        RenderDesc                _renderDesc;
+        RenderDesc                  _renderDesc;
 
-        IDXGIDevice*              _dxgiDevice;
-        IDXGIAdapter*             _dxgiAdapter;
-        IDXGIFactory *            _dxgiFactory;
+        IDXGIDevice*                _dxgiDevice;
+        IDXGIAdapter*               _dxgiAdapter;
+        IDXGIFactory *              _dxgiFactory;
 
-        Device*                   _device;
+        Device*                     _device;
 
-        D3D_DRIVER_TYPE           _driverType;
-        D3D_FEATURE_LEVEL         _featureLevel;
+        D3D_DRIVER_TYPE             _driverType;
+        D3D_FEATURE_LEVEL           _featureLevel;
 
-        IDXGISwapChain*           _swapChain;
-        ID3D11RenderTargetView*   _renderTargetView;
-        ID3D11DepthStencilView*   _depthStencilView;
-        ID3D11Texture2D*          _depthStencilBuffer;
-        ID3D11DepthStencilState*  _depthStencilState;
-        ID3D11DepthStencilState*  _depthDisabledStencilState;
-        ID3D11RasterizerState*    _rasterizerState;
-        D3D11_VIEWPORT            _screenViewport;
+        IDXGISwapChain*             _swapChain;
+        ID3D11RenderTargetView*     _renderTargetView;
+        ID3D11DepthStencilView*     _depthStencilView;
+        ID3D11Texture2D*            _depthStencilBuffer;
+        ID3D11DepthStencilState*    _depthStencilState;
+        ID3D11DepthStencilState*    _depthDisabledStencilState;
+        ID3D11RasterizerState*      _rasterizerState;
+        D3D11_VIEWPORT              _screenViewport;
 
-        UINT                      _4xMsaaQuality;
-        ID3D11SamplerState*       _colorSampler;
-        ID3D11RasterizerState*    _backFaceCulling;
+        UINT                        _4xMsaaQuality;
+        ID3D11SamplerState*         _colorSampler;
+        ID3D11RasterizerState*      _backFaceCulling;
 
-        ConstantBufferElement     _frameConstantBuffer;
-        ConstantBufferElement     _objectConstantBuffer;
-        ConstantBufferElement     _lightConstantBuffer;
-        ConstantBufferElement     _quadConstantBuffer;
+        SPtr<ConstantBufferElement> _frameConstantBuffer;
+        SPtr<ConstantBufferElement> _objectConstantBuffer;
+        SPtr<ConstantBufferElement> _lightConstantBuffer;
+        SPtr<ConstantBufferElement> _quadConstantBuffer;
     };
 
     RenderAPI& gRenderAPI();

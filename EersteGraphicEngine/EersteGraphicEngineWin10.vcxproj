@@ -451,7 +451,7 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Shader/Common/Quad/%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/Shader/Common/Quad/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_PS.hlsl">
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_PS.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS_MAIN</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
@@ -469,7 +469,7 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Shader/Forward/Data/%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)/Shader/Forward/Data/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\Data_VS.hlsl">
+    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_VS.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)/Shader/Forward/Data/%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)/Shader/Forward/Data/%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Shader/Forward/Data/%(Filename).cso</ObjectFileOutput>

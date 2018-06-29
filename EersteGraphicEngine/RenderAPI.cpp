@@ -8,19 +8,27 @@ namespace ege
 {
     RenderAPI::RenderAPI()
     {
-        _driverType           = D3D_DRIVER_TYPE_HARDWARE;
-        _featureLevel         = D3D_FEATURE_LEVEL_11_0;
+        _driverType                = D3D_DRIVER_TYPE_HARDWARE;
+        _featureLevel              = D3D_FEATURE_LEVEL_11_0;
 
-        _swapChain            = nullptr;
-        _renderTargetView     = nullptr;
-        _depthStencilView     = nullptr;
-        _depthStencilBuffer   = nullptr;
-        _depthStencilState    = nullptr;
-        _rasterizerState      = nullptr;
-        _screenViewport       = { 0 };
+        _swapChain                 = nullptr;
+        _renderTargetView          = nullptr;
+        _depthStencilView          = nullptr;
+        _depthStencilBuffer        = nullptr;
+        _depthStencilState         = nullptr;
+        _rasterizerState           = nullptr;
+        _screenViewport            = { 0 };
 
-        _colorSampler         = nullptr;
-        _backFaceCulling      = nullptr;
+        _colorSampler              = nullptr;
+        _backFaceCulling           = nullptr;
+
+        _depthStencilState         = nullptr;
+        _depthDisabledStencilState = nullptr;
+
+        _frameConstantBuffer       = nullptr;
+        _objectConstantBuffer      = nullptr;
+        _lightConstantBuffer       = nullptr;
+        _quadConstantBuffer        = nullptr;
     }
 
     RenderAPI::~RenderAPI()
@@ -82,7 +90,7 @@ namespace ege
     void RenderAPI::ClearRenderTargetView()
     {
         ID3D11DeviceContext* context = _device->GetImmediateContext();
-        context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        context->ClearRenderTargetView(_renderTargetView, reinterpret_cast<const float*>(&Colors::Blue));
     }
 
     void RenderAPI::ClearDepthStencilView()
@@ -165,9 +173,11 @@ namespace ege
             EGE_ASSERT_ERROR(SUCCEEDED(hr), "Failed to initialie device");
         }
 
+        //Check multisampling support
         device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &_4xMsaaQuality);
         assert(_4xMsaaQuality > 0);
 
+        //Create Swap chain
         DXGI_SWAP_CHAIN_DESC sd;
         ZeroMemory(&sd, sizeof(sd));
         sd.BufferCount = 2;
@@ -181,8 +191,8 @@ namespace ege
         sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
         sd.OutputWindow = window.GetHWnd();
         sd.Windowed = TRUE;
-        sd.SampleDesc.Count = 4;
-        sd.SampleDesc.Quality = _4xMsaaQuality - 1;
+        sd.SampleDesc.Count = 1;
+        sd.SampleDesc.Quality = 0;
         sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
         hr = device->QueryInterface(__uuidof(IDXGIDevice), (void**)&_dxgiDevice);
@@ -215,16 +225,15 @@ namespace ege
         depthStencilDesc.MipLevels = 1;
         depthStencilDesc.ArraySize = 1;
         depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-        depthStencilDesc.SampleDesc.Count = 4;
-        depthStencilDesc.SampleDesc.Quality = _4xMsaaQuality - 1;
+        depthStencilDesc.SampleDesc.Count = 1;
+        depthStencilDesc.SampleDesc.Quality = 0;
         depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
         depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
         depthStencilDesc.CPUAccessFlags = 0;
         depthStencilDesc.MiscFlags = 0;
 
         device->CreateTexture2D(&depthStencilDesc, nullptr, &_depthStencilBuffer);
-        device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);
-        context->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);        
+        device->CreateDepthStencilView(_depthStencilBuffer, nullptr, &_depthStencilView);  
 
         // Setup the viewport
         _screenViewport.Width = (FLOAT)window.GetWindowWidth();
@@ -239,6 +248,11 @@ namespace ege
         context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
         // Create constant buffers
+        _frameConstantBuffer  = ege_shared_ptr_new<ConstantBufferElement>();
+        _objectConstantBuffer = ege_shared_ptr_new<ConstantBufferElement>();
+        _lightConstantBuffer  = ege_shared_ptr_new<ConstantBufferElement>();
+        _quadConstantBuffer   = ege_shared_ptr_new<ConstantBufferElement>();
+
         D3D11_BUFFER_DESC bdFrame;
         ZeroMemory(&bdFrame, sizeof(bdFrame));
         bdFrame.Usage = D3D11_USAGE_DEFAULT;
@@ -246,26 +260,26 @@ namespace ege
         bdFrame.CPUAccessFlags = 0;
 
         bdFrame.ByteWidth = sizeof(FrameConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer.Buffer);
-        _frameConstantBuffer.UpdateBuffer = ege_shared_ptr_new<FrameConstantBuffer>();
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_frameConstantBuffer->Buffer);
+        _frameConstantBuffer->UpdateBuffer = ege_shared_ptr_new<FrameConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create frame constant buffer");
 
         bdFrame.ByteWidth = sizeof(ObjectConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer.Buffer);
-        _objectConstantBuffer.UpdateBuffer = ege_shared_ptr_new<ObjectConstantBuffer>();
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_objectConstantBuffer->Buffer);
+        _objectConstantBuffer->UpdateBuffer = ege_shared_ptr_new<ObjectConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create object constant buffer");
 
         bdFrame.ByteWidth = sizeof(LightConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer.Buffer);
-        _lightConstantBuffer.UpdateBuffer = ege_shared_ptr_new<LightConstantBuffer>();
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_lightConstantBuffer->Buffer);
+        _lightConstantBuffer->UpdateBuffer = ege_shared_ptr_new<LightConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create light constant buffer");
 
         bdFrame.ByteWidth = sizeof(QuadConstantBuffer);
-        hr = device->CreateBuffer(&bdFrame, nullptr, &_quadConstantBuffer.Buffer);
-        _quadConstantBuffer.UpdateBuffer = ege_shared_ptr_new<QuadConstantBuffer>();
+        hr = device->CreateBuffer(&bdFrame, nullptr, &_quadConstantBuffer->Buffer);
+        _quadConstantBuffer->UpdateBuffer = ege_shared_ptr_new<QuadConstantBuffer>();
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create quad constant buffer");
         
@@ -300,7 +314,6 @@ namespace ege
             context->RSSetState(_backFaceCulling);
         }
 
-
         //Create a depth stencil state with depth enabled
         D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc;
 
@@ -323,7 +336,7 @@ namespace ege
 
         device->CreateDepthStencilState(&depthStencilStateDesc, &_depthStencilState);
 
-        //Create a depth stencil state with depth enabled
+        //Create a depth stencil state with depth disabled
         ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
 
         depthStencilStateDesc.DepthEnable = false;
@@ -372,8 +385,8 @@ namespace ege
         depthStencilDesc.MipLevels = 1;
         depthStencilDesc.ArraySize = 1;
         depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-        depthStencilDesc.SampleDesc.Count = 4;
-        depthStencilDesc.SampleDesc.Quality = _4xMsaaQuality - 1;;
+        depthStencilDesc.SampleDesc.Count = 1;
+        depthStencilDesc.SampleDesc.Quality = 0;
         depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
         depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
         depthStencilDesc.CPUAccessFlags = 0;
@@ -441,24 +454,52 @@ namespace ege
         return _device;
     }
 
-    ConstantBufferElement* RenderAPI::GetConstantBuffer(ConstantBufferType type)
+    ConstantBufferElement& RenderAPI::GetConstantBuffer(ConstantBufferType type)
     {
         switch (type)
         {
         case ConstantBufferType::FRAME:
-            return &_frameConstantBuffer;
+            return *_frameConstantBuffer;
             break;
 
         case ConstantBufferType::OBJECT:
-            return &_objectConstantBuffer;
+            return *_objectConstantBuffer;
             break;
 
         case ConstantBufferType::LIGHT:
-            return &_lightConstantBuffer;
+            return *_lightConstantBuffer;
+            break;
+
+        case ConstantBufferType::QUAD:
+            return *_quadConstantBuffer;
             break;
         }
 
-        return &_frameConstantBuffer;
+        return *_frameConstantBuffer;
+    }
+
+    SPtr<ConstantBufferElement> RenderAPI::GetConstantBufferPtr(ConstantBufferType type)
+    {
+        switch (type)
+        {
+        case ConstantBufferType::FRAME:
+            return _frameConstantBuffer;
+            break;
+
+        case ConstantBufferType::OBJECT:
+            return _objectConstantBuffer;
+            break;
+
+        case ConstantBufferType::LIGHT:
+            return _lightConstantBuffer;
+            break;
+
+        case ConstantBufferType::QUAD:
+            return _quadConstantBuffer;
+            break;
+        }
+
+        return _frameConstantBuffer;
     }
 
     RenderDesc& RenderAPI::GetRenderDesc()

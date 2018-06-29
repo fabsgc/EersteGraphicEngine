@@ -59,7 +59,7 @@ namespace ege
         }
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ConstantBufferElement* constantBuffer = _renderAPI.GetConstantBuffer(ConstantBufferType::LIGHT);
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
         LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
         UINT lightIndex = constantBufferUpdate->LightIndex;
@@ -73,6 +73,33 @@ namespace ege
         constantBufferUpdate->Lights[lightIndex].LightType       = static_cast<UINT>(_type);
 
         
+        constantBufferUpdate->LightIndex = lightIndex + 1;
+    }
+
+    void SpotLight::DrawMetaData()
+    {
+        Light::DrawMetaData();
+
+        if (_drawLightModel)
+        {
+            _lightModel->DrawMetaData();
+        }
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdate = (LightConstantBuffer*)&*constantBuffer->UpdateBuffer;
+
+        UINT lightIndex = constantBufferUpdate->LightIndex;
+
+        constantBufferUpdate->Lights[lightIndex].LightColor = _color;
+        constantBufferUpdate->Lights[lightIndex].LightDirection = _direction;
+        constantBufferUpdate->Lights[lightIndex].LightPosition = _position;
+        constantBufferUpdate->Lights[lightIndex].LightRadius = _radius;
+        constantBufferUpdate->Lights[lightIndex].LightInnerAngle = _innerAngle;
+        constantBufferUpdate->Lights[lightIndex].LightOuterAngle = _outerAngle;
+        constantBufferUpdate->Lights[lightIndex].LightType = static_cast<UINT>(_type);
+
+
         constantBufferUpdate->LightIndex = lightIndex + 1;
     }
 
