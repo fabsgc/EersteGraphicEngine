@@ -951,10 +951,10 @@
     <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_PS.hlsl">
       <Filter>Data\Shader\Common\Quad</Filter>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_PS.hlsl">
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_PS.hlsl">
       <Filter>Data\Shader\Forward\MetaData</Filter>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Data\MetaData_VS.hlsl">
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_VS.hlsl">
       <Filter>Data\Shader\Forward\MetaData</Filter>
     </FxCompile>
   </ItemGroup>

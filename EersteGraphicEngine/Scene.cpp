@@ -89,6 +89,20 @@ namespace ege
         DrawCamera();
         DrawLights();
         DrawNodes();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+
+        SPtr<ConstantBufferElement> constantBufferFrame = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
+        FrameConstantBuffer* constantBufferUpdateFrame = (FrameConstantBuffer*)&*constantBufferFrame->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferObject = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdateObject = (ObjectConstantBuffer*)&*constantBufferObject->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferLight = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdateLight = (LightConstantBuffer*)&*constantBufferLight->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferQuad = _renderAPI.GetConstantBufferPtr(ConstantBufferType::QUAD);
+        QuadConstantBuffer* constantBufferUpdateQuad = (QuadConstantBuffer*)&*constantBufferQuad->UpdateBuffer;
     }
 
     void Scene::DrawMetaData()
@@ -96,6 +110,20 @@ namespace ege
         DrawCamera();
         DrawMetaDataLights();
         DrawMetaDataNodes();
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        
+        SPtr<ConstantBufferElement> constantBufferFrame = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
+        FrameConstantBuffer* constantBufferUpdateFrame = (FrameConstantBuffer*)&*constantBufferFrame->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferObject = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* constantBufferUpdateObject = (ObjectConstantBuffer*)&*constantBufferObject->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferLight = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
+        LightConstantBuffer* constantBufferUpdateLight = (LightConstantBuffer*)&*constantBufferLight->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> constantBufferQuad = _renderAPI.GetConstantBufferPtr(ConstantBufferType::QUAD);
+        QuadConstantBuffer* constantBufferUpdateQuad = (QuadConstantBuffer*)&*constantBufferQuad->UpdateBuffer;
     }
 
     void Scene::DrawCamera()
@@ -145,7 +173,7 @@ namespace ege
 
         if (_ambientLight != nullptr && _ambientLight->IsEnabled())
         {
-            _ambientLight->DrawMetaData();
+            _ambientLight->Draw();
         }
 
         for (auto light : _lights)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-    <window width="1280" height="720" title="My First Graphic Engine" fps="0" rawinput="true" fullscreen="false"/>
-    <!--<window width="240" height="135" title="My First Graphic Engine" fps="0" rawinput="true" fullscreen="false"/>-->
+    <!--<window width="1280" height="720" title="My First Graphic Engine" fps="0" rawinput="true" fullscreen="false"/>-->
+    <window width="240" height="135" title="My First Graphic Engine" fps="0" rawinput="true" fullscreen="false"/>
 </application>

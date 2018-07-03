@@ -24,6 +24,10 @@ namespace ege
         _shader->InsertConstantBuffer(0, frameConstantBuffer);
         _shader->InsertConstantBuffer(1, objectConstantBuffer);
         _shader->InsertConstantBuffer(2, lightConstantBuffer);
+
+        _shaderMetaData->InsertConstantBuffer(0, frameConstantBuffer);
+        _shaderMetaData->InsertConstantBuffer(1, objectConstantBuffer);
+        _shaderMetaData->InsertConstantBuffer(2, lightConstantBuffer);
     }
 
     void DefaultMaterial::Update()

@@ -57,7 +57,7 @@ namespace ege
 
         SPtr<Node> node                  = ege_shared_ptr_new<Node>();
         SPtr<ThirdPersonCamera> camera   = ege_shared_ptr_new<ThirdPersonCamera>();
-        SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
+        //SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
         //SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
         SPtr<FlyingCamera> camera4       = ege_shared_ptr_new<FlyingCamera>();
 
@@ -81,7 +81,7 @@ namespace ege
         _scene->Initialise();
 
         camera->Initialise();
-        camera2->Initialise();
+        //camera2->Initialise();
         //camera3->Initialise();
         camera4->Initialise();
         ambient->Initialise();
@@ -123,8 +123,8 @@ namespace ege
         node->SetScene(_scene);
         node->InsertNode("camera", camera);
         node->InsertNode("sun", sun);
-        node->InsertNode("lamp", lamp);
-        node->InsertNode("spot", spot);
+        //node->InsertNode("lamp", lamp);
+        //node->InsertNode("spot", spot);
         node->InsertNode("wind", wind);
         node->InsertNode("wind-2", wind2);
         node->InsertNode("building", building);
@@ -142,10 +142,10 @@ namespace ege
             }
         }
 
-        //_scene->InsertCamera("camera", camera);
+        _scene->InsertCamera("camera", camera);
         _scene->InsertLight("sun", sun);
-        _scene->InsertLight("lamp", lamp);
-        _scene->InsertLight("spot", spot);
+        //_scene->InsertLight("lamp", lamp);
+        //_scene->InsertLight("spot", spot);
         _scene->InsertNode("root", node);
 
         _scene->SetActiveCamera(camera);

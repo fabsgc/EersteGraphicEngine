@@ -72,7 +72,6 @@ namespace ege
         constantBufferUpdate->Lights[lightIndex].LightOuterAngle = _outerAngle;
         constantBufferUpdate->Lights[lightIndex].LightType       = static_cast<UINT>(_type);
 
-        
         constantBufferUpdate->LightIndex = lightIndex + 1;
     }
 
@@ -98,7 +97,6 @@ namespace ege
         constantBufferUpdate->Lights[lightIndex].LightInnerAngle = _innerAngle;
         constantBufferUpdate->Lights[lightIndex].LightOuterAngle = _outerAngle;
         constantBufferUpdate->Lights[lightIndex].LightType = static_cast<UINT>(_type);
-
 
         constantBufferUpdate->LightIndex = lightIndex + 1;
     }
