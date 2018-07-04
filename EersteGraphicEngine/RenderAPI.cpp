@@ -110,7 +110,7 @@ namespace ege
 
             if (_renderDesc.VSync)
             {
-                hr = _swapChain->Present(0, 0);
+                hr = _swapChain->Present(1, 0);
             }
             else
             {
@@ -176,8 +176,8 @@ namespace ege
         _device->GetD3D11Device()->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &_4xMsaaQuality);
         assert(_4xMsaaQuality > 0);
 
-        _MSAASampleCount = 1;
-        _MSAASampleQuality = 0;
+        _MSAASampleCount = 4;
+        _MSAASampleQuality = _4xMsaaQuality - 1;
     }
 
     void RenderAPI::CreateSwapChain()

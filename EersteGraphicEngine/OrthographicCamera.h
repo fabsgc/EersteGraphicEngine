@@ -9,9 +9,10 @@ namespace ege
     {
     public:
         OrthographicCamera();
+        OrthographicCamera(CameraType type);
         ~OrthographicCamera();
 
-        void         Update();
+        virtual void Update() override;
         virtual void ComputeProjectionMatrix() override;
         virtual void Strafe(float x, float y, float z);
         virtual void Strafe(XMFLOAT3 distance);

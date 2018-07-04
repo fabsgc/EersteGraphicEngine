@@ -576,6 +576,9 @@
     <ClCompile Include="Quad.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
     </ClCompile>
+    <ClCompile Include="QuadScreenCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -883,6 +886,9 @@
     </ClInclude>
     <ClInclude Include="Quad.h">
       <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadScreenCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

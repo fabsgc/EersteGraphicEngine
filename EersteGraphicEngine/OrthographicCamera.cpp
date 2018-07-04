@@ -2,11 +2,21 @@
 
 namespace ege
 {
-    const float OrthographicCamera::DefaultMinZoom   = 0.001f;
+    const float OrthographicCamera::DefaultMinZoom   = 0.01f;
     const float OrthographicCamera::DefaultMaxZoom   = 256.0f;
 
     OrthographicCamera::OrthographicCamera()
         : Camera(CameraType::OrthographicCamera)
+        , _zoom(0.5f)
+        , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
+    {
+        _zoomSpeed = 1.0f;
+        _position = XMFLOAT3(0.0f, 0.0f, 0.0f);
+        ComputeProjectionMatrix();
+    }
+
+    OrthographicCamera::OrthographicCamera(CameraType type)
+        : Camera(type)
         , _zoom(0.5f)
         , _lastMousePosition(XMFLOAT2(1000.0f, 1000.0f))
     {
@@ -106,8 +116,7 @@ namespace ege
 
         XMVECTOR Right = XMVectorSet(_position.x, _position.y, 0.0f, 0.0f);
         XMVECTOR Up    = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-        //XMVECTOR Look = XMVectorSet(_position.x, _position.y - 0.67f, 1.0f, 0.0f);
-        XMVECTOR Look  = XMVectorSet(_position.x, _position.y, 1.0f, 0.0f);
+        XMVECTOR Look = XMVectorSet(_position.x, _position.y - 0.67f, 1.0f, 0.0f);
 
         XMMATRIX View = XMMatrixLookAtLH(Right, Look, Up);
 

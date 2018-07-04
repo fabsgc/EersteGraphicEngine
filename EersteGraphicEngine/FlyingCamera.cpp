@@ -16,6 +16,8 @@ namespace ege
     FlyingCamera::FlyingCamera(CameraType type)
         : PerspectiveCamera(type)
     {
+        _translationSpeed = 5.0f;
+        _rotationSpeed = 1.0f;
     }
 
     FlyingCamera::~FlyingCamera()

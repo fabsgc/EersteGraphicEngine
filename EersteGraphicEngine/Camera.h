@@ -16,6 +16,7 @@ namespace ege
         FirstPersonCamera,
         ThirdPersonCamera,
         OrthographicCamera,
+        QuadScreenCamera,
         GenericCamera
     };
 

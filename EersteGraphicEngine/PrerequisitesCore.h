@@ -189,6 +189,7 @@ namespace ege
     class  Frustum;
     class  PerspectiveCamera;
     class  OrthographicCamera;
+    class  QuadScreenCamera;
     class  FlyingCamera;
     class  FirstPersonCamera;
     class  ThirdPersonCamera;

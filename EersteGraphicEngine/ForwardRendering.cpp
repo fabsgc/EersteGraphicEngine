@@ -4,7 +4,7 @@
 #include "ShaderManager.h"
 #include "ModelManager.h"
 
-#include "OrthographicCamera.h"
+#include "QuadScreenCamera.h"
 
 namespace ege
 {
@@ -95,7 +95,7 @@ namespace ege
 
     void ForwardRendering::CreateCamera()
     {
-        _camera = ege_shared_ptr_new<OrthographicCamera>();
+        _camera = ege_shared_ptr_new<QuadScreenCamera>();
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> quadConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::QUAD);
 
@@ -164,16 +164,16 @@ namespace ege
     void ForwardRendering::SetRenderTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
-        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
+        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
+        ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
         context->OMSetRenderTargets(1, &renderTargetView, _renderAPI.GetDepthStencilView());
     }
 
     void ForwardRendering::SetEffectTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
-        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
+        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
+        ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
         context->OMSetRenderTargets(1, &renderTargetView, _renderAPI.GetDepthStencilView());
     }
 
@@ -197,15 +197,15 @@ namespace ege
     void ForwardRendering::ClearRenderTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
-        //context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        //context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
     }
 
     void ForwardRendering::ClearEffectTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
-        //context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        //context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
+        context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
     }
 
     void ForwardRendering::ClearFinalTarget()
@@ -257,7 +257,7 @@ namespace ege
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
 
-        //_renderTexture->BoundNonMsTexture();
+        _renderTexture->BoundNonMsTexture();
 
         ID3D11ShaderResourceView* resourceView = _renderTexture->GetShaderResourceView();
         context->PSSetShaderResources(0, 1, &resourceView);

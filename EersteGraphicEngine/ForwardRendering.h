@@ -56,7 +56,7 @@ namespace ege
         ID3D11RenderTargetView*  _metaDataTargets[FORWARD_DATA_RENDER_TARGET];
 
         SPtr<Shader>             _quadShader;
-        SPtr<OrthographicCamera> _camera;
+        SPtr<QuadScreenCamera>   _camera;
         SPtr<Geometry>           _quad;
 
         ID3D11DepthStencilView*  _depthStencilView;
