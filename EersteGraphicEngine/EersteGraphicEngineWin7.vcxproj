@@ -211,6 +211,7 @@
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
     <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="QuadScreenCamera.cpp" />
     <ClCompile Include="RenderAPI.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderPipeline.cpp" />
@@ -302,6 +303,7 @@
     <ClInclude Include="PrerequisitesCore.h" />
     <ClInclude Include="PrerequisitesUtil.h" />
     <ClInclude Include="Quad.h" />
+    <ClInclude Include="QuadScreenCamera.h" />
     <ClInclude Include="RenderAPI.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderPipeline.h" />
