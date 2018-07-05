@@ -6,7 +6,7 @@ struct PS_INPUT
     float2 Texture  : TEXCOORD0;
 };
 
-Texture2D FinalTexture  : register(t0);
+Texture2D FinalTexture  : register(t7);
 
 float4 PS_MAIN(PS_INPUT IN) : SV_Target
 {

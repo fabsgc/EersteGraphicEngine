@@ -19,21 +19,21 @@ namespace ege
 
     void Node::InsertNode(String name, SPtr<Node> node)
     {
-        _child.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
+        _children.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
     }
 
     void Node::DeleteNode(String name)
     {
-        _child.erase(name);
+        _children.erase(name);
     }
 
     void Node::DeleteNode(SPtr<Node> node)
     {
-        for (auto it = _child.begin(); it != _child.end(); it++)
+        for (auto it = _children.begin(); it != _children.end(); it++)
         {
             if (it->second == node)
             {
-                _child.erase(it);
+                _children.erase(it);
                 break;
             }
         }
@@ -41,7 +41,7 @@ namespace ege
 
     void Node::Update()
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             child.second->Update();
         }
@@ -49,7 +49,7 @@ namespace ege
 
     void Node::Draw()
     {
-        for (auto child : _child )
+        for (auto child : _children)
         {
             if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
             {
@@ -60,7 +60,7 @@ namespace ege
 
     void Node::DrawMetaData()
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
             {
@@ -84,6 +84,11 @@ namespace ege
         return _type;
     }
 
+    Map<String, SPtr<Node>>& Node::GetChildren()
+    {
+        return _children;
+    }
+
     void Node::SetScene(SPtr<Scene> scene)
     {
         _scene = scene;
@@ -96,7 +101,7 @@ namespace ege
 
     void Node::Move(XMVECTOR movement)
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {
@@ -123,7 +128,7 @@ namespace ege
 
     void Node::MoveStrafe(XMVECTOR movement)
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {
@@ -150,7 +155,7 @@ namespace ege
 
     void Node::Scale(XMVECTOR origin, XMVECTOR scale)
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {
@@ -180,7 +185,7 @@ namespace ege
         XMFLOAT3 position = GetPosition();
         XMVECTOR P = XMLoadFloat3(&position);
 
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {
@@ -207,7 +212,7 @@ namespace ege
 
     void Node::Rotate(XMVECTOR origin, XMVECTOR eulerAngles)
     {
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {
@@ -237,7 +242,7 @@ namespace ege
         XMFLOAT3 position = GetPosition();
         XMVECTOR P = XMLoadFloat3(&position);
 
-        for (auto child : _child)
+        for (auto child : _children)
         {
             switch (child.second->GetType())
             {

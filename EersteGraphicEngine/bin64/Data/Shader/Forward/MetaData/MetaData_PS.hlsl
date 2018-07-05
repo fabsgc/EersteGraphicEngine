@@ -20,9 +20,9 @@ struct PS_OUTPUT
     float4 Depth    : SV_Target2;
 };
 
-Texture2D DiffuseTexture  : register(t0);
-Texture2D SpecularTexture : register(t1);
-Texture2D NormalTexture   : register(t2);
+Texture2D DiffuseTexture  : register(t3);
+Texture2D SpecularTexture : register(t4);
+Texture2D NormalTexture   : register(t5);
 
 PS_OUTPUT ComputeSpecularBuffer(PS_INPUT IN, PS_OUTPUT OUT);
 PS_OUTPUT ComputeNormalBuffer(PS_INPUT IN, PS_OUTPUT OUT);

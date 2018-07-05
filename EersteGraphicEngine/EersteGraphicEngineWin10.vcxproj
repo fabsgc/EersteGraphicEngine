@@ -145,6 +145,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>/DEGE_WIN_SDK_10 /DEGE_ERROR_LOG_FILE=\"Log/Errors.log\" /DEGE_DEBUG_LOG_FILE=\"Log/Debug.log\" /DEGE_CONFIG_APP_FILE=\"Data/Config/Application.xml\" /DEGE_CONFIG_KEYMAP_FILE=\"Data/Config/Keymap.xml\" /DEGE_CONFIG_CONTEXT_FILE=\"Data/Config/Context.xml\" /DEGE_CONFIG_RENDER_FILE=\"Data/Config/Render.xml\" /DEGE_CONFIG_SHADER_FILE=\"Data/Config/Shader.xml\" /DEGE_CONFIG_MODEL_FILE=\"Data/Config/Model.xml\" /DEGE_CONFIG_SCENE_FILE=\"Data/Config/Scene.xml\" /DEGE_CONFIG_TEXTURE_FILE=\"Data/Config/Texture.xml\" /DEGE_CONFIG_MATERIAL_FILE=\"Data/Config/Material.xml\" /DEGE_SHADERS_FOLDER=\"Data/Shader/\" /DEGE_MODEL_FOLDER=\"Data/Model/\" /DEGE_SCENE_FOLDER=\"Data/Scene/\" /DEGE_TEXTURE_FOLDER=\"Data/Texture/\" /DEGE_MATERIAL_FOLDER=\"Data/Material/\" /DEGE_SHADERS_INCLUDE_FOLDER=\"Data/Shader/Common/\" /DEGE_COMPILED_SHADERS_FOLDER=\"Shader/\"  %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>lib\tinyxml2;lib\assimp;lib\jsoncpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -21,34 +21,35 @@ namespace ege
         Node(NodeType type = NodeType::Node);
         ~Node();
 
-        virtual void  Initialise();
-        void          InsertNode(String name, SPtr<Node> node);
-        void          DeleteNode(String name);
-        void          DeleteNode(SPtr<Node> node);
-        void          Update() override;
-        void          Draw() override;
-        virtual void  DrawMetaData();
+        virtual void             Initialise();
+        void                     InsertNode(String name, SPtr<Node> node);
+        void                     DeleteNode(String name);
+        void                     DeleteNode(SPtr<Node> node);
+        void                     Update() override;
+        void                     Draw() override;
+        virtual void             DrawMetaData();
 
-        NodeType      GetType();
-        SPtr<Scene>   GetScene();
-        SPtr<Node>    GetParent();
-        void          SetScene(SPtr<Scene> scene);
-        void          SetParent(SPtr<Node> parent);
+        NodeType                 GetType();
+        SPtr<Scene>              GetScene();
+        SPtr<Node>               GetParent();
+        Map<String, SPtr<Node>>& GetChildren();
+        void                     SetScene(SPtr<Scene> scene);
+        void                     SetParent(SPtr<Node> parent);
 
-        using         IMoveable::Move;
-        using         IMoveable::Scale;
-        using         IMoveable::Rotate;
-        virtual void  Move(XMVECTOR movement) override;
-        virtual void  MoveStrafe(XMVECTOR movement) override;
-        virtual void  Scale(XMVECTOR origin, XMVECTOR scale) override;
-        virtual void  Scale(XMVECTOR scale) override;
-        virtual void  Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
-        virtual void  Rotate(XMVECTOR eulerAngles) override;
+        using                    IMoveable::Move;
+        using                    IMoveable::Scale;
+        using                    IMoveable::Rotate;
+        virtual void             Move(XMVECTOR movement) override;
+        virtual void             MoveStrafe(XMVECTOR movement) override;
+        virtual void             Scale(XMVECTOR origin, XMVECTOR scale) override;
+        virtual void             Scale(XMVECTOR scale) override;
+        virtual void             Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
+        virtual void             Rotate(XMVECTOR eulerAngles) override;
 
     protected:
         SPtr<Scene>                _scene;
         SPtr<Node>                 _parent;
-        Map<String, SPtr<Node>>    _child;
+        Map<String, SPtr<Node>>    _children;
 
         NodeType                   _type;
     };

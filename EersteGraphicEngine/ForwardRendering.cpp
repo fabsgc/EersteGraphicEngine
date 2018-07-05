@@ -5,6 +5,8 @@
 #include "ModelManager.h"
 
 #include "QuadScreenCamera.h"
+#include "Model.h"
+#include "Node.h"
 
 namespace ege
 {
@@ -164,7 +166,6 @@ namespace ege
     void ForwardRendering::SetRenderTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
         ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
         context->OMSetRenderTargets(1, &renderTargetView, _renderAPI.GetDepthStencilView());
     }
@@ -172,7 +173,6 @@ namespace ege
     void ForwardRendering::SetEffectTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderTargetView();
         ID3D11RenderTargetView* renderTargetView = _renderTexture->GetRenderMSTargetView();
         context->OMSetRenderTargets(1, &renderTargetView, _renderAPI.GetDepthStencilView());
     }
@@ -197,14 +197,12 @@ namespace ege
     void ForwardRendering::ClearRenderTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
         context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
     }
 
     void ForwardRendering::ClearEffectTarget()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //context->ClearRenderTargetView(&*_renderTexture->GetRenderTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
         context->ClearRenderTargetView(&*_renderTexture->GetRenderMSTargetView(), reinterpret_cast<const float*>(&Colors::LightSteelBlue));
     }
 
@@ -222,9 +220,9 @@ namespace ege
 
         _scene->DrawMetaData();
 
-        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11RenderTargetView* nullViews[FORWARD_DATA_RENDER_TARGET] = { nullptr, nullptr, nullptr };
-        context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, nullViews, nullptr);
+        //ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        //ID3D11RenderTargetView* nullViews[FORWARD_DATA_RENDER_TARGET] = { nullptr, nullptr, nullptr };
+        //context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawRender()
@@ -233,11 +231,54 @@ namespace ege
         SetRenderTarget();
         ClearRenderTarget();
 
-        _scene->Draw();
+        //_scene->Draw();
+
+        SPtr<Camera> camera = _scene->GetActiveCamera();
+        Map<String, SPtr<Node>>& nodes = _scene->GetNodes();
+        Map<String, SPtr<Light>>& lights = _scene->GetLights();
+        SPtr<AmbientLight> ambientLight = _scene->GetAmbientLight();
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        ID3D11RenderTargetView* nullViews[1] = { nullptr };
-        context->OMSetRenderTargets(1, nullViews, nullptr);
+
+        SPtr<ConstantBufferElement> lightConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
+        LightConstantBuffer* lightConstantBufferUpdate = (LightConstantBuffer*)&*lightConstantBuffer->UpdateBuffer;
+
+        SPtr<ConstantBufferElement> objectConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+        ObjectConstantBuffer* objectConstantBufferUpdate = (ObjectConstantBuffer*)&*objectConstantBuffer->UpdateBuffer;
+
+        lightConstantBufferUpdate->LightIndex = 0;
+
+        _scene->DrawCamera();
+
+        if (ambientLight != nullptr && ambientLight->IsEnabled())
+        {
+            ambientLight->Draw();
+        }
+
+        for (auto node : nodes)
+        {
+            Map<String, SPtr<Node>>& children = node.second->GetChildren();
+
+            if (node.second->GetType() == NodeType::Model)
+            {
+                SPtr<Model> model = dynamic_cast<Model*>(node.second);
+                LightMode lightMode = model->GetLightMode();
+            }
+
+            for (auto child : children)
+            {
+                if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
+                {
+                    //child.second->Draw();
+                }
+            }
+        }
+
+
+
+        //ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        //ID3D11RenderTargetView* nullViews[1] = { nullptr };
+        //context->OMSetRenderTargets(1, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawEffects()
@@ -260,14 +301,14 @@ namespace ege
         _renderTexture->BoundNonMsTexture();
 
         ID3D11ShaderResourceView* resourceView = _renderTexture->GetShaderResourceView();
-        context->PSSetShaderResources(0, 1, &resourceView);
+        context->PSSetShaderResources(7, 1, &resourceView);
 
         _quadShader->Apply();
         _quad->Draw();
 
         _renderAPI.TurnZBufferOn();
 
-        ID3D11ShaderResourceView* null[] = { nullptr, nullptr, nullptr };
-        context->PSSetShaderResources(0, 3, null);
+        //ID3D11ShaderResourceView* null[] = { nullptr, nullptr, nullptr };
+        //context->PSSetShaderResources(0, 3, null);
     }
 }
