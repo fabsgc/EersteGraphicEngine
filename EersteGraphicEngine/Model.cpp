@@ -42,7 +42,7 @@ namespace ege
     {
         Node::Draw();
 
-        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        /*ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
@@ -54,7 +54,7 @@ namespace ege
             _material->Apply();
         }
         
-        _geometry.Draw();
+        _geometry.Draw();*/
     }
 
     void Model::DrawMetaData()

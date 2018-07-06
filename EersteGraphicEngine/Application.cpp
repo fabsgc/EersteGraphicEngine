@@ -131,9 +131,9 @@ namespace ege
         node->InsertNode("player", player);
         node->InsertNode("quad", quad);
 
-        for (INT8 i = -3; i <= 3; i++)
+        for (INT8 i = -64; i <= 64; i++)
         {
-            for (INT8 j = -3; j <= 3; j++)
+            for (INT8 j = -64; j <= 64; j++)
             {
                 SPtr<CityModel> model = ege_shared_ptr_new<CityModel>("grass", "grass-diffuse", "grass-specular");
                 model->Initialise();

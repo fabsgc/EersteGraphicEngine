@@ -43,10 +43,10 @@
 #   endif
 #else 
 #   ifndef EGE_ASSERT_ERROR
-#   define EGE_ASSERT_ERROR(condition, error) (condition)
+#   define EGE_ASSERT_ERROR(condition, error) {}
 #   endif
 
 #   ifndef EGE_ASSERT_ERROR_SHORT
-#   define EGE_ASSERT_ERROR_SHORT(condition) (condition)
+#   define EGE_ASSERT_ERROR_SHORT(condition) {}
 #   endif
 #endif

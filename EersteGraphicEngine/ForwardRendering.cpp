@@ -231,9 +231,9 @@ namespace ege
         SetRenderTarget();
         ClearRenderTarget();
 
-        //_scene->Draw();
+        _scene->Draw();
 
-        SPtr<Camera> camera = _scene->GetActiveCamera();
+        /*SPtr<Camera> camera = _scene->GetActiveCamera();
         Map<String, SPtr<Node>>& nodes = _scene->GetNodes();
         Map<String, SPtr<Light>>& lights = _scene->GetLights();
         SPtr<AmbientLight> ambientLight = _scene->GetAmbientLight();
@@ -272,9 +272,7 @@ namespace ege
                     //child.second->Draw();
                 }
             }
-        }
-
-
+        }*/
 
         //ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         //ID3D11RenderTargetView* nullViews[1] = { nullptr };
