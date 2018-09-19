@@ -9,7 +9,7 @@
 
 #include "Geometry.h"
 
-#define FORWARD_DATA_RENDER_TARGET 4
+#define FORWARD_DATA_RENDER_TARGET 3
 
 namespace ege
 {

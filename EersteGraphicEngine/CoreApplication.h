@@ -75,7 +75,7 @@ namespace ege
 
         const Context* GetCurrentContext() const;
 
-        template<class T = Application>
+        template<class T = CoreApplication>
         static void StartUp(const StartUpDescription& desc)
         {
             IModule::StartUp<T>(desc);
@@ -85,6 +85,8 @@ namespace ege
         void Draw() override;
 
         const StartUpDescription& GetStartUpDescription() const;
+
+		SPtr<Scene>& GetScene();
 
     protected:
         void OnStartUp() override;

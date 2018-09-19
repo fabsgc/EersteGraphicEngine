@@ -130,7 +130,7 @@ namespace ege
 
     void ForwardRendering::Draw()
     {
-        DrawMetaData();
+        //DrawMetaData();
         DrawRender();
         //DrawEffects();
         DrawFinal();
@@ -220,9 +220,9 @@ namespace ege
 
         _scene->DrawMetaData();
 
-        //ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //ID3D11RenderTargetView* nullViews[FORWARD_DATA_RENDER_TARGET] = { nullptr, nullptr, nullptr };
-        //context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, nullViews, nullptr);
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11RenderTargetView* nullViews[FORWARD_DATA_RENDER_TARGET] = { nullptr, nullptr, nullptr };
+        context->OMSetRenderTargets(FORWARD_DATA_RENDER_TARGET, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawRender()
@@ -274,9 +274,9 @@ namespace ege
             }
         }*/
 
-        //ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        //ID3D11RenderTargetView* nullViews[1] = { nullptr };
-        //context->OMSetRenderTargets(1, nullViews, nullptr);
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+        ID3D11RenderTargetView* nullViews[1] = { nullptr };
+        context->OMSetRenderTargets(1, nullViews, nullptr);
     }
 
     void ForwardRendering::DrawEffects()
@@ -306,7 +306,7 @@ namespace ege
 
         _renderAPI.TurnZBufferOn();
 
-        //ID3D11ShaderResourceView* null[] = { nullptr, nullptr, nullptr };
-        //context->PSSetShaderResources(0, 3, null);
+        ID3D11ShaderResourceView* null[] = { nullptr, nullptr, nullptr };
+        context->PSSetShaderResources(0, 3, null);
     }
 }

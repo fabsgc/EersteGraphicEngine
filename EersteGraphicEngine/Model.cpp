@@ -6,15 +6,21 @@
 #include "Material.h"
 #include "Light.h"
 
+#include "CoreApplication.h"
+
+#include "PerspectiveCamera.h"
+
 namespace ege
 {
-    const bool Model::DefaultCastShadow     = true;
+	const bool Model::DefaultCastShadow = true;
+	const bool Model::DefaultStatic     = true;
     const LightMode Model::DefaultLightMode = LightMode::All;
 
     Model::Model()
         : Node(NodeType::Model)
         , _renderAPI(gRenderAPI())
-        , _castShadow(DefaultCastShadow)
+		, _castShadow(DefaultCastShadow)
+		, _static(DefaultCastShadow)
         , _lightMode(DefaultLightMode)
     {
         XMStoreFloat4x4(&_world, XMMatrixIdentity());
@@ -42,7 +48,24 @@ namespace ege
     {
         Node::Draw();
 
-        /*ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+		CoreApplication& app = gCoreApplication();
+
+		SPtr<Scene> scene   = app.GetScene();
+		SPtr<Camera> camera = scene->GetActiveCamera();
+
+		CameraType cameraType = camera->GetType();
+
+		if (cameraType == CameraType::FirstPersonCamera || cameraType == CameraType::ThirdPersonCamera || cameraType == CameraType::FlyingCamera)
+		{
+			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
+
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 5.0f))
+			{
+				return;
+			}
+		}
+
+        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
@@ -54,7 +77,7 @@ namespace ege
             _material->Apply();
         }
         
-        _geometry.Draw();*/
+        _geometry.Draw();
     }
 
     void Model::DrawMetaData()
@@ -98,6 +121,11 @@ namespace ege
         _castShadow = castShadow;
     }
 
+	void Model::SetStatic(bool isStatic)
+	{
+		_static = isStatic;
+	}
+
     void Model::SetLightMode(LightMode lightMode)
     {
         lightMode = _lightMode;
@@ -122,6 +150,11 @@ namespace ege
     {
         return _castShadow;
     }
+
+	bool Model::GetStatic() const
+	{
+		return _static;
+	}
 
     const LightMode& Model::GetLightMode() const
     {

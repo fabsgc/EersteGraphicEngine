@@ -13,7 +13,6 @@
 
 #include "CityModel.h"
 #include "Player.h"
-#include "Quad.h"
 
 namespace ege
 {
@@ -55,39 +54,34 @@ namespace ege
     {
         _scene                           = ege_shared_ptr_new<Scene>();
 
+		// ################ CREATE NODES
         SPtr<Node> node                  = ege_shared_ptr_new<Node>();
+
         SPtr<ThirdPersonCamera> camera   = ege_shared_ptr_new<ThirdPersonCamera>();
-        //SPtr<FirstPersonCamera> camera2  = ege_shared_ptr_new<FirstPersonCamera>();
-        //SPtr<OrthographicCamera> camera3 = ege_shared_ptr_new<OrthographicCamera>();
-        SPtr<FlyingCamera> camera4       = ege_shared_ptr_new<FlyingCamera>();
+		SPtr<Player> player = ege_shared_ptr_new<Player>();
 
         SPtr<AmbientLight> ambient       = ege_shared_ptr_new<AmbientLight>();
         SPtr<DirectionalLight> sun       = ege_shared_ptr_new<DirectionalLight>();
         SPtr<PointLight> lamp            = ege_shared_ptr_new<PointLight>();
         SPtr<SpotLight> spot             = ege_shared_ptr_new<SpotLight>();
 
-        SPtr<Player> player              = ege_shared_ptr_new<Player>();
-
         SPtr<CityModel> wind             = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
         SPtr<CityModel> wind2            = ege_shared_ptr_new<CityModel>("wind-turbine", "wind-turbine-diffuse", "wind-turbine-specular");
-        SPtr<CityModel> building = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
+        SPtr<CityModel> building         = ege_shared_ptr_new<CityModel>("building-1", "building-1-diffuse", "building-1-specular");
 
-        SPtr<Quad> quad         = ege_shared_ptr_new<Quad>();
-
+		// ################ SPECIFY IF WE CAST LIGHTS
         sun->SetDrawLightModel(true);
         lamp->SetDrawLightModel(true);
         spot->SetDrawLightModel(true);
 
+		// ################ INITIALISE NODES
         _scene->Initialise();
 
-        camera->Initialise();
-        //camera2->Initialise();
-        //camera3->Initialise();
-        camera4->Initialise();
         ambient->Initialise();
         sun->Initialise();
         lamp->Initialise();
-
+		
+		camera->Initialise();
         player->Initialise();
 
         wind->Initialise();
@@ -97,16 +91,12 @@ namespace ege
         wind2->RotatePitch(XM_PIDIV4);
         building->RotatePitch(XM_PI);
 
-        quad->Initialise();
-
+		// ################ CHANGE ATTRIBUTES FOR EACH NODE
         wind->GoTo(5.0f, 0.0, 0.0f);
         wind2->GoTo(25.0f, 0.0, 5.0f);
         building->GoTo(-30.0f, 0.0, 20.0f);
 
         player->GoTo(0.0f, 1.0f, 0.0f);
-        //player->AttachCamera(camera);
-
-        quad->GoTo(-3.0f, 1.0f, 0.0f);
 
         ambient->SetColor(XMFLOAT4(1.0f, 1.0f, 0.95f, 0.3f));
         sun->SetColor(XMFLOAT4(0.95f, 0.90f, 0.8f, 0.4f));
@@ -120,6 +110,7 @@ namespace ege
         spot->SetDirection(XMFLOAT3(1.0f, -1.0f, 0.0f));
         spot->SetRadius(35.0f);
 
+		// ################ INSERT NODES
         node->SetScene(_scene);
         node->InsertNode("camera", camera);
         node->InsertNode("sun", sun);
@@ -129,11 +120,10 @@ namespace ege
         node->InsertNode("wind-2", wind2);
         node->InsertNode("building", building);
         node->InsertNode("player", player);
-        node->InsertNode("quad", quad);
 
-        for (INT8 i = -64; i <= 64; i++)
+        for (INT8 i = -10; i <= 10; i++)
         {
-            for (INT8 j = -64; j <= 64; j++)
+            for (INT8 j = -10; j <= 10; j++)
             {
                 SPtr<CityModel> model = ege_shared_ptr_new<CityModel>("grass", "grass-diffuse", "grass-specular");
                 model->Initialise();

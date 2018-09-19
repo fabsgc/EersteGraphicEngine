@@ -217,12 +217,6 @@
     <Filter Include="Source Files\App\Model\City">
       <UniqueIdentifier>{b4bdf2cf-d88f-459c-b9c1-f5ec5bb1ed67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Renderer\Light\Model">
-      <UniqueIdentifier>{1c432b12-3465-47b0-87a2-f7553d5f4fb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Core\Renderer\Light\Model">
-      <UniqueIdentifier>{d4c4f48b-dbb5-4129-abcf-4d4c46b11898}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Util">
       <UniqueIdentifier>{c403cd66-6afa-49f7-b8ae-3101b4a1d4a2}</UniqueIdentifier>
     </Filter>
@@ -259,12 +253,6 @@
     <Filter Include="Source Files\Core\Renderer\Camera\Handler">
       <UniqueIdentifier>{faf795df-af08-4186-b984-a21806347380}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Renderer\Bounding">
-      <UniqueIdentifier>{034b1f4e-b10c-40e6-85c0-32ce7a41e2e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Core\Renderer\Bounding">
-      <UniqueIdentifier>{f9bfdf5a-d468-453c-98e2-85a20a8ec773}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core\RenderAPI\Texture">
       <UniqueIdentifier>{7651805e-af7e-4d58-8dac-9d879abc0a79}</UniqueIdentifier>
     </Filter>
@@ -295,20 +283,38 @@
     <Filter Include="Header Files\Core\Renderer\Effect">
       <UniqueIdentifier>{580278c0-e6d9-4cc1-8649-266b9d64650a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\RenderAPI\Buffer">
+      <UniqueIdentifier>{a7860405-da01-47dd-9d83-d707c8dd4cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Model\Bounding">
+      <UniqueIdentifier>{f9bfdf5a-d468-453c-98e2-85a20a8ec773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Renderer\Light\Light">
+      <UniqueIdentifier>{1c432b12-3465-47b0-87a2-f7553d5f4fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Model\Bounding">
+      <UniqueIdentifier>{034b1f4e-b10c-40e6-85c0-32ce7a41e2e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Renderer\Light\Light">
+      <UniqueIdentifier>{d4c4f48b-dbb5-4129-abcf-4d4c46b11898}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Data\Shader\Common">
-      <UniqueIdentifier>{13885f1d-fced-441b-a1c4-b39ce8e0e618}</UniqueIdentifier>
+      <UniqueIdentifier>{a6139bc5-456f-40d0-9861-3689f8fb8928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Shader\Common\Quad">
+      <UniqueIdentifier>{5e8b60a6-fccb-4b35-8ac4-63d8a711aee6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Data\Shader\Forward">
-      <UniqueIdentifier>{59329958-e99e-451f-b2e0-055d0a33faad}</UniqueIdentifier>
+      <UniqueIdentifier>{bd1be4ad-83b8-4f50-8523-e089066b8b63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Deferred">
-      <UniqueIdentifier>{a3370874-3bdb-41c6-b589-18102745c83c}</UniqueIdentifier>
+    <Filter Include="Data\Shader\Forward\Default">
+      <UniqueIdentifier>{7138fff3-3627-47fb-ab4f-e0f28e8e4aeb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Data\Shader\Forward\Include">
-      <UniqueIdentifier>{9d987c4a-6e9f-44ec-a47a-89742b690b9a}</UniqueIdentifier>
+      <UniqueIdentifier>{5112624b-1147-487f-8f24-066da3267b34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Shader\Forward\Color">
-      <UniqueIdentifier>{e7174069-cb8a-418d-b91f-2110f7edfdb1}</UniqueIdentifier>
+    <Filter Include="Data\Shader\Forward\MetaData">
+      <UniqueIdentifier>{0db559f7-23b2-48a7-a87b-9fc222a70384}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -478,7 +484,7 @@
       <Filter>Source Files\App\Model\City</Filter>
     </ClCompile>
     <ClCompile Include="LightModel.cpp">
-      <Filter>Source Files\Core\Renderer\Light\Model</Filter>
+      <Filter>Source Files\Core\Renderer\Light\Light</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Source Files\Core\Util</Filter>
@@ -526,16 +532,16 @@
       <Filter>Source Files\Core\Renderer\Camera\Perspective</Filter>
     </ClCompile>
     <ClCompile Include="Bounding.cpp">
-      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
-      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
     </ClCompile>
     <ClCompile Include="BoundingComplex.cpp">
-      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
     </ClCompile>
     <ClCompile Include="BoundingSphere.cpp">
-      <Filter>Source Files\Core\Renderer\Bounding</Filter>
+      <Filter>Source Files\Core\Renderer\Model\Bounding</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Core\RenderAPI\Texture</Filter>
@@ -563,6 +569,15 @@
     </ClCompile>
     <ClCompile Include="RenderTexture.cpp">
       <Filter>Source Files\Core\Renderer\RenderPipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadScreenCamera.cpp">
+      <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Core\Renderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Source Files\App\Model\Primitive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -771,7 +786,7 @@
       <Filter>Header Files\App\Model\City</Filter>
     </ClInclude>
     <ClInclude Include="LightModel.h">
-      <Filter>Header Files\Core\Renderer\Light\Model</Filter>
+      <Filter>Header Files\Core\Renderer\Light\Light</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Header Files\Core\Util</Filter>
@@ -834,16 +849,16 @@
       <Filter>Header Files\Core\Renderer\Camera\Handler</Filter>
     </ClInclude>
     <ClInclude Include="Bounding.h">
-      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
-      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
     </ClInclude>
     <ClInclude Include="BoundingComplex.h">
-      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
     </ClInclude>
     <ClInclude Include="BoundingSphere.h">
-      <Filter>Header Files\Core\Renderer\Bounding</Filter>
+      <Filter>Header Files\Core\Renderer\Model\Bounding</Filter>
     </ClInclude>
     <ClInclude Include="lib\ddstextureloader\DDSTextureLoader.h">
       <Filter>Header Files\Utility\Lib\DDSTextureLoader</Filter>
@@ -862,6 +877,18 @@
     </ClInclude>
     <ClInclude Include="RenderTexture.h">
       <Filter>Header Files\Core\Renderer\RenderPipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadScreenCamera.h">
+      <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Header Files\App\Model\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderObject.h">
+      <Filter>Header Files\Core\RenderAPI\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Header Files\Core\RenderAPI\Buffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -907,15 +934,30 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_PS.hlsl">
-      <Filter>Data\Shader\Forward\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_PS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
     </FxCompile>
-    <FxCompile Include="bin64\Data\Shader\Forward\Color\Color_VS.hlsl">
-      <Filter>Data\Shader\Forward\Color</Filter>
+    <FxCompile Include="bin64\Data\Shader\Common\Quad\Quad_VS.hlsl">
+      <Filter>Data\Shader\Common\Quad</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_PS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\Default\Default_VS.hlsl">
+      <Filter>Data\Shader\Forward\Default</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_PS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
+    </FxCompile>
+    <FxCompile Include="bin64\Data\Shader\Forward\MetaData\MetaData_VS.hlsl">
+      <Filter>Data\Shader\Forward\MetaData</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin64\Data\Shader\Forward\Include\Common.hlsli">
+      <Filter>Data\Shader\Forward\Include</Filter>
+    </None>
+    <None Include="bin64\Data\Shader\Forward\Include\Light.hlsli">
       <Filter>Data\Shader\Forward\Include</Filter>
     </None>
     <None Include="bin64\Data\Shader\Forward\Include\Texture.hlsli">

@@ -10,6 +10,9 @@ namespace ege
 
     Geometry::~Geometry()
     {
+
+		SafeReleaseCom(_indexBuffer);
+		SafeReleaseCom(_vertexBuffer);
     };
 
     void Geometry::Build(SPtr<ModelDesc> modelDesc)
@@ -60,7 +63,7 @@ namespace ege
 
     void Geometry::Draw()
     {
-        /*ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
+        ID3D11DeviceContext* context = gRenderAPI().GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
         ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
@@ -70,7 +73,7 @@ namespace ege
         context->IASetIndexBuffer(_indexBuffer, DXGI_FORMAT_R16_UINT, 0);
 
         context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
-        context->DrawIndexed((UINT)_indices.size(), 0, 0);*/
+        context->DrawIndexed((UINT)_indices.size(), 0, 0);
     }
 
     void Geometry::SetColor(const Color color)

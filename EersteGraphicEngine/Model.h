@@ -25,17 +25,20 @@ namespace ege
         void                 Build(SPtr<ModelDesc> modelDesc);
         void                 SetMaterial(SPtr<Material> material);
         void                 SetColor(const Color color);
-        void                 SetCastShadow(bool castShadow);
+		void                 SetCastShadow(bool castShadow);
+		void                 SetStatic(bool isStatic);
         void                 SetLightMode(LightMode lightMode);
         void                 AddLights(SPtr<Light> light);
         Geometry&            GetGeometry();
         SPtr<Material>       GetMaterial();
         bool                 GetCastShadow() const;
+		bool                 GetStatic() const;
         const LightMode&     GetLightMode() const;
         Vector<SPtr<Light>>& GetLights();
 
     protected:
-        static const bool      DefaultCastShadow;
+		static const bool      DefaultCastShadow;
+		static const bool      DefaultStatic;
         static const LightMode DefaultLightMode;
         
     protected:
@@ -46,6 +49,7 @@ namespace ege
         Geometry            _geometry;
 
         bool                _castShadow;
+		bool                _static;
         LightMode           _lightMode;
         Vector<SPtr<Light>> _lights;
     };

@@ -183,16 +183,6 @@ namespace ege
     }
 
     /**
-    * \brief Create a new unique pointer using a custom allocator category.
-    */
-    template<class Type, class Allocator = GeneralAllocator, class... Args>
-    UPtr<Type> ege_unique_ptr_new(Args &&... args)
-    {
-        Type*rawPtr = (Type*)ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
-        return ege_unique_ptr<Type, Allocator>(rawPtr);
-    }
-
-    /**
     * \brief Create a new unique pointer from a previously constructed object.
     *        Pointer specific data will be allocated using the provided allocator category.
     */
@@ -201,6 +191,16 @@ namespace ege
     {
         return std::unique_ptr<Type, decltype(&ege_delete<Type, Allocator>)>(data, ege_delete<Type, Allocator>);
     }
+
+	/**
+	* \brief Create a new unique pointer using a custom allocator category.
+	*/
+	template<class Type, class Allocator = GeneralAllocator, class... Args>
+	UPtr<Type> ege_unique_ptr_new(Args &&... args)
+	{
+		Type*rawPtr = (Type*)ege_allocate<Type, Allocator>(std::forward<Args>(args)...);
+		return ege_unique_ptr<Type, Allocator>(rawPtr);
+	}
 
     /**
     * \brief Create a new unique pointer from a previously constructed object.

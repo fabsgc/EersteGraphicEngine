@@ -10,15 +10,15 @@
         {                                                                                               \
             if (!(condition))                                                                           \
             {                                                                                           \
-                std::ofstream errorFile(EGE_ERROR_LOG_FILE, std::ios_base::out | std::ios_base::app);   \
+                ::std::ofstream errorFile(EGE_ERROR_LOG_FILE, ::std::ios_base::out | ::std::ios_base::app);   \
                                                                                                         \
-                errorFile << "Assertion failed at " << __FILE__ << ":" << __LINE__ << std::endl;        \
-                errorFile << "Inside " << __FUNCTION__ << std::endl;                                    \
-                errorFile << "Date: " << __DATE__ << std::endl;                                         \
-                errorFile << "Time: " << __TIME__ << std::endl;                                         \
-                errorFile << "Error: " << error << std::endl;                                           \
-                errorFile << "Condition: " << (condition) << std::endl;                                   \
-                errorFile << "############################################: " << std::endl;             \
+                errorFile << "Assertion failed at " << __FILE__ << ":" << __LINE__ << ::std::endl;        \
+                errorFile << "Inside " << __FUNCTION__ << ::std::endl;                                    \
+                errorFile << "Date: " << __DATE__ << ::std::endl;                                         \
+                errorFile << "Time: " << __TIME__ << ::std::endl;                                         \
+                errorFile << "Error: " << error << ::std::endl;                                           \
+                errorFile << "Condition: " << (condition) << ::std::endl;                                   \
+                errorFile << "############################################: " << ::std::endl;             \
                 assert((condition));                                                                      \
             }                                                                                           \
         }                                                                                   
@@ -29,14 +29,14 @@
         {                                                                                               \
             if (!(condition))                                                                           \
             {                                                                                           \
-                std::ofstream errorFile(EGE_ERROR_LOG_FILE, std::ios_base::out | std::ios_base::app);   \
+                ::std::ofstream errorFile(EGE_ERROR_LOG_FILE, ::std::ios_base::out | ::std::ios_base::app);   \
                                                                                                         \
                 errorFile << "Assertion failed at " << __FILE__ << ":" << __LINE__;                     \
-                errorFile << " inside " << __FUNCTION__ << std::endl;                                   \
-                errorFile << "Date: " << __DATE__ << std::endl;                                         \
-                errorFile << "Time: " << __TIME__ << std::endl;                                         \
+                errorFile << " inside " << __FUNCTION__ << ::std::endl;                                   \
+                errorFile << "Date: " << __DATE__ << ::std::endl;                                         \
+                errorFile << "Time: " << __TIME__ << ::std::endl;                                         \
                 errorFile << "Condition: " << (condition);                                                \
-                errorFile << "############################################: " << std::endl;             \
+                errorFile << "############################################: " << ::std::endl;             \
                 assert((condition));                                                                      \
             }                                                                                           \
         }                                                                                   

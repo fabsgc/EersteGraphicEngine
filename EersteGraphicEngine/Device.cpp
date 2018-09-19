@@ -1,5 +1,8 @@
 #include "Device.h"
 
+#include "comdef.h"
+#include <iostream>
+
 namespace ege
 {
     Device::Device()
@@ -52,6 +55,29 @@ namespace ege
 
     void Device::Shutdown()
     {
+		//We check potentially memory leaks at shutdown
+
+		ID3D11Debug* debugDevice = nullptr;
+		HRESULT result = _D3D11Device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDevice));
+
+		if (FAILED(result))
+		{
+			_com_error err(result);
+			LPCTSTR errMsg = err.ErrorMessage();
+			::std::cout << errMsg << ::std::endl;
+		}
+
+		result = debugDevice->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+
+		if (FAILED(result))
+		{
+			_com_error err(result);
+			LPCTSTR errMsg = err.ErrorMessage();
+			::std::cout << errMsg << ::std::endl;
+		}
+
+		SafeReleaseCom(debugDevice);
+
         if (_immediateContext)
         {
             _immediateContext->Flush();

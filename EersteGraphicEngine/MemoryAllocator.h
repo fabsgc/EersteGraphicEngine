@@ -82,6 +82,61 @@ namespace ege {
     {
     };
 
+	/* ###################################################################
+	*  ############# ENGINE MEMORY ALLOCATION ############################
+	*  ################################################################ */
+
+	/**
+	* Allocates the specified number of bytes (custom allocator)
+	*/
+	template<class Allocator = GeneralAllocator>
+	inline void* ege_allocate(UINT32 count)
+	{
+		return MemoryAllocator<Allocator>::Allocate(count);
+	}
+
+	/**
+	* Allocates enough bytes to hold the specified type, but doesn't construct it (custom allocator).
+	*/
+	template<class T, class Allocator = GeneralAllocator>
+	inline T* ege_allocate()
+	{
+		return (T*)MemoryAllocator<Allocator>::Allocate(sizeof(T));
+	}
+
+	/**
+	* Create a new object with the specified allocator and the specified parameters (custom allocator).
+	*/
+	template<class Type, class Allocator, class... Args>
+	Type* ege_new(Args &&...args)
+	{
+		return new (ege_allocate<Allocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
+	}
+
+	/** Create a new object with the specified allocator and the specified parameters. */
+	template<class Type, class... Args>
+	Type* ege_new(Args &&...args)
+	{
+		return new (ege_allocate<GeneralAllocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
+	}
+
+	/**
+	* Frees all the bytes allocated at the specified location.
+	*/
+	template<class Allocator = GeneralAllocator>
+	inline void ege_deallocate(void* ptr)
+	{
+		MemoryAllocator<Allocator>::Deallocate(ptr);
+	}
+
+	/** Destructs and frees the specified object. */
+	template<class T, class Allocator = GeneralAllocator>
+	inline void ege_delete(T* ptr)
+	{
+		(ptr)->~T();
+		MemoryAllocator<Allocator>::Deallocate(ptr);
+	}
+
     /* ###################################################################
     *  ############# STL ALLOCATOR WRAPPER ###############################
     *  ################################################################ */
@@ -172,61 +227,6 @@ namespace ege {
     public:
         Allocator * _allocator;
     };
-
-    /* ###################################################################
-    *  ############# ENGINE MEMORY ALLOCATION ############################
-    *  ################################################################ */
-
-    /**
-    * Allocates the specified number of bytes (custom allocator)
-    */
-    template<class Allocator = GeneralAllocator>
-    inline void* ege_allocate(UINT32 count)
-    {
-        return MemoryAllocator<Allocator>::Allocate(count);
-    }
-
-    /**
-    * Allocates enough bytes to hold the specified type, but doesn't construct it (custom allocator).
-    */
-    template<class T, class Allocator = GeneralAllocator>
-    inline T* ege_allocate()
-    {
-        return (T*)MemoryAllocator<Allocator>::Allocate(sizeof(T));
-    }
-
-    /**
-    * Create a new object with the specified allocator and the specified parameters (custom allocator).
-    */
-    template<class Type, class Allocator, class... Args>
-    Type* ege_new(Args &&...args)
-    {
-        return new (ege_allocate<Allocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
-    }
-
-    /** Create a new object with the specified allocator and the specified parameters. */
-    template<class Type, class... Args>
-    Type* ege_new(Args &&...args)
-    {
-        return new (ege_allocate<GeneralAllocator>(sizeof(Type))) Type(std::forward<Args>(args)...);
-    }
-
-    /**
-    * Frees all the bytes allocated at the specified location.
-    */
-    template<class Allocator = GeneralAllocator>
-    inline void ege_deallocate(void* ptr)
-    {
-        MemoryAllocator<Allocator>::Deallocate(ptr);
-    }
-
-    /** Destructs and frees the specified object. */
-    template<class T, class Allocator = GeneralAllocator>
-    inline void ege_delete(T* ptr)
-    {
-        (ptr)->~T();
-        MemoryAllocator<Allocator>::Deallocate(ptr);
-    }
 }
 
 #include "BasicAllocator.h"

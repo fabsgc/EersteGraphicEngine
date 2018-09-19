@@ -12,9 +12,9 @@ namespace ege
         ~Application();
 
         template<class T = Application>
-        static void startUp(const StartUpDescription& desc)
+        static void StartUp(const StartUpDescription& desc)
         {
-            CoreApplication::startUp<T>(desc);
+            CoreApplication::StartUp<T>(desc);
         }
 
         void RunMainLoop() override;

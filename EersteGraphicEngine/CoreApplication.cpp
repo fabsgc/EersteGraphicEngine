@@ -393,6 +393,11 @@ namespace ege
         return _startUpDesc;
     }
 
+	SPtr<Scene>& CoreApplication::GetScene()
+	{
+		return _scene;
+	}
+
     CoreApplication& gCoreApplication()
     {
         return CoreApplication::Instance();

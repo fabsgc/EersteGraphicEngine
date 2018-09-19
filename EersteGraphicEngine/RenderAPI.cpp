@@ -1,4 +1,4 @@
-#include "RenderAPI.h"
+﻿#include "RenderAPI.h"
 
 #include "ShaderManager.h"
 #include "EventManager.h"
@@ -71,6 +71,8 @@ namespace ege
         SafeReleaseCom(_dxgiDevice);
         SafeReleaseCom(_dxgiAdapter);
         SafeReleaseCom(_dxgiFactory);
+
+		SafeRelease(_device);
     }
 
     void RenderAPI::OnResize()
@@ -88,6 +90,8 @@ namespace ege
     {
         ClearRenderTargetView();
         ClearDepthStencilView();
+
+		ID3D11Debug* debugDevice = nullptr;
     }
 
     void RenderAPI::ClearRenderTargetView()
@@ -382,7 +386,6 @@ namespace ege
         hr = device->CreateDepthStencilState(&depthStencilStateDesc, &_depthStencilState);
 
         EGE_ASSERT_ERROR(SUCCEEDED(hr), "Can't create depth stencil state with enabled depth");
-
     }
 
     void RenderAPI::SetPrimitiveTopology()

@@ -35,7 +35,7 @@ namespace ege
 
     void Material::Apply(bool shaderMetaData)
     {
-        /*if (_shader != nullptr && shaderMetaData == false)
+        if (_shader != nullptr && shaderMetaData == false)
         {
             _shader->Apply();
         }
@@ -60,7 +60,7 @@ namespace ege
         constantBufferUpdate->HasEmit            = _hasEmit;
         constantBufferUpdate->HasDiffuseTexture  = _hasDiffuseTexture;
         constantBufferUpdate->HasSpecularTexture = _hasSpecularTexture;
-        constantBufferUpdate->HasNormalTexture   = _hasNormalTexture;*/
+        constantBufferUpdate->HasNormalTexture   = _hasNormalTexture;
     }
 
     const XMFLOAT4& Material::GetSpecularColor() const
