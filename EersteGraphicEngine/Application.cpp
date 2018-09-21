@@ -97,9 +97,9 @@ namespace ege
 		gMaterialManager().Insert("plane", planeMaterial);
 		gMaterialManager().Insert("cube", cubeMaterial);
 
-		for (INT8 i = -6; i <= 6; i++)
+		for (INT8 i = -10; i <= 10; i++)
 		{
-			for (INT8 j = -6; j <= 6; j++)
+			for (INT8 j = -10; j <= 10; j++)
 			{
 				SPtr<Plane> grass = ege_shared_ptr_new<Plane>();
 				grass->Initialise();
@@ -110,9 +110,9 @@ namespace ege
 			}
 		}
 
-		for (INT8 i = -6; i <= 6; i++)
+		for (INT8 i = -10; i <= 10; i++)
 		{
-			for (INT8 j = -6; j <= 6; j++)
+			for (INT8 j = -10; j <= 10; j++)
 			{
 				SPtr<Cube> cube = ege_shared_ptr_new<Cube>();
 				cube->Initialise();

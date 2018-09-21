@@ -57,7 +57,7 @@ namespace ege
 		{
 			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
 
-			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 2.0f))
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 3.0f))
 			{
 				return;
 			}

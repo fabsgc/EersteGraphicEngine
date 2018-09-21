@@ -313,6 +313,12 @@
     <Filter Include="Data\Shader\Forward\Default">
       <UniqueIdentifier>{189946cc-a5dc-4ffb-9d9e-ce7baf88b862}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\App\Material\Primitive">
+      <UniqueIdentifier>{d88ee54e-488f-47b5-9ca3-e6ace4b49fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App\Material\Primitive">
+      <UniqueIdentifier>{d29ad728-3879-4ccb-9ab1-5a56849e5b03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -563,6 +569,15 @@
     </ClCompile>
     <ClCompile Include="QuadScreenCamera.cpp">
       <Filter>Source Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedModel.cpp">
+      <Filter>Source Files\Core\Renderer\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMaterial.cpp">
+      <Filter>Source Files\App\Material\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMaterial.cpp">
+      <Filter>Source Files\App\Material\Primitive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -853,6 +868,15 @@
     </ClInclude>
     <ClInclude Include="QuadScreenCamera.h">
       <Filter>Header Files\Core\Renderer\Camera\Orthographic</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedModel.h">
+      <Filter>Header Files\Core\Renderer\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMaterial.h">
+      <Filter>Header Files\App\Material\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneMaterial.h">
+      <Filter>Header Files\App\Material\Primitive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

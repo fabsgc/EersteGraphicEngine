@@ -157,6 +157,7 @@ namespace ege
     struct FrameConstantBuffer;
     struct ObjectConstantBuffer;
     struct LightConstantBuffer;
+    struct InstanceBuffer;
     class  RenderAPI;
     class  Device;
     class  Geometry;

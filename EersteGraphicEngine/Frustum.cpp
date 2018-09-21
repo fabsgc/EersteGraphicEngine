@@ -95,7 +95,7 @@ namespace ege
                 positionVector.y * position.y +
                 positionVector.z * position.z + positionVector.w;
 
-            if (distance <= 0)
+            if (distance + radius <= 0)
             {
                 return false;
             }
