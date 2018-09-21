@@ -170,6 +170,7 @@
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="CoreApplication.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="CubeMaterial.cpp" />
     <ClCompile Include="DefaultMaterial.cpp" />
     <ClCompile Include="DeferredRendering.cpp" />
     <ClCompile Include="Device.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="IComponentHandler.cpp" />
     <ClCompile Include="IMoveable.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="InstancedModel.cpp" />
     <ClCompile Include="Joypad.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Landscape.cpp" />
@@ -213,6 +215,7 @@
     <ClCompile Include="OrthographicCameraHandler.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PlaneMaterial.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="PoolAllocator.cpp" />
@@ -260,6 +263,7 @@
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="CoreApplication.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubeMaterial.h" />
     <ClInclude Include="DefaultMaterial.h" />
     <ClInclude Include="DeferredRendering.h" />
     <ClInclude Include="Device.h" />
@@ -284,6 +288,7 @@
     <ClInclude Include="IModule.h" />
     <ClInclude Include="IMoveable.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InstancedModel.h" />
     <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="Joypad.h" />
@@ -309,6 +314,7 @@
     <ClInclude Include="OrthographicCameraHandler.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PlaneMaterial.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PoolAllocator.h" />

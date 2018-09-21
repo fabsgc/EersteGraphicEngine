@@ -38,13 +38,19 @@ namespace ege
         void                      DrawMetaDataLights();
         void                      DrawMetaDataNodes();
 
-    protected:
-        RenderAPI&                _renderAPI;
+		void                      CreateDrawList();
+		void                      CreateDrawListFromNode(SPtr<Node> node);
 
-        Map<String, SPtr<Node>>   _nodes;
-        Map<String, SPtr<Light>>  _lights;
-        Map<String, SPtr<Camera>> _cameras;
-        SPtr<Camera>              _camera;
-        SPtr<AmbientLight>        _ambientLight;
+    protected:
+        RenderAPI&                     _renderAPI;
+
+        Map<String, SPtr<Node>>        _nodes;
+        Map<String, SPtr<Light>>       _lights;
+        Map<String, SPtr<Camera>>      _cameras;
+        SPtr<Camera>                   _camera;
+        SPtr<AmbientLight>             _ambientLight;
+
+		Map<Pair<SPtr<Material>, SPtr<ModelDesc>>, List<SPtr<Model>>> _instancedModels;
+		List<SPtr<Model>>              _nonInstancedModels;
     };
 }

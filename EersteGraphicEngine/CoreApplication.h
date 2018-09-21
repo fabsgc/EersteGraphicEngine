@@ -102,7 +102,8 @@ namespace ege
         void StartUpConsole();
         void StartUpTaskScheduler();
         void StartUpTextureManager();
-        void StartUpModelManager();
+		void StartUpModelManager();
+		void StartUpMaterialManager();
         void StartUpSceneManager();
         void StartUpRenderPipeline();
 

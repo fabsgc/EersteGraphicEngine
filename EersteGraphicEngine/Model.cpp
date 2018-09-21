@@ -13,14 +13,12 @@
 namespace ege
 {
 	const bool Model::DefaultCastShadow = true;
-	const bool Model::DefaultStatic     = true;
     const LightMode Model::DefaultLightMode = LightMode::All;
 
     Model::Model()
         : Node(NodeType::Model)
         , _renderAPI(gRenderAPI())
 		, _castShadow(DefaultCastShadow)
-		, _static(DefaultCastShadow)
         , _lightMode(DefaultLightMode)
     {
         XMStoreFloat4x4(&_world, XMMatrixIdentity());
@@ -46,7 +44,7 @@ namespace ege
 
     void Model::Draw()
     {
-        Node::Draw();
+        //Node::Draw();
 
 		CoreApplication& app = gCoreApplication();
 
@@ -59,7 +57,7 @@ namespace ege
 		{
 			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
 
-			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 5.0f))
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 2.0f))
 			{
 				return;
 			}
@@ -82,7 +80,7 @@ namespace ege
 
     void Model::DrawMetaData()
     {
-        Node::DrawMetaData();
+        //Node::DrawMetaData();
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
@@ -121,11 +119,6 @@ namespace ege
         _castShadow = castShadow;
     }
 
-	void Model::SetStatic(bool isStatic)
-	{
-		_static = isStatic;
-	}
-
     void Model::SetLightMode(LightMode lightMode)
     {
         lightMode = _lightMode;
@@ -146,15 +139,15 @@ namespace ege
         return _material;
     }
 
+	SPtr<ModelDesc> Model::GetModelDesc()
+	{
+		return _modelDesc;
+	}
+
     bool Model::GetCastShadow() const
     {
         return _castShadow;
     }
-
-	bool Model::GetStatic() const
-	{
-		return _static;
-	}
 
     const LightMode& Model::GetLightMode() const
     {

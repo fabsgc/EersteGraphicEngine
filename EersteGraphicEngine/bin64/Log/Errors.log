@@ -837,3 +837,31 @@ Time: 16:46:06
 Error: Can't create depth stencil state with enabled depth
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\imodule.h:52
+Inside ege::IModule<class ege::MaterialManager>::Instance
+Date: Sep 19 2018
+Time: 14:02:09
+Error: Trying to access a module but it hasn't been started up yet.
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:448
+Inside ege::RenderAPI::Resize
+Date: Sep 21 2018
+Time: 13:14:21
+Error: Can't resize swap chain buffer
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\renderapi.cpp:247
+Inside ege::RenderAPI::CreateDepthStencilBuffer
+Date: Sep 21 2018
+Time: 13:14:21
+Error: Can't create depth stencil buffer
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\rendertexture.cpp:26
+Inside ege::RenderTexture::Initialise
+Date: Sep 21 2018
+Time: 13:14:32
+Error: Can't create render target texture
+Condition: 0
+############################################: 

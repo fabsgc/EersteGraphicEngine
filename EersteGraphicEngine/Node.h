@@ -33,8 +33,10 @@ namespace ege
         SPtr<Scene>              GetScene();
         SPtr<Node>               GetParent();
         Map<String, SPtr<Node>>& GetChildren();
+		bool                     GetStatic() const;
         void                     SetScene(SPtr<Scene> scene);
         void                     SetParent(SPtr<Node> parent);
+		void                     SetStatic(bool isStatic);
 
         using                    IMoveable::Move;
         using                    IMoveable::Scale;
@@ -46,11 +48,16 @@ namespace ege
         virtual void             Rotate(XMVECTOR origin, XMVECTOR eulerAngles) override;
         virtual void             Rotate(XMVECTOR eulerAngles) override;
 
-    protected:
-        SPtr<Scene>                _scene;
-        SPtr<Node>                 _parent;
-        Map<String, SPtr<Node>>    _children;
+	protected:
+		static const bool        DefaultStatic;
 
-        NodeType                   _type;
+    protected:
+        SPtr<Scene>              _scene;
+        SPtr<Node>               _parent;
+        Map<String, SPtr<Node>>  _children;
+
+        NodeType                 _type;
+
+		bool                     _static;
     };
 }

@@ -89,6 +89,9 @@ namespace ege
     template <typename T, typename A = StdAllocator<T, BasicAllocator>>
     using List = std::list<T, A>;
 
+	template <typename T, typename A = StdAllocator<T, BasicAllocator>>
+	using Set = std::set<T, A>;
+
     template <typename L, typename R>
     using Pair = std::pair<L, R>;
 

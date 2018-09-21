@@ -8,6 +8,8 @@
 #include "Mouse.h"
 #include "InputHandler.h"
 
+#include "MaterialManager.h"
+
 #include "ModelManager.h"
 #include "Model.h"
 
@@ -172,7 +174,8 @@ namespace ege
         StartUpRenderer();
         StartUpComponents();
         StartUpTextureManager();
-        StartUpModelManager();
+		StartUpModelManager();
+		StartUpMaterialManager();
         StartUpSceneManager();
         StartUpRenderPipeline();
 
@@ -271,6 +274,11 @@ namespace ege
     {
         ModelManager::StartUp();
     }
+
+	void CoreApplication::StartUpMaterialManager()
+	{
+		MaterialManager::StartUp();
+	}
 
     void CoreApplication::StartUpSceneManager()
     {

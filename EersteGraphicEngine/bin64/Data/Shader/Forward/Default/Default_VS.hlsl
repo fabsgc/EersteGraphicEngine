@@ -3,12 +3,14 @@
 
 struct VS_INPUT
 {
-    float4 Position : POSITION;
-    float4 Color    : COLOR0;
-    float2 Texture  : TEXCOORD0;
-    float3 Normal   : NORMAL;
-    float3 Tangent  : TANGENT;
-    float3 Binormal : BINORMAL;
+    float4 Position    : POSITION;
+    float4 Color       : COLOR0;
+    float2 Texture     : TEXCOORD0;
+    float3 Normal      : NORMAL;
+    float3 Tangent     : TANGENT;
+    float3 Binormal    : BINORMAL;
+    float3 instancePos : INSTANCEPOS;
+    uint instanceID    : SV_InstanceID;
 };
 
 struct VS_OUTPUT

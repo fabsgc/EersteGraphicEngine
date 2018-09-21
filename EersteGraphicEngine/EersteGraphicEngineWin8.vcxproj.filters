@@ -316,6 +316,12 @@
     <Filter Include="Data\Shader\Forward\MetaData">
       <UniqueIdentifier>{0db559f7-23b2-48a7-a87b-9fc222a70384}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\App\Material\Primitive">
+      <UniqueIdentifier>{e9faed5a-9241-49e8-9cee-290756962f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App\Material\Primitive">
+      <UniqueIdentifier>{420b769e-68b6-4709-9cd1-c722bc037343}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timer.cpp">
@@ -578,6 +584,15 @@
     </ClCompile>
     <ClCompile Include="Quad.cpp">
       <Filter>Source Files\App\Model\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeMaterial.cpp">
+      <Filter>Source Files\App\Material\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneMaterial.cpp">
+      <Filter>Source Files\App\Material\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedModel.cpp">
+      <Filter>Source Files\Core\Renderer\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -889,6 +904,15 @@
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Header Files\Core\RenderAPI\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeMaterial.h">
+      <Filter>Header Files\App\Material\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneMaterial.h">
+      <Filter>Header Files\App\Material\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedModel.h">
+      <Filter>Header Files\Core\Renderer\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

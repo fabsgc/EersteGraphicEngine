@@ -2,10 +2,13 @@
 
 namespace ege
 {
+	const bool Node::DefaultStatic = true;
+
     Node::Node(NodeType nodeType)
         : _scene(nullptr)
         , _parent(nullptr)
         , _type(nodeType)
+		, _static(DefaultStatic)
     {
     }
     
@@ -84,6 +87,11 @@ namespace ege
         return _type;
     }
 
+	bool Node::GetStatic() const
+	{
+		return _static;
+	}
+
     Map<String, SPtr<Node>>& Node::GetChildren()
     {
         return _children;
@@ -98,6 +106,11 @@ namespace ege
     {
         _parent = parent;
     }
+
+	void Node::SetStatic(bool isStatic)
+	{
+		_static = isStatic;
+	}
 
     void Node::Move(XMVECTOR movement)
     {

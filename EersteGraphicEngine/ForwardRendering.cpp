@@ -233,47 +233,6 @@ namespace ege
 
         _scene->Draw();
 
-        /*SPtr<Camera> camera = _scene->GetActiveCamera();
-        Map<String, SPtr<Node>>& nodes = _scene->GetNodes();
-        Map<String, SPtr<Light>>& lights = _scene->GetLights();
-        SPtr<AmbientLight> ambientLight = _scene->GetAmbientLight();
-
-        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-
-        SPtr<ConstantBufferElement> lightConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::LIGHT);
-        LightConstantBuffer* lightConstantBufferUpdate = (LightConstantBuffer*)&*lightConstantBuffer->UpdateBuffer;
-
-        SPtr<ConstantBufferElement> objectConstantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
-        ObjectConstantBuffer* objectConstantBufferUpdate = (ObjectConstantBuffer*)&*objectConstantBuffer->UpdateBuffer;
-
-        lightConstantBufferUpdate->LightIndex = 0;
-
-        _scene->DrawCamera();
-
-        if (ambientLight != nullptr && ambientLight->IsEnabled())
-        {
-            ambientLight->Draw();
-        }
-
-        for (auto node : nodes)
-        {
-            Map<String, SPtr<Node>>& children = node.second->GetChildren();
-
-            if (node.second->GetType() == NodeType::Model)
-            {
-                SPtr<Model> model = dynamic_cast<Model*>(node.second);
-                LightMode lightMode = model->GetLightMode();
-            }
-
-            for (auto child : children)
-            {
-                if (child.second->GetType() != NodeType::Camera && child.second->GetType() != NodeType::Light)
-                {
-                    //child.second->Draw();
-                }
-            }
-        }*/
-
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         ID3D11RenderTargetView* nullViews[1] = { nullptr };
         context->OMSetRenderTargets(1, nullViews, nullptr);

@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+#include "Model.h"
+
 namespace ege
 {
     Scene::Scene()
@@ -161,19 +163,87 @@ namespace ege
 
     void Scene::DrawNodes()
     {
-        for (auto node : _nodes)
+        /*for (auto node : _nodes)
         {
             node.second->Draw();
-        }
+        }*/
+
+		for (auto models : _instancedModels)
+		{
+			for (auto model : models.second)
+			{
+				model->Draw();
+			}
+		}
+
+		for (auto model : _nonInstancedModels)
+		{
+			model->Draw();
+		}
     }
 
     void Scene::DrawMetaDataNodes()
     {
-        for (auto node : _nodes)
+        /*for (auto node : _nodes)
         {
             node.second->DrawMetaData();
-        }
+        }*/
+
+		for (auto models : _instancedModels)
+		{
+			for (auto model : models.second)
+			{
+				model->DrawMetaData();
+			}
+		}
+
+		for (auto model : _nonInstancedModels)
+		{
+			model->DrawMetaData();
+		}
     }
+
+	void Scene::CreateDrawList()
+	{
+		for (auto node : _nodes)
+		{
+			CreateDrawListFromNode(node.second);
+		}
+	}
+
+	void Scene::CreateDrawListFromNode(SPtr<Node> node)
+	{
+		if (node->GetType() == NodeType::Model)
+		{
+			SPtr<Model> model = std::static_pointer_cast<Model>(node);
+
+			if (model->GetStatic())
+			{
+				Pair<SPtr<Material>, SPtr<ModelDesc>> modelPair;
+
+				SPtr<ModelDesc> modelDesc = model->GetModelDesc();
+				SPtr<Material>  material  = model->GetMaterial();
+
+				modelPair = std::make_pair<>(material, modelDesc);
+
+				_instancedModels[modelPair].push_back(model);
+			}
+			else
+			{
+				_nonInstancedModels.push_back(model);
+			}
+		}
+
+		Map<String, SPtr<Node>> children = node->GetChildren();
+
+		if (children.size() > 0)
+		{
+			for (auto child : children)
+			{
+				CreateDrawListFromNode(child.second);
+			}
+		}
+	}
 
     Map<String, SPtr<Node>>& Scene::GetNodes()
     {

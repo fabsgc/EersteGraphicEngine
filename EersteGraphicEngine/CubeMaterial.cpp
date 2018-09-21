@@ -1,20 +1,18 @@
-#include "PlaneMaterial.h"
+#include "CubeMaterial.h"
 #include "ShaderManager.h"
-
-#include "TextureManager.h"
 
 namespace ege
 {
-	PlaneMaterial::PlaneMaterial()
+	CubeMaterial::CubeMaterial()
 		: Material()
 	{
 	}
 
-	PlaneMaterial::~PlaneMaterial()
+	CubeMaterial::~CubeMaterial()
 	{
 	}
 
-	void PlaneMaterial::Initialise()
+	void CubeMaterial::Initialise()
 	{
 		_shader = gShaderManager().GetPtr("forward-default");
 		_shaderMetaData = gShaderManager().GetPtr("forward-meta-data");
@@ -33,17 +31,14 @@ namespace ege
 
 		_hasSpecular = true;
 		_hasEmit = false;
-		_hasDiffuseTexture = true;
-		_hasSpecularTexture = true;
+		_hasDiffuseTexture = false;
+		_hasSpecularTexture = false;
 		_hasNormalTexture = false;
 
 		_specularPower = 16.0f;
-
-		InsertTexture(0, gTextureManager().GetPtr("grass-diffuse"));
-		InsertTexture(1, gTextureManager().GetPtr("grass-specular"));
 	}
 
-	void PlaneMaterial::Update()
+	void CubeMaterial::Update()
 	{
 	}
 }
