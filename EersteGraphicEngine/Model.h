@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
+#include "CoreApplication.h"
 #include "RenderAPI.h"
 #include "Geometry.h"
 #include "Node.h"
@@ -35,12 +36,17 @@ namespace ege
         const LightMode&     GetLightMode() const;
         Vector<SPtr<Light>>& GetLights();
 
+	protected:
+		bool                 IsInFrustum();
+
     protected:
 		static const bool      DefaultCastShadow;
         static const LightMode DefaultLightMode;
         
     protected:
         RenderAPI&          _renderAPI;
+		CoreApplication&    _application;
+		Scene&              _scene;
 
         SPtr<ModelDesc>     _modelDesc;
         SPtr<Material>      _material;

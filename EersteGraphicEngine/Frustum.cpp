@@ -80,29 +80,33 @@ namespace ege
 
     const bool Frustum::CheckSphere(PerspectiveCamera* camera, Model* model, const float radius) const
     {
-        const XMFLOAT4X4 projection = camera->GetProjection();
-        const XMFLOAT3& position    = model->GetPosition();
-        const XMFLOAT4X4& view      = camera->GetView();
-
-        // Check if the radius of the sphere is inside the view frustum.
-        for (UINT8 i = 0; i<6; i++)
-        {
-            XMFLOAT4 positionVector;
-            XMStoreFloat4(&positionVector, _planes[i]);
-
-            float distance =
-                positionVector.x * position.x +
-                positionVector.y * position.y +
-                positionVector.z * position.z + positionVector.w;
-
-            if (distance <= 0)
-            {
-                return false;
-            }
-        }
-
-        return true;
+		return CheckSphere(camera, model->GetPosition(), radius);
     }
+
+	const bool Frustum::CheckSphere(PerspectiveCamera* camera, const XMFLOAT3& position, const float radius) const
+	{
+		const XMFLOAT4X4 projection = camera->GetProjection();
+		const XMFLOAT4X4& view = camera->GetView();
+
+		// Check if the radius of the sphere is inside the view frustum.
+		for (UINT8 i = 0; i < 6; i++)
+		{
+			XMFLOAT4 positionVector;
+			XMStoreFloat4(&positionVector, _planes[i]);
+
+			float distance =
+				positionVector.x * position.x +
+				positionVector.y * position.y +
+				positionVector.z * position.z + positionVector.w;
+
+			if (distance + radius <= 0)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 
     const XMVECTOR* Frustum::GetPlanes() const
     {

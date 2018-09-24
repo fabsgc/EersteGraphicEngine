@@ -82,9 +82,9 @@ namespace ege
 
 		// ################ INSERT NODES
 		node->SetScene(_scene);
-		node->InsertNode("camera", camera);
+		//node->InsertNode("camera", camera);
 		//node->InsertNode("player", player);
-		node->InsertNode("sun", sun);
+		//node->InsertNode("sun", sun);
 
 		// ################ LOAD MATERIALS
 

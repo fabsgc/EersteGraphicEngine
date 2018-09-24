@@ -20,7 +20,7 @@ namespace ege
         void                      InsertNode(String name, SPtr<Node> node);
         void                      InsertLight(String name, SPtr<Light> light);
         void                      InsertCamera(String name, SPtr<Camera> camera);
-        SPtr<Node>&               GetNode(String name);
+        //SPtr<Node>&               GetNode(String name);
         SPtr<Light>&              GetLight(String name);
         SPtr<Camera>&             GetCamera(String name);
         SPtr<Camera>&             GetActiveCamera();
@@ -42,15 +42,13 @@ namespace ege
 		void                      CreateDrawListFromNode(SPtr<Node> node);
 
     protected:
-        RenderAPI&                     _renderAPI;
+        RenderAPI&                _renderAPI;
 
-        Map<String, SPtr<Node>>        _nodes;
-        Map<String, SPtr<Light>>       _lights;
-        Map<String, SPtr<Camera>>      _cameras;
-        SPtr<Camera>                   _camera;
-        SPtr<AmbientLight>             _ambientLight;
-
-		Map<Pair<SPtr<Material>, SPtr<ModelDesc>>, List<SPtr<Model>>> _instancedModels;
-		List<SPtr<Model>>              _nonInstancedModels;
+        //Map<String, SPtr<Node>> _nodes;
+		Map<String, SPtr<Model>>  _models;
+        Map<String, SPtr<Light>>  _lights;
+        Map<String, SPtr<Camera>> _cameras;
+        SPtr<Camera>              _camera;
+        SPtr<AmbientLight>        _ambientLight;
     };
 }

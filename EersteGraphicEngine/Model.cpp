@@ -15,9 +15,11 @@ namespace ege
 	const bool Model::DefaultCastShadow = true;
     const LightMode Model::DefaultLightMode = LightMode::All;
 
-    Model::Model()
-        : Node(NodeType::Model)
-        , _renderAPI(gRenderAPI())
+	Model::Model()
+		: Node(NodeType::Model)
+		, _renderAPI(gRenderAPI())
+		, _application(gCoreApplication())
+		, _scene(*_application.GetScene())
 		, _castShadow(DefaultCastShadow)
         , _lightMode(DefaultLightMode)
     {
@@ -46,21 +48,9 @@ namespace ege
     {
         //Node::Draw();
 
-		CoreApplication& app = gCoreApplication();
-
-		SPtr<Scene> scene   = app.GetScene();
-		SPtr<Camera> camera = scene->GetActiveCamera();
-
-		CameraType cameraType = camera->GetType();
-
-		if (cameraType == CameraType::FirstPersonCamera || cameraType == CameraType::ThirdPersonCamera || cameraType == CameraType::FlyingCamera)
+		if (IsInFrustum() == false)
 		{
-			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
-
-			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 2.0f))
-			{
-				return;
-			}
+			return;
 		}
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
@@ -81,6 +71,11 @@ namespace ege
     void Model::DrawMetaData()
     {
         //Node::DrawMetaData();
+
+		if (IsInFrustum() == false)
+		{
+			return;
+		}
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
@@ -158,4 +153,22 @@ namespace ege
     {
         return _lights;
     }
+
+	bool Model::IsInFrustum()
+	{
+		SPtr<Camera> camera = _scene.GetActiveCamera();
+		CameraType cameraType = camera->GetType();
+
+		if (cameraType == CameraType::FirstPersonCamera || cameraType == CameraType::ThirdPersonCamera || cameraType == CameraType::FlyingCamera)
+		{
+			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
+
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 2.0f))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

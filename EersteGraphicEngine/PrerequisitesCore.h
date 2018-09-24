@@ -13,6 +13,10 @@
 #   define _WIN32_WINNT _WIN32_WINNT_WIN10
 #endif
 
+#if !defined(EGE_MAX_INSTANCED_OBJECTS)
+#	define EGE_MAX_INSTANCED_OBJECTS 64
+#endif
+
 #include "PrerequisitesUtil.h"
 
 #include <dxgi.h>
@@ -157,6 +161,7 @@ namespace ege
     struct FrameConstantBuffer;
     struct ObjectConstantBuffer;
     struct LightConstantBuffer;
+	struct InstanceBuffer;
     class  RenderAPI;
     class  Device;
     class  Geometry;
@@ -174,6 +179,8 @@ namespace ege
     class  ModelLoader;
     struct ModelDesc;
     class  Model;
+	class  InstancedModel;
+	struct InstancedElement;
 
     class  Material;
     class  MaterialManager;

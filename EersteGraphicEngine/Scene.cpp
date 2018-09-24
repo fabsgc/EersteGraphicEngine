@@ -16,7 +16,7 @@ namespace ege
 
     void Scene::InsertNode(String name, SPtr<Node> node)
     {
-        _nodes.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
+        //_nodes.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
     }
 
     void Scene::InsertLight(String name, SPtr<Light> light)
@@ -80,10 +80,16 @@ namespace ege
             _ambientLight->Update();
         }
 
-        for (auto node : _nodes)
-        {
-            node.second->Update();
-        }
+		auto update = [](auto elements) {
+			for (auto element : elements)
+			{
+				element.second->Update();
+			}
+		};
+
+		update(_cameras);
+		update(_lights);
+		update(_models);
     }
 
     void Scene::Draw()

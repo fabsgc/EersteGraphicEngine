@@ -16,6 +16,7 @@ namespace ege
 {
 	InstancedModel::InstancedModel()
 		: Model()
+		, _instancedCounter(0)
 	{
 		XMStoreFloat4x4(&_world, XMMatrixIdentity());
 	}
@@ -46,5 +47,31 @@ namespace ege
 	void InstancedModel::DrawMetaData()
 	{
 		//Node::DrawMetaData();
+	}
+
+	void InstancedModel::AddObject(SPtr<Model> model)
+	{
+		_worlds[_instancedCounter]   = model->GetWorld();
+		_position[_instancedCounter] = model->GetPosition();
+
+		_instancedCounter++;
+	}
+
+	bool InstancedModel::IsInFrustum(XMFLOAT3 position)
+	{
+		SPtr<Camera> camera = _scene.GetActiveCamera();
+		CameraType cameraType = camera->GetType();
+
+		if (cameraType == CameraType::FirstPersonCamera || cameraType == CameraType::ThirdPersonCamera || cameraType == CameraType::FlyingCamera)
+		{
+			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
+
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, position, 2.0f))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

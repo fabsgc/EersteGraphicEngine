@@ -57,7 +57,7 @@ namespace ege
 
     void Camera::Draw()
     {
-        Node::Draw();
+        //Node::Draw();
 
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
         FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
@@ -73,7 +73,7 @@ namespace ege
 
     void Camera::DrawMetaData()
     {
-        Node::Draw();
+        //Node::Draw();
 
         SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::FRAME);
         FrameConstantBuffer* constantBufferUpdate = (FrameConstantBuffer*)&*constantBuffer->UpdateBuffer;
