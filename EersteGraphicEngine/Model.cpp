@@ -50,7 +50,16 @@ namespace ege
 
 		if (IsInFrustum() == false)
 		{
+<<<<<<< HEAD
 			return;
+=======
+			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
+
+			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 3.0f))
+			{
+				return;
+			}
+>>>>>>> 95117089a3b8c617be86b1411bc7883f00865e95
 		}
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
