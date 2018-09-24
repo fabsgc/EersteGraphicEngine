@@ -50,16 +50,7 @@ namespace ege
 
 		if (IsInFrustum() == false)
 		{
-<<<<<<< HEAD
 			return;
-=======
-			PerspectiveCamera& perspectiveCamera = static_cast<PerspectiveCamera&>(*camera);
-
-			if (!perspectiveCamera.GetFrustum().CheckSphere(&perspectiveCamera, this, 3.0f))
-			{
-				return;
-			}
->>>>>>> 95117089a3b8c617be86b1411bc7883f00865e95
 		}
 
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
@@ -68,6 +59,7 @@ namespace ege
 
         XMMATRIX world = XMLoadFloat4x4(&_world);
         constantBufferUpdate->World = XMMatrixTranspose(world);
+		constantBufferUpdate->IsInstance = false;
 
         if (_material != nullptr)
         {
@@ -86,19 +78,19 @@ namespace ege
 			return;
 		}
 
-        ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
-        SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
-        ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
+		ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
+		SPtr<ConstantBufferElement> constantBuffer = _renderAPI.GetConstantBufferPtr(ConstantBufferType::OBJECT);
+		ObjectConstantBuffer* constantBufferUpdate = (ObjectConstantBuffer*)&*constantBuffer->UpdateBuffer;
 
-        XMMATRIX world = XMLoadFloat4x4(&_world);
-        constantBufferUpdate->World = XMMatrixTranspose(world);
+		XMMATRIX world = XMLoadFloat4x4(&_world);
+		constantBufferUpdate->World = XMMatrixTranspose(world);
 
-        if (_material != nullptr)
-        {
-            _material->Apply(true);
-        }
+		if (_material != nullptr)
+		{
+			_material->Apply(true);
+		}
 
-        _geometry.Draw();
+		_geometry.Draw();
     }
 
     void Model::Build(SPtr<ModelDesc> modelDesc)

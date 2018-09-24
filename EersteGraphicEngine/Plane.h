@@ -1,11 +1,11 @@
 #pragma once
 
 #include "PrerequisitesCore.h"
-#include "Model.h"
+#include "InstancedModel.h"
 
 namespace ege
 {
-    class Plane : public Model
+    class Plane : public InstancedModel
     {
     public:
         Plane();

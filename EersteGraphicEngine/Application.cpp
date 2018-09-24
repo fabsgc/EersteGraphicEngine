@@ -9,6 +9,7 @@
 
 #include "Plane.h"
 #include "Cube.h"
+#include "Sphere.h"
 
 #include "MaterialManager.h"
 #include "PlaneMaterial.h"
@@ -55,7 +56,7 @@ namespace ege
 		_scene = ege_shared_ptr_new<Scene>();
 
 		// ################ CREATE NODES
-		SPtr<Node> node                = ege_shared_ptr_new<Node>();
+		//SPtr<Node> node                = ege_shared_ptr_new<Node>();
 		SPtr<ThirdPersonCamera> camera = ege_shared_ptr_new<ThirdPersonCamera>();
 		//SPtr<Player> player            = ege_shared_ptr_new<Player>();
 		SPtr<AmbientLight> ambient     = ege_shared_ptr_new<AmbientLight>();
@@ -81,7 +82,7 @@ namespace ege
 		sun->SetDirection(XMFLOAT3(-2.5f, -1.0f, -1.0f));
 
 		// ################ INSERT NODES
-		node->SetScene(_scene);
+		//node->SetScene(_scene);
 		//node->InsertNode("camera", camera);
 		//node->InsertNode("player", player);
 		//node->InsertNode("sun", sun);
@@ -97,40 +98,50 @@ namespace ege
 		gMaterialManager().Insert("plane", planeMaterial);
 		gMaterialManager().Insert("cube", cubeMaterial);
 
-		for (INT8 i = -6; i <= 6; i++)
+		/*SPtr<Sphere> sphere = ege_shared_ptr_new<Sphere>();
+		sphere->Initialise();
+		sphere->SetMaterial(gMaterialManager().GetPtr("cube"));
+		_scene->InsertModel("sphere", sphere);
+		*/
+
+		SPtr<Plane> grass = ege_shared_ptr_new<Plane>();
+		grass->Initialise();
+		grass->SetMaterial(gMaterialManager().GetPtr("plane"));
+		grass->SetStatic(true);
+
+		for (INT8 i = -4; i <= 5; i++)
 		{
-			for (INT8 j = -6; j <= 6; j++)
+			for (INT8 j = -4; j <= 5; j++)
 			{
-				SPtr<Plane> grass = ege_shared_ptr_new<Plane>();
-				grass->Initialise();
 				grass->GoTo(i * 5.0f, 0.0f, j * 5.0f);
-				grass->SetMaterial(gMaterialManager().GetPtr("plane"));
-				grass->SetStatic(true);
-				node->InsertNode("grass-" + ToString(i) + "-" + ToString(j), grass);
+				grass->AddObject(grass);
 			}
 		}
 
-		for (INT8 i = -6; i <= 6; i++)
+		_scene->InsertModel("grass", grass);
+		
+		SPtr<Cube> cube = ege_shared_ptr_new<Cube>();
+		cube->Initialise();
+		cube->SetMaterial(gMaterialManager().GetPtr("cube"));
+		cube->SetStatic(true);
+
+		for (INT8 i = -4; i <= 5; i++)
 		{
-			for (INT8 j = -6; j <= 6; j++)
+			for (INT8 j = -4; j <= 5; j++)
 			{
-				SPtr<Cube> cube = ege_shared_ptr_new<Cube>();
-				cube->Initialise();
 				cube->GoTo(i * 5.0f, 1.0f, j * 5.0f);
-				cube->SetMaterial(gMaterialManager().GetPtr("cube"));
-				cube->SetStatic(true);
-				node->InsertNode("cube-" + ToString(i) + "-" + ToString(j), cube);
+				cube->AddObject(cube);
 			}
 		}
+
+		_scene->InsertModel("cube-", cube);
 
 		_scene->InsertCamera("camera", camera);
 		_scene->InsertLight("sun", sun);
-		_scene->InsertNode("root", node);
+		//_scene->InsertNode("root", node);
 
 		_scene->SetActiveCamera(camera);
 		_scene->SetAmbientLight(ambient);
-
-		_scene->CreateDrawList();
 	}
 
 	Application& gApplication()

@@ -865,3 +865,31 @@ Time: 13:14:32
 Error: Can't create render target texture
 Condition: 0
 ############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\instancedmodel.cpp:92
+Inside ege::InstancedModel::AddObject
+Date: Sep 24 2018
+Time: 12:12:38
+Error: You can't add another instance for this model
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\instancedmodel.cpp:144
+Inside ege::InstancedModel::AddObject
+Date: Sep 24 2018
+Time: 13:09:57
+Error: You can't add another instance for this model
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\instancedmodel.cpp:150
+Inside ege::InstancedModel::AddObject
+Date: Sep 24 2018
+Time: 13:14:00
+Error: You can't add another instance for this model
+Condition: 0
+############################################: 
+Assertion failed at c:\users\fabien\documents\eerstegraphicengine\eerstegraphicengine\instancedmodel.cpp:150
+Inside ege::InstancedModel::AddObject
+Date: Sep 24 2018
+Time: 13:17:05
+Error: You can't add another instance for this model
+Condition: 0
+############################################: 

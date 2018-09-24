@@ -4,8 +4,6 @@ cbuffer FrameConstantBuffer : register(b0)
     matrix Projection;
 
     float3 CameraPosition;
-
-    matrix Worlds[169];
 }
 
 cbuffer ObjectConstantBuffer : register(b1)
@@ -24,6 +22,8 @@ cbuffer ObjectConstantBuffer : register(b1)
     bool   HasNormalTexture;
 
     bool   IsInstance;
+
+    matrix Worlds[100];
 }
 
 struct ColorComponent

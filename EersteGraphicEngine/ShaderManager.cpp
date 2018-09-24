@@ -1,6 +1,8 @@
 #include "ShaderManager.h"
 #include "Shader.h"
 
+#include "VertexDesc.h"
+
 namespace ege
 {
     void ShaderManager::OnStartUp()

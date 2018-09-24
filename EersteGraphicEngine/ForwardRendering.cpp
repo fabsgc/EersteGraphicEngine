@@ -133,7 +133,7 @@ namespace ege
         //DrawMetaData();
         DrawRender();
         //DrawEffects();
-        DrawFinal();
+        //DrawFinal();
     }
 
     void ForwardRendering::Update()
@@ -228,8 +228,10 @@ namespace ege
     void ForwardRendering::DrawRender()
     {
         _renderAPI.ClearDepthStencilView();
-        SetRenderTarget();
-        ClearRenderTarget();
+        //SetRenderTarget();
+		SetFinalTarget();
+        //ClearRenderTarget();
+		ClearFinalTarget();
 
         _scene->Draw();
 

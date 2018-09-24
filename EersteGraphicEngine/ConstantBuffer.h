@@ -33,9 +33,7 @@ namespace ege
 
 	struct InstanceBuffer : public ConstantBuffer
 	{
-		XMMATRIX Worlds[169];
-		UINT     InstanceCounter;
-		/* PADDING */ float    Padding1[3];
+		XMMATRIX Worlds[100];
 	};
 
     struct FrameConstantBuffer : public ConstantBuffer
@@ -45,8 +43,6 @@ namespace ege
 
         XMFLOAT3 CameraPosition;
         /* PADDING */ float    Padding1;
-
-		XMMATRIX Worlds[169];
 
         FrameConstantBuffer()
         {}
@@ -65,6 +61,8 @@ namespace ege
         BOOL     HasSpecularTexture;
         BOOL     HasNormalTexture;
 		BOOL     IsInstance;
+
+		XMMATRIX Worlds[100];
 
         ObjectConstantBuffer()
             : SpecularColor(XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f))

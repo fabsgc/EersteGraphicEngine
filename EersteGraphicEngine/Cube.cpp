@@ -6,7 +6,7 @@
 namespace ege
 {
     Cube::Cube()
-        : Model()
+        : InstancedModel()
     {
     }
 
@@ -18,9 +18,9 @@ namespace ege
     {
         Build(gModelManager().GetPtr("cube"));
 
-        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
-        material->Initialise();
-        SetMaterial(material);
+		SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
+		material->Initialise();
+		SetMaterial(material);
     }
 
     void Cube::Update()

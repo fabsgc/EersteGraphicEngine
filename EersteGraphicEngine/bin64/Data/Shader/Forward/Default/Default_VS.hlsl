@@ -9,8 +9,8 @@ struct VS_INPUT
     float3 Normal      : NORMAL;
     float3 Tangent     : TANGENT;
     float3 Binormal    : BINORMAL;
-    float3 instancePos : INSTANCEPOS;
-    uint instanceID    : SV_InstanceID;
+    float3 InstancePos : INSTANCEPOS;
+    uint   InstanceID  : SV_InstanceID;
 };
 
 struct VS_OUTPUT
@@ -41,6 +41,13 @@ VS_OUTPUT VS_MAIN( VS_INPUT IN )
 
     float3 worldPosition = mul(IN.Position, World).xyz;
     output.ViewWorldDirection = normalize(worldPosition - CameraPosition);
+
+    if (IsInstance)
+    {
+        output.Position = mul(IN.Position, Worlds[IN.InstanceID]);
+        output.Position = mul(output.Position, View);
+        output.Position = mul(output.Position, Projection);
+    }
 
     return output;
 }

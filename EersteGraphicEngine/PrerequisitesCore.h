@@ -14,7 +14,7 @@
 #endif
 
 #if !defined(EGE_MAX_INSTANCED_OBJECTS)
-#	define EGE_MAX_INSTANCED_OBJECTS 64
+#	define EGE_MAX_INSTANCED_OBJECTS 100
 #endif
 
 #include "PrerequisitesUtil.h"
@@ -180,7 +180,6 @@ namespace ege
     struct ModelDesc;
     class  Model;
 	class  InstancedModel;
-	struct InstancedElement;
 
     class  Material;
     class  MaterialManager;

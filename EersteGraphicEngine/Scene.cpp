@@ -14,10 +14,15 @@ namespace ege
     void Scene::Initialise()
     {}
 
-    void Scene::InsertNode(String name, SPtr<Node> node)
+    /*void Scene::InsertNode(String name, SPtr<Node> node)
     {
         //_nodes.insert(Pair<String, SPtr<Node>>(name, std::move(node)));
-    }
+    }*/
+
+	void Scene::InsertModel(String name, SPtr<Model> model)
+	{
+		_models.insert(Pair<String, SPtr<Model>>(name, std::move(model)));
+	}
 
     void Scene::InsertLight(String name, SPtr<Light> light)
     {
@@ -29,13 +34,21 @@ namespace ege
         _cameras.insert(Pair<String, SPtr<Camera>>(name, std::move(camera)));
     }
 
-    SPtr<Node>& Scene::GetNode(String name)
+    /*SPtr<Node>& Scene::GetNode(String name)
     {
         auto found = _nodes.find(name);
         EGE_ASSERT_ERROR((found != _nodes.end()), ("Node " + name + " not found"));
 
         return found->second;
-    }
+    }*/
+
+	SPtr<Model>& Scene::GetModel(String name)
+	{
+		auto found = _models.find(name);
+		EGE_ASSERT_ERROR((found != _models.end()), ("Light " + name + " not found"));
+
+		return found->second;
+	}
 
     SPtr<Light>& Scene::GetLight(String name)
     {
@@ -96,14 +109,14 @@ namespace ege
     {
         DrawCamera();
         DrawLights();
-        DrawNodes();
+        DrawModels();
     }
 
     void Scene::DrawMetaData()
     {
         DrawCamera();
         DrawMetaDataLights();
-        DrawMetaDataNodes();
+		DrawMetaDataModels();
     }
 
     void Scene::DrawCamera()
@@ -143,6 +156,14 @@ namespace ege
         context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);        
     }
 
+	void Scene::DrawModels()
+	{
+		for (auto model : _models)
+		{
+			model.second->Draw();
+		}
+	}
+
     void Scene::DrawMetaDataLights()
     {
         ID3D11DeviceContext* context = _renderAPI.GetDevice()->GetImmediateContext();
@@ -167,12 +188,20 @@ namespace ege
         context->UpdateSubresource(constantBuffer->Buffer, 0, nullptr, constantBufferUpdate, 0, 0);
     }
 
-    void Scene::DrawNodes()
+	void Scene::DrawMetaDataModels()
+	{
+		for (auto model : _models)
+		{
+			model.second->DrawMetaData();
+		}
+	}
+
+    /*void Scene::DrawNodes()
     {
-        /*for (auto node : _nodes)
+        for (auto node : _nodes)
         {
             node.second->Draw();
-        }*/
+        }
 
 		for (auto models : _instancedModels)
 		{
@@ -190,10 +219,10 @@ namespace ege
 
     void Scene::DrawMetaDataNodes()
     {
-        /*for (auto node : _nodes)
+        for (auto node : _nodes)
         {
             node.second->DrawMetaData();
-        }*/
+        }
 
 		for (auto models : _instancedModels)
 		{
@@ -254,7 +283,12 @@ namespace ege
     Map<String, SPtr<Node>>& Scene::GetNodes()
     {
         return _nodes;
-    }
+    }*/
+
+	Map<String, SPtr<Model>>& Scene::GetModels()
+	{
+		return _models;
+	}
 
     Map<String, SPtr<Light>>& Scene::GetLights()
     {

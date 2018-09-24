@@ -6,7 +6,7 @@
 namespace ege
 {
     Plane::Plane()
-        : Model()
+        : InstancedModel()
     {
     }
 
@@ -18,9 +18,9 @@ namespace ege
     {
         Build(gModelManager().GetPtr("plane"));
 
-        SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
-        material->Initialise();
-        SetMaterial(material);
+		SPtr<DefaultMaterial> material = ege_shared_ptr_new<DefaultMaterial>();
+		material->Initialise();
+		SetMaterial(material);
     }
 
     void Plane::Update()

@@ -17,29 +17,34 @@ namespace ege
         ~Scene();
 
         void                      Initialise();
-        void                      InsertNode(String name, SPtr<Node> node);
+        //void                      InsertNode(String name, SPtr<Node> node);
+		void                      InsertModel(String name, SPtr<Model> model);
         void                      InsertLight(String name, SPtr<Light> light);
         void                      InsertCamera(String name, SPtr<Camera> camera);
-        //SPtr<Node>&               GetNode(String name);
-        SPtr<Light>&              GetLight(String name);
+        //SPtr<Node>&             GetNode(String name);
+		SPtr<Model>&              GetModel(String name);
+		SPtr<Light>&              GetLight(String name);
         SPtr<Camera>&             GetCamera(String name);
         SPtr<Camera>&             GetActiveCamera();
         SPtr<AmbientLight>&       GetAmbientLight();
-        Map<String, SPtr<Node>>&  GetNodes();
-        Map<String, SPtr<Light>>& GetLights();
+        //Map<String, SPtr<Node>>&  GetNodes();
+		Map<String, SPtr<Model>>& GetModels();
+		Map<String, SPtr<Light>>& GetLights();
         void                      SetActiveCamera(SPtr<Camera> camera);
         void                      SetAmbientLight(SPtr<AmbientLight> ambientLight);
         void                      Update() override;
         void                      Draw() override;
         void                      DrawMetaData();
+		void                      DrawModels();
         void                      DrawCamera();
         void                      DrawLights();
-        void                      DrawNodes();
+        //void                      DrawNodes();
         void                      DrawMetaDataLights();
-        void                      DrawMetaDataNodes();
+		//void                      DrawMetaDataNodes();
+		void                      DrawMetaDataModels();
 
-		void                      CreateDrawList();
-		void                      CreateDrawListFromNode(SPtr<Node> node);
+		//void                      CreateDrawList();
+		//void                      CreateDrawListFromNode(SPtr<Node> node);
 
     protected:
         RenderAPI&                _renderAPI;

@@ -24,7 +24,7 @@ namespace ege
 
     void SceneLoader::LoadNode(SPtr<Scene> scene, SPtr<Node> parent, tinyxml2::XMLElement* element)
     {
-        SPtr<Node> node = ege_shared_ptr_new<Node>();
+        /*SPtr<Node> node = ege_shared_ptr_new<Node>();
         String name = element->Attribute("name");
 
         tinyxml2::XMLElement* nodesElement = element->FirstChildElement("nodes");
@@ -43,7 +43,7 @@ namespace ege
         else
         {
             scene->InsertNode(name, node);
-        }
+        }*/
     }
 
     void SceneLoader::LoadEntityModel(SPtr<Scene> scene, SPtr<Node> node, tinyxml2::XMLElement* element)
